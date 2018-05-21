@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="tech.liveeasy.apps.agent" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>百居</name>
     <description>百居易科技/经纪人作业</description>
-    <author email="ll_wang@live.cn" href="http://ionicframework.com/">百居</author>
+    <author email="ll_wang@live.cn" href="http://liveeasy.tech/">百居</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
