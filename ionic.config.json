@@ -1,0 +1,14 @@
+{
+  "name": "liveeasy",
+  "app_id": "19532114",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "https://erp.liveeasy.tech/api/v1/"
+    }
+  ]
+}

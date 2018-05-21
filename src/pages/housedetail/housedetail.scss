@@ -1,0 +1,30 @@
+.redact{
+    background: none;
+    color: red;
+    border: 1px solid red;
+    width: 90%;
+}
+.hdRightInfo{
+    position: relative;
+}
+.hdRightInfo span{
+    position: absolute;
+    top: 1.5rem;
+    right: 13px;
+}
+.hdRightInfo input{
+    text-align: right;
+    padding-right: 18px
+}
+.hdRightInfo1 input{
+    text-align: right;
+}
+.houseTips{
+    padding: 8px 0 5px;
+}
+.houseTips a{
+    background: #F8F8F8;
+    display: inline-block;
+    padding: 3px 12px;
+    margin: 0 5px 3px;
+}

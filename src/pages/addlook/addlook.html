@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>添加带看</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <form>
+    <ion-grid class="p0">
+      <ion-row>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <ion-label class="pl12">房源ID：</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <ion-label>楼盘：</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <ion-label class="pl12">楼盘地址：</ion-label>
+              <ion-label class="updateTextaera">
+                <textarea placeholder="请填写楼盘地址"></textarea>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="pl12 bgWhite">
+          <ion-item>
+            <ion-label>看房时间</ion-label>
+            <ion-datetime displayFormat="YYYY MM, DD HH:mm"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col col-12 class="followMain bgWhite">
+          <div>
+            看房记录：
+          </div>
+          <div>
+            <textarea rows="5" placeholder="你跟进的内容..."></textarea>
+          </div>
+        </ion-col>
+        <ion-col col-12 class="bgWhite">
+            <div>上传图片:</div>
+            <div>
+               <button (click)="takePhoto(0)"> 上传图片1</button>
+            </div>
+        </ion-col>
+
+        <ion-col col-12 class="bgWhite p10">
+          <button ion-button full color="danger" class="radius">确定</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+
+</ion-content>

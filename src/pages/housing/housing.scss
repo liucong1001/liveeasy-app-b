@@ -1,0 +1,138 @@
+page-housing .adds {
+    color: #fff;
+    font-size: 35px;
+    position: absolute;
+    right: 15px;
+    top: 6px;
+}
+
+page-housing .houseMenu {
+    background: #F8F8F8;
+}
+
+page-housing .houseMenu ion-col {
+    // border: 1px solid;
+    padding: 13px 0;
+    color: #555;
+}
+
+page-housing .houseMenu ion-col ion-icon {
+    position: relative;
+    top: 3px;
+    left: 5px;
+}
+
+page-housing .tips a {
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px;
+    margin-right: 6px
+}
+
+page-housing .tips a:first-child {
+    background: #FEEDE9;
+    color: #F98369;
+}
+
+page-housing .tips a:nth-child(2) {
+    background: #E7F7F7;
+    color: #7DD4D0;
+}
+
+page-housing .tips a:nth-child(3) {
+    background: #E9F6FC;
+    color: #69C2EC;
+}
+
+page-housing .tips a:nth-child(4) {
+    background: #F6EAF5;
+    color: #C373BA;
+}
+
+page-housing .tips a:nth-child(5) {
+    background: #E2F5ED;
+    color: #3DBD89;
+}
+
+page-housing .tips a:nth-child(6) {
+    background: #E8F7E4;
+    color: #68CA47;
+}
+
+page-housing .houseStatus {
+    border-top: 1px solid #F5F5F5;
+    padding: 6px 0;
+}
+
+page-housing .houseStatus a {
+    color: #73A0CE;
+    display: block;
+    border-right: 1px solid #f2f2f2;
+}
+
+page-housing .houseMain {
+    margin-bottom: 10px
+}
+
+.lists {
+    position: fixed; // top: 10%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 99; // color: #000
+    height: 65%;
+    margin-top: -1px
+}
+
+.leftChange {
+    height: 84%;
+    overflow: scroll; // background: #aaa;
+    border-bottom: 1px solid #F4F4F4;
+}
+
+.leftChange a,
+    {
+    border-bottom: 1px solid #F5F5F5;
+    display: block;
+    padding: 13px 10px;
+}
+.leftChange .item-block{
+    min-height:46px;
+}
+.updateBg {
+    background: #F8F8F8;
+}
+
+.lists button {
+    border-radius: 5px;
+    margin-top: 13px;
+}
+
+.pop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .3;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+.houseType{
+    padding: 0 25px;
+}
+
+.btns{
+    padding: 0 5px;
+    position: absolute;
+    bottom: 0;
+    width: 84%;
+}
+.item-radio-checked.item-ios ion-label {
+    color: #DB2924;
+}
+
+.radio-ios .radio-checked .radio-inner {
+    border-color: #DB2924;
+}

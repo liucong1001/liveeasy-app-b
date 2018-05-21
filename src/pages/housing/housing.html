@@ -1,0 +1,267 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>房源</ion-title>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p0" style="position: relative;">
+    <div style="position: relative;">
+      <ion-row class="houseMenu">
+        <ion-col col-3 class="tc" (click)="showMenu1()">
+          区域
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </ion-col>
+        <ion-col col-3 class="tc" (click)="showMenu2()">
+          户型
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </ion-col>
+        <ion-col col-3 class="tc" (click)="showMenu3()">
+          小区
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </ion-col>
+        <ion-col col-3 class="tc" (click)="showMenu4()">
+          更多
+          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+        <!-- 区域 -->
+        <ion-grid class="lists p0" *ngIf="show">
+          <ion-row>
+            <ion-col col-6 class="p0">
+              <div class="leftChange">
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+              </div>
+              <div class="p5 ">
+                <button ion-button full color="light">重置</button>
+              </div>
+            </ion-col>
+            <ion-col col-6 class="p0">
+              <div class="leftChange updateBg">
+                <ion-list radio-group>
+                  <ion-item>
+                    <ion-label>不限</ion-label>
+                    <ion-radio checked="true" value="go"></ion-radio>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>武昌区</ion-label>
+                    <ion-radio value="rust"></ion-radio>
+                  </ion-item>
+                </ion-list>
+              </div>
+              <div class="p5 ">
+                <button ion-button full color="danger">确定</button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!-- 户型 -->
+        <div class="lists houseType" *ngIf="houseType">
+          <ion-list radio-group>
+            <ion-item>
+              <ion-label>不限</ion-label>
+              <ion-radio checked="true" value="go"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>一室</ion-label>
+              <ion-radio value="rust"></ion-radio>
+            </ion-item>
+          </ion-list>
+          <div class="p5 btns">
+            <button ion-button full color="danger">确定</button>
+          </div>
+        </div>
+
+        <!-- 小区 -->
+        <div class="lists houseType" *ngIf="housingEstate">
+            <ion-list radio-group>
+              <ion-item>
+                <ion-label>xx小区</ion-label>
+                <ion-radio checked="true" value="go"></ion-radio>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>xx小区</ion-label>
+                <ion-radio value="rust"></ion-radio>
+              </ion-item>
+            </ion-list>
+            <div class="p5 btns">
+              <button ion-button full color="danger">确定</button>
+            </div>
+          </div>
+        <!-- 更多 -->
+        <div class="lists houseType" *ngIf="more">
+            <ion-list radio-group>
+              <ion-item>
+                <ion-label>只看我的房源</ion-label>
+                <ion-radio checked="true" value="go"></ion-radio>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label>待处理申请关闭</ion-label>
+                <ion-radio value="rust"></ion-radio>
+              </ion-item>
+            </ion-list>
+            <div class="p5 btns">
+              <button ion-button full color="danger">确定</button>
+            </div>
+          </div>
+    </div>
+
+
+
+    <ion-row class="bgWhite houseMain">
+      <ion-col col-12 (click)="goHouseDetail()">
+        <ion-row>
+          <ion-col col-4>
+            <img src="../../assets/imgs/home.png" alt="" width="100%" height="120">
+          </ion-col>
+          <ion-col col-8>
+            <div class="ellipsis">
+              <font size="3">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</font>
+            </div>
+            <p class="m5">
+              <font size="2" color="#aaa">ID:
+                <span>2323232</span>
+                <span>2室一厅</span>
+              </font>
+            </p>
+            <ion-row>
+              <ion-col col-6 class="p0">
+                <font size="2" color="#aaa">建面96m
+                  <sup>2</sup>
+                </font>
+              </ion-col>
+              <ion-col col-6 class="tr p0">
+                <font color="red" size="3"> 12000元/m
+                  <sup>2</sup>
+                </font>
+              </ion-col>
+            </ion-row>
+            <div class="tips m5">
+              <a>满五</a>
+              <a>锁</a>
+              <a>委</a>
+              <a>学</a>
+              <a>铁</a>
+              <a>审</a>
+            </div>
+            <div>
+              <font size="1" color="#aaa">
+                <span>2017/12/12</span>录入</font>
+              <font size="1" color="#aaa">归属人：
+                <span>张三</span>
+              </font>
+            </div>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-col>
+
+      <ion-col col-12 class="houseStatus">
+        <ion-row>
+          <ion-col col-4 class="tc" (click)="goFollow()">
+            <a>跟进</a>
+          </ion-col>
+          <ion-col col-4 class="tc" (click)="goAddLook()">
+            <a>带看</a>
+          </ion-col>
+          <ion-col col-4 class="tc" (click)="goCloseHouse()">
+            <a>关闭</a>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bgWhite houseMain">
+        <ion-col col-12>
+          <ion-row>
+            <ion-col col-4>
+              <img src="../../assets/imgs/home.png" alt="" width="100%" height="120">
+            </ion-col>
+            <ion-col col-8>
+              <div class="ellipsis">
+                <font size="3">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</font>
+              </div>
+              <p class="m5">
+                <font size="2" color="#aaa">ID:
+                  <span>2323232</span>
+                  <span>2室一厅</span>
+                </font>
+              </p>
+              <ion-row>
+                <ion-col col-6 class="p0">
+                  <font size="2" color="#aaa">建面96m
+                    <sup>2</sup>
+                  </font>
+                </ion-col>
+                <ion-col col-6 class="tr p0">
+                  <font color="red" size="3"> 12000元/m
+                    <sup>2</sup>
+                  </font>
+                </ion-col>
+              </ion-row>
+              <div class="tips m5">
+                <a>满五</a>
+                <a>锁</a>
+                <a>委</a>
+                <a>学</a>
+                <a>铁</a>
+                <a>审</a>
+              </div>
+              <div>
+                <font size="1" color="#aaa">
+                  <span>2017/12/12</span>录入</font>
+                <font size="1" color="#aaa">归属人：
+                  <span>张三</span>
+                </font>
+              </div>
+            </ion-col>
+          </ion-row>
+  
+  
+        </ion-col>
+  
+        <ion-col col-12 class="houseStatus">
+          <ion-row>
+            <ion-col col-4 class="tc">
+              <a>跟进</a>
+            </ion-col>
+            <ion-col col-4 class="tc">
+              <a>带看</a>
+            </ion-col>
+            <ion-col col-4 class="tc">
+              <a>关闭</a>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+  </ion-grid>
+
+
+</ion-content>
+<div class="pop" *ngIf="pop"></div>
+
+
+
+
+

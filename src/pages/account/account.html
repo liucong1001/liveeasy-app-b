@@ -1,0 +1,22 @@
+<ion-content padding style="background: #fff">
+  <h2 class="loginTitle">账号密码登录2</h2>
+  <div>
+    <ion-item>
+      <ion-input placeholder="请输入账号" [(ngModel)]="username"   clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="请输入密码" [(ngModel)]="password" type="password"  clearInput></ion-input>
+    </ion-item>
+
+    <div class="m28">
+      <button ion-button block color="danger" (click)="login()">登录</button>
+    </div>
+    <ion-grid class="p0 m15">
+      <ion-row>
+        <ion-col col-6 (click)="goLogin()">
+          <font color="#aaa">用手机登录</font>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

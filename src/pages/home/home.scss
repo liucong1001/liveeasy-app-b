@@ -1,0 +1,35 @@
+page-home ion-list{
+    margin-top: 10px !important;
+}
+page-home ion-list h2{
+    font-size: 1.5rem !important;
+}
+.leftImg{
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    background: #F1B11E;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 5px
+}
+.leftImg i{
+    color: #fff;
+    font-size: 25px
+}
+.leftImgNotice {
+    background: #FE6000;
+}
+.leftImgAdjust{
+    background: #FC524F;
+}
+page-home ion-grid ion-col{
+    text-align: center
+}
+page-home ion-grid ion-col a{
+    display: block;
+    margin-top: 3px
+}
+page-home .item-ios ion-thumbnail[item-start]{
+    margin: 8px 16px 8px 9px;
+}

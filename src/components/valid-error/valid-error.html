@@ -1,0 +1,6 @@
+<!-- Generated template for the ValidErrorComponent component -->
+<div *ngIf="(control.touched || control.dirty)&& control.invalid" class="valid-error">
+  <p *ngFor="let err of errors">
+    <span *ngIf="control.hasError(err.type)">*{{ err.message }}</span>
+  </p>
+</div>

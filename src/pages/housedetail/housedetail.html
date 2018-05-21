@@ -1,0 +1,173 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>房源详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- 当房源被锁定时 -->
+  <!-- <div class="bgWhite p10">
+    <font color="red">房源即将成交已经锁定，无法下架，修改房源信息，上传或删除图片，修改或删除住委托书，修改或删除钥匙。</font>
+  </div> -->
+  <form>
+    <ion-list>
+        <ion-item class="pl12">
+            <ion-label>房源ID：</ion-label>
+            <ion-input type="text">
+            </ion-input>
+          </ion-item>
+    </ion-list>
+    <ion-list (click)="goserach()">
+      <button ion-item class="pl12">
+        选择楼盘
+        <font color="#aaa" class="changes">选择楼盘</font>
+      </button>
+    </ion-list>
+    <ion-list>
+        
+          
+      <ion-item class="pl12" *ngIf="sensitiveInfo">
+        <ion-label>栋号</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12" *ngIf="sensitiveInfo">
+        <ion-label>单元</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1</ion-option>
+          <ion-option value="n64">2</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>楼层</ion-label>
+          <ion-input type="text">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">层</span>
+      </div>
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+        <ion-label>房间号</ion-label>
+        <ion-input type="text" placeholder="请输入房间号" class="p0">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="m10">
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>建筑面积</ion-label>
+          <ion-input type="text">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">平</span>
+      </div>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>套内面积</ion-label>
+          <ion-input type="text">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">平</span>
+      </div>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>价格</ion-label>
+          <ion-input type="text">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">万</span>
+      </div>
+      <ion-item class="pl12">
+        <ion-label>户型</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>朝向</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1</ion-option>
+          <ion-option value="n64">2</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>装修</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">2</ion-option>
+          <ion-option value="n64">1</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list class="m10">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+        <ion-label>业主姓名</ion-label>
+        <ion-input type="text" placeholder="请填写业主姓名">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>户型</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+        <ion-label>业主电话1</ion-label>
+        <ion-input type="text" placeholder="请填写业主电话">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>业主电话2</ion-label>
+        <ion-input type="text" placeholder="可选填">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list (click)="presentActionSheet()" class="m10">
+      <button ion-item class="pl12">
+        更多
+      </button>
+    </ion-list>
+    <ion-row class="bgWhite houseTips">
+      <ion-col col-4 class="pl12">
+        房源标签
+      </ion-col>
+      <ion-col col-8>
+        <a>ddd</a>
+        <a>ddd</a>
+        <a>ddd</a>
+        <a>ddd</a>
+        <a>ddd</a>
+        <a>ddd</a>
+      </ion-col>
+    </ion-row>
+    <ion-list (click)="presentActionSheet()" class="m10">
+      <button ion-item class="pl12">
+        更多
+      </button>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button color="danger" (click)="showInfo()" *ngIf="showInfos" >调取敏感信息</button>
+          <button ion-button color="danger" *ngIf="follow" >跟进</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="redact" (click)="goRedact()">编辑房源</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
