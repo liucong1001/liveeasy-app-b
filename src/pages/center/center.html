@@ -1,18 +1,42 @@
-<!--
-  Generated template for the CenterPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>center</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
+<ion-content>
+  <div class="setting">
+      <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+  </div>
+  <ion-grid class="bgWhite cHead">
+    <ion-row class="plr" (click)="goaccount()" >
+      <ion-col col-3>
+        <img src="../../assets/imgs/menu1.png"  class="cLeftImg" alt="" width="100%" height="70">
+      </ion-col>
+      <ion-col col-9 class="cRightMain">
+        <div>
+            <font size="4">刘秀</font>
+          <a class="followTips">店长</a>
+        </div>
+        <div  class="m5">
+          <font size="2" color="#aaa">武昌一店</font>
+        </div>
+        <div>
+          <font size="2" color="#aaa">工号：2532323</font>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list class="m10">
+    <button ion-item class="pl12" (click)="aboutUs()">
+      关于我们
+    </button>
+    <button ion-item class="pl12" (click)="help()">
+      帮助反馈
+    </button>
+  </ion-list>
+  <ion-list class="m10">
+    <button ion-item class="pl12" (click)="updatepwd()">
+      修改密码
+    </button>
+  </ion-list>
+  <ion-list class="m10">
+    <ion-item class="tc">
+        退出登录
+    </ion-item>
+  </ion-list>
 </ion-content>

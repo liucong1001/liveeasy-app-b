@@ -9,6 +9,7 @@ import {HomeProvider} from "../../providers/home/home";
 })
 export class HomePage {
 
+  notificationNews = [];
   constructor(public navCtrl: NavController,public homeProvider:HomeProvider) {
     // // 测试接口
     // this.homeProvider.test().then(res=>{
@@ -18,11 +19,12 @@ export class HomePage {
     // });
     // // pagelist接口
     // this.homeProvider.pageList().then();
-
-
     //   this.homeProvider.cpageList({a:'ad',name:'liu'}).then();
     //   this.homeProvider.gpageList({a:'11',b:'22'}).then();
-    //   this.homeProvider.getNotification().then();
+
+       this.homeProvider.getNotification().then(res=>{
+           this.notificationNews = res.data.result;
+       });
   }
 
   msgDetail(){

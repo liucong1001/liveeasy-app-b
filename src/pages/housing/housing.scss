@@ -1,4 +1,4 @@
-page-housing .adds {
+.adds {
     color: #fff;
     font-size: 35px;
     position: absolute;
@@ -6,17 +6,17 @@ page-housing .adds {
     top: 6px;
 }
 
-page-housing .houseMenu {
+.houseMenu {
     background: #F8F8F8;
 }
 
-page-housing .houseMenu ion-col {
+.houseMenu ion-col {
     // border: 1px solid;
     padding: 13px 0;
     color: #555;
 }
 
-page-housing .houseMenu ion-col ion-icon {
+.houseMenu ion-col ion-icon {
     position: relative;
     top: 3px;
     left: 5px;
@@ -59,18 +59,18 @@ page-housing .tips a:nth-child(6) {
     color: #68CA47;
 }
 
-page-housing .houseStatus {
+.houseStatus {
     border-top: 1px solid #F5F5F5;
     padding: 6px 0;
 }
 
-page-housing .houseStatus a {
+.houseStatus a {
     color: #73A0CE;
     display: block;
     border-right: 1px solid #f2f2f2;
 }
 
-page-housing .houseMain {
+.houseMain {
     margin-bottom: 10px
 }
 

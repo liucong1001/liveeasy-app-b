@@ -16,6 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class MdetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+   let news = navParams.get('news');
+   console.log('路由参数',news);
   }
 
   ionViewDidLoad() {

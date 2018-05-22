@@ -102,4 +102,5 @@ export class HousingPage {
     this.navCtrl.push(AddhousePage);
   }
 
+
 }

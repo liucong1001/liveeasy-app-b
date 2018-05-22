@@ -6,23 +6,13 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row (click)="goMdetails()">
+  <ion-row *ngFor="let item of notificationNews; index as i;"   (click)="goMdetails(item)">
     <ion-col col-12 class="tc">
-      <font size="1">2018年5月16日 14：20：20</font>
+      <font size="1">{{item.publishTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</font>
     </ion-col>
     <ion-col col-12 class="bgWhite p10">
-        <h3>标题</h3>
-        <p>的打发打发打发打发打发打发的</p>
+        <h3>{{item.notificationTitle}}</h3>
+        <p>{{item.notificationCont}} {{item.postPersonId}}</p>
       </ion-col>
   </ion-row>
-  <ion-row>
-      <ion-col col-12 class="tc">
-        <font size="1">2018年5月16日 14：20：20</font>
-      </ion-col>
-      <ion-col col-12 class="bgWhite p10">
-          <h3>标题</h3>
-          <p>的打发打发打发打发打发打发的</p>
-        </ion-col>
-    </ion-row>
-    
 </ion-content>

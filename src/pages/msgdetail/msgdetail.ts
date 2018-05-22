@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MdetailsPage } from '../mdetails/mdetails';
+import {HomeProvider} from "../../providers/home/home";
 
 /**
  * Generated class for the MsgdetailPage page.
@@ -15,15 +16,21 @@ import { MdetailsPage } from '../mdetails/mdetails';
   templateUrl: 'msgdetail.html',
 })
 export class MsgdetailPage {
+    notificationNews = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public homeProvider:HomeProvider) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.homeProvider.getNotification().then(res=>{
+          this.notificationNews = res.data.result;
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MsgdetailPage');
   }
-  goMdetails(){
-    this.navCtrl.push(MdetailsPage)
+  goMdetails(item){
+    this.navCtrl.push(MdetailsPage,{news:item})
   }
+
 
 }

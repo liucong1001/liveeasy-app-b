@@ -27,10 +27,37 @@ import { HousedetailPage } from '../pages/housedetail/housedetail';
 import { RedacthousePage } from '../pages/redacthouse/redacthouse';
 import { AddhousePage } from '../pages/addhouse/addhouse';
 import { LockhousePage } from '../pages/lockhouse/lockhouse';
+
+
+
 import { CommonModule } from '@angular/common';
 import {ComponentsModule} from "../components/components.module";
 import { HttpProvider } from '../providers/http/http';
 import { Camera } from '@ionic-native/camera';
+
+import { RolepeoplePage } from '../pages/rolepeople/rolepeople';
+import { RecordPage } from '../pages/record/record';
+import { MypassengerPage } from '../pages/mypassenger/mypassenger';
+import { PublicpassengerPage } from '../pages/publicpassenger/publicpassenger';
+import { AddpassengerPage } from '../pages/addpassenger/addpassenger';
+import { PassengerdetailPage } from '../pages/passengerdetail/passengerdetail';
+import { PassengerfollowPage } from '../pages/passengerfollow/passengerfollow';
+import { PfollowrecordPage } from '../pages/pfollowrecord/pfollowrecord';
+import { PassengerlookPage } from '../pages/passengerlook/passengerlook';
+import { PlookrecordPage } from '../pages/plookrecord/plookrecord';
+import { AccomplishPage } from '../pages/accomplish/accomplish';
+import { CloseprivateguestPage } from '../pages/closeprivateguest/closeprivateguest';
+import { PublicpdetailPage } from '../pages/publicpdetail/publicpdetail';
+import { AddpublicguestPage } from '../pages/addpublicguest/addpublicguest';
+import { DeclarationPage } from '../pages/declaration/declaration';
+import { DeclardetailPage } from '../pages/declardetail/declardetail';
+import { ChoosehousePage } from '../pages/choosehouse/choosehouse';
+import { UpdatepwdPage } from '../pages/updatepwd/updatepwd';
+import { HelpPage } from '../pages/help/help';
+import { AboutusPage } from '../pages/aboutus/aboutus';
+import { MyaccountPage } from '../pages/myaccount/myaccount';
+import { VerifyphonePage } from '../pages/verifyphone/verifyphone'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -50,7 +77,29 @@ import { Camera } from '@ionic-native/camera';
     HousedetailPage,
     RedacthousePage,
     AddhousePage,
-    LockhousePage
+    LockhousePage,
+      RolepeoplePage,
+      RecordPage,
+      AddpassengerPage,
+      MypassengerPage,
+      PublicpassengerPage,
+      PassengerdetailPage,
+      PassengerfollowPage,
+      PfollowrecordPage,
+      PassengerlookPage,
+      PlookrecordPage,
+      AccomplishPage,
+      CloseprivateguestPage,
+      PublicpdetailPage,
+      AddpublicguestPage,
+      DeclarationPage,
+      DeclardetailPage,
+      ChoosehousePage,
+      AboutusPage,
+      HelpPage,
+      UpdatepwdPage,
+      MyaccountPage,
+      VerifyphonePage
 
   ],
   entryComponents: [
@@ -71,7 +120,29 @@ import { Camera } from '@ionic-native/camera';
     HousedetailPage,
     RedacthousePage,
     AddhousePage,
-    LockhousePage
+    LockhousePage,
+      RolepeoplePage,
+      RecordPage,
+      AddpassengerPage,
+      MypassengerPage,
+      PublicpassengerPage,
+      PassengerdetailPage,
+      PassengerfollowPage,
+      PfollowrecordPage,
+      PassengerlookPage,
+      PlookrecordPage,
+      AccomplishPage,
+      CloseprivateguestPage,
+      PublicpdetailPage,
+      AddpublicguestPage,
+      DeclarationPage,
+      DeclardetailPage,
+      ChoosehousePage,
+      AboutusPage,
+      HelpPage,
+      UpdatepwdPage,
+      MyaccountPage,
+      VerifyphonePage
     
   ],
     imports: [

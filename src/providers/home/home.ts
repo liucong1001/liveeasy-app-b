@@ -48,7 +48,7 @@ export class HomeProvider {
     gpageList(params?){
         return this.httpProvider.httpGet(this.pageListPath,params);
     }
-
+    //首页-公告消息接口
     getNotification(){
       var dataP = {"currentPage":1,"limit":10,"offset":0,"params":{"status":"1"},"totalCount":0,"totalPages":0,"totalRecords":0};
       return this.httpProvider.httpPost(this.notificationPath,dataP);
