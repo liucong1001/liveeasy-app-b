@@ -1,0 +1,167 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>公客池</ion-title>
+      <ion-icon ios="ios-add" md="md-add" class="adds"></ion-icon>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid class="p0" style="position: relative;">
+      <div style="position: relative;">
+        <ion-row class="houseMenu">
+          <ion-col col-4 class="tc" (click)="showMenu1()">
+            全部公客
+            <ion-icon name="md-arrow-dropdown"></ion-icon>
+          </ion-col>
+          <ion-col col-4 class="tc" (click)="showMenu2()">
+            面积
+            <ion-icon name="md-arrow-dropdown"></ion-icon>
+          </ion-col>
+          <ion-col col-4 class="tc" (click)="showMenu3()">
+            价格
+            <ion-icon name="md-arrow-dropdown"></ion-icon>
+          </ion-col>
+        </ion-row>
+  
+        <!-- 区域 -->
+        <ion-grid class="lists p0" *ngIf="show">
+          <ion-row>
+            <ion-col col-6 class="p0">
+              <div class="leftChange">
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+                <a>不限</a>
+                <a>武昌区</a>
+                <a>不限</a>
+              </div>
+              <div class="p5 ">
+                <button ion-button full color="light">重置</button>
+              </div>
+            </ion-col>
+            <ion-col col-6 class="p0">
+              <div class="leftChange updateBg">
+                <ion-list radio-group>
+                  <ion-item>
+                    <ion-label>不限</ion-label>
+                    <ion-radio checked="true" value="go"></ion-radio>
+                  </ion-item>
+  
+                  <ion-item>
+                    <ion-label>武昌区</ion-label>
+                    <ion-radio value="rust"></ion-radio>
+                  </ion-item>
+                </ion-list>
+              </div>
+              <div class="p5 ">
+                <button ion-button full color="danger">确定</button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+        <!-- 户型 -->
+        <div class="lists houseType" *ngIf="houseType">
+          <ion-list radio-group>
+            <ion-item>
+              <ion-label>不限</ion-label>
+              <ion-radio checked="true" value="go"></ion-radio>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>一室</ion-label>
+              <ion-radio value="rust"></ion-radio>
+            </ion-item>
+          </ion-list>
+          <div class="p5 btns">
+            <button ion-button full color="danger">确定</button>
+          </div>
+        </div>
+  
+  
+        <!-- 跟进 -->
+        <div class="lists houseType" *ngIf="more">
+          <ion-list radio-group>
+            <ion-item>
+              <ion-label>只看我的房源</ion-label>
+              <ion-radio checked="true" value="go"></ion-radio>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>待处理申请关闭</ion-label>
+              <ion-radio value="rust"></ion-radio>
+            </ion-item>
+          </ion-list>
+          <div class="p5 btns">
+            <button ion-button full color="danger">确定</button>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+      <ion-row class="bgWhite houseMain">
+        <ion-col col-12 (click)="gopDetail()">
+          <ion-row>
+            <ion-col col-9>
+              <div class="ellipsis tips">
+                <font size="3">标题标题标</font>
+                <font size="2" color="#aaa">（客户来源）</font>
+              </div>
+              <p class="m5">
+                <font size="2" color="#aaa">ID:
+                  <span>2323232</span>
+                  <span>武昌-徐东</span>
+                </font>
+              </p>
+              <p class="m5">
+                  <font size="1" color="#aaa">
+                    <span>2017/12/12录入</span>
+                    <span>流入公客</span>
+                  </font>
+                </p>
+            </ion-col>
+            <ion-col col-3 class="tc m15">
+              <img src="../../assets/imgs/phone.png" alt="" width="45" height="45">
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row class="bgWhite houseMain">
+          <ion-col col-12 (click)="gopDetail()">
+              <ion-row>
+                <ion-col col-9>
+                    <div class="ellipsis tips">
+                        <font size="3">标题标题标</font>
+                        <font size="2" color="#aaa">（客户来源）</font>
+                      </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">ID:
+                      <span>2323232</span>
+                      <span>武昌-徐东</span>
+                    </font>
+                  </p>
+                  <p class="m5">
+                      <font size="2" color="#aaa">
+                        <span>2017/12/12录入</span>
+                        <span>流入公客</span>
+                      </font>
+                    </p>
+                </ion-col>
+                <ion-col col-3 class="tc m15">
+                  <img src="../../assets/imgs/phone.png" alt="" width="45" height="45">
+                </ion-col>
+              </ion-row>
+            </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <div class="pop" *ngIf="pop"></div>

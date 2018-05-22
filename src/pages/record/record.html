@@ -1,0 +1,112 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>记录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="tc" [ngClass]="{'active-tab':index==0}" (click)="goToSlide(0)">
+        跟进记录
+      </ion-col>
+      <ion-col class="tc" [ngClass]="{'active-tab':index==1}" (click)="goToSlide(1)">
+          空看记录
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
+        <div class="location">
+          <ion-list>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-12>
+                  刘秀
+                  <a class="followTips">日常跟进</a>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-12>
+                  刘秀
+                  <a class="followTips">日常跟进</a>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-slide>
+      <ion-slide>
+          <div class="location">
+              <ion-list>
+                <ion-item class="updateHegiht">
+                  <ion-row>
+                    <ion-col col-12>
+                      刘秀
+                      <a class="emptyTips">空看</a>
+                    </ion-col>
+                    <ion-col col-12>
+                      发放地点打发打发打发打发打发打发的
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-row>
+                            <ion-col col-4 >
+                                <img src="" width="200" height="100">
+                            </ion-col>
+                            <ion-col col-4 >
+                                <img src="" width="200" height="100">
+                            </ion-col>
+                        </ion-row>
+                      </ion-col>
+                    <ion-col col-12>
+                      <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                    </ion-col>
+                  </ion-row>
+                </ion-item>
+                <ion-item class="updateHegiht">
+                  <ion-row>
+                    <ion-col col-12>
+                      刘秀
+                      <a class="emptyTips">空看</a>
+                    </ion-col>
+                    <ion-col col-12>
+                      发放地点打发打发打发打发打发打发的
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-row>
+                            <ion-col col-4 >
+                                <img src="" width="200" height="100">
+                            </ion-col>
+                            <ion-col col-4 >
+                                <img src="" width="200" height="100">
+                            </ion-col>
+                        </ion-row>
+                      </ion-col>
+                    <ion-col col-12>
+                      <font color="#aaa">2017-12-12 12：25：74</font>
+                    </ion-col>
+                  </ion-row>
+                </ion-item>
+              </ion-list>
+            </div>
+      </ion-slide>
+    </ion-slides>
+  </div>

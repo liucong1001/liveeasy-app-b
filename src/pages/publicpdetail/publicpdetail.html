@@ -1,0 +1,161 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>公客详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <form>
+    <ion-list>
+
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>客户ID</ion-label>
+        <ion-input type="text" value="123">
+        </ion-input>
+      </ion-item>
+      <button ion-item class="pl12 hdRightInfo1">
+        <ion-label>录入时间</ion-label>
+        <ion-datetime displayFormat="YYYY/MM/DD HH:mm"></ion-datetime>
+      </button>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>公客位置</ion-label>
+        <ion-input type="text" value="多段多">
+        </ion-input>
+      </ion-item>
+      <button ion-item class="pl12 hdRightInfo1">
+          <ion-label>流入时间</ion-label>
+          <ion-datetime displayFormat="YYYY/MM/DD HH:mm"></ion-datetime>
+        </button>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>客户姓名</ion-label>
+        <ion-input type="text" value="多段多">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>客户性别</ion-label>
+        <ion-select okText="确定" cancelText="关闭">
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">男</ion-option>
+          <ion-option value="n64">女</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>客户手机</ion-label>
+        <ion-input type="text" value="245565656">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>客户来源</ion-label>
+        <ion-select>
+          <ion-option value="nes" selected>1</ion-option>
+          <ion-option value="n64">2</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>客户归属</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1</ion-option>
+          <ion-option value="n64">2</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>客户等级</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1</ion-option>
+          <ion-option value="n64">2</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list style="margin-top: 10px" (click)="clickIntention()">
+      <button ion-item class="pl12" *ngIf="right">
+        <font color="#5A8FC5">客户意向</font>
+      </button>
+      <ion-item class="pl12" *ngIf="down">
+        <font color="#5A8FC5">客户意向</font>
+        <i class="iconfont icon-xia"></i>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="showIntention">
+      <ion-item class="pl12">
+        <ion-label>意向区域</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>意向楼盘</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>面积要求</ion-label>
+          <ion-input type="text">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">平</span>
+      </div>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>价格要求</ion-label>
+          <ion-input type="text" placeholder="例如：100-30000">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">万</span>
+      </div>
+      <ion-item class="pl12">
+        <ion-label>楼层要求</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>居室要求</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>客厅要求</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>装修要求</ion-label>
+        <ion-select>
+          <ion-option value="change" selected>请选择</ion-option>
+          <ion-option value="nes">1栋</ion-option>
+          <ion-option value="n64">2栋</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row class="p10">
+        <ion-col col-4>
+          <button ion-button color="danger" full class="radius" (click)="addPublicGuest()">领取公客</button>
+        </ion-col>
+        <ion-col col-4>
+          <button class="radius updateBtn" (click)="passengerLook()">约看</button>
+        </ion-col>
+        <ion-col col-4>
+          <button class="radius updateBtn" (click)="passengerFollow()">跟进</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>验证手机</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  <ion-content>
+    <form>
+      <ion-list class="m10">
+          <ion-item class="pl12">
+              <ion-label>手机号</ion-label>
+              <ion-input placeholder="请输入手机号" clearInput></ion-input>
+            </ion-item>
+            <div class="relative">
+              <ion-item class="pl12">
+                  <ion-label>验证码</ion-label>
+                <ion-input placeholder="请输入短信验证码"></ion-input>
+              </ion-item>
+              <div class="sendMsg" (click)="sendMsg()">发送验证码</div>
+            </div>
+      </ion-list>
+      <div padding>
+        <button ion-button block color="danger">提交</button>
+      </div>
+    </form>
+  </ion-content>
+  

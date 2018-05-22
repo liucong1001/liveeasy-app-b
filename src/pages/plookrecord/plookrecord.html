@@ -1,0 +1,138 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>约看记录</ion-title>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="tc" [ngClass]="{'active-tab':index==0}" (click)="goToSlide(0)">
+        约看中
+      </ion-col>
+      <ion-col class="tc" [ngClass]="{'active-tab':index==1}" (click)="goToSlide(1)">
+        已完成
+      </ion-col>
+      <ion-col class="tc" [ngClass]="{'active-tab':index==2}" (click)="goToSlide(2)">
+        已关闭
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
+        <ion-row class="bgWhite houseMain">
+          <ion-col col-12>
+            <ion-row>
+              <ion-col col-7 class="tl">
+                <div class="ellipsis">
+                  <font size="3">的顺丰</font>
+                </div>
+                <p class="m5">
+                  <font size="2" color="#aaa">
+                    <span>2017/12/12 12：07：33</span>
+                  </font>
+                </p>
+              </ion-col>
+              <ion-col col-5 class="tc m15">
+                <font size="2" color="#aaa">
+                  房源ID：
+                  <span>12513151</span>
+                </font>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-12 class="houseStatus">
+            <ion-row>
+              <ion-col col-6 class="tc" (click)="accomplish()">
+                <font size="2">完成</font>
+              </ion-col>
+              <ion-col col-6 class="tc" (click)="closePrivateGuest()">
+                <font size="2">关闭</font>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+      <ion-slide>
+        <div class="location">
+          <ion-list>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-6>
+                  刘秀
+                </ion-col>
+                <ion-col col-6 class="tr">
+                  <font size="1" color="#aaa">房源ID：5454545454</font>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-6>
+                  刘秀
+                </ion-col>
+                <ion-col col-6 class="tr">
+                  <font size="1" color="#aaa">房源ID：5454545454</font>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="location">
+          <ion-list>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-6>
+                  刘秀
+                </ion-col>
+                <ion-col col-6 class="tr">
+                  <font size="1" color="#aaa">房源ID：5454545454</font>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item class="updateHegiht">
+              <ion-row>
+                <ion-col col-6>
+                  刘秀
+                </ion-col>
+                <ion-col col-6 class="tr">
+                  <font size="1" color="#aaa">房源ID：5454545454</font>
+                </ion-col>
+                <ion-col col-12>
+                  发放地点打发打发打发打发打发打发的
+                </ion-col>
+                <ion-col col-12>
+                  <font color="#aaa">2017-12-12 12：25：74</font>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>

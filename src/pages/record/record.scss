@@ -1,0 +1,14 @@
+.followTips,.emptyTips{
+    display: inline-block;
+    background: #FDEAE6;
+    color: #F77254;
+    padding: 2px 8px;
+    margin-left: 10px
+}
+.active-tab{
+    border-bottom: 1px solid #DB2924;
+}
+.emptyTips{
+    background: #E5F6F6;
+    color: #51C396;
+}
