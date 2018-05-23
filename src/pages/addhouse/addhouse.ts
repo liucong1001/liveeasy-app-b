@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ErrorMessage} from '../../components/valid-error/valid-error';
+import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -17,8 +18,15 @@ import {ErrorMessage} from '../../components/valid-error/valid-error';
 export class AddhousePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder ) {
+              private fb:FormBuilder,private addhouseProvider:AddhouseProvider) {
+       //楼盘列表
+        this.addhouseProvider.estateListSelect().then(res=>{
 
+        });
+        //房源标签
+       this.addhouseProvider.estateTagsSelect().then(res=>{
+
+       })
   }
 
   form:FormGroup =this.fb.group({
