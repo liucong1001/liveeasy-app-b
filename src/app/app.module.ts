@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {StartupPage} from '../pages/startup/startup'
@@ -57,6 +57,18 @@ import { HelpPage } from '../pages/help/help';
 import { AboutusPage } from '../pages/aboutus/aboutus';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { VerifyphonePage } from '../pages/verifyphone/verifyphone'
+import { VersionProvider } from '../providers/version/app.version';
+import {VersionUpdateProvider} from "../providers/version/app.update";
+import {FileOpener} from "@ionic-native/file-opener";
+import {FileTransfer} from '@ionic-native/file-transfer';
+import {File} from '@ionic-native/file';
+import {Device} from "@ionic-native/device";
+import {HTTP} from "@ionic-native/http";
+import {AppVersion} from "@ionic-native/app-version";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
+import {HeaderColor} from "@ionic-native/header-color";
+import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
+import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 
 @NgModule({
   declarations: [
@@ -143,7 +155,7 @@ import { VerifyphonePage } from '../pages/verifyphone/verifyphone'
       UpdatepwdPage,
       MyaccountPage,
       VerifyphonePage
-    
+
   ],
     imports: [
         BrowserModule,
@@ -155,14 +167,26 @@ import { VerifyphonePage } from '../pages/verifyphone/verifyphone'
     ],
     bootstrap: [IonicApp],
     providers: [
-        StatusBar,
-        SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
-        LoginProvider,
-        LocalStorageProvider,
-        HomeProvider,
-        HttpProvider,
-        Camera,
+      StatusBar,
+      SplashScreen,
+      {provide: ErrorHandler, useClass: IonicErrorHandler},
+      LoginProvider,
+      LocalStorageProvider,
+      HomeProvider,
+      HttpProvider,
+      Camera,
+      VersionUpdateProvider,
+      VersionProvider,
+      FileOpener,
+      FileTransfer,
+      Device,
+      File,
+      HTTP,
+      AndroidPermissions,
+      AppVersion,
+      HeaderColor,
+      FingerprintAIO,
+      NativePageTransitions
     ]
 })
 export class AppModule {}

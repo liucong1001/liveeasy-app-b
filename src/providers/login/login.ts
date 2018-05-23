@@ -16,5 +16,4 @@ export class LoginProvider {
         return  res  as any;
      })
   }
-
 }

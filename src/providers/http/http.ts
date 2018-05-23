@@ -14,19 +14,19 @@ export class HttpProvider {
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider) {
     console.log('Hello HttpProvider Provider');
   }
-    public headers = new HttpHeaders().set('Content-Type', 'application/json')
-        .set('token',this.localStorageProvider.get('ticket')) ;
+  public headers = new HttpHeaders().set('Content-Type', 'application/json')
+    .set('token',this.localStorageProvider.get('ticket')) ;
 
-    public httpGet(url,params):Promise<any>{
-         return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
-                return res as any;
-         })
-   }
+  public httpGet(url,params):Promise<any>{
+    return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
+      return res as any;
+    })
+  }
 
-   public httpPost(url,params):Promise<any>{
-       return this.http.post(url,params,{headers:this.headers}).toPromise().then(res=>{
-           return res as any;
-       })
-   }
+  public httpPost(url,params):Promise<any>{
+    return this.http.post(url,params,{headers:this.headers}).toPromise().then(res=>{
+      return res as any;
+    })
+  }
 
 }
