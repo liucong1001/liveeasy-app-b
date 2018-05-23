@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
  * Generated class for the AddlookPage page.
@@ -16,13 +16,42 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class AddlookPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private camera: Camera) {
+              private camera: Camera,public actionSheetCtrl: ActionSheetController,) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddlookPage');
   }
 
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      // title: '更多',
+      buttons: [
+        {
+          text: '选择图片',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+            this.takePhoto(0);
+          }
+        },{
+          text: '拍照',
+          handler: () => {
+            console.log('Archive clicked');
+            this.takePhoto(1);
+          }
+        },{
+          text: '关闭',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
     //take Photo
     takePhoto(sourceType:number) {

@@ -50,12 +50,10 @@
             <textarea rows="5" placeholder="你跟进的内容..."></textarea>
           </div>
         </ion-col>
-        <ion-col col-12 class="bgWhite">
-            <div>上传图片:</div>
-            <div>
-               <button (click)="takePhoto(0)"> 上传图片1</button>
-            </div>
-        </ion-col>
+        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+          <span>上传图片</span>
+          <div class="bgWrapper m10"></div>
+        </div>
 
         <ion-col col-12 class="bgWhite p10">
           <button ion-button full color="danger" class="radius">确定</button>

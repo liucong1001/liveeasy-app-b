@@ -43,7 +43,7 @@ export class MyApp {
       //检测版本更新
       appUpdate.checkVersion();
       //设置全局页面过渡
-      this.setPageTransition();
+      // this.setPageTransition();
     });
   }
 
