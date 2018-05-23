@@ -15,6 +15,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class AddlookPage {
 
+  path: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,) {
   }
@@ -67,6 +68,7 @@ export class AddlookPage {
 
         this.camera.getPicture(options).then((imageData) => {
             let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.path = base64Image;
         }, (err) => {
             // Handle error
         });

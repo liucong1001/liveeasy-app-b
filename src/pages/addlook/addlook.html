@@ -52,7 +52,10 @@
         </ion-col>
         <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
           <span>上传图片</span>
-          <div class="bgWrapper m10"></div>
+          <div class="bgWrapper m10"  *ngIf="!path"></div>
+          <div *ngIf="path">
+            <img [src]="path" />
+          </div>
         </div>
 
         <ion-col col-12 class="bgWhite p10">
