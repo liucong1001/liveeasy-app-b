@@ -18,8 +18,10 @@ import { MyaccountPage } from '../myaccount/myaccount';
   templateUrl: 'center.html',
 })
 export class CenterPage {
-
+  photo:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // this.photo = this.localStorageProvider.get('photo');
+    this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
   }
 
   ionViewDidLoad() {

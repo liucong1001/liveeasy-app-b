@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { RedacthousePage } from '../redacthouse/redacthouse';
 import {SearchhousePage} from "../searchhouse/searchhouse";
+import {RecordPage} from "../record/record";
 
 /**
  * Generated class for the HousedetailPage page.
@@ -53,7 +54,9 @@ export class HousedetailPage {
     });
     actionSheet.present();
   }
-
+  record(){
+    this.navCtrl.push(RecordPage);
+  }
   goRedact(){
     this.navCtrl.push(RedacthousePage);
   }

@@ -5,6 +5,7 @@ import {UpdatepwdProvider} from '../../providers/updatepwd/updatepwd'
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {ErrorMessage} from "../../components/valid-error/valid-error";
+import {AccountPage} from "../account/account";
 @IonicPage()
 @Component({
   selector: 'page-updatepwd',
@@ -37,6 +38,7 @@ export class UpdatepwdPage {
           alert('密码正确');
           this.updprovider.postPassword({newPassword:this.form.value.newPassword,loginName:this.loginName}).then(res => {
             console.log(res)
+            this.navCtrl.push(AccountPage)
           });
         }else {
           alert('旧密码不正确');

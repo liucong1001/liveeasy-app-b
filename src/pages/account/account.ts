@@ -39,7 +39,8 @@ export class AccountPage {
             this.localStorageProvider.set('loginInfo',res.data);
             //QU
             this.localStorageProvider.set('loginName',res.data.loginName);
-          this.localStorageProvider.set('phone',res.data.phone);
+            this.localStorageProvider.set('phone',res.data.phone);
+            this.localStorageProvider.set('photo',res.data.photo);
             this.localStorageProvider.set('ticket',res.ticket);
             console.log('数据',res);
         }).catch(err=>{
