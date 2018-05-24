@@ -69,7 +69,8 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {HeaderColor} from "@ionic-native/header-color";
 import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
 import {NativePageTransitions} from "@ionic-native/native-page-transitions";
-
+import { AddhouseProvider } from '../providers/addhouse/addhouse';
+import {SearchhousePage} from "../pages/searchhouse/searchhouse";
 @NgModule({
   declarations: [
     MyApp,
@@ -111,7 +112,8 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
       HelpPage,
       UpdatepwdPage,
       MyaccountPage,
-      VerifyphonePage
+      VerifyphonePage,
+    SearchhousePage
 
   ],
   entryComponents: [
@@ -154,7 +156,8 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
       HelpPage,
       UpdatepwdPage,
       MyaccountPage,
-      VerifyphonePage
+      VerifyphonePage,
+    SearchhousePage
 
   ],
     imports: [
@@ -163,7 +166,12 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
         FormsModule,
         ComponentsModule,
         CommonModule,
-        IonicModule.forRoot(MyApp)
+        // IonicModule.forRoot(MyApp)
+      IonicModule.forRoot(MyApp,{
+        tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
+        mode: 'ios'          //把所有平台设置为iOS风格：
+
+      })
     ],
     bootstrap: [IonicApp],
     providers: [
@@ -174,6 +182,7 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
       LocalStorageProvider,
       HomeProvider,
       HttpProvider,
+      AddhouseProvider,
       Camera,
       VersionUpdateProvider,
       VersionProvider,

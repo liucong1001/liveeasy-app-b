@@ -4,11 +4,11 @@
       <ion-title>选择房源</ion-title>
       <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>
     </ion-navbar>
-  
+
   </ion-header>
-  
+
   <ion-content>
-    <ion-grid class="p0" style="position: relative;">
+    <ion-grid class="p0">
       <div style="position: relative;">
         <ion-row class="houseMenu">
           <ion-col col-4 class="tc" (click)="showMenu1()">
@@ -24,7 +24,7 @@
             <ion-icon name="md-arrow-dropdown"></ion-icon>
           </ion-col>
         </ion-row>
-  
+
         <!-- 区域 -->
         <ion-grid class="lists p0" *ngIf="show">
           <ion-row>
@@ -54,7 +54,7 @@
                     <ion-label>不限</ion-label>
                     <ion-radio checked="true" value="go"></ion-radio>
                   </ion-item>
-  
+
                   <ion-item>
                     <ion-label>武昌区</ion-label>
                     <ion-radio value="rust"></ion-radio>
@@ -67,7 +67,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-  
+
         <!-- 户型 -->
         <div class="lists houseType" *ngIf="houseType">
           <ion-list radio-group>
@@ -75,7 +75,7 @@
               <ion-label>不限</ion-label>
               <ion-radio checked="true" value="go"></ion-radio>
             </ion-item>
-  
+
             <ion-item>
               <ion-label>一室</ion-label>
               <ion-radio value="rust"></ion-radio>
@@ -85,8 +85,8 @@
             <button ion-button full color="danger">确定</button>
           </div>
         </div>
-  
-  
+
+
         <!-- 小区 -->
         <div class="lists houseType" *ngIf="more">
             <ion-list radio-group>
@@ -94,7 +94,7 @@
                   <ion-label>xx小区</ion-label>
                   <ion-radio checked="true" value="go"></ion-radio>
                 </ion-item>
-    
+
                 <ion-item>
                   <ion-label>xx小区</ion-label>
                   <ion-radio value="rust"></ion-radio>

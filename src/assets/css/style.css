@@ -71,7 +71,7 @@
     url('//at.alicdn.com/t/font_659599_eujmbhwippnzh0k9.ttf?t=1526628674647') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
     url('//at.alicdn.com/t/font_659599_eujmbhwippnzh0k9.svg?t=1526628674647#iconfont') format('svg'); /* iOS 4.1- */
   }
-  
+
   .iconfont {
     font-family:"iconfont" !important;
     font-size:16px;
@@ -79,26 +79,26 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   .icon-xia:before { content: "\e60e"; }
-  
+
   .icon-shengyin:before { content: "\e617"; }
-  
+
   .icon-keyuan-keyuan:before { content: "\e620"; }
-  
+
   .icon-gonggao:before { content: "\e68e"; }
-  
+
   .icon-zulinfangyuan:before { content: "\e7fb"; }
-  
+
   .icon-jiedaituanduikeyuandituanduigeshu:before { content: "\e6c3"; }
-  
+
   .icon-wo:before { content: "\e619"; }
-  
+
   .icon-Pathx:before { content: "\e603"; }
-  
+
   .icon-yemian:before { content: "\e844"; }
-  
-  
+
+
 a{
     color: #000
 }
@@ -139,6 +139,20 @@ a{
 .tabs-ios .tab-button[aria-selected=true]{
     color: #DB2924
 }
+.searchbar-ios .searchbar-input{
+  background: #e8e8e8;
+  border-radius: 90px;
+  height: 2.5rem;
+}
+.searchbar-ios .searchbar-search-icon{
+  background-size: 16px;
+  top: 9px;
+}
+.searchbar-ios{
+  background: none;
+  border: 0;
+  padding: 0;
+}
 .bgWhite{
     background: #fff;
 }
@@ -147,7 +161,7 @@ a{
     margin: 0 10px;
     font-size: 35px;
 }
-.content-ios,ion-app.md,.content-md{
+.content-ios{
     background: #F8F8F8;
 }
  /* ion-footer {
@@ -167,55 +181,6 @@ a{
 }
 
 /* Android */
-.toolbar-background-md{
-    border: 0
-}
-.toolbar-md{
-    min-height: 44px;
-
-}
-.toolbar-title-md{
-    font-size: 1.7rem;
-    text-align: center
-}
-.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
-    border-bottom-color:#f5f5f5;
-    box-shadow:none;
-}
-.item-md.item-block .item-inner{
-    border-bottom:0.55px solid #f5f5f5;
-}
-.item-md,.item-md.item-block .item-inner{
-    padding: 0
-}
-.button-md{
-    box-shadow:none;
-    font-size:1.6rem;
-    border-radius: 5px;
-    height: 3.73rem;
-}
-item item-block item-md item-input-has-focus{
-    border: 0
-}
-.item-md ion-thumbnail[item-start]{
-    margin: 8px 16px 8px 9px;
-}
-.item-md ion-thumbnail{
-    min-width: 56px;
-    min-height: 56px;
-}
-.tabs-md .tabbar{
-    background: #fff
-}
-.tabs-md .tab-button[aria-selected=true],
-.tab-button-icon,.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
-    color: #DB2924;
-}
-.tabs-md .tab-button{
-    min-height: 49px;
-    color: #8c8c8c;
-}
-
 /* Android END*/
 
 

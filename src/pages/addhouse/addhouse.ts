@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ErrorMessage} from '../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
+import {SearchhousePage} from "../searchhouse/searchhouse";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -91,7 +92,7 @@ export class AddhousePage {
   }
 
   goserach(){
-    
+    this.navCtrl.push(SearchhousePage)
   }
 
   save(){

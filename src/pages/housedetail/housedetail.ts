@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { RedacthousePage } from '../redacthouse/redacthouse';
+import {SearchhousePage} from "../searchhouse/searchhouse";
 
 /**
  * Generated class for the HousedetailPage page.
@@ -15,7 +16,7 @@ import { RedacthousePage } from '../redacthouse/redacthouse';
   templateUrl: 'housedetail.html',
 })
 export class HousedetailPage {
-  sensitiveInfo =false; 
+  sensitiveInfo =false;
   showInfos=true;
   follow=false;
 
@@ -62,6 +63,6 @@ export class HousedetailPage {
     this.follow=true;
   }
   goserach(){
-    // this.navCtrl.push()
+    this.navCtrl.push(SearchhousePage)
   }
 }
