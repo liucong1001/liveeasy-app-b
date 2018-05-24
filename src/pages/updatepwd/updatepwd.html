@@ -5,15 +5,15 @@
 
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="update()">
     <ion-list class="m10">
       <ion-item class="pl12">
         <ion-label>当前密码</ion-label>
-        <ion-input type="password" placeholder="请输入旧密码"></ion-input>
+        <ion-input type="password" placeholder="请输入旧密码" formControlName="plainPassword"></ion-input>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>新密码</ion-label>
-        <ion-input type="password" placeholder="6-16个字符"></ion-input>
+        <ion-input type="password" placeholder="6-16个字符" formControlName="newPassword"></ion-input>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>确认新密码</ion-label>
@@ -22,7 +22,7 @@
     </ion-list>
 
     <div padding>
-      <button ion-button block color="danger">确认提交</button>
+      <button ion-button block color="danger" [disabled]="form.invalid">确认提交</button>
     </div>
   </form>
 </ion-content>

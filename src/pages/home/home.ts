@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MsgdetailPage } from '../msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
-
+import {AddhousePage} from "../addhouse/addhouse";
+import {AddpassengerPage} from "../addpassenger/addpassenger";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -26,7 +27,12 @@ export class HomePage {
            this.notificationNews = res.data.result;
        });
   }
-
+  addhouse(){
+    this.navCtrl.push(AddhousePage)
+  }
+  addpassenger(){
+    this.navCtrl.push(AddpassengerPage)
+  }
   msgDetail(){
     this.navCtrl.push(MsgdetailPage)
   }

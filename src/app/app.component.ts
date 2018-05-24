@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import {App, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {AccountPage} from "../pages/account/account";
+// import {AccountPage} from "../pages/account/account";
 import {VersionProvider} from "../providers/version/app.version";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {Device} from "@ionic-native/device";
 import {HeaderColor} from "@ionic-native/header-color";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StartupPage} from "../pages/startup/startup";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = AccountPage;
+  rootPage:any = StartupPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private appUpdate: VersionProvider,

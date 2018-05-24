@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // import { HomePage } from '../home/home';
 import { AccountPage } from '../account/account';
 // import { LoginPage } from '../login/login';
-declare var $: any;
 /**
  * Generated class for the StartupPage page.
  *
@@ -17,28 +16,38 @@ declare var $: any;
   templateUrl: 'startup.html',
 })
 export class StartupPage {
-
+  public num = 5;
+  public timer:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log('init',this.num);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartupPage');
-    var wait = $(".skip").html();
-    timeOut();
-    function timeOut() {
-      if (wait != 0) {
-        setTimeout(function () {
-          $('.skip').text(--wait);
-          timeOut();
-          if(wait == 0){
-            // this.NavController.pop(AccountPage);
-          }
-        }, 1000);
-      }
-    }
-
+    // this.go();
+    // this.timer=
   }
+  // ngOnInit(){
+  //
+  // }
 
+//   setInterval(() => {
+//   this.num = this.num - 1;
+//   if (this.num <= 0){
+//   clearInterval(this.timer);
+//   this.navCtrl.push(AccountPage)
+// }
+// console.log(this.num)
+// }, 1000);
+//     go(){
+//         setInterval(function () {
+//           this.num = 20;
+//           this.num = this.num - 1;
+//           console.log('num999',this.num);
+//
+//         },1000)
+//      }
   gohome() {
     this.navCtrl.setRoot(AccountPage);
   }

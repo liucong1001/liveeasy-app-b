@@ -18,8 +18,8 @@ import {LocalStorageProvider} from  '../../providers/local-storage/local-storage
     templateUrl: 'account.html',
 })
 export class AccountPage {
-    username:string = 'mylangyi';
-    password:string = '123456';
+    username:string = 'test01';
+    password:string = 'test01';
     url:string = "/login";
     constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,
                 public loginProvider:LoginProvider,public localStorageProvider:LocalStorageProvider,
@@ -37,6 +37,9 @@ export class AccountPage {
         this.loginProvider.login(this.username,this.password).then(res=>{
             this.navCtrl.setRoot(TabsPage);
             this.localStorageProvider.set('loginInfo',res.data);
+            //QU
+            this.localStorageProvider.set('loginName',res.data.loginName);
+          this.localStorageProvider.set('phone',res.data.phone);
             this.localStorageProvider.set('ticket',res.ticket);
             console.log('数据',res);
         }).catch(err=>{

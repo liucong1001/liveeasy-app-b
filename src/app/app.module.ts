@@ -70,7 +70,8 @@ import {HeaderColor} from "@ionic-native/header-color";
 import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
 import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 import { AddhouseProvider } from '../providers/addhouse/addhouse';
-import {SearchhousePage} from "../pages/searchhouse/searchhouse";
+import {SearchhousePage} from '../pages/searchhouse/searchhouse';
+import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
 @NgModule({
   declarations: [
     MyApp,
@@ -158,7 +159,6 @@ import {SearchhousePage} from "../pages/searchhouse/searchhouse";
       MyaccountPage,
       VerifyphonePage,
     SearchhousePage
-
   ],
     imports: [
         BrowserModule,
@@ -184,6 +184,7 @@ import {SearchhousePage} from "../pages/searchhouse/searchhouse";
       HttpProvider,
       AddhouseProvider,
       Camera,
+      UpdatepwdProvider,
       VersionUpdateProvider,
       VersionProvider,
       FileOpener,

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UpdatepwdPage } from '../updatepwd/updatepwd';
 import { VerifyphonePage } from '../verifyphone/verifyphone';
-
+import {HttpClient} from '@angular/common/http';
+import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 /**
  * Generated class for the MyaccountPage page.
  *
@@ -16,8 +17,10 @@ import { VerifyphonePage } from '../verifyphone/verifyphone';
   templateUrl: 'myaccount.html',
 })
 export class MyaccountPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  phone:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
+    this.phone = this.localStorageProvider.get('phone');
+    console.log(this.phone)
   }
 
   ionViewDidLoad() {

@@ -7,12 +7,12 @@
   <ion-grid class="bgWhite">
       <ion-row>
           <ion-col col-3>
-              <div>
+              <div (click)="addhouse()">
                   <img src="assets/imgs/menu1.png" alt="" width="45" height="45">
                   <a>房源录入</a>
               </div>
           </ion-col>
-          <ion-col col-3>
+          <ion-col col-3 (click)="addpassenger()">
               <img src="assets/imgs/menu2.png" alt="" width="45" height="45">
               <a>客源录入</a>
           </ion-col>
@@ -59,7 +59,7 @@
                   <font size="1" color="#aaa">04-01</font>
               </ion-col>
           </ion-row>
-          
+
           <p class="ellipsis">sddddddddddddsddddddddddddsddddddddddddsdddddddddddd</p>
       </ion-item>
       <ion-item>
@@ -76,7 +76,7 @@
                   <font size="1" color="#aaa">04-01</font>
               </ion-col>
           </ion-row>
-          
+
           <p class="ellipsis">sddddddddddddsddddddddddddsddddddddddddsdddddddddddd</p>
       </ion-item>
   </ion-list>
