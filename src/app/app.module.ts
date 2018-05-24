@@ -72,6 +72,9 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 import { AddhouseProvider } from '../providers/addhouse/addhouse';
 import {SearchhousePage} from '../pages/searchhouse/searchhouse';
 import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
+import { PropertyProvider } from '../providers/property/property';
+import {StringJsonPipe} from "../pipes/string-json/string-json";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -114,7 +117,8 @@ import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
       UpdatepwdPage,
       MyaccountPage,
       VerifyphonePage,
-    SearchhousePage
+      SearchhousePage,
+      StringJsonPipe
 
   ],
   entryComponents: [
@@ -181,8 +185,8 @@ import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
       LoginProvider,
       LocalStorageProvider,
       HomeProvider,
-      HttpProvider,
       AddhouseProvider,
+      HttpProvider,
       Camera,
       UpdatepwdProvider,
       VersionUpdateProvider,
@@ -196,7 +200,8 @@ import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
       AppVersion,
       HeaderColor,
       FingerprintAIO,
-      NativePageTransitions
+      NativePageTransitions,
+      PropertyProvider
     ]
 })
 export class AppModule {}

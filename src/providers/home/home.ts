@@ -9,23 +9,18 @@ import {HttpProvider} from "../http/http";
 */
 @Injectable()
 export class HomeProvider {
-    private  path = '/test';
+
     private  pageListPath = '/property/propertyInfo/pageList';
     private  notificationPath = '/notification/notificationInfo/findNotifyByCompanyId';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
-    // public headers = new HttpHeaders().set('token',this.localStorageProvider.get('ticket') );
+
 
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
               public httpProvider:HttpProvider) {
     console.log('Hello HomeProvider Provider',this.headers);
   }
-    public  test():Promise<any>{
-        return this.http.get(this.path,{headers:this.headers}).toPromise().then(res=>{
-            return  res  as any;
-        })
-    }
 
     public pageList():Promise<any>{
         return this.http.post(this.pageListPath,null,{headers:this.headers}).toPromise().then(res=>{

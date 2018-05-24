@@ -8,33 +8,33 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="save()">
     <ion-list (click)="goserach()" >
-      <button ion-item class="pl12">
-        选择楼盘
-        <font color="#aaa" class="changes">选择楼盘</font>
-      </button>
+      <ion-item class="pl12">
+        <ion-label >楼盘</ion-label>
+        <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="estate" (ngModelChange)="estateChange($event)">
+          <ion-option [value]="item"  *ngFor="let item of estateList  "> {{item.estateName}}</ion-option>
+        </ion-select>
+      </ion-item>
+
     </ion-list>
     <ion-list>
       <ion-item class="pl12">
         <ion-label>栋号</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="building_no">
-          <ion-option [value]="">请选择</ion-option>
+        <ion-select okText="确定"  cancelText="关闭"  [placeholder]="'请选择'"  formControlName="building_no">
           <ion-option [value]="1">1栋</ion-option>
           <ion-option [value]="2">2栋</ion-option>
+          <ion-option [value]="3">3栋</ion-option>
+          <ion-option [value]="4">4栋</ion-option>
         </ion-select>
       </ion-item>
       <valid-error [errors]="errors.building_no"  [control]="form.get('building_no')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>单元</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="unit_no">
-          <ion-option [value]="" >请选择</ion-option>
-          <ion-option [value]="1">一单元</ion-option>
-          <ion-option [value]="2">二单元</ion-option>
-        </ion-select>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unit_no"> </ion-input>
       </ion-item>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层</ion-label>
-          <ion-input type="number" formControlName="floor_no" [ngClass]="{'form-control-danger':form.get('floor_no')&&form.get('floor_no').touched}">
+          <ion-input type="number" pattern="[0-9]*" formControlName="floor_no" [ngClass]="{'form-control-danger':form.get('floor_no')&&form.get('floor_no').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
@@ -50,7 +50,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积</ion-label>
-          <ion-input type="text" formControlName="space_size">
+          <ion-input type="number" formControlName="space_size">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -58,7 +58,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" formControlName="inner_space_size">
+          <ion-input type="number" formControlName="inner_space_size">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -66,23 +66,22 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格</ion-label>
-          <ion-input type="text" formControlName="property_price">
+          <ion-input type="number" formControlName="property_price">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
       </div>
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
-        <ion-select okText="确定"  cancelText="关闭">
-            <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1栋</ion-option>
-          <ion-option value="n64">2栋</ion-option>
-        </ion-select>
+        <ion-input type="number" formControlName="bedrooms"></ion-input>  <span class="">室</span>
+        <ion-input type="number" formControlName="halls"></ion-input>  <span class="">厅</span>
+        <ion-input type="number" formControlName="bathrooms"></ion-input>  <span class="hdRightInfo">厨</span>
+        <ion-input type="number" formControlName="kitchens"></ion-input>  <span class="hdRightInfo">卫</span>
+        <ion-input type="number" formControlName="balconies"></ion-input>  <span class="hdRightInfo">阳</span>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>朝向</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="orientation">
-           <ion-option value="change">请选择</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation">
           <ion-option value="1">东</ion-option>
           <ion-option value="2">东南</ion-option>
           <ion-option value="3">南</ion-option>
@@ -95,8 +94,7 @@
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="decoration">
-          <ion-option value="change">请选择</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration">
           <ion-option [value]="1">毛坯</ion-option>
           <ion-option [value]="2">清水</ion-option>
           <ion-option [value]="3">精装</ion-option>
@@ -104,6 +102,7 @@
         </ion-select>
       </ion-item>
     </ion-list>
+
     <ion-list class="m10">
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主姓名</ion-label>
@@ -111,21 +110,20 @@
         </ion-input>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>户型</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" >
-            <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1栋</ion-option>
-          <ion-option value="n64">2栋</ion-option>
+        <ion-label>业主性别</ion-label>
+        <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
+          <ion-option value="male">男</ion-option>
+          <ion-option value="female">女</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1</ion-label>
-        <ion-input type="text" placeholder="请填写业主电话" >
+        <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="text" placeholder="可选填" >
+        <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
     </ion-list>

@@ -3,35 +3,11 @@
     <ion-title>消息详情</ion-title>
   </ion-navbar>
 </ion-header>
-<!--notificationCont-->
-<!--:-->
-<!--"欢迎"-->
-<!--notificationId-->
-<!--:-->
-<!--"37cde52dc2f34cb1a267df4efb73ed46"-->
-<!--notificationTitle-->
-<!--:-->
-<!--"你好"-->
-<!--postPersonId-->
-<!--:-->
-<!--"系统管理员"-->
-<!--publishTime-->
-<!--:-->
-<!--1526636050545-->
-<!--publisherId-->
-<!--:-->
-<!--"2"-->
-<!--scope-->
-<!--:-->
-<!--0-->
-<!--status-->
-<!--:-->
-<!--1-->
 
 <ion-content padding class="bgWhite">
   <h4>{{news?.notificationTitle}}</h4>
   <div>
-    <font color="#aaa" size="2">{{news?.publishTime}}</font>
+    <font color="#aaa" size="2">{{news?.publishTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</font>
   </div>
   <div>
     {{news?.notificationCont}}

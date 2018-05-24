@@ -12,6 +12,8 @@ export class AddhouseProvider {
 
   private  estateList = '/property/estateInfo/pageList.do';
   private  estateTagsInfos ='/property/tagsInfo/list.do';
+  private  addEatate = 'property/propertyInfo/insert.do';
+
   constructor(public http: HttpClient,public httpProvider:HttpProvider) {
     console.log('Hello AddhouseProvider Provider');
   }
@@ -23,6 +25,10 @@ export class AddhouseProvider {
   //房源标签
   public estateTagsSelect(params?){
       return this.httpProvider.httpGet(this.estateTagsInfos,params);
+  }
+ //录入房源
+  public  save(params?){
+      return this.httpProvider.httpPost(this.addEatate,params);
   }
 
 }

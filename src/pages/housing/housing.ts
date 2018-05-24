@@ -6,6 +6,9 @@ import { ClosehousePage } from '../closehouse/closehouse';
 import { AddlookPage } from '../addlook/addlook';
 import { HousedetailPage } from '../housedetail/housedetail';
 import { AddhousePage } from '../addhouse/addhouse';
+import {PropertyProvider} from "../../providers/property/property";
+// import {Pipe, PipeTransform} from '@angular/core';
+import {StringJsonPipe} from "../../pipes/string-json/string-json";
 /**
  * Generated class for the HousingPage page.
  *
@@ -17,6 +20,7 @@ import { AddhousePage } from '../addhouse/addhouse';
 @Component({
   selector: 'page-housing',
   templateUrl: 'housing.html',
+  // pipes:[StringJsonPipe],
 })
 export class HousingPage {
   show=false;
@@ -24,14 +28,22 @@ export class HousingPage {
   more=false;
   pop=false;
   housingEstate=false;
+  pageData = [];
+  totalPages:number;//总页数
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,public propertyProvider:PropertyProvider
 ) {
-  }
+
+   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
+    this.propertyProvider.page(1).then(res=>{
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+      console.log('分也数据',this.totalPages,res.data.result);
+    })
   }
   //menu
   showMenu1(){
@@ -95,12 +107,66 @@ export class HousingPage {
   goCloseHouse(){
     this.navCtrl.push(ClosehousePage);
   }
-  goHouseDetail(){
-    this.navCtrl.push(HousedetailPage)
+  goHouseDetail(item){
+    this.navCtrl.push(HousedetailPage,{item:item})
   }
   addHouse(){
     this.navCtrl.push(AddhousePage);
   }
 
+   //上拉刷新
+  doRefresh(refresher) {
+         console.log('上拉刷新Begin async operation', refresher);
+
+         setTimeout(() => {
+             // this.items = [];
+             // for (var i = 0; i < 30; i++) {
+             //     this.items.push( this.items.length );
+             //   }
+             console.log('Async operation has ended');
+             refresher.complete();
+           }, 2000);
+       }
+   //条数
+  currentPage:number =1;
+ //下拉加载
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    // this.propertyProvider.page(2).then(res=>{
+    //   this.pageData.push(res.data.result);
+    //   console.log('加载分数据2',res.data.result);
+    // });
+
+    setTimeout(() => {
+
+      infiniteScroll.complete();
+
+      this.currentPage++;
+      console.log('加载完成后，关闭刷新',this.currentPage);
+      // for (let i = 0; i < 30; i++) {
+        // this.items.push( this.items.length );
+        this.propertyProvider.page(this.currentPage).then(res=>{
+          for(let i=0;i<res.data.result.length;i++){
+            this.pageData.push(res.data.result[i]);
+          }
+          // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
+        });
+      // }
+
+      if(this.currentPage >=this.totalPages){
+        //如果都加载完成的情况，就直接 disable ，移除下拉加载
+        infiniteScroll.enable(false);
+        //toast提示
+        alert("已加载所有");
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete(function () {
+        console.log('数据请求完成');
+      });
+    }, 1000);
+
+  }
 
 }

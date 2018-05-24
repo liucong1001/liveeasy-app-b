@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../searchhouse/searchhouse";
@@ -17,12 +17,12 @@ import {SearchhousePage} from "../searchhouse/searchhouse";
   templateUrl: 'addhouse.html',
 })
 export class AddhousePage {
-
+  estateList:[any];
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider) {
        //楼盘列表
         this.addhouseProvider.estateListSelect().then(res=>{
-
+           this.estateList = res.data.result;
         });
         //房源标签
        this.addhouseProvider.estateTagsSelect().then(res=>{
@@ -31,6 +31,9 @@ export class AddhousePage {
   }
 
   form:FormGroup =this.fb.group({
+      estate:['',Validators.required],//楼盘
+      estateName:[''],
+      estateId:[''],
       building_no:['',Validators.required], //楼栋号
       unit_no:['',Validators.required],//单元号
       floor_no:['',[Validators.required,Validators.maxLength(5)]],//楼层
@@ -38,9 +41,26 @@ export class AddhousePage {
       space_size:[''],//建筑面积
       inner_space_size:[''],//套内面积
       property_price:[''],//价格
+      bedrooms:['1'],//室
+      halls:['1'],
+      bathrooms:['1'],
+      kitchens:['1'],
+      balconies:['1'],//阳
       orientation:[null],//房屋朝向
       decoration:[null],//装修水平
-      contact:[''],//业主姓名
+      contacts:this.fb.array([
+        this.fb.group({
+          contact:[''],
+          contactType:['mobile'],
+          contactInfo:[''],
+          sex:[''],
+          desc:[''],
+        })
+      ]),//业主信息
+     contact:[],
+     contactInfo:[],
+     contactInfo2:[],
+     sex:[],
       tags:[''],//房源标签
 
   });
@@ -95,11 +115,32 @@ export class AddhousePage {
     this.navCtrl.push(SearchhousePage)
   }
 
+  estateChange(Value){
+
+      // this.form.setValue({estateName:Value.estateName});
+    this.form.controls['estateName'].setValue(Value.estateName);
+    this.form.controls['estateId'].setValue(Value.estateId);
+      console.log('表单',this.form.value);
+  }
+
   save(){
+    // this.form.controls['contacts'].valu
+     this.form.value.contacts[0].contact = this.form.value.contact;
+     this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
+     this.form.value.contacts[0].sex = this.form.value.sex;
+
+     this.form.value.contacts.push(this.form.value.contacts[0]);
+     var tel=  this.form.value.contactInfo2;
+     this.form.value.contacts[1].contactInfo  = tel;
+
     if(this.form.invalid){
       return false;
     }
+
     console.log('房源录入表单',this.form.value);
+    this.addhouseProvider.save(this.form.value).then(res=>{
+      alert('录入成功！');
+    })
   }
 
 }

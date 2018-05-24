@@ -20,8 +20,11 @@ export class HousedetailPage {
   sensitiveInfo =false;
   showInfos=true;
   follow=false;
+  data:object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
+    this.data = navParams.get('item');
+    console.log('参数',this.data);
   }
 
   ionViewDidLoad() {
