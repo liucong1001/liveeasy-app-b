@@ -115,8 +115,8 @@ export class HousingPage {
     });
   }
 
-  goAddLook(){
-    this.navCtrl.push(AddlookPage);
+  goAddLook(item){
+    this.navCtrl.push(AddlookPage,{item:item});
   }
   goCloseHouse(){
     this.navCtrl.push(ClosehousePage);

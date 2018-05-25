@@ -29,6 +29,8 @@ export class HousedetailPage {
     console.log('参数',this.data);
   }
 
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousedetailPage');
   }

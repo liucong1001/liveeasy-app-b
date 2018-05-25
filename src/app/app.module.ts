@@ -76,6 +76,8 @@ import { PropertyProvider } from '../providers/property/property';
 import {StringJsonPipe} from "../pipes/string-json/string-json";
 import { LookhousePage } from './../pages/lookhouse/lookhouse';
 import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
+import {ToParseIntPipe} from "../pipes/to-parse-int/to-parse-int";
+import { FileProvider } from '../providers/file/file';
 import {FollowProvider} from "../providers/follow/follow";
 @NgModule({
   declarations: [
@@ -121,8 +123,11 @@ import {FollowProvider} from "../providers/follow/follow";
       VerifyphonePage,
       SearchhousePage,
       StringJsonPipe,
-    LookhousePage,
-    LetteratorneyPage
+      LookhousePage,
+      LetteratorneyPage,
+      StringJsonPipe,
+      ToParseIntPipe
+
   ],
   entryComponents: [
     MyApp,
@@ -207,6 +212,7 @@ import {FollowProvider} from "../providers/follow/follow";
       FingerprintAIO,
       NativePageTransitions,
       PropertyProvider,
+      FileProvider,
       FollowProvider
     ]
 })
