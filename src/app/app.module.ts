@@ -76,6 +76,7 @@ import { PropertyProvider } from '../providers/property/property';
 import {StringJsonPipe} from "../pipes/string-json/string-json";
 import { LookhousePage } from './../pages/lookhouse/lookhouse';
 import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
+import {FollowProvider} from "../providers/follow/follow";
 @NgModule({
   declarations: [
     MyApp,
@@ -205,7 +206,8 @@ import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
       HeaderColor,
       FingerprintAIO,
       NativePageTransitions,
-      PropertyProvider
+      PropertyProvider,
+      FollowProvider
     ]
 })
 export class AppModule {}

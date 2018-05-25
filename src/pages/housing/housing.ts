@@ -43,8 +43,10 @@ export class HousingPage {
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
       console.log('分也数据',this.totalPages,res.data.result);
+
     })
   }
+
   //menu
   showMenu1(){
     if(this.show==false || this.houseType == true || this.more == true || this.housingEstate == true){
@@ -105,8 +107,12 @@ export class HousingPage {
       this.housingEstate=false;
     }
   }
-  goFollow(){
-    this.navCtrl.push(FollowPage);
+  goFollow(item){
+    this.navCtrl.push(FollowPage,{
+      propertyid:item.propertyId,
+      estatename:item.estateName,
+      convid:item.convId,
+    });
   }
 
   goAddLook(){
@@ -116,8 +122,9 @@ export class HousingPage {
     this.navCtrl.push(ClosehousePage);
   }
   goHouseDetail(item){
-    this.navCtrl.push(HousedetailPage,{item:item})
+    this.navCtrl.push(HousedetailPage,{item:item});
   }
+
   addHouse(){
     this.navCtrl.push(AddhousePage);
   }

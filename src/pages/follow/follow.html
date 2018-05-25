@@ -5,22 +5,26 @@
 
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="subFollow()">
     <ion-grid class="p0">
       <ion-row>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
-              <ion-label class="pl12">房源ID：</ion-label>
-              <ion-input type="text"></ion-input>
+              <div class="pl12">
+                <span>房源ID：</span>
+                <span>{{convid}}</span>
+              </div>
             </ion-item>
           </ion-list>
         </ion-col>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
-              <ion-label>楼盘：</ion-label>
-              <ion-input type="text"></ion-input>
+              <div class="pl12">
+                <span>楼盘：</span>
+                <span>{{estatename}}</span>
+              </div>
             </ion-item>
           </ion-list>
         </ion-col>
@@ -37,11 +41,14 @@
       </ion-row>
       <ion-row>
         <ion-col col-12 class="pl12 bgWhite">
-          <ion-list (click)="presentActionSheet()" class="testss">
-            <button ion-item>
-              跟进类型：
-              <font color="#aaa">请选择跟进类型</font>
-            </button>
+          <ion-list >
+            <ion-item>
+              <ion-label>跟进类型</ion-label>
+              <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="followupCode">
+                <ion-option value="1">日常跟进</ion-option>
+                <ion-option value="2">查看敏感信息</ion-option>
+              </ion-select>
+            </ion-item>
           </ion-list>
         </ion-col>
         <ion-col col-12 class="followMain bgWhite">
@@ -49,11 +56,11 @@
             跟进内容：
           </div>
           <div>
-              <textarea rows="10" placeholder="请填写内容" (click)="anything()" id="anything"></textarea>
+              <textarea rows="10" placeholder="请填写内容" (click)="anything()" formControlName="content"></textarea>
             </div>
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
-            <button ion-button full color="danger" class="radius">确定</button>
+            <button ion-button full color="danger" class="radius" [disabled]="form.invalid">确定</button>
         </ion-col>
       </ion-row>
     </ion-grid>
