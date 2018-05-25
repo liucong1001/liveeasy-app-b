@@ -150,12 +150,12 @@ liveeasy-erp/oss/estateId/propertyId/1525540902906.png"  alt="" width="100%" hei
                 </font>
               </p>
               <ion-row>
-                <ion-col col-6 class="p0">
-                  <font size="2" color="#aaa">
+                <ion-col col-4 class="p0">
+                  <font size="1" color="#aaa">
                     建面 <span>{{item.spaceSize}}m</span> <sup>2</sup>
                   </font>
                 </ion-col>
-                <ion-col col-6 class="tr p0">
+                <ion-col col-8 class="tr p0">
                   <font color="red" size="3">
 
                     <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*1000 | number:'3.1-5'}}</span>

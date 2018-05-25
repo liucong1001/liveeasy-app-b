@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
- * Generated class for the LetteratorneyPage page.
+ * Generated class for the LookhousePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,10 +10,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
-  selector: 'page-letteratorney',
-  templateUrl: 'letteratorney.html',
+  selector: 'page-lookhouse',
+  templateUrl: 'lookhouse.html',
 })
-export class LetteratorneyPage {
+export class LookhousePage {
   path: string;
   constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
   }
@@ -65,7 +65,7 @@ export class LetteratorneyPage {
     });
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LetteratorneyPage');
+    console.log('ionViewDidLoad LookhousePage');
   }
 
 }

@@ -74,7 +74,8 @@ import {SearchhousePage} from '../pages/searchhouse/searchhouse';
 import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
 import { PropertyProvider } from '../providers/property/property';
 import {StringJsonPipe} from "../pipes/string-json/string-json";
-
+import { LookhousePage } from './../pages/lookhouse/lookhouse';
+import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
 @NgModule({
   declarations: [
     MyApp,
@@ -118,8 +119,9 @@ import {StringJsonPipe} from "../pipes/string-json/string-json";
       MyaccountPage,
       VerifyphonePage,
       SearchhousePage,
-      StringJsonPipe
-
+      StringJsonPipe,
+    LookhousePage,
+    LetteratorneyPage
   ],
   entryComponents: [
     MyApp,
@@ -162,7 +164,9 @@ import {StringJsonPipe} from "../pipes/string-json/string-json";
       UpdatepwdPage,
       MyaccountPage,
       VerifyphonePage,
-    SearchhousePage
+    SearchhousePage,
+    LookhousePage,
+    LetteratorneyPage
   ],
     imports: [
         BrowserModule,

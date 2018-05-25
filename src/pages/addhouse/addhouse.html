@@ -27,9 +27,9 @@
         </ion-select>
       </ion-item>
       <valid-error [errors]="errors.building_no"  [control]="form.get('building_no')"  ></valid-error>
-      <ion-item class="pl12">
+      <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元</ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unit_no"> </ion-input>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unit_no" ></ion-input>
       </ion-item>
       <div class="hdRightInfo">
         <ion-item class="pl12">
@@ -73,11 +73,11 @@
       </div>
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
-        <ion-input type="number" formControlName="bedrooms"></ion-input>  <span class="">室</span>
-        <ion-input type="number" formControlName="halls"></ion-input>  <span class="">厅</span>
-        <ion-input type="number" formControlName="bathrooms"></ion-input>  <span class="hdRightInfo">厨</span>
-        <ion-input type="number" formControlName="kitchens"></ion-input>  <span class="hdRightInfo">卫</span>
-        <ion-input type="number" formControlName="balconies"></ion-input>  <span class="hdRightInfo">阳</span>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'">
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>朝向</ion-label>
