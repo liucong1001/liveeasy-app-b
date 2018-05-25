@@ -7,9 +7,10 @@
 <ion-content padding class="bgWhite">
   <h4>{{news?.notificationTitle}}</h4>
   <div>
+    <font color="#aaa" size="2">来源：百居易</font>&nbsp;
     <font color="#aaa" size="2">{{news?.publishTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</font>
   </div>
-  <div>
+  <div class="mt5">
     {{news?.notificationCont}}
     {{news?.postPersonId}}
   </div>
