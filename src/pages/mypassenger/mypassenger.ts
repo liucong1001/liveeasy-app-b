@@ -62,6 +62,14 @@ export class MypassengerPage {
       this.pop=false;
     }
   }
+  pops(){
+    if(this.more==true || this.show == true || this.houseType == true){
+      this.more=false;
+      this.show=false;
+      this.pop=false;
+      this.houseType = false;
+    }
+  }
   addpassenger(){
     this.navCtrl.push(AddpassengerPage)
   }
