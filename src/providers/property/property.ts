@@ -8,7 +8,8 @@ import {HttpProvider} from "../http/http";
 export class PropertyProvider {
 
   private  pageListPath = '/property/propertyInfo/pageList.do';
-  private  insertEmptyLookPath = '/propertyFollowupInfo/insertEmptyLook.do';
+  // property/propertyFollowupInfo/insertEmptyLook.do
+  private  insertEmptyLookPath = '/property/propertyFollowupInfo/insertEmptyLook.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider) {
     console.log('Hello PropertyProvider Provider');
   }
