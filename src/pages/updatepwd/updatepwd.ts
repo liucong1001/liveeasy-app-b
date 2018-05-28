@@ -13,6 +13,8 @@ import {AccountPage} from "../account/account";
 })
 export class UpdatepwdPage {
   loginName:string;
+  tips=false;
+  pwd=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,
               public  updprovider: UpdatepwdProvider,
@@ -23,27 +25,32 @@ export class UpdatepwdPage {
   form:FormGroup =this.fb.group({
     plainPassword:['',Validators.required], //旧密码
     newPassword:['',Validators.required],//新密码
-
+    verifyPassword:[''],//确认新密码
   });
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdatepwdPage');
   }
-
-
   update(){
     if (this.form.value.plainPassword != '') {
       this.updprovider.getoldPassword({plainPassword:this.form.value.plainPassword}).then(res => {
         console.log(res);
-        if (res.data == true){
-          alert('密码正确');
+        if (res.data == true && this.form.value.newPassword == this.form.value.verifyPassword){
+          // alert('密码正确');
+          this.pwd=false;
           this.updprovider.postPassword({newPassword:this.form.value.newPassword,loginName:this.loginName}).then(res => {
             console.log(res)
             this.navCtrl.push(AccountPage)
           });
         }else {
-          alert('旧密码不正确');
+          // alert('旧密码不正确');
+          this.pwd=true;
         }
       })
+    }
+    if(this.form.value.newPassword != this.form.value.verifyPassword){
+      this.tips=true;
+    }else {
+      this.tips = false;
     }
   }
 
