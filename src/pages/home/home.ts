@@ -4,6 +4,7 @@ import { MsgdetailPage } from '../msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../addhouse/addhouse";
 import {AddpassengerPage} from "../addpassenger/addpassenger";
+import {DeclarationPage} from "../declaration/declaration";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -36,5 +37,9 @@ export class HomePage {
   msgDetail(){
     this.navCtrl.push(MsgdetailPage)
   }
+
+  godeclara(){
+  this.navCtrl.push(DeclarationPage)
+}
 
 }

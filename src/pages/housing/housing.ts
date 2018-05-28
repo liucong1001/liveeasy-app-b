@@ -118,8 +118,13 @@ export class HousingPage {
   goAddLook(item){
     this.navCtrl.push(AddlookPage,{item:item});
   }
-  goCloseHouse(){
-    this.navCtrl.push(ClosehousePage);
+  goCloseHouse(item){
+    this.navCtrl.push(ClosehousePage,{
+      propertyid:item.propertyId,
+      estatename:item.estateName,
+      convid:item.convId,
+    });
+    // this.navCtrl.push(ClosehousePage);
   }
   goHouseDetail(item){
     this.navCtrl.push(HousedetailPage,{item:item});

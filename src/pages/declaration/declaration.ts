@@ -45,7 +45,13 @@ export class DeclarationPage {
       this.pop=false;
     }
   }
-
+  pops(){
+    if(this.show == true || this.houseType == true){
+      this.show=false;
+      this.pop=false;
+      this.houseType = false;
+    }
+  }
   declarationDetail(){
     this.navCtrl.push(DeclardetailPage)
   }

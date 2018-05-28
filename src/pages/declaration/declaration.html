@@ -3,9 +3,9 @@
     <ion-navbar>
       <ion-title>报单列表</ion-title>
     </ion-navbar>
-  
+
   </ion-header>
-  
+
   <ion-content>
     <ion-grid class="p0" style="position: relative;">
       <div style="position: relative;">
@@ -19,7 +19,7 @@
             <ion-icon name="md-arrow-dropdown"></ion-icon>
           </ion-col>
         </ion-row>
-  
+
         <!-- 状态 -->
         <div class="lists houseType" *ngIf="show">
             <ion-list radio-group>
@@ -27,7 +27,7 @@
                 <ion-label>不限</ion-label>
                 <ion-radio checked="true" value="go"></ion-radio>
               </ion-item>
-    
+
               <ion-item>
                 <ion-label>一室</ion-label>
                 <ion-radio value="rust"></ion-radio>
@@ -37,7 +37,7 @@
               <button ion-button full color="danger">确定</button>
             </div>
           </div>
-  
+
         <!-- 报单时间 -->
         <div class="lists houseType" *ngIf="houseType">
           <ion-list radio-group>
@@ -45,7 +45,7 @@
               <ion-label>不限</ion-label>
               <ion-radio checked="true" value="go"></ion-radio>
             </ion-item>
-  
+
             <ion-item>
               <ion-label>一室</ion-label>
               <ion-radio value="rust"></ion-radio>
@@ -90,7 +90,6 @@
           </ion-list>
         </div>
     </ion-grid>
-  
-  
+
+    <div class="pops" *ngIf="pop" (click)="pops()"></div>
   </ion-content>
-  <div class="pop" *ngIf="pop"></div>

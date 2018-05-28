@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
-
+import {RecordProvider} from '../../providers/record/record';
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {HttpClient} from '@angular/common/http';
 /**
  * Generated class for the RecordPage page.
  *
@@ -16,17 +18,20 @@ import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 export class RecordPage {
   @ViewChild(Slides) slides: Slides;
   index: number = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public http: HttpClient,
+              public  recordprovider: RecordProvider,) {
+    this.recordprovider.getRecord({}).then(res => {
+      console.log(res)
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordPage');
   }
   //添加active
   goToSlide(index) {
-   
     this.slides.slideTo(index, 500);
     this.addActive(index);
-
   }
   // 滑动切换
   slideChanged() {
@@ -37,7 +42,9 @@ export class RecordPage {
   // 改变tab 颜色
   addActive(index) {
     this.index = index;
-    console.log(index)
+    // console.log(index)
   }
+
+
 }
 

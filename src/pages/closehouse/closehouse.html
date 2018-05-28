@@ -5,22 +5,26 @@
 
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="subClose()">
     <ion-grid class="p0">
       <ion-row>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
-              <ion-label class="pl12">房源ID：</ion-label>
-              <ion-input type="text"></ion-input>
+              <div class="pl12">
+                <span>房源ID：</span>
+                <span>{{convid}}</span>
+              </div>
             </ion-item>
           </ion-list>
         </ion-col>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
-              <ion-label>楼盘：</ion-label>
-              <ion-input type="text"></ion-input>
+              <div class="pl12">
+                <span>楼盘：</span>
+                <span>{{estatename}}</span>
+              </div>
             </ion-item>
           </ion-list>
         </ion-col>
@@ -36,19 +40,26 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-12 class="pl12 bgWhite">
-          <ion-list (click)="presentActionSheet()" class="testss">
-            <button ion-item >
-              关闭类型：
-              <font color="#aaa">请选择跟进类型</font>
-            </button>
+        <ion-col col-12 class="bgWhite p0">
+          <ion-list >
+            <ion-item>
+              <ion-label class="pl12">关闭类型</ion-label>
+              <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="propertyStatus">
+                <ion-option value="6">已成交</ion-option>
+                <ion-option value="7">暂不交易</ion-option>
+                <ion-option value="8">无效房源</ion-option>
+                <ion-option value="9">他售房源</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label class="pl12">无效原因</ion-label>
+              <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'">
+                <ion-option value="1">日常跟进</ion-option>
+                <ion-option value="2">查看敏感信息</ion-option>
+              </ion-select>
+            </ion-item>
           </ion-list>
-          <ion-list (click)="presentActionSheet()" class="testss">
-              <button ion-item>
-                关闭类型：
-                <font color="#aaa">请选择跟进类型</font>
-              </button>
-            </ion-list>
+
         </ion-col>
         <ion-col col-12 class="followMain bgWhite">
           <div>
@@ -59,7 +70,7 @@
             </div>
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
-            <button ion-button full color="danger" class="radius">确定</button>
+            <button ion-button full color="danger" class="radius"  [disabled]="form.invalid">确定</button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -79,6 +79,8 @@ import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
 import {ToParseIntPipe} from "../pipes/to-parse-int/to-parse-int";
 import { FileProvider } from '../providers/file/file';
 import {FollowProvider} from "../providers/follow/follow";
+import {ClosehouseProvider} from "../providers/closehouse/closehouse";
+import {RecordProvider} from "../providers/record/record";
 @NgModule({
   declarations: [
     MyApp,
@@ -213,7 +215,9 @@ import {FollowProvider} from "../providers/follow/follow";
       NativePageTransitions,
       PropertyProvider,
       FileProvider,
-      FollowProvider
+      FollowProvider,
+      ClosehouseProvider,
+      RecordProvider
     ]
 })
 export class AppModule {}

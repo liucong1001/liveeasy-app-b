@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {FollowProvider} from '../../providers/follow/follow'
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {HousingPage} from "../housing/housing";
 /**
  * Generated class for the FollowPage page.
  *
@@ -47,7 +48,8 @@ export class FollowPage {
   subFollow(){
       // alert('222');
       this.followProvider.getfollow({followup_code:this.form.value.followupCode,content:this.form.value.content,propertyId:this.propertyid,followupTime:this.followuptime}).then(res => {
-        console.log(res)
+        console.log(res);
+        this.navCtrl.push(HousingPage)
       });
   console.log(this.form.value)
 }
