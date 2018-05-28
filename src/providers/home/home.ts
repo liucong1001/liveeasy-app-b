@@ -3,22 +3,22 @@ import { Injectable } from '@angular/core';
 import {LocalStorageProvider} from '../local-storage/local-storage'
 import {toPromise} from "rxjs/operator/toPromise";
 import {HttpProvider} from "../http/http";
-
+import {ConfigProvider} from "../config/config";
 /*
   首页接口服务
 */
 @Injectable()
 export class HomeProvider {
 
-    private  pageListPath = '/property/propertyInfo/pageList';
-    private  notificationPath = '/notification/notificationInfo/findNotifyByCompanyId';
+    private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList';
+    private  notificationPath =this.configProvider.set().http+ '/notification/notificationInfo/findNotifyByCompanyId';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
 
 
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
-              public httpProvider:HttpProvider) {
+              public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello HomeProvider Provider',this.headers);
   }
 

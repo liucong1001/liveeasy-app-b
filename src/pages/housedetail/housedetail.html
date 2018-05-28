@@ -10,12 +10,11 @@
 
 <ion-content>
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="save()">
     <ion-list>
+
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>房间ID</ion-label>
-        <ion-input type="text" value="12163" class="p0">
-        </ion-input>
+        <ion-label>房间ID:{{data.convId}}</ion-label>
       </ion-item>
     </ion-list>
     <ion-list (click)="goserach()">
@@ -25,33 +24,30 @@
       </button>
     </ion-list>
     <ion-list>
-      <ion-item class="pl12">
-        <ion-label>栋号</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>2栋</ion-option>
-          <ion-option value="nes">1栋</ion-option>
-          <ion-option value="n64">2栋</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item class="pl12">
-        <ion-label>单元</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>2单元</ion-option>
-          <ion-option value="nes">1单元</ion-option>
-          <ion-option value="n64">2单元</ion-option>
-        </ion-select>
-      </ion-item>
+      <div class="hdRightInfo1">
+        <ion-item class="pl12">
+          <ion-label>栋号</ion-label>
+          <ion-input type="text"  class="tr" formControlName="buildingNo" ></ion-input>
+        </ion-item>
+      </div>
+      <div class="hdRightInfo1">
+        <ion-item class="pl12">
+          <ion-label>单元</ion-label>
+          <ion-input type="number" pattern="[0-9]*"  class="tr" formControlName="unitNo" ></ion-input>
+        </ion-item>
+      </div>
+
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>楼层</ion-label>
-          <ion-input type="text" value="11">
+          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号</ion-label>
-        <ion-input type="text" value="202" class="p0">
+        <ion-input type="text" placeholder="请输入房间号" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
     </ion-list>
@@ -59,7 +55,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积</ion-label>
-          <ion-input type="text" value="97">
+          <ion-input type="number" formControlName="spaceSize">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -67,7 +63,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" value="97">
+          <ion-input type="number" formControlName="innerSpaceSize">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -75,38 +71,39 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格</ion-label>
-          <ion-input type="text" value="197">
+          <ion-input type="number" formControlName="propertyPrice">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
       </div>
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
-        <ion-select>
-          <ion-option value="1">一室</ion-option>
-          <ion-option value="1">二室</ion-option>
-        </ion-select>
-        <ion-select>
-          <ion-option value="1">2厅</ion-option>
-        </ion-select>
-        <ion-select>
-          <ion-option value="1">5卫</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'">
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>朝向</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>朝北</ion-option>
-          <ion-option value="nes">朝南</ion-option>
-          <ion-option value="n64">朝北</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation">
+          <ion-option value="1">东</ion-option>
+          <ion-option value="2">东南</ion-option>
+          <ion-option value="3">南</ion-option>
+          <ion-option value="4">西南</ion-option>
+          <ion-option value="5">西</ion-option>
+          <ion-option value="6">西北</ion-option>
+          <ion-option value="7">北</ion-option>
+          <ion-option value="8">东北</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>2</ion-option>
-          <ion-option value="nes">2</ion-option>
-          <ion-option value="n64">1</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration">
+          <ion-option [value]="1">毛坯</ion-option>
+          <ion-option [value]="2">清水</ion-option>
+          <ion-option [value]="3">精装</ion-option>
+          <ion-option [value]="4">豪装</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -146,7 +143,7 @@
         房源标签
       </ion-col>
       <ion-col col-8>
-        <a  [ngClass]="{'red': !classFlag}" (click)="changeClass()">ddd</a>
+        <a>ddd</a>
         <a>ddd</a>
         <a>ddd</a>
         <a>ddd</a>

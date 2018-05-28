@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
+import {ConfigProvider} from "../config/config";
 /*
   Generated class for the AddhouseProvider provider.
 
@@ -10,9 +11,9 @@ import {HttpProvider} from "../http/http";
 @Injectable()
 export class UpdatepwdProvider {
 
-    private  oldPassword = '/property/propertyInfo/editPassword';
-    private  aaPassword = '/property/propertyInfo/undatePassword';
-    constructor(public http: HttpClient,public httpProvider:HttpProvider) {
+    private  oldPassword = this.configProvider.set().http+'/property/propertyInfo/editPassword';
+    private  aaPassword = this.configProvider.set().http+'/property/propertyInfo/undatePassword';
+    constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
         console.log('Hello UpdatepwdProvider Provider');
     }
 

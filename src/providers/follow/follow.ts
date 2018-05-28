@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
-
+import {ConfigProvider} from "../config/config";
 /*
   Generated class for the AddhouseProvider provider.
 
@@ -11,8 +11,8 @@ import {HttpProvider} from "../http/http";
 @Injectable()
 export class FollowProvider {
 
-  private  follow = 'property/propertyFollowupInfo/insertFollowUp';
-  constructor(public http: HttpClient,public httpProvider:HttpProvider) {
+  private  follow = this.configProvider.set().http+'property/propertyFollowupInfo/insertFollowUp';
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }
 

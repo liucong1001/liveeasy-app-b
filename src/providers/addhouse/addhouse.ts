@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
+import {ConfigProvider} from "../config/config";
 /*
   Generated class for the AddhouseProvider provider.
 
@@ -10,11 +11,11 @@ import {HttpProvider} from "../http/http";
 @Injectable()
 export class AddhouseProvider {
 
-  private  estateList = '/property/estateInfo/pageList.do';
-  private  estateTagsInfos ='/property/tagsInfo/list.do';
-  private  addEatate = 'property/propertyInfo/insert.do';
+  private  estateList = this.configProvider.set().http+'/property/estateInfo/pageList.do';
+  private  estateTagsInfos =this.configProvider.set().http+'/property/tagsInfo/list.do';
+  private  addEatate = this.configProvider.set().http+'property/propertyInfo/insert.do';
 
-  constructor(public http: HttpClient,public httpProvider:HttpProvider) {
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello AddhouseProvider Provider');
   }
 

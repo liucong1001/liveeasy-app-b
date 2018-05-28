@@ -19,30 +19,30 @@
     <ion-list>
       <ion-item class="pl12">
         <ion-label>栋号</ion-label>
-        <ion-select okText="确定"  cancelText="关闭"  [placeholder]="'请选择'"  formControlName="building_no">
+        <ion-select okText="确定"  cancelText="关闭"  [placeholder]="'请选择'"  formControlName="buildingNo">
           <ion-option [value]="1">1栋</ion-option>
           <ion-option [value]="2">2栋</ion-option>
           <ion-option [value]="3">3栋</ion-option>
           <ion-option [value]="4">4栋</ion-option>
         </ion-select>
       </ion-item>
-      <valid-error [errors]="errors.building_no"  [control]="form.get('building_no')"  ></valid-error>
+      <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元</ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unit_no" ></ion-input>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" ></ion-input>
       </ion-item>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层</ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="floor_no" [ngClass]="{'form-control-danger':form.get('floor_no')&&form.get('floor_no').touched}">
+          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
-      <valid-error [errors]="errors.floor_no"  [control]="form.get('floor_no')"  ></valid-error>
+      <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号</ion-label>
-        <ion-input type="text" placeholder="请输入房间号" formControlName="house_no" class="p0">
+        <ion-input type="text" placeholder="请输入房间号" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
     </ion-list>
@@ -50,7 +50,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积</ion-label>
-          <ion-input type="number" formControlName="space_size">
+          <ion-input type="number" formControlName="spaceSize">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -58,7 +58,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="number" formControlName="inner_space_size">
+          <ion-input type="number" formControlName="innerSpaceSize">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -66,17 +66,22 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格</ion-label>
-          <ion-input type="number" formControlName="property_price">
+          <ion-input type="number" formControlName="propertyPrice">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
       </div>
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'">
-          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
-          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
-          <ion-option value="1">一室一厅一厨一卫一阳台</ion-option>
+        <ion-select>
+          <ion-option value="1">一室</ion-option>
+          <ion-option value="1">二室</ion-option>
+        </ion-select>
+        <ion-select>
+          <ion-option value="1">2厅</ion-option>
+        </ion-select>
+        <ion-select>
+          <ion-option value="1">5卫</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">

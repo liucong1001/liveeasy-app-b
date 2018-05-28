@@ -3,7 +3,7 @@
     <name>百居</name>
     <description>百居易科技/经纪人作业</description>
     <author email="ll_wang@live.cn" href="http://liveeasy.tech/">百居</author>
-    <content original-src="index.html" src="http://192.168.0.109:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -39,6 +39,7 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
         <preference name="CodePushDeploymentKey" value="CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260" />
+        <preference name="loadUrlTimeoutValue" value="60000" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -82,7 +83,6 @@
     <allow-navigation href="http://192.168.0.115:8100" />
     <allow-navigation href="http://192.168.0.112:8100" />
     <allow-navigation href="http://192.168.0.109:8100" />
-    <engine name="android" spec="^6.2.3" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
@@ -102,4 +102,7 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
+    <allow-navigation href="http://192.168.1.113:8100" />
+    <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
+    <engine name="android" spec="7.0.0" />
 </widget>

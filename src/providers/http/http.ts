@@ -15,7 +15,8 @@ export class HttpProvider {
     console.log('Hello HttpProvider Provider');
   }
   public headers = new HttpHeaders().set('Content-Type', 'application/json')
-    .set('token',this.localStorageProvider.get('ticket')) ;
+    .set('token',this.localStorageProvider.get('ticket'))
+    .set('Access-Control-Allow-Origin','*');
 
   public httpGet(url,params):Promise<any>{
     return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{

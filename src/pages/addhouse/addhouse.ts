@@ -34,13 +34,13 @@ export class AddhousePage {
       estate:['',Validators.required],//楼盘
       estateName:[''],
       estateId:[''],
-      building_no:['',Validators.required], //楼栋号
-      unit_no:['',Validators.required],//单元号
-      floor_no:['',[Validators.required,Validators.maxLength(5)]],//楼层
-      house_no:[''],//房间号
-      space_size:[''],//建筑面积
-      inner_space_size:[''],//套内面积
-      property_price:[''],//价格
+      buildingNo:['',Validators.required], //楼栋号
+      unitNo:['',Validators.required],//单元号
+      floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
+      houseNo:[''],//房间号
+      spaceSize:[''],//建筑面积
+      innerSpaceSize:[''],//套内面积
+      propertyPrice:[''],//价格
       bedrooms:['1'],//室
       halls:['1'],
       bathrooms:['1'],
@@ -66,18 +66,18 @@ export class AddhousePage {
   });
  //表单验证消息
     errors={
-        building_no:[
+        buildingNo:[
             new ErrorMessage('required','楼栋号必须要填写！'),
             new ErrorMessage('maxLength','这个长度太长了'),
         ],
-        unit_no:[
+        unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
         ],
-        floor_no:[
+        floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
             new ErrorMessage('maxLength','楼层名称太长了'),
         ]
-    }
+    };
 
 
   ionViewDidLoad() {

@@ -81,6 +81,8 @@ import { FileProvider } from '../providers/file/file';
 import {FollowProvider} from "../providers/follow/follow";
 import {ClosehouseProvider} from "../providers/closehouse/closehouse";
 import {RecordProvider} from "../providers/record/record";
+import {ConfigProvider} from "../providers/config/config";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -217,7 +219,9 @@ import {RecordProvider} from "../providers/record/record";
       FileProvider,
       FollowProvider,
       ClosehouseProvider,
-      RecordProvider
+      RecordProvider,
+      FollowProvider,
+      ConfigProvider
     ]
 })
 export class AppModule {}
