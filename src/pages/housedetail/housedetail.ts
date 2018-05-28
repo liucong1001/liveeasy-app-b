@@ -23,7 +23,7 @@ export class HousedetailPage {
   showInfos=true;
   follow=false;
   data:object;
-
+  classFlag = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
     this.data = navParams.get('item');
     console.log('参数',this.data);
@@ -83,5 +83,9 @@ export class HousedetailPage {
   }
   rolepeople(){
     this.navCtrl.push(RolepeoplePage)
+  }
+  // 动态控制样式
+  changeClass() {
+    this.classFlag = !this.classFlag;
   }
 }

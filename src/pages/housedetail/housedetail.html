@@ -12,7 +12,6 @@
 
   <form>
     <ion-list>
-
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间ID</ion-label>
         <ion-input type="text" value="12163" class="p0">
@@ -84,9 +83,14 @@
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
         <ion-select>
-          <ion-option value="change" selected>1栋</ion-option>
-          <ion-option value="nes">1栋</ion-option>
-          <ion-option value="n64">2栋</ion-option>
+          <ion-option value="1">一室</ion-option>
+          <ion-option value="1">二室</ion-option>
+        </ion-select>
+        <ion-select>
+          <ion-option value="1">2厅</ion-option>
+        </ion-select>
+        <ion-select>
+          <ion-option value="1">5卫</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
@@ -142,7 +146,7 @@
         房源标签
       </ion-col>
       <ion-col col-8>
-        <a>ddd</a>
+        <a  [ngClass]="{'red': !classFlag}" (click)="changeClass()">ddd</a>
         <a>ddd</a>
         <a>ddd</a>
         <a>ddd</a>
