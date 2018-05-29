@@ -18,11 +18,24 @@ import {HttpClient} from '@angular/common/http';
 export class RecordPage {
   @ViewChild(Slides) slides: Slides;
   index: number = 0;
+  followUp:any;
+  lookEmpty:any;
+  id:any;
+  nones=false;
+  have=false;
+  a:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,
-              public  recordprovider: RecordProvider,) {
+              public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider) {
     this.recordprovider.getRecord({}).then(res => {
-      console.log(res)
+      console.log(res);
+      this.followUp = res.data.propFollowupInfos;
+      this.lookEmpty=res.data.propEmptyLookInfos;
+      // this.a='https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/liveeasy-erp/';
+      for (var i = 0;i<res.data.length;i++){
+        debugger;
+        console.log(res.data.propEmptyLookInfos[i].followupPics)
+      }
     });
   }
   ionViewDidLoad() {
@@ -36,7 +49,7 @@ export class RecordPage {
   // 滑动切换
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    console.log(currentIndex);
+    // console.log(currentIndex);
     this.addActive(currentIndex);
   }
   // 改变tab 颜色
@@ -44,7 +57,6 @@ export class RecordPage {
     this.index = index;
     // console.log(index)
   }
-
 
 }
 

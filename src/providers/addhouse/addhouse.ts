@@ -14,7 +14,7 @@ export class AddhouseProvider {
   private  estateList = this.configProvider.set().http+'/property/estateInfo/pageList.do';
   private  estateTagsInfos =this.configProvider.set().http+'/property/tagsInfo/list.do';
   private  addEatate = this.configProvider.set().http+'property/propertyInfo/insert.do';
-
+  private  searchHouse = this.configProvider.set().http+'property/propertyInfo/findSubDistrict.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello AddhouseProvider Provider');
   }
@@ -30,6 +30,11 @@ export class AddhouseProvider {
  //录入房源
   public  save(params?){
       return this.httpProvider.httpPost(this.addEatate,params);
+  }
+
+  //搜索房源——区域
+  public  search(params?){
+    return this.httpProvider.httpGet(this.searchHouse,params);
   }
 
 }

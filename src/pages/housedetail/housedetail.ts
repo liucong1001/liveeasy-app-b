@@ -9,6 +9,7 @@ import { RolepeoplePage } from '../rolepeople/rolepeople';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "../../components/valid-error/valid-error";
 import {PropertyModel} from "../../model/property/property.model";
+import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -28,27 +29,29 @@ export class HousedetailPage {
   data:PropertyModel;
   classFlag = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider) {
     this.data = navParams.get('item');
-     this.form.patchValue({
-       buildingNo:this.data.buildingNo,
-       unitNo:this.data.unitNo,
-       floorNo:this.data.floorNo,
-       houseNo:this.data.houseNo,
-       spaceSize:this.data.spaceSize,
-       innerSpaceSize:this.data.innerSpaceSize,
-       propertyPrice:this.data.propertyPrice,
-       bedrooms:this.data.bedrooms,
-       halls:this.data.halls,
-       bathrooms:this.data.bathrooms,
-       kitchens:this.data.kitchens,
-       balconies:this.data.balconies,
-       orientation:this.data.orientation,
-       decoration:this.data.decoration,
-     });
-    console.log('参数',this.data,'东浩',this.data.buildingNo);
+    this.form.patchValue({
+      buildingNo: this.data.buildingNo,
+      unitNo: this.data.unitNo,
+      floorNo: this.data.floorNo,
+      houseNo: this.data.houseNo,
+      spaceSize: this.data.spaceSize,
+      innerSpaceSize: this.data.innerSpaceSize,
+      propertyPrice: this.data.propertyPrice,
+      bedrooms: this.data.bedrooms,
+      halls: this.data.halls,
+      bathrooms: this.data.bathrooms,
+      kitchens: this.data.kitchens,
+      balconies: this.data.balconies,
+      orientation: this.data.orientation,
+      decoration: this.data.decoration,
+    });
+    console.log('参数', this.data, '东浩', this.data.buildingNo);
+    console.log(this.data.propertyId);
+    this.localStorageProvider.set('propertyid',this.data.propertyId)
   }
-
+public  id:any;
 
 
   ionViewDidLoad() {

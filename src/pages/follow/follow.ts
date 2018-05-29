@@ -49,6 +49,7 @@ export class FollowPage {
       // alert('222');
       this.followProvider.getfollow({followup_code:this.form.value.followupCode,content:this.form.value.content,propertyId:this.propertyid,followupTime:this.followuptime}).then(res => {
         console.log(res);
+        alert('跟进成功！')
         this.navCtrl.push(HousingPage)
       });
   console.log(this.form.value)

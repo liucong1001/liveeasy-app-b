@@ -62,5 +62,12 @@ export class PublicpassengerPage {
   gopDetail(){
     this.navCtrl.push(PublicpdetailPage)
   }
-
+  pops(){
+    if(this.more==true || this.show == true || this.houseType == true){
+      this.more=false;
+      this.show=false;
+      this.pop=false;
+      this.houseType = false;
+    }
+  }
 }

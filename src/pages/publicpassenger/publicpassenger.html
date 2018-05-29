@@ -4,9 +4,9 @@
       <ion-title>公客池</ion-title>
       <ion-icon ios="ios-add" md="md-add" class="adds"></ion-icon>
     </ion-navbar>
-  
+
   </ion-header>
-  
+
   <ion-content>
     <ion-grid class="p0" style="position: relative;">
       <div style="position: relative;">
@@ -24,7 +24,7 @@
             <ion-icon name="md-arrow-dropdown"></ion-icon>
           </ion-col>
         </ion-row>
-  
+
         <!-- 区域 -->
         <ion-grid class="lists p0" *ngIf="show">
           <ion-row>
@@ -54,7 +54,7 @@
                     <ion-label>不限</ion-label>
                     <ion-radio checked="true" value="go"></ion-radio>
                   </ion-item>
-  
+
                   <ion-item>
                     <ion-label>武昌区</ion-label>
                     <ion-radio value="rust"></ion-radio>
@@ -67,7 +67,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-  
+
         <!-- 户型 -->
         <div class="lists houseType" *ngIf="houseType">
           <ion-list radio-group>
@@ -75,7 +75,7 @@
               <ion-label>不限</ion-label>
               <ion-radio checked="true" value="go"></ion-radio>
             </ion-item>
-  
+
             <ion-item>
               <ion-label>一室</ion-label>
               <ion-radio value="rust"></ion-radio>
@@ -85,8 +85,8 @@
             <button ion-button full color="danger">确定</button>
           </div>
         </div>
-  
-  
+
+
         <!-- 跟进 -->
         <div class="lists houseType" *ngIf="more">
           <ion-list radio-group>
@@ -94,7 +94,7 @@
               <ion-label>只看我的房源</ion-label>
               <ion-radio checked="true" value="go"></ion-radio>
             </ion-item>
-  
+
             <ion-item>
               <ion-label>待处理申请关闭</ion-label>
               <ion-radio value="rust"></ion-radio>
@@ -105,9 +105,9 @@
           </div>
         </div>
       </div>
-  
-  
-  
+
+
+
       <ion-row class="bgWhite houseMain">
         <ion-col col-12 (click)="gopDetail()">
           <ion-row>
@@ -163,5 +163,5 @@
             </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="pop" *ngIf="pop" (click)="pops()"></div>
   </ion-content>
-  <div class="pop" *ngIf="pop"></div>
