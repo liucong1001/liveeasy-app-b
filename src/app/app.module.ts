@@ -82,6 +82,8 @@ import {FollowProvider} from "../providers/follow/follow";
 import {ClosehouseProvider} from "../providers/closehouse/closehouse";
 import {RecordProvider} from "../providers/record/record";
 import {ConfigProvider} from "../providers/config/config";
+import { CustomerProvider } from '../providers/customer/customer';
+import {AreaPipe} from "../pipes/area/area";
 
 @NgModule({
   declarations: [
@@ -130,7 +132,8 @@ import {ConfigProvider} from "../providers/config/config";
       LookhousePage,
       LetteratorneyPage,
       StringJsonPipe,
-      ToParseIntPipe
+      ToParseIntPipe,
+       AreaPipe,
 
   ],
   entryComponents: [
@@ -221,7 +224,8 @@ import {ConfigProvider} from "../providers/config/config";
       ClosehouseProvider,
       RecordProvider,
       FollowProvider,
-      ConfigProvider
+      ConfigProvider,
+    CustomerProvider
     ]
 })
 export class AppModule {}

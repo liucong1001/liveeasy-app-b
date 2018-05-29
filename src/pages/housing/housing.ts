@@ -9,6 +9,8 @@ import { AddhousePage } from '../addhouse/addhouse';
 import {PropertyProvider} from "../../providers/property/property";
 // import {Pipe, PipeTransform} from '@angular/core';
 import {StringJsonPipe} from "../../pipes/string-json/string-json";
+import {ConfigProvider} from "../../providers/config/config";
+import {PropertyModel} from "../../model/property/property.model";
 /**
  * Generated class for the HousingPage page.
  *
@@ -28,11 +30,13 @@ export class HousingPage {
   more=false;
   pop=false;
   housingEstate=false;
-  pageData = [];
+  pageData = [PropertyModel];
   totalPages:number;//总页数
+
+  imgHeader:string; //线上图片默认头地址
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController,
-    public modalCtrl: ModalController,public propertyProvider:PropertyProvider
+    public modalCtrl: ModalController,public propertyProvider:PropertyProvider,public  configProvider:ConfigProvider
 ) {
 
    }
@@ -43,8 +47,9 @@ export class HousingPage {
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
       console.log('分也数据',this.totalPages,res.data.result);
+    });
 
-    })
+    this.imgHeader = this.configProvider.set().img;
   }
 
   //menu
@@ -147,21 +152,13 @@ export class HousingPage {
              refresher.complete();
            }, 2000);
        }
+
    //条数
   currentPage:number =1;
  //下拉加载
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    // this.propertyProvider.page(2).then(res=>{
-    //   this.pageData.push(res.data.result);
-    //   console.log('加载分数据2',res.data.result);
-    // });
-
     setTimeout(() => {
-
       infiniteScroll.complete();
-
       this.currentPage++;
       console.log('加载完成后，关闭刷新',this.currentPage);
       // for (let i = 0; i < 30; i++) {
@@ -180,12 +177,19 @@ export class HousingPage {
         //toast提示
         alert("已加载所有");
       }
-
       console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
     }, 1000);
+
+  }
+
+
+  pic(data){
+    if(data){
+      return JSON.parse(data)[0].thumbnail
+    }
 
   }
 

@@ -1,0 +1,7 @@
+<!-- Generated template for the UploadComponent component -->
+<div>
+  <div class="bgWrapper m10" *ngIf="!path" (click)="presentActionSheet()"></div>
+  <div *ngIf="path">
+    <img [src]="path"/>
+  </div>
+</div>

@@ -105,71 +105,26 @@
         </div>
       </div>
     </div>
-
-
-
-    <ion-row class="bgWhite houseMain">
-      <ion-col col-12 (click)="gopassengerDetail()">
-        <ion-row>
-          <ion-col col-9>
-            <div class="ellipsis tips">
-              <font size="3">标题标题标</font>
-              <a>锁</a>
-              <a>急</a>
-              <a>约</a>
-            </div>
-            <p class="m5">
-              <font size="2" color="#aaa">ID:
-                <span>2323232</span>
-                <span>武昌-徐东</span>
-              </font>
-            </p>
-            <p class="m5">
-                <font size="2" color="#aaa">
-                  <span>2017/12/12录入</span>
-                  <span>归属人：斩三</span>
-                </font>
-              </p>
-          </ion-col>
-          <ion-col col-3 class="tc m15">
-            <img src="assets/imgs/phone.png" alt="" width="45" height="45">
-          </ion-col>
-        </ion-row>
-      </ion-col>
-      <ion-col col-12 class="houseStatus">
-        <ion-row>
-          <ion-col col-4 class="tc" (click)="gopFollow()">
-            <a>跟进</a>
-          </ion-col>
-          <ion-col col-4 class="tc" (click)="golook()">
-            <a>约看</a>
-          </ion-col>
-          <ion-col col-4 class="tc" (click)="closePrivateGuest()">
-            <a>关闭</a>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row class="bgWhite houseMain">
+    <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
         <ion-col col-12 (click)="gopassengerDetail()">
             <ion-row>
               <ion-col col-9>
                 <div class="ellipsis tips">
-                  <font size="3">标题标题标</font>
+                  <font size="3">{{item.customerName}}</font>
                   <a>锁</a>
                   <a>急</a>
                   <a>约</a>
                 </div>
                 <p class="m5">
                   <font size="2" color="#aaa">ID:
-                    <span>2323232</span>
-                    <span>武昌-徐东</span>
+                    <span>{{item.customerSn}}</span>
+                    <span>{{item.intentionDiviCode}}</span>
                   </font>
                 </p>
                 <p class="m5">
                     <font size="2" color="#aaa">
-                      <span>2017/12/12录入</span>
-                      <span>归属人：斩三</span>
+                      <span>{{item.createTime | date:'yyyy年MM月dd日'}}录入</span>
+                      <span>归属人：{{item.agentId}}</span>
                     </font>
                   </p>
               </ion-col>

@@ -18,13 +18,13 @@ export class HttpProvider {
     .set('token',this.localStorageProvider.get('ticket'))
     .set('Access-Control-Allow-Origin','*');
 
-  public httpGet(url,params):Promise<any>{
+  public httpGet(url,params?):Promise<any>{
     return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
       return res as any;
     })
   }
 
-  public httpPost(url,params):Promise<any>{
+  public httpPost(url,params?):Promise<any>{
     return this.http.post(url,params,{headers:this.headers}).toPromise().then(res=>{
       return res as any;
     })

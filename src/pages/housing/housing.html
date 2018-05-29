@@ -133,12 +133,7 @@
         <ion-col col-12 (click)="goHouseDetail(item)">
           <ion-row>
             <ion-col col-4>
-              <!--<p> 图片路径{{item.propertyPics }}</p>-->
-              <!--<img [src]="item?.propertyPics&&item.propertyPics[0]?.imagePath  "  alt="" width="100%" height="120">-->
-              <!--"'https://liveeasy.oss-cn-shenzhen.aliyuncs.com/' "-->
-              <!--<span>图片{{item.propertyPics && item.propertyPics['0']['imagePath']  }}</span>-->
-              <img src="https://liveeasy.oss-cn-shenzhen.aliyuncs.com/
-liveeasy-erp/oss/estateId/propertyId/1525540902906.png"  alt="" width="100%" height="120">
+              <img [src]="imgHeader+pic(item?.propertyPics)"  alt="" width="100%" height="120">
             </ion-col>
             <ion-col col-8>
               <div class="ellipsis">

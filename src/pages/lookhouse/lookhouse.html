@@ -110,19 +110,14 @@
       </div>
       <ion-list class="m10">
 
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
-          <span>门牌号</span>
-          <div class="bgWrapper m10" *ngIf="!path"></div>
-          <div *ngIf="path">
-            <img [src]="path"/>
-          </div>
+        <div class="attorneyPic bgWhite">
+          <span>门牌号:</span>
+          <upload [useDir]="useDir" [desc]="'门牌'" (successEvent)="menPai($event)"></upload>
         </div>
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+
+        <div class="attorneyPic bgWhite">
           <span>户型图</span>
-          <div class="bgWrapper m10" *ngIf="!path"></div>
-          <div *ngIf="path">
-            <img [src]="path"/>
-          </div>
+          <upload [useDir]="useDir" [desc]="'户型'" (successEvent)="huXin($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
           <span>室内图</span>

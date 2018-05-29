@@ -151,8 +151,12 @@ public  id:any;
   letterOfAttorney(){
     this.navCtrl.push(LetteratorneyPage)
   }
+
+  /**
+   * 房源实勘
+   */
   lookHouse(){
-    this.navCtrl.push(LookhousePage);
+    this.navCtrl.push(LookhousePage,{item:this.navParams.get('item')});
   }
   rolepeople(){
     this.navCtrl.push(RolepeoplePage)

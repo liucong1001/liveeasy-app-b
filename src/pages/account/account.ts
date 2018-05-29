@@ -18,8 +18,8 @@ import {LocalStorageProvider} from  '../../providers/local-storage/local-storage
     templateUrl: 'account.html',
 })
 export class AccountPage {
-    username:string = 'test01';
-    password:string = 'test01';
+    username:string = 'mylangyi';
+    password:string = '123456';
     url:string = "/login";
     constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,
                 public loginProvider:LoginProvider,public localStorageProvider:LocalStorageProvider,

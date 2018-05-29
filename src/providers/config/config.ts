@@ -11,6 +11,7 @@ export class ConfigProvider {
     url:'',
     oss:'',
     http:'',
+    img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
   };
 
   constructor(public http: HttpClient) {
@@ -21,6 +22,7 @@ export class ConfigProvider {
         url:'',
         oss:'',
         http:'https://erp.liveeasy.tech/api/v1',
+        img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
       }
     }
   }

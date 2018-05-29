@@ -77,6 +77,10 @@ export  class PropertyModel {
    * 房源标签
    */
   tags:string;
+  /**
+   * 实勘图片
+   */
+  propertyPics?:any;
 
   // buildingNo:['',Validators.required], //楼栋号
   // unitNo:['',Validators.required],//单元号

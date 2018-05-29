@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {PropertyModel} from "../../model/property/property.model";
 /**
  * Generated class for the LookhousePage page.
  *
@@ -15,57 +16,72 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class LookhousePage {
   path: string;
+  data:PropertyModel;
+  useDir :string;
   constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
+    this.data = navParams.get('item');
+    this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
+    console.log('dir',this.useDir);
   }
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      // title: '更多',
-      buttons: [
-        {
-          text: '选择图片',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-            this.takePhoto(0);
-          }
-        },{
-          text: '拍照',
-          handler: () => {
-            console.log('Archive clicked');
-            this.takePhoto(1);
-          }
-        },{
-          text: '关闭',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-  //take Photo
-  takePhoto(sourceType:number) {
-    console.log('手机调试',sourceType);
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType:sourceType,
-    }
 
-    this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.path = base64Image;
-    }, (err) => {
-      // Handle error
-    });
-  }
+  // presentActionSheet() {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     // title: '更多',
+  //     buttons: [
+  //       {
+  //         text: '选择图片',
+  //         role: 'destructive',
+  //         handler: () => {
+  //           console.log('Destructive clicked');
+  //           this.takePhoto(0);
+  //         }
+  //       },{
+  //         text: '拍照',
+  //         handler: () => {
+  //           console.log('Archive clicked');
+  //           this.takePhoto(1);
+  //         }
+  //       },{
+  //         text: '关闭',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
+  // //take Photo
+  // takePhoto(sourceType:number) {
+  //   console.log('手机调试',sourceType);
+  //   const options: CameraOptions = {
+  //     quality: 50,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     correctOrientation: true,
+  //     sourceType:sourceType,
+  //   }
+  //
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
+  //     this.path = base64Image;
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LookhousePage');
   }
+  menPai(event){
+    console.log('门牌号',event);
+  }
+  huXin(event){
+    console.log('户型图',event);
+  }
+
+
+
 
 }
