@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
 import {ConfigProvider} from "../config/config";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /*
   房源接口
 */
@@ -10,8 +11,9 @@ export class PropertyProvider {
 
   private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
-
-  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
+  private  searchHousePath = this.configProvider.set().http+'/property/PropertyInfo/findSubDistrict.do';
+  bedRType:any;
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,) {
     console.log('Hello PropertyProvider Provider');
   }
 
@@ -24,5 +26,15 @@ export class PropertyProvider {
   insertEmptyLook(params?){
      return this.httpProvider.httpPost(this.insertEmptyLookPath,params)
   }
-
+  //搜索房源——区域
+  search(params?) {
+    var data = {"superDistrictId":'32553c97266c463895df33e3e5ec0215','type':1};
+    return this.httpProvider.httpGet(this.searchHousePath,data)
+  }
+  //搜索房源——户型
+  houseType(params?) {
+    this.bedRType=this.localStorageProvider.get('bedroom');
+    var data = {"currentPage":1,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","bedroomType":this.bedRType,"tags":0,"loginUserProvince":"42"}}
+    return this.httpProvider.httpPost(this.pageListPath,data)
+  }
 }

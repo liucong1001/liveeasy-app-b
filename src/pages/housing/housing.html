@@ -65,7 +65,7 @@
                   </ion-item>
                 </ion-list>
               </div>
-              <div class="p5 ">
+              <div class="p15 ">
                 <button ion-button full color="danger">确定</button>
               </div>
             </ion-col>
@@ -73,24 +73,44 @@
         </ion-grid>
 
         <!-- 户型 -->
-        <div class="lists houseType" *ngIf="houseType">
-          <ion-list radio-group>
-            <ion-item>
-              <ion-label>不限</ion-label>
-              <ion-radio checked="true" value="go"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>一室</ion-label>
-              <ion-radio value="rust"></ion-radio>
-            </ion-item>
-          </ion-list>
-          <div class="p5 btns">
-            <button ion-button full color="danger">确定</button>
-          </div>
+      <div class="lists houseType" *ngIf="houseType">
+        <!--<h2>{{label}}</h2>-->
+        <ion-list radio-group [(ngModel)]="type">
+          <ion-item>
+            <ion-label>不限</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>一室</ion-label>
+            <ion-radio value="1" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>两室</ion-label>
+            <ion-radio value="2"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>三室</ion-label>
+            <ion-radio value="3"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>四室</ion-label>
+            <ion-radio value="4"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>五室</ion-label>
+            <ion-radio value="5"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>五室以上</ion-label>
+            <ion-radio value="6"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <div class="p15 btns">
+          <button ion-button full color="danger" (click)="test()">确定</button>
         </div>
+      </div>
 
-        <!-- 小区 -->
+      <!-- 小区 -->
         <div class="lists houseType" *ngIf="housingEstate">
             <ion-list radio-group>
               <ion-item>
@@ -103,7 +123,7 @@
                 <ion-radio value="rust"></ion-radio>
               </ion-item>
             </ion-list>
-            <div class="p5 btns">
+            <div class="p15 btns">
               <button ion-button full color="danger">确定</button>
             </div>
           </div>
@@ -120,7 +140,7 @@
                 <ion-radio value="rust"></ion-radio>
               </ion-item>
             </ion-list>
-            <div class="p5 btns">
+            <div class="p15 btns">
               <button ion-button full color="danger">确定</button>
             </div>
           </div>

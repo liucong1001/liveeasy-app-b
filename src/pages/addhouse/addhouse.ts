@@ -18,6 +18,7 @@ import {SearchhousePage} from "../searchhouse/searchhouse";
 })
 export class AddhousePage {
   estateList:[any];
+  classFlag = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider) {
        //楼盘列表
@@ -142,5 +143,8 @@ export class AddhousePage {
       alert('录入成功！');
     })
   }
-
+// 动态控制样式
+  changeClass() {
+    this.classFlag = !this.classFlag;
+  }
 }

@@ -16,8 +16,6 @@ export class RecordProvider {
   private record = this.configProvider.set().http + 'property/propertyInfo/propertyDetail.do';
 
   constructor(public http: HttpClient, public httpProvider: HttpProvider, private configProvider: ConfigProvider, public localStorageProvider: LocalStorageProvider) {
-    // this.id = this.localStorageProvider.get('propertyid');
-    // console.log(this.id)
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordProvider');
@@ -28,6 +26,7 @@ export class RecordProvider {
     var data = {"propertyId": this.id}
     return this.httpProvider.httpPost(this.record, data)
   }
+
 
 }
 

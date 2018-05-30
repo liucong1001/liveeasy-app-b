@@ -11,6 +11,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {StringJsonPipe} from "../../pipes/string-json/string-json";
 import {ConfigProvider} from "../../providers/config/config";
 import {PropertyModel} from "../../model/property/property.model";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /**
  * Generated class for the HousingPage page.
  *
@@ -32,23 +33,37 @@ export class HousingPage {
   housingEstate=false;
   pageData = [PropertyModel];
   totalPages:number;//总页数
-
   imgHeader:string; //线上图片默认头地址
+  type:string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController,
-    public modalCtrl: ModalController,public propertyProvider:PropertyProvider,public  configProvider:ConfigProvider
-) {
+              public alertCtrl: AlertController,
+              public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
+              public configProvider:ConfigProvider) {
+    //搜索房源——区域
+    this.propertyProvider.search({}).then(res => {
+      console.log(res);
+    })
+  }
 
-   }
 
+
+  test(){
+    console.log(this.type)
+    this.localStorageProvider.set('bedroom',this.type);
+    this.propertyProvider.houseType({}).then(res => {
+      // this.pageData=res.data;
+      console.log('数据',res.data);
+    })
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
-    this.propertyProvider.page(1).then(res=>{
+    this.propertyProvider.page(1).then(res => {
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
-      console.log('分也数据',this.totalPages,res.data.result);
-    });
-
+      console.log('分页数据', this.totalPages, res.data.result);
+      console.log(res.data.result)
+    })
     this.imgHeader = this.configProvider.set().img;
   }
 
@@ -71,10 +86,10 @@ export class HousingPage {
       this.show=false;
       this.pop=true;
       this.more = false;
-      this.housingEstate=false;
-    }else{
+      this.housingEstate = false;
+    } else {
       this.houseType = false;
-      this.pop=false;
+      this.pop = false;
     }
   }
 
@@ -152,7 +167,6 @@ export class HousingPage {
              refresher.complete();
            }, 2000);
        }
-
    //条数
   currentPage:number =1;
  //下拉加载
