@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "../../components/valid-error/valid-error";
 import {PropertyModel} from "../../model/property/property.model";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
+import {PropertyProvider} from "../../providers/property/property";
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -29,7 +30,7 @@ export class HousedetailPage {
   data:PropertyModel;
   classFlag = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.data = navParams.get('item');
     this.form.patchValue({
       buildingNo: this.data.buildingNo,
@@ -163,7 +164,9 @@ public  id:any;
   }
   //表单提交
   save(){
-
+    this.propertyProvider.updates().then(res=>{
+      console.log(this.form.value);
+    })
   }
   // 动态控制样式
   changeClass() {

@@ -71,6 +71,7 @@ export class LookhousePage {
   //     // Handle error
   //   });
   // }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LookhousePage');
   }
