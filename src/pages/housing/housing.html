@@ -182,20 +182,13 @@
                 </ion-col>
               </ion-row>
               <div class="tips m5">
-                <a>满五</a>
-                <a>锁</a>
-                <a>委</a>
-                <a>学</a>
-                <a>铁</a>
-                <a>审</a>
+                <a *ngFor=" let x of tagPipe(item.tagsStr)">{{tagName(x)}}</a>
               </div>
               <div>
                 <font size="1" color="#aaa">
                   <span>{{item.createdTime | date:'yyyy年MM月dd日'}}</span>录入</font>
                 <font size="1" color="#aaa">归属人：
-                  <!--JSON.stringify(product)-->
-                  <span>{{item.realtorId }}</span>
-                  <!--<span>{{item.contacts  }}</span>-->
+                  <span>{{item.realtorName }}</span>
                 </font>
               </div>
             </ion-col>

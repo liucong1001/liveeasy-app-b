@@ -11,6 +11,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {StringJsonPipe} from "../../pipes/string-json/string-json";
 import {ConfigProvider} from "../../providers/config/config";
 import {PropertyModel} from "../../model/property/property.model";
+import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /**
  * Generated class for the HousingPage page.
@@ -36,13 +37,19 @@ export class HousingPage {
   imgHeader:string; //线上图片默认头地址
   type:string;
 
+  tagsList = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
-              public configProvider:ConfigProvider) {
+              public configProvider:ConfigProvider, public addhouseProvider:AddhouseProvider) {
     //搜索房源——区域
-    this.propertyProvider.search({}).then(res => {
-      console.log(res);
+    // this.propertyProvider.search({}).then(res => {
+    //   console.log(res);
+    // })
+    //房源标签
+    this.addhouseProvider.estateTagsSelect().then(res=>{
+      this.tagsList = res.data;
+      console.log('房源列表',this.tagsList);
     })
   }
 
@@ -56,6 +63,7 @@ export class HousingPage {
       console.log('数据',res.data);
     })
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
     this.propertyProvider.page(1).then(res => {
@@ -204,7 +212,23 @@ export class HousingPage {
     if(data){
       return JSON.parse(data)[0].thumbnail
     }
-
   }
+
+  //房源标签转换（字符串转为数组）
+  tagPipe(data){
+    if(data){
+      return data.split(",");
+    }
+  }
+  //房源标签code转换为name
+  tagName(code){
+    for(var i in this.tagsList){
+       if(code == this.tagsList[i].tagCode){
+         return this.tagsList[i].tagDesc
+       }
+    }
+  }
+
+
 
 }

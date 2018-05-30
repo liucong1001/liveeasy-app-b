@@ -81,34 +81,9 @@ export  class PropertyModel {
    * 实勘图片
    */
   propertyPics?:any;
-
-  // buildingNo:['',Validators.required], //楼栋号
-  // unitNo:['',Validators.required],//单元号
-  // floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
-  // houseNo:[''],//房间号
-  // space_size:[''],//建筑面积
-  // inner_space_size:[''],//套内面积
-  // property_price:[''],//价格
-  // bedrooms:['1'],//室
-  // halls:['1'],
-  // bathrooms:['1'],
-  // kitchens:['1'],
-  // balconies:['1'],//阳
-  // orientation:[null],//房屋朝向
-  // decoration:[null],//装修水平
-  // contacts:this.fb.array([
-  //                          this.fb.group({
-  //     contact:[''],
-  //     contactType:['mobile'],
-  //     contactInfo:[''],
-  //     sex:[''],
-  //     desc:[''],
-  //   })
-  //                        ]),//业主信息
-  // contact:[],
-  // contactInfo:[],
-  // contactInfo2:[],
-  // sex:[],
-  // tags:[''],//房源标签
+  /**
+   * 多个房源标签组合列表
+   */
+  tagsStr?:any;
 
 }
