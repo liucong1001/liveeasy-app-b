@@ -21,7 +21,6 @@ export class CustomerProvider {
     var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
     return   this.httpProvider.httpPost(this.pageListPath,data)
   }
-
   //区域
   area(){
     return   this.httpProvider.httpGet(this.areaPath);
@@ -30,5 +29,22 @@ export class CustomerProvider {
   tradingArea(){
     return   this.httpProvider.httpGet(this.tradingAreaPath);
   }
+
+  //列表条件搜索
+  pageSearch(currentPage,params){
+    var  data = {
+      currentPage: currentPage,
+      limit:10,
+      totalRecords:0,
+      totalPages:0,
+      offset:0,
+      order:'asc',
+      params:{
+        ...params,
+      },
+    };
+    return this.httpProvider.httpPost(this.pageListPath,data)
+  }
+
 
 }

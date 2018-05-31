@@ -13,6 +13,7 @@ import {ConfigProvider} from "../../providers/config/config";
 import {PropertyModel} from "../../model/property/property.model";
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {CustomerProvider} from "../../providers/customer/customer";
 
 /**
  * Generated class for the HousingPage page.
@@ -53,19 +54,19 @@ export class HousingPage {
     district:'',
     area:'',
     bedroomType:'0',
-    districtCode:'420103',
+    districtCode:'',
     estateId:'',
     param:'1', //默认搜索是1,只看我的6,
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
-              public configProvider: ConfigProvider, public addhouseProvider: AddhouseProvider) {
-    //搜索房源——区域
-    this.propertyProvider.search({}).then(res => {
-      console.log('区域', res.data);
-      this.area = res.data;
+              public configProvider: ConfigProvider, public addhouseProvider: AddhouseProvider,public customerProvider:CustomerProvider) {
+    this.customerProvider.area().then(res=>{
+      console.log('区域', res);
+      this.area = res;
     });
+
 
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
@@ -85,18 +86,13 @@ export class HousingPage {
 
   //搜索房源——区域——商圈
   go(item) {
-
     this.selected = item;
-
     this.aeraShow=false;
     this.tradArea=true;
-    this.localStorageProvider.set('districtId',item.id)
-    console.log(item.id,item.name);
     this.params.district = item.id;
-
-    this.propertyProvider.search2({}).then(res => {
+    this.params.districtCode = item.code;
+    this.propertyProvider.search2(item.id).then(res => {
       this.district=res.data;
-      console.log('区域2', res.data);
       if(this.district == undefined){
           // alert('暂无该地区!')
         this.hTips=true
@@ -148,12 +144,7 @@ export class HousingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
-    this.propertyProvider.page(1).then(res => {
-      this.pageData = res.data.result;
-      this.totalPages = res.data.totalPages;
-      console.log('分页数据', this.totalPages, res.data.result);
-      console.log(res.data.result)
-    });
+    this.search();
     this.imgHeader = this.configProvider.set().img;
   }
 
@@ -318,12 +309,13 @@ export class HousingPage {
       }
     }
   }
-// 动态控制样式
-//   changeClass() {
-//     this.classFlag = !this.classFlag;
-//   }
+
 
 }
+
+/**
+ * 定义搜索条件类
+ */
 class  PropertyPageParams {
   district:string;
   area:string; //商圈

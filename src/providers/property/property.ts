@@ -34,9 +34,9 @@ export class PropertyProvider {
     return this.httpProvider.httpGet(this.searchHousePath,data)
   }
   //搜索房源——区域——商圈
-  search2(params?) {
-    this.districtId=this.localStorageProvider.get('districtId')
-    var data = {"superDistrictId":this.districtId,'type':2};
+  search2(districtId) {
+    // this.districtId=this.localStorageProvider.get('districtId')
+    var data = {"superDistrictId":districtId,'type':2};
     return this.httpProvider.httpGet(this.searchHousePath,data)
   }
   //搜索房源——户型
