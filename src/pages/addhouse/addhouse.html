@@ -75,7 +75,7 @@
         <ion-label>户型</ion-label>
         <ion-select>
           <ion-option value="1">一室</ion-option>
-          <ion-option value="1">二室</ion-option>
+          <ion-option value="2">二室</ion-option>
         </ion-select>
         <ion-select>
           <ion-option value="1">2厅</ion-option>
@@ -137,19 +137,27 @@
         更多
       </button>
     </ion-list>
-    <ion-row class="bgWhite houseTips">
-      <ion-col col-4 class="pl12">
-        房源标签
-      </ion-col>
-      <ion-col col-8>
-        <a [ngClass]="{'red': !classFlag}" (click)="changeClass()">ddd</a>
-        <a>ddd</a>
-        <a>ddd</a>
-        <a>ddd</a>
-        <a>ddd</a>
-        <a>ddd</a>
-      </ion-col>
-    </ion-row>
+    <!--<ion-row class="bgWhite houseTips">-->
+      <!--<ion-col col-4 class="pl12">-->
+        <!--房源标签-->
+      <!--</ion-col>-->
+      <!--<ion-col col-8>-->
+        <!--<a [ngClass]="{'red': !classFlag}" (click)="changeClass()">ddd</a>-->
+        <!--<a>ddd</a>-->
+        <!--<a>ddd</a>-->
+        <!--<a>ddd</a>-->
+        <!--<a>ddd</a>-->
+        <!--<a>ddd</a>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+    <ion-item class="pl12">
+      <ion-label>房源标签</ion-label>
+      <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation">
+        <ion-option value="1">sd</ion-option>
+        <ion-option value="2">sds</ion-option>
+        <ion-option value="3">sdsd</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-list (click)="presentActionSheet()" class="m10">
       <button ion-item class="pl12">
         房源描述

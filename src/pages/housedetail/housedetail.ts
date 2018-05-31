@@ -11,6 +11,7 @@ import {ErrorMessage} from "../../components/valid-error/valid-error";
 import {PropertyModel} from "../../model/property/property.model";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {PropertyProvider} from "../../providers/property/property";
+import {HousingPage} from "../housing/housing";
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -28,7 +29,19 @@ export class HousedetailPage {
   showInfos=true;
   follow=false;
   data:PropertyModel;
-  classFlag = true;
+
+  //编辑房源
+  propertyid:any;
+  buildingNo:any; //栋号
+  unitNo:any; //单元
+  floorNo:any; //楼层
+  houseNo:any; //房间号
+  spaceSize:any; //建筑面积
+  innerSpaceSize:any; //套内面积
+  propertyPrice:any; //价格
+  orientation:any; //朝向
+  decoration:any; //装修
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.data = navParams.get('item');
@@ -50,6 +63,7 @@ export class HousedetailPage {
     });
     console.log('参数', this.data, '东浩', this.data.buildingNo);
     console.log(this.data.propertyId);
+    this.propertyid=this.data.propertyId;
     this.localStorageProvider.set('propertyid',this.data.propertyId)
   }
 public  id:any;
@@ -156,6 +170,7 @@ public  id:any;
   /**
    * 房源实勘
    */
+
   lookHouse(){
     this.navCtrl.push(LookhousePage,{item:this.navParams.get('item')});
   }
@@ -164,12 +179,19 @@ public  id:any;
   }
   //表单提交
   save(){
-    this.propertyProvider.updates().then(res=>{
+    this.propertyProvider.updates({
+      propertyId:this.propertyid,buildingNo:this.form.value.buildingNo,
+      unitNo:this.form.value.unitNo,floorNo:this.form.value.floorNo,
+      houseNo:this.form.value.houseNo,spaceSize:this.form.value.spaceSize,
+      innerSpaceSize:this.form.value.innerSpaceSize,
+      propertyPrice:this.form.value.propertyPrice,
+      orientation:this.form.value.orientation,decoration:this.form.value.decoration,
+    }).then(res=>{
       console.log(this.form.value);
+      console.log(res);
+      this.navCtrl.push(HousingPage)
+
     })
   }
-  // 动态控制样式
-  changeClass() {
-    this.classFlag = !this.classFlag;
-  }
+
 }

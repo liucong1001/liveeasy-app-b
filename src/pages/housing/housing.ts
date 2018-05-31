@@ -28,6 +28,7 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
   // pipes:[StringJsonPipe],
 })
 export class HousingPage {
+  classFlag = true;
   show = false;
   houseType = false;
   more = false;
@@ -259,6 +260,9 @@ export class HousingPage {
       }
     }
   }
-
+// 动态控制样式
+//   changeClass() {
+//     this.classFlag = !this.classFlag;
+//   }
 
 }
