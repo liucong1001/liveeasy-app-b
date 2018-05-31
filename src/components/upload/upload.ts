@@ -5,6 +5,7 @@ import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native
 import {FileProvider} from "../../providers/file/file";
 import {PropertyProvider} from "../../providers/property/property";
 import {PropertyModel} from "../../model/property/property.model";
+// import { ImagePicker } from '@ionic-native/image-picker';
 
 /**
   多图片上传组件
@@ -29,7 +30,9 @@ export class UploadComponent {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
-              private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider) {
+              private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
+              // private imagePicker:ImagePicker
+  ) {
 
   }
   //触发调用事件
@@ -75,15 +78,29 @@ export class UploadComponent {
       sourceType:sourceType,
     };
 
-    this.camera.getPicture(options).then((imageData,) => {
-      console.log('图片data',options);
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      // this.path = base64Image;
-      // console.log('图片信息64位',this.path,'图片信息',imageData);
-      this.upload(this.useDir);
-    }, (err) => {
-      // Handle error
-    });
+
+    if(sourceType==0){
+     // this.imagePicker.getPictures(options).then(results=>{
+     //     for(var i=0;i<results.length;i++){
+     //       console.log('图片'+i,results[i]);
+     //     }
+     // })
+
+
+    }else if(sourceType==1){
+
+      this.camera.getPicture(options).then((imageData,) => {
+        console.log('图片data',options);
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.path = base64Image;
+        // console.log('图片信息64位',this.path,'图片信息',imageData);
+        this.upload(this.useDir);
+      }, (err) => {
+        // Handle error
+      });
+
+    }
+
   }
 
 
@@ -108,7 +125,7 @@ export class UploadComponent {
         }
       };
 
-      // console.log('上传参数',this.path,this.apiPath,options);
+      console.log('公上传参数',this.path,apiPath,options);
       this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
 
         this.imagePath = this.imagePathHead +useDir +options.fileName;
@@ -119,8 +136,8 @@ export class UploadComponent {
           bucketId:'liveeasydev',
           imagePath:this.imagePath,
           thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
-          position:'',
-          desc:'',
+          position:this.position,
+          desc:this.desc,
         };
         console.log('upload成功',data,'图片地址',this.imagePath);
         this.successEvent.emit({pic});

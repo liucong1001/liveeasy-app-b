@@ -112,13 +112,14 @@
 
         <div class="attorneyPic bgWhite">
           <span>门牌号:</span>
-          <upload [useDir]="useDir" [desc]="'门牌'" (successEvent)="menPai($event)"></upload>
+          <upload [useDir]="useDir" [desc]="'门牌'" [position]="''" (successEvent)="menPai($event)"></upload>
         </div>
 
         <div class="attorneyPic bgWhite">
           <span>户型图</span>
-          <upload [useDir]="useDir" [desc]="'户型'" (successEvent)="huXin($event)"></upload>
+          <upload [useDir]="useDir" [desc]="'户型'" [position]="''" (successEvent)="huXin($event)"></upload>
         </div>
+
         <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
           <span>室内图</span>
           <div class="bgWrapper m10" *ngIf="!path"></div>

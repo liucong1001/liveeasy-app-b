@@ -40,10 +40,23 @@ export class HousingPage {
   type: string;
   area: any;
   tagsList = [];
+  estateList = []; //楼盘列表
   district:any;
   aeraShow=true;
   tradArea=false;
   hTips=false;
+  /**
+   * 列表搜索条件
+   * @type {{}}
+   */
+  params:PropertyPageParams = {
+    district:'',
+    area:'',
+    bedroomType:'0',
+    districtCode:'420103',
+    estateId:'',
+    param:'1', //默认搜索是1,只看我的6,
+  };
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
@@ -52,20 +65,35 @@ export class HousingPage {
     this.propertyProvider.search({}).then(res => {
       console.log('区域', res.data);
       this.area = res.data;
-    })
+    });
 
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsList = res.data;
       console.log('房源列表', this.tagsList);
-    })
+    });
+
+    //楼盘列表
+    this.addhouseProvider.estateListSelect().then(res=>{
+      this.estateList = res.data.result;
+    });
   }
+  selected :any;
+  isActive(item) {
+    return this.selected === item;
+  };
+
   //搜索房源——区域——商圈
   go(item) {
+
+    this.selected = item;
+
     this.aeraShow=false;
     this.tradArea=true;
     this.localStorageProvider.set('districtId',item.id)
-    console.log(item.id,item.name)
+    console.log(item.id,item.name);
+    this.params.district = item.id;
+
     this.propertyProvider.search2({}).then(res => {
       this.district=res.data;
       console.log('区域2', res.data);
@@ -77,6 +105,8 @@ export class HousingPage {
       }
     })
   }
+
+
   test() {
     console.log(this.type)
     this.localStorageProvider.set('bedroom', this.type);
@@ -85,9 +115,37 @@ export class HousingPage {
       console.log('数据', res.data);
     })
   }
-  subSearch(){
 
+  /**
+   * 列表搜索
+   */
+  search(){
+    this.pageData = null;
+     console.log('搜索',this.params);
+     this.propertyProvider.pageSearch(1,this.params).then(res=>{
+       this.pageData = res.data.result;
+       this.totalPages = res.data.totalPages;
+        //关闭搜索框子
+       this.show = false;
+       this.houseType = false;
+       this.more = false;
+       this.pop = false;
+       this.housingEstate = false;
+     });
   }
+  //重置
+  reset(){
+    this.params= {
+      district:'',
+      area:'',
+      bedroomType:'0',
+      districtCode:'420103',
+      estateId:'',
+      param:'1', //默认搜索是1,只看我的6,
+    };
+    this.search();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
     this.propertyProvider.page(1).then(res => {
@@ -95,7 +153,7 @@ export class HousingPage {
       this.totalPages = res.data.totalPages;
       console.log('分页数据', this.totalPages, res.data.result);
       console.log(res.data.result)
-    })
+    });
     this.imgHeader = this.configProvider.set().img;
   }
 
@@ -216,7 +274,7 @@ export class HousingPage {
       console.log('加载完成后，关闭刷新', this.currentPage);
       // for (let i = 0; i < 30; i++) {
       // this.items.push( this.items.length );
-      this.propertyProvider.page(this.currentPage).then(res => {
+      this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
         for (let i = 0; i < res.data.result.length; i++) {
           this.pageData.push(res.data.result[i]);
         }
@@ -266,3 +324,13 @@ export class HousingPage {
 //   }
 
 }
+class  PropertyPageParams {
+  district:string;
+  area:string; //商圈
+  bedroomType?:string;//户室
+  city?:string;
+  districtCode?:string;
+  estateId?:string;//小区
+  param?:string;
+}
+

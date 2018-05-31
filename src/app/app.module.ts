@@ -84,6 +84,7 @@ import {RecordProvider} from "../providers/record/record";
 import {ConfigProvider} from "../providers/config/config";
 import { CustomerProvider } from '../providers/customer/customer';
 import {AreaPipe} from "../pipes/area/area";
+// import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -225,7 +226,8 @@ import {AreaPipe} from "../pipes/area/area";
       RecordProvider,
       FollowProvider,
       ConfigProvider,
-    CustomerProvider
+    CustomerProvider,
+      // ImagePicker,
     ]
 })
 export class AppModule {}

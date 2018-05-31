@@ -9,7 +9,7 @@
     </ion-item>
 
     <div class="m28">
-      <button ion-button block color="danger" (click)="login()">登录</button>
+      <button ion-button block color="danger" [disabled]="loginBtn"   (click)="login()">登录</button>
     </div>
     <ion-grid class="p0 m15">
       <ion-row>

@@ -102,10 +102,10 @@ page-housing .tips a:nth-child(6) {
     display: block;
     padding: 13px 10px;
 }
-.leftChange a:active{
-background:#DB2924;
-color:#fff;
-}
+//.leftChange a:active{
+//background:#DB2924;
+//color:#fff;
+//}
 .leftChange .item-block{
     min-height:46px;
 }
@@ -146,4 +146,7 @@ color:#fff;
 
 .radio-ios .radio-checked .radio-inner {
     border-color: #DB2924;
+}
+.active{
+  color: #DB2924;
 }

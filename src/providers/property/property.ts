@@ -45,6 +45,25 @@ export class PropertyProvider {
     var data = {"currentPage":1,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","bedroomType":this.bedRType,"tags":0,"loginUserProvince":"42"}}
     return this.httpProvider.httpPost(this.pageListPath,data)
   }
+
+  //列表条件搜索
+  pageSearch(currentPage,params){
+      var  data = {
+        currentPage: currentPage,
+        limit:10,
+        totalRecords:0,
+        totalPages:0,
+        offset:0,
+        order:'asc',
+        params:{
+          loginUserProvince:'42',
+          orderBy:'1',
+          propertyPriceUnit:'1',
+          ...params,
+        },
+      };
+      return this.httpProvider.httpPost(this.pageListPath,data)
+  }
 //修改房源
   updates(params?) {
     // var data = {};

@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ComponentsComponent } from './components/components';
 import { ValidErrorComponent } from './valid-error/valid-error';
 import { UploadComponent } from './upload/upload';
+
 @NgModule({
 	declarations: [
 	ComponentsComponent,
     ValidErrorComponent,
-    UploadComponent],
+    UploadComponent,],
 	imports: [CommonModule],
 	exports: [ComponentsComponent,
     ValidErrorComponent,
-    UploadComponent]
+    UploadComponent,]
 })
 export class ComponentsModule {}
