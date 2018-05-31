@@ -1,6 +1,9 @@
 .p15{
   padding:0 5px 15px;
 }
+.item-blockUpdate{
+  min-height:3.9rem;
+}
 .adds {
     color: #fff;
     font-size: 35px;
@@ -83,12 +86,12 @@ page-housing .tips a:nth-child(6) {
     width: 100%;
     background: #fff;
     z-index: 99; // color: #000
-    height: 62%;
+    height: 68%;
     margin-top: -1px
 }
 
 .leftChange {
-    height: 78%;
+    height: 82%;
     overflow: scroll; // background: #aaa;
     border-bottom: 1px solid #F4F4F4;
 }
