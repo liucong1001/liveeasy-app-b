@@ -30,18 +30,7 @@
           <ion-row>
             <ion-col col-6 class="p0">
               <div class="leftChange">
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
+                <a *ngFor=" let item of area"   [ngClass]="{'active': isActive(item)}" (click)="go(item)">{{item.name}}</a>
               </div>
               <div class="p5 ">
                 <button ion-button full color="light">重置</button>
@@ -105,48 +94,62 @@
           </div>
         </div>
       </div>
-      <ion-row class="bgWhite houseMain">
-        <ion-col>
-          <ion-row (click)="gopublicpasger()" class="addline">
-            <ion-col col-7>
-              <div class="ellipsis">
-                <font size="3">标题标题标</font>
+      <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
+        <ion-col col-12 (click)="gopassengerDetail()">
+          <ion-row>
+            <ion-col col-9>
+              <div class="ellipsis tips">
+                <font size="3">{{item.customerName}}</font>
+                <!--急-->
+                <a>{{item.followLabel==1?'急':''}}</a>
+                <!--约-->
+                <a>{{item.lookLable==1?'约':''}}</a>
+                <!--<a>约</a>-->
               </div>
               <p class="m5">
+                <font size="2" color="#aaa">ID:
+                  <span>{{item.customerSn}}</span>
+                  <span>{{item.intentionDiviCode}}</span>
+                </font>
+              </p>
+              <p class="m5">
                 <font size="2" color="#aaa">
-                  <span>2室一厅1厨1卫</span>/
-                  <span>96m<sup>2</sup></span>
+                  <span>{{item.createTime | date:'yyyy年MM月dd日'}}录入</span>
+                  <span>归属人：{{item.agentId}}</span>
                 </font>
               </p>
             </ion-col>
-            <ion-col col-5 class="tc m15">
-                <font size="2" color="#aaa">
-                    <span>ID:</span>
-                    <span>121212121</span>
-                  </font>
+            <ion-col col-3 class="tc m15">
+              <img src="assets/imgs/phone.png" alt="" width="45" height="45">
             </ion-col>
           </ion-row>
-          <ion-row (click)="gopublicpasger()" class="addline">
-              <ion-col col-7>
-                <div class="ellipsis">
-                  <font size="3">标题标题标</font>
-                </div>
-                <p class="m5">
-                  <font size="2" color="#aaa">
-                    <span>2室一厅1厨1卫</span>/
-                    <span>96m<sup>2</sup></span>
-                  </font>
-                </p>
-              </ion-col>
-              <ion-col col-5 class="tc m15">
-                  <font size="2" color="#aaa">
-                      <span>ID:</span>
-                      <span>121212121</span>
-                    </font>
-              </ion-col>
-            </ion-row>
+        </ion-col>
+        <ion-col col-12 class="houseStatus">
+          <ion-row>
+            <ion-col col-4 class="tc" (click)="goFollow()">
+              <a>跟进</a>
+            </ion-col>
+            <ion-col col-4 class="tc" (click)="golook()">
+              <a>约看</a>
+            </ion-col>
+            <ion-col col-4 class="tc" (click)="closePrivateGuest()">
+              <a>关闭</a>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
+
+      <div *ngIf="pageData==null">
+        抱歉，找不到数据
+      </div>
+
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="加载中...">
+
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-grid>
     <div class="pops" *ngIf="pop" (click)="pops()"></div>
   </ion-content>

@@ -3,56 +3,44 @@
     <ion-navbar>
       <ion-title>客户详情</ion-title>
     </ion-navbar>
-  
+
   </ion-header>
   <ion-content>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="save()">
       <ion-list>
-  
         <ion-item class="pl12 hdRightInfo1">
-          <ion-label>客户ID</ion-label>
-          <ion-input type="text" value="123">
+          <ion-label>客户姓名</ion-label>
+          <ion-input type="text" placeholder="请输入" formControlName="customerName">
           </ion-input>
         </ion-item>
-        <ion-item class="pl12 hdRightInfo1">
-            <ion-label>客户姓名</ion-label>
-            <ion-input type="text" value="多段多">
-            </ion-input>
-          </ion-item>
         <ion-item class="pl12">
           <ion-label>客户性别</ion-label>
-          <ion-select okText="确定" cancelText="关闭">
-            <ion-option value="change" selected>请选择</ion-option>
-            <ion-option value="nes">男</ion-option>
-            <ion-option value="n64">女</ion-option>
+          <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender">
+            <ion-option value="1">男</ion-option>
+            <ion-option value="2">女</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12 hdRightInfo1">
           <ion-label>客户手机</ion-label>
-          <ion-input type="text" value="245565656">
+          <ion-input type="text" placeholder="请输入手机号" formControlName="customerPhone">
           </ion-input>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户来源</ion-label>
-          <ion-select>
-            <ion-option value="nes" selected>1</ion-option>
-            <ion-option value="n64">2</ion-option>
+          <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc">
+            <ion-option [value]="item.value"  *ngFor="let item of customerSrcList  "> {{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户归属</ion-label>
-          <ion-select>
-            <ion-option value="change" selected>请选择</ion-option>
-            <ion-option value="nes">1</ion-option>
-            <ion-option value="n64">2</ion-option>
+          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId">
+            <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户等级</ion-label>
-          <ion-select>
-            <ion-option value="change" selected>请选择</ion-option>
-            <ion-option value="nes">1</ion-option>
-            <ion-option value="n64">2</ion-option>
+          <ion-select  okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerGrade">
+            <ion-option [value]="item.value" *ngFor="let item of customeroGrageInfoList  ">{{item.label}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-list>
@@ -67,21 +55,26 @@
       </ion-list>
       <ion-list *ngIf="showIntention">
           <ion-item class="pl12">
-              <ion-label>意向区域</ion-label>
-              <ion-select>
-                <ion-option value="change" selected>请选择</ion-option>
-                <ion-option value="nes">1栋</ion-option>
-                <ion-option value="n64">2栋</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item class="pl12">
-              <ion-label>意向楼盘</ion-label>
-              <ion-select>
-                <ion-option value="change" selected>请选择</ion-option>
-                <ion-option value="nes">1栋</ion-option>
-                <ion-option value="n64">2栋</ion-option>
-              </ion-select>
-            </ion-item>
+            <ion-label>意向区域</ion-label>
+            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode">
+              <ion-option [value]="item.code" *ngFor="let item of area  ">{{item.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="pl12">
+            <ion-label>意向商圈</ion-label>
+            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionTradeCode">
+              <ion-option [value]="item.code" *ngFor="let item of tradingArea  ">{{item.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="pl12">
+            <ion-label>意向楼盘</ion-label>
+            <!--formControlName="intentionEstate"-->
+            <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭"  formControlName="intentionEstate"
+                        <!--[formControl]="form.controls['intentionEstate']"-->
+                        (ngModelChange)="estateChange($event)">
+              <ion-option [value]="item.id"  *ngFor="let item of estateList  "> {{item.estateName}}</ion-option>
+            </ion-select>
+          </ion-item>
             <div class="hdRightInfo">
               <ion-item class="pl12">
                 <ion-label>面积要求</ion-label>
@@ -144,13 +137,13 @@
       <ion-grid>
         <ion-row class="p10">
           <ion-col col-4>
-          <button ion-button color="danger" full class="radius">编辑</button>
+          <button ion-button color="danger" full type="submit" class="radius">编辑</button>
           </ion-col>
           <ion-col col-4>
               <button class="radius updateBtn" (click)="passengerLook()">约看</button>
           </ion-col>
           <ion-col col-4>
-              <button class="radius updateBtn" (click)="passengerFollow()">跟进</button>          
+              <button class="radius updateBtn" (click)="passengerFollow()">跟进</button>
           </ion-col>
         </ion-row>
       </ion-grid>

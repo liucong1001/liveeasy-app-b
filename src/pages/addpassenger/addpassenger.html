@@ -6,49 +6,41 @@
 
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="save()">
     <ion-list>
-
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>客户姓名</ion-label>
-        <ion-input type="text" placeholder="请输入">
+        <ion-input type="text" placeholder="请输入" formControlName="customerName">
         </ion-input>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>客户性别</ion-label>
-        <ion-select okText="确定" cancelText="关闭">
-          <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">男</ion-option>
-          <ion-option value="n64">女</ion-option>
+        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender">
+          <ion-option value="1">男</ion-option>
+          <ion-option value="2">女</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>客户手机</ion-label>
-        <ion-input type="text" placeholder="请输入手机号">
+        <ion-input type="text" placeholder="请输入手机号" formControlName="customerPhone">
         </ion-input>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>客户来源</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1</ion-option>
-          <ion-option value="n64">2</ion-option>
-        </ion-select>
+          <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc">
+            <ion-option [value]="item.value"  *ngFor="let item of customerSrcList  "> {{item.label}}</ion-option>
+          </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>客户归属</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1</ion-option>
-          <ion-option value="n64">2</ion-option>
+        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId">
+          <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>客户等级</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1</ion-option>
-          <ion-option value="n64">2</ion-option>
+        <ion-select  okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerGrade">
+          <ion-option [value]="item.value" *ngFor="let item of customeroGrageInfoList  ">{{item.label}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -64,18 +56,20 @@
     <ion-list *ngIf="showIntention">
         <ion-item class="pl12">
             <ion-label>意向区域</ion-label>
-            <ion-select>
-              <ion-option value="change" selected>请选择</ion-option>
-              <ion-option value="nes">1栋</ion-option>
-              <ion-option value="n64">2栋</ion-option>
+            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode">
+              <ion-option [value]="item.code" *ngFor="let item of area  ">{{item.name}}</ion-option>
             </ion-select>
           </ion-item>
+        <ion-item class="pl12">
+          <ion-label>意向商圈</ion-label>
+          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionTradeCode">
+            <ion-option [value]="item.code" *ngFor="let item of tradingArea  ">{{item.name}}</ion-option>
+          </ion-select>
+        </ion-item>
           <ion-item class="pl12">
             <ion-label>意向楼盘</ion-label>
-            <ion-select>
-              <ion-option value="change" selected>请选择</ion-option>
-              <ion-option value="nes">1栋</ion-option>
-              <ion-option value="n64">2栋</ion-option>
+            <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionEstate" (ngModelChange)="estateChange($event)">
+              <ion-option [value]="item.id"  *ngFor="let item of estateList  "> {{item.estateName}}</ion-option>
             </ion-select>
           </ion-item>
           <div class="hdRightInfo">
@@ -139,7 +133,7 @@
     </ion-list>
     <ion-grid>
       <ion-row class="p10">
-        <button ion-button full color="danger" class="radius">提交</button>
+        <button ion-button full color="danger" type="submit" class="radius">提交</button>
       </ion-row>
     </ion-grid>
   </form>

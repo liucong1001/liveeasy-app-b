@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PublicpassengerPage } from '../publicpassenger/publicpassenger';
+import {PublicCustomerProvider} from "../../providers/public-customer/public-customer";
+import {PropertyProvider} from "../../providers/property/property";
+import {CustomerProvider} from "../../providers/customer/customer";
 
 /**
- * Generated class for the ChoosehousePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+   公客列表
  */
 
 @IonicPage()
@@ -19,11 +19,88 @@ export class ChoosehousePage {
   houseType=false;
   more=false;
   pop=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pageData = [];
+  totalPages:number;//总页数
+  /**
+   * 列表搜索条件
+   */
+  area: any;
+  estateList = []; //楼盘列表
+  district:any;
+  tradingArea = [];//商圈数组
+  intentionTradeCodeId:string;  //用于转换商圈
+  /**
+   * 列表搜索条件
+   * @type {{}}
+   */
+  params:PublicCustomerPageParams = {
+    customerSrc:'0',
+    orderBy:'DESC',
+  };
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
+              public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,) {
+    this.customerProvider.area().then(res=>{
+      this.area = res;
+    });
+    this.customerProvider.tradingArea().then(res=>{
+      this.tradingArea = res;
+    })
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChoosehousePage');
+    this.search();
+  }
+  selected :any;
+  isActive(item) {
+    return this.selected === item;
+  };
+
+  //搜索房源——区域——商圈
+  go(item) {
+    console.log('查询商圈',item);
+    this.selected = item;
+    this.propertyProvider.search2(item.id).then(res => {
+      this.district=res.data;
+      // if(this.district == undefined){
+      //   // alert('暂无该地区!')
+      //   this.hTips=true
+      // }else {
+      //   this.hTips=false;
+      // }
+    })
+  }
+
+  /**
+   * 监听商圈id——code（转换）
+   */
+  intentionTrade(event){
+    console.log('商圈',event);
+    for(var i in this.tradingArea){
+      if(this.tradingArea[i].id == event){
+        // this.params.intentionTradeCode = this.tradingArea[i].code;
+      }
+    }
+
+  }
+  /**
+   * 列表搜索
+   */
+  search(){
+    this.pageData = null;
+    console.log('搜索',this.params);
+    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+      //关闭搜索框子
+      this.show = false;
+      this.houseType = false;
+      this.more = false;
+      this.pop = false;
+      // this.housingEstate = false;
+    });
   }
   //menu
   showMenu1(){
@@ -70,4 +147,12 @@ export class ChoosehousePage {
   gopublicpasger(){
     this.navCtrl.push(PublicpassengerPage)
   }
+}
+
+/**
+ * 公客搜索条件类
+ */
+class  PublicCustomerPageParams {
+  customerSrc?:string;
+  orderBy?:string;
 }

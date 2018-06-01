@@ -12,6 +12,13 @@ export class CustomerProvider {
   private  pageListPath = this.configProvider.set().http+'/customer/customerInfo/pageList';
   private  areaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/4.do';
   private  tradingAreaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/5.do';
+  private  customerSrcInfoPath = this.configProvider.set().http+'/customer/customerInfo/customerSrcInfo';
+  private  agentListPath = this.configProvider.set().http+'/customer/customerInfo/agentList';
+  private customeroGrageInfoPath = this.configProvider.set().http+'/customer/customerInfo/customeroGradeInfo';
+  private  addPath = this.configProvider.set().http+'/customer/customerInfo/insert';
+  private  detailPath = this.configProvider.set().http+'/customer/customerInfo/DateilView.do';
+  private  updateDetailPath = this.configProvider.set().http+'/customer/customerInfo/update';
+
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello CustomerProvider Provider');
   }
@@ -45,6 +52,31 @@ export class CustomerProvider {
     };
     return this.httpProvider.httpPost(this.pageListPath,data)
   }
+ //客户来源
+  customerSrcInfo(){
+     return this.httpProvider.httpGet(this.customerSrcInfoPath);
+  }
+ //客户归属
+  agentList(){
+    return this.httpProvider.httpGet(this.agentListPath);
+  }
+  //客户等级
+  customeroGrageInfo(){
+    return this.httpProvider.httpGet(this.customeroGrageInfoPath);
+  }
+  //录入客户
+  add(params){
+     return this.httpProvider.httpPostForm(this.addPath,params);
+  }
+  //根据ID获取客户详情
+  getDetail(id){
+     return this.httpProvider.httpPost(this.detailPath+'&id='+id);
+  }
+  //编辑客户
+  update(params){
+    return this.httpProvider.httpPostForm(this.updateDetailPath,params);
+  }
+
 
 
 }

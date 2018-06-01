@@ -18,6 +18,10 @@ export class HttpProvider {
     .set('token',this.localStorageProvider.get('ticket'))
     .set('Access-Control-Allow-Origin','*');
 
+  public headersForm = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    .set('token',this.localStorageProvider.get('ticket'))
+    .set('Access-Control-Allow-Origin','*');
+
   public httpGet(url,params?):Promise<any>{
     return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
       return res as any;
@@ -29,5 +33,12 @@ export class HttpProvider {
       return res as any;
     })
   }
+  //formData表单
+  public httpPostForm(url,params?):Promise<any>{
+    return this.http.post(url,params,{headers:this.headersForm}).toPromise().then(res=>{
+      return res as any;
+    })
+  }
+
 
 }
