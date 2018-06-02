@@ -8,6 +8,8 @@
 </ion-header>
 
 
+
+
 <ion-content>
 
   <form [formGroup]="form" >
@@ -139,20 +141,50 @@
         </ion-input>
       </ion-item>
     </ion-list>
-    <ion-list (click)="presentActionSheet()" class="m10">
-      <button ion-item class="pl12">
-        更多
-        <font color="#aaa" class="changes">请选择</font>
+    <ion-list (click)="clickIntention()">
+      <button ion-item class="pl12" *ngIf="right">
+        <font>更多</font>
       </button>
+      <ion-item class="pl12" *ngIf="down" >
+        <font>更多</font>
+        <i class="iconfont icon-xia"></i>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="showIntention">
+      <ion-item class="pl12">
+        <ion-label>建筑类型</ion-label>
+        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option>未知</ion-option>
+          <ion-option>塔楼</ion-option>
+          <ion-option>板楼</ion-option>
+          <ion-option>板塔结合</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>楼户比例</ion-label>
+          <ion-select  okText="确定" cancelText="关闭" [placeholder]="'请选择梯'">
+            <ion-option value="0">1</ion-option>
+          </ion-select>
+          <ion-select  okText="确定" cancelText="关闭" [placeholder]="'请选择户'">
+            <ion-option value="1">2</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>配备电梯</ion-label>
+        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="nes">有</ion-option>
+          <ion-option value="n64">无</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-list>
 
-    <ion-item class="pl12">
+    <ion-item class="pl12 m10">
       <ion-label>房源标签</ion-label>
       <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'">
         <ion-option value="{{i+1}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
       </ion-select>
     </ion-item>
-    <ion-list (click)="presentActionSheet()" class="m10">
+    <ion-list (click)="godesc()" class="m10">
       <button ion-item class="pl12">
         房源描述
       </button>
@@ -359,4 +391,8 @@
   </form> -->
 
 </ion-content>
+
+
+
+
 

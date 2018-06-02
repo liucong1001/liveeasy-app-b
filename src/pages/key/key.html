@@ -18,7 +18,7 @@
         </ion-input>
       </ion-item>
       <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
-        <span>委托书图片</span>
+        <span>钥匙委托协议</span>
         <div class="bgWrapper m10" *ngIf="!path"></div>
         <div *ngIf="path">
           <img [src]="path" formControlName="keyDlgtFilePics"/>
@@ -27,7 +27,8 @@
     </ion-list>
     <ion-grid>
       <ion-row>
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="goYc()">提交</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="goYc()"  *ngIf="sub">提交</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="updateYc()" *ngIf="update">修改业主委托书</button>
       </ion-row>
     </ion-grid>
   </form>

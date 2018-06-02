@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic
 import {PropertyProvider} from "../../providers/property/property";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import {HousedetailPage} from "../housedetail/housedetail";
 /**
  * Generated class for the KeyPage page.
  *
@@ -18,22 +19,33 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 export class KeyPage {
   propertyid:any;
   attorneys:any;
+  sub=true;
+  update=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,
               private fb:FormBuilder,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
-  }
+    this.propertyid= navParams.get('propertyid');
+    console.log(this.propertyid)
+    this.propertyProvider.keydetail(this.propertyid).then(res => {
+      console.log(res);
+      if(res.data != undefined){
+        this.form.patchValue({
+          keySn: res.data.keySn,
+          keyAddress: res.data.keyAddress,
+          keyDlgtFilePics: res.data.keyDlgtFilePics,
+        });
+        this.update=true;
+        this.sub=false;
+      }else {
 
+      }
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad KeyPage');
     this.attorneys=new Date().getTime();
-    this.propertyid=this.localStorageProvider.get('propertyid');
-    this.propertyProvider.keydetail({}).then(res => {
-      console.log(res);
-
-    });
   }
-
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: '更多',
@@ -66,9 +78,8 @@ export class KeyPage {
     keyAddress:['',Validators.required],//起始时间
     keyDlgtFilePics:[''],//结束时间
   });
-
+//上传钥匙信息
   goYc(){
-    this.propertyid=this.localStorageProvider.get('propertyid');
     this.propertyProvider.key({
       loginFlag:1,
       status:1,
@@ -79,9 +90,23 @@ export class KeyPage {
       keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
-      // alert('跟进成功！')
-      // this.navCtrl.push(HousingPage)
+      this.navCtrl.push(HousedetailPage)
     });
     console.log(this.form.value);
   }
+  //修改钥匙信息
+  updateYc(){
+    this.propertyProvider.updates({
+      loginFlag:1,
+      propertyId:this.propertyid,
+      createTime:this.attorneys,
+      keySn:this.form.value.keySn,
+      keyAddress:this.form.value.keyAddress,
+      keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
+    }).then(res => {
+      console.log(res);
+      this.navCtrl.push(HousedetailPage)
+    });
+  }
+
 }

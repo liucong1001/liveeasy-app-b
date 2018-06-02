@@ -14,6 +14,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {HousingPage} from "../housing/housing";
 import {FollowPage} from "../follow/follow";
 import {KeyPage} from "../key/key";
+import {DescPage} from "../desc/desc";
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -31,7 +32,10 @@ export class HousedetailPage {
   showInfos=true;
   follow=false;
   data:PropertyModel;
-
+  //更多
+  showIntention=false;
+  right=true;
+  down=false;
   //编辑房源
   propertyid:any;
   buildingNo:any; //栋号
@@ -169,7 +173,9 @@ export class HousedetailPage {
     this.navCtrl.push(SearchhousePage)
   }
   letterOfAttorney(){
-    this.navCtrl.push(LetteratorneyPage)
+    this.navCtrl.push(LetteratorneyPage,{
+      propertyid:this.propertyid,
+    })
   }
 
   /**
@@ -209,6 +215,25 @@ export class HousedetailPage {
 
   //钥匙
   goKey(){
-    this.navCtrl.push(KeyPage)
+    this.navCtrl.push(KeyPage,{
+      propertyid:this.propertyid,
+    })
+  }
+
+  //更多
+  clickIntention(){
+    if(this.showIntention==false ){
+      this.showIntention=true;
+      this.right=false;
+      this.down=true;
+    }else{
+      this.showIntention=false;
+      this.right=true;
+      this.down=false;
+    }
+  }
+  //房源描述
+  godesc(){
+    this.navCtrl.push(DescPage)
   }
 }

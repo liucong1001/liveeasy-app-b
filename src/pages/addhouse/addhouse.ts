@@ -6,6 +6,7 @@ import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../searchhouse/searchhouse";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {HousingPage} from "../housing/housing";
+import {DescPage} from "../desc/desc";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -22,6 +23,10 @@ export class AddhousePage {
   estateList:[any];
   classFlag = true;
   houLabel:any;
+  //更多
+  showIntention=false;
+  right=true;
+  down=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider) {
@@ -172,5 +177,22 @@ export class AddhousePage {
 // 动态控制样式
   changeClass() {
     this.classFlag = !this.classFlag;
+  }
+
+  //更多
+  clickIntention(){
+    if(this.showIntention==false ){
+      this.showIntention=true;
+      this.right=false;
+      this.down=true;
+    }else{
+      this.showIntention=false;
+      this.right=true;
+      this.down=false;
+    }
+  }
+  //房源描述
+  godesc(){
+    this.navCtrl.push(DescPage)
   }
 }

@@ -86,6 +86,7 @@ import { CustomerProvider } from '../providers/customer/customer';
 import {AreaPipe} from "../pipes/area/area";
 import {KeyPage} from "../pages/key/key";
 import { PublicCustomerProvider } from '../providers/public-customer/public-customer';
+import {DescPage} from "../pages/desc/desc";
 // import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
@@ -137,7 +138,8 @@ import { PublicCustomerProvider } from '../providers/public-customer/public-cust
       StringJsonPipe,
       ToParseIntPipe,
        AreaPipe,
-    KeyPage
+    KeyPage,
+    DescPage
   ],
   entryComponents: [
     MyApp,
@@ -183,7 +185,8 @@ import { PublicCustomerProvider } from '../providers/public-customer/public-cust
     SearchhousePage,
     LookhousePage,
     LetteratorneyPage,
-    KeyPage
+    KeyPage,
+    DescPage
   ],
     imports: [
         BrowserModule,
