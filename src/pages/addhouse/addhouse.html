@@ -20,10 +20,10 @@
       <ion-item class="pl12">
         <ion-label>栋号</ion-label>
         <ion-select okText="确定"  cancelText="关闭"  [placeholder]="'请选择'"  formControlName="buildingNo">
-          <ion-option [value]="1">1栋</ion-option>
-          <ion-option [value]="2">2栋</ion-option>
-          <ion-option [value]="3">3栋</ion-option>
-          <ion-option [value]="4">4栋</ion-option>
+          <ion-option value="1">1栋</ion-option>
+          <ion-option value="2">2栋</ion-option>
+          <ion-option value="3">3栋</ion-option>
+          <ion-option value="4">4栋</ion-option>
         </ion-select>
       </ion-item>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"  ></valid-error>
@@ -100,10 +100,10 @@
       <ion-item class="pl12">
         <ion-label>装修</ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration">
-          <ion-option [value]="1">毛坯</ion-option>
-          <ion-option [value]="2">清水</ion-option>
-          <ion-option [value]="3">精装</ion-option>
-          <ion-option [value]="4">豪装</ion-option>
+          <ion-option value="1">毛坯</ion-option>
+          <ion-option value="2">清水</ion-option>
+          <ion-option value="3">精装</ion-option>
+          <ion-option value="4">豪装</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>

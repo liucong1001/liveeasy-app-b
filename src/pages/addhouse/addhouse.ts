@@ -5,6 +5,7 @@ import {ErrorMessage} from '../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../searchhouse/searchhouse";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
+import {HousingPage} from "../housing/housing";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -28,16 +29,17 @@ export class AddhousePage {
         this.addhouseProvider.estateListSelect().then(res=>{
            this.estateList = res.data.result;
         });
-        //房源标签
+
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res=>{
-      console.log(res)
+      console.log(res);
       this.houLabel=res.data;
       this.localStorageProvider.set('labels',res.data);
     })
   }
 
   form:FormGroup =this.fb.group({
+      adminDivisionCode:[''],//楼盘相对应区域
       estate:['',Validators.required],//楼盘
       estateName:[''],
       estateId:[''],
@@ -68,7 +70,17 @@ export class AddhousePage {
      contactInfo:[],
      contactInfo2:[],
      sex:[],
-      tags:[''],//房源标签
+      tags:['0'],//房源标签
+     infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
+     buildingType:['0'],
+     buzzOwnerType:['0'],//交易权属
+     buzzType:['0'],
+    hasElevator:['0'],
+    positionInBuilding:['2'],
+    propertyLife:['1'],
+    propertyMortgage:['0'],
+    propertyPriceUnit:['1'],
+    propertyType:['1'],
 
   });
  //表单验证消息
@@ -123,8 +135,7 @@ export class AddhousePage {
   }
 
   estateChange(Value){
-
-      // this.form.setValue({estateName:Value.estateName});
+    this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
     this.form.controls['estateName'].setValue(Value.estateName);
     this.form.controls['estateId'].setValue(Value.estateId);
       console.log('表单',this.form.value);
@@ -139,6 +150,9 @@ export class AddhousePage {
      this.form.value.contacts.push(this.form.value.contacts[0]);
      var tel=  this.form.value.contactInfo2;
      this.form.value.contacts[1].contactInfo  = tel;
+     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+
+
 
     if(this.form.invalid){
       return false;
@@ -146,7 +160,13 @@ export class AddhousePage {
 
     console.log('房源录入表单',this.form.value);
     this.addhouseProvider.save(this.form.value).then(res=>{
-      alert('录入成功！');
+      if(res.success){
+        alert('录入成功！');
+        this.navCtrl.push(HousingPage);
+      }
+
+    },err=>{
+      alert('录入失败');
     })
   }
 // 动态控制样式

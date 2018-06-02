@@ -125,18 +125,18 @@
         <div class="leftChange">
           <a *ngFor=" let item of area" (click)="go(item)">{{item.name}}</a>
         </div>
-        <ion-row>
-          <ion-col col-6>
-            <div class="p5 p0">
-              <button ion-button full color="light" (click)="reset()">重置</button>
-            </div>
-          </ion-col>
-          <ion-col col-6>
-            <div class="p5 ">
-              <button ion-button full color="danger" (click)="search()" >确定</button>
-            </div>
-          </ion-col>
-        </ion-row>
+        <!--<ion-row>-->
+          <!--<ion-col col-6>-->
+            <!--<div class="p5 p0">-->
+              <!--<button ion-button full color="light" (click)="reset()">重置</button>-->
+            <!--</div>-->
+          <!--</ion-col>-->
+          <!--<ion-col col-6>-->
+            <!--<div class="p5 ">-->
+              <!--<button ion-button full color="danger" (click)="search()" >确定</button>-->
+            <!--</div>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
       </ion-col>
     </ion-row>
 
@@ -146,23 +146,23 @@
         <div class="leftChange">
           <a *ngFor=" let item of area" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">{{item.name}}</a>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="light">重置</button>
-        </div>
+        <!--<div class="p5 ">-->
+          <!--<button ion-button full color="light">重置</button>-->
+        <!--</div>-->
       </ion-col>
       <ion-col col-6 class="p0">
         <div class="leftChange updateBg">
           <ion-list radio-group [(ngModel)]="params.area">
-            <ion-item *ngFor=" let items of district;let i = index" >
-              <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.id}}"></ion-radio>
-            </ion-item>
+              <ion-item *ngFor=" let items of district;let i = index" >
+                <ion-label>{{items.name}}</ion-label>
+                <ion-radio value="{{items.id}}" (ionSelect)="search()"></ion-radio>
+              </ion-item>
           </ion-list>
           <div *ngIf="hTips">暂无该地区！</div>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="danger" (click)="search()">确定</button>
-        </div>
+        <!--<div class="p5 ">-->
+          <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
+        <!--</div>-->
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -173,36 +173,36 @@
     <ion-list radio-group [(ngModel)]="params.bedroomType" class="scrollC">
       <ion-item>
         <ion-label>不限</ion-label>
-        <ion-radio value="0"></ion-radio>
+        <ion-radio value="0" (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>一室</ion-label>
-        <ion-radio value="1" checked></ion-radio>
+        <ion-radio value="1" checked (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>两室</ion-label>
-        <ion-radio value="2"></ion-radio>
+        <ion-radio value="2" (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>三室</ion-label>
-        <ion-radio value="3"></ion-radio>
+        <ion-radio value="3" (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>四室</ion-label>
-        <ion-radio value="4"></ion-radio>
+        <ion-radio value="4" (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>五室</ion-label>
-        <ion-radio value="5"></ion-radio>
+        <ion-radio value="5" (ionSelect)="search()"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>五室以上</ion-label>
-        <ion-radio value="6"></ion-radio>
+        <ion-radio value="6" (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="btns">
-      <button ion-button full color="danger" (click)="search()">确定</button>
-    </div>
+    <!--<div class="btns">-->
+      <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
+    <!--</div>-->
   </div>
 
   <!-- 小区 -->
@@ -210,29 +210,29 @@
     <ion-list radio-group [(ngModel)]="params.estateId" class="scrollC">
       <ion-item *ngFor="let e of estateList">
         <ion-label>{{e.estateName}}</ion-label>
-        <ion-radio value="{{e.estateId}}"></ion-radio>
+        <ion-radio value="{{e.estateId}}" (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="btns">
-      <button ion-button full color="danger" (click)="search()">确定</button>
-    </div>
+    <!--<div class="btns">-->
+      <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
+    <!--</div>-->
   </div>
   <!-- 更多 -->
   <div class="lists houseType" *ngIf="more">
     <ion-list radio-group [(ngModel)]="params.param" class="scrollC">
       <ion-item>
         <ion-label>只看我的房源</ion-label>
-        <ion-radio  value="6"></ion-radio>
+        <ion-radio  value="6" (ionSelect)="search()"></ion-radio>
       </ion-item>
 
       <ion-item>
         <ion-label>待处理申请关闭</ion-label>
-        <ion-radio value="1"></ion-radio>
+        <ion-radio value="1" (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="p15 btns">
-      <button ion-button full color="danger" (click)="search()">确定</button>
-    </div>
+    <!--<div class="p15 btns">-->
+      <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
+    <!--</div>-->
   </div>
 
 </div>

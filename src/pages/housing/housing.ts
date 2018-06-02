@@ -85,6 +85,10 @@ export class HousingPage {
     return this.selected === item;
   };
 
+  search1(data){
+    console.log('点击',data);
+  }
+
   //搜索房源——区域——商圈
   go(item) {
     this.selected = item;
@@ -266,22 +270,21 @@ export class HousingPage {
       infiniteScroll.complete();
       this.currentPage++;
       console.log('加载完成后，关闭刷新', this.currentPage);
-      // for (let i = 0; i < 30; i++) {
-      // this.items.push( this.items.length );
-      this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-        for (let i = 0; i < res.data.result.length; i++) {
-          this.pageData.push(res.data.result[i]);
-        }
-        // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
-      });
-      // }
 
       if (this.currentPage >= this.totalPages) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
         alert("已加载所有");
+       }else {
+        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+          for (let i = 0; i < res.data.result.length; i++) {
+            this.pageData.push(res.data.result[i]);
+          }
+          // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
+        });
       }
+
       console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
