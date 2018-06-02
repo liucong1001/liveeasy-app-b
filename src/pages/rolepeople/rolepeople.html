@@ -11,42 +11,28 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-list *ngIf="this.person == undefined">
+dfdfd
+  </ion-list>
   <ion-list>
-    <ion-item class="updateHegiht">
+    <ion-item class="updateHegiht" *ngFor="let item of person">
       <ion-row  >
         <ion-col col-5>
           首次录入人
         </ion-col>
         <ion-col col-7 class="tr">
-          大概多
+          {{item.initRealtorName}}
         </ion-col>
       </ion-row>
       <ion-row class="m5">
-          <ion-col col-5>
-            首次录入时间
-          </ion-col>
-          <ion-col col-7 class="tr">
-            2017-08-18 12：25：74
-          </ion-col>
-        </ion-row>
+        <ion-col col-5>
+          首次录入时间
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{item.createdTime | date:'yyyy年MM月dd日'}}
+        </ion-col>
+      </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht">
-        <ion-row  >
-          <ion-col col-5>
-            首次录入人
-          </ion-col>
-          <ion-col col-7 class="tr">
-            大概多
-          </ion-col>
-        </ion-row>
-        <ion-row class="m5">
-            <ion-col col-5>
-              首次录入时间
-            </ion-col>
-            <ion-col col-7 class="tr">
-              2017-08-18 12：25：74
-            </ion-col>
-          </ion-row>
-      </ion-item>
+
   </ion-list>
 </ion-content>

@@ -12,6 +12,8 @@ import {PropertyModel} from "../../model/property/property.model";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {PropertyProvider} from "../../providers/property/property";
 import {HousingPage} from "../housing/housing";
+import {FollowPage} from "../follow/follow";
+import {KeyPage} from "../key/key";
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -41,7 +43,8 @@ export class HousedetailPage {
   propertyPrice:any; //价格
   orientation:any; //朝向
   decoration:any; //装修
-
+//房源标签
+  houLabel:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.data = navParams.get('item');
@@ -64,9 +67,11 @@ export class HousedetailPage {
     console.log('参数', this.data, '东浩', this.data.buildingNo);
     console.log(this.data.propertyId);
     this.propertyid=this.data.propertyId;
-    this.localStorageProvider.set('propertyid',this.data.propertyId)
+    this.localStorageProvider.set('propertyid',this.data.propertyId);
+    //获取房源标签
+    this.houLabel=this.localStorageProvider.get('labels');
+    console.log(this.houLabel)
   }
-public  id:any;
 
 
   ionViewDidLoad() {
@@ -193,5 +198,17 @@ public  id:any;
 
     })
   }
+  //跟进
+  goFollow(){
+    this.navCtrl.push(FollowPage,{
+      propertyid: this.data.propertyId,
+      estatename: this.data.estateName,
+      convid: this.data.convId,
+    })
+  }
 
+  //钥匙
+  goKey(){
+    this.navCtrl.push(KeyPage)
+  }
 }

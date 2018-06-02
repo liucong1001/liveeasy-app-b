@@ -84,6 +84,7 @@ import {RecordProvider} from "../providers/record/record";
 import {ConfigProvider} from "../providers/config/config";
 import { CustomerProvider } from '../providers/customer/customer';
 import {AreaPipe} from "../pipes/area/area";
+import {KeyPage} from "../pages/key/key";
 import { PublicCustomerProvider } from '../providers/public-customer/public-customer';
 // import { ImagePicker } from '@ionic-native/image-picker';
 
@@ -136,7 +137,7 @@ import { PublicCustomerProvider } from '../providers/public-customer/public-cust
       StringJsonPipe,
       ToParseIntPipe,
        AreaPipe,
-
+    KeyPage
   ],
   entryComponents: [
     MyApp,
@@ -181,7 +182,8 @@ import { PublicCustomerProvider } from '../providers/public-customer/public-cust
       VerifyphonePage,
     SearchhousePage,
     LookhousePage,
-    LetteratorneyPage
+    LetteratorneyPage,
+    KeyPage
   ],
     imports: [
         BrowserModule,

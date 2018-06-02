@@ -173,10 +173,10 @@ a{
  } */
 
 /* header public */
-.toolbar-background-ios,.toolbar-background-md {
+.toolbar-background-ios{
     background: #DB2924;
 }
-.toolbar-title-ios ,.toolbar-title-md,.bar-button-default-md{
+.toolbar-title-ios {
     color: #fff;
 }
 

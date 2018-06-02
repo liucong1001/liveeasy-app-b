@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>钥匙</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>钥匙编号</ion-label>
+        <ion-input type="text"  class="p0" formControlName="keySn">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12 hdRightInfo1">
+        <ion-label>钥匙存储地址</ion-label>
+        <ion-input type="text"  class="p0" formControlName="keyAddress">
+        </ion-input>
+      </ion-item>
+      <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+        <span>委托书图片</span>
+        <div class="bgWrapper m10" *ngIf="!path"></div>
+        <div *ngIf="path">
+          <img [src]="path" formControlName="keyDlgtFilePics"/>
+        </div>
+      </div>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="goYc()">提交</button>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

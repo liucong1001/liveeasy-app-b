@@ -13,8 +13,13 @@ export class PropertyProvider {
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
+  private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
+  private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do'
+  //业主委托
+  private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do'
   bedRType:any;
   districtId:any;
+  propertyid:any;
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,) {
     console.log('Hello PropertyProvider Provider');
   }
@@ -68,5 +73,19 @@ export class PropertyProvider {
   updates(params?) {
     // var data = {};
     return this.httpProvider.httpPost(this.updatePath,params)
+  }
+  //业主委托书
+  attorney(params?) {
+    return this.httpProvider.httpPost(this.attorneyPath,params)
+  }
+  //钥匙
+  key(params?) {
+    return this.httpProvider.httpPost(this.keyPath,params)
+  }
+  //钥匙想详情
+  keydetail(params?) {
+    this.propertyid=this.localStorageProvider.get('propertyid');
+    var data = {"propertyId":this.propertyid};
+    return this.httpProvider.httpPost(this.keydetailPath,data)
   }
 }

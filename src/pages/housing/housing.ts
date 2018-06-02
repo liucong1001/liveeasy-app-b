@@ -72,6 +72,7 @@ export class HousingPage {
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsList = res.data;
       console.log('房源列表', this.tagsList);
+
     });
 
     //楼盘列表
@@ -120,6 +121,8 @@ export class HousingPage {
      console.log('搜索',this.params);
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
        this.pageData = res.data.result;
+       console.log(this.pageData)
+       this.localStorageProvider.set('result',this.pageData);
        this.totalPages = res.data.totalPages;
         //关闭搜索框子
        this.show = false;

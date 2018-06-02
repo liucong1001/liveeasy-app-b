@@ -127,12 +127,13 @@ export class ChoosehousePage {
   }
 
   showMenu3(){
-    if(this.show == true || this.more == true){
+    if(this.more == false || this.show == true || this.houseType==true){
       this.show=false;
       this.pop=true;
-      this.more = false;
+      this.more = true;
       this.houseType = false;
     }else{
+      this.more=false;
       this.pop=false;
     }
   }

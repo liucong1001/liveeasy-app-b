@@ -145,30 +145,16 @@
         <font color="#aaa" class="changes">请选择</font>
       </button>
     </ion-list>
-    <!--<ion-row class="bgWhite houseTips">-->
-      <!--<ion-col col-4 class="pl12">-->
-        <!--房源标签-->
-      <!--</ion-col>-->
-      <!--<ion-col col-8>-->
-        <!--<a [ngClass]="{'red': !classFlag}" (click)="changeClass()">ddd</a>-->
-        <!--<a>ddd</a>-->
-        <!--<a>ddd</a>-->
-        <!--<a>ddd</a>-->
-        <!--<a>ddd</a>-->
-        <!--<a>ddd</a>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
+
     <ion-item class="pl12">
       <ion-label>房源标签</ion-label>
-      <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation">
-        <ion-option value="1">sd</ion-option>
-        <ion-option value="2">sds</ion-option>
-        <ion-option value="3">sdsd</ion-option>
+      <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'">
+        <ion-option value="{{i+1}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-list (click)="presentActionSheet()" class="m10">
       <button ion-item class="pl12">
-        房源标签
+        房源描述
       </button>
     </ion-list>
     <ion-list class="m10">
@@ -180,7 +166,7 @@
         业主委托书
         <font color="#aaa" class="changes">有</font>
       </button>
-      <button ion-item class="pl12" (click)="presentActionSheet()">
+      <button ion-item class="pl12" (click)="goKey()">
         钥匙
         <font color="#aaa" class="changes">有</font>
       </button>
@@ -193,7 +179,7 @@
       <ion-row>
         <ion-col col-6>
           <button ion-button full color="danger" *ngIf="showInfos" (click)="showInfo()" class="radius">调取敏感信息</button>
-          <button ion-button full color="danger" *ngIf="follow" class="radius">跟进</button>
+          <button ion-button full color="danger" *ngIf="follow" class="radius" (click)="goFollow()">跟进</button>
         </ion-col>
         <ion-col col-6>
           <button ion-button class="redact" color="light" (click)="save()">确认修改</button>

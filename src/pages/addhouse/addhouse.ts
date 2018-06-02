@@ -4,6 +4,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../searchhouse/searchhouse";
+import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 /**
  * Generated class for the AddhousePage page.
  *
@@ -19,16 +20,21 @@ import {SearchhousePage} from "../searchhouse/searchhouse";
 export class AddhousePage {
   estateList:[any];
   classFlag = true;
+  houLabel:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,private addhouseProvider:AddhouseProvider) {
+              private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
+              public localStorageProvider:LocalStorageProvider) {
        //楼盘列表
         this.addhouseProvider.estateListSelect().then(res=>{
            this.estateList = res.data.result;
         });
         //房源标签
-       this.addhouseProvider.estateTagsSelect().then(res=>{
-
-       })
+    //房源标签
+    this.addhouseProvider.estateTagsSelect().then(res=>{
+      console.log(res)
+      this.houLabel=res.data;
+      this.localStorageProvider.set('labels',res.data);
+    })
   }
 
   form:FormGroup =this.fb.group({

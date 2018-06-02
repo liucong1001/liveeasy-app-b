@@ -1,8 +1,8 @@
 .p15{
   padding:0 5px 15px;
 }
-.item-blockUpdate{
-  min-height:3.9rem;
+.popLocation{
+  top: 91px;position: relative
 }
 .adds {
     color: #fff;
@@ -85,17 +85,20 @@ page-housing .tips a:nth-child(6) {
     left: 0;
     width: 100%;
     background: #fff;
-    z-index: 99; // color: #000
-    height: 68%;
+    z-index: 9999; // color: #000
+    height: 62%;
     margin-top: -1px
 }
 
 .leftChange {
-    height: 82%;
+    height: 78%;
     overflow: scroll; // background: #aaa;
     border-bottom: 1px solid #F4F4F4;
 }
-
+.scrollC{
+  overflow: scroll;
+  height: 80%;
+}
 .leftChange a
     {
     border-bottom: 1px solid #F5F5F5;
@@ -128,14 +131,14 @@ page-housing .tips a:nth-child(6) {
     opacity: .3;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    z-index:1;
+    z-index:100;
 }
 .houseType{
     padding: 0 25px;
 }
 
 .btns{
-    padding: 0 5px;
+    margin-bottom: 10px;
     position: absolute;
     bottom: 0;
     width: 84%;

@@ -9,7 +9,6 @@
 
   <ion-content>
     <ion-grid class="p0" style="position: relative;">
-      <div style="position: relative;">
         <ion-row class="houseMenu">
           <ion-col col-4 class="tc" (click)="showMenu1()">
             全部公客
@@ -24,89 +23,6 @@
             <ion-icon name="md-arrow-dropdown"></ion-icon>
           </ion-col>
         </ion-row>
-
-        <!-- 区域 -->
-        <ion-grid class="lists p0" *ngIf="show">
-          <ion-row>
-            <ion-col col-6 class="p0">
-              <div class="leftChange">
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-                <a>不限</a>
-                <a>武昌区</a>
-                <a>不限</a>
-              </div>
-              <div class="p5 ">
-                <button ion-button full color="light">重置</button>
-              </div>
-            </ion-col>
-            <ion-col col-6 class="p0">
-              <div class="leftChange updateBg">
-                <ion-list radio-group>
-                  <ion-item>
-                    <ion-label>不限</ion-label>
-                    <ion-radio checked="true" value="go"></ion-radio>
-                  </ion-item>
-
-                  <ion-item>
-                    <ion-label>武昌区</ion-label>
-                    <ion-radio value="rust"></ion-radio>
-                  </ion-item>
-                </ion-list>
-              </div>
-              <div class="p5 ">
-                <button ion-button full color="danger">确定</button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <!-- 户型 -->
-        <div class="lists houseType" *ngIf="houseType">
-          <ion-list radio-group>
-            <ion-item>
-              <ion-label>不限</ion-label>
-              <ion-radio checked="true" value="go"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>一室</ion-label>
-              <ion-radio value="rust"></ion-radio>
-            </ion-item>
-          </ion-list>
-          <div class="p5 btns">
-            <button ion-button full color="danger">确定</button>
-          </div>
-        </div>
-
-
-        <!-- 跟进 -->
-        <div class="lists houseType" *ngIf="more">
-          <ion-list radio-group>
-            <ion-item>
-              <ion-label>只看我的房源</ion-label>
-              <ion-radio checked="true" value="go"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>待处理申请关闭</ion-label>
-              <ion-radio value="rust"></ion-radio>
-            </ion-item>
-          </ion-list>
-          <div class="p5 btns">
-            <button ion-button full color="danger">确定</button>
-          </div>
-        </div>
-      </div>
-
-
 
       <ion-row class="bgWhite houseMain">
         <ion-col col-12 (click)="gopDetail()">
@@ -163,5 +79,86 @@
             </ion-col>
       </ion-row>
     </ion-grid>
-    <div class="pop" *ngIf="pop" (click)="pops()"></div>
+
   </ion-content>
+<div class="popLocation">
+  <!-- 区域 -->
+  <ion-grid class="lists p0" *ngIf="show">
+    <ion-row>
+      <ion-col col-6 class="p0">
+        <div class="leftChange">
+          <a>不限</a>
+          <a>武昌区</a>
+          <a>不限</a>
+          <a>不限</a>
+          <a>武昌区</a>
+          <a>不限</a>
+          <a>不限</a>
+          <a>武昌区</a>
+          <a>不限</a>
+          <a>不限</a>
+          <a>武昌区</a>
+          <a>不限</a>
+        </div>
+        <div class="p5 ">
+          <button ion-button full color="light">重置</button>
+        </div>
+      </ion-col>
+      <ion-col col-6 class="p0">
+        <div class="leftChange updateBg">
+          <ion-list radio-group>
+            <ion-item>
+              <ion-label>不限</ion-label>
+              <ion-radio checked="true" value="go"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>武昌区</ion-label>
+              <ion-radio value="rust"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div class="p5 ">
+          <button ion-button full color="danger">确定</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- 户型 -->
+  <div class="lists houseType" *ngIf="houseType">
+    <ion-list radio-group>
+      <ion-item>
+        <ion-label>不限</ion-label>
+        <ion-radio checked="true" value="go"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>一室</ion-label>
+        <ion-radio value="rust"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <div class="p5 btns">
+      <button ion-button full color="danger">确定</button>
+    </div>
+  </div>
+
+  <!-- 跟进 -->
+  <div class="lists houseType" *ngIf="more">
+    <ion-list radio-group>
+      <ion-item>
+        <ion-label>只看我的房源</ion-label>
+        <ion-radio checked="true" value="go"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>待处理申请关闭</ion-label>
+        <ion-radio value="rust"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <div class="p5 btns">
+      <button ion-button full color="danger">确定</button>
+    </div>
+  </div>
+
+</div>
+<div class="pop" *ngIf="pop" (click)="pops()"></div>
