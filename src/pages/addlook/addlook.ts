@@ -30,13 +30,14 @@ export class AddlookPage {
   imagePath = '';
   nowDateFile :any;
   formData:any;
+  standardAddress:any;
   fileTransfer: FileTransferObject = this.transfer.create();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider) {
     this.data = navParams.get('item');
-
+    this.standardAddress = navParams.get('standardAddress');
   }
 
   ionViewDidLoad() {

@@ -22,7 +22,10 @@
     <ion-list (click)="goserach()">
       <button ion-item class="pl12">
         选择楼盘
-        <font color="#aaa" class="changes">碧桂园生态城</font>
+        <font color="#aaa" class="changes">
+           <span >{{form.value.estateName}}</span>
+           <!--<span *ngIf="issearchEaste">{{searchEaste}}</span>-->
+        </font>
       </button>
     </ion-list>
     <ion-list>
@@ -119,25 +122,29 @@
     <ion-list class="m10">
       <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-label>业主姓名</ion-label>
-        <ion-input type="text" value="张三">
+        <ion-input type="text" placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contact"  [control]="form.get('contact')"  ></valid-error>
+
       <ion-item class="pl12">
         <ion-label>业主性别</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>男</ion-option>
-          <ion-option value="nes">男</ion-option>
-          <ion-option value="n64">女</ion-option>
+        <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
+          <ion-option value="male">男</ion-option>
+          <ion-option value="female">女</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
+      <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1</ion-label>
-        <ion-input type="text" value="1555555555">
+        <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="text" value="1555555555">
+        <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
     </ion-list>
@@ -186,8 +193,8 @@
 
     <ion-item class="pl12 m10">
       <ion-label>房源标签</ion-label>
-      <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'">
-        <ion-option value="{{i+1}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
+      <ion-select okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
+        <ion-option value="{{item.tagCode}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-list (click)="godesc()" class="m10">

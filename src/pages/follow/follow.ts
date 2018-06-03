@@ -22,6 +22,7 @@ export class FollowPage {
   estatename:any;
   followuptime:any;
   convid:any;
+  standardAddress:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,
               public  followProvider: FollowProvider,
@@ -30,8 +31,9 @@ export class FollowPage {
     this.propertyid = navParams.get('propertyid');
     this.estatename = navParams.get('estatename');
     this.convid = navParams.get('convid');
+    this.standardAddress = navParams.get('standardAddress');
     this.followuptime=new Date().getTime();
-    console.log(this.convid)
+    console.log('跟进',navParams)
 
   }
 
@@ -40,9 +42,8 @@ export class FollowPage {
 
   }
   form:FormGroup =this.fb.group({
-    followupCode:['',Validators.required], //旧密码
-    content:['',Validators.required],//新密码
-
+    followupCode:['',Validators.required], //类型
+    content:['',Validators.required],//内容
   });
 
   subFollow(){

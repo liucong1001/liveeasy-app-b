@@ -71,7 +71,23 @@ export  class PropertyModel {
   /**
    * 联系人
    */
-  contacts:object;
+  contacts:any;
+  /**
+   *姓名
+   */
+  contact:string;
+  /**
+   * 性别
+   */
+  sex:string;
+  /**
+   * 电话
+   */
+  contactInfo:string;
+  /**
+   * 电话2
+   */
+  contactInfo2:string;
 
   /**
    * 房源标签

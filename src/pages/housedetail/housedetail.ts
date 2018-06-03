@@ -15,6 +15,7 @@ import {HousingPage} from "../housing/housing";
 import {FollowPage} from "../follow/follow";
 import {KeyPage} from "../key/key";
 import {DescPage} from "../desc/desc";
+import { Events } from 'ionic-angular';
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -50,40 +51,81 @@ export class HousedetailPage {
 //房源标签
   houLabel:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
+              public events: Events) {
     this.data = navParams.get('item');
-    this.form.patchValue({
-      buildingNo: this.data.buildingNo,
-      unitNo: this.data.unitNo,
-      floorNo: this.data.floorNo,
-      houseNo: this.data.houseNo,
-      spaceSize: this.data.spaceSize,
-      innerSpaceSize: this.data.innerSpaceSize,
-      propertyPrice: this.data.propertyPrice,
-      bedrooms: this.data.bedrooms,
-      halls: this.data.halls,
-      bathrooms: this.data.bathrooms,
-      kitchens: this.data.kitchens,
-      balconies: this.data.balconies,
-      orientation: this.data.orientation,
-      decoration: this.data.decoration,
-    });
-    console.log('参数', this.data, '东浩', this.data.buildingNo);
-    console.log(this.data.propertyId);
+
+    // console.log('获取详情', this.data, '联系人',this.data.contacts,JSON.parse(this.data.contacts));
+    var jsonData = JSON.parse(this.data.contacts);
+    if( this.data){
+      this.form.patchValue({
+        buildingNo: this.data.buildingNo,
+        estateName:this.data.estateName,
+        unitNo: this.data.unitNo,
+        floorNo: this.data.floorNo,
+        houseNo: this.data.houseNo,
+        spaceSize: this.data.spaceSize,
+        innerSpaceSize: this.data.innerSpaceSize,
+        propertyPrice: this.data.propertyPrice,
+        bedrooms: this.data.bedrooms,
+        halls: this.data.halls,
+        bathrooms: this.data.bathrooms,
+        kitchens: this.data.kitchens,
+        balconies: this.data.balconies,
+        orientation: this.data.orientation,
+        decoration: this.data.decoration,
+        contact:jsonData[0].contact,
+        sex:jsonData[0].sex,
+        contactInfo:jsonData[0].contactInfo,
+        contactInfo2:jsonData.length>1?jsonData[1].contactInfo:'',
+      });
+    }
+
+    //判断存在tagsStr
+    if(this.data.tagsStr){
+      var tagsStr =  this.data.tagsStr.toString();
+      var tagsArry = tagsStr.split(',');
+       var arry = [];
+        for(var i in tagsArry){
+           arry[i] = tagsArry[i].toString().replace(/\s/g, "")
+        }
+
+      this.form.patchValue({
+        tagsStr:arry
+      })
+    }
+    // console.log('参数',this.data, this.data.tagsStr,tagsArry,'表单标签',arry,'固定',['8','16','32']);
+    // console.log(this.data.propertyId);
     this.propertyid=this.data.propertyId;
     this.localStorageProvider.set('propertyid',this.data.propertyId);
     //获取房源标签
     this.houLabel=this.localStorageProvider.get('labels');
-    console.log(this.houLabel)
+
   }
 
+
+  //房源标签处理
+  tagsSum(data){
+    var str =  data.toString();
+    var result = str.split(",");
+    var sum = 0;
+    for(var i in result){
+      sum+=parseInt(result[i])
+    }
+    return sum ;
+  };
+
+  tagsSelect(value){
+    this.form.value.tags= this.tagsSum(value);
+  };
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousedetailPage');
   }
 
   form:FormGroup =this.fb.group({
-    estate:[''],//楼盘
+    adminDivisionCode:[''],//楼盘相对应区域
+    estate:['',Validators.required],//楼盘
     estateName:[''],
     estateId:[''],
     buildingNo:['',Validators.required], //楼栋号
@@ -109,11 +151,22 @@ export class HousedetailPage {
         desc:[''],
       })
     ]),//业主信息
-    contact:[],
-    contactInfo:[],
-    contactInfo2:[],
-    sex:[],
-    tags:[''],//房源标签
+    contact:['',Validators.required],
+    contactInfo:['',[Validators.required, Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)]],
+    contactInfo2:['',Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)],
+    sex:['male',Validators.required],
+    tags:['0'],//房源标签
+     tagsStr:[],//列表
+    infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
+    buildingType:['0'],
+    buzzOwnerType:['0'],//交易权属
+    buzzType:['0'],
+    hasElevator:['0'],
+    positionInBuilding:['2'],
+    propertyLife:['1'],
+    propertyMortgage:['0'],
+    propertyPriceUnit:['1'],
+    propertyType:['1'],
 
   });
   //表单验证消息
@@ -128,8 +181,22 @@ export class HousedetailPage {
     floorNo:[
       new ErrorMessage('required','楼层必须要填写！'),
       new ErrorMessage('maxLength','楼层名称太长了'),
-    ]
+    ],
+    contact:[
+      new ErrorMessage('required','业主姓名必须要填写！'),
+    ],
+    sex:[
+      new ErrorMessage('required','业主性别必须要填写！'),
+    ],
+    contactInfo:[
+      new ErrorMessage('required','业主电话必须要填写！'),
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
+    contactInfo2:[
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
   };
+
 
 
     presentActionSheet() {
@@ -169,9 +236,30 @@ export class HousedetailPage {
     this.showInfos=false;
     this.follow=true;
   }
+
+  //楼盘搜索页面
   goserach(){
-    this.navCtrl.push(SearchhousePage)
+    this.events.subscribe('bevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      // this.form.value.estateName = params.estateName;
+      // this.form.value.estateId =  params.estateId;
+      this.estateChange(params);
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(SearchhousePage);
+  };
+  estateChange(Value){
+    this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
+    this.form.controls['estateName'].setValue(Value.estateName);
+    this.form.controls['estateId'].setValue(Value.estateId);
+    console.log('表单',this.form.value);
   }
+
+
+
+
   letterOfAttorney(){
     this.navCtrl.push(LetteratorneyPage,{
       propertyid:this.propertyid,
@@ -185,24 +273,44 @@ export class HousedetailPage {
   lookHouse(){
     this.navCtrl.push(LookhousePage,{item:this.navParams.get('item')});
   }
+
   rolepeople(){
     this.navCtrl.push(RolepeoplePage,{
       propertyid:this.propertyid,
     })
   }
+
+
   //表单提交
   save(){
-    this.propertyProvider.updates({
-      propertyId:this.propertyid,buildingNo:this.form.value.buildingNo,
-      unitNo:this.form.value.unitNo,floorNo:this.form.value.floorNo,
-      houseNo:this.form.value.houseNo,spaceSize:this.form.value.spaceSize,
-      innerSpaceSize:this.form.value.innerSpaceSize,
-      propertyPrice:this.form.value.propertyPrice,
-      orientation:this.form.value.orientation,decoration:this.form.value.decoration,
-    }).then(res=>{
-      console.log(this.form.value);
-      console.log(res);
-      this.navCtrl.push(HousingPage)
+    // tagsSum
+    this.form.patchValue({
+      tags:this.tagsSum(this.form.value.tagsStr)
+    });
+    delete this.form.value.tagsStr;
+    // this.propertyProvider.updates({
+    //   propertyId:this.propertyid,buildingNo:this.form.value.buildingNo,
+    //   unitNo:this.form.value.unitNo,floorNo:this.form.value.floorNo,
+    //   houseNo:this.form.value.houseNo,spaceSize:this.form.value.spaceSize,
+    //   innerSpaceSize:this.form.value.innerSpaceSize,
+    //   propertyPrice:this.form.value.propertyPrice,
+    //   orientation:this.form.value.orientation,decoration:this.form.value.decoration,
+    // }).then(res=>{
+    //   console.log(this.form.value);
+    //   console.log(res);
+    //   this.navCtrl.push(HousingPage);
+    // });
+
+
+
+    this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+    var formData = {
+      propertyId:this.propertyid,
+      ...this.form.value
+    };
+    this.propertyProvider.updates(formData).then(res=>{
+       alert('修改成功');
+       this.navCtrl.push(HousingPage);
     })
   }
   //跟进

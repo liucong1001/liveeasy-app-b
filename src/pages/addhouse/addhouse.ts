@@ -71,10 +71,10 @@ export class AddhousePage {
           desc:[''],
         })
       ]),//业主信息
-     contact:[],
-     contactInfo:[],
-     contactInfo2:[],
-     sex:[],
+     contact:['',Validators.required],
+     contactInfo:['',[Validators.required, Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)]],
+     contactInfo2:['',Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)],
+     sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
      buildingType:['0'],
@@ -100,7 +100,20 @@ export class AddhousePage {
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
             new ErrorMessage('maxLength','楼层名称太长了'),
-        ]
+        ],
+      contact:[
+           new ErrorMessage('required','业主姓名必须要填写！'),
+      ],
+      sex:[
+          new ErrorMessage('required','业主性别必须要填写！'),
+      ],
+      contactInfo:[
+        new ErrorMessage('required','业主电话必须要填写！'),
+        new ErrorMessage('pattern', '手机号码格式不正确！'),
+      ],
+      contactInfo2:[
+        new ErrorMessage('pattern', '手机号码格式不正确！'),
+      ],
     };
 
 
@@ -145,6 +158,19 @@ export class AddhousePage {
     this.form.controls['estateId'].setValue(Value.estateId);
       console.log('表单',this.form.value);
   }
+  //房源标签处理
+   tagsSum(data){
+    var str =  data.toString();
+    var result = str.split(",");
+    var sum = 0;
+     for(var i in result){
+         sum+=parseInt(result[i])
+     }
+     return sum ;
+   }
+  tagsSelect(value){
+    this.form.value.tags= this.tagsSum(value);
+  }
 
   save(){
     // this.form.controls['contacts'].valu
@@ -156,7 +182,6 @@ export class AddhousePage {
      var tel=  this.form.value.contactInfo2;
      this.form.value.contacts[1].contactInfo  = tel;
      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-
 
 
     if(this.form.invalid){
@@ -173,10 +198,6 @@ export class AddhousePage {
     },err=>{
       alert('录入失败');
     })
-  }
-// 动态控制样式
-  changeClass() {
-    this.classFlag = !this.classFlag;
   }
 
   //更多

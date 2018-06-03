@@ -22,6 +22,7 @@ export class ClosehousePage {
   closetime:any;
   estatename:any;
   convid:any;
+  standardAddress:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,
               public  closehouseProvider: ClosehouseProvider,
@@ -29,6 +30,7 @@ export class ClosehousePage {
     this.propertyid = navParams.get('propertyid');
     this.estatename = navParams.get('estatename');
     this.convid = navParams.get('convid');
+    this.standardAddress = navParams.get('standardAddress');
     this.closetime=new Date().getTime();
     // console.log(this.estatename)
   }

@@ -78,6 +78,7 @@ export class HousingPage {
     //楼盘列表
     this.addhouseProvider.estateListSelect().then(res=>{
       this.estateList = res.data.result;
+      console.log('楼盘列表',this.estateList);
     });
   }
   selected :any;
@@ -218,16 +219,25 @@ export class HousingPage {
     }
   }
 
+ //根据楼盘名返回楼盘地址
+  searchStandardAddress(name){
+     for(var i in  this.estateList){
+         if(name == this.estateList[i].estateName){
+            return this.estateList[i].standardAddress
+         }
+     }
+  }
   goFollow(item) {
     this.navCtrl.push(FollowPage, {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
+      standardAddress:this.searchStandardAddress(item.estateName)
     });
   }
 
   goAddLook(item) {
-    this.navCtrl.push(AddlookPage, {item: item});
+    this.navCtrl.push(AddlookPage, {item: item,standardAddress:this.searchStandardAddress(item.estateName)});
   }
 
   goCloseHouse(item) {
@@ -235,8 +245,9 @@ export class HousingPage {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
-    });
-    // this.navCtrl.push(ClosehousePage);
+      standardAddress:this.searchStandardAddress(item.estateName),
+    })
+
   }
 
   goHouseDetail(item) {

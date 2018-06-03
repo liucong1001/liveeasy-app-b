@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 import {HousingPage} from "../housing/housing";
 import {PropertyProvider} from "../../providers/property/property";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {ErrorMessage} from "../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
 /**
  * Generated class for the LetteratorneyPage page.
@@ -26,6 +27,7 @@ export class LetteratorneyPage {
   upd=false;
   delegateDocId:any;
   data:any;
+  timeCheck = false;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,
@@ -105,11 +107,25 @@ export class LetteratorneyPage {
   }
 
   form:FormGroup =this.fb.group({
-    delegateDocSn:['',Validators.required], //委托书编号
+    delegateDdocSn:['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/g)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:['',Validators.required],//结束时间
     delegateDocPics:[''],//委托书图片
   });
+
+  //表单验证消息
+  errors={
+    delegateDdocSn:[
+      new ErrorMessage('required','委托书编号必须要填写！'),
+      new ErrorMessage('pattern','只能输入数字和字母'),
+    ],
+    delegateBeginTm:[
+      new ErrorMessage('required','起始时间必须要填写！'),
+    ],
+    delegateEndTm:[
+      new ErrorMessage('required','结束时间必须要填写！'),
+    ],
+  };
 
   //上传业主委托书
   go(){
@@ -131,6 +147,23 @@ export class LetteratorneyPage {
     console.log(this.form.value);
     console.log(new Date(this.form.value.delegateBeginTm).getTime())
     console.log(new Date(this.form.value.delegateEndTm).getTime())
+  }
+
+  /**
+   * 验证时间
+   */
+  timeCompare(){
+     if(this.form.value.delegateBeginTm&&this.form.value.delegateEndTm){
+       var startTime = new Date(Date.parse(this.form.value.delegateBeginTm.replace("-","/")));
+       var endTime = new Date(Date.parse(this.form.value.delegateEndTm.replace("-","/")));
+       if(startTime>endTime){
+         console.log('开始时间必须小于结束时间');
+         this.timeCheck = true;
+       }else {
+         this.timeCheck = false;
+       }
+       console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
+     }
   }
 
   //修改业主委托书

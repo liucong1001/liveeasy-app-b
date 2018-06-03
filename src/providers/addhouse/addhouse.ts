@@ -11,7 +11,7 @@ import {ConfigProvider} from "../config/config";
 @Injectable()
 export class AddhouseProvider {
 
-  private  estateList = this.configProvider.set().http+'/property/estateInfo/pageList.do';
+  private  estateList = this.configProvider.set().http+'/customer/customerInfo/estateInfo';
   private  estateTagsInfos =this.configProvider.set().http+'/property/tagsInfo/list.do';
   private  addEatate = this.configProvider.set().http+'property/propertyInfo/insert.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
@@ -20,7 +20,7 @@ export class AddhouseProvider {
 
   // 楼盘列表
   public estateListSelect(params?){
-      return this.httpProvider.httpPost(this.estateList,params);
+      return this.httpProvider.httpPostForm(this.estateList,'currentPage=1&limit=22');
   }
   //房源标签
   public estateTagsSelect(params?){

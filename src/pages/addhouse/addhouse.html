@@ -114,6 +114,7 @@
         <ion-input type="text" placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contact"  [control]="form.get('contact')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>业主性别</ion-label>
         <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
@@ -121,11 +122,13 @@
           <ion-option value="female">女</ion-option>
         </ion-select>
       </ion-item>
+      <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1</ion-label>
         <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
         <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
@@ -179,8 +182,8 @@
     <ion-list class="m10">
       <ion-item class="pl12">
         <ion-label>房源标签</ion-label>
-        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'">
-          <ion-option value="{{i+1}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
+        <ion-select okText="确定" cancelText="关闭"  formControlName="tags" (ionChange)="tagsSelect($event)"  multiple="true" [placeholder]="'请选择'">
+          <ion-option value="{{item.tagCode}}" *ngFor="let item of houLabel;let i = index">{{item.tagDesc}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -189,7 +192,6 @@
         房源描述
       </button>
     </ion-list>
-
     <ion-grid>
       <ion-row>
         <button type="submit"  [disabled]="form.invalid" ion-button full color="danger"  class="radius">提交</button>
