@@ -11,7 +11,7 @@ import {HttpProvider} from "../http/http";
 @Injectable()
 export class ClosehouseProvider {
 
-  private  closeHouse = 'property/propertyInfo/closeProperty';
+  private  closeHouse = 'property/propertyInfo/propertyCloseProperty';
   constructor(public http: HttpClient,public httpProvider:HttpProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }

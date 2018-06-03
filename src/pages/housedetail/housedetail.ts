@@ -186,7 +186,9 @@ export class HousedetailPage {
     this.navCtrl.push(LookhousePage,{item:this.navParams.get('item')});
   }
   rolepeople(){
-    this.navCtrl.push(RolepeoplePage)
+    this.navCtrl.push(RolepeoplePage,{
+      propertyid:this.propertyid,
+    })
   }
   //表单提交
   save(){

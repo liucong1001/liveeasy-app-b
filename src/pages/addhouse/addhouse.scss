@@ -1,3 +1,31 @@
-page-addhouse {
-
+.allStyle{
+  background: #fff;
+  height: 4.4rem;
+  font-size: 1.5rem;
+}
+.allStyle ion-row{
+  border-bottom: 1px solid #F4F4F4;
+  margin-left: 12px;
+}
+.allStyle ion-row ion-col span:first-child{
+  margin:15px 0 0 0;
+  display: block;
+}
+.upI{
+  height: 40px;
+  line-height: 40px;
+  margin-left: 8px;
+}
+.upI{
+  width: 75%;
+  margin: 0;
+  border: 0;
+}
+.upPostion{
+  position: absolute;
+  height: 40px;
+  right: 10px;
+  color: #aaa;
+  top: 15px;
+  z-index: 1;
 }
