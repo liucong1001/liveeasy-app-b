@@ -203,7 +203,6 @@ export class HousedetailPage {
       console.log(this.form.value);
       console.log(res);
       this.navCtrl.push(HousingPage)
-
     })
   }
   //跟进

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 import {HousingPage} from "../housing/housing";
 import {PropertyProvider} from "../../providers/property/property";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {HousedetailPage} from "../housedetail/housedetail";
 /**
  * Generated class for the LetteratorneyPage page.
  *
@@ -19,17 +20,37 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 })
 export class LetteratorneyPage {
   path: string;
-  // delegateDdocSn:string; //委托书编号
-  // delegateBeginTm:number; //起始时间
-  // delegateEndTm:number; //结束时间
-  // delegateDocPics:any; //委托书图片
   propertyid:any;
   attorneys:any;
+  sub=true;
+  upd=false;
+  delegateDocId:any;
+  data:any;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,
               public navParams: NavParams,
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
+    this.propertyid = navParams.get('propertyid');
+    // console.log(this.propertyid);
+    //委托书详情
+    this.propertyProvider.adetail(this.propertyid).then(res => {
+      console.log('委托书详情',res);
+      this.data = res.data;
+      this.delegateDocId= res.data.delegateDocId;
+      if(res.data != undefined){
+        this.form.patchValue({
+          delegateDocSn:res.data.delegateDocSn,
+          delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
+          delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
+          delegateDocPics:res.data.delegateDocPics,
+        })
+        this.sub=false;
+        this.upd=true;
+      }else {
+        // alert(2);
+      }
+    });
   }
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -69,7 +90,7 @@ export class LetteratorneyPage {
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
       sourceType:sourceType,
-    }
+    };
 
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -84,31 +105,50 @@ export class LetteratorneyPage {
   }
 
   form:FormGroup =this.fb.group({
-    delegateDdocSn:['',Validators.required], //委托书编号
+    delegateDocSn:['',Validators.required], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:['',Validators.required],//结束时间
     delegateDocPics:[''],//委托书图片
   });
 
+  //上传业主委托书
   go(){
-    this.propertyid=this.localStorageProvider.get('propertyid');
     this.propertyProvider.attorney({
-      loginFlag:1,
+      // loginFlag:1,
       delegateStyle:1,
-      status:1,
+      // status:1,
       propertyId:this.propertyid,
       createTime:this.attorneys,
-      delegateDdocSn:this.form.value.delegateDdocSn,
+      delegateDocSn:this.form.value.delegateDocSn,
       delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
       delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
       delegateDocPics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
-      // alert('跟进成功！')
-      // this.navCtrl.push(HousingPage)
+      alert('上传成功！')
+      this.navCtrl.push(HousingPage)
     });
     console.log(this.form.value);
     console.log(new Date(this.form.value.delegateBeginTm).getTime())
     console.log(new Date(this.form.value.delegateEndTm).getTime())
+  }
+
+  //修改业主委托书
+  upYz(){
+    this.propertyProvider.aupdate({
+      delegateDocId:this.delegateDocId,
+      delegateStyle:1,
+      propertyId:this.propertyid,
+      createTime:this.attorneys,
+      delegateDocSn:this.form.value.delegateDocSn,
+      delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
+      delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
+      delegateDocPics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527845042587\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg\",\"thumbnail\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
+      delegateDocInfoEntity:this.data,
+    }).then(res => {
+      console.log(res);
+      alert('修改成功！');
+      this.navCtrl.push(HousingPage)
+    });
   }
 }

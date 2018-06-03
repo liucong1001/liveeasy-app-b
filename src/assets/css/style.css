@@ -164,6 +164,10 @@ a{
 .content-ios{
     background: #F8F8F8;
 }
+.alert-ios .alert-button:last-child,
+.picker-ios .picker-toolbar-button:last-child .picker-button{
+  font-weight: normal !important;
+}
  /* ion-footer {
      padding: 0 0 40px;
  }

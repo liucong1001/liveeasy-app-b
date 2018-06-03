@@ -15,13 +15,14 @@ export class PropertyProvider {
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
   //角色人
   private  rolePath = this.configProvider.set().http+ '/property/propertyInfo/propertyDetail';
-  private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
-  private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';
-  private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do'
   //业主委托
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
   private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
   private  adetailPath = this.configProvider.set().http+'/property/delegateDocInfo/detail.do'
+  //钥匙
+  private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
+  private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';
+  private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do'
   bedRType:any;
   districtId:any;
   propertyid:any;

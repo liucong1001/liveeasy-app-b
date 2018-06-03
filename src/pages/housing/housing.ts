@@ -126,7 +126,7 @@ export class HousingPage {
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
        this.pageData = res.data.result;
        console.log(this.pageData)
-       this.localStorageProvider.set('result',this.pageData);
+       // this.localStorageProvider.set('result',this.pageData);
        this.totalPages = res.data.totalPages;
         //关闭搜索框子
        this.show = false;

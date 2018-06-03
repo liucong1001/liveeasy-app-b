@@ -11,28 +11,118 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list *ngIf="this.person == undefined">
-dfdfd
-  </ion-list>
-  <ion-list>
-    <ion-item class="updateHegiht" *ngFor="let item of person">
-      <ion-row  >
+  <!--<ion-list *ngIf="this.person == undefined">-->
+    <!--暂无数据！-->
+  <!--</ion-list>-->
+  <ion-list *ngIf="data">
+    <ion-item class="updateHegiht" >
+      <ion-row  *ngIf="data.initRealtorName != undefined">
         <ion-col col-5>
           首次录入人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{item.initRealtorName}}
+          {{data.initRealtorName}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5">
+      <ion-row class="m5" *ngIf="data.createdTime != undefined">
         <ion-col col-5>
           首次录入时间
         </ion-col>
         <ion-col col-7 class="tr">
-          {{item.createdTime | date:'yyyy年MM月dd日'}}
+          {{data.createdTime | date:'yyyy年MM月dd日'}}
         </ion-col>
       </ion-row>
     </ion-item>
+    <ion-item class="updateHegiht" >
+      <ion-row  *ngIf="data.initRealtorName != undefined">
+        <ion-col col-5>
+          录入人
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.initRealtorName}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="m5" *ngIf="data.activiateTime != undefined">
+        <ion-col col-5>
+          激活时间
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.activiateTime | date:'yyyy年MM月dd日'}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="m5" *ngIf="data.realtorName != undefined">
+        <ion-col col-5>
+          归属人
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.realtorName}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item class="updateHegiht">
+      <ion-row *ngIf="data.picstor != undefined">
+        <ion-col col-5>
+          实勘人
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.picstor}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="m5" *ngIf="data.picstorTime != undefined">
+        <ion-col col-5>
+          实勘达成时间
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.picstorTime | date:'yyyy年MM月dd日'}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item class="updateHegiht">
+      <ion-row *ngIf="data.keyAgentName != undefined">
+        <ion-col col-5>
+          钥匙人
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.keyAgentName}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item class="updateHegiht">
+      <ion-row  *ngIf="data.updator != undefined">
+        <ion-col col-5>
+          最后修改人
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{data.updator}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="m5" *ngIf="data.updatorTime != undefined">
+        <ion-col col-5>
+          最后修改时间
+        </ion-col>
+        <ion-col col-7 class="tr">
+          {{ data.updatorTime| date:'yyyy年MM月dd日'}}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <!--<ion-item class="updateHegiht" >-->
+      <!--<ion-row  >-->
+        <!--<ion-col col-5>-->
+          <!--房源发布人-->
+        <!--</ion-col>-->
+        <!--<ion-col col-7 class="tr">-->
+         <!--fff-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+      <!--<ion-row class="m5">-->
+        <!--<ion-col col-5>-->
+          <!--发布时间-->
+        <!--</ion-col>-->
+        <!--<ion-col col-7 class="tr">-->
+          <!--gfff-->
+        <!--</ion-col>-->
+      <!--</ion-row>-->
+    <!--</ion-item>-->
 
   </ion-list>
 </ion-content>

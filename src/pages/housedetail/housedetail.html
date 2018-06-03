@@ -26,13 +26,13 @@
       </button>
     </ion-list>
     <ion-list>
-      <div class="hdRightInfo1">
+      <div class="hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-item class="pl12">
           <ion-label>栋号</ion-label>
           <ion-input type="text" class="tr" formControlName="buildingNo"></ion-input>
         </ion-item>
       </div>
-      <div class="hdRightInfo1">
+      <div class="hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-item class="pl12">
           <ion-label>单元</ion-label>
           <ion-input type="number" pattern="[0-9]*" class="tr" formControlName="unitNo"></ion-input>
@@ -48,7 +48,7 @@
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-label>房间号</ion-label>
         <ion-input type="text" placeholder="请输入房间号" formControlName="houseNo" class="p0">
         </ion-input>
@@ -117,7 +117,7 @@
       </ion-item>
     </ion-list>
     <ion-list class="m10">
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-label>业主姓名</ion-label>
         <ion-input type="text" value="张三">
         </ion-input>
@@ -130,7 +130,7 @@
           <ion-option value="n64">女</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
         <ion-label>业主电话1</ion-label>
         <ion-input type="text" value="1555555555">
         </ion-input>

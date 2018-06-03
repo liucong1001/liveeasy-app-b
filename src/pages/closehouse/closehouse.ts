@@ -34,17 +34,43 @@ export class ClosehousePage {
   }
   form:FormGroup =this.fb.group({
     propertyStatus:['',Validators.required],
-
+    invalidReason:[''],
+    closeDesc:['',Validators.required],
   });
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClosehousePage');
   }
+
   subClose(){
-    this.closehouseProvider.getClose({propertyId:this.propertyid,propertyStatus:this.form.value.propertyStatus,closeTime:this.closetime}).then(res => {
-      console.log(res);
-      //判断归属人和操作人是否一致
-      this.navCtrl.push(HousingPage)
-    });
+    if(this.form.value.propertyStatus != 7){
+      this.closehouseProvider.getClose({
+        propertyId:this.propertyid,
+        propertyStatus:this.form.value.propertyStatus,
+        closeTime:this.closetime,
+        invalidReason:this.form.value.invalidReason,
+        closeDesc:this.form.value.closeDesc
+      }).then(res => {
+        console.log(res);
+        //判断归属人和操作人是否一致
+        // this.navCtrl.push(HousingPage)
+      });
+    }else if(this.form.value.propertyStatus == 7){
+      if(this.form.value.invalidReason !=''){
+        this.closehouseProvider.getClose({
+          propertyId:this.propertyid,
+          propertyStatus:this.form.value.propertyStatus,
+          closeTime:this.closetime,
+          invalidReason:this.form.value.invalidReason,
+          closeDesc:this.form.value.closeDesc
+        }).then(res => {
+          console.log(res);
+          //判断归属人和操作人是否一致
+          // this.navCtrl.push(HousingPage)
+        });
+      }else {
+        alert('请选择无效原因')
+      }
+    }
     console.log(this.form.value)
   }
 

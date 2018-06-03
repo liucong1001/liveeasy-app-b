@@ -14,11 +14,11 @@
       </ion-item>
       <ion-item class="pl12">
           <ion-label>起始时间</ion-label>
-          <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm"></ion-datetime>
+          <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm" doneText="确定"  cancelText="取消"></ion-datetime>
         </ion-item>
         <ion-item class="pl12">
-            <ion-label>起始时间</ion-label>
-            <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateEndTm"></ion-datetime>
+            <ion-label>结束时间</ion-label>
+            <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateEndTm" doneText="确定"  cancelText="取消"></ion-datetime>
           </ion-item>
           <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
         <span>委托书图片</span>
@@ -29,54 +29,12 @@
       </div>
     </ion-list>
     <ion-grid>
-      <ion-row>
-          <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="go()">提交</button>
+      <ion-row class="p15">
+          <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="go()" *ngIf="sub">提交</button>
+        <button ion-button full color="danger" class="radius"  (click)="upYz()"  *ngIf="upd">修改业主委托书</button>
       </ion-row>
     </ion-grid>
   </form>
-
-  <!-- 有委托书 -->
-   <!--<form>-->
-      <!--<ion-list>-->
-          <!--<ion-item class="pl12 hdRightInfo1" >-->
-            <!--<ion-label>上传人</ion-label>-->
-            <!--<ion-input type="text" value="里都是实打实打算" class="p0">-->
-            <!--</ion-input>-->
-          <!--</ion-item>-->
-          <!--<ion-item class="pl12 hdRightInfo1" >-->
-              <!--<ion-label>上传时间</ion-label>-->
-              <!--<ion-input type="text" value="里都是实打实打算" class="p0">-->
-              <!--</ion-input>-->
-            <!--</ion-item>-->
-        <!--</ion-list>-->
-      <!--<ion-list class="m10">-->
-        <!--<ion-item class="pl12 hdRightInfo1" >-->
-          <!--<ion-label>委托书编号</ion-label>-->
-          <!--<ion-input type="text" value="12163" class="p0">-->
-          <!--</ion-input>-->
-        <!--</ion-item>-->
-        <!--<ion-item class="pl12">-->
-            <!--<ion-label>起始时间</ion-label>-->
-            <!--<ion-datetime displayFormat="YYYY/MM/DD"></ion-datetime>-->
-          <!--</ion-item>-->
-          <!--<ion-item class="pl12">-->
-              <!--<ion-label>截至时间</ion-label>-->
-              <!--<ion-datetime displayFormat="YYYY/MM/DD"></ion-datetime>-->
-            <!--</ion-item>-->
-            <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
-        <!--<span>委托书图片</span>-->
-        <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
-        <!--<div *ngIf="path">-->
-          <!--<img [src]="path"/>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--</ion-list>-->
-      <!--<ion-grid>-->
-        <!--<ion-row class="p10">-->
-            <!--<button ion-button full color="danger" class="radius">提交</button>-->
-        <!--</ion-row>-->
-      <!--</ion-grid>-->
-  <!--</form> -->
 
   <!-- 审核中不能修改 -->
   <!--<form>-->
