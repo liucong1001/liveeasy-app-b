@@ -101,5 +101,21 @@ export  class PropertyModel {
    * 多个房源标签组合列表
    */
   tagsStr?:any;
+  /**
+   * 建筑类型
+   */
+  buildingType:any;
+  /**
+   * 配备电梯
+   */
+  hasElevator:string;
+
+  elevators:any;
+
+  apartments:any;
+  /**
+   * 描述
+   */
+  propertyDesc:any;
 
 }

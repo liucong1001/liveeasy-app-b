@@ -46,10 +46,6 @@ export class SearchhousePage {
   }
 
   select(item){
-    // let param = item;
-    // this.callback(param).then(()=>{
-    //   this.navCtrl.pop();
-    // });
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('bevents', item);

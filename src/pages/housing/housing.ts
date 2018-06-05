@@ -57,6 +57,7 @@ export class HousingPage {
     districtCode:'',
     estateId:'',
     param:'1', //默认搜索是1,只看我的6,
+    tags:0,
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -89,9 +90,12 @@ export class HousingPage {
   search1(data){
     console.log('点击',data);
   }
-
+  searchDict = '';
+  searchArea = '';
   //搜索房源——区域——商圈
   go(item) {
+    this.searchDict = item.name;
+
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
@@ -122,6 +126,13 @@ export class HousingPage {
    * 列表搜索
    */
   search(){
+    console.log('area',this.params.area);
+    for(var i in this.district){
+       if(this.params.area ==this.district[i].estateId){
+         console.log('选择',this.district[i].estateName)
+       }
+    }
+
     this.pageData = null;
      console.log('搜索',this.params);
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
@@ -341,5 +352,6 @@ class  PropertyPageParams {
   districtCode?:string;
   estateId?:string;//小区
   param?:string;
+  tags?:any;
 }
 

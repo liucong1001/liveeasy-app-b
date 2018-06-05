@@ -7,6 +7,7 @@ import {SearchhousePage} from "../searchhouse/searchhouse";
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {HousingPage} from "../housing/housing";
 import {DescPage} from "../desc/desc";
+import { Events } from 'ionic-angular';
 /**
  * Generated class for the AddhousePage page.
  *
@@ -29,10 +30,11 @@ export class AddhousePage {
   down=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
-              public localStorageProvider:LocalStorageProvider) {
+              public localStorageProvider:LocalStorageProvider,public events: Events) {
        //楼盘列表
         this.addhouseProvider.estateListSelect().then(res=>{
            this.estateList = res.data.result;
+           console.log('楼盘列表',this.estateList);
         });
 
     //房源标签
@@ -51,16 +53,16 @@ export class AddhousePage {
       buildingNo:['',Validators.required], //楼栋号
       unitNo:['',Validators.required],//单元号
       floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
-      houseNo:[''],//房间号
-      spaceSize:[''],//建筑面积
-      innerSpaceSize:[''],//套内面积
-      propertyPrice:[''],//价格
+      houseNo:['',Validators.required],//房间号
+      spaceSize:['',Validators.required],//建筑面积
+      innerSpaceSize:['',Validators.required],//套内面积
+      propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
       bathrooms:['1'],
       kitchens:['1'],
       balconies:['1'],//阳
-      orientation:[null],//房屋朝向
+      orientation:[null,Validators.required],//房屋朝向
       decoration:[null],//装修水平
       contacts:this.fb.array([
         this.fb.group({
@@ -77,16 +79,19 @@ export class AddhousePage {
      sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
-     buildingType:['0'],
+     buildingType:['0'],//建筑类型
      buzzOwnerType:['0'],//交易权属
      buzzType:['0'],
-    hasElevator:['0'],
+    hasElevator:['0'],//配备电梯
     positionInBuilding:['2'],
-    propertyLife:['1'],
+    propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],
     propertyPriceUnit:['1'],
     propertyType:['1'],
-
+    propertyDesc:[''],//房源描述
+    //楼号比例
+    elevators:[''],//梯
+    apartments:[''],//户
   });
  //表单验证消息
     errors={
@@ -153,6 +158,7 @@ export class AddhousePage {
   }
 
   estateChange(Value){
+    console.log('value',Value);
     this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
     this.form.controls['estateName'].setValue(Value.estateName);
     this.form.controls['estateId'].setValue(Value.estateId);
@@ -169,35 +175,50 @@ export class AddhousePage {
      return sum ;
    }
   tagsSelect(value){
-    this.form.value.tags= this.tagsSum(value);
+    this.form.value.tags = this.tagsSum(value);
+    console.log('标签',this.form.value.tags,this.form.value);
   }
 
   save(){
-    // this.form.controls['contacts'].valu
+
+    this.tagsSelect(this.form.value.tags);
+
+    console.log('触发save方法',this.form.value.contacts);
+    // 联系人
      this.form.value.contacts[0].contact = this.form.value.contact;
      this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
      this.form.value.contacts[0].sex = this.form.value.sex;
 
-     this.form.value.contacts.push(this.form.value.contacts[0]);
-     var tel=  this.form.value.contactInfo2;
-     this.form.value.contacts[1].contactInfo  = tel;
-     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+     var man2 ={
+       contact:this.form.value.contact,
+       contactInfo:this.form.value.contactInfo2,
+       sex:this.form.value.sex,
+       contactType:'mobile',
+       desc:'',
+     };
 
+    this.form.value.contacts.push(man2);
+     console.log('第二个人',man2,'联系人',this.form.value.contacts);
+     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
 
     if(this.form.invalid){
       return false;
     }
 
-    console.log('房源录入表单',this.form.value);
+    console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
+
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
         alert('录入成功！');
         this.navCtrl.push(HousingPage);
+      }else {
+        alert('录入失败！');
       }
 
     },err=>{
       alert('录入失败');
     })
+
   }
 
   //更多
@@ -214,6 +235,14 @@ export class AddhousePage {
   }
   //房源描述
   godesc(){
-    this.navCtrl.push(DescPage)
+    this.events.subscribe('content', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      this.form.patchValue({propertyDesc:params});
+      console.log('表单的描述',this.form.value.propertyDesc);
+      // 取消订阅
+      this.events.unsubscribe('content');
+    });
+    this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
   }
 }

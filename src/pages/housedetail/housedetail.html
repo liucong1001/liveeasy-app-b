@@ -81,15 +81,26 @@
       </div>
       <ion-item class="pl12">
         <ion-label>户型</ion-label>
-        <ion-select  okText="确定" cancelText="关闭" [placeholder]="'请选择'">
+        <ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">
           <ion-option value="1">一室</ion-option>
           <ion-option value="2">二室</ion-option>
+          <ion-option value="3">三室</ion-option>
+          <ion-option value="4">四室</ion-option>
+          <ion-option value="5">五室</ion-option>
         </ion-select>
-        <ion-select  okText="确定" cancelText="关闭" [placeholder]="'请选择'">
-          <ion-option value="1">2厅</ion-option>
+        <ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'">
+          <ion-option value="1">1厅</ion-option>
+          <ion-option value="2">2厅</ion-option>
+          <ion-option value="3">3厅</ion-option>
+          <ion-option value="4">4厅</ion-option>
+          <ion-option value="5">5厅</ion-option>
         </ion-select>
-        <ion-select  okText="确定" cancelText="关闭" [placeholder]="'请选择'">
-          <ion-option value="1">5卫</ion-option>
+        <ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'">
+          <ion-option value="1">1卫</ion-option>
+          <ion-option value="2">2卫</ion-option>
+          <ion-option value="3">3卫</ion-option>
+          <ion-option value="4">4卫</ion-option>
+          <ion-option value="5">5卫</ion-option>
         </ion-select>
 
       </ion-item>
@@ -157,11 +168,11 @@
     <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
         <ion-label>建筑类型</ion-label>
-        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭">
-          <ion-option>未知</ion-option>
-          <ion-option>塔楼</ion-option>
-          <ion-option>板楼</ion-option>
-          <ion-option>板塔结合</ion-option>
+        <ion-select okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭">
+          <ion-option value="0">未知</ion-option>
+          <ion-option value="1" >塔楼</ion-option>
+          <ion-option value="2">板楼</ion-option>
+          <ion-option value="3">板塔结合</ion-option>
         </ion-select>
       </ion-item>
       <div class="allStyle">
@@ -170,20 +181,20 @@
             <span class="upHe">楼户比例</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number" class="upI"/>
+            <input type="number"  formControlName="elevators"  class="upI" />
             <span class="upPostion">梯</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number" class="upI"/>
+            <input type="number"  formControlName="apartments" class="upI"/>
             <span class="upPostion">户</span>
           </ion-col>
         </ion-row>
       </div>
       <ion-item class="pl12">
         <ion-label>配备电梯</ion-label>
-        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭">
-          <ion-option value="nes">有</ion-option>
-          <ion-option value="n64">无</ion-option>
+        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">有</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>

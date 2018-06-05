@@ -54,8 +54,8 @@ export class HousedetailPage {
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events) {
     this.data = navParams.get('item');
-
-    // console.log('获取详情', this.data, '联系人',this.data.contacts,JSON.parse(this.data.contacts));
+    // '联系人',this.data.contacts,JSON.parse(this.data.contacts)
+    console.log('获取详情', this.data );
     var jsonData = JSON.parse(this.data.contacts);
     if( this.data){
       this.form.patchValue({
@@ -78,6 +78,12 @@ export class HousedetailPage {
         sex:jsonData[0].sex,
         contactInfo:jsonData[0].contactInfo,
         contactInfo2:jsonData.length>1?jsonData[1].contactInfo:'',
+        //更多
+        buildingType:this.data.buildingType,
+        hasElevator:this.data.hasElevator,
+        elevators:this.data.elevators,
+        apartments:this.data.apartments,
+        propertyDesc:this.data.propertyDesc,//描述
       });
     }
 
@@ -131,16 +137,16 @@ export class HousedetailPage {
     buildingNo:['',Validators.required], //楼栋号
     unitNo:['',Validators.required],//单元号
     floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
-    houseNo:[''],//房间号
-    spaceSize:[''],//建筑面积
-    innerSpaceSize:[''],//套内面积
-    propertyPrice:[''],//价格
+    houseNo:['',Validators.required],//房间号
+    spaceSize:['',Validators.required],//建筑面积
+    innerSpaceSize:['',Validators.required],//套内面积
+    propertyPrice:['',Validators.required],//价格
     bedrooms:['1'],//室
     halls:['1'],
     bathrooms:['1'],
     kitchens:['1'],
     balconies:['1'],//阳
-    orientation:[null],//房屋朝向
+    orientation:[null,Validators.required],//房屋朝向
     decoration:[null],//装修水平
     contacts:this.fb.array([
       this.fb.group({
@@ -156,18 +162,21 @@ export class HousedetailPage {
     contactInfo2:['',Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)],
     sex:['male',Validators.required],
     tags:['0'],//房源标签
-     tagsStr:[],//列表
+    tagsStr:[],//列表
     infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
-    buildingType:['0'],
+    buildingType:['0'],//建筑类型
     buzzOwnerType:['0'],//交易权属
     buzzType:['0'],
-    hasElevator:['0'],
+    hasElevator:['0'],//配备电梯
     positionInBuilding:['2'],
-    propertyLife:['1'],
+    propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],
     propertyPriceUnit:['1'],
     propertyType:['1'],
-
+    propertyDesc:[''],//房源描述
+    //楼号比例
+    elevators:[''],//梯
+    apartments:[''],//户
   });
   //表单验证消息
   errors={
@@ -288,22 +297,23 @@ export class HousedetailPage {
       tags:this.tagsSum(this.form.value.tagsStr)
     });
     delete this.form.value.tagsStr;
-    // this.propertyProvider.updates({
-    //   propertyId:this.propertyid,buildingNo:this.form.value.buildingNo,
-    //   unitNo:this.form.value.unitNo,floorNo:this.form.value.floorNo,
-    //   houseNo:this.form.value.houseNo,spaceSize:this.form.value.spaceSize,
-    //   innerSpaceSize:this.form.value.innerSpaceSize,
-    //   propertyPrice:this.form.value.propertyPrice,
-    //   orientation:this.form.value.orientation,decoration:this.form.value.decoration,
-    // }).then(res=>{
-    //   console.log(this.form.value);
-    //   console.log(res);
-    //   this.navCtrl.push(HousingPage);
-    // });
+    // 联系人
+    this.form.value.contacts[0].contact = this.form.value.contact;
+    this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
+    this.form.value.contacts[0].sex = this.form.value.sex;
 
+    var man2 ={
+      contact:this.form.value.contact,
+      contactInfo:this.form.value.contactInfo2,
+      sex:this.form.value.sex,
+      contactType:'mobile',
+      desc:'',
+    };
 
-
+    this.form.value.contacts.push(man2);
+    console.log('第二个人',man2,'联系人',this.form.value.contacts);
     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+
     var formData = {
       propertyId:this.propertyid,
       ...this.form.value
@@ -343,6 +353,15 @@ export class HousedetailPage {
   }
   //房源描述
   godesc(){
-    this.navCtrl.push(DescPage)
+    // this.navCtrl.push(DescPage)
+    this.events.subscribe('content', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      this.form.patchValue({propertyDesc:params});
+      console.log('表单的描述',this.form.value.propertyDesc);
+      // 取消订阅
+      this.events.unsubscribe('content');
+    });
+    this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
   }
 }

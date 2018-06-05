@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content padding>
   <form>
-    <textarea name="" id="" cols="30" rows="10" placeholder="请填写内容...." class="ustyle"></textarea>
-    <button ion-button block color="danger" class="m10">确定</button>
+    <textarea  id="" cols="30" rows="10" name="content"  [(ngModel)]="content" placeholder="请填写内容...." class="ustyle"></textarea>
+    <button ion-button block color="danger" class="m10" (click)="confirm()">确定</button>
   </form>
 </ion-content>
