@@ -256,6 +256,7 @@ export class HousingPage {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
+      realtorId:item.realtorId,
       standardAddress:this.searchStandardAddress(item.estateName),
     })
 

@@ -5,7 +5,7 @@
 
 </ion-header>
 <ion-content>
-  <form [formGroup]="form" (ngSubmit)="subClose()">
+  <form [formGroup]="form">
     <ion-grid class="p0">
       <ion-row>
         <ion-col col-6 class="p0">
@@ -65,19 +65,16 @@
         <ion-col col-12 class="followMain bgWhite">
           <div>关闭说明：</div>
           <div>
-              <textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></textarea>
-            </div>
+            <textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></textarea>
+          </div>
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
-            <button ion-button full color="danger" class="radius"  [disabled]="form.invalid">确定</button>
+          <button ion-button full color="danger" class="radius"  [disabled]="form.invalid" *ngIf="subs" (click)="subClose()">确定</button>
+          <button ion-button full color="danger" class="radius" (click)="subApplic()" *ngIf="applic">提交申请</button>
+          <button (click)="pending()" *ngIf="pending">您有一条待处理申请</button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
-
-  <!-- <ion-item>
-    <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
-  </ion-item> -->
 </ion-content>
 

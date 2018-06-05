@@ -12,11 +12,15 @@ import {HttpProvider} from "../http/http";
 export class ClosehouseProvider {
 
   private  closeHouse = 'property/propertyInfo/propertyCloseProperty';
+  private  show = 'property/propertyInfo/closePropertyShow';
   constructor(public http: HttpClient,public httpProvider:HttpProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }
 
   public getClose(params?){
     return this.httpProvider.httpPost(this.closeHouse,params);
+  }
+  public getShow(propertyId){
+    return this.httpProvider.httpPost(this.show,{propertyId:propertyId});
   }
 }
