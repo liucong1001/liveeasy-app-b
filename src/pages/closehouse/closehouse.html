@@ -45,13 +45,13 @@
             <ion-item>
               <ion-label class="pl12">关闭类型</ion-label>
               <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="propertyStatus">
-                <ion-option value="6">暂不出售</ion-option>
-                <ion-option value="7">无效</ion-option>
-                <ion-option value="8">他售</ion-option>
-                <ion-option value="9">本公司成交</ion-option>
+                <ion-option value="7">暂不出售</ion-option>
+                <ion-option value="8">无效</ion-option>
+                <ion-option value="9">他售</ion-option>
+                <ion-option value="6">本公司成交</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item *ngIf="form.value.propertyStatus == 7">
+            <ion-item *ngIf="form.value.propertyStatus == 8">
               <ion-label class="pl12">无效原因</ion-label>
               <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="invalidReason">
                 <ion-option value="1">业主不存在</ion-option>

@@ -5,19 +5,19 @@
   <ion-grid class="bgWhite cHead">
     <ion-row class="plr" (click)="goaccount()" >
       <ion-col col-3>
-        <img src="{{photo}}"  class="cLeftImg" alt="" width="100%" height="80">
+        <img src="{{photo}}"  class="cLeftImg" alt="" width="100%" height="70">
       </ion-col>
       <ion-col col-9 class="cRightMain">
         <div>
             <font size="4">{{name}}</font>
-          <!--<a class="followTips">店长</a>-->
+          <a class="followTips">{{custposName}}</a>
         </div>
         <!--<div  class="m5">-->
           <!--<font size="2" color="#aaa">武昌一店</font>-->
         <!--</div>-->
-        <!--<div>-->
-          <!--<font size="2" color="#aaa">工号：2532323</font>-->
-        <!--</div>-->
+        <div class="m10">
+          <font size="2" color="#aaa">工号：{{gh}}</font>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

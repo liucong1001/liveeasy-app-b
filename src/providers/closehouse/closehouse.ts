@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
-
+import {ConfigProvider} from "../config/config";
 /*
   Generated class for the AddhouseProvider provider.
 
@@ -11,9 +11,9 @@ import {HttpProvider} from "../http/http";
 @Injectable()
 export class ClosehouseProvider {
 
-  private  closeHouse = 'property/propertyInfo/propertyCloseProperty';
-  private  show = 'property/propertyInfo/closePropertyShow';
-  constructor(public http: HttpClient,public httpProvider:HttpProvider) {
+  private  closeHouse = this.configProvider.set().http+'property/propertyInfo/propertyCloseProperty.do';
+  private  show = this.configProvider.set().http+'property/propertyInfo/closePropertyShow.do';
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }
 
@@ -21,6 +21,6 @@ export class ClosehouseProvider {
     return this.httpProvider.httpPost(this.closeHouse,params);
   }
   public getShow(propertyId){
-    return this.httpProvider.httpPost(this.show,{propertyId:propertyId});
+    return this.httpProvider.httpPost(this.show + "?propertyId="+propertyId,propertyId);
   }
 }

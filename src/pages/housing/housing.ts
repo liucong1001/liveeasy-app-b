@@ -263,7 +263,10 @@ export class HousingPage {
   }
 
   goHouseDetail(item) {
-    this.navCtrl.push(HousedetailPage, {item: item});
+    this.navCtrl.push(HousedetailPage, {
+      item: item,
+      estateList:this.estateList
+    });
   }
 
   addHouse() {

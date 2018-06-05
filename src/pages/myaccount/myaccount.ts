@@ -19,11 +19,13 @@ import {LocalStorageProvider} from  '../../providers/local-storage/local-storage
 export class MyaccountPage {
   phone:any;
   photo:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
-    this.phone = this.localStorageProvider.get('phone');
-    // this.photo = this.localStorageProvider.get('photo');
+    this.phone = this.localStorageProvider.get('loginInfo').phone;
+    // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
     console.log(this.phone)
+
   }
 
   ionViewDidLoad() {

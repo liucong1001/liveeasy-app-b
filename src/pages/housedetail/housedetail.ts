@@ -50,10 +50,12 @@ export class HousedetailPage {
   decoration:any; //装修
 //房源标签
   houLabel:any;
+  estateList:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events) {
     this.data = navParams.get('item');
+    this.estateList = navParams.get('estateList');
     // '联系人',this.data.contacts,JSON.parse(this.data.contacts)
     console.log('获取详情', this.data );
     var jsonData = JSON.parse(this.data.contacts);
@@ -323,12 +325,21 @@ export class HousedetailPage {
        this.navCtrl.push(HousingPage);
     })
   }
+  //根据楼盘名返回楼盘地址
+  searchStandardAddress(name){
+    for(var i in  this.estateList){
+      if(name == this.estateList[i].estateName){
+        return this.estateList[i].standardAddress
+      }
+    }
+  }
   //跟进
   goFollow(){
     this.navCtrl.push(FollowPage,{
       propertyid: this.data.propertyId,
       estatename: this.data.estateName,
       convid: this.data.convId,
+      standardAddress:this.searchStandardAddress(this.data.estateName)
     })
   }
 

@@ -11,12 +11,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <!--<ion-list *ngIf="this.person == undefined">-->
-    <!--暂无数据！-->
-  <!--</ion-list>-->
+  <ion-list *ngIf="this.data == undefined">
+    暂无数据！
+  </ion-list>
   <ion-list *ngIf="data">
-    <ion-item class="updateHegiht" >
-      <ion-row  *ngIf="data.initRealtorName != undefined">
+    <ion-item class="updateHegiht"  *ngIf="data.initRealtorName != undefined">
+      <ion-row>
         <ion-col col-5>
           首次录入人
         </ion-col>
@@ -24,7 +24,9 @@
           {{data.initRealtorName}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5" *ngIf="data.createdTime != undefined">
+    </ion-item>
+    <ion-item class="updateHegiht" *ngIf="data.createdTime != undefined">
+      <ion-row class="m5">
         <ion-col col-5>
           首次录入时间
         </ion-col>
@@ -33,8 +35,8 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" >
-      <ion-row  *ngIf="data.initRealtorName != undefined">
+    <ion-item class="updateHegiht"  *ngIf="data.initRealtorName != undefined">
+      <ion-row>
         <ion-col col-5>
           录入人
         </ion-col>
@@ -42,7 +44,9 @@
           {{data.initRealtorName}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5" *ngIf="data.activiateTime != undefined">
+    </ion-item>
+    <ion-item class="updateHegiht"  *ngIf="data.activiateTime != undefined">
+      <ion-row class="m5">
         <ion-col col-5>
           激活时间
         </ion-col>
@@ -50,7 +54,9 @@
           {{data.activiateTime | date:'yyyy年MM月dd日'}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5" *ngIf="data.realtorName != undefined">
+    </ion-item>
+    <ion-item class="updateHegiht" *ngIf="data.realtorName != undefined">
+      <ion-row class="m5">
         <ion-col col-5>
           归属人
         </ion-col>
@@ -59,8 +65,8 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht">
-      <ion-row *ngIf="data.picstor != undefined">
+    <ion-item class="updateHegiht" *ngIf="data.picstor != undefined">
+      <ion-row>
         <ion-col col-5>
           实勘人
         </ion-col>
@@ -68,7 +74,9 @@
           {{data.picstor}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5" *ngIf="data.picstorTime != undefined">
+    </ion-item>
+    <ion-item class="updateHegiht" *ngIf="data.picstorTime != undefined">
+      <ion-row class="m5">
         <ion-col col-5>
           实勘达成时间
         </ion-col>
@@ -77,8 +85,8 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht">
-      <ion-row *ngIf="data.keyAgentName != undefined">
+    <ion-item class="updateHegiht" *ngIf="data.keyAgentName != undefined">
+      <ion-row>
         <ion-col col-5>
           钥匙人
         </ion-col>
@@ -87,8 +95,8 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht">
-      <ion-row  *ngIf="data.updator != undefined">
+    <ion-item class="updateHegiht" *ngIf="data.updator != undefined">
+      <ion-row>
         <ion-col col-5>
           最后修改人
         </ion-col>
@@ -96,7 +104,9 @@
           {{data.updator}}
         </ion-col>
       </ion-row>
-      <ion-row class="m5" *ngIf="data.updatorTime != undefined">
+    </ion-item>
+    <ion-item class="updateHegiht" *ngIf="data.updatorTime != undefined">
+      <ion-row class="m5" >
         <ion-col col-5>
           最后修改时间
         </ion-col>

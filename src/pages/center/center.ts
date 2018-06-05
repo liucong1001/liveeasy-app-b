@@ -22,10 +22,14 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 export class CenterPage {
   photo:any;
   name:any;
+  gh:any;
+  custposName:any;
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.name = this.localStorageProvider.get('loginInfo').name;
+    this.gh=this.localStorageProvider.get('loginInfo').no;
+    this.custposName =this.localStorageProvider.get('loginInfo') .custPosName
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
     console.log(this.name)
   }

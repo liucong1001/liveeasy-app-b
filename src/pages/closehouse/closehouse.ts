@@ -67,7 +67,7 @@ export class ClosehousePage {
   }
 
   subClose(){
-    if(this.form.value.propertyStatus != 7){
+    if(this.form.value.propertyStatus != 8){
       this.closehouseProvider.getClose({
         propertyId:this.propertyid,
         propertyStatus:this.form.value.propertyStatus,
@@ -79,7 +79,7 @@ export class ClosehousePage {
         alert('关闭成功');
         this.navCtrl.push(HousingPage)
       });
-    }else if(this.form.value.propertyStatus == 7){
+    }else if(this.form.value.propertyStatus == 8){
       if(this.form.value.invalidReason !=''){
         this.closehouseProvider.getClose({
           propertyId:this.propertyid,
@@ -103,10 +103,12 @@ export class ClosehousePage {
     console.log(this.propertyid)
     this.closehouseProvider.getClose({
       propertyId:this.propertyid,
+      //当前操作人id
       propertyStatus:this.form.value.propertyStatus,
-      closeTime:this.closetime,
+      // closeTime:this.closetime,
       invalidReason:this.form.value.invalidReason,
-      closeDesc:this.form.value.closeDesc
+      closeDesc:this.form.value.closeDesc,
+      applyTime:new Date().getTime(),
     }).then(res => {
       console.log(res);
       alert('提交成功，请等候同意！');
