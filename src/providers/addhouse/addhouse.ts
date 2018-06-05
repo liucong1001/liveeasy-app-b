@@ -20,7 +20,12 @@ export class AddhouseProvider {
 
   // 楼盘列表
   public estateListSelect(params?){
-      return this.httpProvider.httpPostForm(this.estateList,'currentPage=1&limit=22');
+      // return this.httpProvider.httpPostForm(this.estateList,'currentPage=1&limit=22');
+      var data = {
+        currentPage:1,
+        limit:22,
+      };
+     return  this.httpProvider.httpGet(this.estateList,data);
   }
   //房源标签
   public estateTagsSelect(params?){
