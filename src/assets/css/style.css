@@ -154,7 +154,7 @@ a{
   padding: 0;
 }
 .bgWhite{
-    background: #fff;
+    background: #fff !important;
 }
 .iconfont {
     color: #D7D7D7;

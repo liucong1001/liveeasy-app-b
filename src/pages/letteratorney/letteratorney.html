@@ -12,7 +12,7 @@
         <ion-input type="text"  class="p0" formControlName="delegateDocSn">
         </ion-input>
       </ion-item>
-      <valid-error [errors]="errors.delegateDdocSn"  [control]="form.get('delegateDdocSn')"  ></valid-error>
+      <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
       <ion-item class="pl12">
           <ion-label>起始时间</ion-label>
           <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm"   doneText="确定"  cancelText="取消" (ionChange)="timeCompare()"></ion-datetime>

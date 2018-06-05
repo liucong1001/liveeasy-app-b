@@ -5,6 +5,7 @@ import { HelpPage } from '../help/help';
 import { UpdatepwdPage } from '../updatepwd/updatepwd';
 import { MyaccountPage } from '../myaccount/myaccount';
 import {AccountPage} from "../account/account";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 
 /**
  * Generated class for the CenterPage page.
@@ -20,10 +21,13 @@ import {AccountPage} from "../account/account";
 })
 export class CenterPage {
   photo:any;
+  name:any;
   @ViewChild(Content) content: Content;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // this.photo = this.localStorageProvider.get('photo');
+  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
+    // this.photo = this.localStorageProvider.get('loginInfo').photo;
+    this.name = this.localStorageProvider.get('loginInfo').name;
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
+    console.log(this.name)
   }
 
   ionViewDidLoad() {

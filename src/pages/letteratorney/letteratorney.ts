@@ -38,9 +38,9 @@ export class LetteratorneyPage {
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
       console.log('委托书详情',res);
-      this.data = res.data;
-      this.delegateDocId= res.data.delegateDocId;
       if(res.data != undefined){
+        this.data = res.data;
+        this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({
           delegateDocSn:res.data.delegateDocSn,
           delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
@@ -107,7 +107,7 @@ export class LetteratorneyPage {
   }
 
   form:FormGroup =this.fb.group({
-    delegateDdocSn:['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/g)]], //委托书编号
+    delegateDocSn:['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/g)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:['',Validators.required],//结束时间
     delegateDocPics:[''],//委托书图片
@@ -115,7 +115,7 @@ export class LetteratorneyPage {
 
   //表单验证消息
   errors={
-    delegateDdocSn:[
+    delegateDocSn:[
       new ErrorMessage('required','委托书编号必须要填写！'),
       new ErrorMessage('pattern','只能输入数字和字母'),
     ],
