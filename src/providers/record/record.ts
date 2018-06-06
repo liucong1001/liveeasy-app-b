@@ -19,11 +19,8 @@ export class RecordProvider {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordProvider');
   }
-  getRecord() {
-    // this.propertyid = this.localStorageProvider.get('').propertyId;
-    // this.agentid = this.localStorageProvider.get('loginInfo').id;
-    // var data = {"propertyId": this.propertyid,"agentId":this.agentid}
-    // return this.httpProvider.httpPost(this.record, data)
+  getRecord(params?) {
+    return this.httpProvider.httpPost(this.record, params)
   }
 
 

@@ -28,9 +28,7 @@ export class RecordPage {
               public http: HttpClient,
               public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider,
               public  configProvider:ConfigProvider) {
-    this.propertyid = navParams.get('propertyid');
-    this.agentid = this.localStorageProvider.get('loginInfo').id;
-    this.recordprovider.getRecord(this.propertyid,this.agentid).then(res => {
+    this.recordprovider.getRecord({}).then(res => {
       console.log(res);
       this.followUp = res.data.propFollowupInfos;
       this.lookEmpty=res.data.propEmptyLookInfos;

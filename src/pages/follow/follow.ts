@@ -48,28 +48,18 @@ export class FollowPage {
 
   subFollow(){
       // alert('222');
-      this.followProvider.getfollow({followup_code:this.form.value.followupCode,content:this.form.value.content,propertyId:this.propertyid,followupTime:this.followuptime}).then(res => {
+      this.followProvider.getfollow({
+        agentId:this.localStorageProvider.get('loginInfo').id,
+        followup_code:this.form.value.followupCode,
+        content:this.form.value.content,
+        propertyId:this.propertyid,
+        followupTime:this.followuptime
+      }).then(res => {
         console.log(res);
         alert('跟进成功！')
         this.navCtrl.push(HousingPage)
       });
   console.log(this.form.value)
 }
-  anything(){
-    // if(this.form.valid.xx != ''){
-    //   this.xx=true;
-    // }else {
-    //   this.xx=false;
-    // }
-  //       var a = bind('input propertychange', function() {
-  //     if($(this).val() != ""){
-  //       $(this).css('border','1px solid red')
-  //     }else{
-  //       $(this).css('border','1px solid #F0F0F0')
-  //     };
-  // });
-  }
-
-
 
 }
