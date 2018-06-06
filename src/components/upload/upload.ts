@@ -5,8 +5,8 @@ import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native
 import {FileProvider} from "../../providers/file/file";
 import {PropertyProvider} from "../../providers/property/property";
 import {PropertyModel} from "../../model/property/property.model";
-// import { ImagePicker } from '@ionic-native/image-picker';
-
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
 /**
   多图片上传组件
  */
@@ -20,18 +20,22 @@ export class UploadComponent {
   @Input() useDir: string;  //图片地址（id比值 例如："楼盘id/房源id/"）
   @Input() position: string; //（例如：add）
   @Input() desc: string; //描述（例如：“门牌图”）
+  @Input() max:number;
   @Output() successEvent = new EventEmitter<any>();
+  showTip = true;//是否展示引导上产框框
 
   path: string;
   imagePathHead = 'liveeasy-erp/oss/';
   imagePath = '';
   nowDateFile :any;
   fileTransfer: FileTransferObject = this.transfer.create();
-
+  data: string = "";
+  camerData :string = "";
+  imageBase64 : Array<string>=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
-              // private imagePicker:ImagePicker
+              private imagePicker:ImagePicker,private base64: Base64
   ) {
 
   }
@@ -78,21 +82,39 @@ export class UploadComponent {
       sourceType:sourceType,
     };
 
-
+   //选择相册图片
     if(sourceType==0){
-     // this.imagePicker.getPictures(options).then(results=>{
-     //     for(var i=0;i<results.length;i++){
-     //       console.log('图片'+i,results[i]);
-     //     }
-     // })
+     this.imagePicker.getPictures(options).then(results=>{
+         for(var i=0;i<results.length;i++){
+           console.log('图片'+i,results[i]);
+           var path = results[i].replace(/^file:\/\//, '');
+           var imgUrl= "<img src=" +results[i] +  " class='img_upload'  \">  ";
+           this.data = this.data+imgUrl;
+           this.upload(this.useDir);
+           //转64字节
+           this.base64.encodeFile(results[i]).then((base64File: string) => {
+              // this.path = 'data:image/jpeg;base64,' + base64File;
+              this.path =  base64File;
+             // this.imageBase64.push(base64File);
+             // console.log('转字节',base64File);
+             // this.path = base64File;
 
+           }, (err) => {
+             console.log(err);
+           });
+         }
+     })
 
+   //拍照图片
     }else if(sourceType==1){
 
       this.camera.getPicture(options).then((imageData,) => {
         console.log('图片data',options);
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         this.path = base64Image;
+        //页面显示多个拍照
+        var pathHtml =  "<img src=" +this.path +  " class='img_upload'  \">  ";
+        this.data = this.data + pathHtml;
         // console.log('图片信息64位',this.path,'图片信息',imageData);
         this.upload(this.useDir);
       }, (err) => {

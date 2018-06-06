@@ -93,7 +93,7 @@ export class AddlookPage {
           console.log('图片data',options);
             let base64Image = 'data:image/jpeg;base64,' + imageData;
             this.path = base64Image;
-            // console.log('图片信息64位',this.path,'图片信息',imageData);
+            console.log('图片信息64位',this.path,'图片信息',imageData);
             this.upload(this.data.estateId+'/'+this.data.propertyId+'/');
         }, (err) => {
             // Handle error

@@ -88,7 +88,8 @@ import {KeyPage} from "../pages/key/key";
 import { PublicCustomerProvider } from '../providers/public-customer/public-customer';
 import {DescPage} from "../pages/desc/desc";
 import {BelongerPage} from "../pages/belonger/belonger";
-// import { ImagePicker } from '@ionic-native/image-picker';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
 
 @NgModule({
   declarations: [
@@ -237,7 +238,8 @@ import {BelongerPage} from "../pages/belonger/belonger";
       ConfigProvider,
     CustomerProvider,
     PublicCustomerProvider,
-      // ImagePicker,
+       ImagePicker,
+       Base64,
     ]
 })
 export class AppModule {}

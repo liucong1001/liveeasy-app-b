@@ -245,4 +245,9 @@ export class AddhousePage {
     });
     this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
   }
+
+  menPai(event){
+    console.log('门牌号',event);
+  }
+
 }

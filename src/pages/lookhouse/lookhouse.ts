@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {PropertyModel} from "../../model/property/property.model";
+import {PropertyProvider} from "../../providers/property/property";
+import {ConfigProvider} from "../../providers/config/config";
+
 /**
  * Generated class for the LookhousePage page.
  *
@@ -18,10 +21,25 @@ export class LookhousePage {
   path: string;
   data:PropertyModel;
   useDir :string;
-  constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
+  formData = {
+     arrPic:[],
+     propertyId:'',
+  };
+  imgHeader: string; //线上图片默认头地址
+  imgJson :any;
+  edit = false;
+  constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+              public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,) {
     this.data = navParams.get('item');
+    this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
-    console.log('dir',this.useDir);
+    // propertyPics
+    if(this.data.propertyPics){
+      this.imgJson = JSON.parse(this.data.propertyPics); //默认展示有图片
+    }else{
+      this.edit = true;
+    }
+    console.log('dir',this.useDir,'详情',this.data.propertyPics);
   }
 
   // presentActionSheet() {
@@ -74,15 +92,53 @@ export class LookhousePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LookhousePage');
+    this.imgHeader = this.configProvider.set().img;
   }
   menPai(event){
     console.log('门牌号',event);
+    this.formData.arrPic.push(event.pic);
+    console.log('表单',this.formData);
   }
   huXin(event){
     console.log('户型图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  keTin(event){
+    console.log('客厅图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  woShi(event){
+    console.log('卧室图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  chuFang(event){
+    console.log('厨房图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  woShenJian(event){
+    console.log('卫生间图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  other(event){
+    console.log('其他图',event);
+    this.formData.arrPic.push(event.pic);
+  }
+  save(){
+     console.log('提交',this.formData);
+     this.propertyProvider.shiKanSave(this.formData).then(res=>{
+        if(res.success){
+          alert('上传成功！');
+        }else {
+          alert('上传失败');
+        }
+     },err=>{
+       alert('上传失败');
+     })
   }
 
-
+  update(){
+      this.edit = true;
+  }
 
 
 }

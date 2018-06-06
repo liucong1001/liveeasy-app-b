@@ -38,7 +38,9 @@ export class MyApp {
         this.androidPermissions.requestPermissions([
           this.androidPermissions.PERMISSION.CAMERA,
           this.androidPermissions.PERMISSION.GET_ACCOUNTS,
-          this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES
+          this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES,
+          // this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+          // this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
         ]);
       }
       //检测版本更新

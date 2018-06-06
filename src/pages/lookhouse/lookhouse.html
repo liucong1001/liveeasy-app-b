@@ -13,28 +13,28 @@
       <!--</div>-->
       <!--<ion-list class="m10">-->
 
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>门牌号</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>户型图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>室内图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>卧室图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
@@ -65,28 +65,28 @@
       <!--</ion-list>-->
       <!--<ion-list class="m10">-->
 
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>门牌号</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>户型图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>室内图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
             <!--<img [src]="path"/>-->
           <!--</div>-->
         <!--</div>-->
-        <!--<div class="attorneyPic bgWhite" (click)="presentActionSheet()">-->
+        <!--<div class="attorneyPic bgWhite" >-->
           <!--<span>卧室图</span>-->
           <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
           <!--<div *ngIf="path">-->
@@ -108,32 +108,50 @@
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           &nbsp;实勘图正在审核，审核期间不允许删除图片</font>
       </div>
-      <ion-list class="m10">
+      <ion-list class="m10" *ngIf="!edit" >
+        <div class="attorneyPic bgWhite" *ngFor="let item of imgJson">
+          <p>{{item.desc}}</p>
+          <div>
+            <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+          </div>
+        </div>
+      </ion-list>
+
+      <ion-list class="m10" *ngIf="edit">
 
         <div class="attorneyPic bgWhite">
           <span>门牌号:</span>
-          <upload [useDir]="useDir" [desc]="'门牌'" [position]="''" (successEvent)="menPai($event)"></upload>
+          <upload [useDir]="useDir" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
         </div>
 
         <div class="attorneyPic bgWhite">
           <span>户型图</span>
-          <upload [useDir]="useDir" [desc]="'户型'" [position]="''" (successEvent)="huXin($event)"></upload>
+          <upload [useDir]="useDir" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)"></upload>
         </div>
 
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
-          <span>室内图</span>
-          <div class="bgWrapper m10" *ngIf="!path"></div>
-          <div *ngIf="path">
-            <img [src]="path"/>
-          </div>
+        <div class="attorneyPic bgWhite" >
+          <span>客厅图</span>
+          <upload [useDir]="useDir" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)"></upload>
         </div>
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+        <div class="attorneyPic bgWhite" >
           <span>卧室图</span>
-          <div class="bgWrapper m10" *ngIf="!path"></div>
-          <div *ngIf="path">
-            <img [src]="path"/>
-          </div>
+          <upload [useDir]="useDir" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)"></upload>
+        </div>
+        <div class="attorneyPic bgWhite" >
+          <span>厨房图</span>
+          <upload [useDir]="useDir" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)"></upload>
+        </div>
+        <div class="attorneyPic bgWhite" >
+          <span>卫生间图</span>
+          <upload [useDir]="useDir" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"></upload>
+        </div>
+        <div class="attorneyPic bgWhite" >
+          <span>其他图</span>
+          <upload [useDir]="useDir" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"></upload>
         </div>
         </ion-list>
+      <!--[disabled]="form.invalid"-->
+      <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">修改图片</button>
+      <button ion-button full color="danger" class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
     </form>
   </ion-content>

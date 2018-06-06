@@ -6,6 +6,11 @@
 
 </ion-header>
 <ion-content>
+  <div class="attorneyPic bgWhite">
+    <span>门牌号:</span>
+    <upload [useDir]="useDir" [desc]="'门牌'" [position]="''" (successEvent)="menPai($event)"></upload>
+  </div>
+
   <!--(ngSubmit)="save()"-->
   <form [formGroup]="form" >
     <ion-list (click)="goserach()" >

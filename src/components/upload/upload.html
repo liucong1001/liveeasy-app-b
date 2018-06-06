@@ -1,7 +1,5 @@
-<!-- Generated template for the UploadComponent component -->
 <div>
-  <div class="bgWrapper m10" *ngIf="!path" (click)="presentActionSheet()"></div>
-  <div *ngIf="path">
-    <img [src]="path"/>
-  </div>
+ <!--上传图片div-->
+  <div id="uploadDiv" [innerHtml]="data"></div>
+  <div class="bgWrapper m10" id="tip_camer" (click)="presentActionSheet()"></div>
 </div>

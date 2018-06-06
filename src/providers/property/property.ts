@@ -23,6 +23,8 @@ export class PropertyProvider {
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
+  //实勘图
+  private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
   bedRType:any;
   districtId:any;
   propertyid:any;
@@ -109,5 +111,9 @@ export class PropertyProvider {
   role(propertyId){
     // var  data = {''}
     return this.httpProvider.httpPost(this.rolePath,{propertyId:propertyId})
+  }
+  //实勘图
+  shiKanSave(data){
+    return this.httpProvider.httpPostForm(this.shiKanPath,data);
   }
 }
