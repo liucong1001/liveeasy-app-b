@@ -54,53 +54,53 @@ export class LetteratorneyPage {
       }
     });
   }
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      // title: '更多',
-      buttons: [
-        {
-          text: '选择图片',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-            this.takePhoto(0);
-          }
-        },{
-          text: '拍照',
-          handler: () => {
-            console.log('Archive clicked');
-            this.takePhoto(1);
-          }
-        },{
-          text: '关闭',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-  //take Photo
-  takePhoto(sourceType:number) {
-    console.log('手机调试',sourceType);
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType:sourceType,
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.path = base64Image;
-    }, (err) => {
-      // Handle error
-    });
-  }
+  // presentActionSheet() {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     // title: '更多',
+  //     buttons: [
+  //       {
+  //         text: '选择图片',
+  //         role: 'destructive',
+  //         handler: () => {
+  //           console.log('Destructive clicked');
+  //           this.takePhoto(0);
+  //         }
+  //       },{
+  //         text: '拍照',
+  //         handler: () => {
+  //           console.log('Archive clicked');
+  //           this.takePhoto(1);
+  //         }
+  //       },{
+  //         text: '关闭',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
+  // //take Photo
+  // takePhoto(sourceType:number) {
+  //   console.log('手机调试',sourceType);
+  //   const options: CameraOptions = {
+  //     quality: 50,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     correctOrientation: true,
+  //     sourceType:sourceType,
+  //   };
+  //
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
+  //     this.path = base64Image;
+  //   }, (err) => {
+  //     // Handle error
+  //   });
+  // }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
@@ -164,6 +164,11 @@ export class LetteratorneyPage {
        }
        console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
      }
+  }
+  //委托书
+  weiTuo(event){
+    console.log('委托书',event);
+    // this.form.patchValue({delegateDocPics:})
   }
 
   //修改业主委托书

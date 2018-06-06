@@ -24,12 +24,14 @@
           </ion-item>
       <valid-error [errors]="errors.delegateEndTm"  [control]="form.get('delegateEndTm')"  ></valid-error>
        <p *ngIf="timeCheck" class="errorTip">*起始时间不能大于结束时间</p>
-          <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
-        <span>委托书图片</span>
-        <div class="bgWrapper m10" *ngIf="!path"></div>
-        <div *ngIf="path">
-          <img [src]="path" formControlName="delegateDocPics"/>
-        </div>
+          <div class="attorneyPic bgWhite">
+            <span>委托书图片</span>
+            <upload [useDir]="useDir" [desc]="'委托书'" [position]="''" (successEvent)="weiTuo($event)"></upload>
+            <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
+        <!--<div *ngIf="path">-->
+          <!--<img [src]="path" formControlName="delegateDocPics"/>-->
+        <!--</div>-->
+            <!---->
       </div>
     </ion-list>
     <ion-grid>
