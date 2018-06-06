@@ -10,7 +10,7 @@
       <ion-col col-9 class="cRightMain">
         <div>
             <font size="4">{{name}}</font>
-          <a class="followTips">{{custposName}}</a>
+          <a class="followTips" *ngIf="this.custposName == '' ">{{custposName}}</a>
         </div>
         <!--<div  class="m5">-->
           <!--<font size="2" color="#aaa">武昌一店</font>-->

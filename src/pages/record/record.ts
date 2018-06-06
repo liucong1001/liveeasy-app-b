@@ -24,15 +24,17 @@ export class RecordPage {
   id:any;
   nones=false;
   have=false;
-  a:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,
               public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider,
               public  configProvider:ConfigProvider) {
-    this.recordprovider.getRecord({}).then(res => {
+    this.propertyid = navParams.get('propertyid');
+    this.agentid = this.localStorageProvider.get('loginInfo').id;
+    this.recordprovider.getRecord(this.propertyid,this.agentid).then(res => {
       console.log(res);
       this.followUp = res.data.propFollowupInfos;
       this.lookEmpty=res.data.propEmptyLookInfos;
+      // this.name = res.data.propFollowupInfos;
       // this.a='https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/liveeasy-erp/';
       for (var i = 0;i<res.data.length;i++){
         // debugger;

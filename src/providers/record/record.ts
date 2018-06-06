@@ -12,7 +12,6 @@ import {LocalStorageProvider} from '../../providers/local-storage/local-storage'
 */
 @Injectable()
 export class RecordProvider {
-  public id: any;
   private record = this.configProvider.set().http + 'property/propertyInfo/propertyDetail.do';
 
   constructor(public http: HttpClient, public httpProvider: HttpProvider, private configProvider: ConfigProvider, public localStorageProvider: LocalStorageProvider) {
@@ -20,11 +19,11 @@ export class RecordProvider {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordProvider');
   }
-  getRecord(params?) {
-    this.id = this.localStorageProvider.get('propertyid');
-    console.log(this.id)
-    var data = {"propertyId": this.id}
-    return this.httpProvider.httpPost(this.record, data)
+  getRecord() {
+    // this.propertyid = this.localStorageProvider.get('').propertyId;
+    // this.agentid = this.localStorageProvider.get('loginInfo').id;
+    // var data = {"propertyId": this.propertyid,"agentId":this.agentid}
+    // return this.httpProvider.httpPost(this.record, data)
   }
 
 
