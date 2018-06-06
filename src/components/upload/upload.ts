@@ -86,7 +86,7 @@ export class UploadComponent {
     if(sourceType==0){
      this.imagePicker.getPictures(options).then(results=>{
          for(var i=0;i<results.length;i++){
-           console.log('图片'+i,results[i]);
+           // console.log('图片'+i,results[i]);
            var path = results[i].replace(/^file:\/\//, '');
            var imgUrl= "<img src=" +results[i] +  " class='img_upload'  \">  ";
            this.data = this.data+imgUrl;
@@ -96,8 +96,6 @@ export class UploadComponent {
               // this.path = 'data:image/jpeg;base64,' + base64File;
               this.path =  base64File;
              // this.imageBase64.push(base64File);
-             // console.log('转字节',base64File);
-             // this.path = base64File;
 
            }, (err) => {
              console.log(err);
@@ -109,7 +107,7 @@ export class UploadComponent {
     }else if(sourceType==1){
 
       this.camera.getPicture(options).then((imageData,) => {
-        console.log('图片data',options);
+        // console.log('图片data',options);
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         this.path = base64Image;
         //页面显示多个拍照
@@ -147,7 +145,7 @@ export class UploadComponent {
         }
       };
 
-      console.log('公上传参数',this.path,apiPath,options);
+      // console.log('公上传参数',this.path,apiPath,options);
       this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
 
         this.imagePath = this.imagePathHead +useDir +options.fileName;

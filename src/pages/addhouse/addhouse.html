@@ -9,13 +9,12 @@
   <!--(ngSubmit)="save()"-->
   <form [formGroup]="form" >
     <ion-list (click)="goserach()" >
-      <ion-item class="pl12">
-        <ion-label> 楼盘<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="estate" (ionChange)="estateChange($event)">
-          <ion-option [value]="item"  *ngFor="let item of estateList  "> {{item.estateName}}</ion-option>
-        </ion-select>
-      </ion-item>
-
+      <button ion-item class="pl12">
+        选择楼盘
+        <font color="#aaa" class="changes">
+          <span >{{form.value.estateName}}</span>
+        </font>
+      </button>
     </ion-list>
     <ion-list>
       <ion-item class="pl12">

@@ -44,7 +44,7 @@ export class AddlookPage {
     console.log('ionViewDidLoad AddlookPage',);
     // this.data = this.navParams.get('item');
     console.log('带看',this.data,this.data.convId);
-
+    this.fileProvider.getTicker(this.data.estateId+'/'+this.data.propertyId+'/').then()
   }
 
 
@@ -103,11 +103,11 @@ export class AddlookPage {
 
     //文件上传
     upload(useDir){
-
+        console.log('上传的useDir',useDir);
         this.fileProvider.getTicker(useDir).then(res=>{
           var apiPath = res.data.host ;
           var data = res.data;
-          // console.log('获取签证成功',res,apiPath);
+          console.log('获取签证成功',res,apiPath);
           this.nowDateFile = new Date().getTime();   //这里没有共用部分
           let options:FileUploadOptions = {
             fileKey:'file',
@@ -122,7 +122,7 @@ export class AddlookPage {
             }
           };
 
-          // console.log('上传参数',this.path,this.apiPath,options);
+          console.log('上传参数',this.path,apiPath,options);
           this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
 
 

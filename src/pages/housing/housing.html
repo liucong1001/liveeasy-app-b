@@ -12,25 +12,27 @@
       <ion-row class="houseMenu">
         <ion-col col-3 class="tc" (click)="showMenu1()">
 
-          <!--{{searchDict}}{{ searchArea}} -->
-          区域
+          {{searchDict}}{{ searchArea}}
+          <span *ngIf="!searchDict">区域</span>
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
         <ion-col col-3 class="tc" (click)="showMenu2()">
-          户型
+
+          <span *ngIf="searchFloorNum==2">{{housePipe(params.bedroomType)}}</span>
+          <span [hidden]="searchFloorNum==2"> 户型</span>
           <ion-icon name="md-arrow-dropdown"></ion-icon>
+
         </ion-col>
         <ion-col col-3 class="tc" (click)="showMenu3()">
-          小区
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
+             <span [ngClass]="{xiaoQu:params.estateId}" >{{ estatePipe(params.estateId)}}</span>
+            <span *ngIf="!params.estateId"> 小区 </span>
+          <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
         </ion-col>
         <ion-col col-3 class="tc" (click)="showMenu4()">
           更多
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
       </ion-row>
-
-
 
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
       <!--<h3>{{i+1}}</h3>-->
@@ -176,36 +178,12 @@
 
   <!-- 户型 -->
   <div class="lists houseType" *ngIf="houseType">
-    <!--<h2>{{label}}</h2>-->
     <ion-list radio-group [(ngModel)]="params.bedroomType" class="scrollC">
-      <ion-item>
-        <ion-label>不限</ion-label>
-        <ion-radio value="0" (ionSelect)="search()"></ion-radio>
+      <ion-item *ngFor="let y of houseJSON">
+         <ion-label>{{y.name}}</ion-label>
+         <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
-      <ion-item>
-        <ion-label>一室</ion-label>
-        <ion-radio value="1" checked (ionSelect)="search()"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>两室</ion-label>
-        <ion-radio value="2" (ionSelect)="search()"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>三室</ion-label>
-        <ion-radio value="3" (ionSelect)="search()"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>四室</ion-label>
-        <ion-radio value="4" (ionSelect)="search()"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>五室</ion-label>
-        <ion-radio value="5" (ionSelect)="search()"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>五室以上</ion-label>
-        <ion-radio value="6" (ionSelect)="search()"></ion-radio>
-      </ion-item>
+
     </ion-list>
     <!--<div class="btns">-->
       <!--<button ion-button full color="danger" (click)="search()">确定</button>-->

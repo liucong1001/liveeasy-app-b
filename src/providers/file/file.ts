@@ -9,14 +9,18 @@ import {ConfigProvider} from "../config/config";
 export class FileProvider {
 
   getTickerPath = this.configProvider.set().http+'/oss/getTicker';
-  baseDir = this.configProvider.set().http+'liveeasy-erp/oss/';
+  // baseDir = this.configProvider.set().http+'liveeasy-erp/oss/';
+  baseDir = 'liveeasy-erp/oss/';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello FileProvider Provider');
   }
 
   //获取签证
   getTicker(userDir){
-     return this.httpProvider.httpPost(this.getTickerPath,this.baseDir+userDir)
+     var data = {
+       userDir:this.baseDir+userDir
+     };
+     return this.httpProvider.httpPostFormJson(this.getTickerPath,data)
   }
 
 

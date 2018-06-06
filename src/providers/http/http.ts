@@ -39,6 +39,13 @@ export class HttpProvider {
       return res as any;
     })
   }
+//formData传object
+  public httpPostFormJson(url,data):Promise<any>{
+    return this.http.post(url,data,{headers:this.headersForm}).toPromise().then(res=>{
+      return res as any;
+    })
+  }
+
 
 
 }

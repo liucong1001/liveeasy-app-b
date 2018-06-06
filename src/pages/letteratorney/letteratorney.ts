@@ -28,13 +28,16 @@ export class LetteratorneyPage {
   delegateDocId:any;
   data:any;
   timeCheck = false;
+  useDir:string;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,
               public navParams: NavParams,
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
     this.propertyid = navParams.get('propertyid');
-    // console.log(this.propertyid);
+    this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
+    // this.useDir = this.propertyid+'/'+navParams.get('estateId')+'/';
+    // console.log('propertyid的值',this.propertyid);
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
       console.log('委托书详情',res);
@@ -165,14 +168,16 @@ export class LetteratorneyPage {
        console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
      }
   }
+  imgData = [];
   //委托书
   weiTuo(event){
-    console.log('委托书',event);
-    // this.form.patchValue({delegateDocPics:})
+    this.imgData.push(event.pic);
+    console.log('图片数据',this.imgData);
   }
 
   //修改业主委托书
   upYz(){
+    console.log('提交数据',JSON.stringify(this.imgData));
     this.propertyProvider.aupdate({
       delegateDocId:this.delegateDocId,
       delegateStyle:1,
@@ -181,7 +186,8 @@ export class LetteratorneyPage {
       delegateDocSn:this.form.value.delegateDocSn,
       delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
       delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
-      delegateDocPics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527845042587\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg\",\"thumbnail\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
+      delegateDocPics: JSON.stringify(this.imgData),
+      // delegateDocPics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527845042587\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg\",\"thumbnail\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
       delegateDocInfoEntity:this.data,
     }).then(res => {
       console.log(res);

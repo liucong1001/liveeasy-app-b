@@ -25,6 +25,10 @@ export class PropertyProvider {
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
+
+  // 楼盘模糊搜索 http://47.75.151.57:7077/live/search?keyword=1&site=4200
+  //http://47.75.151.57:7077/live/search?keyword=11&site=4200
+  private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
   bedRType:any;
   districtId:any;
   propertyid:any;
@@ -115,5 +119,10 @@ export class PropertyProvider {
   //实勘图
   shiKanSave(data){
     return this.httpProvider.httpPostForm(this.shiKanPath,data);
+  }
+  //专用版楼盘搜索
+  searchFloor(params){
+    var site = '2000';
+    return this.httpProvider.httpGet(this.floorSearchPath+params+'&site='+site)
   }
 }

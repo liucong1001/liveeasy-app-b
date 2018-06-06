@@ -165,10 +165,19 @@ page-housing .tips a:nth-child(10) {
 .item-radio-checked.item-ios ion-label {
   color: #DB2924;
 }
-
 .radio-ios .radio-checked .radio-inner {
   border-color: #DB2924;
 }
 .active{
   color: #DB2924;
+}
+.xiaoQu{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 60%;
+}
+.upIcon{
+  top: -2px !important;
 }

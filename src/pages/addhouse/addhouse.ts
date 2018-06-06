@@ -47,7 +47,7 @@ export class AddhousePage {
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
-      estate:['',Validators.required],//楼盘
+      estate:[''],//楼盘
       estateName:[''],
       estateId:[''],
       buildingNo:['',Validators.required], //楼栋号
@@ -154,16 +154,31 @@ export class AddhousePage {
   }
 
   goserach(){
-    this.navCtrl.push(SearchhousePage)
+    this.events.subscribe('bevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      // this.form.value.estateName = params.estateName;
+      // this.form.value.estateId =  params.estateId;
+      this.estateChange(params);
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(SearchhousePage);
   }
 
   estateChange(Value){
     console.log('value',Value);
-    this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
-    this.form.controls['estateName'].setValue(Value.estateName);
-    this.form.controls['estateId'].setValue(Value.estateId);
-      console.log('表单',this.form.value);
+    // this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
+    // this.form.controls['estateName'].setValue(Value.estateName);
+    // this.form.controls['estateId'].setValue(Value.estateId);
+    //   console.log('表单',this.form.value);
+    //哥
+    this.form.controls['adminDivisionCode'].setValue(Value.site);
+    this.form.controls['estateName'].setValue(Value.keyword);
+    this.form.controls['estateId'].setValue(Value.id);
+    console.log('表单',this.form.value);
   }
+
   //房源标签处理
    tagsSum(data){
     var str =  data.toString();

@@ -262,9 +262,12 @@ export class HousedetailPage {
     this.navCtrl.push(SearchhousePage);
   };
   estateChange(Value){
-    this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
-    this.form.controls['estateName'].setValue(Value.estateName);
-    this.form.controls['estateId'].setValue(Value.estateId);
+    // this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
+    // this.form.controls['estateName'].setValue(Value.estateName);
+    // this.form.controls['estateId'].setValue(Value.estateId);
+    this.form.controls['adminDivisionCode'].setValue(Value.site);
+    this.form.controls['estateName'].setValue(Value.keyword);
+    this.form.controls['estateId'].setValue(Value.id);
     console.log('表单',this.form.value);
   }
 
@@ -274,6 +277,7 @@ export class HousedetailPage {
   letterOfAttorney(){
     this.navCtrl.push(LetteratorneyPage,{
       propertyid:this.propertyid,
+      estateId:this.data.estateId,
     })
   }
 

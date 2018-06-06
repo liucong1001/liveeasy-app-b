@@ -122,11 +122,13 @@ export class HousingPage {
     })
   }
 
+
   /**
    * 列表搜索
    */
   search(){
-    console.log('area',this.params.area);
+
+    console.log('搜索',this.params.area);
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
          console.log('选择',this.district[i].estateName)
@@ -146,6 +148,13 @@ export class HousingPage {
        this.more = false;
        this.pop = false;
        this.housingEstate = false;
+
+       //户型搜索条件字显示
+       if(this.searchFloorNum ==1){
+          this.searchFloorNum = 2;
+       }
+       console.log('次数',this.searchFloorNum);
+
      });
   }
   //重置
@@ -180,8 +189,11 @@ export class HousingPage {
       this.pop = false;
     }
   }
-
+  // searchEaste = false;
+  searchFloorNum = 0; //初始化搜索次数
+  //户型搜索
   showMenu2() {
+    this.searchFloorNum =1;
     if (this.houseType == false || this.show == true || this.more == true || this.housingEstate == true) {
       this.houseType = true;
       this.show = false;
@@ -341,6 +353,33 @@ export class HousingPage {
       }
     }
   }
+
+  houseJSON = [
+    {name:'不限',val:0},
+    {name:'一室',val:1},
+    {name:'二室',val:2},
+    {name:'三室',val:3},
+    {name:'四室',val:4},
+    {name:'五室',val:5},
+    {name:'五室以上',val:6},
+  ];
+//户型转换
+  housePipe(data){
+     for(var i in this.houseJSON){
+        if(data == this.houseJSON[i].val){
+          return this.houseJSON[i].name;
+        }
+     }
+  }
+  //小区转化
+  estatePipe(data){
+     for(var i in this.estateList){
+       if(data ==this.estateList[i].estateId){
+         return this.estateList[i].estateName
+       }
+     }
+  }
+
 
 
 }
