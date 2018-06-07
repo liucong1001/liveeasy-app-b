@@ -40,17 +40,16 @@ export class SearchhousePage {
   getData(data){
     var path = 'http://47.75.151.57:7077/live/search?keyword='+data+'&site=4200';
     return  this.http.get(path).toPromise().then(res=>{
-      return res;
+      return res as any;
     });
   }
   floor = [];
   getFloorKey(event){
     console.log('event',event.data);
+
     this.getData(event.data).then(res=>{
       this.floor = res.result;
-      console.log('123',res.result);
     })
-    // console.log('接受', );
   }
 
   ionViewDidLoad() {
