@@ -28,19 +28,20 @@ export class AccountPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad AccountPage');
+      // 存储系统中存在登录ticket记录直接跳转到主界面
+      if(this.localStorageProvider.get('ticket')){
+        this.navCtrl.push(TabsPage);
+      }
     }
     goLogin(){
         this.navCtrl.setRoot(LoginPage);
     }
 
     login(){
-
         this.loginBtn = true;
         this.loginProvider.login(this.username,this.password).then(res=>{
             if(res.success){
               this.loginBtn = false;
-              // this.navCtrl.setRoot(TabsPage);
               this.navCtrl.push(TabsPage);
               this.localStorageProvider.set('loginInfo',res.data);
               //存相关信息
