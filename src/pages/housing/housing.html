@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar (click)="allSearch()">
-    <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="serInput"></ion-searchbar>
+  <ion-navbar>
+    <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="serInput" (click)="allSearch()"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds ub" (click)="addHouse()"></ion-icon>
   </ion-navbar>
 </ion-header>
@@ -190,10 +190,21 @@
 
   <!-- 电梯 -->
   <div class="lists houseType" *ngIf="housingEstate">
-    <ion-list radio-group [(ngModel)]="params.estateId" class="scrollC">
-      <ion-item *ngFor="let e of estateList">
-        <ion-label>{{e.estateName}}</ion-label>
-        <ion-radio value="{{e.estateId}}" (ionSelect)="search()"></ion-radio>
+    <!--<ion-list radio-group [(ngModel)]="params.estateId" class="scrollC">-->
+      <!--<ion-item *ngFor="let e of estateList">-->
+        <!--<ion-label>{{e.estateName}}</ion-label>-->
+        <!--<ion-radio value="{{e.estateId}}" (ionSelect)="search()"></ion-radio>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+    <ion-list radio-group [(ngModel)]="params.param" class="scrollC">
+      <ion-item>
+        <ion-label>有</ion-label>
+        <ion-radio  value="0"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>无</ion-label>
+        <ion-radio value="1"></ion-radio>
       </ion-item>
     </ion-list>
     <!--<div class="btns">-->

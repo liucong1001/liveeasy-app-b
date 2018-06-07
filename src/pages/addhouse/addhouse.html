@@ -10,22 +10,21 @@
   <form [formGroup]="form" >
     <ion-list (click)="goserach()" >
       <button ion-item class="pl12">
-        选择楼盘
+        选择楼盘<i class="text-danger">*</i>
         <font color="#aaa" class="changes">
           <span >{{form.value.estateName}}</span>
         </font>
       </button>
     </ion-list>
     <ion-list>
-      <ion-item class="pl12">
-        <ion-label>栋号<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  cancelText="关闭"  [placeholder]="'请选择'"  formControlName="buildingNo">
-          <ion-option value="1">1栋</ion-option>
-          <ion-option value="2">2栋</ion-option>
-          <ion-option value="3">3栋</ion-option>
-          <ion-option value="4">4栋</ion-option>
-        </ion-select>
-      </ion-item>
+      <div class="hdRightInfo">
+        <ion-item class="pl12">
+          <ion-label>栋号<i class="text-danger">*</i></ion-label>
+          <ion-input type="number" formControlName="innerSpaceSize">
+          </ion-input>
+        </ion-item>
+        <span class="hdRightInfo">栋</span>
+      </div>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
@@ -57,7 +56,7 @@
       </div>
       <div class="hdRightInfo">
         <ion-item class="pl12">
-          <ion-label>套内面积<i class="text-danger">*</i></ion-label>
+          <ion-label>套内面积</ion-label>
           <ion-input type="number" formControlName="innerSpaceSize">
           </ion-input>
         </ion-item>
@@ -72,7 +71,7 @@
         <span class="hdRightInfo">万</span>
       </div>
       <ion-item class="pl12">
-        <ion-label>户型</ion-label>
+        <ion-label>户型<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">
           <ion-option value="1">一室</ion-option>
           <ion-option value="2">二室</ion-option>
@@ -96,7 +95,7 @@
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>朝向</ion-label>
+        <ion-label>朝向<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation">
           <ion-option value="1">东</ion-option>
           <ion-option value="2">东南</ion-option>
@@ -109,7 +108,7 @@
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>装修</ion-label>
+        <ion-label>装修<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration">
           <ion-option value="1">毛坯</ion-option>
           <ion-option value="2">清水</ion-option>
