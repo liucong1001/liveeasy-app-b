@@ -20,7 +20,7 @@ export class FileProvider {
      var data = {
        userDir:this.baseDir+userDir
      };
-     return this.httpProvider.httpPostFormJson(this.getTickerPath,data)
+     return this.httpProvider.httpPostFormJson(this.getTickerPath,"userDir=" + this.baseDir+userDir)
   }
 
 

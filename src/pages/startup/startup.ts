@@ -35,6 +35,7 @@ export class StartupPage {
   }
 
   gohome() {
+    window.clearInterval(this.timer);
     this.navCtrl.setRoot(AccountPage);
   }
 

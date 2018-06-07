@@ -35,16 +35,16 @@ export class AccountPage {
     }
 
     login(){
+
         this.loginBtn = true;
         this.loginProvider.login(this.username,this.password).then(res=>{
             if(res.success){
               this.loginBtn = false;
-              this.navCtrl.setRoot(TabsPage);
+              // this.navCtrl.setRoot(TabsPage);
+              this.navCtrl.push(TabsPage);
               this.localStorageProvider.set('loginInfo',res.data);
               //存相关信息
               this.localStorageProvider.set('loginName',res.data.loginName);
-              // this.localStorageProvider.set('phone',res.data.phone);
-              // this.localStorageProvider.set('photo',res.data.photo);
               this.localStorageProvider.set('ticket',res.ticket);
             }
         }).catch(err=>{

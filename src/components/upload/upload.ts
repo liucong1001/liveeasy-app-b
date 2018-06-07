@@ -130,7 +130,7 @@ export class UploadComponent {
     this.fileProvider.getTicker(useDir).then(res=>{
       var apiPath = res.data.host ;
       var data = res.data;
-      // console.log('获取签证成功',res,apiPath);
+      console.log('获取签证成功',res,apiPath);
       this.nowDateFile = new Date().getTime();   //这里没有共用部分
       let options:FileUploadOptions = {
         fileKey:'file',

@@ -94,7 +94,8 @@ export class AddlookPage {
             let base64Image = 'data:image/jpeg;base64,' + imageData;
             this.path = base64Image;
             console.log('图片信息64位',this.path,'图片信息',imageData);
-            this.upload(this.data.estateId+'/'+this.data.propertyId+'/');
+            // this.upload(this.data.+'/'+this.data.propertyId+'/');
+          this.upload(this.data.propertyId+'/'+this.data.estateId+'/');
         }, (err) => {
             // Handle error
         });
@@ -121,11 +122,8 @@ export class AddlookPage {
               'signature': data.signature
             }
           };
-
           console.log('上传参数',this.path,apiPath,options);
           this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
-
-
              this.imagePath = this.imagePathHead +useDir +options.fileName;
             console.log('upload成功',data,'图片地址',this.imagePath);
 
@@ -167,8 +165,13 @@ export class AddlookPage {
 
 
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
-         alert('添加成功');
-        this.navCtrl.push(HousingPage);
+        if(res.success){
+          alert('添加成功');
+          this.navCtrl.push(HousingPage);
+        }else {
+          console.log('失败',res);
+        }
+
       }).catch(err=>{
          alert('添加失败'+err);
       })

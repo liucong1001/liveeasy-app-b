@@ -22,6 +22,11 @@ export class HttpProvider {
     .set('token',this.localStorageProvider.get('ticket'))
     .set('Access-Control-Allow-Origin','*');
 
+  public headersFormJson = new HttpHeaders().set('Content-Type', 'application/json;charset=UTF-8')
+    .set('token',this.localStorageProvider.get('ticket'))
+    .set('Access-Control-Allow-Origin','*');
+
+
   public httpGet(url,params?):Promise<any>{
     return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
       return res as any;
