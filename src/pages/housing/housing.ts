@@ -65,6 +65,7 @@ export class HousingPage {
               public alertCtrl: AlertController,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
               public configProvider: ConfigProvider, public addhouseProvider: AddhouseProvider,public customerProvider:CustomerProvider) {
+    console.log('页面数据',this.pageData);
     this.customerProvider.area().then(res=>{
       console.log('区域', res);
       this.area = res;
@@ -89,9 +90,7 @@ export class HousingPage {
     return this.selected === item;
   };
 
-  search1(data){
-    console.log('点击',data);
-  }
+
   searchDict = '';
   searchArea = '';
   //搜索房源——区域——商圈
@@ -124,12 +123,12 @@ export class HousingPage {
     })
   }
 
+  hasData = true;
   /**
    * 列表搜索
    */
   search(){
 
-    console.log('搜索',this.params.area);
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
          console.log('选择',this.district[i].estateName)
@@ -137,11 +136,16 @@ export class HousingPage {
     }
 
     this.pageData = null;
-     console.log('搜索',this.params);
+    this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
        this.pageData = res.data.result;
-       console.log(this.pageData)
-       // this.localStorageProvider.set('result',this.pageData);
+       console.log('查询到的页面数据',this.pageData);
+       console.log('是否有数据',res.data.hasOwnProperty('result'));
+        if(res.data.hasOwnProperty('result')){
+           this.hasData  = true;
+        }else{
+           this.hasData = false;
+        }
        this.totalPages = res.data.totalPages;
         //关闭搜索框子
        this.show = false;
