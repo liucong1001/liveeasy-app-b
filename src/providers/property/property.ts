@@ -117,8 +117,8 @@ export class PropertyProvider {
     return this.httpProvider.httpPost(this.rolePath,{propertyId:propertyId})
   }
   //实勘图
-  shiKanSave(data){
-    return this.httpProvider.httpPostForm(this.shiKanPath,data);
+  shiKanSave(arrPic,propertyId){
+    return this.httpProvider.httpPostForm(this.shiKanPath,"arrPic=" + arrPic+"&propertyId="+propertyId);
   }
   //专用版楼盘搜索
   searchFloor(params){

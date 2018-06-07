@@ -17,12 +17,14 @@
         <ion-input type="text"  class="p0" formControlName="keyAddress">
         </ion-input>
       </ion-item>
-      <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+      <div class="attorneyPic bgWhite">
         <span>钥匙委托协议</span>
-        <div class="bgWrapper m10" *ngIf="!path"></div>
-        <div *ngIf="path">
-          <img [src]="path" formControlName="keyDlgtFilePics"/>
-        </div>
+        <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
+        <!--<div *ngIf="path">-->
+          <!--<img [src]="path" formControlName="keyDlgtFilePics"/>-->
+        <!--</div>-->
+        <upload [useDir]="useDir" [desc]="''" [position]="''" (successEvent)="yaoChi($event)"></upload>
+
       </div>
     </ion-list>
     <ion-grid>

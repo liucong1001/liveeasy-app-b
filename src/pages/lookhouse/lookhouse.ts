@@ -22,7 +22,7 @@ export class LookhousePage {
   data:PropertyModel;
   useDir :string;
   formData = {
-     arrPic:[],
+     arrPic:'',
      propertyId:'',
   };
   imgHeader: string; //线上图片默认头地址
@@ -89,45 +89,49 @@ export class LookhousePage {
   //     // Handle error
   //   });
   // }
-
+ imgData = [];
   ionViewDidLoad() {
     console.log('ionViewDidLoad LookhousePage');
     this.imgHeader = this.configProvider.set().img;
   }
   menPai(event){
     console.log('门牌号',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
     console.log('表单',this.formData);
   }
   huXin(event){
     console.log('户型图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   keTin(event){
     console.log('客厅图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   woShi(event){
     console.log('卧室图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   chuFang(event){
     console.log('厨房图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   woShenJian(event){
     console.log('卫生间图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   other(event){
     console.log('其他图',event);
-    this.formData.arrPic.push(event.pic);
+    this.imgData.push(event.pic);
   }
   save(){
+    //
+     this.formData.arrPic =  JSON.stringify(this.imgData);
      console.log('提交',this.formData);
-     this.propertyProvider.shiKanSave(this.formData).then(res=>{
+     this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
         if(res.success){
+          console.log('成功返回的数据',res);
           alert('上传成功！');
+          this.navCtrl.pop();
         }else {
           alert('上传失败');
         }

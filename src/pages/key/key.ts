@@ -32,6 +32,7 @@ export class KeyPage {
               private fb:FormBuilder,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
+    this.data = navParams.get('item');
     console.log(this.propertyid)
     this.propertyProvider.keydetail(this.propertyid).then(res => {
       console.log(res);
@@ -117,7 +118,8 @@ export class KeyPage {
       createTime:this.attorneys,
       keySn:this.form.value.keySn,
       keyAddress:this.form.value.keyAddress,
-      keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
+      keyDlgtFilePics:JSON.stringify(this.imgData),
+      // keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
       alert('上传成功');
@@ -125,6 +127,12 @@ export class KeyPage {
     });
     console.log(this.form.value);
   }
+  // JSON.stringify(this.imgData)
+  imgData = [];
+  yaoChi(event){
+    this.imgData.push(event.pic);
+  }
+
   //修改钥匙信息
   updateYc(){
     this.propertyProvider.keyupdate({
@@ -134,12 +142,13 @@ export class KeyPage {
       // createTime:this.attorneys,
       keySn:this.form.value.keySn,
       keyAddress:this.form.value.keyAddress,
-      keyDlgtFilePics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
+      keyDlgtFilePics:JSON.stringify(this.imgData),
+      // keyDlgtFilePics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
       propertyKeyInfoEntity:this.data,
     }).then(res => {
       console.log(res);
       alert('修改成功');
-      this.navCtrl.push(HousedetailPage)
+      this.navCtrl.pop();
     });
   }
 

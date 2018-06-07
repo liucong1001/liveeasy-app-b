@@ -56,10 +56,15 @@ export class HousedetailPage {
               public events: Events) {
     this.data = navParams.get('item');
     this.estateList = navParams.get('estateList');
+    // this.localStorageProvider.set('item',this.data);
+    // if( this.localStorageProvider.get('item')){
+    //
+    // }
     // '联系人',this.data.contacts,JSON.parse(this.data.contacts)
     console.log('获取详情', this.data );
-    var jsonData = JSON.parse(this.data.contacts);
+
     if( this.data){
+      var jsonData = JSON.parse(this.data.contacts);
       this.form.patchValue({
         buildingNo: this.data.buildingNo,
         estateName:this.data.estateName,
@@ -87,27 +92,30 @@ export class HousedetailPage {
         apartments:this.data.apartments,
         propertyDesc:this.data.propertyDesc,//描述
       });
-    }
-
-    //判断存在tagsStr
-    if(this.data.tagsStr){
-      var tagsStr =  this.data.tagsStr.toString();
-      var tagsArry = tagsStr.split(',');
-       var arry = [];
+      //判断存在tagsStr
+      if(this.data.tagsStr){
+        var tagsStr =  this.data.tagsStr.toString();
+        var tagsArry = tagsStr.split(',');
+        var arry = [];
         for(var i in tagsArry){
-           arry[i] = tagsArry[i].toString().replace(/\s/g, "")
+          arry[i] = tagsArry[i].toString().replace(/\s/g, "")
         }
 
-      this.form.patchValue({
-        tagsStr:arry
-      })
+        this.form.patchValue({
+          tagsStr:arry
+        })
+      }
+      this.propertyid=this.data.propertyId;
+      this.localStorageProvider.set('propertyid',this.data.propertyId);
+      //获取房源标签
+      this.houLabel=this.localStorageProvider.get('labels');
+
     }
+
+
     // console.log('参数',this.data, this.data.tagsStr,tagsArry,'表单标签',arry,'固定',['8','16','32']);
     // console.log(this.data.propertyId);
-    this.propertyid=this.data.propertyId;
-    this.localStorageProvider.set('propertyid',this.data.propertyId);
-    //获取房源标签
-    this.houLabel=this.localStorageProvider.get('labels');
+
 
   }
 
@@ -353,6 +361,7 @@ export class HousedetailPage {
   goKey(){
     this.navCtrl.push(KeyPage,{
       propertyid:this.propertyid,
+      item:this.data,
     })
   }
 

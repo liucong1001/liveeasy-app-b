@@ -195,9 +195,7 @@ export class AddhousePage {
   }
 
   save(){
-
     this.tagsSelect(this.form.value.tags);
-
     console.log('触发save方法',this.form.value.contacts);
     // 联系人
      this.form.value.contacts[0].contact = this.form.value.contact;

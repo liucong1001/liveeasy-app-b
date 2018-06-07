@@ -63,6 +63,9 @@ export class HousingPage {
     param:'1', //默认搜索是1,只看我的6,
     tags:0,
   };
+  //楼盘搜索
+  searchFloorName:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,

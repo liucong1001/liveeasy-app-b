@@ -2,6 +2,9 @@ upload {
 
 }
 .camer-div,#uploadDiv,.tip_camer{
-  display: inline;
+  display: inline-block;
 }
-
+.bgWrapper{
+  display: inline-block;
+  //margin:8px 10px 0;
+}

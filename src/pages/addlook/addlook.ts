@@ -7,6 +7,7 @@ import {PropertyModel} from "../../model/property/property.model";
 import {PropertyProvider} from "../../providers/property/property";
 import {AddhousePage} from "../addhouse/addhouse";
 import {HousingPage} from "../housing/housing";
+import {ConfigProvider} from "../../providers/config/config";
 /**
  * Generated class for the AddlookPage page.
  *
@@ -21,7 +22,7 @@ import {HousingPage} from "../housing/housing";
 })
 export class AddlookPage {
 
-  path: string;
+  path: any;
   data:PropertyModel;
   followup_time:any;  //时间
   content:any; //内容
@@ -35,7 +36,8 @@ export class AddlookPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
-              private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider) {
+              private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
+              public configProvider: ConfigProvider) {
     this.data = navParams.get('item');
     this.standardAddress = navParams.get('standardAddress');
   }
@@ -44,7 +46,8 @@ export class AddlookPage {
     console.log('ionViewDidLoad AddlookPage',);
     // this.data = this.navParams.get('item');
     console.log('带看',this.data,this.data.convId);
-    this.fileProvider.getTicker(this.data.estateId+'/'+this.data.propertyId+'/').then()
+    this.fileProvider.getTicker(this.data.estateId+'/'+this.data.propertyId+'/').then();
+    this.imgHeader = this.configProvider.set().img;
   }
 
 
@@ -77,12 +80,23 @@ export class AddlookPage {
     actionSheet.present();
   }
 
+   convertBase64UrlToBlob(urlData) {
+    const bytes = window.atob(urlData.split(',')[1]);        // 去掉url的头，并转换为byte
+    // 处理异常,将ascii码小于0的转换为大于0
+    const ab = new ArrayBuffer(bytes.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < bytes.length; i++) {
+      ia[i] = bytes.charCodeAt(i);
+    }
+    return new Blob([ab], { type: 'image/png' });
+  }
+
     //打开摄像头
     takePhoto(sourceType:number) {
       // console.log('手机调试',sourceType);
         const options: CameraOptions = {
             quality: 50,
-            destinationType: this.camera.DestinationType.DATA_URL,
+            destinationType: this.camera.DestinationType.FILE_URI,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true,
@@ -91,9 +105,9 @@ export class AddlookPage {
 
         this.camera.getPicture(options).then((imageData,) => {
           console.log('图片data',options);
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
-            this.path = base64Image;
-            console.log('图片信息64位',this.path,'图片信息',imageData);
+            // let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.path = imageData ;
+            console.log('图片信息imageData位',this.path,'图片信息',imageData);
             // this.upload(this.data.+'/'+this.data.propertyId+'/');
           this.upload(this.data.propertyId+'/'+this.data.estateId+'/');
         }, (err) => {
@@ -101,7 +115,8 @@ export class AddlookPage {
         });
     }
 
-
+  imgHeader='';
+  imgSrc = '';
     //文件上传
     upload(useDir){
         console.log('上传的useDir',useDir);
@@ -109,13 +124,13 @@ export class AddlookPage {
           var apiPath = res.data.host ;
           var data = res.data;
           console.log('获取签证成功',res,apiPath);
-          this.nowDateFile = new Date().getTime();   //这里没有共用部分
+          let newFileName = this.nowDateFile = new Date().getTime();   //这里没有共用部分
           let options:FileUploadOptions = {
             fileKey:'file',
-            fileName:new Date().getTime()+'.jpg',
+            fileName: newFileName +'.jpg',
             headers:{},
             params:{
-              'key' : data.dir,
+              'key' : data.dir + newFileName +'.jpg',
               'policy': data.policy,
               'OSSAccessKeyId': data.accessid,
               'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
@@ -125,7 +140,8 @@ export class AddlookPage {
           console.log('上传参数',this.path,apiPath,options);
           this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
              this.imagePath = this.imagePathHead +useDir +options.fileName;
-            console.log('upload成功',data,'图片地址',this.imagePath);
+             this.imgSrc = this.imgHeader+ this.imagePath;
+            console.log('upload成功',data,'图片地址',this.imagePath,'全地址',this.imgSrc);
 
           }, (err) => {
             console.log('upload失败',err);

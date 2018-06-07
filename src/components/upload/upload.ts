@@ -7,6 +7,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {PropertyModel} from "../../model/property/property.model";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
+import {ConfigProvider} from "../../providers/config/config";
 /**
   多图片上传组件
  */
@@ -35,9 +36,9 @@ export class UploadComponent {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
-              private imagePicker:ImagePicker,private base64: Base64
+              private imagePicker:ImagePicker,private base64: Base64,public configProvider: ConfigProvider
   ) {
-
+    this.imgHeader = this.configProvider.set().img;
   }
   //触发调用事件
   presentActionSheet() {
@@ -75,7 +76,7 @@ export class UploadComponent {
     // console.log('手机调试',sourceType);
     const options: CameraOptions = {
       quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
@@ -88,8 +89,8 @@ export class UploadComponent {
          for(var i=0;i<results.length;i++){
            // console.log('图片'+i,results[i]);
            var path = results[i].replace(/^file:\/\//, '');
-           var imgUrl= "<img src=" +results[i] +  " class='img_upload'  \">  ";
-           this.data = this.data+imgUrl;
+           // var imgUrl= "<img src=" +results[i] +  " class='img_upload'  \">  ";
+           // this.data = this.data+imgUrl;
            this.upload(this.useDir);
            //转64字节
            this.base64.encodeFile(results[i]).then((base64File: string) => {
@@ -107,12 +108,10 @@ export class UploadComponent {
     }else if(sourceType==1){
 
       this.camera.getPicture(options).then((imageData,) => {
-        // console.log('图片data',options);
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        // console.log('图片data',options);'data:image/jpeg;base64,' +
+        let base64Image =  imageData;
         this.path = base64Image;
-        //页面显示多个拍照
-        var pathHtml =  "<img src=" +this.path +  " class='img_upload'  \">  ";
-        this.data = this.data + pathHtml;
+
         // console.log('图片信息64位',this.path,'图片信息',imageData);
         this.upload(this.useDir);
       }, (err) => {
@@ -123,7 +122,8 @@ export class UploadComponent {
 
   }
 
-
+  imgHeader='';
+  imgSrc = '';
   //文件上传
   upload(useDir){
 
@@ -131,13 +131,13 @@ export class UploadComponent {
       var apiPath = res.data.host ;
       var data = res.data;
       console.log('获取签证成功',res,apiPath);
-      this.nowDateFile = new Date().getTime();   //这里没有共用部分
+      let newFileName = this.nowDateFile = new Date().getTime();   //这里没有共用部分
       let options:FileUploadOptions = {
         fileKey:'file',
         fileName:new Date().getTime()+'.jpg',
         headers:{},
         params:{
-          'key' : data.dir,
+          'key' : data.dir + newFileName +'.jpg',
           'policy': data.policy,
           'OSSAccessKeyId': data.accessid,
           'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
@@ -159,6 +159,11 @@ export class UploadComponent {
           position:this.position,
           desc:this.desc,
         };
+        this.imgSrc = this.imgHeader+ this.imagePath;
+        //页面显示多个拍照
+        var pathHtml =  "<img src=" +this.imgSrc +  " class='img_upload'  \">  ";
+        this.data = this.data + pathHtml;
+
         console.log('upload成功',data,'图片地址',this.imagePath);
         this.successEvent.emit({pic});
       }, (err) => {

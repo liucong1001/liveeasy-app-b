@@ -21,14 +21,12 @@ export class SearchhousePage {
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
     // this.initializeItems();
-
     //楼盘列表
     this.addhouseProvider.estateListSelect().then(res=>{
       this.estateList = res.data.result;
       this.initializeItems();
     });
     this.callback = this.navParams.get("callback");
-
   }
 
   getData(data){
@@ -47,6 +45,7 @@ export class SearchhousePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchhousePage');
+
   }
 
 
