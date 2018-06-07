@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
- <ion-searchbar placeholder="楼盘搜索" (ionInput)="getItems($event)" class="hoInput"></ion-searchbar>
+ <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="hoInput"></ion-searchbar>
   </ion-navbar>
   <ion-list *ngIf="associate" class="searchs">
     <ion-item *ngFor="let item of items"  class="pl12">{{ item }}</ion-item>

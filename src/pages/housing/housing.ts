@@ -48,6 +48,7 @@ export class HousingPage {
   hTips=false;
   associate=false;
   searchPop=false;
+  address:any;
   /**
    * 列表搜索条件
    * @type {{}}
@@ -70,8 +71,6 @@ export class HousingPage {
       console.log('区域', res);
       this.area = res;
     });
-
-
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsList = res.data;
@@ -251,10 +250,11 @@ export class HousingPage {
   searchStandardAddress(name){
      for(var i in  this.estateList){
          if(name == this.estateList[i].estateName){
-            return this.estateList[i].standardAddress
+            return this.estateList[i].standardAddress;
          }
      }
   }
+
   goFollow(item) {
     this.navCtrl.push(FollowPage, {
       propertyid: item.propertyId,

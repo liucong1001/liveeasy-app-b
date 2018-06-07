@@ -62,8 +62,8 @@ export class AddhousePage {
       bathrooms:['1'],
       kitchens:['1'],
       balconies:['1'],//阳
-      orientation:[null,Validators.required],//房屋朝向
-      decoration:[null],//装修水平
+      orientation:['1',Validators.required],//房屋朝向
+      decoration:['1'],//装修水平
       contacts:this.fb.array([
         this.fb.group({
           contact:[''],

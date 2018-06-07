@@ -26,7 +26,7 @@
           <ion-option value="4">4栋</ion-option>
         </ion-select>
       </ion-item>
-      <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"  ></valid-error>
+      <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
         <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" ></ion-input>

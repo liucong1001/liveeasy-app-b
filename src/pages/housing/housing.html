@@ -40,17 +40,17 @@
       <ion-col col-12 (click)="goHouseDetail(item)">
         <ion-row>
           <ion-col col-4>
-            <img [src]="imgHeader+pic(item?.propertyPics)" *ngIf="item.propertyPics" alt="" width="100%" height="140">
-            <img src="assets/imgs/default.jpg"  *ngIf="!item.propertyPics" alt="" width="100%" height="140">
+            <img [src]="imgHeader+pic(item?.propertyPics)" *ngIf="item.propertyPics" alt="" width="100%" height="120">
+            <img src="assets/imgs/default.jpg"  *ngIf="!item.propertyPics" alt="" width="100%" height="120">
           </ion-col>
           <ion-col col-8>
             <div class="ellipsis">
               <font size="3">{{item.estateName}}</font>
             </div>
-            <p class="m5">
-              <font size="2" color="#aaa">ID:
-                <span>{{item.convId}}</span>
-                <span>{{item.propertyTitle}}</span>
+            <p class="m5 ellipsis" >
+              <font size="2" color="#aaa">
+                <!--ID:<span>{{item.convId}}</span>-->
+                <span>{{searchStandardAddress(item.estateName)}}</span>
               </font>
             </p>
             <ion-row>
@@ -70,12 +70,12 @@
                 </font>
               </ion-col>
             </ion-row>
-            <div class="tips uDis">
+            <div class="tips" [ngClass]="{uDis:item.tagsStr}">
               <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5">{{tagName(x)}}</a>
             </div>
             <div>
               <font size="1" color="#aaa">
-                <span>{{item.createdTime | date:'yyyy年MM月dd日'}}</span>录入</font>
+                <span>{{item.createdTime | date:'yyyy/MM/dd'}}</span>录入</font>
               <font size="1" color="#aaa">归属人：
                 <span>{{item.realtorName }}</span>
               </font>
