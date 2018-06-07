@@ -5,6 +5,7 @@ import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../addhouse/addhouse";
 import {AddpassengerPage} from "../addpassenger/addpassenger";
 import {DeclarationPage} from "../declaration/declaration";
+import {AllsearchPage} from "../allsearch/allsearch";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -28,7 +29,6 @@ export class HomePage {
        this.homeProvider.getNotification().then(res=>{
            this.notificationNews = res.data.result;
        });
-    this.initializeItems()
   }
   addhouse(){
     this.navCtrl.push(AddhousePage)
@@ -43,33 +43,7 @@ export class HomePage {
   godeclara(){
   this.navCtrl.push(DeclarationPage)
 }
-//搜索
-  items;
-  initializeItems(){
-    this.items=[
-      'Amsterdam',
-      'Bogota',
-      'Buenos Aires',
-      'Cairo',
-      'Dhaka',
-      'Edinburgh',
-      'Uelzen',
-      'Washington'
-    ]
-  }
-  getItems(ev){
-    this.initializeItems();
-    var val=ev.target.value;
-    this.associate=true;
-    this.pop=true;
-    if(val&&val.trim()!=''){
-      this.items=this.items.filter((item)=>{
-        return (item.toLowerCase().indexOf(val.toLowerCase())>-1)
-      })
-    }
-  }
-  pops(){
-    this.pop=false;
-    this.associate=false;
+  allSearch(){
+    this.navCtrl.push(AllsearchPage)
   }
 }

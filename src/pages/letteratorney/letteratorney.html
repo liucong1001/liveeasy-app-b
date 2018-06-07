@@ -12,13 +12,20 @@
         <ion-input type="text"  class="p0" formControlName="delegateDocSn">
         </ion-input>
       </ion-item>
+      <ion-item class="pl12">
+        <ion-label>类型</ion-label>
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="delegateStyle">
+          <ion-option value="1">售出为止</ion-option>
+          <ion-option value="2">截止时间</ion-option>
+        </ion-select>
+      </ion-item>
       <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
       <ion-item class="pl12">
           <ion-label>起始时间</ion-label>
           <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm"   doneText="确定"  cancelText="取消" (ionChange)="timeCompare()"></ion-datetime>
         </ion-item>
       <valid-error [errors]="errors.delegateBeginTm"  [control]="form.get('delegateBeginTm')"  ></valid-error>
-        <ion-item class="pl12">
+        <ion-item class="pl12" *ngIf="this.form.value.delegateStyle == 2">
             <ion-label>结束时间</ion-label>
             <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateEndTm" (ionChange)="timeCompare()" doneText="确定"  cancelText="取消"></ion-datetime>
           </ion-item>

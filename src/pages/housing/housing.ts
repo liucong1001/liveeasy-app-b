@@ -14,6 +14,7 @@ import {PropertyModel} from "../../model/property/property.model";
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {CustomerProvider} from "../../providers/customer/customer";
+import {AllsearchPage} from "../allsearch/allsearch";
 
 /**
  * Generated class for the HousingPage page.
@@ -384,38 +385,9 @@ export class HousingPage {
        }
      }
   }
-
-
-  //搜索
-  items;
-  initializeItems(){
-    this.items=[
-      'Amsterdam',
-      'Bogota',
-      'Buenos Aires',
-      'Cairo',
-      'Dhaka',
-      'Edinburgh',
-      'Uelzen',
-      'Washington'
-    ]
+  allSearch(){
+    this.navCtrl.push(AllsearchPage)
   }
-  getItems(ev){
-    this.initializeItems();
-    var val=ev.target.value;
-    this.associate=true;
-    this.searchPop=true;
-    if(val&&val.trim()!=''){
-      this.items=this.items.filter((item)=>{
-        return (item.toLowerCase().indexOf(val.toLowerCase())>-1)
-      })
-    }
-  }
-  searchPops(){
-    this.associate=false;
-    this.searchPop=false;
-  }
-
 }
 
 /**

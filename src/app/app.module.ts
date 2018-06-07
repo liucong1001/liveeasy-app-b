@@ -90,7 +90,7 @@ import {DescPage} from "../pages/desc/desc";
 import {BelongerPage} from "../pages/belonger/belonger";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
-
+import {AllsearchPage} from "../pages/allsearch/allsearch";
 @NgModule({
   declarations: [
     MyApp,
@@ -142,7 +142,8 @@ import { Base64 } from '@ionic-native/base64';
        AreaPipe,
     KeyPage,
     DescPage,
-    BelongerPage
+    BelongerPage,
+    AllsearchPage
   ],
   entryComponents: [
     MyApp,
@@ -190,7 +191,8 @@ import { Base64 } from '@ionic-native/base64';
     LetteratorneyPage,
     KeyPage,
     DescPage,
-    BelongerPage
+    BelongerPage,
+    AllsearchPage
   ],
     imports: [
         BrowserModule,
