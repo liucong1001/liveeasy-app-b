@@ -121,7 +121,7 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       alert('上传成功');
-      this.navCtrl.push(HousingPage)
+      this.navCtrl.push(HousedetailPage)
     });
     console.log(this.form.value);
   }
@@ -139,7 +139,7 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       alert('修改成功');
-      this.navCtrl.push(HousingPage)
+      this.navCtrl.push(HousedetailPage)
     });
   }
 

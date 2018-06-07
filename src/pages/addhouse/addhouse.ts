@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";

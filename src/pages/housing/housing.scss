@@ -1,3 +1,17 @@
+.searchPop{
+  z-index: 1 !important;
+  top: 0 !important;
+}
+.ub{
+  background: #db2426;
+  width: 30px;
+  height: 2.2rem;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.9em !important;
+  margin: 3px 0 0 10px;
+  right: 8px !important;
+}
 .uDis{
   height: 36px;
   overflow: hidden;
@@ -140,7 +154,7 @@ page-housing .tips a:nth-child(10) {
   margin-top: 13px;
 }
 
-.pop,.pops {
+.pop,.pops,.searchPop {
   position: absolute;
   left: 0;
   top: 90px;

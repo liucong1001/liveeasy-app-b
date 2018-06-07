@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic
 import { RedacthousePage } from '../redacthouse/redacthouse';
 import {SearchhousePage} from "../searchhouse/searchhouse";
 import {RecordPage} from "../record/record";
-import { LookhousePage } from './../lookhouse/lookhouse';
+import { LookhousePage } from '../lookhouse/lookhouse';
 import { LetteratorneyPage } from '../letteratorney/letteratorney';
 import { RolepeoplePage } from '../rolepeople/rolepeople';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";

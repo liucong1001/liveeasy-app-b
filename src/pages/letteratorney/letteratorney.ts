@@ -145,7 +145,7 @@ export class LetteratorneyPage {
     }).then(res => {
       console.log(res);
       alert('上传成功！')
-      this.navCtrl.push(HousingPage)
+      this.navCtrl.push(HousedetailPage)
     });
     console.log(this.form.value);
     console.log(new Date(this.form.value.delegateBeginTm).getTime())
@@ -192,7 +192,7 @@ export class LetteratorneyPage {
     }).then(res => {
       console.log(res);
       alert('修改成功！');
-      this.navCtrl.push(HousingPage)
+      this.navCtrl.push(HousedetailPage)
     });
   }
 }

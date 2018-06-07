@@ -46,6 +46,8 @@ export class HousingPage {
   aeraShow=true;
   tradArea=false;
   hTips=false;
+  associate=false;
+  searchPop=false;
   /**
    * 列表搜索条件
    * @type {{}}
@@ -121,7 +123,6 @@ export class HousingPage {
       console.log('数据', res.data);
     })
   }
-
 
   /**
    * 列表搜索
@@ -381,6 +382,35 @@ export class HousingPage {
   }
 
 
+  //搜索
+  items;
+  initializeItems(){
+    this.items=[
+      'Amsterdam',
+      'Bogota',
+      'Buenos Aires',
+      'Cairo',
+      'Dhaka',
+      'Edinburgh',
+      'Uelzen',
+      'Washington'
+    ]
+  }
+  getItems(ev){
+    this.initializeItems();
+    var val=ev.target.value;
+    this.associate=true;
+    this.searchPop=true;
+    if(val&&val.trim()!=''){
+      this.items=this.items.filter((item)=>{
+        return (item.toLowerCase().indexOf(val.toLowerCase())>-1)
+      })
+    }
+  }
+  searchPops(){
+    this.associate=false;
+    this.searchPop=false;
+  }
 
 }
 

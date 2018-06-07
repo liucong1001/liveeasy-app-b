@@ -1,3 +1,29 @@
+page-home .toolbar-background-ios,
+page-housing .toolbar-background-ios{
+  background: #e8e8e8 !important;
+}
+page-home .toolbar .searchbar-ios .searchbar-input,
+page-housing .toolbar .searchbar-ios .searchbar-input{
+  background: #fff !important;
+}
+page-home .searchbar-ios,
+page-housing .searchbar-ios{
+    min-height: 100%;
+}
+page-home .pop{
+  z-index: 1;
+  top: 0;
+}
+.searchs{
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: 38px;
+}
+.hoInput{
+  width: 95%;
+  margin: 5px auto;
+}
 .newsList:last-child{
   margin: 3px 0 8px;
 }

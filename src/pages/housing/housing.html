@@ -1,10 +1,11 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>房源</ion-title>
-    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+    <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="serInput"></ion-searchbar>
+    <ion-icon ios="ios-add" md="md-add" class="adds ub" (click)="addHouse()"></ion-icon>
   </ion-navbar>
-
+  <ion-list *ngIf="associate">
+    <ion-item *ngFor="let item of items"  class="pl12">{{ item }}</ion-item>
+  </ion-list>
 </ion-header>
 
 <ion-content no-bounce>
@@ -222,6 +223,6 @@
 
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>
-
+<div class="searchPop" *ngIf="searchPop" (click)="searchPops()"></div>
 
 
