@@ -33,7 +33,7 @@ export class FollowPage {
     this.convid = navParams.get('convid');
     this.standardAddress = navParams.get('standardAddress');
     this.followuptime=new Date().getTime();
-    console.log('跟进',navParams)
+    console.log('跟进',navParams);
 
   }
 
@@ -42,7 +42,7 @@ export class FollowPage {
 
   }
   form:FormGroup =this.fb.group({
-    followupCode:['',Validators.required], //类型
+    followupCode:['1',Validators.required], //类型
     content:['',Validators.required],//内容
   });
 

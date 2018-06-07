@@ -19,8 +19,8 @@ export class RecordProvider {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordProvider');
   }
-  getRecord(params?) {
-    return this.httpProvider.httpPost(this.record, params)
+  getRecord(propertyId) {
+    return this.httpProvider.httpPost(this.record, {propertyId:propertyId})
   }
 
 

@@ -8,6 +8,7 @@
     <!--</ion-item>-->
   <!--</ion-list>-->
   <ion-searchbar placeholder="楼盘搜索" (ionInput)="getFloorKey($event)" class="serInput"></ion-searchbar>
+  <span class="cancel" (click)="back()">取消</span>
   <ion-list>
       <ion-item *ngFor="let item of floor"  class="pl12">
       <ion-label>{{item.keyword}}</ion-label>

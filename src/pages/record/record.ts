@@ -24,20 +24,16 @@ export class RecordPage {
   id:any;
   nones=false;
   have=false;
+  propertyid:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,
               public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider,
               public  configProvider:ConfigProvider) {
-    this.recordprovider.getRecord({}).then(res => {
+    this.propertyid = navParams.get('propertyid');
+    this.recordprovider.getRecord(this.propertyid).then(res => {
       console.log(res);
-      this.followUp = res.data.propFollowupInfos;
-      this.lookEmpty=res.data.propEmptyLookInfos;
-      // this.name = res.data.propFollowupInfos;
-      // this.a='https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/liveeasy-erp/';
-      for (var i = 0;i<res.data.length;i++){
-        // debugger;
-        console.log(res.data.propEmptyLookInfos[i].followupPics)
-      }
+        this.followUp = res.data.propFollowupInfos;
+        this.lookEmpty=res.data.propEmptyLookInfos;
     });
   }
   imgHeader:string; //线上图片默认头地址

@@ -237,7 +237,9 @@ export class HousedetailPage {
     actionSheet.present();
   }
   record(){
-    this.navCtrl.push(RecordPage);
+    this.navCtrl.push(RecordPage,{
+      propertyid:this.propertyid,
+    });
   }
   goRedact(){
     this.navCtrl.push(RedacthousePage);
