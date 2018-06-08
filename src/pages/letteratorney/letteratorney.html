@@ -15,8 +15,8 @@
       <ion-item class="pl12">
         <ion-label>类型</ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="delegateStyle">
-          <ion-option value="1">售出为止</ion-option>
-          <ion-option value="2">截止时间</ion-option>
+          <ion-option value="1">截止时间</ion-option>
+          <ion-option value="2">售出为止</ion-option>
         </ion-select>
       </ion-item>
       <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
@@ -25,15 +25,23 @@
           <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm"   doneText="确定"  cancelText="取消" (ionChange)="timeCompare()"></ion-datetime>
         </ion-item>
       <valid-error [errors]="errors.delegateBeginTm"  [control]="form.get('delegateBeginTm')"  ></valid-error>
-        <ion-item class="pl12" *ngIf="this.form.value.delegateStyle == 2">
-            <ion-label>结束时间</ion-label>
+      <ion-item class="pl12" *ngIf="this.form.value.delegateStyle == 1">
+            <ion-label>截止时间</ion-label>
             <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateEndTm" (ionChange)="timeCompare()" doneText="确定"  cancelText="取消"></ion-datetime>
           </ion-item>
       <valid-error [errors]="errors.delegateEndTm"  [control]="form.get('delegateEndTm')"  ></valid-error>
-       <p *ngIf="timeCheck" class="errorTip">*起始时间不能大于结束时间</p>
-          <div class="attorneyPic bgWhite">
-            <span>委托书图片</span>
-            <upload [useDir]="useDir" [desc]="'委托书'" [position]="''" (successEvent)="weiTuo($event)"></upload>
+      <p *ngIf="timeCheck" class="errorTip">*起始时间不能大于结束时间</p>
+      <div class="attorneyPic bgWhite" *ngIf="edit">
+        <span>委托书图片</span>
+        <upload [useDir]="useDir" [desc]="'委托书'" [position]="''" (successEvent)="weiTuo($event)"></upload>
+      </div>
+    </ion-list>
+    <ion-list *ngIf="!edit" >
+      <div class="attorneyPic bgWhite" *ngFor="let item of imgJson">
+        <p>{{item.desc}}</p>
+        <div class="m10">
+          <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+        </div>
       </div>
     </ion-list>
     <ion-grid>

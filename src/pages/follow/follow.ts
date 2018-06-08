@@ -57,7 +57,7 @@ export class FollowPage {
       }).then(res => {
         console.log(res);
         alert('跟进成功！')
-        this.navCtrl.push(HousingPage)
+        this.navCtrl.pop()
       });
   console.log(this.form.value)
 }

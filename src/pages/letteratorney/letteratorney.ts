@@ -7,6 +7,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {ErrorMessage} from "../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
+import {ConfigProvider} from "../../providers/config/config";
 /**
  * Generated class for the LetteratorneyPage page.
  *
@@ -29,10 +30,13 @@ export class LetteratorneyPage {
   data:any;
   timeCheck = false;
   useDir:string;
+  imgHeader: string;
+  imgJson :any;
+  edit = false;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,
-              public navParams: NavParams,
+              public navParams: NavParams,public configProvider: ConfigProvider,
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
     this.propertyid = navParams.get('propertyid');
     this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
@@ -41,7 +45,7 @@ export class LetteratorneyPage {
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
       console.log('委托书详情',res);
-      if(res.data != undefined){
+      if(res.hasOwnProperty('data')){
         this.data = res.data;
         this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({
@@ -49,13 +53,21 @@ export class LetteratorneyPage {
           delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
           delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
           delegateDocPics:res.data.delegateDocPics,
+          delegateStyle:res.data.delegateStyle
         })
         this.sub=false;
         this.upd=true;
-      }else {
-        // alert(2);
       }
+      //委托书图片显示
+      if(res.hasOwnProperty('data')){
+        this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
+        console.log(this.imgJson)
+      }else{
+        this.edit = true;
+      }
+      console.log('dir',this.useDir,'详情',this.data);
     });
+
   }
   // presentActionSheet() {
   //   let actionSheet = this.actionSheetCtrl.create({
@@ -107,13 +119,14 @@ export class LetteratorneyPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
+    this.imgHeader = this.configProvider.set().img;
   }
 
   form:FormGroup =this.fb.group({
     delegateDocSn:['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/g)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:['',Validators.required],//结束时间
-    delegateDocPics:[''],//委托书图片
+    delegateDocPics:['',Validators.required],//委托书图片
     delegateStyle:['',Validators.required] //状态
   });
 
@@ -146,7 +159,7 @@ export class LetteratorneyPage {
     }).then(res => {
       console.log(res);
       alert('上传成功！')
-      this.navCtrl.push(HousedetailPage)
+      this.navCtrl.pop()
     });
     console.log(this.form.value);
     console.log(new Date(this.form.value.delegateBeginTm).getTime())
@@ -181,7 +194,7 @@ export class LetteratorneyPage {
     console.log('提交数据',JSON.stringify(this.imgData));
     this.propertyProvider.aupdate({
       delegateDocId:this.delegateDocId,
-      delegateStyle:1,
+      delegateStyle:this.form.value.delegateStyle,
       propertyId:this.propertyid,
       createTime:this.attorneys,
       delegateDocSn:this.form.value.delegateDocSn,
@@ -193,6 +206,7 @@ export class LetteratorneyPage {
     }).then(res => {
       console.log(res);
       alert('修改成功！');
+      this.navCtrl.pop()
       // propertyId   showIntention=false;
       this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
     });

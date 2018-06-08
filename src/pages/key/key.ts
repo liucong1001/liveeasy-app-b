@@ -123,7 +123,7 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       alert('上传成功');
-      this.navCtrl.push(HousedetailPage)
+      this.navCtrl.pop()
     });
     console.log(this.form.value);
   }

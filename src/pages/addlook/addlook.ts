@@ -183,7 +183,7 @@ export class AddlookPage {
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
         if(res.success){
           alert('添加成功');
-          this.navCtrl.push(HousingPage);
+          this.navCtrl.pop();
         }else {
           console.log('失败',res);
         }

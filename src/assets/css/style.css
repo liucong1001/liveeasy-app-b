@@ -18,13 +18,9 @@
 }
 
 .font12 {
-    font-size: 12px
+    font-size: xx-small;
+  color: #aaa;
 }
-
-.font16 {
-    font-size: 16px
-}
-
 .relative {
     position: relative;
 }

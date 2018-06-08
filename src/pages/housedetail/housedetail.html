@@ -11,9 +11,8 @@
 
   <form [formGroup]="form" *ngIf="data" >
     <ion-list>
-
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>房间ID:{{data.convId}}</ion-label>
+        <ion-label>房间ID：{{data.convId}}</ion-label>
       </ion-item>
     </ion-list>
     <ion-list (click)="goserach()">
@@ -212,15 +211,12 @@
     <ion-list class="m10">
       <button ion-item class="pl12" (click)="lookHouse()">
         房源实勘
-        <font color="#aaa" class="changes">无</font>
       </button>
       <button ion-item class="pl12" (click)="letterOfAttorney()">
         业主委托书
-        <font color="#aaa" class="changes">有</font>
       </button>
       <button ion-item class="pl12" (click)="goKey()">
         钥匙
-        <font color="#aaa" class="changes">有</font>
       </button>
       <button ion-item class="pl12" (click)="rolepeople()">
         角色人

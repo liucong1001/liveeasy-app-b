@@ -41,7 +41,6 @@ export class AllsearchPage {
       return res as any;
     });
   }
-
   floor = [];
   edit = false;
   getFloorKey(event){

@@ -90,7 +90,7 @@ export class ClosehousePage {
         }).then(res => {
           console.log(res);
           alert('关闭成功');
-          this.navCtrl.push(HousingPage)
+          this.navCtrl.pop();
         });
       }else {
         alert('请选择无效原因')
