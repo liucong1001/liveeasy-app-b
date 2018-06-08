@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar (click)="allSearch()">
- <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="hoInput"></ion-searchbar>
+  <ion-navbar>
+    <ion-searchbar placeholder="房源搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 <ion-content>

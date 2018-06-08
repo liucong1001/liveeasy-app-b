@@ -43,7 +43,9 @@ export class HomePage {
   godeclara(){
   this.navCtrl.push(DeclarationPage)
 }
+  floorName = '';
   allSearch(){
-    this.navCtrl.push(AllsearchPage)
-  }
+    this.navCtrl.push(AllsearchPage,{floorName:this.floorName,index:1})
+}
+
 }

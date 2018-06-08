@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from '../follow/follow';
 import {ClosehousePage} from '../closehouse/closehouse';
@@ -15,6 +15,7 @@ import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {CustomerProvider} from "../../providers/customer/customer";
 import {AllsearchPage} from "../allsearch/allsearch";
+import {SearchhousePage} from "../searchhouse/searchhouse";
 
 /**
  * Generated class for the HousingPage page.
@@ -67,10 +68,20 @@ export class HousingPage {
   searchFloorName:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl: AlertController,
+              public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
               public configProvider: ConfigProvider, public addhouseProvider: AddhouseProvider,public customerProvider:CustomerProvider) {
     console.log('页面数据',this.pageData);
+
+      if(!navParams.get('item')){
+        this.floorName = '';
+        this.params.estateId = '';
+      }else {
+        this.floorName = navParams.get('item').keyword;
+        this.params.estateId = navParams.get('item').id;
+      }
+
+
     this.customerProvider.area().then(res=>{
       console.log('区域', res);
       this.area = res;
@@ -390,8 +401,26 @@ export class HousingPage {
        }
      }
   }
+  floorName = '';
   allSearch(){
-    this.navCtrl.push(AllsearchPage)
+
+    // this.events.subscribe('bevents', (params) => {
+    //   // 接收B页面发布的数据
+    //   console.log('接收数据为: ', params);
+    //   if(!params){
+    //     this.floorName = '';
+    //     this.params.estateId = '';
+    //   }else {
+    //     this.floorName = params.keyword;
+    //     this.params.estateId = params.id;
+    //   }
+    //   this.search();
+    //   // keyword
+    //   // 取消订阅
+    //   this.events.unsubscribe('bevents');
+    // });
+   // this.navCtrl.push(SearchhousePage);
+    this.navCtrl.push(AllsearchPage,{floorName:this.floorName})
   }
 }
 

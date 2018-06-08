@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar placeholder="房源搜索" (ionInput)="getItems($event)" class="serInput" (click)="allSearch()"></ion-searchbar>
-    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+    <ion-searchbar placeholder="房源搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
+    <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
   </ion-navbar>
 </ion-header>
 

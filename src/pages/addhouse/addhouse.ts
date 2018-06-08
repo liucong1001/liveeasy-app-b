@@ -93,6 +93,7 @@ export class AddhousePage {
     elevators:[''],//梯
     apartments:[''],//户
   });
+
  //表单验证消息
     errors={
         buildingNo:[

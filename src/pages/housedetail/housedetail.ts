@@ -126,7 +126,7 @@ export class HousedetailPage {
   //房源标签处理
   tagsSum(data){
     var str =  data.toString();
-    var result = str.split(",");
+    var result = str.split(",");0
     var sum = 0;
     for(var i in result){
       sum+=parseInt(result[i])
@@ -268,8 +268,6 @@ export class HousedetailPage {
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
       console.log('接收数据为: ', params);
-      // this.form.value.estateName = params.estateName;
-      // this.form.value.estateId =  params.estateId;
       this.estateChange(params);
       // 取消订阅
       this.events.unsubscribe('bevents');

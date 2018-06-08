@@ -20,13 +20,11 @@ export class SearchhousePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
-    // this.initializeItems();
-    //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-      this.initializeItems();
-    });
-    this.callback = this.navParams.get("callback");
+
+    //默认楼盘展示
+    this.getData('wu').then(res=>{
+      this.floor = res.result;
+    })
   }
 
   getData(data){

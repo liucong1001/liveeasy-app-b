@@ -48,7 +48,7 @@
             <textarea rows="5" [(ngModel)]="content"  name="content"  placeholder="你跟进的内容..."></textarea>
           </div>
         </ion-col>
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
+        <div class="attorneyPic bgWhite">
           <span>上传图片</span>
           <div class="bgWrapper m10"  *ngIf="!path"></div>
           <div *ngIf="path" class="m10" >

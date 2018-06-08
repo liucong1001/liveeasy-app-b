@@ -5,6 +5,8 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 import {HttpClient} from '@angular/common/http';
 import { Events } from 'ionic-angular';
 import {PropertyProvider} from "../../providers/property/property";
+import {HousingPage} from "../housing/housing";
+import {HomePage} from "../home/home";
 /**
  * Generated class for the AllsearchPage page.
  *
@@ -24,14 +26,12 @@ export class AllsearchPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
-    // this.initializeItems();
+    this.search = navParams.get('floorName');
 
-    //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-      this.initializeItems();
-    });
-    this.callback = this.navParams.get("callback");
+  //默认楼盘展示
+    this.getData('wu').then(res=>{
+      this.floor = res.result;
+    })
 
   }
 
@@ -41,10 +41,13 @@ export class AllsearchPage {
       return res as any;
     });
   }
+
   floor = [];
+  edit = false;
   getFloorKey(event){
     this.getData(event._value).then(res=>{
       this.floor = res.result;
+      this.edit = true;
     })
   }
 
@@ -53,27 +56,18 @@ export class AllsearchPage {
     console.log('ionViewDidLoad AllsearchPage');
   }
 
-
-  items;
-  initializeItems(){
-    this.items = this.estateList;
-  }
-  getItems(ev){
-    this.initializeItems();
-    var val=ev.target.value;
-    if(val&&val.trim()!=''){
-      this.items=this.items.filter((item)=>{
-        // return (item.toLowerCase().indexOf(val.toLowerCase())>-1)
-        return (item.estateName.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
-  }
-
   select(item){
-    this.navCtrl.pop().then(() => {
-      // 发布 bevents事件
-      this.events.publish('bevents', item);
-    });
+
+    console.log('idnex的值',this.navParams.get('index'),'item的值',item);
+    if(this.navParams.get('index')==1&&item==null){
+      this.navCtrl.setRoot(HomePage,{item:item});
+      // alert('主页');
+    }
+    else  {
+      // alert('列表页');
+      this.navCtrl.setRoot(HousingPage,{item:item});
+      // this.navCtrl.parent.select(1);
+    }
   }
 
   back(){
