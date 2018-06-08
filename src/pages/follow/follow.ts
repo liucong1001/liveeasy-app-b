@@ -50,7 +50,7 @@ export class FollowPage {
       // alert('222');
       this.followProvider.getfollow({
         agentId:this.localStorageProvider.get('loginInfo').id,
-        followup_code:this.form.value.followupCode,
+        followupCode:this.form.value.followupCode,
         content:this.form.value.content,
         propertyId:this.propertyid,
         followupTime:this.followuptime

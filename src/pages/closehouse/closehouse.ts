@@ -90,7 +90,7 @@ export class ClosehousePage {
         }).then(res => {
           console.log(res);
           alert('关闭成功');
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(HousingPage);
         });
       }else {
         alert('请选择无效原因')
@@ -111,6 +111,7 @@ export class ClosehousePage {
       applyTime:new Date().getTime(),
     }).then(res => {
       console.log(res);
+      this.navCtrl.parent.select(1);
       alert('提交成功，请等候同意！');
     });
   }
