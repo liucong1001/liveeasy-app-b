@@ -91,59 +91,104 @@ import {BelongerPage} from "../pages/belonger/belonger";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {AllsearchPage} from "../pages/allsearch/allsearch";
+//启动加速
+import {AboutusPageModule} from '../pages/aboutus/aboutus.module';
+import {AccomplishPageModule} from '../pages/accomplish/accomplish.module';
+import {AccountPageModule} from '../pages/account/account.module';
+import {AddhousePageModule}from '../pages/addhouse/addhouse.module';
+import {AddlookPageModule}from'../pages/addlook/addlook.module';
+import {AddpassengerPageModule} from '../pages/addpassenger/addpassenger.module';
+import { VerifyphonePageModule } from './../pages/verifyphone/verifyphone.module';
+import { UpdatepwdPageModule } from './../pages/updatepwd/updatepwd.module';
+import { StartupPageModule } from './../pages/startup/startup.module';
+import { SearchhousePageModule } from './../pages/searchhouse/searchhouse.module';
+import { RolepeoplePageModule } from './../pages/rolepeople/rolepeople.module';
+import { RedacthousePageModule } from './../pages/redacthouse/redacthouse.module';
+import { RecordPageModule } from './../pages/record/record.module';
+import { PublicpdetailPageModule } from './../pages/publicpdetail/publicpdetail.module';
+import { PublicpassengerPageModule } from './../pages/publicpassenger/publicpassenger.module';
+import { PfollowrecordPageModule } from './../pages/pfollowrecord/pfollowrecord.module';
+import { PassengerlookPageModule } from './../pages/passengerlook/passengerlook.module';
+import { PassengerfollowPageModule } from './../pages/passengerfollow/passengerfollow.module';
+import { PassengerPageModule } from './../pages/passenger/passenger.module';
+import { MypassengerPageModule } from './../pages/mypassenger/mypassenger.module';
+import { MyaccountPageModule } from './../pages/myaccount/myaccount.module';
+import { MsgdetailPageModule } from './../pages/msgdetail/msgdetail.module';
+import { MdetailsPageModule } from './../pages/mdetails/mdetails.module';
+import { LoginPageModule } from './../pages/login/login.module';
+import { LockhousePageModule } from './../pages/lockhouse/lockhouse.module';
+import { LetteratorneyPageModule } from './../pages/letteratorney/letteratorney.module';
+import { KeyPageModule } from './../pages/key/key.module';
+import { HousingPageModule } from './../pages/housing/housing.module';
+import { HousedetailPageModule } from './../pages/housedetail/housedetail.module';
+import { HelpPageModule } from './../pages/help/help.module';
+import { FollowPageModule } from './../pages/follow/follow.module';
+import { DescPageModule } from './../pages/desc/desc.module';
+import { DeclardetailPageModule } from './../pages/declardetail/declardetail.module';
+import { DeclarationPageModule } from './../pages/declaration/declaration.module';
+import { CloseprivateguestPageModule } from './../pages/closeprivateguest/closeprivateguest.module';
+import { ClosehousePageModule } from './../pages/closehouse/closehouse.module';
+import { ChoosehousePageModule } from './../pages/choosehouse/choosehouse.module';
+import { CenterPageModule } from './../pages/center/center.module';
+import { BelongerPageModule } from './../pages/belonger/belonger.module';
+import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
+import { AddpublicguestPageModule } from './../pages/addpublicguest/addpublicguest.module';
+import {PassengerdetailPageModule} from './../pages/passengerdetail/passengerdetail.module'
+import  {PlookrecordPageModule} from './../pages/plookrecord/plookrecord.module';
+import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    StartupPage,
-    AccountPage,
-    LoginPage,
-    MsgdetailPage,
+    // StartupPage,
+    // AccountPage,
+    // LoginPage,
+    // MsgdetailPage,
     TabsPage,
-    PassengerPage,
-    CenterPage,
-    HousingPage,
-    FollowPage,
-    ClosehousePage,
-    AddlookPage,
-    MdetailsPage,
-    HousedetailPage,
-    RedacthousePage,
-    AddhousePage,
-    LockhousePage,
-      RolepeoplePage,
-      RecordPage,
-      AddpassengerPage,
-      MypassengerPage,
-      PublicpassengerPage,
-      PassengerdetailPage,
-      PassengerfollowPage,
-      PfollowrecordPage,
-      PassengerlookPage,
-      PlookrecordPage,
-      AccomplishPage,
-      CloseprivateguestPage,
-      PublicpdetailPage,
-      AddpublicguestPage,
-      DeclarationPage,
-      DeclardetailPage,
-      ChoosehousePage,
-      AboutusPage,
-      HelpPage,
-      UpdatepwdPage,
-      MyaccountPage,
-      VerifyphonePage,
-      SearchhousePage,
-      StringJsonPipe,
-      LookhousePage,
-      LetteratorneyPage,
-      StringJsonPipe,
-      ToParseIntPipe,
-       AreaPipe,
-    KeyPage,
-    DescPage,
-    BelongerPage,
-    AllsearchPage
+    // PassengerPage,
+    // CenterPage,
+    // HousingPage,
+    // FollowPage,
+    // ClosehousePage,
+    // AddlookPage,
+    // MdetailsPage,
+    // HousedetailPage,
+    // RedacthousePage,
+    // AddhousePage,
+    // LockhousePage,
+    //   RolepeoplePage,
+    //   RecordPage,
+    //   AddpassengerPage,
+    //   MypassengerPage,
+    //   PublicpassengerPage,
+    //   PassengerdetailPage,
+    //   PassengerfollowPage,
+    //   PfollowrecordPage,
+    //   PassengerlookPage,
+    //   PlookrecordPage,
+    //   AccomplishPage,
+    //   CloseprivateguestPage,
+    //   PublicpdetailPage,
+    //   AddpublicguestPage,
+    //   DeclarationPage,
+    //   DeclardetailPage,
+    //   ChoosehousePage,
+    //   // AboutusPage,
+    //   HelpPage,
+    //   UpdatepwdPage,
+    //   MyaccountPage,
+    //   VerifyphonePage,
+    //   SearchhousePage,
+    //   StringJsonPipe,
+    //   LookhousePage,
+    //   LetteratorneyPage,
+    //   StringJsonPipe,
+    //   ToParseIntPipe,
+    //    AreaPipe,
+    // KeyPage,
+    // DescPage,
+    // BelongerPage,
+    // AllsearchPage,
   ],
   entryComponents: [
     MyApp,
@@ -200,6 +245,17 @@ import {AllsearchPage} from "../pages/allsearch/allsearch";
         FormsModule,
         ComponentsModule,
         CommonModule,
+        //页面模块，
+       AboutusPageModule,
+      AccomplishPageModule,AccountPageModule,AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
+      VerifyphonePageModule,UpdatepwdPageModule,StartupPageModule,SearchhousePageModule,RolepeoplePageModule,
+      RedacthousePageModule,RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
+      PassengerlookPageModule,PassengerfollowPageModule,PassengerPageModule,MypassengerPageModule,MyaccountPageModule,
+      MsgdetailPageModule,MdetailsPageModule,LoginPageModule,LockhousePageModule,LetteratorneyPageModule,KeyPageModule,
+      HousingPageModule,HousedetailPageModule,HelpPageModule,FollowPageModule,DescPageModule,DeclardetailPageModule,DeclarationPageModule,
+      CloseprivateguestPageModule,ClosehousePageModule,ClosehousePageModule,ChoosehousePageModule,CenterPageModule,
+      BelongerPageModule,AllsearchPageModule,AddpublicguestPageModule,PassengerdetailPageModule,PlookrecordPageModule,
+      LookhousePageModule,
         // IonicModule.forRoot(MyApp)
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
