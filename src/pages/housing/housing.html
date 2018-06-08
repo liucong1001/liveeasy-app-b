@@ -194,12 +194,12 @@
       <!--</ion-item>-->
     <!--</ion-list>-->
     <ion-list radio-group [(ngModel)]="params.param" class="scrollC">
-      <ion-item>
+      <ion-item (clcik)="dt()">
         <ion-label>有</ion-label>
         <ion-radio  value="0"></ion-radio>
       </ion-item>
 
-      <ion-item>
+      <ion-item (clcik)="dt()">
         <ion-label>无</ion-label>
         <ion-radio value="1"></ion-radio>
       </ion-item>

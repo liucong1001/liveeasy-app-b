@@ -118,9 +118,13 @@ export class HousingPage {
     this.params.area ='';
     this.search();
   }
+  //电梯
+  dt(){
+    console.log('参数',this.params);
+    this.params.area ='';
+    this.search();
+  }
   go(item) {
-    this.cityId=item.id;
-    console.log(this.cityId)
     this.searchDict = item.name;
 
     this.selected = item;
