@@ -23,3 +23,16 @@
   font-size: 2em;
   line-height: 48px;
 }
+//search-input
+.toolbar .searchbar-ios {
+  .searchbar-input{
+    height: 3rem;
+  }
+  .searchbar-search-icon{
+    top:1rem;
+    left:.9rem;
+  }
+}
+.searchbar-ios.searchbar-left-aligned .searchbar-input{
+  padding-left: 3rem;
+}

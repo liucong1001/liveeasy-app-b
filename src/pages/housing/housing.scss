@@ -1,13 +1,15 @@
-.ub{
-  background: #db2426;
-  width: 30px;
-  height: 2.2rem;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 1.9em !important;
-  margin: 3px 0 0 10px;
-  right: 8px !important;
-}
+//.ub{
+//  //background: #db2426;
+//  width: 30px;
+//  //height: 2.2rem;
+//  //border-radius: 5px;
+//  text-align: center;
+//  font-size: 1.9em !important;
+//  font-weight: bold;
+//  margin: 3px 0 0 10px;
+//  right: 8px !important;
+//  color: #db2426;
+//}
 .uDis{
   height: 36px;
   overflow: hidden;
@@ -19,12 +21,14 @@
   top: 91px;position: relative
 }
 .adds {
-  color: #fff;
-  font-size: 35px;
+  color: #db2426;
+  font-size: 3rem;
+  font-weight: bold;
   position: absolute;
-  right: 15px;
-  top: 6px;
+  right: 1.2rem;
+  top: 0.6rem;
 }
+
 
 .houseMenu {
   background: #F8F8F8;
@@ -190,4 +194,17 @@ page-housing .tips a:nth-child(10) {
 }
 .upIcon{
   top: -2px !important;
+}
+//------------
+page-housing {
+  .serInput{
+    width: 87%;
+  }
+  .toolbar-background-ios{
+    background-color: #f8f8f8;
+  }
+  .houseMenu{
+    background-color: #fff;
+  }
+
 }
