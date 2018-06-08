@@ -259,8 +259,8 @@ import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
         // IonicModule.forRoot(MyApp)
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
-        mode: 'ios'          //把所有平台设置为iOS风格：
-
+        mode: 'ios',          //把所有平台设置为iOS风格：
+        // swipeBackEnabled: true
       })
     ],
     bootstrap: [IonicApp],

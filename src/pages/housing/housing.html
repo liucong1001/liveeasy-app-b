@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar placeholder="房源搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
+    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
-`  <ion-row class="houseMenu">
+  <ion-row class="houseMenu">
     <ion-col col-3 class="tc" (click)="showMenu1()">
 
       {{searchDict}}{{ searchArea}}
@@ -22,7 +22,10 @@
     </ion-col>
     <ion-col col-3 class="tc" (click)="showMenu3()">
       <span [ngClass]="{xiaoQu:params.estateId}" >{{ estatePipe(params.estateId)}}</span>
-      <span *ngIf="!params.estateId"> 电梯 </span>
+
+      <!--<span *ngIf="params.hasElevator==null">{{elevatorPipe(params.hasElevator) }}</span>-->
+      <!--*ngIf="params.hasElevator!=null"-->
+      <span > 电梯 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" (click)="showMenu4()">
@@ -37,7 +40,7 @@
       <!--<h3>{{i+1}}</h3>-->
       <ion-col col-12 (click)="goHouseDetail(item)">
         <ion-row>
-          <ion-col col-4>
+          <ion-col col-4 style="height: 100px;overflow:hidden">
             <img [src]="imgHeader+pic(item?.propertyPics)" *ngIf="item.propertyPics" alt="" width="90%">
             <img src="assets/imgs/default.jpg"  *ngIf="!item.propertyPics" alt="" width="90%">
           </ion-col>
@@ -70,7 +73,7 @@
             </div>
             <div>
                 <span class="font12">{{item.createdTime | date:'yyyy/MM/dd'}}录入</span>
-                <span class="font12">归属人：{{item.realtorName }}：</span>
+                <span class="font12">归属人：{{item.realtorName }}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -98,13 +101,17 @@
     <!--refreshingText="Refreshing...">-->
     <!--</ion-refresher-content>-->
     <!--</ion-refresher>-->
-    <div *ngIf="hasData&&pageData ==null" class="tc">
-      <ion-spinner item-start name="ios"></ion-spinner>
-      加载数据中。。。
+    <div class="content_page">
+      <div *ngIf="hasData&&pageData ==null" class="tc">
+        <ion-spinner item-start name="ios"></ion-spinner>
+        加载数据中...
+      </div>
+      <!--<span *ngIf="all">已加载全部</span>-->
+      <div *ngIf="!hasData"  class="tc">
+        抱歉！没有找到数据
+      </div>
     </div>
-    <div *ngIf="!hasData" class="tc">
-      抱歉！没有找到数据
-    </div>
+
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
@@ -178,7 +185,6 @@
          <ion-label>{{y.name}}</ion-label>
          <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
-
     </ion-list>
     <!--<div class="btns">-->
       <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
@@ -187,26 +193,12 @@
 
   <!-- 电梯 -->
   <div class="lists houseType" *ngIf="housingEstate">
-    <!--<ion-list radio-group [(ngModel)]="params.estateId" class="scrollC">-->
-      <!--<ion-item *ngFor="let e of estateList">-->
-        <!--<ion-label>{{e.estateName}}</ion-label>-->
-        <!--<ion-radio value="{{e.estateId}}" (ionSelect)="search()"></ion-radio>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-    <ion-list radio-group [(ngModel)]="params.param" class="scrollC">
-      <ion-item (clcik)="dt()">
-        <ion-label>有</ion-label>
-        <ion-radio  value="0"></ion-radio>
-      </ion-item>
-
-      <ion-item (clcik)="dt()">
-        <ion-label>无</ion-label>
-        <ion-radio value="1"></ion-radio>
+    <ion-list radio-group [(ngModel)]="params.hasElevator" class="scrollC">
+      <ion-item *ngFor="let y of hasElevatorJson">
+        <ion-label>{{y.name}}</ion-label>
+        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <!--<div class="btns">-->
-      <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
-    <!--</div>-->
   </div>
   <!-- 更多 -->
   <div class="lists houseType" *ngIf="more">

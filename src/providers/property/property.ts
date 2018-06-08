@@ -30,7 +30,7 @@ export class PropertyProvider {
   //http://47.75.151.57:7077/live/search?keyword=11&site=4200
   private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
   //查找具体信息内容
-  private record = this.configProvider.set().http + 'property/propertyInfo/propertyDetail.do';
+  private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
   bedRType:any;
   districtId:any;
   propertyid:any;

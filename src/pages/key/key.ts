@@ -7,6 +7,7 @@ import {HousedetailPage} from "../housedetail/housedetail";
 import {LetteratorneyPage} from "../letteratorney/letteratorney";
 import {HousingPage} from "../housing/housing";
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {ConfigProvider} from "../../providers/config/config";
 /**
  * Generated class for the KeyPage page.
  *
@@ -27,9 +28,13 @@ export class KeyPage {
   data:any;
   keydelegateid:any;
   path: string;
+  useDir:string;
+  imgHeader: string;
+  imgJson :any;
+  edit = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera,
-              private fb:FormBuilder,
+              private fb:FormBuilder,public configProvider: ConfigProvider,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
     this.data = navParams.get('item');
@@ -47,14 +52,21 @@ export class KeyPage {
         });
         this.update=true;
         this.sub=false;
-      }else {
-
       }
+      //钥匙图片显示
+      if(res.hasOwnProperty('data')){
+        this.imgJson = JSON.parse(this.data.keyDlgtFilePics); //默认展示有图片
+        console.log(this.imgJson)
+      }else{
+        this.edit = true;
+      }
+      console.log('dir',this.useDir,'详情',this.data);
     });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad KeyPage');
     this.attorneys=new Date().getTime();
+    this.imgHeader = this.configProvider.set().img;
   }
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -105,9 +117,9 @@ export class KeyPage {
   }
 
   form:FormGroup =this.fb.group({
-    keySn:['',Validators.required], //委托书编号
-    keyAddress:['',Validators.required],//起始时间
-    keyDlgtFilePics:[''],//结束时间
+    keySn:['',Validators.required], //编号
+    keyAddress:['',Validators.required],//
+    keyDlgtFilePics:['',Validators.required],//结束时间
   });
 //上传钥匙信息
   goYc(){

@@ -11,7 +11,7 @@ import {ConfigProvider} from "../config/config";
 @Injectable()
 export class FollowProvider {
 
-  private  follow = this.configProvider.set().http+'property/propertyFollowupInfo/insertFollowUp.do';
+  private  follow = this.configProvider.set().http+'/property/propertyFollowupInfo/insertFollowUp.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }

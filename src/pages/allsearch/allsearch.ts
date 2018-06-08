@@ -56,7 +56,6 @@ export class AllsearchPage {
   }
 
   select(item){
-
     console.log('idnex的值',this.navParams.get('index'),'item的值',item);
     if(this.navParams.get('index')==1&&item==null){
       this.navCtrl.setRoot(HomePage,{item:item});
@@ -65,7 +64,9 @@ export class AllsearchPage {
     else  {
       // alert('列表页');
       this.navCtrl.setRoot(HousingPage,{item:item});
-      // this.navCtrl.parent.select(1);
+      // this.navCtrl.setRoot()HousingPage,{item:item});
+      // this.navCtrl.popTo(HousingPage,{item:item})
+      this.navCtrl.parent.select(1);
     }
   }
 

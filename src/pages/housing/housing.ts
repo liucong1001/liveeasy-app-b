@@ -16,7 +16,8 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 import {CustomerProvider} from "../../providers/customer/customer";
 import {AllsearchPage} from "../allsearch/allsearch";
 import {SearchhousePage} from "../searchhouse/searchhouse";
-
+import {Tabs} from 'ionic-angular';
+import {Injectable,ViewChild} from '@angular/core';
 /**
  * Generated class for the HousingPage page.
  *
@@ -31,6 +32,8 @@ import {SearchhousePage} from "../searchhouse/searchhouse";
   // pipes:[StringJsonPipe],
 })
 export class HousingPage {
+  @ViewChild('myTabs') tabRef: Tabs;
+
   classFlag = true;
   show = false;
   houseType = false;
@@ -63,6 +66,7 @@ export class HousingPage {
     estateId:'',
     param:'1', //默认搜索是1,只看我的6,
     tags:0,
+    hasElevator:'',
   };
   //楼盘搜索
   searchFloorName:any;
@@ -177,6 +181,7 @@ export class HousingPage {
         }else{
            this.hasData = false;
         }
+        console.log('hasData',this.hasData);
        this.totalPages = res.data.totalPages;
         //关闭搜索框子
        this.show = false;
@@ -210,6 +215,7 @@ export class HousingPage {
     console.log('ionViewDidLoad HousingPage');
     this.search();
     this.imgHeader = this.configProvider.set().img;
+    // this.tabRef.select(1);
   }
 
   //menu
@@ -340,7 +346,7 @@ export class HousingPage {
 
   //条数
   currentPage: number = 1;
-
+  all = false;
   //下拉加载
   doInfinite(infiniteScroll) {
     setTimeout(() => {
@@ -352,8 +358,11 @@ export class HousingPage {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
+        this.all = true;
         alert("已加载所有");
+
        }else {
+        this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
           for (let i = 0; i < res.data.result.length; i++) {
             this.pageData.push(res.data.result[i]);
@@ -402,6 +411,13 @@ export class HousingPage {
     {name:'五室',val:5},
     {name:'五室以上',val:6},
   ];
+
+  hasElevatorJson = [
+    {name:'不限',val:null},
+    {name:'无',val:'0'},
+    {name:'有',val:'1'},
+  ];
+
 //户型转换
   housePipe(data){
      for(var i in this.houseJSON){
@@ -417,6 +433,13 @@ export class HousingPage {
          return this.estateList[i].estateName
        }
      }
+  }
+  elevatorPipe(val){
+    for(var i in this.hasElevatorJson){
+      if(this.hasElevatorJson[i].val==val){
+        return this.hasElevatorJson[i].name;
+      }
+    }
   }
   floorName = '';
   allSearch(){
@@ -439,6 +462,8 @@ export class HousingPage {
    // this.navCtrl.push(SearchhousePage);
     this.navCtrl.push(AllsearchPage,{floorName:this.floorName})
   }
+
+
 }
 
 /**
@@ -453,5 +478,6 @@ class  PropertyPageParams {
   estateId?:string;//小区
   param?:string;
   tags?:any;
+  hasElevator?:any;//是否有电梯
 }
 

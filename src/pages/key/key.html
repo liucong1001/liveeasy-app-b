@@ -17,7 +17,7 @@
         <ion-input type="text"  class="p0" formControlName="keyAddress">
         </ion-input>
       </ion-item>
-      <div class="attorneyPic bgWhite">
+      <div class="attorneyPic bgWhite" *ngIf="edit">
         <span>钥匙委托协议</span>
         <!--<div class="bgWrapper m10" *ngIf="!path"></div>-->
         <!--<div *ngIf="path">-->
@@ -25,6 +25,14 @@
         <!--</div>-->
         <upload [useDir]="useDir" [desc]="''" [position]="''" (successEvent)="yaoChi($event)"></upload>
 
+      </div>
+    </ion-list>
+    <ion-list *ngIf="!edit" >
+      <div class="attorneyPic bgWhite" *ngFor="let item of imgJson">
+        <p>{{item.desc}}</p>
+        <div class="m10">
+          <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+        </div>
       </div>
     </ion-list>
     <ion-grid>

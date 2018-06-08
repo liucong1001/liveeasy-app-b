@@ -55,7 +55,7 @@ export class AddhousePage {
       floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
       houseNo:['',Validators.required],//房间号
       spaceSize:['',Validators.required],//建筑面积
-      innerSpaceSize:['',Validators.required],//套内面积
+      innerSpaceSize:[''],//套内面积
       propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
@@ -224,7 +224,7 @@ export class AddhousePage {
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
         alert('录入成功！');
-        this.navCtrl.push(HousingPage);
+        this.navCtrl.setRoot(HousingPage);
       }else {
         alert('录入失败！');
       }

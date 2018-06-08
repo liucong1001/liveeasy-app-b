@@ -13,7 +13,7 @@ export class AddhouseProvider {
 
   private  estateList = this.configProvider.set().http+'/customer/customerInfo/estateInfo';
   private  estateTagsInfos =this.configProvider.set().http+'/property/tagsInfo/list.do';
-  private  addEatate = this.configProvider.set().http+'property/propertyInfo/insert.do';
+  private  addEatate = this.configProvider.set().http+'/property/propertyInfo/insert.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello AddhouseProvider Provider');
   }

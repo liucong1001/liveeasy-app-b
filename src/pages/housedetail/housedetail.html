@@ -133,7 +133,7 @@
       </ion-item>
       <valid-error [errors]="errors.contact"  [control]="form.get('contact')"  ></valid-error>
 
-      <ion-item class="pl12">
+      <ion-item class="pl12" *ngIf="sensitiveInfo">
         <ion-label>业主性别</ion-label>
         <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
           <ion-option value="male">男</ion-option>

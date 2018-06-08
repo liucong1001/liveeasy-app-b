@@ -11,8 +11,8 @@ import {ConfigProvider} from "../config/config";
 @Injectable()
 export class ClosehouseProvider {
 
-  private  closeHouse = this.configProvider.set().http+'property/propertyInfo/propertyCloseProperty.do';
-  private  show = this.configProvider.set().http+'property/propertyInfo/closePropertyShow.do';
+  private  closeHouse = this.configProvider.set().http+'/property/propertyInfo/propertyCloseProperty.do';
+  private  show = this.configProvider.set().http+'/property/propertyInfo/closePropertyShow.do';
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello UpdatepwdProvider Provider');
   }

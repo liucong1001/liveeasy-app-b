@@ -55,8 +55,28 @@ export class HousedetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider) {
-    // this.data = navParams.get('item');
-    // this.estateList = navParams.get('estateList');
+
+
+
+  }
+
+
+  //房源标签处理
+  tagsSum(data){
+    var str =  data.toString();
+    var result = str.split(",");0
+    var sum = 0;
+    for(var i in result){
+      sum+=parseInt(result[i])
+    }
+    return sum ;
+  };
+
+  tagsSelect(value){
+    this.form.value.tags= this.tagsSum(value);
+  };
+
+  ionViewDidLoad() {
 
     //楼盘列表
     this.addhouseProvider.estateListSelect().then(res=>{
@@ -64,8 +84,8 @@ export class HousedetailPage {
       console.log('楼盘列表',this.estateList);
     });
 
-    this.propertyProvider.getRecord(navParams.data.propertyId).then(res=>{
-        this.data = res.data;
+    this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
+      this.data = res.data;
 
       if( this.data){
         var jsonData = JSON.parse(this.data.contacts);
@@ -117,28 +137,12 @@ export class HousedetailPage {
       }
 
     });
-   this.propertyid =  navParams.data.propertyId;
-    console.log('获取详情id', navParams.data.propertyId );
-
-  }
+    this.propertyid =  this.navParams.data.propertyId;
+    console.log('获取详情id',this.navParams.data.propertyId );
 
 
-  //房源标签处理
-  tagsSum(data){
-    var str =  data.toString();
-    var result = str.split(",");0
-    var sum = 0;
-    for(var i in result){
-      sum+=parseInt(result[i])
-    }
-    return sum ;
-  };
 
-  tagsSelect(value){
-    this.form.value.tags= this.tagsSum(value);
-  };
 
-  ionViewDidLoad() {
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
     console.log('获取存贮id',propertyId);
     console.log('ionViewDidLoad HousedetailPage11');
@@ -311,11 +315,15 @@ export class HousedetailPage {
 
   //表单提交
   save(){
-    // tagsSum
-    this.form.patchValue({
-      tags:this.tagsSum(this.form.value.tagsStr)
-    });
-    delete this.form.value.tagsStr;
+
+    if(this.form.value.tagsStr){
+      this.form.patchValue({
+        tags:this.tagsSum(this.form.value.tagsStr)
+      });
+      delete this.form.value.tagsStr;
+    }
+
+
     // 联系人
     this.form.value.contacts[0].contact = this.form.value.contact;
     this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
@@ -339,7 +347,7 @@ export class HousedetailPage {
     };
     this.propertyProvider.updates(formData).then(res=>{
        alert('修改成功');
-       this.navCtrl.push(HousingPage);
+       this.navCtrl.setRoot(HousingPage);
     })
   }
   //根据楼盘名返回楼盘地址

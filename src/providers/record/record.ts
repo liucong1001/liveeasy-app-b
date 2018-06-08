@@ -12,7 +12,7 @@ import {LocalStorageProvider} from '../../providers/local-storage/local-storage'
 */
 @Injectable()
 export class RecordProvider {
-  private record = this.configProvider.set().http + 'property/propertyInfo/propertyDetail.do';
+  private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
 
   constructor(public http: HttpClient, public httpProvider: HttpProvider, private configProvider: ConfigProvider, public localStorageProvider: LocalStorageProvider) {
   }

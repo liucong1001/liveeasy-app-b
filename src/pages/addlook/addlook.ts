@@ -8,6 +8,7 @@ import {PropertyProvider} from "../../providers/property/property";
 import {AddhousePage} from "../addhouse/addhouse";
 import {HousingPage} from "../housing/housing";
 import {ConfigProvider} from "../../providers/config/config";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /**
  * Generated class for the AddlookPage page.
  *
@@ -34,7 +35,7 @@ export class AddlookPage {
   standardAddress:any;
   fileTransfer: FileTransferObject = this.transfer.create();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
@@ -175,6 +176,7 @@ export class AddlookPage {
         recordTime:new Date().getTime(),
         size:'',
         thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
+        agentId:this.localStorageProvider.get('loginInfo').id,
       };
 
       console.log('表单内容',this.formData);
@@ -192,4 +194,5 @@ export class AddlookPage {
          alert('添加失败'+err);
       })
     }
+
 }
