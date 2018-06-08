@@ -66,7 +66,7 @@ export class HousingPage {
   };
   //楼盘搜索
   searchFloorName:any;
-
+  selected :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
@@ -86,6 +86,8 @@ export class HousingPage {
       console.log('区域', res);
       this.area = res;
     });
+
+
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsList = res.data;
@@ -99,16 +101,26 @@ export class HousingPage {
       console.log('楼盘列表',this.estateList);
     });
   }
-  selected :any;
+
   isActive(item) {
     return this.selected === item;
   };
-
+  unlimited(){
+    this.search();
+  }
 
   searchDict = '';
   searchArea = '';
   //搜索房源——区域——商圈
+  cityId:any;
+  bx(){
+    console.log('参数',this.params);
+    this.params.area ='';
+    this.search();
+  }
   go(item) {
+    this.cityId=item.id;
+    console.log(this.cityId)
     this.searchDict = item.name;
 
     this.selected = item;
@@ -153,6 +165,7 @@ export class HousingPage {
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
        this.pageData = res.data.result;
+       console.log(this.pageData)
        console.log('查询到的页面数据',this.pageData);
        console.log('是否有数据',res.data.hasOwnProperty('result'));
         if(res.data.hasOwnProperty('result')){

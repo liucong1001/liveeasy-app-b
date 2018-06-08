@@ -1,17 +1,5 @@
-//.ub{
-//  //background: #db2426;
-//  width: 30px;
-//  //height: 2.2rem;
-//  //border-radius: 5px;
-//  text-align: center;
-//  font-size: 1.9em !important;
-//  font-weight: bold;
-//  margin: 3px 0 0 10px;
-//  right: 8px !important;
-//  color: #db2426;
-//}
 .uDis{
-  height: 36px;
+  height: 30px;
   overflow: hidden;
 }
 .p15{
@@ -32,6 +20,10 @@
 
 .houseMenu {
   background: #F8F8F8;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 44px;
 }
 
 .houseMenu ion-col {
@@ -48,8 +40,8 @@
 
 page-housing .tips a {
   display: inline-block;
-  font-size: 12px;
-  padding: 3px;
+  font-size: xx-small;
+  padding: 1px 3px;
   margin-right: 6px
 }
 
@@ -112,7 +104,9 @@ page-housing .tips a:nth-child(10) {
 .houseMain {
   margin-bottom: 10px
 }
-
+.houseMain:first-child{
+  margin-top: 46px;
+}
 .lists {
   position: fixed; // top: 10%;
   left: 0;
