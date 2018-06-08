@@ -284,9 +284,11 @@ export class HousingPage {
   }
 
   goHouseDetail(item) {
+    this.localStorageProvider.set('propertyIdDetail',item.propertyId);
     this.navCtrl.push(HousedetailPage, {
-      item: item,
-      estateList:this.estateList
+      // item: item,
+      estateList:this.estateList,
+      propertyId:item.propertyId,
     });
   }
 

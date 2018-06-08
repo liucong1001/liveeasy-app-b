@@ -148,7 +148,7 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       alert('修改成功');
-      this.navCtrl.pop();
+      this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
     });
   }
 

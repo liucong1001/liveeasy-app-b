@@ -193,7 +193,8 @@ export class LetteratorneyPage {
     }).then(res => {
       console.log(res);
       alert('修改成功！');
-      this.navCtrl.pop();
+      // propertyId   showIntention=false;
+      this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
     });
   }
 }

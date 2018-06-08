@@ -29,6 +29,8 @@ export class PropertyProvider {
   // 楼盘模糊搜索 http://47.75.151.57:7077/live/search?keyword=1&site=4200
   //http://47.75.151.57:7077/live/search?keyword=11&site=4200
   private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
+  //查找具体信息内容
+  private record = this.configProvider.set().http + 'property/propertyInfo/propertyDetail.do';
   bedRType:any;
   districtId:any;
   propertyid:any;
@@ -124,5 +126,9 @@ export class PropertyProvider {
   searchFloor(params){
     var site = '2000';
     return this.httpProvider.httpGet(this.floorSearchPath+params+'&site='+site)
+  }
+ // 根据id查询内容
+  getRecord(propertyId) {
+    return this.httpProvider.httpPost(this.record, {propertyId:propertyId})
   }
 }

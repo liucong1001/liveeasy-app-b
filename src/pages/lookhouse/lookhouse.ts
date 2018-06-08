@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import {PropertyModel} from "../../model/property/property.model";
 import {PropertyProvider} from "../../providers/property/property";
 import {ConfigProvider} from "../../providers/config/config";
+import {HousedetailPage} from "../housedetail/housedetail";
 
 /**
  * Generated class for the LookhousePage page.
@@ -42,53 +43,6 @@ export class LookhousePage {
     console.log('dir',this.useDir,'详情',this.data.propertyPics);
   }
 
-  // presentActionSheet() {
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     // title: '更多',
-  //     buttons: [
-  //       {
-  //         text: '选择图片',
-  //         role: 'destructive',
-  //         handler: () => {
-  //           console.log('Destructive clicked');
-  //           this.takePhoto(0);
-  //         }
-  //       },{
-  //         text: '拍照',
-  //         handler: () => {
-  //           console.log('Archive clicked');
-  //           this.takePhoto(1);
-  //         }
-  //       },{
-  //         text: '关闭',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
-  // //take Photo
-  // takePhoto(sourceType:number) {
-  //   console.log('手机调试',sourceType);
-  //   const options: CameraOptions = {
-  //     quality: 50,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //     correctOrientation: true,
-  //     sourceType:sourceType,
-  //   }
-  //
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
-  //     this.path = base64Image;
-  //   }, (err) => {
-  //     // Handle error
-  //   });
-  // }
  imgData = [];
   ionViewDidLoad() {
     console.log('ionViewDidLoad LookhousePage');
@@ -131,7 +85,7 @@ export class LookhousePage {
         if(res.success){
           console.log('成功返回的数据',res);
           alert('上传成功！');
-          this.navCtrl.pop();
+          this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
         }else {
           alert('上传失败');
         }
