@@ -119,7 +119,7 @@ export class KeyPage {
   form:FormGroup =this.fb.group({
     keySn:['',Validators.required], //编号
     keyAddress:['',Validators.required],//
-    keyDlgtFilePics:['',Validators.required],//结束时间
+    keyDlgtFilePics:[''],//结束时间
   });
 //上传钥匙信息
   goYc(){

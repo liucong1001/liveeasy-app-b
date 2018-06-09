@@ -93,6 +93,7 @@ export class HousingPage {
         this.area.unshift({name:'不限',id:'99'});
       }
       this.tagsList = res.data.tags; //房源标签
+      this.localStorageProvider.set('tagsList',this.tagsList);
     });
 
 

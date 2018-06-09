@@ -127,7 +127,7 @@ export class LetteratorneyPage {
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:[''],//结束时间
     delegateDocPics:['',Validators.required],//委托书图片
-    delegateStyle:['',Validators.required] //状态
+    delegateStyle:[''] //状态
   });
 
   //表单验证消息

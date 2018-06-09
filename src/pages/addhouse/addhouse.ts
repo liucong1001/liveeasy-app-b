@@ -66,8 +66,8 @@ export class AddhousePage {
         })
       ]),//业主信息
      contact:['',Validators.required],
-     contactInfo:['',[Validators.required, Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)]],
-     contactInfo2:['',Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)],
+     contactInfo:['',[Validators.required, Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)]],
+     contactInfo2:['',Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)],
      sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
