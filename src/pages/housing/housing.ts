@@ -97,13 +97,7 @@ export class HousingPage {
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsList = res.data;
       console.log('房源列表', this.tagsList);
-
-    });
-
-    //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-      console.log('楼盘列表',this.estateList);
+       this.localStorageProvider.set('tagsList',this.tagsList);
     });
   }
 
@@ -299,16 +293,7 @@ export class HousingPage {
       this.housingEstate = false;
     }
   }
-
- //根据楼盘名返回楼盘地址
-  searchStandardAddress(name){
-     for(var i in  this.estateList){
-         if(name == this.estateList[i].estateName){
-            return this.estateList[i].standardAddress;
-         }
-     }
-  }
-
+ //
   goFollow(item) {
     this.navCtrl.push(FollowPage, {
       propertyid: item.propertyId,
@@ -319,7 +304,7 @@ export class HousingPage {
   }
 
   goAddLook(item) {
-    this.navCtrl.push(AddlookPage, {item: item,standardAddress:this.searchStandardAddress(item.estateName)});
+    this.navCtrl.push(AddlookPage, {item: item,standardAddress:item.standardAddress});
   }
 
   goCloseHouse(item) {
@@ -328,7 +313,7 @@ export class HousingPage {
       estatename: item.estateName,
       convid: item.convId,
       realtorId:item.realtorId,
-      standardAddress:this.searchStandardAddress(item.estateName),
+      standardAddress:item.standardAddress,
     })
 
   }
@@ -336,8 +321,6 @@ export class HousingPage {
   goHouseDetail(item) {
     this.localStorageProvider.set('propertyIdDetail',item.propertyId);
     this.navCtrl.push(HousedetailPage, {
-      // item: item,
-      estateList:this.estateList,
       propertyId:item.propertyId,
     });
   }
@@ -448,13 +431,14 @@ export class HousingPage {
      }
   }
   //小区转化
-  estatePipe(data){
-     for(var i in this.estateList){
-       if(data ==this.estateList[i].estateId){
-         return this.estateList[i].estateName
-       }
-     }
-  }
+  // estatePipe(data){
+  //    for(var i in this.estateList){
+  //      if(data ==this.estateList[i].estateId){
+  //        return this.estateList[i].estateName
+  //      }
+  //    }
+  // }
+
   elevatorPipe(val){
     for(var i in this.hasElevatorJson){
       if(this.hasElevatorJson[i].val==val){

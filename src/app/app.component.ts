@@ -10,12 +10,13 @@ import {HeaderColor} from "@ionic-native/header-color";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StartupPage} from "../pages/startup/startup";
 import {HomePage} from "../pages/home/home";
+import {AccountPage} from "../pages/account/account";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = StartupPage;
+  rootPage:any = AccountPage;
   // rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,

@@ -44,9 +44,15 @@ export class AllsearchPage {
   floor = [];
   edit = false;
   getFloorKey(event){
+    console.log('值',event._value);
     this.getData(event._value).then(res=>{
       this.floor = res.result;
       this.edit = true;
+
+      if(event._value==null){
+        this.edit =false;
+      }
+
     })
   }
 
