@@ -5,6 +5,7 @@ import {ClosehouseProvider} from '../../providers/closehouse/closehouse'
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
 import {HousingPage} from "../housing/housing";
+import {PropertyProvider} from "../../providers/property/property";
 /**
  * Generated class for the ClosehousePage page.
  *
@@ -28,33 +29,44 @@ export class ClosehousePage {
   subs=true;
   applic=false;
   pending=false;
+  data:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,
               public  closehouseProvider: ClosehouseProvider,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid = navParams.get('propertyid');
-    this.estatename = navParams.get('estatename');
-    this.convid = navParams.get('convid');
-    this.standardAddress = navParams.get('standardAddress');
-    this.closetime=new Date().getTime();
-    this.realtorId = navParams.get('realtorId');
+
     this.loginId=this.localStorageProvider.get('loginInfo').id;
-    console.log(this.loginId,this.realtorId)
-    //判断归属人和操作人是否一致
-    if(this.realtorId == this.loginId){
-      //判断返回data.result是否显示处理申请信息
-      this.closehouseProvider.getShow(this.propertyid).then(res => {
-        console.log(this.propertyid)
-        console.log(res);
-        // if(res.data.result == 1){
-        //   this.pending =true;
-        // }
-      });
-    }else {
-      console.log('你不是此房源归属人，请先申请');
-      this.subs=false;
-      this.applic=true
-    }
+
+    this.propertyProvider.getRecord(this.propertyid).then(res=>{
+        this.data = res.data;
+
+      this.estatename = this.data.estateName;
+      this.convid = this.data.convId;
+      this.standardAddress = this.data.standardAddress;
+      this.closetime=new Date().getTime();
+      this.realtorId = this.data.realtorId;
+
+
+      console.log(this.loginId,this.realtorId)
+      //判断归属人和操作人是否一致
+      if(this.realtorId == this.loginId){
+        //判断返回data.result是否显示处理申请信息
+        this.closehouseProvider.getShow(this.propertyid).then(res => {
+          console.log(this.propertyid)
+          console.log(res);
+          // if(res.data.result == 1){
+          //   this.pending =true;
+          // }
+        });
+      }else {
+        console.log('你不是此房源归属人，请先申请');
+        this.subs=false;
+        this.applic=true
+      }
+
+    });
+
 
   }
   form:FormGroup =this.fb.group({
