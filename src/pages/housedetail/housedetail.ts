@@ -78,12 +78,6 @@ export class HousedetailPage {
 
   ionViewDidLoad() {
 
-    //楼盘列表
-    // this.addhouseProvider.estateListSelect().then(res=>{
-    //   this.estateList = res.data.result;
-    //   console.log('楼盘列表',this.estateList);
-    // });
-
     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
       this.data = res.data;
 

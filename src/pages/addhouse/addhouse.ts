@@ -21,7 +21,7 @@ import { Events } from 'ionic-angular';
   templateUrl: 'addhouse.html',
 })
 export class AddhousePage {
-  estateList:[any];
+  // estateList:[any];
   classFlag = true;
   houLabel:any;
   //更多
@@ -31,18 +31,10 @@ export class AddhousePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events) {
-       //楼盘列表
-        this.addhouseProvider.estateListSelect().then(res=>{
-           this.estateList = res.data.result;
-           console.log('楼盘列表',this.estateList);
-        });
+     //楼盘列表
 
     //房源标签
-    this.addhouseProvider.estateTagsSelect().then(res=>{
-      console.log(res);
-      this.houLabel=res.data;
-      this.localStorageProvider.set('labels',res.data);
-    })
+    this.houLabel = this.localStorageProvider.get('tagsList');
   }
 
   form:FormGroup =this.fb.group({
