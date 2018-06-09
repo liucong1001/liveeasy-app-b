@@ -28,10 +28,6 @@ export class AllsearchPage {
               private http:HttpClient) {
     this.search = navParams.get('floorName');
 
-  //默认楼盘展示
-    this.getData('wu').then(res=>{
-      this.floor = res.result;
-    })
 
   }
 
@@ -44,12 +40,12 @@ export class AllsearchPage {
   floor = [];
   edit = false;
   getFloorKey(event){
-    console.log('值',event._value);
+    console.log('值',this.search);
     this.getData(event._value).then(res=>{
       this.floor = res.result;
       this.edit = true;
 
-      if(event._value==null){
+      if(this.search==''){
         this.edit =false;
       }
 

@@ -44,14 +44,14 @@
       </ion-thumbnail>
       <ion-row>
         <ion-col col-6 class="plr" style="margin-top: 5px">
-          <h2>百居易公告</h2>
+          <h2>房贝公告</h2>
         </ion-col>
         <ion-col col-6 class="tr">
           <font size="1" color="#aaa">04-01</font>
         </ion-col>
       </ion-row>
       <div class="ellipsis newsList" *ngFor="let item of notificationNews; index as i;">
-        <span *ngIf="i==notificationNews.length-1">{{item.notificationTitle}}  {{item.notificationCont}}   {{item.postPersonId}}</span>
+        <span class="newsTip"  *ngIf="i==0">{{item.notificationTitle}}  {{item.notificationCont}}   {{item.postPersonId}}</span>
       </div>
     </ion-item>
     <ion-item hidden>

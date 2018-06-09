@@ -22,9 +22,6 @@ export class SearchhousePage {
               private http:HttpClient) {
 
     //默认楼盘展示
-    this.getData('wu').then(res=>{
-      this.floor = res.result;
-    })
   }
 
   getData(data){
@@ -33,10 +30,15 @@ export class SearchhousePage {
       return res as any;
     });
   }
+  edit = false;
   floor = [];
   getFloorKey(event){
     this.getData(event._value).then(res=>{
       this.floor = res.result;
+      this.edit = true;
+      if(this.search==''){
+        this.edit =false;
+      }
     })
   }
 

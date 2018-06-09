@@ -88,17 +88,20 @@ export class HousingPage {
 
     this.customerProvider.area().then(res=>{
       console.log('区域', res);
-      this.area = res;
-      this.area.unshift({name:'不限',id:'99'});
+      this.area = res.data.distrs;
+      if(this.area){
+        this.area.unshift({name:'不限',id:'99'});
+      }
+      this.tagsList = res.data.tags; //房源标签
     });
 
 
     //房源标签
-    this.addhouseProvider.estateTagsSelect().then(res => {
-      this.tagsList = res.data;
-      console.log('房源列表', this.tagsList);
-       this.localStorageProvider.set('tagsList',this.tagsList);
-    });
+    // this.addhouseProvider.estateTagsSelect().then(res => {
+    //   this.tagsList = res.data;
+    //   console.log('房源列表', this.tagsList);
+    //    this.localStorageProvider.set('tagsList',this.tagsList);
+    // });
   }
 
   isActive(item) {

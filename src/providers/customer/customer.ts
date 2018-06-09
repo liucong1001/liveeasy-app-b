@@ -10,7 +10,8 @@ import {ConfigProvider} from "../config/config";
 export class CustomerProvider {
 
   private  pageListPath = this.configProvider.set().http+'/customer/customerInfo/pageList';
-  private  areaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/4.do';
+  // private  areaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/4';
+  private  areaPath = this.configProvider.set().http+'/dicts/getDistrictsAndPropertyTag/4';
   private  tradingAreaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/5.do';
   private  customerSrcInfoPath = this.configProvider.set().http+'/customer/customerInfo/customerSrcInfo';
   private  agentListPath = this.configProvider.set().http+'/customer/customerInfo/agentList';
@@ -18,6 +19,8 @@ export class CustomerProvider {
   private  addPath = this.configProvider.set().http+'/customer/customerInfo/insert';
   private  detailPath = this.configProvider.set().http+'/customer/customerInfo/DateilView.do';
   private  updateDetailPath = this.configProvider.set().http+'/customer/customerInfo/update';
+
+
 
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello CustomerProvider Provider');
@@ -30,10 +33,20 @@ export class CustomerProvider {
   }
   //区域
   area(){
-    return   this.httpProvider.httpGet(this.areaPath);
+    var data = {
+      type:'4',
+      cityToFor:'4201',
+      num:0
+    };
+    return   this.httpProvider.httpPost(this.areaPath+'?cityToFor=4201&num=0',0);
   }
   //商圈
   tradingArea(){
+    // var data = {
+    //   type:'4',
+    //   cityToFor:'4201',
+    //   num:0
+    // };
     return   this.httpProvider.httpGet(this.tradingAreaPath);
   }
 
