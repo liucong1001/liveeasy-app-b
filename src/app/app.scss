@@ -29,7 +29,7 @@
 //search-input
 .toolbar .searchbar-ios {
   .searchbar-input{
-    height: 3rem;
+    height: 2.6rem;
   }
   .searchbar-search-icon{
     top:1rem;
@@ -38,4 +38,5 @@
 }
 .searchbar-ios.searchbar-left-aligned .searchbar-input{
   padding-left: 3rem;
+    border-radius: 4px;
 }

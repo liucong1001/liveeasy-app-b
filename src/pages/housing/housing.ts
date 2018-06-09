@@ -359,7 +359,12 @@ export class HousingPage {
         infiniteScroll.enable(false);
         //toast提示
         this.all = true;
-        alert("已加载所有");
+        // alert("已加载所有");
+        // let i = this.all ;
+        // setTimeout(function () {
+        //     i = false;
+        //     console.log('set',i);
+        // },2000)
 
        }else {
         this.all = false;
@@ -375,7 +380,7 @@ export class HousingPage {
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
-    }, 1000);
+    }, 2000);
 
   }
 
