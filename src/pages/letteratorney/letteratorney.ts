@@ -123,10 +123,10 @@ export class LetteratorneyPage {
   }
 
   form:FormGroup =this.fb.group({
-    delegateDocSn:['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]*$/g)]], //委托书编号
+    delegateDocSn:['',[Validators.required, Validators.pattern(/^[\da-zA-Z]+$/)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:[''],//结束时间
-    delegateDocPics:['',Validators.required],//委托书图片
+    delegateDocPics:[''],//委托书图片
     delegateStyle:[''] //状态
   });
 

@@ -12,6 +12,7 @@
         <ion-input type="text"  class="p0" formControlName="delegateDocSn">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>类型</ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="delegateStyle">
@@ -19,7 +20,6 @@
           <ion-option value="2">售出为止</ion-option>
         </ion-select>
       </ion-item>
-      <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
       <ion-item class="pl12">
           <ion-label>起始时间</ion-label>
           <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateBeginTm"   doneText="确定"  cancelText="取消" (ionChange)="timeCompare()"></ion-datetime>
