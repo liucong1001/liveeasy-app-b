@@ -79,10 +79,10 @@ export class HousedetailPage {
   ionViewDidLoad() {
 
     //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-      console.log('楼盘列表',this.estateList);
-    });
+    // this.addhouseProvider.estateListSelect().then(res=>{
+    //   this.estateList = res.data.result;
+    //   console.log('楼盘列表',this.estateList);
+    // });
 
     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
       this.data = res.data;
@@ -351,20 +351,20 @@ export class HousedetailPage {
     })
   }
   //根据楼盘名返回楼盘地址
-  searchStandardAddress(name){
-    for(var i in  this.estateList){
-      if(name == this.estateList[i].estateName){
-        return this.estateList[i].standardAddress
-      }
-    }
-  }
+  // searchStandardAddress(name){
+  //   for(var i in  this.estateList){
+  //     if(name == this.estateList[i].estateName){
+  //       return this.estateList[i].standardAddress
+  //     }
+  //   }
+  // }
   //跟进
   goFollow(){
     this.navCtrl.push(FollowPage,{
       propertyid: this.data.propertyId,
       estatename: this.data.estateName,
       convid: this.data.convId,
-      standardAddress:this.searchStandardAddress(this.data.estateName)
+      standardAddress:this.data.standardAddress
     })
   }
 

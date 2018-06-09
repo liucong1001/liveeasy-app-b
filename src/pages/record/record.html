@@ -23,7 +23,7 @@
       <ion-slide>
         <div class="location">
           <ion-list>
-            <ion-item *ngIf="followUp == undefined">暂无跟进记录</ion-item>
+            <ion-item *ngIf="followUp == undefined" class="tc">暂无跟进记录</ion-item>
           </ion-list>
           <ion-list>
             <ion-item class="updateHegiht" *ngFor="let item of followUp">
@@ -47,7 +47,7 @@
       <ion-slide  style="height: 100%">
           <div class="location">
               <ion-list>
-                <ion-item *ngIf="lookEmpty == undefined">暂无空看记录</ion-item>
+                <ion-item *ngIf="lookEmpty == undefined" class="tc">暂无空看记录</ion-item>
               </ion-list>
               <ion-list>
                 <ion-item class="updateHegiht" *ngFor="let items of lookEmpty">

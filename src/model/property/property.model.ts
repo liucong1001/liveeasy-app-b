@@ -117,5 +117,6 @@ export  class PropertyModel {
    * 描述
    */
   propertyDesc:any;
+  standardAddress?:any;
 
 }

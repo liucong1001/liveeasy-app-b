@@ -89,6 +89,7 @@ export class HousingPage {
     this.customerProvider.area().then(res=>{
       console.log('区域', res);
       this.area = res;
+      this.area.unshift({name:'不限',id:'99'});
     });
 
 
@@ -109,8 +110,15 @@ export class HousingPage {
   isActive(item) {
     return this.selected === item;
   };
+  allCity = false;
   unlimited(){
+    this.allCity = true;
+    this.params.district = '';
+    this.params.districtCode = '';
+    this.params.area = '';
     this.search();
+    // this.isActive('');
+    // this.reset();
   }
 
   searchDict = '';
@@ -129,6 +137,14 @@ export class HousingPage {
     this.search();
   }
   go(item) {
+    // this.allCity = false;
+    if(item.id=='99'){
+      this.params.districtCode = '';
+      this.params.estateId = '';
+      this.params.area = '';
+      this.search();
+    }
+
     this.searchDict = item.name;
 
     this.selected = item;
@@ -298,7 +314,7 @@ export class HousingPage {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
-      standardAddress:this.searchStandardAddress(item.estateName)
+      standardAddress:item.standardAddress
     });
   }
 

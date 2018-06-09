@@ -27,12 +27,14 @@
   line-height: 48px;
 }
 //search-input
-.toolbar .searchbar-ios {
+
+.searchbar-ios {
   .searchbar-input{
-    height: 2.6rem;
+    height: 3rem;
   }
   .searchbar-search-icon{
-    top:1rem;
+    background-size: 1.4rem;
+    top:.8rem;
     left:.9rem;
   }
 }

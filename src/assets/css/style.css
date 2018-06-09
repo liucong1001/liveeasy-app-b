@@ -129,21 +129,16 @@ a{
 .bar-button-default-ios{
     color:#fff;
 }
-.tabs-ios .tab-button[aria-selected=true] .tab-button-icon{
-    color: #DB2924;
-}
-.tabs-ios .tab-button[aria-selected=true]{
-    color: #DB2924
-}
+
 .searchbar-ios .searchbar-input{
   background: #e8e8e8;
   border-radius: 90px;
-  height: 2.5rem;
+  /*height: 2.5rem;*/
 }
-.searchbar-ios .searchbar-search-icon{
-  background-size: 16px;
-  top: 9px;
-}
+/*.searchbar-ios .searchbar-search-icon{*/
+  /*background-size: 16px;*/
+  /*top: 9px;*/
+/*}*/
 .searchbar-ios{
   background: none;
   border: 0;
@@ -174,7 +169,7 @@ a{
 
 /* header public */
 .toolbar-background-ios{
-    background: #DB2924;
+    background: #1ab394;
 }
 .toolbar-title-ios {
     color: #fff;

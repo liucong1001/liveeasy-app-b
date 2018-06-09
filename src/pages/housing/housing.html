@@ -9,7 +9,7 @@
   <ion-row class="houseMenu">
     <ion-col col-3 class="tc" (click)="showMenu1()">
 
-      {{searchDict}}{{ searchArea}}
+      <span >{{searchDict}}{{ searchArea}} </span>
       <span *ngIf="!searchDict">区域</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
@@ -22,10 +22,10 @@
     </ion-col>
     <ion-col col-3 class="tc" (click)="showMenu3()">
       <!--<span [ngClass]="{xiaoQu:params.estateId}" >{{ estatePipe(params.estateId)}}</span>-->
-
-      <!--<span *ngIf="params.hasElevator==null">{{elevatorPipe(params.hasElevator) }}</span>-->
+      <!--ngIf="params.hasElevator==null"-->
+      <span >{{elevatorPipe(params.hasElevator) }}</span>
       <!--*ngIf="params.hasElevator!=null"-->
-      <span > 电梯 </span>
+      <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" (click)="showMenu4()">
@@ -56,15 +56,17 @@
             </p>
             <ion-row>
               <ion-col col-5 class="p0 ellipsis">
-                  <span class="font12">建面 <span>{{item.spaceSize}}m</span> <sup>2</sup></span>
+                  <span class="font12">建面 <span>{{item.spaceSize}}㎡</span>
+                    <!--<sup>2</sup>-->
+                  </span>
               </ion-col>
               <ion-col col-7 class="tr p0">
                 <font color="red" class="font12">
                   <span
                     *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*1000 | toParseInt}}</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
-                  元/m
-                  <sup>2</sup>
+                  元/㎡
+                  <!--<sup>2</sup>-->
                 </font>
               </ion-col>
             </ion-row>
@@ -130,7 +132,7 @@
     <ion-row *ngIf="aeraShow">
       <ion-col col-12 class="p0">
         <div class="leftChange">
-          <a (click)="unlimited()" [ngClass]="{'active': isActive}">不限</a>
+          <!--<a (click)="unlimited()" [ngClass]="{'active': isActive}">不限</a>-->
           <a *ngFor=" let item of area" (click)="go(item)">{{item.name}}</a>
         </div>
         <!--<ion-row>-->
@@ -152,7 +154,7 @@
     <ion-row *ngIf="tradArea">
       <ion-col col-6 class="p0">
         <div class="leftChange">
-          <a (click)="unlimited()" [ngClass]="{'active': isActive(this.area)}">不限</a>
+          <!--<a (click)="unlimited()" [ngClass]="{'active': isActive(this.area)}">不限</a>-->
           <a *ngFor=" let item of area" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">{{item.name}}</a>
         </div>
         <!--<div class="p5 ">-->

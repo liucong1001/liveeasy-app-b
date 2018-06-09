@@ -1,12 +1,15 @@
 page-addlook {
 
 }
+.radio-ios .radio-checked .radio-inner{
+  border-color: #1ab394 !important;
+}
 .attorneyPic{
   padding: 10px 12px;
   width: 100%;
 }
 .bgWrapper{
-  background: url(../assets/imgs/uoloadbg.png) no-repeat center ;
+  background: url(assets/imgs/uoloadbg.png) no-repeat center ;
   height: 96px;
   width: 120px;
   border: 1px solid #f8f8f8;
