@@ -81,6 +81,7 @@ export class PropertyProvider {
         ...params,
       },
     };
+    console.log('开始请求时间',new Date());
     return this.httpProvider.httpPost(this.pageListPath,data)
   }
 //修改房源

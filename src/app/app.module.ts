@@ -91,6 +91,8 @@ import {BelongerPage} from "../pages/belonger/belonger";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {AllsearchPage} from "../pages/allsearch/allsearch";
+import { LazyLoadImageModule } from 'ng2-lazyload-image';
+import {ToastComponent} from "../components/toast/toast"
 //启动加速
 import {AboutusPageModule} from '../pages/aboutus/aboutus.module';
 import {AccomplishPageModule} from '../pages/accomplish/accomplish.module';
@@ -245,6 +247,7 @@ import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
         FormsModule,
         ComponentsModule,
         CommonModule,
+        LazyLoadImageModule,
         //页面模块，
        AboutusPageModule,
       AccomplishPageModule,AccountPageModule,AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
@@ -298,6 +301,7 @@ import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
     PublicCustomerProvider,
        ImagePicker,
        Base64,
+      ToastComponent,
     ]
 })
 export class AppModule {}

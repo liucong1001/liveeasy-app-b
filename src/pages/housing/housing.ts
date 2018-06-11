@@ -71,6 +71,7 @@ export class HousingPage {
   //楼盘搜索
   searchFloorName:any;
   selected :any;
+  offset = 100;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
@@ -179,17 +180,18 @@ export class HousingPage {
 
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
-         console.log('选择',this.district[i].estateName)
+         // console.log('选择',this.district[i].estateName)
        }
     }
 
     this.pageData = null;
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
+       console.log('结束时间',new Date());
        this.pageData = res.data.result;
-       console.log(this.pageData)
-       console.log('查询到的页面数据',this.pageData);
-       console.log('是否有数据',res.data.hasOwnProperty('result'));
+       // console.log(this.pageData)
+       // console.log('查询到的页面数据',this.pageData);
+       // console.log('是否有数据',res.data.hasOwnProperty('result'));
         if(res.data.hasOwnProperty('result')){
            this.hasData  = true;
         }else{
@@ -383,7 +385,7 @@ export class HousingPage {
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
-    }, 2000);
+    }, 1000);
 
   }
 

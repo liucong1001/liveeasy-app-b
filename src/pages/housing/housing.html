@@ -40,9 +40,10 @@
       <!--<h3>{{i+1}}</h3>-->
       <ion-col col-12 (click)="goHouseDetail(item)">
         <ion-row>
-          <ion-col col-4 style="height: 100px;overflow:hidden">
-            <img [src]="imgHeader+pic(item?.propertyPics)" *ngIf="item.propertyPics" alt="" width="90%">
-            <img src="assets/imgs/default.jpg"  *ngIf="!item.propertyPics" alt="" width="90%">
+          <ion-col col-4 >
+            <img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"
+                 [lazyLoad]="imgHeader+pic(item?.propertyPics)"
+                  alt="" width="90%" height="100px">
           </ion-col>
           <ion-col col-8>
             <div class="ellipsis">

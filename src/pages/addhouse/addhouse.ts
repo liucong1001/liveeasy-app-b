@@ -8,6 +8,7 @@ import {LocalStorageProvider} from  '../../providers/local-storage/local-storage
 import {HousingPage} from "../housing/housing";
 import {DescPage} from "../desc/desc";
 import { Events } from 'ionic-angular';
+import {ToastComponent} from "../../components/toast/toast";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -30,7 +31,7 @@ export class AddhousePage {
   down=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
-              public localStorageProvider:LocalStorageProvider,public events: Events) {
+              public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent) {
      //楼盘列表
 
     //房源标签
@@ -85,7 +86,11 @@ export class AddhousePage {
     elevators:[''],//梯
     apartments:[''],//户
   });
-
+    tip(){
+      this.toast.alert('alert默认消息');
+      this.toast.msg('成功操作');
+      this.toast.error('失败操作');
+    }
  //表单验证消息
     errors={
         buildingNo:[
@@ -215,14 +220,14 @@ export class AddhousePage {
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
-        alert('录入成功！');
+       this.toast.alert('录入成功!');
         this.navCtrl.setRoot(HousingPage);
       }else {
-        alert('录入失败！');
+        this.toast.error('录入失败！');
       }
 
     },err=>{
-      alert('录入失败');
+      this.toast.error('录入失败！');
     })
 
   }
