@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
-import { RedacthousePage } from '../../redacthouse/redacthouse';
 import {SearchhousePage} from "./searchhouse/searchhouse";
 import {RecordPage} from "./record/record";
 import { LookhousePage } from './lookhouse/lookhouse';
@@ -17,6 +16,8 @@ import {KeyPage} from "./key/key";
 import {DescPage} from "./desc/desc";
 import { Events } from 'ionic-angular';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
+import {ToastComponent} from "../../../components/toast/toast";
+
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -54,7 +55,7 @@ export class HousedetailPage {
   estateList:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
-              public events: Events,public addhouseProvider: AddhouseProvider) {
+              public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,) {
 
 
 
@@ -252,9 +253,9 @@ export class HousedetailPage {
       propertyid:this.propertyid,
     });
   }
-  goRedact(){
-    this.navCtrl.push(RedacthousePage);
-  }
+  // goRedact(){
+  //   this.navCtrl.push(RedacthousePage);
+  // }
   showInfo(){
     this.sensitiveInfo =true;
     this.showInfos=false;
@@ -340,8 +341,14 @@ export class HousedetailPage {
       ...this.form.value
     };
     this.propertyProvider.updates(formData).then(res=>{
-       alert('修改成功');
-       this.navCtrl.setRoot(HousingPage);
+      if(res.success){
+        this.toast.msg('修改成功!');
+        this.navCtrl.setRoot(HousingPage);
+      }else{
+        this.toast.error('修改失败！');
+      }
+       // alert('修改成功');
+
     })
   }
   //根据楼盘名返回楼盘地址

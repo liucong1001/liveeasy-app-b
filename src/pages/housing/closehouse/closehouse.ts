@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import {ClosehouseProvider} from '../../providers/closehouse/closehouse'
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {ClosehouseProvider} from '../../../providers/closehouse/closehouse'
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
-import {HousingPage} from "../housing/housing";
-import {PropertyProvider} from "../../providers/property/property";
+import {HousingPage} from "../../housing/housing";
+import {PropertyProvider} from "../../../providers/property/property";
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  * Generated class for the ClosehousePage page.
  *
@@ -31,7 +32,7 @@ export class ClosehousePage {
   pending=false;
   data:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              public http: HttpClient,
+              public http: HttpClient,public toast:ToastComponent,
               public  closehouseProvider: ClosehouseProvider,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid = navParams.get('propertyid');
@@ -88,8 +89,14 @@ export class ClosehousePage {
         closeDesc:this.form.value.closeDesc
       }).then(res => {
         console.log(res);
-        alert('关闭成功');
-        this.navCtrl.push(HousingPage)
+        if(res.success){
+          this.toast.msg('关闭成功!');
+          this.navCtrl.setRoot(HousingPage)
+        }else{
+          this.toast.error('关闭失败！');
+        }
+        // alert('关闭成功');
+        // this.navCtrl.push(HousingPage)
       });
     }else if(this.form.value.propertyStatus == 8){
       if(this.form.value.invalidReason !=''){
@@ -101,11 +108,17 @@ export class ClosehousePage {
           closeDesc:this.form.value.closeDesc
         }).then(res => {
           console.log(res);
-          alert('关闭成功');
-          this.navCtrl.setRoot(HousingPage);
+          if(res.success){
+            this.toast.msg('关闭成功!');
+            this.navCtrl.setRoot(HousingPage)
+          }else{
+            this.toast.error('关闭失败！');
+          }
+          // alert('关闭成功');
+          // this.navCtrl.setRoot(HousingPage);
         });
       }else {
-        alert('请选择无效原因')
+        this.toast.error('请选择无效原因');
       }
     }
     console.log(this.form.value)
@@ -124,7 +137,7 @@ export class ClosehousePage {
     }).then(res => {
       console.log(res);
       this.navCtrl.parent.select(1);
-      alert('提交成功，请等候同意！');
+      this.toast.msg('提交成功，请等候同意!');
     });
   }
 

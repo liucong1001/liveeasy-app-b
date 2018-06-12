@@ -9,6 +9,7 @@ import {AddhousePage} from "../addhouse/addhouse";
 import {HousingPage} from "../housing";
 import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  * Generated class for the AddlookPage page.
  *
@@ -36,7 +37,7 @@ export class AddlookPage {
   fileTransfer: FileTransferObject = this.transfer.create();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
-              private camera: Camera,public actionSheetCtrl: ActionSheetController,
+              private camera: Camera,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
     this.data = navParams.get('item');
@@ -184,12 +185,12 @@ export class AddlookPage {
 
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
         if(res.success){
-          alert('添加成功');
+          this.toast.msg('添加成功!');
           this.navCtrl.pop();
         }else {
+          this.toast.error('添加失败!');
           console.log('失败',res);
         }
-
       }).catch(err=>{
          alert('添加失败'+err);
       })

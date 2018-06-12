@@ -8,6 +8,8 @@ import {LetteratorneyPage} from "../letteratorney/letteratorney";
 import {HousingPage} from "../../housing";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {ConfigProvider} from "../../../../providers/config/config";
+import {ToastComponent} from "../../../../components/toast/toast";
+
 /**
  * Generated class for the KeyPage page.
  *
@@ -34,7 +36,7 @@ export class KeyPage {
   edit = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera,
-              private fb:FormBuilder,public configProvider: ConfigProvider,
+              private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
     this.data = navParams.get('item');
@@ -134,8 +136,14 @@ export class KeyPage {
       // keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
-      alert('上传成功');
-      this.navCtrl.pop()
+      if(res.success){
+        this.toast.msg('上传成功!');
+        this.navCtrl.pop()
+      }else{
+        this.toast.error('上传失败！');
+      }
+      // alert('上传成功');
+      // this.navCtrl.pop()
     });
     console.log(this.form.value);
   }
@@ -159,8 +167,14 @@ export class KeyPage {
       propertyKeyInfoEntity:this.data,
     }).then(res => {
       console.log(res);
-      alert('修改成功');
-      this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+      if(res.success){
+        this.toast.msg('修改成功!');
+        this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+      }else{
+        this.toast.error('修改失败！');
+      }
+      // alert('修改成功');
+
     });
   }
 

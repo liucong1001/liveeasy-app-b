@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 import {FollowProvider} from '../../../providers/follow/follow'
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {HousingPage} from "../housing";
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  * Generated class for the FollowPage page.
  *
@@ -25,6 +26,7 @@ export class FollowPage {
   standardAddress:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,
+              public toast:ToastComponent,
               public  followProvider: FollowProvider,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
 
@@ -56,8 +58,14 @@ export class FollowPage {
         followupTime:this.followuptime
       }).then(res => {
         console.log(res);
-        alert('跟进成功！')
-        this.navCtrl.pop()
+        if(res.success){
+          this.toast.msg('跟进成功!');
+          this.navCtrl.pop()
+        }else{
+          this.toast.error('跟进失败！');
+        }
+        // alert('跟进成功！')
+        // this.navCtrl.pop()
       });
   console.log(this.form.value)
 }

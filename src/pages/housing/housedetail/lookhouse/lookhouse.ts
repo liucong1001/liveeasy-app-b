@@ -5,6 +5,8 @@ import {PropertyModel} from "../../../../model/property/property.model";
 import {PropertyProvider} from "../../../../providers/property/property";
 import {ConfigProvider} from "../../../../providers/config/config";
 import {HousedetailPage} from "../housedetail";
+import {ToastComponent} from "../../../../components/toast/toast";
+
 
 /**
  * Generated class for the LookhousePage page.
@@ -29,7 +31,7 @@ export class LookhousePage {
   imgHeader: string; //线上图片默认头地址
   imgJson :any;
   edit = false;
-  constructor(public navCtrl: NavController,private camera: Camera, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+  constructor(public navCtrl: NavController,private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,) {
     this.data = navParams.get('item');
     this.formData.propertyId = this.data.propertyId;
@@ -84,13 +86,13 @@ export class LookhousePage {
      this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
         if(res.success){
           console.log('成功返回的数据',res);
-          alert('上传成功！');
+          this.toast.msg('上传成功!');
           this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
         }else {
-          alert('上传失败');
+          this.toast.error('上传失败!');
         }
      },err=>{
-       alert('上传失败');
+       this.toast.error('上传失败!');
      })
   }
 
