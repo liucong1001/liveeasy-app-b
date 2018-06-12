@@ -14,8 +14,8 @@ export class TabsPage {
   @ViewChild('myTabs') tabRef: Tabs;
   tab1Root = HomePage;
   tab2Root = HousingPage;
-  // tab3Root = PassengerPage;
-  // tab4Root = CenterPage;
+  tab3Root = PassengerPage;
+  tab4Root = CenterPage;
 
   constructor() {
   }

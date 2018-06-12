@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UpdatepwdPage } from '../updatepwd/updatepwd';
-import { VerifyphonePage } from '../verifyphone/verifyphone';
+import { UpdatepwdPage } from '../center/updatepwd/updatepwd';
+import { VerifyphonePage } from '../center/verifyphone/verifyphone';
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 /**

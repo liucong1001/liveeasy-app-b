@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import {UpdatepwdProvider} from '../../providers/updatepwd/updatepwd'
+import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {HttpClient} from '@angular/common/http';
-import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
-import {ErrorMessage} from "../../components/valid-error/valid-error";
-import {AccountPage} from "../account/account";
+import {LocalStorageProvider} from '../../../providers/local-storage/local-storage'
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {AccountPage} from "../../account/account";
 @IonicPage()
 @Component({
   selector: 'page-updatepwd',

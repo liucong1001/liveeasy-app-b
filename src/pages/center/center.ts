@@ -1,8 +1,8 @@
 import { Component ,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams,Content } from 'ionic-angular';
-import { AboutusPage } from '../aboutus/aboutus';
-import { HelpPage } from '../help/help';
-import { UpdatepwdPage } from '../updatepwd/updatepwd';
+import { AboutusPage } from './aboutus/aboutus';
+import { HelpPage } from './help/help';
+import { UpdatepwdPage } from './updatepwd/updatepwd';
 import { MyaccountPage } from '../myaccount/myaccount';
 import {AccountPage} from "../account/account";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";

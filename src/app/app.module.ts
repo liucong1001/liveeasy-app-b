@@ -52,11 +52,11 @@ import { AddpublicguestPage } from '../pages/addpublicguest/addpublicguest';
 import { DeclarationPage } from '../pages/declaration/declaration';
 import { DeclardetailPage } from '../pages/declardetail/declardetail';
 import { ChoosehousePage } from '../pages/choosehouse/choosehouse';
-import { UpdatepwdPage } from '../pages/updatepwd/updatepwd';
-import { HelpPage } from '../pages/help/help';
-import { AboutusPage } from '../pages/aboutus/aboutus';
+import { UpdatepwdPage } from '../pages/center/updatepwd/updatepwd';
+import { HelpPage } from '../pages/center/help/help';
+import { AboutusPage } from '../pages/center/aboutus/aboutus';
 import { MyaccountPage } from '../pages/myaccount/myaccount';
-import { VerifyphonePage } from '../pages/verifyphone/verifyphone'
+import { VerifyphonePage } from '../pages/center/verifyphone/verifyphone'
 import { VersionProvider } from '../providers/version/app.version';
 import {VersionUpdateProvider} from "../providers/version/app.update";
 import {FileOpener} from "@ionic-native/file-opener";
@@ -94,14 +94,14 @@ import {AllsearchPage} from "../pages/allsearch/allsearch";
 import { LazyLoadImageModule } from 'ng2-lazyload-image';
 import {ToastComponent} from "../components/toast/toast"
 //启动加速
-import {AboutusPageModule} from '../pages/aboutus/aboutus.module';
+import {AboutusPageModule} from '../pages/center/aboutus/aboutus.module';
 import {AccomplishPageModule} from '../pages/accomplish/accomplish.module';
 import {AccountPageModule} from '../pages/account/account.module';
 import {AddhousePageModule}from '../pages/addhouse/addhouse.module';
 import {AddlookPageModule}from'../pages/addlook/addlook.module';
 import {AddpassengerPageModule} from '../pages/addpassenger/addpassenger.module';
-import { VerifyphonePageModule } from './../pages/verifyphone/verifyphone.module';
-import { UpdatepwdPageModule } from './../pages/updatepwd/updatepwd.module';
+import { VerifyphonePageModule } from '../pages/center/verifyphone/verifyphone.module';
+import { UpdatepwdPageModule } from '../pages/center/updatepwd/updatepwd.module';
 import { StartupPageModule } from './../pages/startup/startup.module';
 import { SearchhousePageModule } from './../pages/searchhouse/searchhouse.module';
 import { RolepeoplePageModule } from './../pages/rolepeople/rolepeople.module';
@@ -123,7 +123,7 @@ import { LetteratorneyPageModule } from './../pages/letteratorney/letteratorney.
 import { KeyPageModule } from './../pages/key/key.module';
 import { HousingPageModule } from './../pages/housing/housing.module';
 import { HousedetailPageModule } from './../pages/housedetail/housedetail.module';
-import { HelpPageModule } from './../pages/help/help.module';
+import { HelpPageModule } from '../pages/center/help/help.module';
 import { FollowPageModule } from './../pages/follow/follow.module';
 import { DescPageModule } from './../pages/desc/desc.module';
 import { DeclardetailPageModule } from './../pages/declardetail/declardetail.module';
