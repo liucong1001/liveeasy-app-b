@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PublicpassengerPage } from '../publicpassenger/publicpassenger';
-import {PublicCustomerProvider} from "../../providers/public-customer/public-customer";
-import {PropertyProvider} from "../../providers/property/property";
-import {CustomerProvider} from "../../providers/customer/customer";
+import { PublicpassengerPage } from '../publicpassenger';
+import {PublicCustomerProvider} from "../../../../providers/public-customer/public-customer";
+import {PropertyProvider} from "../../../../providers/property/property";
+import {CustomerProvider} from "../../../../providers/customer/customer";
 
 /**
    公客列表

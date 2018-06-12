@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PlookrecordPage } from '../plookrecord/plookrecord';
-import { PfollowrecordPage } from '../pfollowrecord/pfollowrecord';
-import { AddpublicguestPage } from '../addpublicguest/addpublicguest';
+import { PlookrecordPage } from './plookrecord/plookrecord';
+import { PfollowrecordPage } from './pfollowrecord/pfollowrecord';
+import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 
 /**
  * Generated class for the PublicpdetailPage page.

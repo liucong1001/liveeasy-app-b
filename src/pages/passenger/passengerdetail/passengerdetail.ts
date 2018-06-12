@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PfollowrecordPage } from './../pfollowrecord/pfollowrecord';
-import { PlookrecordPage } from './../plookrecord/plookrecord';
+import { PfollowrecordPage } from '../publicpassenger/publicpdetail/pfollowrecord/pfollowrecord';
+import { PlookrecordPage } from '../publicpassenger/publicpdetail/plookrecord/plookrecord';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AddhouseProvider} from "../../providers/addhouse/addhouse";
-import {CustomerProvider} from "../../providers/customer/customer";
+import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
+import {CustomerProvider} from "../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger/mypassenger";
 /**
  * Generated class for the PassengerdetailPage page.

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DeclarationPage } from '../declaration/declaration';
-
 /**
- * Generated class for the AddpublicguestPage page.
+ * Generated class for the AccomplishPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,18 +9,15 @@ import { DeclarationPage } from '../declaration/declaration';
 
 @IonicPage()
 @Component({
-  selector: 'page-addpublicguest',
-  templateUrl: 'addpublicguest.html',
+  selector: 'page-accomplish',
+  templateUrl: 'accomplish.html',
 })
-export class AddpublicguestPage {
+export class AccomplishPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddpublicguestPage');
-  }
-  goDeclaration(){
-    this.navCtrl.push(DeclarationPage)
+    console.log('ionViewDidLoad AccomplishPage');
   }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from './../addpassenger/addpassenger';
-import { MypassengerPage } from './../mypassenger/mypassenger';
-import { ChoosehousePage } from '../choosehouse/choosehouse';
+import { AddpassengerPage } from './addpassenger/addpassenger';
+import { MypassengerPage } from './mypassenger/mypassenger';
+import { ChoosehousePage } from './publicpassenger/choosehouse/choosehouse';
 /**
  * Generated class for the PassengerPage page.
  *

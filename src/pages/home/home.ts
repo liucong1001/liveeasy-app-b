@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../addhouse/addhouse";
-import {AddpassengerPage} from "../addpassenger/addpassenger";
-import {DeclarationPage} from "../declaration/declaration";
+import {AddpassengerPage} from "../passenger/addpassenger/addpassenger";
+import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";
 @Component({
   selector: 'page-home',

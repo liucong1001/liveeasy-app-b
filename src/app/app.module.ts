@@ -37,21 +37,21 @@ import { Camera } from '@ionic-native/camera';
 
 import { RolepeoplePage } from '../pages/rolepeople/rolepeople';
 import { RecordPage } from '../pages/record/record';
-import { MypassengerPage } from '../pages/mypassenger/mypassenger';
-import { PublicpassengerPage } from '../pages/publicpassenger/publicpassenger';
-import { AddpassengerPage } from '../pages/addpassenger/addpassenger';
-import { PassengerdetailPage } from '../pages/passengerdetail/passengerdetail';
-import { PassengerfollowPage } from '../pages/passengerfollow/passengerfollow';
-import { PfollowrecordPage } from '../pages/pfollowrecord/pfollowrecord';
-import { PassengerlookPage } from '../pages/passengerlook/passengerlook';
-import { PlookrecordPage } from '../pages/plookrecord/plookrecord';
-import { AccomplishPage } from '../pages/accomplish/accomplish';
-import { CloseprivateguestPage } from '../pages/closeprivateguest/closeprivateguest';
-import { PublicpdetailPage } from '../pages/publicpdetail/publicpdetail';
-import { AddpublicguestPage } from '../pages/addpublicguest/addpublicguest';
-import { DeclarationPage } from '../pages/declaration/declaration';
-import { DeclardetailPage } from '../pages/declardetail/declardetail';
-import { ChoosehousePage } from '../pages/choosehouse/choosehouse';
+import { MypassengerPage } from '../pages/passenger/mypassenger/mypassenger';
+import { PublicpassengerPage } from '../pages/passenger/publicpassenger/publicpassenger';
+import { AddpassengerPage } from '../pages/passenger/addpassenger/addpassenger';
+import { PassengerdetailPage } from '../pages/passenger/passengerdetail/passengerdetail';
+import { PassengerfollowPage } from '../pages/passenger/mypassenger/passengerfollow/passengerfollow';
+import { PfollowrecordPage } from '../pages/passenger/publicpassenger/publicpdetail/pfollowrecord/pfollowrecord';
+import { PassengerlookPage } from '../pages/passenger/mypassenger/passengerlook/passengerlook';
+import { PlookrecordPage } from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord';
+import { AccomplishPage } from '../pages/passenger/mypassenger/accomplish/accomplish';
+import { CloseprivateguestPage } from '../pages/passenger/closeprivateguest/closeprivateguest';
+import { PublicpdetailPage } from '../pages/passenger/publicpassenger/publicpdetail/publicpdetail';
+import { AddpublicguestPage } from '../pages/passenger/publicpassenger/publicpdetail/addpublicguest/addpublicguest';
+import { DeclarationPage } from '../pages/home/declaration/declaration';
+import { DeclardetailPage } from '../pages/home/declardetail/declardetail';
+import { ChoosehousePage } from '../pages/passenger/publicpassenger/choosehouse/choosehouse';
 import { UpdatepwdPage } from '../pages/center/updatepwd/updatepwd';
 import { HelpPage } from '../pages/center/help/help';
 import { AboutusPage } from '../pages/center/aboutus/aboutus';
@@ -95,11 +95,11 @@ import { LazyLoadImageModule } from 'ng2-lazyload-image';
 import {ToastComponent} from "../components/toast/toast"
 //启动加速
 import {AboutusPageModule} from '../pages/center/aboutus/aboutus.module';
-import {AccomplishPageModule} from '../pages/accomplish/accomplish.module';
+import {AccomplishPageModule} from '../pages/passenger/mypassenger/accomplish/accomplish.module';
 import {AccountPageModule} from '../pages/account/account.module';
 import {AddhousePageModule}from '../pages/addhouse/addhouse.module';
 import {AddlookPageModule}from'../pages/addlook/addlook.module';
-import {AddpassengerPageModule} from '../pages/addpassenger/addpassenger.module';
+import {AddpassengerPageModule} from '../pages/passenger/addpassenger/addpassenger.module';
 import { VerifyphonePageModule } from '../pages/center/verifyphone/verifyphone.module';
 import { UpdatepwdPageModule } from '../pages/center/updatepwd/updatepwd.module';
 import { StartupPageModule } from './../pages/startup/startup.module';
@@ -107,13 +107,13 @@ import { SearchhousePageModule } from './../pages/searchhouse/searchhouse.module
 import { RolepeoplePageModule } from './../pages/rolepeople/rolepeople.module';
 import { RedacthousePageModule } from './../pages/redacthouse/redacthouse.module';
 import { RecordPageModule } from './../pages/record/record.module';
-import { PublicpdetailPageModule } from './../pages/publicpdetail/publicpdetail.module';
-import { PublicpassengerPageModule } from './../pages/publicpassenger/publicpassenger.module';
-import { PfollowrecordPageModule } from './../pages/pfollowrecord/pfollowrecord.module';
-import { PassengerlookPageModule } from './../pages/passengerlook/passengerlook.module';
-import { PassengerfollowPageModule } from './../pages/passengerfollow/passengerfollow.module';
+import { PublicpdetailPageModule } from '../pages/passenger/publicpassenger/publicpdetail/publicpdetail.module';
+import { PublicpassengerPageModule } from '../pages/passenger/publicpassenger/publicpassenger.module';
+import { PfollowrecordPageModule } from '../pages/passenger/publicpassenger/publicpdetail/pfollowrecord/pfollowrecord.module';
+import { PassengerlookPageModule } from '../pages/passenger/mypassenger/passengerlook/passengerlook.module';
+import { PassengerfollowPageModule } from '../pages/passenger/mypassenger/passengerfollow/passengerfollow.module';
 import { PassengerPageModule } from './../pages/passenger/passenger.module';
-import { MypassengerPageModule } from './../pages/mypassenger/mypassenger.module';
+import { MypassengerPageModule } from '../pages/passenger/mypassenger/mypassenger.module';
 import { MyaccountPageModule } from './../pages/myaccount/myaccount.module';
 import { MsgdetailPageModule } from '../pages/home/msgdetail/msgdetail.module';
 import { MdetailsPageModule } from '../pages/home/mdetails/mdetails.module';
@@ -126,17 +126,17 @@ import { HousedetailPageModule } from './../pages/housedetail/housedetail.module
 import { HelpPageModule } from '../pages/center/help/help.module';
 import { FollowPageModule } from './../pages/follow/follow.module';
 import { DescPageModule } from './../pages/desc/desc.module';
-import { DeclardetailPageModule } from './../pages/declardetail/declardetail.module';
-import { DeclarationPageModule } from './../pages/declaration/declaration.module';
-import { CloseprivateguestPageModule } from './../pages/closeprivateguest/closeprivateguest.module';
+import { DeclardetailPageModule } from '../pages/home/declardetail/declardetail.module';
+import { DeclarationPageModule } from '../pages/home/declaration/declaration.module';
+import { CloseprivateguestPageModule } from '../pages/passenger/closeprivateguest/closeprivateguest.module';
 import { ClosehousePageModule } from './../pages/closehouse/closehouse.module';
-import { ChoosehousePageModule } from './../pages/choosehouse/choosehouse.module';
+import { ChoosehousePageModule } from '../pages/passenger/publicpassenger/choosehouse/choosehouse.module';
 import { CenterPageModule } from './../pages/center/center.module';
 import { BelongerPageModule } from './../pages/belonger/belonger.module';
 import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
-import { AddpublicguestPageModule } from './../pages/addpublicguest/addpublicguest.module';
-import {PassengerdetailPageModule} from './../pages/passengerdetail/passengerdetail.module'
-import  {PlookrecordPageModule} from './../pages/plookrecord/plookrecord.module';
+import { AddpublicguestPageModule } from '../pages/passenger/publicpassenger/publicpdetail/addpublicguest/addpublicguest.module';
+import {PassengerdetailPageModule} from '../pages/passenger/passengerdetail/passengerdetail.module'
+import  {PlookrecordPageModule} from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord.module';
 import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
 @NgModule({
   declarations: [

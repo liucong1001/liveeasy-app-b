@@ -1,8 +1,8 @@
 import { Component ,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams,Slides } from 'ionic-angular';
-import { AccomplishPage } from '../accomplish/accomplish';
-import { CloseprivateguestPage } from '../closeprivateguest/closeprivateguest';
-import { AddpassengerPage } from '../addpassenger/addpassenger';
+import { AccomplishPage } from '../../../mypassenger/accomplish/accomplish';
+import { CloseprivateguestPage } from '../../../closeprivateguest/closeprivateguest';
+import { AddpassengerPage } from '../../../addpassenger/addpassenger';
 
 /**
  * Generated class for the PlookrecordPage page.

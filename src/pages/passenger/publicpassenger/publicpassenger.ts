@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PublicpdetailPage } from '../publicpdetail/publicpdetail';
+import { PublicpdetailPage } from './publicpdetail/publicpdetail';
 
 /**
  * Generated class for the PublicpassengerPage page.
