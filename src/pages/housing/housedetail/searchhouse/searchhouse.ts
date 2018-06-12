@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams} from 'ionic-angular';
-import {AddhouseProvider} from "../../providers/addhouse/addhouse";
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
-import {HousedetailPage} from "../housedetail/housedetail";
+import {AddhouseProvider} from "../../../../providers/addhouse/addhouse";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+import {HousedetailPage} from "../housedetail";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Events } from 'ionic-angular';
-import {PropertyProvider} from "../../providers/property/property";
+import {PropertyProvider} from "../../../../providers/property/property";
 @IonicPage()
 @Component({
   selector: 'page-searchhouse',

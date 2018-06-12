@@ -15,18 +15,16 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { PassengerPage } from '../pages/passenger/passenger';
 import { CenterPage } from '../pages/center/center';
 import { HousingPage } from '../pages/housing/housing';
-import { FollowPage } from '../pages/follow/follow';
-import { ClosehousePage } from '../pages/closehouse/closehouse';
-import { AddlookPage } from '../pages/addlook/addlook';
+import { FollowPage } from '../pages/housing/follow/follow';
+import { ClosehousePage } from '../pages/housing/closehouse/closehouse';
+import { AddlookPage } from '../pages/housing/addlook/addlook';
 import { LoginProvider } from '../providers/login/login';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { HomeProvider } from '../providers/home/home';
 
  import { MdetailsPage } from '../pages/home/mdetails/mdetails';
-import { HousedetailPage } from '../pages/housedetail/housedetail';
-import { RedacthousePage } from '../pages/redacthouse/redacthouse';
-import { AddhousePage } from '../pages/addhouse/addhouse';
-import { LockhousePage } from '../pages/lockhouse/lockhouse';
+import { HousedetailPage } from '../pages/housing/housedetail/housedetail';
+import { AddhousePage } from '../pages/housing/addhouse/addhouse';
 
 
 
@@ -35,8 +33,8 @@ import {ComponentsModule} from "../components/components.module";
 import { HttpProvider } from '../providers/http/http';
 import { Camera } from '@ionic-native/camera';
 
-import { RolepeoplePage } from '../pages/rolepeople/rolepeople';
-import { RecordPage } from '../pages/record/record';
+import { RolepeoplePage } from '../pages/housing/housedetail/rolepeople/rolepeople';
+import { RecordPage } from '../pages/housing/housedetail/record/record';
 import { MypassengerPage } from '../pages/passenger/mypassenger/mypassenger';
 import { PublicpassengerPage } from '../pages/passenger/publicpassenger/publicpassenger';
 import { AddpassengerPage } from '../pages/passenger/addpassenger/addpassenger';
@@ -70,12 +68,12 @@ import {HeaderColor} from "@ionic-native/header-color";
 import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
 import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 import { AddhouseProvider } from '../providers/addhouse/addhouse';
-import {SearchhousePage} from '../pages/searchhouse/searchhouse';
+import {SearchhousePage} from '../pages/housing/housedetail/searchhouse/searchhouse';
 import {UpdatepwdProvider} from "../providers/updatepwd/updatepwd";
 import { PropertyProvider } from '../providers/property/property';
 import {StringJsonPipe} from "../pipes/string-json/string-json";
-import { LookhousePage } from './../pages/lookhouse/lookhouse';
-import { LetteratorneyPage } from '../pages/letteratorney/letteratorney';
+import { LookhousePage } from '../pages/housing/housedetail/lookhouse/lookhouse';
+import { LetteratorneyPage } from '../pages/housing/housedetail/letteratorney/letteratorney';
 import {ToParseIntPipe} from "../pipes/to-parse-int/to-parse-int";
 import { FileProvider } from '../providers/file/file';
 import {FollowProvider} from "../providers/follow/follow";
@@ -84,10 +82,10 @@ import {RecordProvider} from "../providers/record/record";
 import {ConfigProvider} from "../providers/config/config";
 import { CustomerProvider } from '../providers/customer/customer';
 import {AreaPipe} from "../pipes/area/area";
-import {KeyPage} from "../pages/key/key";
+import {KeyPage} from "../pages/housing/housedetail/key/key";
 import { PublicCustomerProvider } from '../providers/public-customer/public-customer';
-import {DescPage} from "../pages/desc/desc";
-import {BelongerPage} from "../pages/belonger/belonger";
+import {DescPage} from "../pages/housing/housedetail/desc/desc";
+import {BelongerPage} from "../pages/housing/closehouse/belonger/belonger";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {AllsearchPage} from "../pages/allsearch/allsearch";
@@ -97,16 +95,15 @@ import {ToastComponent} from "../components/toast/toast"
 import {AboutusPageModule} from '../pages/center/aboutus/aboutus.module';
 import {AccomplishPageModule} from '../pages/passenger/mypassenger/accomplish/accomplish.module';
 import {AccountPageModule} from '../pages/account/account.module';
-import {AddhousePageModule}from '../pages/addhouse/addhouse.module';
-import {AddlookPageModule}from'../pages/addlook/addlook.module';
+import {AddhousePageModule}from '../pages/housing/addhouse/addhouse.module';
+import {AddlookPageModule}from '../pages/housing/addlook/addlook.module';
 import {AddpassengerPageModule} from '../pages/passenger/addpassenger/addpassenger.module';
 import { VerifyphonePageModule } from '../pages/center/verifyphone/verifyphone.module';
 import { UpdatepwdPageModule } from '../pages/center/updatepwd/updatepwd.module';
 import { StartupPageModule } from './../pages/startup/startup.module';
-import { SearchhousePageModule } from './../pages/searchhouse/searchhouse.module';
-import { RolepeoplePageModule } from './../pages/rolepeople/rolepeople.module';
-import { RedacthousePageModule } from './../pages/redacthouse/redacthouse.module';
-import { RecordPageModule } from './../pages/record/record.module';
+import { SearchhousePageModule } from '../pages/housing/housedetail/searchhouse/searchhouse.module';
+import { RolepeoplePageModule } from '../pages/housing/housedetail/rolepeople/rolepeople.module';
+import { RecordPageModule } from '../pages/housing/housedetail/record/record.module';
 import { PublicpdetailPageModule } from '../pages/passenger/publicpassenger/publicpdetail/publicpdetail.module';
 import { PublicpassengerPageModule } from '../pages/passenger/publicpassenger/publicpassenger.module';
 import { PfollowrecordPageModule } from '../pages/passenger/publicpassenger/publicpdetail/pfollowrecord/pfollowrecord.module';
@@ -118,26 +115,25 @@ import { MyaccountPageModule } from './../pages/myaccount/myaccount.module';
 import { MsgdetailPageModule } from '../pages/home/msgdetail/msgdetail.module';
 import { MdetailsPageModule } from '../pages/home/mdetails/mdetails.module';
 import { LoginPageModule } from './../pages/login/login.module';
-import { LockhousePageModule } from './../pages/lockhouse/lockhouse.module';
-import { LetteratorneyPageModule } from './../pages/letteratorney/letteratorney.module';
-import { KeyPageModule } from './../pages/key/key.module';
+import { LetteratorneyPageModule } from '../pages/housing/housedetail/letteratorney/letteratorney.module';
+import { KeyPageModule } from '../pages/housing/housedetail/key/key.module';
 import { HousingPageModule } from './../pages/housing/housing.module';
-import { HousedetailPageModule } from './../pages/housedetail/housedetail.module';
+import { HousedetailPageModule } from '../pages/housing/housedetail/housedetail.module';
 import { HelpPageModule } from '../pages/center/help/help.module';
-import { FollowPageModule } from './../pages/follow/follow.module';
-import { DescPageModule } from './../pages/desc/desc.module';
+import { FollowPageModule } from '../pages/housing/follow/follow.module';
+import { DescPageModule } from '../pages/housing/housedetail/desc/desc.module';
 import { DeclardetailPageModule } from '../pages/home/declardetail/declardetail.module';
 import { DeclarationPageModule } from '../pages/home/declaration/declaration.module';
 import { CloseprivateguestPageModule } from '../pages/passenger/closeprivateguest/closeprivateguest.module';
-import { ClosehousePageModule } from './../pages/closehouse/closehouse.module';
+import { ClosehousePageModule } from '../pages/housing/closehouse/closehouse.module';
 import { ChoosehousePageModule } from '../pages/passenger/publicpassenger/choosehouse/choosehouse.module';
 import { CenterPageModule } from './../pages/center/center.module';
-import { BelongerPageModule } from './../pages/belonger/belonger.module';
+import { BelongerPageModule } from '../pages/housing/closehouse/belonger/belonger.module';
 import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
 import { AddpublicguestPageModule } from '../pages/passenger/publicpassenger/publicpdetail/addpublicguest/addpublicguest.module';
 import {PassengerdetailPageModule} from '../pages/passenger/passengerdetail/passengerdetail.module'
 import  {PlookrecordPageModule} from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord.module';
-import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
+import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhouse.module';
 @NgModule({
   declarations: [
     MyApp,
@@ -208,9 +204,7 @@ import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
     AddlookPage,
     MdetailsPage,
     HousedetailPage,
-    RedacthousePage,
     AddhousePage,
-    LockhousePage,
       RolepeoplePage,
       RecordPage,
       AddpassengerPage,
@@ -252,9 +246,9 @@ import {LookhousePageModule}from'./../pages/lookhouse/lookhouse.module';
        AboutusPageModule,
       AccomplishPageModule,AccountPageModule,AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
       VerifyphonePageModule,UpdatepwdPageModule,StartupPageModule,SearchhousePageModule,RolepeoplePageModule,
-      RedacthousePageModule,RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
+      RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
       PassengerlookPageModule,PassengerfollowPageModule,PassengerPageModule,MypassengerPageModule,MyaccountPageModule,
-      MsgdetailPageModule,MdetailsPageModule,LoginPageModule,LockhousePageModule,LetteratorneyPageModule,KeyPageModule,
+      MsgdetailPageModule,MdetailsPageModule,LoginPageModule,LetteratorneyPageModule,KeyPageModule,
       HousingPageModule,HousedetailPageModule,HelpPageModule,FollowPageModule,DescPageModule,DeclardetailPageModule,DeclarationPageModule,
       CloseprivateguestPageModule,ClosehousePageModule,ClosehousePageModule,ChoosehousePageModule,CenterPageModule,
       BelongerPageModule,AllsearchPageModule,AddpublicguestPageModule,PassengerdetailPageModule,PlookrecordPageModule,

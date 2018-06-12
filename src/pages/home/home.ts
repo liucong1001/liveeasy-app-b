@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
-import {AddhousePage} from "../addhouse/addhouse";
+import {AddhousePage} from "../housing/addhouse/addhouse";
 import {AddpassengerPage} from "../passenger/addpassenger/addpassenger";
 import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";

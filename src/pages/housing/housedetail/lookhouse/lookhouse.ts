@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {PropertyModel} from "../../model/property/property.model";
-import {PropertyProvider} from "../../providers/property/property";
-import {ConfigProvider} from "../../providers/config/config";
-import {HousedetailPage} from "../housedetail/housedetail";
+import {PropertyModel} from "../../../../model/property/property.model";
+import {PropertyProvider} from "../../../../providers/property/property";
+import {ConfigProvider} from "../../../../providers/config/config";
+import {HousedetailPage} from "../housedetail";
 
 /**
  * Generated class for the LookhousePage page.

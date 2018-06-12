@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ErrorMessage} from '../../components/valid-error/valid-error';
-import {AddhouseProvider} from "../../providers/addhouse/addhouse";
-import {SearchhousePage} from "../searchhouse/searchhouse";
-import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
-import {HousingPage} from "../housing/housing";
-import {DescPage} from "../desc/desc";
+import {ErrorMessage} from '../../../components/valid-error/valid-error';
+import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
+import {SearchhousePage} from "../housedetail/searchhouse/searchhouse";
+import {LocalStorageProvider} from '../../../providers/local-storage/local-storage'
+import {HousingPage} from "../housing";
+import {DescPage} from "../housedetail/desc/desc";
 import { Events } from 'ionic-angular';
-import {ToastComponent} from "../../components/toast/toast";
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  * Generated class for the AddhousePage page.
  *

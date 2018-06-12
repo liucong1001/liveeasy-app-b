@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
-import { RedacthousePage } from '../redacthouse/redacthouse';
-import {SearchhousePage} from "../searchhouse/searchhouse";
-import {RecordPage} from "../record/record";
-import { LookhousePage } from '../lookhouse/lookhouse';
-import { LetteratorneyPage } from '../letteratorney/letteratorney';
-import { RolepeoplePage } from '../rolepeople/rolepeople';
+import { RedacthousePage } from '../../redacthouse/redacthouse';
+import {SearchhousePage} from "./searchhouse/searchhouse";
+import {RecordPage} from "./record/record";
+import { LookhousePage } from './lookhouse/lookhouse';
+import { LetteratorneyPage } from './letteratorney/letteratorney';
+import { RolepeoplePage } from './rolepeople/rolepeople';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ErrorMessage} from "../../components/valid-error/valid-error";
-import {PropertyModel} from "../../model/property/property.model";
-import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
-import {PropertyProvider} from "../../providers/property/property";
-import {HousingPage} from "../housing/housing";
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {PropertyModel} from "../../../model/property/property.model";
+import {LocalStorageProvider} from '../../../providers/local-storage/local-storage'
+import {PropertyProvider} from "../../../providers/property/property";
+import {HousingPage} from "../housing";
 import {FollowPage} from "../follow/follow";
-import {KeyPage} from "../key/key";
-import {DescPage} from "../desc/desc";
+import {KeyPage} from "./key/key";
+import {DescPage} from "./desc/desc";
 import { Events } from 'ionic-angular';
-import {AddhouseProvider} from "../../providers/addhouse/addhouse";
+import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
 /**
  * Generated class for the HousedetailPage page.
  *

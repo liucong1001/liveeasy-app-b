@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import {HousingPage} from "../housing/housing";
-import {PropertyProvider} from "../../providers/property/property";
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
-import {ErrorMessage} from "../../components/valid-error/valid-error";
-import {HousedetailPage} from "../housedetail/housedetail";
-import {ConfigProvider} from "../../providers/config/config";
+import {HousingPage} from "../../housing";
+import {PropertyProvider} from "../../../../providers/property/property";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {HousedetailPage} from "../housedetail";
+import {ConfigProvider} from "../../../../providers/config/config";
 /**
  * Generated class for the LetteratorneyPage page.
  *

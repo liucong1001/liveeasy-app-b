@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController  } from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import {FollowProvider} from '../../providers/follow/follow'
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
-import {HousingPage} from "../housing/housing";
+import {FollowProvider} from '../../../providers/follow/follow'
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {HousingPage} from "../housing";
 /**
  * Generated class for the FollowPage page.
  *

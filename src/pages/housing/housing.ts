@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
-import {FollowPage} from '../follow/follow';
-import {ClosehousePage} from '../closehouse/closehouse';
-import {AddlookPage} from '../addlook/addlook';
-import {HousedetailPage} from '../housedetail/housedetail';
-import {AddhousePage} from '../addhouse/addhouse';
+import {FollowPage} from './follow/follow';
+import {ClosehousePage} from './closehouse/closehouse';
+import {AddlookPage} from './addlook/addlook';
+import {HousedetailPage} from './housedetail/housedetail';
+import {AddhousePage} from './addhouse/addhouse';
 import {PropertyProvider} from "../../providers/property/property";
 // import {Pipe, PipeTransform} from '@angular/core';
 import {StringJsonPipe} from "../../pipes/string-json/string-json";
@@ -15,7 +15,7 @@ import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {CustomerProvider} from "../../providers/customer/customer";
 import {AllsearchPage} from "../allsearch/allsearch";
-import {SearchhousePage} from "../searchhouse/searchhouse";
+import {SearchhousePage} from "./housedetail/searchhouse/searchhouse";
 import {Tabs} from 'ionic-angular';
 import {Injectable,ViewChild} from '@angular/core';
 /**

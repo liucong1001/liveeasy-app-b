@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {FileTransfer,FileUploadOptions, FileTransferObject} from "@ionic-native/file-transfer";
-import {FileProvider} from "../../providers/file/file";
-import {PropertyModel} from "../../model/property/property.model";
-import {PropertyProvider} from "../../providers/property/property";
+import {FileProvider} from "../../../providers/file/file";
+import {PropertyModel} from "../../../model/property/property.model";
+import {PropertyProvider} from "../../../providers/property/property";
 import {AddhousePage} from "../addhouse/addhouse";
-import {HousingPage} from "../housing/housing";
-import {ConfigProvider} from "../../providers/config/config";
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {HousingPage} from "../housing";
+import {ConfigProvider} from "../../../providers/config/config";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 /**
  * Generated class for the AddlookPage page.
  *
