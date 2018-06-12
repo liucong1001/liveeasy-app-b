@@ -4,17 +4,20 @@ import { ComponentsComponent } from './components/components';
 import { ValidErrorComponent } from './valid-error/valid-error';
 import { UploadComponent } from './upload/upload';
 import { ToastComponent } from './toast/toast';
+import {ImgListComponent} from './img-list/img-list'
 
 @NgModule({
 	declarations: [
 	ComponentsComponent,
     ValidErrorComponent,
     UploadComponent,
-    ToastComponent,],
+    ToastComponent,
+    ImgListComponent],
 	imports: [CommonModule],
 	exports: [ComponentsComponent,
     ValidErrorComponent,
     UploadComponent,
-    ToastComponent,]
+    ToastComponent,
+    ImgListComponent]
 })
 export class ComponentsModule {}

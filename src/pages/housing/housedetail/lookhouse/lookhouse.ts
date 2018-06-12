@@ -47,7 +47,6 @@ export class LookhousePage {
 
  imgData = [];
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LookhousePage');
     this.imgHeader = this.configProvider.set().img;
   }
   menPai(event){

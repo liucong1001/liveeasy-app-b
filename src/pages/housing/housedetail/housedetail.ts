@@ -17,7 +17,7 @@ import {DescPage} from "./desc/desc";
 import { Events } from 'ionic-angular';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
 import {ToastComponent} from "../../../components/toast/toast";
-
+import { LoadingController, Loading } from 'ionic-angular';
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -55,7 +55,8 @@ export class HousedetailPage {
   estateList:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
-              public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,) {
+              public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
+              public loadingCtrl: LoadingController) {
 
 
 
@@ -78,11 +79,15 @@ export class HousedetailPage {
   };
 
   ionViewDidLoad() {
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+    loading.present();
 
     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
       this.data = res.data;
-
       if( this.data){
+        loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
         this.form.patchValue({
           buildingNo: this.data.buildingNo,

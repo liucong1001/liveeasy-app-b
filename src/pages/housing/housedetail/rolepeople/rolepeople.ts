@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
-import {PropertyProvider} from "../../providers/property/property";
-import {RoleModel} from "../../model/property/role.model";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+import {PropertyProvider} from "../../../../providers/property/property";
+import {RoleModel} from "../../../../model/property/role.model";
 /**
  * Generated class for the RolepeoplePage page.
  *

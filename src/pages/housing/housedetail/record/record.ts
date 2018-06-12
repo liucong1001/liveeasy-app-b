@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
-import {RecordProvider} from '../../providers/record/record';
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {RecordProvider} from '../../../../providers/record/record';
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
-import {ConfigProvider} from "../../providers/config/config";
+import {ConfigProvider} from "../../../../providers/config/config";
 /**
  * Generated class for the RecordPage page.
  *

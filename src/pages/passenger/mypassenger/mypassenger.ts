@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddpassengerPage } from '../addpassenger/addpassenger';
 import { PassengerdetailPage } from '../passengerdetail/passengerdetail';
-import { PassengerlookPage } from './../passengerlook/passengerlook';
-import { PassengerfollowPage } from './../passengerfollow/passengerfollow';
+import { PassengerlookPage } from './passengerlook/passengerlook';
+import { PassengerfollowPage } from './passengerfollow/passengerfollow';
 import { CloseprivateguestPage } from '../closeprivateguest/closeprivateguest';
-import {CustomerProvider} from "../../providers/customer/customer";
-import {PropertyProvider} from "../../providers/property/property";
+import {CustomerProvider} from "../../../providers/customer/customer";
+import {PropertyProvider} from "../../../providers/property/property";
 /**
  * Generated class for the MypassengerPage page.
  *

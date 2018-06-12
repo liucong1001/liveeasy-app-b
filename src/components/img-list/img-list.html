@@ -1,0 +1,7 @@
+<!-- Generated template for the ImgListComponent component -->
+<ng-container *ngIf="imgJson">
+    <div class="attorneyPic bgWhite" *ngFor="let item of imgJsonArry">
+      <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+    </div>
+</ng-container>
+
