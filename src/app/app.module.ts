@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
-import { MsgdetailPage } from '../pages/msgdetail/msgdetail';
+import { MsgdetailPage } from '../pages/home/msgdetail/msgdetail';
 import { TabsPage } from '../pages/tabs/tabs';
 import { PassengerPage } from '../pages/passenger/passenger';
 import { CenterPage } from '../pages/center/center';
@@ -22,7 +22,7 @@ import { LoginProvider } from '../providers/login/login';
 import { LocalStorageProvider } from '../providers/local-storage/local-storage';
 import { HomeProvider } from '../providers/home/home';
 
- import { MdetailsPage } from '../pages/mdetails/mdetails';
+ import { MdetailsPage } from '../pages/home/mdetails/mdetails';
 import { HousedetailPage } from '../pages/housedetail/housedetail';
 import { RedacthousePage } from '../pages/redacthouse/redacthouse';
 import { AddhousePage } from '../pages/addhouse/addhouse';
@@ -115,8 +115,8 @@ import { PassengerfollowPageModule } from './../pages/passengerfollow/passengerf
 import { PassengerPageModule } from './../pages/passenger/passenger.module';
 import { MypassengerPageModule } from './../pages/mypassenger/mypassenger.module';
 import { MyaccountPageModule } from './../pages/myaccount/myaccount.module';
-import { MsgdetailPageModule } from './../pages/msgdetail/msgdetail.module';
-import { MdetailsPageModule } from './../pages/mdetails/mdetails.module';
+import { MsgdetailPageModule } from '../pages/home/msgdetail/msgdetail.module';
+import { MdetailsPageModule } from '../pages/home/mdetails/mdetails.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { LockhousePageModule } from './../pages/lockhouse/lockhouse.module';
 import { LetteratorneyPageModule } from './../pages/letteratorney/letteratorney.module';

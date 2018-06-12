@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { MsgdetailPage } from '../msgdetail/msgdetail';
+import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../addhouse/addhouse";
 import {AddpassengerPage} from "../addpassenger/addpassenger";

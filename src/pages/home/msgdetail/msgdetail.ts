@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MdetailsPage } from '../mdetails/mdetails';
-import {HomeProvider} from "../../providers/home/home";
+import {HomeProvider} from "../../../providers/home/home";
 
 /**
  * Generated class for the MsgdetailPage page.
