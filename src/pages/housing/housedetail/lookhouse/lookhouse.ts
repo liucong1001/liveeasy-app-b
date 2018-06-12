@@ -6,6 +6,7 @@ import {PropertyProvider} from "../../../../providers/property/property";
 import {ConfigProvider} from "../../../../providers/config/config";
 import {HousedetailPage} from "../housedetail";
 import {ToastComponent} from "../../../../components/toast/toast";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 
 /**
@@ -32,7 +33,8 @@ export class LookhousePage {
   imgJson :any;
   edit = false;
   constructor(public navCtrl: NavController,private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,) {
+              public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
+              private photoViewer: PhotoViewer,) {
     this.data = navParams.get('item');
     this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
@@ -45,10 +47,14 @@ export class LookhousePage {
     console.log('dir',this.useDir,'详情',this.data.propertyPics);
   }
 
+
  imgData = [];
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;
   }
+
+
+
   menPai(event){
     console.log('门牌号',event);
     this.imgData.push(event.pic);

@@ -12,10 +12,11 @@
           <!--&nbsp;实勘图正在审核，审核期间不允许删除图片</font>-->
       <!--</div>-->
       <ion-list class="m10" *ngIf="!edit" >
-        <div class="attorneyPic bgWhite" *ngFor="let item of imgJson">
+        <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i = index">
           <p>{{item.desc}}</p>
           <div>
-            <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+            <img [src]="imgHeader+item.thumbnail" alt=""   [imgGallery]="{data:imgJson,index:i}"
+                 class="img_upload">
           </div>
         </div>
       </ion-list>

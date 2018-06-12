@@ -90,7 +90,10 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {AllsearchPage} from "../pages/allsearch/allsearch";
 import { LazyLoadImageModule } from 'ng2-lazyload-image';
-import {ToastComponent} from "../components/toast/toast"
+import {ToastComponent} from "../components/toast/toast";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import * as ionicGalleryModal from 'ionic-gallery-modal';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 //启动加速
 import {AboutusPageModule} from '../pages/center/aboutus/aboutus.module';
 import {AccomplishPageModule} from '../pages/passenger/mypassenger/accomplish/accomplish.module';
@@ -138,55 +141,7 @@ import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhou
   declarations: [
     MyApp,
     HomePage,
-    // StartupPage,
-    // AccountPage,
-    // LoginPage,
-    // MsgdetailPage,
     TabsPage,
-    // PassengerPage,
-    // CenterPage,
-    // HousingPage,
-    // FollowPage,
-    // ClosehousePage,
-    // AddlookPage,
-    // MdetailsPage,
-    // HousedetailPage,
-    // RedacthousePage,
-    // AddhousePage,
-    // LockhousePage,
-    //   RolepeoplePage,
-    //   RecordPage,
-    //   AddpassengerPage,
-    //   MypassengerPage,
-    //   PublicpassengerPage,
-    //   PassengerdetailPage,
-    //   PassengerfollowPage,
-    //   PfollowrecordPage,
-    //   PassengerlookPage,
-    //   PlookrecordPage,
-    //   AccomplishPage,
-    //   CloseprivateguestPage,
-    //   PublicpdetailPage,
-    //   AddpublicguestPage,
-    //   DeclarationPage,
-    //   DeclardetailPage,
-    //   ChoosehousePage,
-    //   // AboutusPage,
-    //   HelpPage,
-    //   UpdatepwdPage,
-    //   MyaccountPage,
-    //   VerifyphonePage,
-    //   SearchhousePage,
-    //   StringJsonPipe,
-    //   LookhousePage,
-    //   LetteratorneyPage,
-    //   StringJsonPipe,
-    //   ToParseIntPipe,
-    //    AreaPipe,
-    // KeyPage,
-    // DescPage,
-    // BelongerPage,
-    // AllsearchPage,
   ],
   entryComponents: [
     MyApp,
@@ -258,7 +213,8 @@ import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhou
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
         mode: 'ios',          //把所有平台设置为iOS风格：
         // swipeBackEnabled: true
-      })
+      }),
+      ionicGalleryModal.GalleryModalModule,
     ],
     bootstrap: [IonicApp],
     providers: [
@@ -296,6 +252,11 @@ import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhou
        ImagePicker,
        Base64,
       ToastComponent,
+      PhotoViewer,
+      {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: ionicGalleryModal.GalleryModalHammerConfig,
+      },
     ]
 })
 export class AppModule {}
