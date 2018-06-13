@@ -136,8 +136,7 @@ export class HousedetailPage {
         this.propertyid=this.data.propertyId;
         this.localStorageProvider.set('propertyid',this.data.propertyId);
         //获取房源标签
-        this.houLabel=this.localStorageProvider.get('labels');
-
+        this.houLabel=this.localStorageProvider.get('tagsList');
       }
 
     });
