@@ -33,7 +33,6 @@ export class ToastComponent {
       position: 'middle',
       cssClass:' toast-success',
     });
-
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });

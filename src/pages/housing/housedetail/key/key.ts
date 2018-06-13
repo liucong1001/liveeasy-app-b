@@ -170,14 +170,12 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       if(res.success){
-        this.toast.msg('修改成功!');
+        this.toast.msg('修改成功!')
         this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
       }else{
         this.toast.error('修改失败！');
       }
       // alert('修改成功');
-
     });
   }
-
 }
