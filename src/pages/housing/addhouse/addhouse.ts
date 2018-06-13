@@ -29,6 +29,10 @@ export class AddhousePage {
   showIntention=false;
   right=true;
   down=false;
+  //户型
+  showHx=false;
+  HxRight=true;
+  HxDown=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent) {
@@ -259,6 +263,18 @@ export class AddhousePage {
 
   menPai(event){
     console.log('门牌号',event);
+  }
+  //户型
+  clickHx(){
+    if(this.showHx==false ){
+      this.showHx=true;
+      this.HxRight=false;
+      this.HxDown=true;
+    }else{
+      this.showHx=false;
+      this.HxRight=true;
+      this.HxDown=false;
+    }
   }
 
 }

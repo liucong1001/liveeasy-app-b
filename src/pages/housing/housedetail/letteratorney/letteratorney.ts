@@ -35,6 +35,9 @@ export class LetteratorneyPage {
   imgHeader: string;
   imgJson :any;
   edit = false;
+  noPermission=false;
+  permission=true;
+  agentname:any;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,public toast:ToastComponent,
@@ -48,25 +51,40 @@ export class LetteratorneyPage {
     this.propertyProvider.adetail(this.propertyid).then(res => {
       console.log('委托书详情',res);
       if(res.hasOwnProperty('data')){
-        this.data = res.data;
-        this.delegateDocId= res.data.delegateDocId;
-        this.form.patchValue({
-          delegateDocSn:res.data.delegateDocSn,
-          delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
-          delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
-          delegateDocPics:res.data.delegateDocPics,
-          delegateStyle:res.data.delegateStyle
-        })
-        this.sub=false;
-        this.upd=true;
-      }
-      //委托书图片显示
-      if(res.hasOwnProperty('data')){
-        this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
-        console.log(this.imgJson)
-      }else{
+        if (res.msg == undefined){
+          this.sub=true;
+          this.upd=false;
+        }else if (res.msg == 1){
+          this.data = res.data;
+          this.delegateDocId= res.data.delegateDocId;
+          this.form.patchValue({
+            delegateDocSn:res.data.delegateDocSn,
+            delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
+            delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
+            delegateDocPics:res.data.delegateDocPics,
+            delegateStyle:res.data.delegateStyle
+          });
+          this.sub=false;
+          this.upd=true;
+          this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
+        }else if (res.msg == 2){
+          console.log(res)
+          this.agentname=res.data.agentName;
+          this.noPermission=true;
+          this.permission=false;
+          this.sub=false;
+          this.upd=false;
+        }
+      }else {
         this.edit = true;
       }
+      //委托书图片显示
+      // if(res.hasOwnProperty('data')){
+      //   this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
+      //   console.log(this.imgJson)
+      // }else{
+      //   this.edit = true;
+      // }
       console.log('dir',this.useDir,'详情',this.data);
     });
 
@@ -128,7 +146,7 @@ export class LetteratorneyPage {
     delegateDocSn:['',[Validators.required, Validators.pattern(/^[\da-zA-Z]+$/)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:[''],//结束时间
-    delegateDocPics:[''],//委托书图片
+    delegateDocPics:['',Validators.required],//委托书图片
     delegateStyle:[''] //状态
   });
 

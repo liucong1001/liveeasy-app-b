@@ -53,7 +53,7 @@ import { ChoosehousePage } from '../pages/passenger/publicpassenger/choosehouse/
 import { UpdatepwdPage } from '../pages/center/updatepwd/updatepwd';
 import { HelpPage } from '../pages/center/help/help';
 import { AboutusPage } from '../pages/center/aboutus/aboutus';
-import { MyaccountPage } from '../pages/myaccount/myaccount';
+import { MyaccountPage } from '../pages/center/myaccount/myaccount';
 import { VerifyphonePage } from '../pages/center/verifyphone/verifyphone'
 import { VersionProvider } from '../providers/version/app.version';
 import {VersionUpdateProvider} from "../providers/version/app.update";
@@ -114,7 +114,7 @@ import { PassengerlookPageModule } from '../pages/passenger/mypassenger/passenge
 import { PassengerfollowPageModule } from '../pages/passenger/mypassenger/passengerfollow/passengerfollow.module';
 import { PassengerPageModule } from './../pages/passenger/passenger.module';
 import { MypassengerPageModule } from '../pages/passenger/mypassenger/mypassenger.module';
-import { MyaccountPageModule } from './../pages/myaccount/myaccount.module';
+import { MyaccountPageModule } from '../pages/center/myaccount/myaccount.module';
 import { MsgdetailPageModule } from '../pages/home/msgdetail/msgdetail.module';
 import { MdetailsPageModule } from '../pages/home/mdetails/mdetails.module';
 import { LoginPageModule } from './../pages/login/login.module';
@@ -137,6 +137,7 @@ import { AddpublicguestPageModule } from '../pages/passenger/publicpassenger/pub
 import {PassengerdetailPageModule} from '../pages/passenger/passengerdetail/passengerdetail.module'
 import  {PlookrecordPageModule} from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord.module';
 import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhouse.module';
+import {HomePageModule} from "../pages/home/home.module";
 @NgModule({
   declarations: [
     MyApp,
@@ -149,45 +150,46 @@ import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhou
     StartupPage,
     AccountPage,
     LoginPage,
-    MsgdetailPage,
+    // MsgdetailPage,
     TabsPage,
-    PassengerPage,
+    // PassengerPage,
     CenterPage,
     HousingPage,
-    FollowPage,
-    ClosehousePage,
-    AddlookPage,
-    MdetailsPage,
-    HousedetailPage,
-    AddhousePage,
-      RolepeoplePage,
-      RecordPage,
-      AddpassengerPage,
-      MypassengerPage,
-      PublicpassengerPage,
-      PassengerdetailPage,
-      PassengerfollowPage,
-      PfollowrecordPage,
-      PassengerlookPage,
-      PlookrecordPage,
-      AccomplishPage,
-      CloseprivateguestPage,
-      PublicpdetailPage,
-      AddpublicguestPage,
-      DeclarationPage,
-      DeclardetailPage,
-      ChoosehousePage,
-      AboutusPage,
-      HelpPage,
-      UpdatepwdPage,
-      MyaccountPage,
-      VerifyphonePage,
-    SearchhousePage,
-    LookhousePage,
-    LetteratorneyPage,
-    KeyPage,
-    DescPage,
-    BelongerPage,
+    PassengerPage,
+    // FollowPage,
+    // ClosehousePage,
+    // AddlookPage,
+    // MdetailsPage,
+    // HousedetailPage,
+    // AddhousePage,
+    //   RolepeoplePage,
+    //   RecordPage,
+    //   AddpassengerPage,
+    //   MypassengerPage,
+    //   PublicpassengerPage,
+    //   PassengerdetailPage,
+    //   PassengerfollowPage,
+    //   PfollowrecordPage,
+    //   PassengerlookPage,
+    //   PlookrecordPage,
+    //   AccomplishPage,
+    //   CloseprivateguestPage,
+    //   PublicpdetailPage,
+    //   AddpublicguestPage,
+    //   DeclarationPage,
+    //   DeclardetailPage,
+    //   ChoosehousePage,
+    //   AboutusPage,
+    //   HelpPage,
+    //   UpdatepwdPage,
+    //   MyaccountPage,
+    //   VerifyphonePage,
+    // SearchhousePage,
+    // LookhousePage,
+    // LetteratorneyPage,
+    // KeyPage,
+    // DescPage,
+    // BelongerPage,
     AllsearchPage
   ],
     imports: [
@@ -198,16 +200,24 @@ import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhou
         CommonModule,
         LazyLoadImageModule,
         //页面模块，
-       AboutusPageModule,
-      AccomplishPageModule,AccountPageModule,AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
-      VerifyphonePageModule,UpdatepwdPageModule,StartupPageModule,SearchhousePageModule,RolepeoplePageModule,
-      RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
-      PassengerlookPageModule,PassengerfollowPageModule,PassengerPageModule,MypassengerPageModule,MyaccountPageModule,
-      MsgdetailPageModule,MdetailsPageModule,LoginPageModule,LetteratorneyPageModule,KeyPageModule,
-      HousingPageModule,HousedetailPageModule,HelpPageModule,FollowPageModule,DescPageModule,DeclardetailPageModule,DeclarationPageModule,
-      CloseprivateguestPageModule,ClosehousePageModule,ClosehousePageModule,ChoosehousePageModule,CenterPageModule,
-      BelongerPageModule,AllsearchPageModule,AddpublicguestPageModule,PassengerdetailPageModule,PlookrecordPageModule,
-      LookhousePageModule,
+       // AboutusPageModule,AccomplishPageModule,
+      AccountPageModule,
+      // AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
+      // VerifyphonePageModule,UpdatepwdPageModule,
+      StartupPageModule,PassengerPageModule,
+      // SearchhousePageModule,RolepeoplePageModule,
+      // RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
+      // PassengerlookPageModule,PassengerfollowPageModule,PassengerPageModule,MypassengerPageModule,MyaccountPageModule,
+      // MsgdetailPageModule,MdetailsPageModule,
+      LoginPageModule,
+      // LetteratorneyPageModule,KeyPageModule,
+      HousingPageModule,
+      // HousedetailPageModule,HelpPageModule,FollowPageModule,DescPageModule,DeclardetailPageModule,DeclarationPageModule,
+      // CloseprivateguestPageModule,ClosehousePageModule,ClosehousePageModule,ChoosehousePageModule,
+      CenterPageModule,
+      // BelongerPageModule,
+      AllsearchPageModule,
+      // AddpublicguestPageModule,PassengerdetailPageModule,PlookrecordPageModule,LookhousePageModule,
         // IonicModule.forRoot(MyApp)
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs

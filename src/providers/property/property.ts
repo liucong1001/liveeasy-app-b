@@ -18,7 +18,7 @@ export class PropertyProvider {
   //业主委托
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
   private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
-  private  adetailPath = this.configProvider.set().http+'/property/delegateDocInfo/detail.do'
+  private  adetailPath = this.configProvider.set().http+'/property/delegateDocInfo/detail'
   //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';

@@ -5,11 +5,15 @@ toast {
 .toast-success {
   > div{
     background-color:#1ab394!important;
+    width: 200px;
+    text-align: center;
   }
 
 }
 .toast-error {
   > div{
     background-color:#f53d3d!important;
+    width: 200px;
+    text-align: center;
   }
 }

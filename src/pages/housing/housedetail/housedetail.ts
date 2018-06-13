@@ -39,6 +39,10 @@ export class HousedetailPage {
   showIntention=false;
   right=true;
   down=false;
+  //户型
+  showHx=false;
+  HxRight=true;
+  HxDown=false;
   //编辑房源
   propertyid:any;
   buildingNo:any; //栋号
@@ -406,5 +410,18 @@ export class HousedetailPage {
       this.events.unsubscribe('content');
     });
     this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
+  }
+
+  //户型
+  clickHx(){
+    if(this.showHx==false ){
+      this.showHx=true;
+      this.HxRight=false;
+      this.HxDown=true;
+    }else{
+      this.showHx=false;
+      this.HxRight=true;
+      this.HxDown=false;
+    }
   }
 }

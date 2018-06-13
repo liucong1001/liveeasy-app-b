@@ -44,7 +44,7 @@ export class KeyPage {
     this.propertyProvider.keydetail(this.propertyid).then(res => {
       console.log(res);
 
-      if(res.data != undefined){
+      if(res.hasOwnProperty('data')){
         this.keydelegateid= res.data.keyDelegateId;
         this.data = res.data;
         this.form.patchValue({
@@ -119,9 +119,9 @@ export class KeyPage {
   }
 
   form:FormGroup =this.fb.group({
-    keySn:['',Validators.required], //编号
-    keyAddress:['',Validators.required],//
-    keyDlgtFilePics:[''],//结束时间
+    keySn:['',Validators.required],
+    keyAddress:['',Validators.required],
+    keyDlgtFilePics:[''],
   });
 //上传钥匙信息
   goYc(){

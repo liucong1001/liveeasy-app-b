@@ -1,10 +1,7 @@
 <ion-header>
-  <ion-navbar >
-
-    <ion-title>首页</ion-title>
-
-    <!--<ion-searchbar style="display: none"  placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>-->
-  </ion-navbar>
+  <!--<ion-navbar >-->
+    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="hoInput" (click)="allSearch()"></ion-searchbar>
+  <!--</ion-navbar>-->
 </ion-header>
 <ion-content>
 
@@ -18,15 +15,15 @@
       </ion-col>
       <ion-col col-3  (click)="addpassenger()">
         <img src="assets/imgs/menu2.png" alt="" width="45" height="45" disabled="">
-        <a disabled="">客源录入</a>
+        <a>客源录入</a>
       </ion-col>
       <ion-col col-3 (click)="godeclara()">
         <img src="assets/imgs/menu3.png" alt="" width="45" height="45">
-        <a disabled="">成功报单</a>
+        <a>成功报单</a>
       </ion-col>
       <ion-col col-3>
         <img src="assets/imgs/menu4.png" alt="" width="45" height="45">
-        <a disabled="">数据统计</a>
+        <a>数据统计</a>
       </ion-col>
     </ion-row>
   </ion-grid>

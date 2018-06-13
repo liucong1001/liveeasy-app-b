@@ -31,13 +31,12 @@ export class ToastComponent {
       message: message,
       duration: 2000,
       position: 'middle',
-      cssClass:' toast-success'
+      cssClass:' toast-success',
     });
 
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-
     toast.present();
   }
   // toast 失败消息提示

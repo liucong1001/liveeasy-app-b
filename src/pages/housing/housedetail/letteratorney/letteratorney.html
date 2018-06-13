@@ -6,7 +6,19 @@
 <ion-content>
   <!-- 没有委托书 -->
   <form [formGroup]="form">
-    <ion-list>
+    <ion-list *ngIf="noPermission">
+      <ion-item class="pl12 hdRightInfo1">
+      <ion-label>上传人</ion-label><ion-label>{{agentname}}</ion-label>
+        <ion-input type="text" value="{{agentname}}" class="p0" disabled>
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12 hdRightInfo1">
+      <ion-label>上传时间</ion-label>
+      <ion-input type="text" value="{{agentname}}" class="p0" disabled>
+      </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="permission">
       <ion-item class="pl12 hdRightInfo1" >
         <ion-label>委托书编号</ion-label>
         <ion-input type="text"  class="p0" formControlName="delegateDocSn">
@@ -46,7 +58,7 @@
     </ion-list>
     <ion-grid>
       <ion-row class="p15">
-          <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="go()" *ngIf="sub">提交</button>
+          <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="go()" *ngIf="sub">上传业主委托书</button>
         <button ion-button full color="danger" class="radius"  (click)="upYz()"  *ngIf="upd">修改业主委托书</button>
       </ion-row>
     </ion-grid>
