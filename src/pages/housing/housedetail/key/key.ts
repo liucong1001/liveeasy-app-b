@@ -149,8 +149,10 @@ export class KeyPage {
   }
   // JSON.stringify(this.imgData)
   imgData = [];
+
   yaoChi(event){
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.imgData = event.data;
   }
 
   //修改钥匙信息

@@ -5,6 +5,7 @@ import { ValidErrorComponent } from './valid-error/valid-error';
 import { UploadComponent } from './upload/upload';
 import { ToastComponent } from './toast/toast';
 import {ImgListComponent} from './img-list/img-list'
+import {DirectivesModule} from "../directives/directives.module";
 
 @NgModule({
 	declarations: [
@@ -13,7 +14,7 @@ import {ImgListComponent} from './img-list/img-list'
     UploadComponent,
     ToastComponent,
     ImgListComponent],
-	imports: [CommonModule],
+	imports: [CommonModule,DirectivesModule],
 	exports: [ComponentsComponent,
     ValidErrorComponent,
     UploadComponent,

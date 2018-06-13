@@ -9,13 +9,14 @@ import {LookhousePageModule} from "./lookhouse/lookhouse.module";
 import {RecordPageModule} from "./record/record.module";
 import {RolepeoplePageModule} from "./rolepeople/rolepeople.module";
 import {SearchhousePageModule} from "./searchhouse/searchhouse.module";
-
+import {DirectivesModule} from "../../../directives/directives.module";
 
 @NgModule({
   declarations: [
     HousedetailPage,
   ],
   imports: [
+    DirectivesModule,
     IonicPageModule.forChild(HousedetailPage),
     ComponentsModule,
     ComponentsModule,

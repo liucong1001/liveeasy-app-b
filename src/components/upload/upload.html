@@ -1,5 +1,13 @@
 <div>
- <!--上传图片div-->
-  <div id="uploadDiv" [innerHtml]="data"></div>
-  <div class="bgWrapper m10" id="tip_camer" (click)="presentActionSheet()"></div>
+  <!--上传图片div-->
+  <div id="uploadDiv" >
+    <div class='upload_div' *ngFor="let item of imgData;let i = index; ">
+      <img src={{imgHeader+item.imagePath}}  [imgGallery]="{data:imgData,index:i}" class='img_upload'>
+      <span class='close_upload deleteSty' name='cha' (click)='delete(i,item)'>x</span>
+    </div>
+
+  </div>
+  <div class="bgWrapper m10" id="tip_camer" (click)="presentActionSheet()">
+  </div>
 </div>
+

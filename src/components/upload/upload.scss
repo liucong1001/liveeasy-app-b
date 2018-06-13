@@ -1,8 +1,9 @@
 upload {
 
 }
-.camer-div,#uploadDiv,.tip_camer{
+.camer-div,#uploadDiv,.tip_camer,.upload_div{
   display: inline-block;
+  margin-right: 10px;
 }
 .bgWrapper{
   display: inline-block;
@@ -11,4 +12,20 @@ upload {
 .img_upload{
   display: inline-block;
   vertical-align: middle;
+}
+.upload_div{
+  position: relative;
+}
+.deleteSty{
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  z-index: 99;
+  background: #1ab394;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 100%;
+  text-align: center;
 }

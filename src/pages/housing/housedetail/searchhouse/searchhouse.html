@@ -1,15 +1,5 @@
-<ion-content>
-  <!--<ion-searchbar placeholder="楼盘搜索" (ionInput)="getItems($event)" class="serInput"></ion-searchbar>-->
-  <!--<span class="cancel" (click)="back()">取消</span>-->
-  <!--<ion-list>-->
-    <!--<ion-item *ngFor="let item of items"  class="pl12">-->
-      <!--<ion-label>{{item.estateName}}</ion-label>-->
-      <!--<ion-radio value="{{item.estateId}}" (ionSelect)="select(item)"></ion-radio>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
-  <!--<ion-searchbar placeholder="楼盘搜索"     (ionInput)="getFloorKey($event)" class="serInput"></ion-searchbar>-->
-  <ion-searchbar placeholder="楼盘搜索"   [(ngModel)]="search"  (ionChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
-
+<ion-content >
+  <ion-searchbar placeholder="楼盘搜索"   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
   <span class="cancel" (click)="back()">取消</span>
   <ion-list>
       <ion-item *ngFor="let item of floor"  class="pl12">
@@ -20,5 +10,13 @@
       未找到，相关房源
     </ion-item>
   </ion-list>
+
+  <div *ngIf="!edit" class="hisRecord">
+    <p class="p10">历史记录</p>
+    <div>
+      <a (click)="chose(x)" *ngFor="let x of floorList ">{{x}}</a>
+    </div>
+  </div>
+
 </ion-content>
 

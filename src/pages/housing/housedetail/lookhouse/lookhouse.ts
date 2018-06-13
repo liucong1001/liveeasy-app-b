@@ -54,40 +54,71 @@ export class LookhousePage {
   }
 
 
-
+  menPaiImg = [];
   menPai(event){
     console.log('门牌号',event);
-    this.imgData.push(event.pic);
-    console.log('表单',this.formData);
+    // this.imgData.push(event.pic);
+    this.menPaiImg = event.data;
+    console.log('表单数据',this.menPaiImg);
   }
+  huxinImg = [];
   huXin(event){
     console.log('户型图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.huxinImg = event.data;
+
   }
+  keTinImg = [];
   keTin(event){
     console.log('客厅图',event);
     this.imgData.push(event.pic);
+    this.keTinImg = event.data;
   }
+  woShiImg = [];
   woShi(event){
     console.log('卧室图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.woShiImg = event.data;
   }
+  chuFangImg = [];
   chuFang(event){
     console.log('厨房图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.chuFangImg = event.data;
   }
+  woShenJianImg = [];
   woShenJian(event){
     console.log('卫生间图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.woShenJianImg = event.data;
+
   }
+  otherImg = [];
   other(event){
     console.log('其他图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
+    this.otherImg = event.data;
   }
+
+  addArry(item,data){
+     for(var i in item){
+        data.push(item[i]);
+     }
+  }
+
   save(){
-    //
-     this.formData.arrPic =  JSON.stringify(this.imgData);
-     console.log('提交',this.formData);
+    this.imgData = [];
+    this.addArry(this.menPaiImg,this.imgData);
+    this.addArry(this.huxinImg,this.imgData);
+    this.addArry(this.keTinImg,this.imgData);
+    this.addArry(this.woShiImg,this.imgData);
+    this.addArry(this.chuFangImg,this.imgData);
+    this.addArry(this.woShenJianImg,this.imgData);
+    this.addArry(this.otherImg,this.imgData);
+
+    this.formData.arrPic =  JSON.stringify(this.imgData);
+
+     console.log('提交',this.imgData,this.formData);
      this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
         if(res.success){
           console.log('成功返回的数据',res);
@@ -104,6 +135,29 @@ export class LookhousePage {
   update(){
       this.edit = true;
   }
+  textArrt =[];
+  isShow(name){
+    // var title = name;
 
+    if(this.textArrt.indexOf(name) == -1){
+      this.textArrt.push(name);
+      console.log('名字',this.textArrt);
+      return true;
+    }else {
+      return false;
+    }
+    // else if(this.isInArray(this.textArrt,name)){
+    //   return false;
+    // }
 
+  }
+
+   isInArray(arr,value){
+    for(var i = 0; i < arr.length; i++){
+      if(value === arr[i]){
+        return true;
+      }
+    }
+    return false;
+  }
 }

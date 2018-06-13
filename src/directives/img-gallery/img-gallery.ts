@@ -17,7 +17,6 @@ export class ImgGalleryDirective {
        index:Number,
   }
   */
-
   @Input() imgGallery:any;
   imgHeader: string; //线上图片默认头地址
   constructor(private modalCtrl:ModalController,public configProvider: ConfigProvider,) {

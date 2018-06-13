@@ -33,7 +33,8 @@ export class SearchhousePage {
   edit = false;
   floor = [];
   getFloorKey(event){
-    this.getData(event._value).then(res=>{
+    console.log('mode',event);
+    this.getData(event).then(res=>{
       this.floor = res.result;
       this.edit = true;
       if(this.search==''){
@@ -45,7 +46,9 @@ export class SearchhousePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchhousePage');
-
+   this.floorList = this.localStorageProvider.get('floorList');
+   if(this.floorList ==null){this.floorList = []}
+   console.log('历史',this.floorList);
   }
 
 
@@ -64,7 +67,24 @@ export class SearchhousePage {
     }
   }
 
+  floorList :Array<any>;
   select(item){
+    // console.log('选择的',item.keyword);
+
+    // if(this.textArrt.indexOf(name) == -1){
+    //   this.textArrt.push(name);
+    //   console.log('名字',this.textArrt);
+    //   return true;
+    // }else {
+    //   return false;
+    // }
+
+    if(this.floorList.indexOf(item.keyword)==-1){
+      this.floorList.push(item.keyword);
+      this.localStorageProvider.set('floorList',this.floorList);
+    }
+
+
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('bevents', item);
@@ -73,6 +93,12 @@ export class SearchhousePage {
 
   back(){
     this.navCtrl.pop()
+  }
+
+  chose(item){
+    console.log('历史选择的',item);
+       this.search = item;
+       this.getFloorKey(item)
   }
 }
 

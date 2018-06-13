@@ -211,7 +211,8 @@ export class LetteratorneyPage {
   imgData = [];
   //委托书
   weiTuo(event){
-    this.imgData.push(event.pic);
+    this.imgData = event.data;
+    // this.imgData.push(event.pic);
     console.log('图片数据',this.imgData);
   }
 

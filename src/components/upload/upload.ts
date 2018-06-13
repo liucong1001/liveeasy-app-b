@@ -70,7 +70,8 @@ export class UploadComponent {
     actionSheet.present();
   }
 
-
+ count = 0;
+  imageBase64Array : Array<string>=[];
   //打开摄像头
   takePhoto(sourceType:number) {
     // console.log('手机调试',sourceType);
@@ -87,21 +88,42 @@ export class UploadComponent {
     if(sourceType==0){
      this.imagePicker.getPictures(options).then(results=>{
          for(var i=0;i<results.length;i++){
-           // console.log('图片'+i,results[i]);
-           var path = results[i].replace(/^file:\/\//, '');
+           this.path = results[i].replace(/^file:\/\//, '');
            // var imgUrl= "<img src=" +results[i] +  " class='img_upload'  \">  ";
            // this.data = this.data+imgUrl;
-           this.upload(this.useDir);
+
+           // this.upload(this.useDir);
+           // console.log('count',this.count,'ii',i);
+           // this.upload(this.useDir,this.path);
            //转64字节
            this.base64.encodeFile(results[i]).then((base64File: string) => {
               // this.path = 'data:image/jpeg;base64,' + base64File;
-              this.path =  base64File;
-             // this.imageBase64.push(base64File);
+             this.imageBase64Array.push(base64File);
+
+             // console.log('图片数组',this.imageBase64Array);
+
+             this.upload(this.useDir,base64File)
+             // if(this.imageBase64Array.length==results.length){
+             //   for(var i in this.imageBase64Array){
+             //     if(this.imageBase64Array[i]!=''){
+             //       this.upload(this.useDir,this.imageBase64Array[i])
+             //     }
+             //   }
+             // }
+
+
+             // this.path =  base64File;
+             //  console.log('count',this.count,'ii',i);
+             //  // if(this.count == i){
+             //    this.upload(this.useDir,this.path);
+             //  // }
+
 
            }, (err) => {
              console.log(err);
            });
          }
+
      })
 
    //拍照图片
@@ -113,19 +135,23 @@ export class UploadComponent {
         this.path = base64Image;
 
         // console.log('图片信息64位',this.path,'图片信息',imageData);
-        this.upload(this.useDir);
+        this.upload(this.useDir,this.path);
       }, (err) => {
         // Handle error
       });
 
     }
 
+
+
+
   }
 
   imgHeader='';
   imgSrc = '';
+  imgData = [];
   //文件上传
-  upload(useDir){
+  upload(useDir,path){
 
     this.fileProvider.getTicker(useDir).then(res=>{
       var apiPath = res.data.host ;
@@ -146,13 +172,14 @@ export class UploadComponent {
       };
 
       // console.log('公上传参数',this.path,apiPath,options);
-      this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
+      this.fileTransfer.upload(path,apiPath,options).then((data) => {
 
         this.imagePath = this.imagePathHead +useDir +options.fileName;
         let imagePath = this.imagePath;
         // let thumbnail =
         var pic = {
-          imageId:this.nowDateFile,
+          // imageId:this.nowDateFile,
+          imageId:options.fileName.split(".")[0],
           bucketId:'liveeasydev',
           imagePath:this.imagePath,
           thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
@@ -161,16 +188,35 @@ export class UploadComponent {
         };
         this.imgSrc = this.imgHeader+ this.imagePath;
         //页面显示多个拍照
-        var pathHtml =  "<img src=" +this.imgSrc +  " class='img_upload'  \">  ";
-        this.data = this.data + pathHtml;
-
-        console.log('upload成功',data,'图片地址',this.imagePath);
-        this.successEvent.emit({pic});
+        // var pathHtml =  "<img src=" +this.imgSrc +  " class='img_upload'  \">  ";
+        // this.data = this.data + pathHtml;
+        // console.log('upload成功',data,'图片地址',this.imagePath);
+        this.imgData.push(pic);
+        console.log('upload成功',data,'图片地址',pic,this.imagePath,'终极',this.imgData);
+        this.successEvent.emit({item:pic,data:this.imgData});
       }, (err) => {
         console.log('upload失败',err);
       });
 
     });
+
+  }
+
+
+
+  deleteNum :number;
+
+  delete(i,item){
+    var deleteData = item;
+    this.imgData.splice(i,1);
+    console.log('删除之后',this.imgData);
+    this.successEvent.emit({item:deleteData,data:this.imgData});
+  }
+
+
+
+  trackByFn(index, item) {
+    return item.imageId;
   }
 
 
