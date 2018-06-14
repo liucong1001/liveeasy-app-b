@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -74,10 +74,16 @@ export class HousingPage {
   offset = 100;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
-              public modalCtrl: ModalController, public propertyProvider: PropertyProvider, public localStorageProvider: LocalStorageProvider,
-              public configProvider: ConfigProvider, public addhouseProvider: AddhouseProvider,public customerProvider:CustomerProvider) {
-    console.log('页面数据',this.pageData);
+              public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
+              public localStorageProvider: LocalStorageProvider,
+              public configProvider: ConfigProvider,
+              public addhouseProvider: AddhouseProvider,
+              public customerProvider:CustomerProvider,
+              menu: MenuController
+  ) {
+      // console.log('页面数据',this.pageData);
 
+      menu.enable(true); //menus-功能开启
       if(!navParams.get('item')){
         this.floorName = '';
         this.params.estateId = '';

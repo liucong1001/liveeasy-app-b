@@ -29,7 +29,7 @@
       <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
-    <ion-col col-3 class="tc" (click)="showMenu4()">
+    <ion-col col-3 class="tc" menuToggle>
       更多
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
