@@ -11,7 +11,7 @@
     </ion-item>
   </ion-list>
 
-  <div *ngIf="!edit" class="hisRecord">
+  <div *ngIf="!edit&&floorList" class="hisRecord">
     <p class="p10">历史记录</p>
     <div>
       <a (click)="chose(x)" *ngFor="let x of floorList ">{{x}}</a>
