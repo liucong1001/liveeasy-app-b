@@ -40,11 +40,11 @@ import { PublicpassengerPage } from '../pages/passenger/publicpassenger/publicpa
 import { AddpassengerPage } from '../pages/passenger/addpassenger/addpassenger';
 import { PassengerdetailPage } from '../pages/passenger/passengerdetail/passengerdetail';
 import { PassengerfollowPage } from '../pages/passenger/mypassenger/passengerfollow/passengerfollow';
-import { PfollowrecordPage } from '../pages/passenger/publicpassenger/publicpdetail/pfollowrecord/pfollowrecord';
+import { PfollowrecordPage } from '../pages/passenger/passengerdetail/pfollowrecord/pfollowrecord';
 import { PassengerlookPage } from '../pages/passenger/mypassenger/passengerlook/passengerlook';
-import { PlookrecordPage } from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord';
+import { PlookrecordPage } from '../pages/passenger/passengerdetail/plookrecord/plookrecord';
 import { AccomplishPage } from '../pages/passenger/mypassenger/accomplish/accomplish';
-import { CloseprivateguestPage } from '../pages/passenger/closeprivateguest/closeprivateguest';
+import { CloseprivateguestPage } from '../pages/passenger/mypassenger/closeprivateguest/closeprivateguest';
 import { PublicpdetailPage } from '../pages/passenger/publicpassenger/publicpdetail/publicpdetail';
 import { AddpublicguestPage } from '../pages/passenger/publicpassenger/publicpdetail/addpublicguest/addpublicguest';
 import { DeclarationPage } from '../pages/home/declaration/declaration';
@@ -109,7 +109,7 @@ import { RolepeoplePageModule } from '../pages/housing/housedetail/rolepeople/ro
 import { RecordPageModule } from '../pages/housing/housedetail/record/record.module';
 import { PublicpdetailPageModule } from '../pages/passenger/publicpassenger/publicpdetail/publicpdetail.module';
 import { PublicpassengerPageModule } from '../pages/passenger/publicpassenger/publicpassenger.module';
-import { PfollowrecordPageModule } from '../pages/passenger/publicpassenger/publicpdetail/pfollowrecord/pfollowrecord.module';
+import { PfollowrecordPageModule } from '../pages/passenger/passengerdetail/pfollowrecord/pfollowrecord.module';
 import { PassengerlookPageModule } from '../pages/passenger/mypassenger/passengerlook/passengerlook.module';
 import { PassengerfollowPageModule } from '../pages/passenger/mypassenger/passengerfollow/passengerfollow.module';
 import { PassengerPageModule } from './../pages/passenger/passenger.module';
@@ -127,7 +127,7 @@ import { FollowPageModule } from '../pages/housing/follow/follow.module';
 import { DescPageModule } from '../pages/housing/housedetail/desc/desc.module';
 import { DeclardetailPageModule } from '../pages/home/declardetail/declardetail.module';
 import { DeclarationPageModule } from '../pages/home/declaration/declaration.module';
-import { CloseprivateguestPageModule } from '../pages/passenger/closeprivateguest/closeprivateguest.module';
+import { CloseprivateguestPageModule } from '../pages/passenger/mypassenger/closeprivateguest/closeprivateguest.module';
 import { ClosehousePageModule } from '../pages/housing/closehouse/closehouse.module';
 import { ChoosehousePageModule } from '../pages/passenger/publicpassenger/choosehouse/choosehouse.module';
 import { CenterPageModule } from './../pages/center/center.module';
@@ -135,7 +135,7 @@ import { BelongerPageModule } from '../pages/housing/closehouse/belonger/belonge
 import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
 import { AddpublicguestPageModule } from '../pages/passenger/publicpassenger/publicpdetail/addpublicguest/addpublicguest.module';
 import {PassengerdetailPageModule} from '../pages/passenger/passengerdetail/passengerdetail.module'
-import  {PlookrecordPageModule} from '../pages/passenger/publicpassenger/publicpdetail/plookrecord/plookrecord.module';
+import  {PlookrecordPageModule} from '../pages/passenger/passengerdetail/plookrecord/plookrecord.module';
 import {LookhousePageModule}from '../pages/housing/housedetail/lookhouse/lookhouse.module';
 import {HomePageModule} from "../pages/home/home.module";
 @NgModule({
@@ -161,27 +161,11 @@ import {HomePageModule} from "../pages/home/home.module";
         FormsModule,
         ComponentsModule,
         CommonModule,
-        LazyLoadImageModule,HomePageModule,
+        LazyLoadImageModule,
+      HomePageModule,
         //页面模块，
-       // AboutusPageModule,AccomplishPageModule,
-      AccountPageModule,
-      // AddhousePageModule,AddlookPageModule,AddpassengerPageModule,
-      // VerifyphonePageModule,UpdatepwdPageModule,
-      StartupPageModule,PassengerPageModule,
-      // SearchhousePageModule,RolepeoplePageModule,
-      // RecordPageModule,PublicpdetailPageModule,PublicpassengerPageModule,PfollowrecordPageModule,
-      // PassengerlookPageModule,PassengerfollowPageModule,PassengerPageModule,MypassengerPageModule,MyaccountPageModule,
-      // MsgdetailPageModule,MdetailsPageModule,
-      LoginPageModule,
-      // LetteratorneyPageModule,KeyPageModule,
-      HousingPageModule,
-      // HousedetailPageModule,HelpPageModule,FollowPageModule,DescPageModule,DeclardetailPageModule,DeclarationPageModule,
-      // CloseprivateguestPageModule,ClosehousePageModule,ClosehousePageModule,ChoosehousePageModule,
-      CenterPageModule,
-      // BelongerPageModule,
-      AllsearchPageModule,
-      // AddpublicguestPageModule,PassengerdetailPageModule,PlookrecordPageModule,LookhousePageModule,
-        // IonicModule.forRoot(MyApp)
+      AccountPageModule,StartupPageModule,PassengerPageModule,
+      LoginPageModule,HousingPageModule,CenterPageModule,AllsearchPageModule,
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
         mode: 'ios',          //把所有平台设置为iOS风格：

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 /**
- * Generated class for the PassengerfollowPage page.
+ * Generated class for the CloseprivateguestPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,16 +12,16 @@ import {ToastComponent} from "../../../../components/toast/toast";
 
 @IonicPage()
 @Component({
-  selector: 'page-passengerfollow',
-  templateUrl: 'passengerfollow.html',
+  selector: 'page-closeprivateguest',
+  templateUrl: 'closeprivateguest.html',
 })
-export class PassengerfollowPage {
+export class CloseprivateguestPage {
   customerid:any;
   clientID:any;
   clientName:any;
   clientPhone:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  private fb:FormBuilder,public customerProvider:CustomerProvider,
+              private fb:FormBuilder,public customerProvider:CustomerProvider,
               public toast:ToastComponent,) {
     this.clientID=navParams.get('item').customerSn;
     this.clientName=navParams.get('item').customerName;
@@ -31,25 +31,24 @@ export class PassengerfollowPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PassengerfollowPage');
+    console.log('ionViewDidLoad CloseprivateguestPage');
   }
   form:FormGroup =this.fb.group({
-    followupCode:['1',Validators.required],
     content:['',Validators.required],
+    customerStatus:['',Validators.required],
   });
-
-  follows(){
-    this.customerProvider.prfollow({
-      followupCode:this.form.value.followupCode,
+  closes(){
+    this.customerProvider.prclose({
+      customerStatus:this.form.value.customerStatus,
       content:this.form.value.content,
-      customer:{customerId:this.customerid}
+      customerId:this.customerid
     }).then(res => {
       console.log(res);
       if(res.success){
-        this.toast.msg('跟进成功!');
+        this.toast.msg('关闭成功!');
         this.navCtrl.pop()
       }else{
-        this.toast.error('跟进失败！');
+        this.toast.error('关闭失败！');
       }
     });
     console.log(this.form.value)

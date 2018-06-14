@@ -4,7 +4,7 @@ import { AddpassengerPage } from '../addpassenger/addpassenger';
 import { PassengerdetailPage } from '../passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
 import { PassengerfollowPage } from './passengerfollow/passengerfollow';
-import { CloseprivateguestPage } from '../closeprivateguest/closeprivateguest';
+import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
 /**
@@ -203,14 +203,20 @@ export class MypassengerPage {
   gopassengerDetail(item){
     this.navCtrl.push(PassengerdetailPage,{customerId:item.customerId});
   }
-  goFollow(){
-    this.navCtrl.push(PassengerfollowPage)
+  goFollow(item){
+    this.navCtrl.push(PassengerfollowPage,{
+      item:item,
+    })
   }
-  golook(){
-    this.navCtrl.push(PassengerlookPage)
+  golook(item){
+    this.navCtrl.push(PassengerlookPage,{
+      item:item,
+    })
   }
-  closePrivateGuest(){
-    this.navCtrl.push(CloseprivateguestPage)
+  closePrivateGuest(item){
+    this.navCtrl.push(CloseprivateguestPage,{
+      item:item,
+    })
   }
 }
 

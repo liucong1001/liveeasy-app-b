@@ -8,7 +8,7 @@ import {DeclarationPageModule} from "./declaration/declaration.module";
 import {MsgdetailPage} from "./msgdetail/msgdetail";
 @NgModule({
   declarations: [
-    HomePage,
+    HomePage
   ],
   imports: [
     IonicPageModule.forChild(HomePage),

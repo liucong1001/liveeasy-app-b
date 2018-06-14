@@ -2,17 +2,17 @@
     <ion-navbar>
       <ion-title>关闭私客</ion-title>
     </ion-navbar>
-  
+
   </ion-header>
   <ion-content>
-    <form>
+    <form [formGroup]="form">
       <ion-grid class="p0">
         <ion-row>
           <ion-col col-6 class="p0">
             <ion-list>
               <ion-item>
                 <ion-label class="pl12">客户ID：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-label>{{clientID}}</ion-label>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -20,7 +20,7 @@
             <ion-list>
               <ion-item>
                 <ion-label>客户姓名：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-label>{{clientName}}</ion-label>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -28,7 +28,7 @@
             <ion-list>
               <ion-item class="pl12">
                 <ion-label>客户电话：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" value="{{clientPhone}}" disabled></ion-input>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -38,24 +38,25 @@
             <ion-list>
               <ion-item class="pl12">
                 <ion-label>关闭类型：</ion-label>
-                <ion-select>
-                  <ion-option value="change" selected>请选择跟进类型</ion-option>
-                  <ion-option value="nes">1栋</ion-option>
-                  <ion-option value="n64">2栋</ion-option>
+                <ion-select okText="确定"  cancelText="关闭" formControlName="customerStatus">
+                  <ion-option value="0">设为无效</ion-option>
+                  <ion-option value="1">设为他售</ion-option>
+                  <ion-option value="2">放入公客池</ion-option>
+                  <ion-option value="3">设为荟居成交</ion-option>
                 </ion-select>
               </ion-item>
             </ion-list>
           </ion-col>
           <ion-col col-12 class="followMain bgWhite">
             <div>
-              关闭内容：
+              关闭原因：
             </div>
             <div>
-              <textarea rows="10" placeholder="请填写内容" (click)="anything()" id="anything"></textarea>
+              <textarea rows="10" placeholder="请填写内容" formControlName="content"></textarea>
             </div>
           </ion-col>
           <ion-col col-12 class="bgWhite p10">
-            <button ion-button full color="danger" class="radius">确认关闭</button>
+            <button ion-button full color="danger" class="radius" (click)="closes()" [disabled]="form.invalid">确认关闭</button>
           </ion-col>
         </ion-row>
       </ion-grid>

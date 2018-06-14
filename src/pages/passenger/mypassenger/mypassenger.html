@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>我的客户</ion-title>
-    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()" style="color: #fff;top: 0.7rem;"></ion-icon>
   </ion-navbar>
 
 </ion-header>
@@ -23,7 +23,7 @@
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
       </ion-row>
-
+<div style="margin-top: 43px"></div>
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
         <ion-col col-12 (click)="gopassengerDetail(item)">
             <ion-row>
@@ -56,13 +56,13 @@
           </ion-col>
           <ion-col col-12 class="houseStatus">
             <ion-row>
-              <ion-col col-4 class="tc" (click)="goFollow()">
+              <ion-col col-4 class="tc" (click)="goFollow(item)">
                 <a>跟进</a>
               </ion-col>
-              <ion-col col-4 class="tc" (click)="golook()">
+              <ion-col col-4 class="tc" (click)="golook(item)">
                 <a>约看</a>
               </ion-col>
-              <ion-col col-4 class="tc" (click)="closePrivateGuest()">
+              <ion-col col-4 class="tc" (click)="closePrivateGuest(item)">
                 <a>关闭</a>
               </ion-col>
             </ion-row>

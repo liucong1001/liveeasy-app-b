@@ -8,7 +8,6 @@ import {ConfigProvider} from "../config/config";
 */
 @Injectable()
 export class CustomerProvider {
-
   private  pageListPath = this.configProvider.set().http+'/customer/customerInfo/pageList';
   // private  areaPath = this.configProvider.set().http+'/customer/customerInfo/addressInfo/4';
   private  areaPath = this.configProvider.set().http+'/dicts/getDistrictsAndPropertyTag/4';
@@ -20,7 +19,12 @@ export class CustomerProvider {
   private  detailPath = this.configProvider.set().http+'/customer/customerInfo/customerDetails';
   private  updateDetailPath = this.configProvider.set().http+'/customer/customerInfo/update';
 
-
+  //我的客户——跟进
+  private  prFollowPath=this.configProvider.set().http+'/customer/customerInfo/CustomerFollowUp';
+  //我的客户——带看
+  private  prlookPath=this.configProvider.set().http+'/customer/customerInfo/lookCustomer';
+  //我的客户——关闭
+  private  prclosePath=this.configProvider.set().http+'/customer/customerInfo/closeCustomer';
 
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello CustomerProvider Provider');
@@ -90,6 +94,16 @@ export class CustomerProvider {
     return this.httpProvider.httpPostForm(this.updateDetailPath,params);
   }
 
-
-
+  //我的客户——跟进
+  public prfollow(params?){
+    return this.httpProvider.httpPost(this.prFollowPath,params);
+  }
+  //我的客户——带看
+  public prlook(params?){
+    return this.httpProvider.httpPost(this.prlookPath,params);
+  }
+  //我的客户——关闭
+  public prclose(params?){
+    return this.httpProvider.httpPost(this.prclosePath,params);
+  }
 }

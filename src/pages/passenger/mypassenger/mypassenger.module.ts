@@ -5,6 +5,8 @@ import {PipesModule} from "../../../pipes/pipes.module";
 import {PassengerfollowPageModule} from "./passengerfollow/passengerfollow.module";
 import {PassengerlookPageModule} from "./passengerlook/passengerlook.module";
 import {AccomplishPageModule} from "./accomplish/accomplish.module";
+import {CloseprivateguestPageModule} from "./closeprivateguest/closeprivateguest.module";
+import {SearchPageModule} from "./search/search.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {AccomplishPageModule} from "./accomplish/accomplish.module";
     IonicPageModule.forChild(MypassengerPage),
     PassengerfollowPageModule,
     PassengerlookPageModule,
-    AccomplishPageModule
+    AccomplishPageModule,
+    CloseprivateguestPageModule,
+    SearchPageModule
   ],
 })
 export class MypassengerPageModule {}

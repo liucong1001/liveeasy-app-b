@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PlookrecordPage } from './plookrecord/plookrecord';
-import { PfollowrecordPage } from './pfollowrecord/pfollowrecord';
+import { PlookrecordPage } from '../../passengerdetail/plookrecord/plookrecord';
+import { PfollowrecordPage } from '../../passengerdetail/pfollowrecord/pfollowrecord';
 import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 
 /**

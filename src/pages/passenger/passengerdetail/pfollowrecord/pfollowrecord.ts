@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from '../../../addpassenger/addpassenger';
+import { AddpassengerPage } from '../../addpassenger/addpassenger';
 /**
  * Generated class for the PfollowrecordPage page.
  *

@@ -1,8 +1,8 @@
 import { Component ,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams,Slides } from 'ionic-angular';
-import { AccomplishPage } from '../../../mypassenger/accomplish/accomplish';
-import { CloseprivateguestPage } from '../../../closeprivateguest/closeprivateguest';
-import { AddpassengerPage } from '../../../addpassenger/addpassenger';
+import { AccomplishPage } from '../../mypassenger/accomplish/accomplish';
+import { CloseprivateguestPage } from '../../mypassenger/closeprivateguest/closeprivateguest';
+import { AddpassengerPage } from '../../addpassenger/addpassenger';
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -34,13 +34,13 @@ export class PlookrecordPage {
   // 滑动切换
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    console.log(currentIndex);
+    // console.log(currentIndex);
     this.addActive(currentIndex);
   }
   // 改变tab 颜色
   addActive(index) {
     this.index = index;
-    console.log(index)
+    // console.log(index)
   }
   accomplish(){
     this.navCtrl.push(AccomplishPage)

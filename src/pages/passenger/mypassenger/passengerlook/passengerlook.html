@@ -1,19 +1,17 @@
 <ion-header>
     <ion-navbar>
       <ion-title>添加约看</ion-title>
-
     </ion-navbar>
-
   </ion-header>
   <ion-content>
-    <form>
+    <form [formGroup]="form">
       <ion-grid class="p0">
         <ion-row>
           <ion-col col-6 class="p0">
             <ion-list>
               <ion-item>
                 <ion-label class="pl12">客户ID：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-label>{{clientID}}</ion-label>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -21,7 +19,7 @@
             <ion-list>
               <ion-item>
                 <ion-label>客户姓名：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-label>{{clientName}}</ion-label>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -29,7 +27,7 @@
             <ion-list>
               <ion-item class="pl12">
                 <ion-label>客户电话：</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" value="{{clientPhone}}" disabled></ion-input>
               </ion-item>
             </ion-list>
           </ion-col>
@@ -37,26 +35,22 @@
         <ion-row>
           <ion-col col-12 class="bgWhite p0">
             <ion-list>
-              <ion-item class="pl12">
-                <ion-label>约看房源</ion-label>
-                <ion-select>
-                  <ion-option value="change" selected>请选择</ion-option>
-                  <ion-option value="nes">1栋</ion-option>
-                  <ion-option value="n64">2栋</ion-option>
-                </ion-select>
-              </ion-item>
+              <button ion-item class="pl12 ">
+                <ion-label>房源编号</ion-label>
+                <ion-input formControlName="propertyId" disabled value="选择房源" (click)="fy()"></ion-input>
+              </button>
             </ion-list>
           </ion-col>
           <ion-col col-12 class="bgWhite p0">
             <ion-list>
                 <ion-item class="pl12">
-                    <ion-label>约看时间</ion-label>
-                    <ion-datetime displayFormat="YYYY MM, DD HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>
-                  </ion-item>
+                    <ion-label>约看时间：</ion-label>
+                    <ion-datetime displayFormat="YYYY/MM/DD" doneText="确定"  cancelText="取消" formControlName="appointmentTm" placeholder="请选择约看时间"></ion-datetime>
+                </ion-item>
             </ion-list>
           </ion-col>
           <ion-col col-12 class="bgWhite p10">
-            <button ion-button full color="danger" class="radius">添加约看</button>
+            <button ion-button full color="danger" class="radius" (click)="looks()" [disabled]="form.invalid">添加约看</button>
           </ion-col>
         </ion-row>
       </ion-grid>
