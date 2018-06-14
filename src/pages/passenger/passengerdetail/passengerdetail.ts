@@ -43,6 +43,7 @@ export class PassengerdetailPage {
     //  this.form.setValue(navParams.data.item);
       var data = navParams.data.item;
       this.form.patchValue({
+        customerId:data.customerId,
         customerName:data.customerName,
         customerGender:data.customerGender,
         customerPhone:data.customerPhone,
@@ -50,6 +51,9 @@ export class PassengerdetailPage {
         agentId:data.agentId,
         customerGrade:data.customerGrade,
       });
+
+      // this.form.setValue(data);
+      console.log('赋值之后',this.form.value);
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
       this.customerSrcList = res;
@@ -80,6 +84,7 @@ export class PassengerdetailPage {
     console.log('ionViewDidLoad PassengerdetailPage');
   }
   form:FormGroup =this.fb.group({
+    customerId:['',Validators.required],
     customerName:['',Validators.required],//客户名称
     customerGender :['',Validators.required],//客户性别
     customerPhone:['',Validators.required],//客户电话

@@ -6,7 +6,7 @@
 
   </ion-header>
   <ion-content>
-    <form [formGroup]="form" (ngSubmit)="save()">
+    <form [formGroup]="form">
       <ion-list>
         <ion-item class="pl12 hdRightInfo1">
           <ion-label>客户姓名</ion-label>
@@ -137,7 +137,7 @@
       <ion-grid>
         <ion-row class="p10">
           <ion-col col-4>
-          <button ion-button color="danger" full type="submit" class="radius">确认修改</button>
+          <button ion-button color="danger" full type="button" (click)="save()" class="radius">确认修改</button>
           </ion-col>
           <ion-col col-4>
               <button class="radius updateBtn" (click)="passengerLook()">约看</button>
