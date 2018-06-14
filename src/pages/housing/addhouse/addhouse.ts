@@ -170,10 +170,6 @@ export class AddhousePage {
 
   estateChange(Value){
     console.log('value',Value);
-    // this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
-    // this.form.controls['estateName'].setValue(Value.estateName);
-    // this.form.controls['estateId'].setValue(Value.estateId);
-    //   console.log('表单',this.form.value);
     //哥
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);

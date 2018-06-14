@@ -53,25 +53,30 @@
           <i class="iconfont icon-xia"></i>
         </ion-item>
     </ion-list>
-    <ion-list *ngIf="showIntention">
+    <ion-list  *ngIf="showIntention">
         <ion-item class="pl12">
             <ion-label>意向区域</ion-label>
-            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode">
+            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode" (ionChange)="areaChange($event)">
               <ion-option [value]="item.code" *ngFor="let item of area  ">{{item.name}}</ion-option>
             </ion-select>
           </ion-item>
-        <ion-item class="pl12">
+
+        <ion-item class="pl12" >
           <ion-label>意向商圈</ion-label>
           <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionTradeCode">
             <ion-option [value]="item.code" *ngFor="let item of tradingArea  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
-          <ion-item class="pl12">
-            <ion-label>意向楼盘</ion-label>
-            <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionEstate" (ngModelChange)="estateChange($event)">
-              <ion-option [value]="item.id"  *ngFor="let item of estateList  "> {{item.estateName}}</ion-option>
-            </ion-select>
-          </ion-item>
+
+        <ion-item (click)="goserach()">
+          <button ion-item class="pl12">
+            选择楼盘<i class="text-danger">*</i>
+            <font color="#aaa" class="changes">
+              <span >{{estateName}}</span>
+            </font>
+          </button>
+        </ion-item>
+
           <div class="hdRightInfo">
             <ion-item class="pl12">
               <ion-label>面积要求</ion-label>

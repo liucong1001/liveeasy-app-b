@@ -201,7 +201,7 @@ export class MypassengerPage {
     this.navCtrl.push(AddpassengerPage)
   }
   gopassengerDetail(item){
-    this.navCtrl.push(PassengerdetailPage,{item:item});
+    this.navCtrl.push(PassengerdetailPage,{customerId:item.customerId});
   }
   goFollow(){
     this.navCtrl.push(PassengerfollowPage)

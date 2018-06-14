@@ -32,27 +32,25 @@ export class PassengerdetailPage {
   district:any;
   tradingArea = [];//商圈数组
   intentionTradeCodeId:string;  //用于转换商圈
-
+ data :any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider) {
-    console.log('传递参数',navParams.data.item,this.form.value);
 
-    // this.customerProvider.getDetail(navParams.data.id).then(res=>{
-    //    console.log('详情',res);
-    // });
-    //  this.form.setValue(navParams.data.item);
-      var data = navParams.data.item;
-      this.form.patchValue({
-        customerId:data.customerId,
-        customerName:data.customerName,
-        customerGender:data.customerGender,
-        customerPhone:data.customerPhone,
-        customerSrc:data.customerSrc,
-        agentId:data.agentId,
-        customerGrade:data.customerGrade,
-      });
+    this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
+       this.data = res;
+       console.log('详情',this.data);
+        this.form.patchValue({
+          customerId:this.data.customerId,
+          customerName:this.data.customerName,
+          customerGender:this.data.customerGender,
+          customerPhone:this.data.customerPhone,
+          customerSrc:this.data.customerSrc,
+          agentId:this.data.agentId,
+          customerGrade:this.data.customerGrade,
+        });
 
-      // this.form.setValue(data);
+    });
+
       console.log('赋值之后',this.form.value);
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
@@ -129,10 +127,13 @@ export class PassengerdetailPage {
 
   save(){
     console.log('编辑客户',this.form.value);
+
     var body = null;
     for(var key in this.form.value){
       body = body+'&'+key+'='+this.form.value[key]+'';
     }
+    body = body.slice(5);
+    console.log('body:',body);
     this.customerProvider.update(body).then(res=>{
       if (res.success){
         alert('修改客户成功!');

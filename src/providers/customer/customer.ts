@@ -17,7 +17,7 @@ export class CustomerProvider {
   private  agentListPath = this.configProvider.set().http+'/customer/customerInfo/agentList';
   private customeroGrageInfoPath = this.configProvider.set().http+'/customer/customerInfo/customeroGradeInfo';
   private  addPath = this.configProvider.set().http+'/customer/customerInfo/insert';
-  private  detailPath = this.configProvider.set().http+'/customer/customerInfo/DateilView.do';
+  private  detailPath = this.configProvider.set().http+'/customer/customerInfo/customerDetails';
   private  updateDetailPath = this.configProvider.set().http+'/customer/customerInfo/update';
 
 
@@ -82,8 +82,8 @@ export class CustomerProvider {
      return this.httpProvider.httpPostForm(this.addPath,params);
   }
   //根据ID获取客户详情
-  getDetail(id){
-     return this.httpProvider.httpPost(this.detailPath+'&id='+id);
+  getDetail(customerId){
+     return this.httpProvider.httpPost(this.detailPath+'?customerId='+customerId);
   }
   //编辑客户
   update(params){

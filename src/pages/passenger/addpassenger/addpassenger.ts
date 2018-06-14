@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger/mypassenger";
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
+import {SearchhousePage} from "../../housing/housedetail/searchhouse/searchhouse";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -24,14 +25,16 @@ export class AddpassengerPage {
   agentList = [];
   customeroGrageInfoList = [];
   //意向
-  area: any;
+  area = [];
   estateList = []; //楼盘列表
   district:any;
   tradingArea = [];//商圈数组
+  shangQuan = [];//保存商圈
   intentionTradeCodeId:string;  //用于转换商圈
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,
-              private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider) {
+              private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
+              public events: Events) {
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
        this.customerSrcList = res;
@@ -46,11 +49,11 @@ export class AddpassengerPage {
     });
     //区域
     this.customerProvider.area().then(res=>{
-      this.area = res;
+      this.area = res.data.distrs;
     });
     //商圈
     this.customerProvider.tradingArea().then(res=>{
-      this.tradingArea = res;
+     this.shangQuan = this.tradingArea = res;
     });
     //楼盘列表
     this.addhouseProvider.estateListSelect().then(res=>{
@@ -98,6 +101,49 @@ export class AddpassengerPage {
       this.right=true;
       this.down=false;
     }
+  }
+
+  areaChange(event){
+
+    this.tradingArea = [];
+    if(this.shangQuan){
+      for(var i in this.shangQuan){
+        if(this.shangQuan[i].code.substring(0,6)==event){
+          this.tradingArea.push(this.shangQuan[i]);
+        }
+      }
+    }
+
+
+  }
+  estateName='';
+  goserach(){
+    this.events.subscribe('bevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      // this.form.value.estateName = params.estateName;
+      // this.form.value.estateId =  params.estateId;
+      this.estateName = params.keyword;
+      this.form.controls['intentionEstate'].setValue(params.id);
+
+      // this.estateChange(params);
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(SearchhousePage);
+  }
+
+  estateChange(Value){
+    console.log('value',Value);
+    //哥
+    // this.form.controls['adminDivisionCode'].setValue(Value.site);
+    // this.form.controls['estateName'].setValue(Value.keyword);
+    if(Value){
+      this.estateName = Value.keyword;
+      this.form.controls['intentionEstate'].setValue(Value.id);
+      console.log('表单',this.form.value);
+    }
+
   }
 
 
