@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams,Slides } from 'ionic-angular';
 import { AccomplishPage } from '../../mypassenger/accomplish/accomplish';
 import { CloseprivateguestPage } from '../../mypassenger/closeprivateguest/closeprivateguest';
 import { AddpassengerPage } from '../../addpassenger/addpassenger';
+import {ToastComponent} from "../../../../components/toast/toast";
+import {CustomerProvider} from "../../../../providers/customer/customer";
+import {ClosePage} from "./close/close";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -19,7 +22,13 @@ import { AddpassengerPage } from '../../addpassenger/addpassenger';
 export class PlookrecordPage {
   @ViewChild(Slides) slides: Slides;
   index: number = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  lRecord:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public customerProvider:CustomerProvider,
+              public toast:ToastComponent,) {
+    this.customerProvider.mfollow({}).then(res => {
+      console.log(res.data.result);
+      this.lRecord=res.data.result
+    });
   }
 
   ionViewDidLoad() {
@@ -45,8 +54,8 @@ export class PlookrecordPage {
   accomplish(){
     this.navCtrl.push(AccomplishPage)
   }
-  closePrivateGuest(){
-    this.navCtrl.push(CloseprivateguestPage)
+  close(){
+    this.navCtrl.push(ClosePage)
   }
   addHouse(){
     this.navCtrl.push(AddpassengerPage)

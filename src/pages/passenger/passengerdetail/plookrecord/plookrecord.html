@@ -25,114 +25,101 @@
   <div>
     <ion-slides (ionSlideDidChange)="slideChanged()">
       <ion-slide>
-        <ion-row class="bgWhite houseMain">
-          <ion-col col-12>
-            <ion-row>
-              <ion-col col-7 class="tl">
-                <div class="ellipsis">
-                  <font size="3">的顺丰</font>
-                </div>
-                <p class="m5">
+        <!--约看中-->
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 1">
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
+                </ion-col>
+                <ion-col col-5 class="tc m15">
                   <font size="2" color="#aaa">
-                    <span>2017/12/12 12：07：33</span>
+                    房源ID：
+                    <span>{{item.customer.customerSn}}</span>
                   </font>
-                </p>
-              </ion-col>
-              <ion-col col-5 class="tc m15">
-                <font size="2" color="#aaa">
-                  房源ID：
-                  <span>12513151</span>
-                </font>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-          <ion-col col-12 class="houseStatus">
-            <ion-row>
-              <ion-col col-6 class="tc" (click)="accomplish()">
-                <font size="2">完成</font>
-              </ion-col>
-              <ion-col col-6 class="tc" (click)="closePrivateGuest()">
-                <font size="2">关闭</font>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col col-12 class="houseStatus">
+              <ion-row>
+                <ion-col col-6 class="tc" (click)="accomplish()">
+                  <font size="2">完成</font>
+                </ion-col>
+                <ion-col col-6 class="tc" (click)="close()">
+                  <font size="2">关闭</font>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+        </div>
+
       </ion-slide>
       <ion-slide>
-        <div class="location">
-          <ion-list>
-            <ion-item class="updateHegiht">
+        <!--已完成-->
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 2">
+            <ion-col col-12>
               <ion-row>
-                <ion-col col-6>
-                  刘秀
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
                 </ion-col>
-                <ion-col col-6 class="tr">
-                  <font size="1" color="#aaa">房源ID：5454545454</font>
-                </ion-col>
-                <ion-col col-12>
-                  发放地点打发打发打发打发打发打发的
-                </ion-col>
-                <ion-col col-12>
-                  <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                <ion-col col-5 class="tc m15">
+                  <font size="2" color="#aaa">
+                    房源ID：
+                    <span>{{item.customer.customerSn}}</span>
+                  </font>
                 </ion-col>
               </ion-row>
-            </ion-item>
-            <ion-item class="updateHegiht">
-              <ion-row>
-                <ion-col col-6>
-                  刘秀
-                </ion-col>
-                <ion-col col-6 class="tr">
-                  <font size="1" color="#aaa">房源ID：5454545454</font>
-                </ion-col>
-                <ion-col col-12>
-                  发放地点打发打发打发打发打发打发的
-                </ion-col>
-                <ion-col col-12>
-                  <font color="#aaa">2017-12-12 12：25：74</font>
-                </ion-col>
-              </ion-row>
-            </ion-item>
-          </ion-list>
+            </ion-col>
+
+          </ion-row>
         </div>
+
       </ion-slide>
       <ion-slide>
-        <div class="location">
-          <ion-list>
-            <ion-item class="updateHegiht">
+        <!--已关闭-->
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 3">
+            <ion-col col-12>
               <ion-row>
-                <ion-col col-6>
-                  刘秀
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
                 </ion-col>
-                <ion-col col-6 class="tr">
-                  <font size="1" color="#aaa">房源ID：5454545454</font>
-                </ion-col>
-                <ion-col col-12>
-                  发放地点打发打发打发打发打发打发的
-                </ion-col>
-                <ion-col col-12>
-                  <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+                <ion-col col-5 class="tc m15">
+                  <font size="2" color="#aaa">
+                    房源ID：
+                    <span>{{item.customer.customerSn}}</span>
+                  </font>
                 </ion-col>
               </ion-row>
-            </ion-item>
-            <ion-item class="updateHegiht">
-              <ion-row>
-                <ion-col col-6>
-                  刘秀
-                </ion-col>
-                <ion-col col-6 class="tr">
-                  <font size="1" color="#aaa">房源ID：5454545454</font>
-                </ion-col>
-                <ion-col col-12>
-                  发放地点打发打发打发打发打发打发的
-                </ion-col>
-                <ion-col col-12>
-                  <font color="#aaa">2017-12-12 12：25：74</font>
-                </ion-col>
-              </ion-row>
-            </ion-item>
-          </ion-list>
+            </ion-col>
+
+          </ion-row>
         </div>
+
       </ion-slide>
     </ion-slides>
   </div>

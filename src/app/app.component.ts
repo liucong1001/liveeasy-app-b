@@ -12,20 +12,27 @@ import {StartupPage} from "../pages/startup/startup";
 import {HomePage} from "../pages/home/home";
 import {AccountPage} from "../pages/account/account";
 
+import {LocalStorageProvider} from "../providers/local-storage/local-storage";
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = AccountPage;
   // rootPage:any = HomePage;
+  tagsList:any;
+  selected:any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              private appUpdate: VersionProvider,
+              private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
               private androidPermissions: AndroidPermissions,
               private device: Device,
               private headerColor: HeaderColor,
               public app: App,
               private nativePageTransitions: NativePageTransitions) {
+    //标签
+    this.tagsList=this.localStorageProvider.get('tagsList');
+    console.log(this.tagsList)
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -89,8 +96,38 @@ export class MyApp {
       this.nativePageTransitions.slide(options)
         .then(data=>{})
         .catch(e=>{});
-      });
+    });
 
-      this.nativePageTransitions.cancelPendingTransition();
+    this.nativePageTransitions.cancelPendingTransition();
   };
+  go(item){
+    this.selected = item;
+  }
+  isActive(item) {
+    // return this.selected == item;
+  };
+  //更多
+  //其他
+  qtJSON = [
+    {name:'只看我的房源',val:0},
+    {name:'待处理关闭申请房源',val:1},
+    {name:'待审核实勘房源',val:2},
+    {name:'待确认钥匙房源',val:3},
+  ];
+  //朝向
+  cxJSON = [
+    {name:'全部',val:0},
+    {name:'东',val:1},
+    {name:'南',val:2},
+    {name:'西',val:3},
+    {name:'北',val:4},
+    {name:'南北',val:5},
+    {name:'双南',val:6},
+    {name:'东西',val:7},
+    {name:'东南',val:8},
+    {name:'西南',val:9},
+    {name:'东北',val:10},
+    {name:'西北',val:11},
+  ];
+
 }

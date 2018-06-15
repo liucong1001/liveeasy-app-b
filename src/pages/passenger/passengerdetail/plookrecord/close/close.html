@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>关闭约看记录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <form>
+    <p class="m10">关闭原因</p>
+    <textarea  id="" cols="30" rows="10" name="content"  [(ngModel)]="content" placeholder="请填写内容...." class="ustyle"></textarea>
+    <button ion-button block color="danger" class="m10" (click)="confirm()">确定</button>
+  </form>
+</ion-content>
