@@ -5,6 +5,7 @@ import {CustomerProvider} from "../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger/mypassenger";
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../../housing/housedetail/searchhouse/searchhouse";
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -68,8 +69,8 @@ export class AddpassengerPage {
 
   form:FormGroup =this.fb.group({
     customerName:['',Validators.required],//客户名称
-    customerGender :['',Validators.required],//客户性别
-    customerPhone:['',Validators.required],//客户电话
+    customerGender :['1',Validators.required],//客户性别
+    customerPhone:['',[Validators.required, Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)]],//客户电话
     customerSrc:['',Validators.required], //客户来源
     agentId:['',Validators.required],//归属人id
      customerGrade:['',],//客户等级
@@ -86,10 +87,29 @@ export class AddpassengerPage {
      maxBedroom:[''],//最多居室
     minHall:[''],//最少厅
     maxHall:[''],//最多厅
+    decorations:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
     comments:[''],//备注
   });
+
+  //表单验证消息
+  errors={
+    customerName:[
+      new ErrorMessage('required','客户名称必须要填写！'),
+    ],
+    customerPhone:[
+      new ErrorMessage('required','电话必须要填写！'),
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
+    customerSrc:[
+      new ErrorMessage('required','客户来源必须要填写！'),
+    ],
+    agentId:[
+      new ErrorMessage('required','客户归属必须要填写！'),
+    ],
+
+  };
 
   clickIntention(){
     if(this.showIntention==false ){
@@ -126,7 +146,6 @@ export class AddpassengerPage {
       this.estateName = params.keyword;
       this.form.controls['intentionEstate'].setValue(params.id);
 
-      // this.estateChange(params);
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
@@ -149,6 +168,7 @@ export class AddpassengerPage {
 
   save(){
     console.log('表单客户',this.form.value);
+
     var body = null;
     for(var key in this.form.value){
       body = body+'&'+key+'='+this.form.value[key]+'';
@@ -161,5 +181,6 @@ export class AddpassengerPage {
     },err=>{
        alert('录入失败！');
     })
+
   }
 }

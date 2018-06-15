@@ -11,11 +11,15 @@
   <ion-grid class="p0">
    <ion-row class="houseMenu">
         <ion-col col-4 class="tc" (click)="showMenu1()">
-          区域
+          <span>{{searchDict}}</span>
+          <span *ngIf="!searchDict">区域</span>
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
         <ion-col col-4 class="tc" (click)="showMenu2()">
-          户型
+
+          <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
+          <span [hidden]="searchFloorNum==2"> 户型</span>
+
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
         <ion-col col-4 class="tc" (click)="showMenu3()">
@@ -69,8 +73,14 @@
           </ion-col>
     </ion-row>
 
-    <div *ngIf="pageData==null">
-      抱歉，找不到数据
+    <div class="content_page" style="margin-top: 150px">
+      <div *ngIf="hasData&&pageData ==null" class="tc">
+        <ion-spinner item-start name="ios"></ion-spinner>
+        加载数据中...
+      </div>
+      <div *ngIf="!hasData"  class="tc">
+        抱歉！没有找到数据
+      </div>
     </div>
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
@@ -80,7 +90,8 @@
 
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
+    <div *ngIf="all" class="sTips">已加载全部
+    </div>
   </ion-grid>
 
 </ion-content>
@@ -92,61 +103,29 @@
         <div class="leftChange">
           <a *ngFor=" let item of area"   [ngClass]="{'active': isActive(item)}" (click)="go(item)">{{item.name}}</a>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="light" (click)="reset()">重置</button>
-        </div>
       </ion-col>
       <ion-col col-6 class="p0">
         <div class="leftChange updateBg">
-          <ion-list radio-group [(ngModel)]="intentionTradeCodeId" (ngModelChange)="intentionTrade($event)">
+          <ion-list radio-group [(ngModel)]="params.intentionTradeCode" >
             <ion-item *ngFor=" let items of district;let i = index" >
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.id}}"></ion-radio>
+              <ion-radio value="{{items.code}}"  (ionSelect)="search()"></ion-radio>
             </ion-item>
           </ion-list>
-          <div *ngIf="hTips">暂无该地区！</div>
+          <div *ngIf="district ==false">暂无该地区！</div>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="danger" (click)="search()">确定</button>
-        </div>
+
       </ion-col>
     </ion-row>
   </ion-grid>
   <!-- 户型 -->
   <div class="lists houseType" *ngIf="houseType">
     <ion-list radio-group [(ngModel)]="params.intentionRoom" class="scrollC">
-      <ion-item class="item-blockUpdate">
-        <ion-label>不限</ion-label>
-        <ion-radio value="0"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>一室</ion-label>
-        <ion-radio value="1"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>两室</ion-label>
-        <ion-radio value="2"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>三室</ion-label>
-        <ion-radio value="3"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>四室</ion-label>
-        <ion-radio value="4"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>五室</ion-label>
-        <ion-radio value="5"></ion-radio>
-      </ion-item>
-      <ion-item class="item-blockUpdate">
-        <ion-label>五室以上</ion-label>
-        <ion-radio value="6"></ion-radio>
+      <ion-item *ngFor="let y of houseJSON">
+        <ion-label>{{y.name}}</ion-label>
+        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="p5 btns">
-      <button ion-button full color="danger" (click)="search()">确定</button>
-    </div>
   </div>
   <!-- 跟进 -->
   <div class="lists houseType" *ngIf="more">

@@ -281,6 +281,7 @@ export class HousedetailPage {
     });
     this.navCtrl.push(SearchhousePage);
   };
+
   estateChange(Value){
     // this.form.controls['adminDivisionCode'].setValue(Value.adminDivisionCode);
     // this.form.controls['estateName'].setValue(Value.estateName);

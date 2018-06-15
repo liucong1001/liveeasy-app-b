@@ -29,11 +29,14 @@ export class MypassengerPage {
   /**
    * 列表搜索条件
    */
-  area: any;
+  area=[];
   estateList = []; //楼盘列表
-  district:any;
+  district = [];
   tradingArea = [];//商圈数组
   intentionTradeCodeId:string;  //用于转换商圈
+  hasData = true;
+
+  shangQuan = []; //商圈
   /**
    * 列表搜索条件
    * @type {{}}
@@ -49,7 +52,11 @@ export class MypassengerPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,) {
     this.customerProvider.area().then(res=>{
-      this.area = res;
+      this.area = res.data.distrs;
+      if(this.area){
+        this.area.unshift({name:'不限',id:'99'});
+      }
+
     });
     this.customerProvider.tradingArea().then(res=>{
       this.tradingArea = res;
@@ -65,49 +72,62 @@ export class MypassengerPage {
   isActive(item) {
     return this.selected === item;
   };
-
+  searchDict = '';
   //搜索房源——区域——商圈
   go(item) {
+    if(item.id == '99'){
+      this.params.intentionDiviCode ='0';
+      this.params.intentionTradeCode = '0';
+      this.search();
+    }
+
+
     console.log('查询商圈',item);
-    this.selected = item;
-    this.propertyProvider.search2(item.id).then(res => {
-      this.district=res.data;
-      // if(this.district == undefined){
-      //   // alert('暂无该地区!')
-      //   this.hTips=true
-      // }else {
-      //   this.hTips=false;
-      // }
-    })
-  }
-
-  /**
-   * 监听商圈id——code（转换）
-   */
-  intentionTrade(event){
-     console.log('商圈',event);
-     for(var i in this.tradingArea){
-        if(this.tradingArea[i].id == event){
-          this.params.intentionTradeCode = this.tradingArea[i].code;
-        }
-     }
+    this.searchDict = item.name;
+    this.selected = item;//激活css选中状态
+     //用code值匹配相应商圈
+    this.district = [];
+    for(var i in this.tradingArea){
+       if(this.tradingArea[i].code.substring(0,6) == item.code){
+          this.district.push(this.tradingArea[i]);
+       }
+    }
+    if(this.district.length>1){
+      this.district.unshift({name:'不限',code:'0'});
+    }
+    this.params.intentionDiviCode = item.code;
 
   }
+
+
   /**
    * 列表搜索
    */
   search(){
     this.pageData = null;
+    this.hasData  = true;
     console.log('搜索',this.params);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
+
+      if(res.data.hasOwnProperty('result')){
+        this.hasData  = true;
+      }else{
+        this.hasData = false;
+      }
+
       //关闭搜索框子
       this.show = false;
       this.houseType = false;
       this.more = false;
       this.pop = false;
       // this.housingEstate = false;
+      //户型搜索条件字显示
+      if(this.searchFloorNum ==1){
+        this.searchFloorNum = 2;
+      }
+
     });
   }
   //重置
@@ -123,9 +143,29 @@ export class MypassengerPage {
     this.search();
   }
 
+  houseJSON = [
+    {name:'不限',val:0},
+    {name:'一室',val:1},
+    {name:'二室',val:2},
+    {name:'三室',val:3},
+    {name:'四室',val:4},
+    {name:'五室',val:5},
+    {name:'五室以上',val:6},
+  ];
+
+  //户型转换
+  housePipe(data){
+    for(var i in this.houseJSON){
+      if(data == this.houseJSON[i].val){
+        return this.houseJSON[i].name;
+      }
+    }
+  }
+
 
   //条数
   currentPage:number =1;
+  all = false;
   //下拉加载
   doInfinite(infiniteScroll) {
     setTimeout(() => {
@@ -135,9 +175,9 @@ export class MypassengerPage {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
-        alert("已加载所有");
+        this.all = true;
       }else {
-        console.log('加载完成后，关闭刷新',this.currentPage);
+        this.all = false;
         this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
@@ -146,7 +186,6 @@ export class MypassengerPage {
 
       }
 
-
       console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
@@ -154,7 +193,7 @@ export class MypassengerPage {
     }, 1000);
 
   }
-
+  searchFloorNum = 0; //初始化搜索次数
   //menu
   showMenu1(){
     if(this.show==false || this.houseType == true || this.more == true ){
@@ -168,6 +207,7 @@ export class MypassengerPage {
     }
   }
   showMenu2(){
+    this.searchFloorNum =1;
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
       this.show=false;

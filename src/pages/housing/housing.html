@@ -112,12 +112,10 @@
         <ion-spinner item-start name="ios"></ion-spinner>
         加载数据中...
       </div>
-      <!--<span *ngIf="all">已加载全部</span>-->
       <div *ngIf="!hasData"  class="tc">
         抱歉！没有找到数据
       </div>
     </div>
-
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content

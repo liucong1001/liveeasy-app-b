@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import { PfollowrecordPage } from './pfollowrecord/pfollowrecord';
 import { PlookrecordPage } from './plookrecord/plookrecord';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger/mypassenger";
+import {SearchhousePage} from "../../housing/housedetail/searchhouse/searchhouse";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -27,18 +28,21 @@ export class PassengerdetailPage {
   agentList = [];
   customeroGrageInfoList = [];
   //意向
-  area: any;
+  area = [];
   estateList = []; //楼盘列表
   district:any;
   tradingArea = [];//商圈数组
   intentionTradeCodeId:string;  //用于转换商圈
  data :any;
+  estateName:'';
   constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,
-              private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider) {
+              private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
+              public events: Events) {
 
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
        this.data = res;
        console.log('详情',this.data);
+
         this.form.patchValue({
           customerId:this.data.customerId,
           customerName:this.data.customerName,
@@ -47,6 +51,19 @@ export class PassengerdetailPage {
           customerSrc:this.data.customerSrc,
           agentId:this.data.agentId,
           customerGrade:this.data.customerGrade,
+          //更多
+          intentionDiviCode:this.data.intentionDiviCode,
+          intentionTradeCode:this.data.intentionTradeCode,
+          // intentionEstate:this.data.intentionEstate,
+           minSpaceSize:this.data.minSpaceSize,
+          maxSpaceSize:this.data.maxSpaceSize,
+          minPrice:this.data.minPrice,
+          minFloor:this.data.minFloor,
+          maxFloor:this.data.maxFloor,
+          minBedroom:this.data.minBedroom,
+          maxBedroom:this.data.maxBedroom,
+          minHall:this.data.minHall,
+          maxHall:this.data.maxHall,
         });
 
     });
@@ -66,16 +83,16 @@ export class PassengerdetailPage {
     });
     //区域
     this.customerProvider.area().then(res=>{
-      this.area = res;
+      this.area = res.data.distrs;
     });
     //商圈
     this.customerProvider.tradingArea().then(res=>{
       this.tradingArea = res;
     });
     //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-    });
+    // this.addhouseProvider.estateListSelect().then(res=>{
+    //   this.estateList = res.data.result;
+    // });
   }
 
   ionViewDidLoad() {
@@ -102,6 +119,7 @@ export class PassengerdetailPage {
     maxBedroom:[''],//最多居室
     minHall:[''],//最少厅
     maxHall:[''],//最多厅
+    decorations:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
     comments:[''],//备注
@@ -125,6 +143,21 @@ export class PassengerdetailPage {
     this.navCtrl.push(PfollowrecordPage)
   }
 
+
+  goserach(){
+    this.events.subscribe('bevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      // this.form.value.estateName = params.estateName;
+      // this.form.value.estateId =  params.estateId;
+      this.estateName = params.keyword;
+      this.form.controls['intentionEstate'].setValue(params.id);
+
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(SearchhousePage);
+  }
   save(){
     console.log('编辑客户',this.form.value);
 
