@@ -370,13 +370,6 @@ export class HousingPage {
         infiniteScroll.enable(false);
         //toast提示
         this.all = true;
-        // alert("已加载所有");
-        // let i = this.all ;
-        // setTimeout(function () {
-        //     i = false;
-        //     console.log('set',i);
-        // },2000)
-
        }else {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {

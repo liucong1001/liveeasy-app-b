@@ -85,7 +85,7 @@ export class CustomerProvider {
   }
   //录入客户
   add(params){
-     return this.httpProvider.httpPostForm(this.addPath,params);
+     return this.httpProvider.httpPost(this.addPath,params);
   }
   //根据ID获取客户详情
   getDetail(customerId){
@@ -93,7 +93,7 @@ export class CustomerProvider {
   }
   //编辑客户
   update(params){
-    return this.httpProvider.httpPostForm(this.updateDetailPath,params);
+    return this.httpProvider.httpPost(this.updateDetailPath,params);
   }
 
   //我的客户——跟进

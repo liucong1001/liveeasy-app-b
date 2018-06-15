@@ -161,13 +161,13 @@ export class PassengerdetailPage {
   save(){
     console.log('编辑客户',this.form.value);
 
-    var body = null;
-    for(var key in this.form.value){
-      body = body+'&'+key+'='+this.form.value[key]+'';
-    }
-    body = body.slice(5);
-    console.log('body:',body);
-    this.customerProvider.update(body).then(res=>{
+    // var body = null;
+    // for(var key in this.form.value){
+    //   body = body+'&'+key+'='+this.form.value[key]+'';
+    // }
+    // body = body.slice(5);
+    // console.log('body:',body);
+    this.customerProvider.update(this.form.value).then(res=>{
       if (res.success){
         alert('修改客户成功!');
         this.navCtrl.push(MypassengerPage);

@@ -4,6 +4,8 @@ import { PublicpassengerPage } from '../publicpassenger';
 import {PublicCustomerProvider} from "../../../../providers/public-customer/public-customer";
 import {PropertyProvider} from "../../../../providers/property/property";
 import {CustomerProvider} from "../../../../providers/customer/customer";
+import {HousedetailPage} from "../../../housing/housedetail/housedetail";
+import {PublicpdetailPage} from "../publicpdetail/publicpdetail";
 
 /**
    公客列表
@@ -102,6 +104,48 @@ export class ChoosehousePage {
       // this.housingEstate = false;
     });
   }
+
+  //条数
+  currentPage: number = 1;
+  all = false;
+  //下拉加载
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      infiniteScroll.complete();
+      this.currentPage++;
+      console.log('加载完成后，关闭刷新', this.currentPage);
+
+      if (this.currentPage >= this.totalPages) {
+        //如果都加载完成的情况，就直接 disable ，移除下拉加载
+        infiniteScroll.enable(false);
+        //toast提示
+        this.all = true;
+      }else {
+        this.all = false;
+        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+          for (let i = 0; i < res.data.result.length; i++) {
+            this.pageData.push(res.data.result[i]);
+          }
+          // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
+        });
+      }
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete(function () {
+        console.log('数据请求完成');
+      });
+    }, 1000);
+
+  }
+
+  //进入详情页
+  gopassengerDetail(item){
+    this.navCtrl.push(PublicpdetailPage, {
+      customerId:item.customerId,
+    });
+  }
+
+
   //menu
   showMenu1(){
     if(this.show==false || this.houseType == true || this.more == true){
@@ -149,6 +193,8 @@ export class ChoosehousePage {
     this.navCtrl.push(PublicpassengerPage)
   }
 }
+
+
 
 /**
  * 公客搜索条件类

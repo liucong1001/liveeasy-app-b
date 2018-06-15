@@ -15,7 +15,7 @@
   </ion-list>
 
   <div *ngIf="!edit&&floorList" class="hisRecord">
-    <ion-list>
+    <ion-list *ngIf="search">
       <ion-item (click)="select(null)">
         <span class="clearFloor">清空条件</span>
       </ion-item>

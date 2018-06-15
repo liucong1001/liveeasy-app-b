@@ -168,12 +168,7 @@ export class AddpassengerPage {
 
   save(){
     console.log('表单客户',this.form.value);
-
-    var body = null;
-    for(var key in this.form.value){
-      body = body+'&'+key+'='+this.form.value[key]+'';
-    }
-    this.customerProvider.add(body).then(res=>{
+    this.customerProvider.add(this.form.value).then(res=>{
       if (res.success){
         alert('录入成功!');
         this.navCtrl.push(MypassengerPage);
