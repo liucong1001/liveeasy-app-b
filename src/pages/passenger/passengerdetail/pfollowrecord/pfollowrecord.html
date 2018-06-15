@@ -7,17 +7,17 @@
 <ion-content>
     <div class="location">
       <ion-list>
-        <ion-item class="updateHegiht p10">
+        <ion-item class="updateHegiht p10" *ngFor="let item of fRecord">
           <ion-row>
             <ion-col col-12>
-              刘秀
-              <a class="followTips">日常跟进</a>
+              {{item.followAgentName}}
+              <a class="followTips">{{item.followupCode=='2'?'带看客户':'日常跟进'}}</a>
             </ion-col>
             <ion-col col-12>
-              发放地点打发打发打发打发打发打发的
+              {{item.content}}
             </ion-col>
             <ion-col col-12>
-              <font color="#aaa" size="1">2017-12-12 12：25：74</font>
+              <font color="#aaa" size="1">{{item.followupTime | date:'yyyy年MM月dd日'}}</font>
             </ion-col>
           </ion-row>
         </ion-item>

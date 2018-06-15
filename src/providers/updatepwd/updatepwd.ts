@@ -12,7 +12,7 @@ import {ConfigProvider} from "../config/config";
 export class UpdatepwdProvider {
 
     private  oldPassword = this.configProvider.set().http+'/property/propertyInfo/editPassword';
-    private  aaPassword = this.configProvider.set().http+'/property/propertyInfo/undatePassword';
+    private  aaPassword = this.configProvider.set().http+'/sys/user/repass';
     constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
         console.log('Hello UpdatepwdProvider Provider');
     }
@@ -22,9 +22,13 @@ export class UpdatepwdProvider {
         return this.httpProvider.httpGet(this.oldPassword,params);
     }
     //修改密码——提交新密码
-    public postPassword(params?){
-        return this.httpProvider.httpPost(this.aaPassword,params);
-    }
+    // public postPassword(opass,npass){
+    //     return this.httpProvider.httpPost(this.aaPassword ,+ '?opass='+ opass  + '&npass=' +  npass);
+    //     // ?newPassword=123456&loginName=1
+    // }
+  postPassword(opass,npass){
+    return this.httpProvider.httpPost(this.aaPassword + "?opass=" + opass+"&npass="+npass);
+  }
 
     // public  login(username,password):Promise<any>{
     //     return this.http.post(this.newsPassword+'?username='+username+'&password='+password,null).toPromise().then(res=>{

@@ -25,6 +25,8 @@ export class CustomerProvider {
   private  prlookPath=this.configProvider.set().http+'/customer/customerInfo/lookCustomer';
   //我的客户——关闭
   private  prclosePath=this.configProvider.set().http+'/customer/customerInfo/closeCustomer';
+//我的客户——跟进记录
+  private  mfollowPath=this.configProvider.set().http+'/customer/customerInfo/followupPageList';
 
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello CustomerProvider Provider');
@@ -105,5 +107,9 @@ export class CustomerProvider {
   //我的客户——关闭
   public prclose(params?){
     return this.httpProvider.httpPost(this.prclosePath,params);
+  }
+  //我的客户——跟进记录
+  public mfollow(params?){
+    return this.httpProvider.httpPost(this.mfollowPath,params);
   }
 }

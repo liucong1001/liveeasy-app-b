@@ -15,13 +15,13 @@
 
       <ion-item class="pl12">
         <ion-label>新密码</ion-label>
-        <ion-input type="password" placeholder="6-16个字符" formControlName="newPassword"></ion-input>
+        <ion-input type="password" placeholder="6-21字母和数字组成" formControlName="newPassword"></ion-input>
       </ion-item>
-      <ion-item class="pl12">
-        <ion-label>确认新密码</ion-label>
-        <ion-input type="password" placeholder="请确认新密码" formControlName="verifyPassword"></ion-input>
-      </ion-item>
-      <ion-item *ngIf="tips" class="pl12"> <font color="red">* 密码输入不一致，请重新填写</font></ion-item>
+      <!--<ion-item class="pl12">-->
+        <!--<ion-label>确认新密码</ion-label>-->
+        <!--<ion-input type="password" placeholder="请确认新密码" formControlName="verifyPassword"></ion-input>-->
+      <!--</ion-item>-->
+      <!--<ion-item *ngIf="tips" class="pl12"> <font color="red">* 密码输入不一致，请重新填写</font></ion-item>-->
 
     </ion-list>
 

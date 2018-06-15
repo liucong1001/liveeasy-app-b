@@ -1,18 +1,23 @@
 <!--<ion-nav [root]="rootPage"></ion-nav>-->
-<ion-menu [content]="content" side="right">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>MenuList</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <ion-item>111</ion-item>
-    <ion-item>222</ion-item>
-    <ion-item>333</ion-item>
+<ion-menu [content]="content" side="right" type="overlay">
+  <ion-content class="bgWhite mores">
+    <ion-list>
+      <ion-item>
+        <h4>标签</h4>
+        <a>我</a>
+      </ion-item>
+      <ion-item>
+        <h6>其他</h6>
+        <a>我</a>
+      </ion-item>
+      <ion-item>
+        <h6>
+          朝向
+        </h6>
+        <a>我</a>
+      </ion-item>
+    </ion-list>
   </ion-content>
-
 </ion-menu>
-
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
