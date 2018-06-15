@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { Component,ViewChild,ElementRef ,Inject } from '@angular/core';
+import { IonicPage, NavController, NavParams,Searchbar } from 'ionic-angular';
 import {AddhouseProvider} from "../../../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {HousedetailPage} from "../housedetail";
@@ -17,11 +17,12 @@ export class SearchhousePage {
   estateList:[any];//楼盘
   callback:any;
   search:any;
+  timer:any; //获取焦点定时器
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient) {
+              private http:HttpClient,) {
 
-    //默认楼盘展示
   }
 
   getData(data){
@@ -49,6 +50,12 @@ export class SearchhousePage {
    this.floorList = this.localStorageProvider.get('floorList');
    if(this.floorList ==null){this.floorList = []}
    console.log('历史',this.floorList);
+
+  }
+  ionViewDidEnter(){
+    this.timer= setInterval(()=>{
+      this.searchBar.setFocus();
+    },500)
   }
 
 
@@ -69,22 +76,12 @@ export class SearchhousePage {
 
   floorList :Array<any>;
   select(item){
-    // console.log('选择的',item.keyword);
-
-    // if(this.textArrt.indexOf(name) == -1){
-    //   this.textArrt.push(name);
-    //   console.log('名字',this.textArrt);
-    //   return true;
-    // }else {
-    //   return false;
-    // }
 
     if(this.floorList.indexOf(item.keyword)==-1){
       this.floorList.push(item.keyword);
       this.localStorageProvider.set('floorList',this.floorList);
     }
-
-
+    window.clearInterval(this.timer);
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('bevents', item);
@@ -92,7 +89,8 @@ export class SearchhousePage {
   }
 
   back(){
-    this.navCtrl.pop()
+    window.clearInterval(this.timer);
+    this.navCtrl.pop;
   }
 
   chose(item){

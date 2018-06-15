@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
@@ -23,6 +23,8 @@ export class AllsearchPage {
   estateList:[any];//楼盘
   callback:any;
   search:any;
+  timer:any; //获取焦点定时器
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
@@ -41,7 +43,7 @@ export class AllsearchPage {
   edit = false;
   getFloorKey(event){
     console.log('值',this.search);
-    this.getData(event._value).then(res=>{
+    this.getData(this.search).then(res=>{
       this.floor = res.result;
       this.edit = true;
 
@@ -55,24 +57,42 @@ export class AllsearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllsearchPage');
+    this.floorList = this.localStorageProvider.get('floorList');
+    if(this.floorList ==null){this.floorList = []}
+    console.log('历史',this.floorList);
   }
+  //进入页面后执行
+  ionViewDidEnter(){
+    this.timer= setInterval(()=>{
+      this.searchBar.setFocus();
+    },500)
+  }
+  //页面离开
+  ionViewCanLeave(){
+    window.clearInterval(this.timer);
+  }
+  floorList :Array<any>;
 
   select(item){
-    console.log('idnex的值',this.navParams.get('index'),'item的值',item);
-    if(this.navParams.get('index')==1&&item==null){
-      this.navCtrl.setRoot(HomePage,{item:item});
-      // alert('主页');
+
+    if(item&&this.floorList.indexOf(item.keyword)==-1){
+      this.floorList.push(item.keyword);
+      this.localStorageProvider.set('floorList',this.floorList);
     }
-    else  {
-      // alert('列表页');
-      this.navCtrl.setRoot(HousingPage,{item:item});
-      // this.navCtrl.setRoot()HousingPage,{item:item});
-      // this.navCtrl.popTo(HousingPage,{item:item})
-      this.navCtrl.parent.select(1);
-    }
+
+    this.navCtrl.pop().then(() => {
+      // 发布 bevents事件
+      this.events.publish('bevents', item);
+    });
   }
 
   back(){
-    this.navCtrl.pop()
+    this.navCtrl.pop();
+  }
+
+  chose(item){
+    console.log('历史选择的',item);
+    this.search = item;
+    this.getFloorKey(item)
   }
 }

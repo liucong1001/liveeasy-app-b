@@ -477,7 +477,23 @@ export class HousingPage {
     //   this.events.unsubscribe('bevents');
     // });
    // this.navCtrl.push(SearchhousePage);
-    this.navCtrl.push(AllsearchPage,{floorName:this.floorName})
+   //  this.navCtrl.push(AllsearchPage,{floorName:this.floorName})
+    this.events.subscribe('bevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+        if(!params){
+          this.floorName = '';
+          this.params.estateId = '';
+        }else {
+          this.floorName = params.keyword;
+          this.params.estateId = params.id;
+          console.log('搜索',this.floorName,this.params.estateId);
+        }
+        this.search();
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(AllsearchPage,{floorName:this.floorName});
   }
 
 
