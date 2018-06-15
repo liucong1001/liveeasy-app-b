@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SearchPage} from "../search/search";
+import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 @IonicPage()
 @Component({
   selector: 'page-passengerlook',
@@ -16,7 +17,7 @@ export class PassengerlookPage {
   clientPhone:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private fb:FormBuilder,public customerProvider:CustomerProvider,
-              public toast:ToastComponent,) {
+              public toast:ToastComponent,  public events: Events) {
     this.clientID=navParams.get('item').customerSn;
     this.clientName=navParams.get('item').customerName;
     this.clientPhone=navParams.get('item').customerPhone;
@@ -33,8 +34,13 @@ export class PassengerlookPage {
   });
 
   fy(){
-    this.navCtrl.push(SearchPage)
+    this.events.subscribe('bevents', (params) => {
+      console.log('接收数据为: ', params);
+      this.events.unsubscribe('bevents');
+    });
+    this.navCtrl.push(SearchhousePage);
   }
+
   looks(){
     this.customerProvider.prlook({
       propertyId:this.form.value.propertyId,
