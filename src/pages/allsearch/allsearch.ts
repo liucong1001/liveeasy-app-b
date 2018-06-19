@@ -30,7 +30,6 @@ export class AllsearchPage {
               private http:HttpClient) {
     this.search = navParams.get('floorName');
 
-
   }
 
   getData(data){
@@ -65,7 +64,7 @@ export class AllsearchPage {
   ionViewDidEnter(){
     this.timer= setInterval(()=>{
       this.searchBar.setFocus();
-    },500)
+    },0)
   }
   //页面离开
   ionViewCanLeave(){

@@ -38,6 +38,20 @@ export class ToastComponent {
     });
     toast.present();
   }
+
+  defaultMsg(position,message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: position,
+      cssClass:' ',
+    });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+  }
+
   // toast 失败消息提示
   error(message){
     let toast = this.toastCtrl.create({
