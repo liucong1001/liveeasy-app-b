@@ -41,7 +41,7 @@ export class ClosePage {
       if(res.success){
         this.toast.msg('关闭成功');
         // this.navCtrl.push(PlookrecordPage,{customerId:this.customerid})
-        this.navCtrl.push(PassengerdetailPage)
+        this.navCtrl.pop();
       }else {
         this.toast.error('关闭失败')
       }

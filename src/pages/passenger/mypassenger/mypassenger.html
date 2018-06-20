@@ -35,9 +35,9 @@
                 <div class="ellipsis tips">
                   <font size="3">{{item.customerName}}</font>
                     <!--急-->
-                  <a>{{item.followLabel==1?'急':''}}</a>
+                  <a *ngIf="item.followLabel">{{item.followLabel==1?'急':''}}</a>
                     <!--约-->
-                  <a>{{item.lookLable==1?'约':''}}</a>
+                  <a *ngIf="item.lookLable">{{item.lookLable==1?'约':''}}</a>
                   <!--<a>约</a>-->
                 </div>
                 <p class="m5">

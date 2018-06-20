@@ -23,6 +23,7 @@ export class PublicpdetailPage {
   down=false;
   customerId:any;
   data:object;
+  datas:any;
   customeroGrageInfoList = [];//客户等级
   constructor(public navCtrl: NavController, public navParams: NavParams,public customerProvider:CustomerProvider) {
     this.customerId=navParams.get('customerId');
@@ -30,6 +31,7 @@ export class PublicpdetailPage {
 
     this.customerProvider.getPublicDetail(this.customerId).then(res=>{
       this.data = res.data;
+      this.datas=res.data.entity;
        // console.log('公客详情',res);
     });
     //
@@ -57,12 +59,12 @@ export class PublicpdetailPage {
   }
   passengerLook(){
     this.navCtrl.push(PlookrecordPage,{
-      id:this.customerId,
+      id:this.datas,
     })
   }
   passengerFollow(){
     this.navCtrl.push(PfollowrecordPage,{
-      id:this.customerId,
+      id:this.datas,
     })
   }
   //客户等级转换
