@@ -9,45 +9,41 @@
   <form  *ngIf="data">
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>客户ID:</ion-label>
-        <ion-label>{{data.entity.customerSn}}</ion-label>
+        <ion-label>客户ID：{{data.entity.customerSn}}</ion-label>
       </ion-item>
       <ion-item  class="pl12 hdRightInfo1 ">
-        <ion-label>录入时间</ion-label>
-        <ion-label>{{data.entity.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>
+        <ion-label>录入时间：{{data.entity.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>
+
+        <!--<ion-label>{{data.entity.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>-->
       </ion-item>
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>公客位置</ion-label>
-        <ion-label>{{data.entity.customerTypeName}}</ion-label>
+        <ion-label>公客位置：{{data.entity.customerTypeName}}</ion-label>
+        <!--<ion-label>{{ data.entity.customerTypeName}}</ion-label>-->
       </ion-item>
       <ion-item  class="pl12 hdRightInfo1">
-          <ion-label>流入时间</ion-label>
-          <ion-label>{{data.entity.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>
+          <ion-label>流入时间：{{data.entity.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>
+          <!--<ion-label>{{ data.entity.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>-->
        </ion-item>
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>客户姓名</ion-label>
-        <ion-label>{{data.entity.customerName}}</ion-label>
+        <ion-label>客户姓名：{{data.entity.customerName}}</ion-label>
+        <!--<ion-label>{{ data.entity.customerName}}</ion-label>-->
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>客户性别</ion-label>
-        <ion-label>{{data.entity.customerGender =='1'?'男':'女'}}</ion-label>
+        <ion-label>客户性别：{{data.entity.customerGender =='1'?'男':'女'}}</ion-label>
 
       </ion-item>
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>客户手机</ion-label>
-        <ion-label>{{data.entity.customerPhone}}</ion-label>
+        <ion-label>客户手机：{{data.entity.customerPhone}}</ion-label>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>客户来源</ion-label>
-        <ion-label>{{data.entity.customerSrcName}}</ion-label>
+        <ion-label>客户来源：{{data.entity.customerSrcName}}</ion-label>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>客户归属</ion-label>
-        <ion-label>{{data.entity.agentName}}</ion-label>
+        <ion-label>客户归属：{{data.entity.agentName}}</ion-label>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>客户等级</ion-label>
-        <ion-label>{{ customerGrade(data.entity.customerGrade)}}</ion-label>
+        <ion-label>客户等级：{{customerGrade(data.entity.customerGrade)}}</ion-label>
+        <!--<ion-label>{{ )}}</ion-label>-->
       </ion-item>
     </ion-list>
     <ion-list style="margin-top: 10px" (click)="clickIntention()">
@@ -61,42 +57,42 @@
     </ion-list>
     <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
-        <ion-label>意向区域</ion-label>
-        <ion-label>{{data.entity.intentionDiviName}}</ion-label>
+        <ion-label>意向区域：{{data.entity.intentionDiviName}}</ion-label>
+        <!--<ion-label>{{data.entity.intentionDiviName}}</ion-label>-->
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>意向楼盘</ion-label>
-        <ion-label>{{data.entity.intentionTradeCode}}</ion-label>
+        <ion-label>意向楼盘：{{data.entity.intentionTradeCode}}</ion-label>
+        <!--<ion-label>{{data.entity.intentionTradeCode}}</ion-label>-->
       </ion-item>
       <div class="hdRightInfo">
         <ion-item class="pl12">
-          <ion-label>面积要求</ion-label>
-          <ion-label>{{data.entity.minSpaceSize}}~{{data.entity.maxSpaceSize}}</ion-label>
+          <ion-label>面积要求：{{data.entity.minSpaceSize}}~{{data.entity.maxSpaceSize}}平</ion-label>
+          <!--<ion-label>{{data.entity.minSpaceSize}}~{{data.entity.maxSpaceSize}}</ion-label>-->
         </ion-item>
-        <span class="hdRightInfo">平</span>
+        <!--<span class="hdRightInfo">平</span>-->
       </div>
       <div class="hdRightInfo">
         <ion-item class="pl12">
-          <ion-label>价格要求</ion-label>
-          <ion-label>{{data.entity.minPrice}}~{{data.entity.maxPrice}}</ion-label>
+          <ion-label>价格要求：{{data.entity.minPrice}}~{{data.entity.maxPrice}}万</ion-label>
+          <!--<ion-label>{{data.entity.minPrice}}~{{data.entity.maxPrice}}</ion-label>-->
         </ion-item>
-        <span class="hdRightInfo">万</span>
+        <!--<span class="hdRightInfo">万</span>-->
       </div>
       <ion-item class="pl12">
-        <ion-label>楼层要求</ion-label>
-        <ion-label>{{data.entity.minFloor}}~{{data.entity.maxFloor}}楼</ion-label>
+        <ion-label>楼层要求：{{data.entity.minFloor}}~{{data.entity.maxFloor}}楼</ion-label>
+        <!--<ion-label>{{data.entity.minFloor}}~{{data.entity.maxFloor}}楼</ion-label>-->
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>居室要求</ion-label>
-        <ion-label>{{data.entity.minBedroom}}~{{data.entity.maxBedroom}}室</ion-label>
+        <ion-label>居室要求：{{data.entity.minBedroom}}~{{data.entity.maxBedroom}}室</ion-label>
+        <!--<ion-label>{{data.entity.minBedroom}}~{{data.entity.maxBedroom}}室</ion-label>-->
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>客厅要求</ion-label>
-        <ion-label>{{data.entity.minHall}}~{{data.entity.maxHall}}厅</ion-label>
+        <ion-label>客厅要求：{{data.entity.minHall}}~{{data.entity.maxHall}}厅</ion-label>
+        <!--<ion-label>{{data.entity.minHall}}~{{data.entity.maxHall}}厅</ion-label>-->
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>装修要求</ion-label>
-        <ion-label>{{data.entity.decorations}}</ion-label>
+        <ion-label>装修要求：{{data.entity.decorations}}</ion-label>
+        <!--<ion-label>{{data.entity.decorations}}</ion-label>-->
       </ion-item>
     </ion-list>
     <ion-grid>
