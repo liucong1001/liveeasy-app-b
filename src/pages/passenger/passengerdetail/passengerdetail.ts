@@ -137,10 +137,14 @@ export class PassengerdetailPage {
     }
   }
   passengerLook(){
-    this.navCtrl.push(PlookrecordPage)
+    this.navCtrl.push(PlookrecordPage,{
+      id:this.data,
+    })
   }
   passengerFollow(){
-    this.navCtrl.push(PfollowrecordPage)
+    this.navCtrl.push(PfollowrecordPage,{
+      id:this.data,
+    })
   }
 
 

@@ -17,10 +17,15 @@ import {CustomerProvider} from "../../../../providers/customer/customer";
 })
 export class PfollowrecordPage {
   fRecord:any;
+  params:any;
+  customerid:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public customerProvider:CustomerProvider,
               public toast:ToastComponent,) {
-    this.customerProvider.mfollow({}).then(res => {
+    this.customerid=navParams.get('id').customerId;
+    console.log(this.customerid)
+    this.params = {customerId:this.customerid}
+    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
       console.log(res.data.result);
       this.fRecord=res.data.result
     });

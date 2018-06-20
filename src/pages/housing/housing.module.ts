@@ -9,6 +9,7 @@ import {ClosehousePageModule} from "./closehouse/closehouse.module";
 import {FollowPageModule} from "./follow/follow.module";
 import {HousedetailPageModule} from "./housedetail/housedetail.module";
 import {MyApp} from "../../app/app.component";
+import {MorePageModule} from "./more/more.module";
 @NgModule({
   declarations: [
     HousingPage,
@@ -21,6 +22,7 @@ import {MyApp} from "../../app/app.component";
     ClosehousePageModule,
     FollowPageModule,
     HousedetailPageModule,
+    MorePageModule
   ],
 })
 export class HousingPageModule {}

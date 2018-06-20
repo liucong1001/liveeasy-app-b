@@ -20,7 +20,10 @@ export class PublicpdetailPage {
   showIntention=false;
   right=true;
   down=false;
+  customerid:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.customerid=navParams.get('item');
+    console.log(this.customerid)
   }
 
   ionViewDidLoad() {
@@ -41,10 +44,14 @@ export class PublicpdetailPage {
     this.navCtrl.push(AddpublicguestPage)
   }
   passengerLook(){
-    this.navCtrl.push(PlookrecordPage)
+    this.navCtrl.push(PlookrecordPage,{
+      id:this.customerid,
+    })
   }
   passengerFollow(){
-    this.navCtrl.push(PfollowrecordPage)
+    this.navCtrl.push(PfollowrecordPage,{
+      id:this.customerid,
+    })
   }
 
 }

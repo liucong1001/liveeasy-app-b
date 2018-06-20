@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()" style="margin-top: 15px"></ion-searchbar>
+    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
   </ion-navbar>
 </ion-header>
@@ -107,7 +107,7 @@
     <!--refreshingText="刷新完毕...">-->
     <!--</ion-refresher-content>-->
     <!--</ion-refresher>-->
-    <div class="content_page" style="margin-top: 150px">
+    <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
         加载数据中...
@@ -226,5 +226,42 @@
 
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>
+
+
+<!--<ion-nav [root]="rootPage"></ion-nav>-->
+<ion-menu [content]="content" side="right" type="overlay">
+  <ion-content padding class="bgWhite mores">
+
+    <div>
+      <h4>标签</h4>
+      <a *ngFor="let bq of tagsList" [ngClass]="{'red': isActive(item)}" (click)="go(item)">{{bq.tagDesc}}</a>
+    </div>
+
+    <div>
+      <h4>
+        朝向
+      </h4>
+      <a *ngFor="let i of cxJSON">{{i.name}}</a>
+    </div>
+    <div>
+      <h4>其他</h4>
+      <a *ngFor="let item of qtJSON">{{item.name}}</a>
+    </div>
+
+
+  </ion-content>
+  <ion-row class="footer">
+    <ion-col col-3>
+      <button ion-button full style="background: #fff;color: #aaa">清除</button>
+    </ion-col>
+    <ion-col col-9>
+      <button ion-button full>确定</button>
+    </ion-col>
+
+  </ion-row>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
 
 

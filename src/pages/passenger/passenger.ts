@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddpassengerPage } from './addpassenger/addpassenger';
 import { MypassengerPage } from './mypassenger/mypassenger';
-import { ChoosehousePage } from './publicpassenger/choosehouse/choosehouse';
 import {PsearchPage} from "./psearch/psearch";
+import { PublicpassengerPage } from './publicpassenger/publicpassenger';
 /**
  * Generated class for the PassengerPage page.
  *
@@ -31,7 +31,7 @@ export class PassengerPage {
     this.navCtrl.push(MypassengerPage)
   }
   publicpassenger(){
-    this.navCtrl.push(ChoosehousePage)
+    this.navCtrl.push(PublicpassengerPage)
   }
   pSearch(){
     this.navCtrl.push(PsearchPage)

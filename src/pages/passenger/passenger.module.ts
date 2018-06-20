@@ -18,7 +18,7 @@ import {PsearchPageModule} from "./psearch/psearch.module";
     MypassengerPageModule,
     PassengerdetailPageModule,
     PublicpassengerPageModule,
-    PsearchPageModule
+    PsearchPageModule,
   ],
 })
 export class PassengerPageModule {}

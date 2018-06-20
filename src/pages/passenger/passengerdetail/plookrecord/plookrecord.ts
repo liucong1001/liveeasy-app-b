@@ -23,9 +23,14 @@ export class PlookrecordPage {
   @ViewChild(Slides) slides: Slides;
   index: number = 0;
   lRecord:any;
+  customerid:any;
+  params:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,) {
-    this.customerProvider.mfollow({}).then(res => {
+    this.customerid=navParams.get('id').customerId;
+    console.log(this.customerid)
+    this.params = {customerId:this.customerid}
+    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
       console.log(res.data.result);
       this.lRecord=res.data.result
     });
