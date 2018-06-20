@@ -23,12 +23,16 @@ export class CustomerProvider {
   private  prFollowPath=this.configProvider.set().http+'/customer/customerInfo/CustomerFollowUp';
   //我的客户——带看
   private  prlookPath=this.configProvider.set().http+'/customer/customerInfo/lookCustomer';
-  //我的客户——关闭
+  //关闭
   private  prclosePath=this.configProvider.set().http+'/customer/customerInfo/closeCustomer';
- //我的客户——跟进记录
+//跟进记录
   private  mfollowPath=this.configProvider.set().http+'/customer/customerInfo/followupPageList';
  //公客详情
   private  publicDetailPath = this.configProvider.set().http+'/publiccustomer/publicCustomerInfo/toDetailApp';
+  //约看
+  private  finishPath=this.configProvider.set().http+'/customer/customerInfo/updateFollowStatus';
+
+
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
     console.log('Hello CustomerProvider Provider');
   }
@@ -128,5 +132,13 @@ export class CustomerProvider {
   public getPublicDetail(id){
     return this.httpProvider.httpGet(this.publicDetailPath+'?id='+id);
   }
+
+  public mfinish(id,status,content){
+    return this.httpProvider.httpPostForm(this.finishPath,"id=" +id + "&status="+status + '&content=' + content);
+  }
+
+
+
+
 
 }
