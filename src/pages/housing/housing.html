@@ -130,7 +130,7 @@
 </ion-content>
 <div class="popLocation">
   <!-- 区域 -->
-  <ion-grid class="lists p0" *ngIf="show">
+  <ion-grid class="lists p0" [hidden]="!show" >
     <ion-row *ngIf="aeraShow">
       <ion-col col-12 class="p0">
         <div class="leftChange">
@@ -185,7 +185,7 @@
   </ion-grid>
 
   <!-- 户型 -->
-  <div class="lists houseType" *ngIf="houseType">
+  <div class="lists houseType" [hidden]="!houseType" >
     <ion-list radio-group [(ngModel)]="params.bedroomType" class="scrollC">
       <ion-item *ngFor="let y of houseJSON">
         <ion-label>{{y.name}}</ion-label>
@@ -198,7 +198,7 @@
   </div>
 
   <!-- 电梯 -->
-  <div class="lists houseType" *ngIf="housingEstate">
+  <div class="lists houseType" [hidden]="!housingEstate" >
     <ion-list radio-group [(ngModel)]="params.hasElevator" class="scrollC">
       <ion-item *ngFor="let y of hasElevatorJson">
         <ion-label>{{y.name}}</ion-label>

@@ -69,6 +69,8 @@ import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
 
 import {HomePageModule} from "../pages/home/home.module";
 import {BackButtonProvider} from "../providers/common/backButton";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -95,6 +97,7 @@ import {BackButtonProvider} from "../providers/common/backButton";
         // swipeBackEnabled: true
       }),
       ionicGalleryModal.GalleryModalModule,
+      BrowserAnimationsModule,
     ],
     bootstrap: [IonicApp],
     providers: [

@@ -18,6 +18,8 @@ import {AllsearchPage} from "../allsearch/allsearch";
 import {SearchhousePage} from "./housedetail/searchhouse/searchhouse";
 import {Tabs} from 'ionic-angular';
 import {Injectable,ViewChild} from '@angular/core';
+import {visibilityToggle} from "../../components/animations/toggle.animation";
+
 /**
  * Generated class for the HousingPage page.
  *
@@ -30,9 +32,25 @@ import {Injectable,ViewChild} from '@angular/core';
   selector: 'page-housing',
   templateUrl: 'housing.html',
   // pipes:[StringJsonPipe],
+  animations:[visibilityToggle],
 })
 export class HousingPage {
   @ViewChild('myTabs') tabRef: Tabs;
+  visibility = 'hidden';
+  showFilter = false;
+  // 列表搜索表单隐藏显示切换
+  toggle() {
+    this.showFilter = !this.showFilter;
+    this.visibility = this.showFilter ? 'shown' : 'hidden';
+  }
+
+  toggle2(){
+
+  }
+
+  // state(){
+  //   return this.showFilter?'shown':'hidden';
+  // }
 
   classFlag = true;
   show = false;
@@ -248,10 +266,13 @@ export class HousingPage {
       this.houseType = false;
       this.more = false;
       this.housingEstate = false;
+      // console.log("111");
     } else {
       this.show = false;
       this.pop = false;
+      // console.log("222");
     }
+    // this.toggle();
   }
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
@@ -264,10 +285,13 @@ export class HousingPage {
       this.pop = true;
       this.more = false;
       this.housingEstate = false;
+      // console.log("111开");
     } else {
       this.houseType = false;
       this.pop = false;
+      // console.log("222关");
     }
+    // this.toggle();
   }
 
   showMenu3() {
@@ -281,6 +305,7 @@ export class HousingPage {
       this.housingEstate = false;
       this.pop = false;
     }
+    // this.toggle();
   }
 
   showMenu4() {
