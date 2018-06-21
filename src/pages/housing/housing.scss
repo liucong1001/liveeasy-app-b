@@ -106,7 +106,7 @@ page-housing .tips a:nth-child(10) {
   margin-bottom: 10px
 }
 .houseMain:first-child{
-  margin-top: 46px;
+  //margin-top: 46px;
 }
 .lists {
   position: fixed; // top: 10%;
@@ -207,4 +207,8 @@ page-housing {
     background-color: #fff;
   }
 
+}
+
+.refresh{
+  margin: 10px 0 35px;
 }

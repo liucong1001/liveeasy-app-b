@@ -3,7 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { HomePage } from './home';
 import {MdetailsPageModule} from "./mdetails/mdetails.module";
 import {MsgdetailPageModule} from "./msgdetail/msgdetail.module";
-import {DeclardetailPageModule} from "./declardetail/declardetail.module";
+import {DeclardetailPageModule} from "./declaration/declardetail/declardetail.module";
 import {DeclarationPageModule} from "./declaration/declaration.module";
 import {MsgdetailPage} from "./msgdetail/msgdetail";
 @NgModule({
@@ -14,7 +14,6 @@ import {MsgdetailPage} from "./msgdetail/msgdetail";
     IonicPageModule.forChild(HomePage),
     MdetailsPageModule,
     MsgdetailPageModule,
-    DeclardetailPageModule,
     DeclarationPageModule
   ],
 })
