@@ -33,9 +33,10 @@
 }
 
 .houseMenu ion-col ion-icon {
-  position: relative;
-  top: 3px;
-  left: 5px;
+  //position: relative;
+  //top: 3px;
+  //left: 5px;
+  vertical-align: middle;
 }
 
 page-housing .tips a {

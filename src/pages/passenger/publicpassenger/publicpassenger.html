@@ -11,15 +11,19 @@
   <ion-grid class="p0">
     <ion-row class="houseMenu">
       <ion-col col-4 class="tc" (click)="showMenu1()">
-        区域
+        <span>{{searchDict}}</span>
+        <span *ngIf="!searchDict">区域</span>
         <ion-icon name="md-arrow-dropdown"></ion-icon>
       </ion-col>
       <ion-col col-4 class="tc" (click)="showMenu2()">
-        户型
+        <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
+        <span [hidden]="searchFloorNum==2"> 户型</span>
         <ion-icon name="md-arrow-dropdown"></ion-icon>
       </ion-col>
+
       <ion-col col-4 class="tc" (click)="showMenu3()">
-        小区
+        <span *ngIf="sx==2">{{filtrate(params.sxShow)}}</span>
+        <span [hidden]="sx==2"> 筛选</span>
         <ion-icon name="md-arrow-dropdown"></ion-icon>
       </ion-col>
     </ion-row>
@@ -70,7 +74,7 @@
       <!--</ion-col>-->
     </ion-row>
 
-    <div *ngIf="pageData==null">
+    <div *ngIf="pageData==null" class="tc">
       抱歉，找不到数据
     </div>
 
@@ -92,65 +96,43 @@
         <div class="leftChange">
           <a *ngFor=" let item of area"   [ngClass]="{'active': isActive(item)}" (click)="go(item)">{{item.name}}</a>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="light">重置</button>
-        </div>
       </ion-col>
       <ion-col col-6 class="p0">
         <div class="leftChange updateBg">
-          <ion-list radio-group>
-            <ion-item>
-              <ion-label>不限</ion-label>
-              <ion-radio checked="true" value="go"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>武昌区</ion-label>
-              <ion-radio value="rust"></ion-radio>
+          <ion-list radio-group [(ngModel)]="params.intentionTradeCode" >
+            <ion-item *ngFor=" let items of district;let i = index" >
+              <ion-label>{{items.name}}</ion-label>
+              <ion-radio value="{{items.code}}"  (ionSelect)="search()"></ion-radio>
             </ion-item>
           </ion-list>
+          <div *ngIf="district ==false">暂无该地区！</div>
         </div>
-        <div class="p5 ">
-          <button ion-button full color="danger">确定</button>
-        </div>
+
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- 户型 -->
   <div class="lists houseType" *ngIf="houseType">
-    <ion-list radio-group>
-      <ion-item>
-        <ion-label>不限</ion-label>
-        <ion-radio checked="true" value="go"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>一室</ion-label>
-        <ion-radio value="rust"></ion-radio>
+    <ion-list radio-group [(ngModel)]="params.intentionRoom" class="scrollC">
+      <ion-item *ngFor="let y of houseJSON">
+        <ion-label>{{y.name}}</ion-label>
+        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="p5 btns">
-      <button ion-button full color="danger">确定</button>
-    </div>
   </div>
 
-  <!-- 小区 -->
+  <!-- 筛选 -->
   <div class="lists houseType" *ngIf="more">
-    <ion-list radio-group>
-      <ion-item>
-        <ion-label>xx小区</ion-label>
-        <ion-radio checked="true" value="go"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>xx小区</ion-label>
-        <ion-radio value="rust"></ion-radio>
+    <ion-list radio-group [(ngModel)]="params.sxShow" class="scrollC">
+      <ion-item *ngFor="let i of filtrateJson;">
+        <ion-label>{{i.name}}</ion-label>
+        <ion-radio value="{{i.val}}" (ionSelect)="sxClick()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="p5 btns">
-      <button ion-button full color="danger">确定</button>
-    </div>
+    <!--<div class="p5 btns">-->
+    <!--<button ion-button full color="danger">确定</button>-->
+    <!--</div>-->
   </div>
 
 </div>

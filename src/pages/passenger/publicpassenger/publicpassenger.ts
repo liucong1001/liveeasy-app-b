@@ -24,24 +24,34 @@ export class PublicpassengerPage {
   /**
    * 列表搜索条件
    */
-  area: any;
+  area=[];
   estateList = []; //楼盘列表
-  district:any;
+  district= [];
   tradingArea = [];//商圈数组
   intentionTradeCodeId:string;  //用于转换商圈
+  hasData = true;
+  shangQuan = []; //商圈
   /**
    * 列表搜索条件
    * @type {{}}
    */
   params:PublicCustomerPageParams = {
     customerSrc:'0',
-    orderBy:'DESC',
+    intentionDiviCode:'0',//区县
+    intentionRoom:'0', //居室
+    intentionTradeCode:'0',//商圈
+    priceUnit:'1',
+    sort:'1',
+    sxShow:'1',
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
               public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,) {
     this.customerProvider.area().then(res=>{
-      this.area = res;
+      this.area = res.data.distrs;
+      if(this.area){
+        this.area.unshift({name:'不限',id:'99'});
+      }
     });
     this.customerProvider.tradingArea().then(res=>{
       this.tradingArea = res;
@@ -52,57 +62,123 @@ export class PublicpassengerPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChoosehousePage');
     this.search();
+    // this.sxClick();
   }
   selected :any;
   isActive(item) {
     return this.selected === item;
   };
-
+  searchDict = '';
   //搜索房源——区域——商圈
   go(item) {
+    if(item.id == '99'){
+      this.params.intentionDiviCode ='0';
+      this.params.intentionTradeCode = '0';
+      this.search();
+    }
+
+
     console.log('查询商圈',item);
-    this.selected = item;
-    this.propertyProvider.search2(item.id).then(res => {
-      this.district=res.data;
-      // if(this.district == undefined){
-      //   // alert('暂无该地区!')
-      //   this.hTips=true
-      // }else {
-      //   this.hTips=false;
-      // }
-    })
+    this.searchDict = item.name;
+    this.selected = item;//激活css选中状态
+    //用code值匹配相应商圈
+    this.district = [];
+    for(var i in this.tradingArea){
+      if(this.tradingArea[i].code.substring(0,6) == item.code){
+        this.district.push(this.tradingArea[i]);
+      }
+    }
+    if(this.district.length>1){
+      this.district.unshift({name:'不限',code:'0'});
+    }
+    this.params.intentionDiviCode = item.code;
+
   }
 
   /**
    * 监听商圈id——code（转换）
    */
-  intentionTrade(event){
-    console.log('商圈',event);
-    for(var i in this.tradingArea){
-      if(this.tradingArea[i].id == event){
-        // this.params.intentionTradeCode = this.tradingArea[i].code;
-      }
-    }
-
-  }
+  // intentionTrade(event){
+  //   console.log('商圈',event);
+  //   for(var i in this.tradingArea){
+  //     if(this.tradingArea[i].id == event){
+  //       // this.params.intentionTradeCode = this.tradingArea[i].code;
+  //     }
+  //   }
+  //
+  // }
   /**
    * 列表搜索
    */
   search(){
     this.pageData = null;
+    this.hasData  = true;
     console.log('搜索',this.params);
-    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
+
+      if(res.data.hasOwnProperty('result')){
+        this.hasData  = true;
+        console.log(this.hasData)
+      }else{
+        this.hasData = false;
+      }
+
       //关闭搜索框子
       this.show = false;
       this.houseType = false;
       this.more = false;
       this.pop = false;
       // this.housingEstate = false;
+      //户型搜索条件字显示
+      if(this.searchFloorNum ==1){
+        this.searchFloorNum = 2;
+      }
     });
   }
 
+  sxClick(){
+    this.pageData = null;
+    this.hasData  = true;
+    console.log('搜索',this.params);
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+
+      if(res.data.hasOwnProperty('result')){
+        this.hasData  = true;
+      }else{
+        this.hasData = false;
+      }
+
+      //关闭搜索框子
+      this.show = false;
+      this.houseType = false;
+      this.more = false;
+      this.pop = false;
+      // this.housingEstate = false;
+      //户型搜索条件字显示
+      if(this.sx ==1){
+        this.sx = 2;
+      }
+    });
+  }
+  searchFloorNum = 0; //初始化搜索次数
+  sx=0;
+  //重置
+  reset(){
+    this.params = {
+      customerSrc:'0',
+      intentionDiviCode:'0',//区县
+      intentionRoom:'0', //居室
+      intentionTradeCode:'0',//商圈
+      priceUnit:'1',
+      sort:'1',
+      sxShow:'1' //筛选
+    };
+    this.search();
+  }
   //条数
   currentPage: number = 1;
   all = false;
@@ -111,21 +187,19 @@ export class PublicpassengerPage {
     setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
-      console.log('加载完成后，关闭刷新', this.currentPage);
-
-      if (this.currentPage >= this.totalPages) {
+      if(this.currentPage >=this.totalPages){
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
         this.all = true;
       }else {
         this.all = false;
-        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-          for (let i = 0; i < res.data.result.length; i++) {
+        this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+          for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
           }
-          // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
         });
+
       }
 
       console.log('Async operation has ended');
@@ -144,6 +218,37 @@ export class PublicpassengerPage {
     });
   }
 
+  houseJSON = [
+    {name:'不限',val:0},
+    {name:'一室',val:1},
+    {name:'二室',val:2},
+    {name:'三室',val:3},
+    {name:'四室',val:4},
+    {name:'五室',val:5},
+    {name:'五室以上',val:6},
+  ];
+
+  filtrateJson = [
+    {name:'全部',val:1},
+    {name:'区公客',val:2},
+    {name:'城市公客',val:3},
+
+  ]
+  //户型转换
+  housePipe(data){
+    for(var i in this.houseJSON){
+      if(data == this.houseJSON[i].val){
+        return this.houseJSON[i].name;
+      }
+    }
+  }
+  filtrate(data){
+    for(var i in this.filtrateJson){
+      if(data == this.filtrateJson[i].val){
+        return this.filtrateJson[i].name;
+      }
+    }
+  }
 
   //menu
   showMenu1(){
@@ -158,6 +263,11 @@ export class PublicpassengerPage {
     }
   }
   showMenu2(){
+    if(this.searchFloorNum == 2){
+      this.searchFloorNum =2;
+    }else {
+      this.searchFloorNum =1;
+    }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
       this.show=false;
@@ -170,6 +280,12 @@ export class PublicpassengerPage {
   }
 
   showMenu3(){
+    if(this.sx == 2){
+      this.sx=2
+    }else {
+      this.sx =1;
+    }
+
     if(this.more == false || this.show == true || this.houseType==true){
       this.show=false;
       this.pop=true;
@@ -201,4 +317,10 @@ export class PublicpassengerPage {
 class  PublicCustomerPageParams {
   customerSrc?:string;
   orderBy?:string;
+  intentionDiviCode:string;
+  intentionRoom:string;
+  intentionTradeCode:string;
+  priceUnit:string;
+  sort:string;
+  sxShow:string;
 }

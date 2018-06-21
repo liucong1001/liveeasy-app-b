@@ -19,13 +19,14 @@
 
           <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
           <span [hidden]="searchFloorNum==2"> 户型</span>
-
           <ion-icon name="md-arrow-dropdown"></ion-icon>
         </ion-col>
-        <ion-col col-4 class="tc" (click)="showMenu3()">
-          更多
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
-        </ion-col>
+     <ion-col col-4 class="tc" (click)="showMenu3()">
+       <span *ngIf="sx==2" class="ellipsis" style="display: inline-block;width: 65px;">{{filtrate(params.sxShow)}}</span>
+       <span [hidden]="sx==2"> 筛选</span>
+       <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
+       <ion-icon name="md-arrow-dropdown" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
+     </ion-col>
       </ion-row>
     <div style="margin-top: 43px"></div>
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
@@ -127,22 +128,17 @@
       </ion-item>
     </ion-list>
   </div>
-  <!-- 跟进 -->
+  <!-- 筛选 -->
   <div class="lists houseType" *ngIf="more">
-    <ion-list radio-group class="scrollC">
-      <ion-item>
-        <ion-label>只看我的房源</ion-label>
-        <ion-radio checked="true" value="go"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>待处理申请关闭</ion-label>
-        <ion-radio value="rust"></ion-radio>
+    <ion-list radio-group [(ngModel)]="params.sxShow" class="scrollC">
+      <ion-item *ngFor="let i of filtrateJson;">
+        <ion-label>{{i.name}}</ion-label>
+        <ion-radio value="{{i.val}}" (ionSelect)="sxClick()"></ion-radio>
       </ion-item>
     </ion-list>
-    <div class="p5 btns">
-      <button ion-button full color="danger">确定</button>
-    </div>
+    <!--<div class="p5 btns">-->
+    <!--<button ion-button full color="danger">确定</button>-->
+    <!--</div>-->
   </div>
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>
