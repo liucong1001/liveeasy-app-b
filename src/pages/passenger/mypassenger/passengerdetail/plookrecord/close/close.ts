@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {CustomerProvider} from "../../../../../providers/customer/customer";
+import {CustomerProvider} from "../../../../../../providers/customer/customer";
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import {ToastComponent} from "../../../../../components/toast/toast";
+import {ToastComponent} from "../../../../../../components/toast/toast";
 import {PlookrecordPage} from "../plookrecord";
 import {PassengerdetailPage} from "../../passengerdetail";
 /**

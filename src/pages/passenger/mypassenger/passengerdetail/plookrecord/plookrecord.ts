@@ -1,10 +1,9 @@
 import { Component ,ViewChild} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
-import { AccomplishPage } from '../../mypassenger/accomplish/accomplish';
-import { CloseprivateguestPage } from '../../mypassenger/closeprivateguest/closeprivateguest';
-import { AddpassengerPage } from '../../addpassenger/addpassenger';
-import {ToastComponent} from "../../../../components/toast/toast";
-import {CustomerProvider} from "../../../../providers/customer/customer";
+import { CloseprivateguestPage } from '../../../mypassenger/closeprivateguest/closeprivateguest';
+import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger';
+import {ToastComponent} from "../../../../../components/toast/toast";
+import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {ClosePage} from "./close/close";
 import {PassengerdetailPage} from "../passengerdetail";
 

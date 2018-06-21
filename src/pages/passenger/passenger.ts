@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from './addpassenger/addpassenger';
+import { AddpassengerPage } from './mypassenger/addpassenger/addpassenger';
 import { MypassengerPage } from './mypassenger/mypassenger';
 import {PsearchPage} from "./psearch/psearch";
 import { PublicpassengerPage } from './publicpassenger/publicpassenger';

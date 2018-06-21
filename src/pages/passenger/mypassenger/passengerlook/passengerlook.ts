@@ -3,7 +3,7 @@ import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SearchPage} from "../search/search";
+import {SearchPage} from "./search/search";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 @IonicPage()
 @Component({

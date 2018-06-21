@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from '../addpassenger/addpassenger';
-import { PassengerdetailPage } from '../passengerdetail/passengerdetail';
+import { AddpassengerPage } from './addpassenger/addpassenger';
+import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
 import { PassengerfollowPage } from './passengerfollow/passengerfollow';
 import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';

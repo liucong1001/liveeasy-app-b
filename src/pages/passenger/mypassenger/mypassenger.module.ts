@@ -4,9 +4,10 @@ import { MypassengerPage } from './mypassenger';
 import {PipesModule} from "../../../pipes/pipes.module";
 import {PassengerfollowPageModule} from "./passengerfollow/passengerfollow.module";
 import {PassengerlookPageModule} from "./passengerlook/passengerlook.module";
-import {AccomplishPageModule} from "./accomplish/accomplish.module";
 import {CloseprivateguestPageModule} from "./closeprivateguest/closeprivateguest.module";
-import {SearchPageModule} from "./search/search.module";
+import {SearchPageModule} from "./passengerlook/search/search.module";
+import {AddpassengerPageModule} from "./addpassenger/addpassenger.module";
+import {PassengerdetailPageModule} from "./passengerdetail/passengerdetail.module";
 
 @NgModule({
   declarations: [
@@ -15,11 +16,11 @@ import {SearchPageModule} from "./search/search.module";
   imports: [
     PipesModule,
     IonicPageModule.forChild(MypassengerPage),
+    AddpassengerPageModule,
+    CloseprivateguestPageModule,
     PassengerfollowPageModule,
     PassengerlookPageModule,
-    AccomplishPageModule,
-    CloseprivateguestPageModule,
-    SearchPageModule
+    PassengerdetailPageModule
   ],
 })
 export class MypassengerPageModule {}

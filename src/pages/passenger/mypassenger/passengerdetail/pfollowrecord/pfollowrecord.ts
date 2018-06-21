@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from '../../addpassenger/addpassenger';
-import {ToastComponent} from "../../../../components/toast/toast";
-import {CustomerProvider} from "../../../../providers/customer/customer";
+import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger';
+import {ToastComponent} from "../../../../../components/toast/toast";
+import {CustomerProvider} from "../../../../../providers/customer/customer";
 /**
  * Generated class for the PfollowrecordPage page.
  *
