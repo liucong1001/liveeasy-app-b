@@ -385,7 +385,7 @@ export class HousingPage {
         this.toast.msg('共'+this.totalRecords+'套房源');
       });
 
-    }, 2000);
+    }, 0);
   }
 
   //条数
