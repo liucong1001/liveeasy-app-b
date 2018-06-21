@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CustomerProvider} from "../../../providers/customer/customer";
-import {MypassengerPage} from "../mypassenger/mypassenger";
-import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
-import {SearchhousePage} from "../../housing/housedetail/searchhouse/searchhouse";
-import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {CustomerProvider} from "../../../../providers/customer/customer";
+import {MypassengerPage} from "../mypassenger";
+import {AddhouseProvider} from "../../../../providers/addhouse/addhouse";
+import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 /**
  * Generated class for the AddpassengerPage page.
  *

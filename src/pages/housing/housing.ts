@@ -19,6 +19,7 @@ import {SearchhousePage} from "./housedetail/searchhouse/searchhouse";
 import {Tabs} from 'ionic-angular';
 import {Injectable,ViewChild} from '@angular/core';
 import {visibilityToggle} from "../../components/animations/toggle.animation";
+import {ToastComponent} from "../../components/toast/toast";
 
 /**
  * Generated class for the HousingPage page.
@@ -97,7 +98,7 @@ export class HousingPage {
               public configProvider: ConfigProvider,
               public addhouseProvider: AddhouseProvider,
               public customerProvider:CustomerProvider,
-              menu: MenuController
+              menu: MenuController,public toast:ToastComponent,
   ) {
       // console.log('页面数据',this.pageData);
 
@@ -197,6 +198,7 @@ export class HousingPage {
   }
 
   hasData = true;
+  totalRecords :any;//查询到的总条数；
   /**
    * 列表搜索
    */
@@ -211,7 +213,8 @@ export class HousingPage {
     this.pageData = null;
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
-       console.log('结束时间',new Date());
+       console.log('结束时间内容',res.data.totalRecords);
+       this.totalRecords = res.data.totalRecords;
        this.pageData = res.data.result;
        // console.log(this.pageData)
        // console.log('查询到的页面数据',this.pageData);
@@ -371,13 +374,18 @@ export class HousingPage {
     console.log('上拉刷新Begin async operation', refresher);
 
     setTimeout(() => {
-      // this.items = [];
-      // for (var i = 0; i < 30; i++) {
-      //     this.items.push( this.items.length );
-      //   }
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
+      this.propertyProvider.pageSearch(1,this.params).then(res=>{
+        console.log('结束时间内容',res.data.totalRecords);
+        this.totalRecords = res.data.totalRecords;
+        this.pageData = res.data.result;
+        this.totalPages = res.data.totalPages;
+
+        console.log('Async operation has ended');
+        refresher.complete();
+        this.toast.msg('共'+this.totalRecords+'套房源');
+      });
+
+    }, 0);
   }
 
   //条数
@@ -478,24 +486,6 @@ export class HousingPage {
   }
   floorName = '';
   allSearch(){
-
-    // this.events.subscribe('bevents', (params) => {
-    //   // 接收B页面发布的数据
-    //   console.log('接收数据为: ', params);
-    //   if(!params){
-    //     this.floorName = '';
-    //     this.params.estateId = '';
-    //   }else {
-    //     this.floorName = params.keyword;
-    //     this.params.estateId = params.id;
-    //   }
-    //   this.search();
-    //   // keyword
-    //   // 取消订阅
-    //   this.events.unsubscribe('bevents');
-    // });
-   // this.navCtrl.push(SearchhousePage);
-   //  this.navCtrl.push(AllsearchPage,{floorName:this.floorName})
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
       console.log('接收数据为: ', params);

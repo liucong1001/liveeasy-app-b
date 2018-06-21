@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PlookrecordPage } from '../../passengerdetail/plookrecord/plookrecord';
-import { PfollowrecordPage } from '../../passengerdetail/pfollowrecord/pfollowrecord';
+import { PlookrecordPage } from '../../mypassenger/passengerdetail/plookrecord/plookrecord';
+import { PfollowrecordPage } from '../../mypassenger/passengerdetail/pfollowrecord/pfollowrecord';
 import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 
@@ -76,6 +76,31 @@ export class PublicpdetailPage {
            }
       }
     }
+  };
+
+  decorationData = [
+    {name:'毛坯',val:'1'},
+    {name:'简装',val:'2'},
+    {name:'中等装修',val:'4'},
+    {name:'精装',val:'8'},
+    {name:'豪装',val:'16'},
+  ];
+  decorationPipe (arry){
+    var str= '';
+    if(arry){
+      for(var i in arry){
+           for(var x in this.decorationData){
+             if(arry[i]==this.decorationData[x].val){
+               str+=this.decorationData[x].name+','
+             }
+           }
+      }
+      return str;
+    }
+
   }
+
+
+
 
 }

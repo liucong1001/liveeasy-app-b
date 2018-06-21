@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddpassengerPage } from '../addpassenger/addpassenger';
-import { PassengerdetailPage } from '../passengerdetail/passengerdetail';
+import { AddpassengerPage } from './addpassenger/addpassenger';
+import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
 import { PassengerfollowPage } from './passengerfollow/passengerfollow';
 import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
+
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -48,9 +49,10 @@ export class MypassengerPage {
     intentionTradeCode:'0',//商圈
     priceUnit:'1',
     sort:'1',
+    sxShow:'1'
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
-              public propertyProvider: PropertyProvider,) {
+              public propertyProvider: PropertyProvider) {
     this.customerProvider.area().then(res=>{
       this.area = res.data.distrs;
       if(this.area){
@@ -130,6 +132,34 @@ export class MypassengerPage {
 
     });
   }
+
+  sxClick(){
+    this.pageData = null;
+    this.hasData  = true;
+    console.log('搜索',this.params);
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+
+      if(res.data.hasOwnProperty('result')){
+        this.hasData  = true;
+      }else{
+        this.hasData = false;
+      }
+
+      //关闭搜索框子
+      this.show = false;
+      this.houseType = false;
+      this.more = false;
+      this.pop = false;
+      // this.housingEstate = false;
+      //户型搜索条件字显示
+      if(this.sx ==1){
+        this.sx = 2;
+      }
+    });
+  }
+  sx=0;
   //重置
   reset(){
    this.params = {
@@ -139,6 +169,7 @@ export class MypassengerPage {
       intentionTradeCode:'0',//商圈
       priceUnit:'1',
       sort:'1',
+     sxShow:'1' //筛选
     };
     this.search();
   }
@@ -153,11 +184,28 @@ export class MypassengerPage {
     {name:'五室以上',val:6},
   ];
 
+  filtrateJson = [
+    {name:'今日未跟进',val:1},
+    {name:'超过三日未跟进',val:2},
+    {name:'今日有约看',val:3},
+    {name:'三日内有约看',val:4},
+
+  ]
+
   //户型转换
   housePipe(data){
     for(var i in this.houseJSON){
       if(data == this.houseJSON[i].val){
         return this.houseJSON[i].name;
+      }
+    }
+  }
+
+  //筛选
+  filtrate(data){
+    for(var i in this.filtrateJson){
+      if(data == this.filtrateJson[i].val){
+        return this.filtrateJson[i].name;
       }
     }
   }
@@ -207,7 +255,12 @@ export class MypassengerPage {
     }
   }
   showMenu2(){
-    this.searchFloorNum =1;
+    // this.searchFloorNum =1;
+    if(this.searchFloorNum == 2){
+      this.searchFloorNum =2;
+    }else {
+      this.searchFloorNum =1;
+    }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
       this.show=false;
@@ -219,6 +272,11 @@ export class MypassengerPage {
     }
   }
   showMenu3(){
+    if(this.sx == 2){
+      this.sx=2
+    }else {
+      this.sx =1;
+    }
     if(this.more==false || this.show == true || this.houseType == true){
       this.more=true;
       this.show=false;
@@ -257,7 +315,8 @@ export class MypassengerPage {
     this.navCtrl.push(CloseprivateguestPage,{
       item:item,
     })
-  }
+  };
+
 }
 
 /**
@@ -270,4 +329,5 @@ export class MypassengerPage {
     intentionTradeCode:string;
     priceUnit:string;
     sort:string;
+  sxShow:string;
  }
