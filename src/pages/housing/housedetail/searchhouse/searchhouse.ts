@@ -90,7 +90,7 @@ export class SearchhousePage {
 
   back(){
     window.clearInterval(this.timer);
-    this.navCtrl.pop;
+    this.navCtrl.pop();
   }
 
   chose(item){

@@ -47,9 +47,9 @@ export class CustomerProvider {
     var data = {
       type:'4',
       cityToFor:'4201',
-      num:0
+      num:6
     };
-    return   this.httpProvider.httpPost(this.areaPath+'?cityToFor=4201&num=0',0);
+    return   this.httpProvider.httpPost(this.areaPath+'?cityToFor=4201&num=6',0);
   }
   //商圈
   tradingArea(){

@@ -29,7 +29,7 @@ export class AddhouseProvider {
   }
   //房源标签
   public estateTagsSelect(params?){
-      return this.httpProvider.httpGet(this.estateTagsInfos,params);
+      return this.httpProvider.httpGet(this.estateTagsInfos,{num:params});
   }
  //录入房源
   public  save(params?){

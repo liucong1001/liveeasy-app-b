@@ -118,13 +118,17 @@ export class HousingPage {
       if(this.area){
         this.area.unshift({name:'不限',id:'99'});
       }
+      /**
+       * 区域和房源标签合成一个接口
+       */
       this.tagsList = res.data.tags; //房源标签
       this.localStorageProvider.set('tagsList',this.tagsList);
     });
 
 
+
     //房源标签
-    // this.addhouseProvider.estateTagsSelect().then(res => {
+    // this.addhouseProvider.estateTagsSelect(6).then(res => {
     //   this.tagsList = res.data;
     //   console.log('房源列表', this.tagsList);
     //    this.localStorageProvider.set('tagsList',this.tagsList);
@@ -382,7 +386,7 @@ export class HousingPage {
 
         console.log('Async operation has ended');
         refresher.complete();
-        this.toast.msg('共'+this.totalRecords+'套房源');
+        // this.toast.msg('加载完成');
       });
 
     }, 0);
