@@ -74,6 +74,7 @@ export class HousedetailPage {
     var sum = 0;
     for(var i in result){
       sum+=parseInt(result[i])
+
     }
     return sum ;
   };

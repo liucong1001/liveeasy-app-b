@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DeclardetailPage } from '../declardetail/declardetail';
+import { DeclardetailPage } from './declardetail/declardetail';
 
 /**
  * Generated class for the DeclarationPage page.

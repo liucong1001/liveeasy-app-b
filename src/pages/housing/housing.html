@@ -3,7 +3,7 @@
     <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
   </ion-navbar>
-  <!--style="display: none"-->
+
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" (click)="showMenu1()">
 
@@ -32,13 +32,11 @@
     </ion-col>
   </ion-row>
 
-
 </ion-header>
 
+<ion-content no-bounce >
 
-<ion-content no-bounce>
-
-  <ion-refresher (ionRefresh)="doRefresh($event)" style="margin-top: 60px;margin-bottom:10px ">
+  <ion-refresher (ionRefresh)="doRefresh($event)" class="refresh">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="获取最新数据..."
@@ -48,7 +46,6 @@
   </ion-refresher>
 
   <ion-grid class="p0 relative" >
-
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
       <!--<h3>{{i+1}}</h3>-->
       <ion-col col-12 (click)="goHouseDetail(item)">
