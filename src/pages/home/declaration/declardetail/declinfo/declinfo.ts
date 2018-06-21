@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {DeclinfoPage} from "./declinfo/declinfo";
 
 /**
- * Generated class for the DeclardetailPage page.
+ * Generated class for the DeclinfoPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,19 +10,16 @@ import {DeclinfoPage} from "./declinfo/declinfo";
 
 @IonicPage()
 @Component({
-  selector: 'page-declardetail',
-  templateUrl: 'declardetail.html',
+  selector: 'page-declinfo',
+  templateUrl: 'declinfo.html',
 })
-export class DeclardetailPage {
+export class DeclinfoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeclardetailPage');
+    console.log('ionViewDidLoad DeclinfoPage');
   }
-goInfo(){
-    this.navCtrl.push(DeclinfoPage)
-}
 
 }
