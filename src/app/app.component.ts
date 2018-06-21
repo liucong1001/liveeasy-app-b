@@ -5,12 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // import {AccountPage} from "../pages/account/account";
 import {VersionProvider} from "../providers/version/app.version";
-import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {Device} from "@ionic-native/device";
 import {HeaderColor} from "@ionic-native/header-color";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {StartupPage} from "../pages/startup/startup";
-import {HomePage} from "../pages/home/home";
 import {AccountPage} from "../pages/account/account";
 
 import {LocalStorageProvider} from "../providers/local-storage/local-storage";
@@ -31,7 +28,6 @@ export class MyApp {
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
-              private androidPermissions: AndroidPermissions,
               private device: Device,
               private headerColor: HeaderColor,
               public app: App,
@@ -56,17 +52,8 @@ export class MyApp {
       headerColor.tint('#DC143C');
       splashScreen.hide();
       //android 6 以上动态获取权限
-      if (this.device.platform == "Android") {
-        this.androidPermissions.requestPermissions([
-          this.androidPermissions.PERMISSION.CAMERA,
-          this.androidPermissions.PERMISSION.GET_ACCOUNTS,
-          this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES,
-          // this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
-          // this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-        ]);
-      }
       //检测版本更新
-      // appUpdate.checkVersion();
+      //appUpdate.checkVersion();
       //设置全局页面过渡
       // this.setPageTransition();
 

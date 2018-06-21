@@ -25,9 +25,7 @@ import {File} from '@ionic-native/file';
 import {Device} from "@ionic-native/device";
 import {HTTP} from "@ionic-native/http";
 import {AppVersion} from "@ionic-native/app-version";
-import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {HeaderColor} from "@ionic-native/header-color";
-import {FingerprintAIO} from "@ionic-native/fingerprint-aio";
 import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 import { AddhouseProvider } from '../providers/addhouse/addhouse';
 
@@ -118,10 +116,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       Device,
       File,
       HTTP,
-      AndroidPermissions,
       AppVersion,
       HeaderColor,
-      FingerprintAIO,
       NativePageTransitions,
       PropertyProvider,
       FileProvider,
