@@ -7,6 +7,7 @@ import { PassengerfollowPage } from './passengerfollow/passengerfollow';
 import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
+
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -51,7 +52,7 @@ export class MypassengerPage {
     sxShow:'1'
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
-              public propertyProvider: PropertyProvider,) {
+              public propertyProvider: PropertyProvider) {
     this.customerProvider.area().then(res=>{
       this.area = res.data.distrs;
       if(this.area){
@@ -314,7 +315,8 @@ export class MypassengerPage {
     this.navCtrl.push(CloseprivateguestPage,{
       item:item,
     })
-  }
+  };
+
 }
 
 /**

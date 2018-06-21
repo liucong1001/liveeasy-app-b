@@ -1,7 +1,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>我的客户</ion-title>
+    <ion-title>我的客户
+    </ion-title>
     <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()" style="color: #fff;top: 0.7rem;"></ion-icon>
   </ion-navbar>
 
@@ -30,9 +31,9 @@
       </ion-row>
     <div style="margin-top: 43px"></div>
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
-        <ion-col col-12 (click)="gopassengerDetail(item)">
+        <ion-col col-12 >
             <ion-row>
-              <ion-col col-9>
+              <ion-col col-9 (click)="gopassengerDetail(item)">
                 <div class="ellipsis tips">
                   <font size="3">{{item.customerName}}</font>
                     <!--急-->
@@ -55,7 +56,7 @@
                   </p>
               </ion-col>
               <ion-col col-3 class="tc m15">
-                <img src="assets/imgs/phone.png" alt="" width="45" height="45">
+                <a [attr.href]="'tel:' + item.customerPhone" class="telPhone"></a>
               </ion-col>
             </ion-row>
           </ion-col>

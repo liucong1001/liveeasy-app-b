@@ -3,11 +3,8 @@
     <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
   </ion-navbar>
-</ion-header>
-
-<ion-content no-bounce>
-
-  <ion-row class="houseMenu">
+  <!--style="display: none"-->
+  <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" (click)="showMenu1()">
 
       <span >{{searchDict}}{{ searchArea}} </span>
@@ -35,6 +32,20 @@
     </ion-col>
   </ion-row>
 
+
+</ion-header>
+
+
+<ion-content no-bounce>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" style="margin-top: 60px;margin-bottom:10px ">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="获取最新数据..."
+      refreshingSpinner="circles"
+      refreshingText="正在加载数据中...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-grid class="p0 relative" >
 
@@ -99,14 +110,8 @@
         </ion-row>
       </ion-col>
     </ion-row>
-    <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
-    <!--<ion-refresher-content-->
-    <!--pullingIcon="arrow-dropdown"-->
-    <!--pullingText="获取最新数据.."-->
-    <!--refreshingSpinner="circles"-->
-    <!--refreshingText="刷新完毕...">-->
-    <!--</ion-refresher-content>-->
-    <!--</ion-refresher>-->
+
+
     <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
