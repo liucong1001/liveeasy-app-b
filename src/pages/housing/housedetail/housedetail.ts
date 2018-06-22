@@ -25,7 +25,9 @@ import { LoadingController, Loading } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  priority: 'high'
+})
 @Component({
   selector: 'page-housedetail',
   templateUrl: 'housedetail.html',

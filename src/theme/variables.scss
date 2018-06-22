@@ -38,7 +38,9 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  first:      #1ab394,
+  white:      #fff
 );
 
 
@@ -53,6 +55,7 @@ $cordova-md-statusbar-padding:20px 0;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
+$refresher-height : 120px;
 
 
 

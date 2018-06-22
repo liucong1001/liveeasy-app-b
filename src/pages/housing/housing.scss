@@ -6,7 +6,7 @@
   padding:0 5px 15px;
 }
 .popLocation{
-  top: 91px;position: relative
+  top: 101px;position: relative
 }
 .adds {
   color: #1ab394;
@@ -23,7 +23,7 @@
   position: fixed;
   width: 100%;
   z-index: 1;
-  top: 44px;
+  top: 64px;
 }
 
 .houseMenu ion-col {
@@ -152,7 +152,7 @@ page-housing .tips a:nth-child(10) {
 .pop,.pops {
   position: absolute;
   left: 0;
-  top: 90px;
+  top: 100px;
   width: 100%;
   height: 100%;
   background-color: #000;
@@ -207,7 +207,7 @@ page-housing {
     background-color: #fff;
   }
   .scroll-content{
-    top: 88px;
+    top: 110px;
     bottom: 55px;
     margin: 0 !important;
   }
@@ -215,4 +215,9 @@ page-housing {
 
 .refresh{
   margin: 40px 0 35px;
+}
+
+#propertyHeader {
+  background-color: #F8F8F8;
+
 }

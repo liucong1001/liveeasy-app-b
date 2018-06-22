@@ -60,6 +60,7 @@ export class HousingPage {
   pop = false;
   housingEstate = false;
   pageData = [PropertyModel];
+  firstPageData = [];
   totalPages: number;//总页数
   imgHeader: string; //线上图片默认头地址
   type: string;
@@ -220,6 +221,7 @@ export class HousingPage {
        console.log('结束时间内容',res.data.totalRecords);
        this.totalRecords = res.data.totalRecords;
        this.pageData = res.data.result;
+       this.firstPageData = res.data.result;
        // console.log(this.pageData)
        // console.log('查询到的页面数据',this.pageData);
        // console.log('是否有数据',res.data.hasOwnProperty('result'));
@@ -377,19 +379,35 @@ export class HousingPage {
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
 
-    setTimeout(() => {
-      this.propertyProvider.pageSearch(1,this.params).then(res=>{
-        console.log('结束时间内容',res.data.totalRecords);
-        this.totalRecords = res.data.totalRecords;
-        this.pageData = res.data.result;
-        this.totalPages = res.data.totalPages;
+    this.propertyProvider.pageSearch(1,this.params).then(res=>{
+      console.log('结束时间内容',res.data.totalRecords);
+      this.totalRecords = res.data.totalRecords;
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+      let newCount = this.checkUpdateCount(res.data.result);
+      this.firstPageData = res.data.result;
 
-        console.log('Async operation has ended');
-        refresher.complete();
-        // this.toast.msg('加载完成');
-      });
+      console.log('Async operation has ended');
+      refresher.complete();
+      if (newCount > 0 ) {
+        this.toast.msg('已更新'+ newCount +'条记录');
+      } else {
+        this.toast.msg('暂无更新');
+      }
+    });
+  }
 
-    }, 0);
+  checkUpdateCount(result) {
+    let count = 0;
+    result = result || [];
+    this.firstPageData = this.firstPageData || [];
+    for (let item in result) {
+      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      if (rs.length == 0) {
+        count ++;
+      }
+    }
+    return count;
   }
 
   //条数

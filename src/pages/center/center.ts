@@ -6,6 +6,7 @@ import { UpdatepwdPage } from './updatepwd/updatepwd';
 import { MyaccountPage } from './myaccount/myaccount';
 import {AccountPage} from "../account/account";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the CenterPage page.
@@ -25,7 +26,9 @@ export class CenterPage {
   gh:any;
   custposName:any;
   @ViewChild(Content) content: Content;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
+    public nativePageTransitions: NativePageTransitions
+  ) {
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.name = this.localStorageProvider.get('loginInfo').name;
     this.gh=this.localStorageProvider.get('loginInfo').no;
@@ -38,20 +41,33 @@ export class CenterPage {
     console.log('ionViewDidLoad CenterPage');
   }
   goaccount(){
-    this.navCtrl.push(MyaccountPage);
+    this.openWin(MyaccountPage);
   }
   aboutUs() {
-    this.navCtrl.push(AboutusPage)
+    this.openWin(AboutusPage)
   }
   help() {
-    this.navCtrl.push(HelpPage)
+    this.openWin(HelpPage)
   }
   updatepwd() {
-    this.navCtrl.push(UpdatepwdPage)
+    this.openWin(UpdatepwdPage)
   }
   reset(){
+
     localStorage.clear();
     this.content.resize();
     this.navCtrl.push(AccountPage);
+  }
+
+  openWin(goPage) {
+    // let options: NativeTransitionOptions = {
+    //   direction: 'left',
+    //   duration: 400,
+    //   slowdownfactor: -1,
+    //   iosdelay: 50
+    // };
+    //
+    // this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage);
   }
 }

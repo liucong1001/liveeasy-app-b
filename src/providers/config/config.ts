@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ConfigProvider {
-  onLine = false; //打包线上开关
+  onLine = true; //打包线上开关
   globalConfig =  {
     url:'',
     oss:'',

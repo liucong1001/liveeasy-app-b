@@ -43,6 +43,7 @@
         "com-sarriaroman-photoviewer": "^1.1.18",
         "com.telerik.plugins.nativepagetransitions": "^0.6.5",
         "cordova-android": "^6.4.0",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-advanced-http": "^1.11.1",
         "cordova-plugin-app-update": "^1.6.0",
         "cordova-plugin-app-version": "^0.1.9",
@@ -101,7 +102,8 @@
             "com-sarriaroman-photoviewer": {}
         },
         "platforms": [
-            "android"
+            "android",
+            "ios"
         ]
     }
 }
