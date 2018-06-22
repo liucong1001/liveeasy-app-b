@@ -1,94 +1,94 @@
 <ion-header>
+  <ion-navbar>
+    <ion-title>报单列表</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <ion-navbar>
-      <ion-title>报单列表</ion-title>
-    </ion-navbar>
-
-  </ion-header>
-
-  <ion-content>
-    <ion-grid class="p0" style="position: relative;">
-      <ion-row class="houseMenu">
-        <ion-col col-6 class="tc" (click)="showMenu1()">
-          状态
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
+<ion-content>
+  <ion-grid class="p0">
+    <ion-row class="houseMenu">
+      <ion-col col-12 class="tc" (click)="showMenu2()">
+        <span *ngIf="searchFloorNum==2">{{housePipe(params.orderStatus)}}</span>
+        <span [hidden]="searchFloorNum==2"> 报单状态</span>
+        <ion-icon name="md-arrow-dropdown"></ion-icon>
+      </ion-col>
+      <!--<ion-col col-6 class="tc" (click)="showMenu3()">-->
+        <!--<span *ngIf="sx==2">{{filtrate(params.sxShow)}}</span>-->
+        <!--<span [hidden]="sx==2"> 筛选</span>-->
+        <!--<ion-icon name="md-arrow-dropdown"></ion-icon>-->
+      <!--</ion-col>-->
+    </ion-row>
+    <div style="margin-top: 43px"></div>
+    <ion-list >
+    <ion-item class="updateHegiht p10" *ngFor="let item of pageData">
+      <ion-row (click)="declarationDetail(item)">
+        <ion-col col-12>
+          {{item.orderNo}}
+          <a class="emptyTips">{{housePipe(item.orderStatus)}}</a>
         </ion-col>
-        <ion-col col-6 class="tc" (click)="showMenu2()">
-          报单时间
-          <ion-icon name="md-arrow-dropdown"></ion-icon>
+        <ion-col col-12>
+          <div><font size="2">客户：<span>{{item.customerName}}</span></font></div>
+          <div><font size="2">报单人：<span>{{item.agentId }}</span></font></div>
+          <div><font size="2">报单时间：<span>{{item.createTime}}</span></font></div>
+          <div><font size="2">最后审核时间：<span>{{item.lastUpdateTm}}</span></font></div>
         </ion-col>
       </ion-row>
+    </ion-item>
 
-
-      <ion-list style="margin-top: 44px">
-            <ion-item class="updateHegiht p10">
-              <ion-row (click)="declarationDetail()">
-                <ion-col col-12>
-                  报单编号
-                  <a class="emptyTips">报单完成</a>
-                </ion-col>
-                <ion-col col-12>
-                  <div><font size="2">客户：<span>打发打发打发打发</span></font></div>
-                  <div><font size="2">报单人：<span>打发打发</span></font></div>
-                  <div><font size="2">报单时间：<span>2017/09/09 17：30：20</span></font></div>
-                  <div><font size="2">最后审核时间：<span>2017/09/09 17：30：20</span></font></div>
-                </ion-col>
-              </ion-row>
-            </ion-item>
-            <ion-item class="updateHegiht p10">
-                <ion-row (click)="declarationDetail()">
-                    <ion-col col-12>
-                      报单编号
-                      <a class="followTips">风控审核不通过</a>
-                    </ion-col>
-                    <ion-col col-12>
-                      <div><font size="2">客户：<span>打发打发打发打发</span></font></div>
-                      <div><font size="2">报单人：<span>打发打发</span></font></div>
-                      <div><font size="2">报单时间：<span>2017/09/09 17：30：20</span></font></div>
-                      <div><font size="2">最后审核时间：<span>2017/09/09 17：30：20</span></font></div>
-                    </ion-col>
-                  </ion-row>
-            </ion-item>
-          </ion-list>
-    </ion-grid>
-
-
-  </ion-content>
-<div class="popLocation">
-  <!-- 状态 -->
-  <div class="lists houseType" *ngIf="show">
-    <ion-list radio-group>
-      <ion-item>
-        <ion-label>不限</ion-label>
-        <ion-radio checked="true" value="go"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>一室</ion-label>
-        <ion-radio value="rust"></ion-radio>
-      </ion-item>
     </ion-list>
-    <!--<div class="p5 btns">-->
-      <!--<button ion-button full color="danger">确定</button>-->
-    <!--</div>-->
-  </div>
 
-  <!-- 报单时间 -->
-  <div class="lists houseType" *ngIf="houseType">
-    <ion-list radio-group>
-      <ion-item>
-        <ion-label>不限</ion-label>
-        <ion-radio checked="true" value="go"></ion-radio>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>一室</ion-label>
-        <ion-radio value="rust"></ion-radio>
-      </ion-item>
-    </ion-list>
-    <div class="p5 btns">
-      <button ion-button full color="danger">确定</button>
+    <div class="content_page">
+      <div *ngIf="hasData&&pageData ==null" class="tc">
+        <ion-spinner item-start name="ios"></ion-spinner>
+        加载数据中...
+      </div>
+      <div *ngIf="!hasData"  class="tc">
+        抱歉！没有找到数据
+      </div>
     </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="加载中...">
+
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div *ngIf="all&&hasData" class="sTips">已加载全部
+    </div>
+  </ion-grid>
+
+</ion-content>
+<div class="popLocation">
+ <!-- 状态 -->
+  <div class="lists houseType" *ngIf="houseType">
+    <ion-list radio-group [(ngModel)]="params.orderStatus" class="scrollC">
+      <ion-item *ngFor="let y of stateJSON">
+        <ion-label>{{y.name}}</ion-label>
+        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
+      </ion-item>
+    </ion-list>
   </div>
+  <!-- 时间 -->
+  <!--<div class="lists houseType" *ngIf="more">-->
+    <!--<ion-list radio-group [(ngModel)]="params.sxShow" class="scrollC">-->
+      <!--<ion-item *ngFor="let i of timerJson;">-->
+        <!--<ion-label>{{i.name}}</ion-label>-->
+        <!--<ion-radio value="{{i.val}}" (ionSelect)="sxClick()"></ion-radio>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+    <!--&lt;!&ndash;<div class="p5 btns">&ndash;&gt;-->
+    <!--&lt;!&ndash;<button ion-button full color="danger">确定</button>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--</div>-->
 </div>
-<div class="pops" *ngIf="pop" (click)="pops()"></div>
+<div class="pop" *ngIf="pop" (click)="pops()"></div>
+
+
+
+
+
+
+
+
+

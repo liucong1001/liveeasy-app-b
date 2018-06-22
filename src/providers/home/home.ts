@@ -13,6 +13,7 @@ export class HomeProvider {
     private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList';
     private  notificationPath =this.configProvider.set().http+ '/notification/notificationInfo/findNotifyByCompanyId';
     private  declarationPath =this.configProvider.set().http+ '/order/submitOrderInfo/pageList/1.do';
+    private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
 
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -66,6 +67,9 @@ export class HomeProvider {
       return this.httpProvider.httpPost(this.declarationPath,data);
     }
 
+    decldetail(orderId){
+      return this.httpProvider.httpGet(this.declDetailPath,{orderId:orderId});
+    }
 
 
 }

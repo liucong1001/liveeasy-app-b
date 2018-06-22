@@ -49,9 +49,6 @@
 }
 //更多
 .mores{
-  .scroll-content{
-    padding-bottom: 60px !important;
-  }
   div{
     border-bottom: 1px solid #f5f5f5;
     padding: 20px 0;
@@ -67,15 +64,14 @@
     color: #aaa;
     //font-size:1rem;
   }
-
-
 }
 .footer{
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: -5px;
+  bottom: -3px;
   z-index: 99;
+
   ion-col{
     padding: 0;
   }
@@ -85,21 +81,7 @@
     border: 0;
   }
 }
-
-//.mores h4{
-//  font-size: 1.6rem;
-//}
-//.mores a{
-//  display: inline-block;
-//  border: 1px solid;
-//  padding: 2px 26px;
-//}
 .red{
   background: red;
 }
-//ion-header{
-//  margin-top: 30px;
-//}
-//ion-content{
-//  margin-top: 30px;
-//}
+
