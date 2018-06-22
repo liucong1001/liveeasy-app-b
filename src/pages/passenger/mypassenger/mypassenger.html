@@ -85,14 +85,14 @@
       </div>
     </div>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!hasData">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="加载中...">
 
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-    <div *ngIf="all" class="sTips">已加载全部
+    <div *ngIf="all&&hasData" class="sTips">已加载全部
     </div>
   </ion-grid>
 
