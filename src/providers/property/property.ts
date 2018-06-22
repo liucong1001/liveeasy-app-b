@@ -69,6 +69,7 @@ export class PropertyProvider {
   pageSearch(currentPage,params){
     var  data = {
       currentPage: currentPage,
+      hasCount:false,
       limit:10,
       totalRecords:0,
       totalPages:0,
