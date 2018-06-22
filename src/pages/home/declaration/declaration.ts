@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DeclardetailPage } from './declardetail/declardetail';
-
+import  {HomeProvider} from  '../../../providers/home/home';
 /**
  * Generated class for the DeclarationPage page.
  *
@@ -18,7 +18,11 @@ export class DeclarationPage {
   show=false;
   houseType=false;
   pop=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public homeProvider:HomeProvider) {
+    this.homeProvider.successOrder(1,{}).then(res => {
+      console.log(res);
+    });
   }
 
   ionViewDidLoad() {
