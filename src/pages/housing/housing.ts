@@ -20,6 +20,7 @@ import {Tabs} from 'ionic-angular';
 import {Injectable,ViewChild} from '@angular/core';
 import {visibilityToggle} from "../../components/animations/toggle.animation";
 import {ToastComponent} from "../../components/toast/toast";
+import {MorePage} from "./more/more";
 
 /**
  * Generated class for the HousingPage page.
@@ -287,6 +288,11 @@ export class HousingPage {
   searchFloorNum = 0; //初始化搜索次数
   //户型搜索
   showMenu2() {
+    if(this.searchFloorNum == 2){
+      this.searchFloorNum =2;
+    }else {
+      this.searchFloorNum =1;
+    }
     this.searchFloorNum =1;
     if (this.houseType == false || this.show == true || this.more == true || this.housingEstate == true) {
       this.houseType = true;
@@ -413,7 +419,7 @@ export class HousingPage {
   //条数
   currentPage: number = 1;
   all = false;
-  //下拉加载
+  //上拉加载
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       infiniteScroll.complete();
@@ -524,6 +530,10 @@ export class HousingPage {
       this.events.unsubscribe('bevents');
     });
     this.navCtrl.push(AllsearchPage,{floorName:this.floorName});
+  }
+
+  mores(){
+    this.navCtrl.push(MorePage)
   }
 
 

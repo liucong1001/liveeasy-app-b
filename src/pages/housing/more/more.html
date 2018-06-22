@@ -1,35 +1,37 @@
-<!--<ion-nav [root]="rootPage"></ion-nav>-->
-<ion-menu [content]="content" side="right" type="overlay">
-  <ion-content padding class="bgWhite mores">
 
-    <div>
-      <h4>标签</h4>
-      <a *ngFor="let bq of tagsList" [ngClass]="{'red': isActive(item)}" (click)="go(item)">{{bq.tagDesc}}</a>
-    </div>
+<ion-header>
+  <ion-navbar>
+    <ion-title>更多</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="bgWhite mores">
 
-    <div>
-      <h4>
-        朝向
-      </h4>
-      <a *ngFor="let i of cxJSON">{{i.name}}</a>
-    </div>
-    <div>
-      <h4>其他</h4>
-      <a *ngFor="let item of qtJSON">{{item.name}}</a>
-    </div>
+<div>
+<h4>标签</h4>
+<a *ngFor="let bq of tagsList" [ngClass]="{'red': isActive(item)}" (click)="go(item)">{{bq.tagDesc}}</a>
+</div>
+
+<div>
+<h4>
+朝向
+</h4>
+<a *ngFor="let i of cxJSON">{{i.name}}</a>
+</div>
+<div>
+<h4>其他</h4>
+<a *ngFor="let item of qtJSON">{{item.name}}</a>
+</div>
 
 
-  </ion-content>
+</ion-content>
+<ion-footer>
   <ion-row class="footer">
-    <ion-col col-3>
+    <ion-col col-6>
       <button ion-button full style="background: #fff;color: #aaa">清除</button>
     </ion-col>
-    <ion-col col-9>
+    <ion-col col-6>
       <button ion-button full>确定</button>
     </ion-col>
 
   </ion-row>
-</ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+</ion-footer>

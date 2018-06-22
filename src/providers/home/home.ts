@@ -12,6 +12,9 @@ export class HomeProvider {
 
     private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList';
     private  notificationPath =this.configProvider.set().http+ '/notification/notificationInfo/findNotifyByCompanyId';
+    private  declarationPath =this.configProvider.set().http+ '/order/submitOrderInfo/pageList/1.do';
+    private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
+
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
@@ -48,10 +51,25 @@ export class HomeProvider {
       var dataP = {"currentPage":1,"limit":10,"offset":0,"params":{"status":"1"},"totalCount":0,"totalPages":0,"totalRecords":0};
       return this.httpProvider.httpPost(this.notificationPath,dataP);
     }
-    successOrder(){
-
+    successOrder(currentPage,params){
+      var  data = {
+        currentPage: currentPage,
+        hasCount:true,
+        limit:10,
+        totalRecords:0,
+        totalPages:0,
+        offset:0,
+        order:'asc',
+        params:{
+          ...params,
+        },
+      };
+      return this.httpProvider.httpPost(this.declarationPath,data);
     }
 
+    decldetail(orderId){
+      return this.httpProvider.httpGet(this.declDetailPath,{orderId:orderId});
+    }
 
 
 }
