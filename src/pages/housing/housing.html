@@ -112,7 +112,7 @@
     </ion-row>
 
 
-    <div class="content_page">
+    <div class="content_page"  style="margin-top: 15px">
       <div *ngIf="hasData&&pageData ==null" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
         加载数据中...
@@ -129,7 +129,7 @@
 
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-    <div *ngIf="all" class="sTips">已加载全部
+    <div *ngIf="all&&hasData" class="sTips">已加载全部
     </div>
   </ion-grid>
 </ion-content>
