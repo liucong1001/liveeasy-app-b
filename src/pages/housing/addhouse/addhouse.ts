@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ActionSheetController, App} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
@@ -35,7 +35,8 @@ export class AddhousePage {
   HxDown=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
-              public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent) {
+              public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
+              public app: App) {
      //楼盘列表
 
     //房源标签
@@ -221,7 +222,8 @@ export class AddhousePage {
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
        this.toast.alert('录入成功!');
-        this.navCtrl.setRoot(HousingPage);
+        // this.app.getActiveNavs()[0].setRoot("HousingPage");
+         this.navCtrl.setRoot(HousingPage);
       }else {
         this.toast.error('录入失败！');
       }

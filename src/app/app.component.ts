@@ -46,7 +46,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       // let status bar overlay webview 头部信号
-      statusBar.overlaysWebView(false);
+      statusBar.overlaysWebView(true);
       // set status bar to white
       // statusBar.backgroundColorByHexString('#ffffff');
       headerColor.tint('#DC143C');

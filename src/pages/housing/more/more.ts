@@ -119,11 +119,8 @@ export class MorePage {
   }
 
   isActive(item) {
-     // console.log('朝向',item);
     if(item.val==this.searchMoreData.orientation){
-      // console.log('朝向',this.searchMoreData.orientation);
      return  true;
-
     }else{
       return this.selected === item;
     }

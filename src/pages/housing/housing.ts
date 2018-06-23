@@ -21,7 +21,7 @@ import {Injectable,ViewChild} from '@angular/core';
 import {visibilityToggle} from "../../components/animations/toggle.animation";
 import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
-
+import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
 /**
  * Generated class for the HousingPage page.
  *
@@ -33,8 +33,22 @@ import {MorePage} from "./more/more";
 @Component({
   selector: 'page-housing',
   templateUrl: 'housing.html',
-  // pipes:[StringJsonPipe],
-  animations:[visibilityToggle],
+  //  visibilityToggle,
+//   animations:[
+//     trigger('fadeInOut', [
+//       transition(':enter', [   // :enter is alias to 'void => *'
+//         style({opacity:0,height:0}),
+//         animate(400, style({opacity:1,height:350}))
+//       ]),
+//       transition(':leave', [   // :leave is alias to '* => void'
+//         style({opacity:0,height:0}),
+//         animate(400, style({opacity:0}))
+//       ])
+//
+//     ])
+//
+//
+// ],
 })
 export class HousingPage {
   @ViewChild('myTabs') tabRef: Tabs;

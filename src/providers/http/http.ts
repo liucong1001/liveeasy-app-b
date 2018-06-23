@@ -101,6 +101,9 @@ export class HttpProvider {
       case 500 :console.log('错误代码',err.status);
         alert('服务器异常');
         break;
+      case 504 :console.log('错误代码',err.status);
+        alert('服务器连接超时');
+        break;
   }}
 
 }
