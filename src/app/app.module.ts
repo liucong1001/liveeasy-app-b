@@ -138,6 +138,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         provide: HAMMER_GESTURE_CONFIG,
         useClass: ionicGalleryModal.GalleryModalHammerConfig,
       },
+
     ]
 })
 export class AppModule {}

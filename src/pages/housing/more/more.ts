@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {TabsPage} from "../../tabs/tabs";
 import {HousingPage} from "../housing";
@@ -19,24 +19,32 @@ import {MyApp} from "../../../app/app.component";
 export class MorePage {
   @ViewChild('content') nav: Nav;
   tagsList:any;
+  tagsStr = [];
+  orientation:any; //朝向
+  //搜索数据
+  searchMoreData = {
+    tags:0,
+    tagsArry:[],
+    orientation:'',
+  };
+
+
   selected:any;
+  selected2:any;
   rootPage:any = MyApp ;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
+              public events: Events,) {
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
     console.log(this.tagsList)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MorePage');
+    this.searchMoreData = this.localStorageProvider.get('searchMoreData');
+    console.log('进入 MorePage',this.searchMoreData);
   }
 
-  go(item){
-    this.selected = item;
-  }
-  isActive(item) {
-    // return this.selected == item;
-  };
+
   //更多
   //其他
   qtJSON = [
@@ -60,5 +68,60 @@ export class MorePage {
     {name:'东北',val:10},
     {name:'西北',val:11},
   ];
+
+
+  // 房源标签
+  choseTag(item){
+    item.active = !item.active;
+   if(item.active) {
+     this.tagsStr.push(item.tagCode);
+   }else {
+         var indexArry  = this.tagsStr.indexOf(item.tagCode);
+         if(indexArry>-1){this.tagsStr.splice(indexArry,1)}
+   }
+   this.searchMoreData.tagsArry =this.tagsStr;
+   this.searchMoreData.tags =0;
+   for(var i in this.tagsStr){
+      this.searchMoreData.tags+=this.tagsStr[i];
+   }
+
+  }
+  //朝向 orientation
+  choseDirect(item){
+    this.selected = item;
+    this.searchMoreData.orientation  = item.val;
+  }
+  //其他
+  choseOther(item){
+    this.selected2 = item;
+  }
+
+  isActive(item) {
+     // console.log('朝向',item);
+    if(item.val==this.searchMoreData.orientation){
+      console.log('朝向',this.searchMoreData.orientation);
+     return  true;
+
+    }else{
+      return this.selected === item;
+    }
+
+
+  };
+  isActive2(item){
+    return this.selected2 === item;
+  }
+
+  reset(){
+    console.log('清除');
+  }
+  confirm(){
+    console.log('确定',this.searchMoreData);
+    this.localStorageProvider.set('searchMoreData',this.searchMoreData);
+    this.navCtrl.pop().then(() => {
+      // 发布 bevents事件
+      this.events.publish('moreSearchBevents', this.searchMoreData);
+    });
+  }
 
 }

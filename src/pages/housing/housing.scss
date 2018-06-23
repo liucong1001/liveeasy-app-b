@@ -23,7 +23,7 @@
   position: fixed;
   width: 100%;
   z-index: 1;
-  top: 64px;
+  top: 42px;
 }
 
 .houseMenu ion-col {
@@ -114,8 +114,8 @@ page-housing .tips a:nth-child(10) {
   width: 100%;
   background: #fff;
   z-index: 9999; // color: #000
-  height: 49%;
-  margin-top: -1px
+  height: 48.5%;
+  margin-top: -13px
 }
 
 .leftChange {
@@ -207,7 +207,7 @@ page-housing {
     background-color: #fff;
   }
   .scroll-content{
-    top: 110px;
+    top: 86px;
     bottom: 55px;
     margin: 0 !important;
   }

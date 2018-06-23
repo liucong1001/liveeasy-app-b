@@ -23,6 +23,9 @@ export class PassengerdetailPage {
   showIntention=false;
   right=true;
   down=false;
+  rest=false;
+  restRight=true;
+  restDown=false;
 
   customerSrcList = [];
   agentList = [];
@@ -136,6 +139,19 @@ export class PassengerdetailPage {
       this.down=false;
     }
   }
+
+  rests(){
+    if(this.rest==false ){
+      this.rest=true;
+      this.restRight=false;
+      this.restDown=true;
+    }else{
+      this.rest=false;
+      this.restRight=true;
+      this.restDown=false;
+    }
+  }
+
   passengerLook(){
     this.navCtrl.push(PlookrecordPage,{
       id:this.data,

@@ -26,10 +26,15 @@ export class HomePage {
     //   this.homeProvider.cpageList({a:'ad',name:'liu'}).then();
     //   this.homeProvider.gpageList({a:'11',b:'22'}).then();
 
-       this.homeProvider.getNotification().then(res=>{
-           this.notificationNews = res.data.result;
-       });
+
   }
+
+  ionViewDidLoad(){
+    this.homeProvider.getNotification().then(res=>{
+      if(res){this.notificationNews = res.data.result;}
+    });
+  }
+
   addhouse(){
     this.navCtrl.push(AddhousePage)
   }
