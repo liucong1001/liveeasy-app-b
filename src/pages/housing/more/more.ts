@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, Nav, NavController, NavParams,Content } from 'ionic-angular';
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {TabsPage} from "../../tabs/tabs";
 import {HousingPage} from "../housing";
-import {MyApp} from "../../../app/app.component";
+import {MyApp} from "../../../app/app.component"
+import { NgZone  } from '@angular/core';
 /**
  * Generated class for the MorePage page.
  *
@@ -17,7 +18,8 @@ import {MyApp} from "../../../app/app.component";
   templateUrl: 'more.html',
 })
 export class MorePage {
-  @ViewChild('content') nav: Nav;
+  // @ViewChild('content') nav: Nav;
+  @ViewChild(Content) content: Content;
   tagsList:any;
   tagsStr = [];
   orientation:any; //朝向
@@ -33,15 +35,34 @@ export class MorePage {
   selected2:any;
   rootPage:any = MyApp ;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
-              public events: Events,) {
-    //标签
-    this.tagsList=this.localStorageProvider.get('tagsList');
-    console.log(this.tagsList)
+              public events: Events, private zone: NgZone) {
+
+
   }
 
   ionViewDidLoad() {
-    this.searchMoreData = this.localStorageProvider.get('searchMoreData');
+    //标签
+    this.tagsList=this.localStorageProvider.get('tagsList');
+    console.log(this.tagsList);
+
+    if(this.localStorageProvider.get('searchMoreData')){
+      this.searchMoreData = this.localStorageProvider.get('searchMoreData');
+    }
+
     console.log('进入 MorePage',this.searchMoreData);
+  }
+  initTags(item){
+
+    if(this.searchMoreData.tagsArry.length>1){
+      //初始化选中状态
+      this.searchMoreData.tagsArry = this.searchMoreData.tagsArry;
+      for(var i in this.searchMoreData.tagsArry ){
+        if(item.tagCode == this.searchMoreData.tagsArry[i] ){
+          item.active =true;
+          return item.active;
+        }
+      }
+    }
   }
 
 
@@ -74,15 +95,16 @@ export class MorePage {
   choseTag(item){
     item.active = !item.active;
    if(item.active) {
-     this.tagsStr.push(item.tagCode);
+     this.searchMoreData.tagsArry.push(item.tagCode);
    }else {
-         var indexArry  = this.tagsStr.indexOf(item.tagCode);
-         if(indexArry>-1){this.tagsStr.splice(indexArry,1)}
+         var indexArry  = this.searchMoreData.tagsArry.indexOf(item.tagCode);
+         if(indexArry>-1){this.searchMoreData.tagsArry.splice(indexArry,1)}
    }
-   this.searchMoreData.tagsArry =this.tagsStr;
+
+   this.searchMoreData.tagsArry =this.searchMoreData.tagsArry;
    this.searchMoreData.tags =0;
-   for(var i in this.tagsStr){
-      this.searchMoreData.tags+=this.tagsStr[i];
+   for(var i in this.searchMoreData.tagsArry){
+      this.searchMoreData.tags+=this.searchMoreData.tagsArry[i];
    }
 
   }
@@ -99,7 +121,7 @@ export class MorePage {
   isActive(item) {
      // console.log('朝向',item);
     if(item.val==this.searchMoreData.orientation){
-      console.log('朝向',this.searchMoreData.orientation);
+      // console.log('朝向',this.searchMoreData.orientation);
      return  true;
 
     }else{
@@ -111,9 +133,16 @@ export class MorePage {
   isActive2(item){
     return this.selected2 === item;
   }
-
+  resetTags(){
+    return  false;
+  }
   reset(){
     console.log('清除');
+     this.searchMoreData.tagsArry =[];
+     this.searchMoreData.tags=0;
+     this.searchMoreData.orientation='';
+      this.localStorageProvider.del('searchMoreData');
+
   }
   confirm(){
     console.log('确定',this.searchMoreData);
