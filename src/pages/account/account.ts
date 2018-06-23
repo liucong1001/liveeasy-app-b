@@ -24,6 +24,7 @@ export class AccountPage {
     password:string = 'le123456';
     url:string = "/login";
     loginBtn:boolean = false ;
+    permissionList = []; //权限存储
     constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,
                 public loginProvider:LoginProvider,public localStorageProvider:LocalStorageProvider,
                public toast:ToastComponent,public backButtonProvider:BackButtonProvider,private platform: Platform,
@@ -56,6 +57,9 @@ export class AccountPage {
               //存相关信息
               this.localStorageProvider.set('loginName',res.data.loginName);
               this.localStorageProvider.set('ticket',res.ticket);
+              //权限
+               console.log('权限',res.data.menus);
+
             }else{
               this.loginBtn = false;
               this.toast.defaultMsg('top','账号或密码有误!');

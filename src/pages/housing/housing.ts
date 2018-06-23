@@ -87,6 +87,7 @@ export class HousingPage {
     estateId:'',
     param:'1', //默认搜索是1,只看我的6,
     tags:0,
+    orientation:'',
     hasElevator:'',
   };
   //楼盘搜索
@@ -533,7 +534,23 @@ export class HousingPage {
   }
 
   mores(){
-    this.navCtrl.push(MorePage)
+    this.events.subscribe('moreSearchBevents', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收更多为: ', params);
+
+      if(!params){
+        this.params.tags = 0;
+      }else {
+        this.params.tags = params.tags;
+        this.params.orientation = params.orientation;
+        // this.params.
+        console.log('搜索',this.floorName,this.params.estateId);
+      }
+       this.search();
+      // 取消订阅
+      this.events.unsubscribe('moreSearchBevents');
+    });
+    this.navCtrl.push(MorePage);
   }
 
 
@@ -552,5 +569,6 @@ class  PropertyPageParams {
   param?:string;
   tags?:any;
   hasElevator?:any;//是否有电梯
+  orientation?:any;//朝向
 }
 
