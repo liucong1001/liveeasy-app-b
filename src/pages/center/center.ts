@@ -60,14 +60,14 @@ export class CenterPage {
   }
 
   openWin(goPage) {
-    // let options: NativeTransitionOptions = {
-    //   direction: 'left',
-    //   duration: 400,
-    //   slowdownfactor: -1,
-    //   iosdelay: 50
-    // };
-    //
-    // this.nativePageTransitions.slide(options);
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage);
   }
 }
