@@ -38,6 +38,7 @@ export class LetteratorneyPage {
   noPermission=false;
   permission=true;
   agentname:any;
+  maxImagesCount = true;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider,
               private camera: Camera,public toast:ToastComponent,
@@ -89,53 +90,7 @@ export class LetteratorneyPage {
     });
 
   }
-  // presentActionSheet() {
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     // title: '更多',
-  //     buttons: [
-  //       {
-  //         text: '选择图片',
-  //         role: 'destructive',
-  //         handler: () => {
-  //           console.log('Destructive clicked');
-  //           this.takePhoto(0);
-  //         }
-  //       },{
-  //         text: '拍照',
-  //         handler: () => {
-  //           console.log('Archive clicked');
-  //           this.takePhoto(1);
-  //         }
-  //       },{
-  //         text: '关闭',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
-  // //take Photo
-  // takePhoto(sourceType:number) {
-  //   console.log('手机调试',sourceType);
-  //   const options: CameraOptions = {
-  //     quality: 50,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //     correctOrientation: true,
-  //     sourceType:sourceType,
-  //   };
-  //
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
-  //     this.path = base64Image;
-  //   }, (err) => {
-  //     // Handle error
-  //   });
-  // }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
@@ -214,6 +169,11 @@ export class LetteratorneyPage {
     this.imgData = event.data;
     // this.imgData.push(event.pic);
     console.log('图片数据',this.imgData);
+    if(this.imgData.length==1){
+      this.maxImagesCount = false;
+    }else {
+      this.maxImagesCount = true;
+    }
   }
 
   //修改业主委托书

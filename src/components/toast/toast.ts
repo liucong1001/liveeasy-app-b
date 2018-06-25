@@ -44,7 +44,7 @@ export class ToastComponent {
       message: message,
       duration: 2000,
       position: position,
-      cssClass:' ',
+      cssClass:'toast-default ',
     });
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');

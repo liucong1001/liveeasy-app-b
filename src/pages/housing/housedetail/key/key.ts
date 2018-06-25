@@ -34,16 +34,14 @@ export class KeyPage {
   imgHeader: string;
   imgJson :any;
   edit = false;
+  maxImagesCount = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera,
               private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
     this.data = navParams.get('item');
-    console.log(this.propertyid)
     this.propertyProvider.keydetail(this.propertyid).then(res => {
-      console.log(res);
-
       if(res.hasOwnProperty('data')){
         this.keydelegateid= res.data.keyDelegateId;
         this.data = res.data;
@@ -62,66 +60,18 @@ export class KeyPage {
       }else{
         this.edit = true;
       }
-      console.log('dir',this.useDir,'详情',this.data);
     });
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad KeyPage');
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
   }
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      // title: '更多',
-      buttons: [
-        {
-          text: '选择图片',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-            this.takePhoto(0);
-          }
-        },{
-          text: '拍照',
-          handler: () => {
-            console.log('Archive clicked');
-            this.takePhoto(1);
-          }
-        },{
-          text: '关闭',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-  //take Photo
-  takePhoto(sourceType:number) {
-    console.log('手机调试',sourceType);
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType:sourceType,
-    };
 
-    this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.path = base64Image;
-    }, (err) => {
-      // Handle error
-    });
-  }
 
   form:FormGroup =this.fb.group({
     keySn:['',Validators.required],
     keyAddress:['',Validators.required],
-    keyDlgtFilePics:[''],
+    keyDlgtFilePics:['',Validators.required],
   });
 //上传钥匙信息
   goYc(){
@@ -151,8 +101,12 @@ export class KeyPage {
   imgData = [];
 
   yaoChi(event){
-    // this.imgData.push(event.pic);
     this.imgData = event.data;
+    if(this.imgData.length==1){
+       this.maxImagesCount = false;
+    }else {
+      this.maxImagesCount = true;
+    }
   }
 
   //修改钥匙信息

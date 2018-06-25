@@ -4,6 +4,7 @@ import { AddpassengerPage } from './mypassenger/addpassenger/addpassenger';
 import { MypassengerPage } from './mypassenger/mypassenger';
 import {PsearchPage} from "./psearch/psearch";
 import { PublicpassengerPage } from './publicpassenger/publicpassenger';
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /**
  * Generated class for the PassengerPage page.
  *
@@ -18,7 +19,8 @@ import { PublicpassengerPage } from './publicpassenger/publicpassenger';
 })
 export class PassengerPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public localStorageProvider: LocalStorageProvider) {
   }
 
   ionViewDidLoad() {

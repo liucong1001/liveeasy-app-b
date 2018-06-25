@@ -411,9 +411,9 @@ export class HousingPage {
       console.log('Async operation has ended');
       refresher.complete();
       if (newCount > 0 ) {
-        this.toast.msg('已更新'+ newCount +'条记录');
+        this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
       } else {
-        this.toast.msg('暂无更新');
+        this.toast.defaultMsg('middle','暂无更新');
       }
     });
   }

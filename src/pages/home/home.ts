@@ -6,6 +6,7 @@ import {AddhousePage} from "../housing/addhouse/addhouse";
 import {AddpassengerPage} from "../passenger/mypassenger/addpassenger/addpassenger";
 import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,7 +15,8 @@ export class HomePage {
   associate=false;
   pop=false;
   notificationNews = [];
-  constructor(public navCtrl: NavController,public homeProvider:HomeProvider) {
+  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,
+              public localStorageProvider: LocalStorageProvider,) {
     // // 测试接口
     // this.homeProvider.test().then(res=>{
     //   console.log('test成功',res);

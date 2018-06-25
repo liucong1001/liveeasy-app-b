@@ -8,7 +8,7 @@
 
 <div>
   <ion-label>房源标签(可多选)</ion-label>
-<a *ngFor="let bq of tagsList;let i = index" [ngClass]="{'active': bq.active||initTags(bq)}" (click)="choseTag(bq,i)">{{bq.tagDesc}}</a>
+  <a *ngFor="let bq of tagsList;let i = index" [ngClass]="{'active': bq.active||initTags(bq)}" (click)="choseTag(bq,i)">{{bq.tagDesc}}</a>
   <!--<ion-select okText="确定" cancelText="关闭"    [(ngModel)]="tags"  multiple="true" [placeholder]="'请选择房源标签'">-->
     <!--<ion-option value="{{item.tagCode}}" *ngFor="let item of tagsList;let i = index">{{item.tagDesc}}</ion-option>-->
   <!--</ion-select>-->
@@ -35,6 +35,5 @@
     <ion-col col-6>
       <button ion-button full (click)="confirm()">确定</button>
     </ion-col>
-
   </ion-row>
 </ion-footer>
