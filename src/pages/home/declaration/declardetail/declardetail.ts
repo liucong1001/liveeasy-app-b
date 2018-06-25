@@ -42,7 +42,6 @@ export class DeclardetailPage {
     {name:'合同信息',val:3},
     {name:'收款信息',val:4},
     {name:'业绩类型',val:5},
-    {name:'补充协议',val:6},
   ];
 goInfo(val){
     this.navCtrl.push(DeclinfoPage,{
