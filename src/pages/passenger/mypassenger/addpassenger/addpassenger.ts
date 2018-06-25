@@ -6,6 +6,7 @@ import {MypassengerPage} from "../mypassenger";
 import {AddhouseProvider} from "../../../../providers/addhouse/addhouse";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {ToastComponent} from "../../../../components/toast/toast";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -36,7 +37,7 @@ export class AddpassengerPage {
   shangQuan = [];//保存商圈
   intentionTradeCodeId:string;  //用于转换商圈
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events) {
     //客户来源
@@ -184,7 +185,7 @@ export class AddpassengerPage {
     console.log('表单客户',this.form.value);
     this.customerProvider.add(this.form.value).then(res=>{
       if (res.success){
-        alert('录入成功!');
+        this.toast.msg('录入成功!');
         this.navCtrl.push(MypassengerPage);
       }
     },err=>{

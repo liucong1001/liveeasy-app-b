@@ -1,19 +1,28 @@
 page-addpassenger input{
 text-align: right;
 }
-.separateIon{
-  margin: 0 22px;
-  padding: 0 10px;
-}
+
 .centers{
-position: absolute;
-  right:12.4rem
-}
-.pf{
   position: absolute;
-  right: 11px;
-  font-size: 1.4rem
+  height: 100%;
+  width: 72%;
+  top: 0;
+  right: 0;
+  padding-top:8px;
+  .separateIon{
+    width: 80%;
+    margin-right: 3px;
+    border: 0;
+    padding: 0 12px;
+  }
+  .suffixs{
+    position: absolute;
+    right: 5px;
+    font-size: 1.3rem;
+    top: 7px;
+  }
 }
+
 .icon-xia{
     position: absolute;
     right: 1px;
