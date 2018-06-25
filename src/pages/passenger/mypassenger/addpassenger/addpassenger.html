@@ -130,16 +130,37 @@
             </ion-select>
           </ion-item>
     </ion-list>
-    <ion-list class="m10">
-      <ion-item class="pl12">
-        <ion-label>其他</ion-label>
-        <ion-select>
-          <ion-option value="change" selected>请选择</ion-option>
-          <ion-option value="nes">1栋</ion-option>
-          <ion-option value="n64">2栋</ion-option>
-        </ion-select>
+    <ion-list style="margin-top: 10px" (click)="rests()">
+      <button ion-item class="pl12" *ngIf="restRight">
+        <span>其他</span>
+      </button>
+      <ion-item class="pl12" *ngIf="restDown" >
+        <span>其他</span>
+        <i class="iconfont icon-xia"></i>
       </ion-item>
     </ion-list>
+    <ion-list *ngIf="rest">
+      <ion-item class="pl12">
+        <ion-label>核心需求点</ion-label>
+        <ion-input type="text"  placeholder="">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>核心抵触点</ion-label>
+        <ion-input type="text" placeholder="">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>核心抵触点</ion-label>
+        <ion-input type="text" placeholder="">
+        </ion-input>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>免打扰时段</ion-label>
+        <ion-datetime placeholder="请选择时间" displayFormat="YYYY/MM/DD HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
     <ion-grid>
       <ion-row class="p10">
         <button ion-button full color="danger"  [disabled]="form.invalid" type="button" (click)="save()" class="radius">提交</button>

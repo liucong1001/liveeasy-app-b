@@ -22,6 +22,9 @@ export class AddpassengerPage {
   showIntention=false;
   right=true;
   down=false;
+  rest=false;
+  restRight=true;
+  restDown=false;
   customerSrcList = [];
   agentList = [];
   customeroGrageInfoList = [];
@@ -120,6 +123,17 @@ export class AddpassengerPage {
       this.showIntention=false;
       this.right=true;
       this.down=false;
+    }
+  }
+  rests(){
+    if(this.rest==false ){
+      this.rest=true;
+      this.restRight=false;
+      this.restDown=true;
+    }else{
+      this.rest=false;
+      this.restRight=true;
+      this.restDown=false;
     }
   }
 
