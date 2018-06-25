@@ -34,7 +34,8 @@ export class CenterPage {
     this.gh=this.localStorageProvider.get('loginInfo').no;
     this.custposName =this.localStorageProvider.get('loginInfo') .custPosName
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
-    console.log(this.name)
+    console.log(this.name);
+    this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
   }
 
   ionViewDidLoad() {

@@ -26,7 +26,7 @@ export class HomePage {
     //   this.homeProvider.cpageList({a:'ad',name:'liu'}).then();
     //   this.homeProvider.gpageList({a:'11',b:'22'}).then();
 
-
+    this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
   }
 
   ionViewDidLoad(){
