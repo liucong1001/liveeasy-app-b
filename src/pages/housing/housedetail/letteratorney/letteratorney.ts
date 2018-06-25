@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
@@ -160,7 +160,7 @@ export class LetteratorneyPage {
       new ErrorMessage('required','起始时间必须要填写！'),
     ],
     delegateEndTm:[
-      new ErrorMessage('required','结束时间必须要填写！'),
+
     ],
   };
 
