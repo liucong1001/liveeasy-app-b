@@ -12,18 +12,20 @@
   color: #1ab394;
   font-size: 3rem;
   font-weight: bold;
-  position: absolute;
-  right: 1.2rem;
-  top: 0.6rem;
+  vertical-align: middle;
+  margin-left: 10px;
+  //position: absolute;
+  //right: 1.2rem;
+  //top: 0.6rem;
 }
 
 
 .houseMenu {
-  background: #F8F8F8;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  top: 42px;
+  //background: #F8F8F8;
+  //position: fixed;
+  //width: 100%;
+  //z-index: 1;
+  //top: 42px;
 }
 
 .houseMenu ion-col {
@@ -199,6 +201,8 @@ padding: 5px 0 12px;
 page-housing {
   .serInput {
     width: 87%;
+    display: inline-block;
+    vertical-align: middle;
   }
   .toolbar-background-ios {
     background-color: #f8f8f8;
@@ -207,9 +211,10 @@ page-housing {
     background-color: #fff;
   }
   .scroll-content{
-    top: 86px;
+    top: 110px;
     bottom: 55px;
     margin: 0 !important;
+    border-top: none !important;
   }
 }
 
