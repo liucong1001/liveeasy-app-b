@@ -45,7 +45,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleLightContent();
+      statusBar.styleLightContent();//头部信号字体颜色
       // let status bar overlay webview 头部信号
       statusBar.overlaysWebView(true);
       // set status bar to white
