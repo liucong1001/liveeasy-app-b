@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {App, Platform, Nav, ToastController,IonicApp} from 'ionic-angular';
+import {App, Platform, Nav, ToastController, IonicApp, Keyboard} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -31,6 +31,7 @@ export class MyApp {
               private device: Device,
               private headerColor: HeaderColor,
               public app: App,
+              public keybord: Keyboard,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController
               ) {
       if(!this.localStorageProvider.get('ticket')){
@@ -54,54 +55,11 @@ export class MyApp {
       //android 6 以上动态获取权限
       //检测版本更新
       //appUpdate.checkVersion();
-      //设置全局页面过渡
-      // this.setPageTransition();
-
       // 返回按键事件
       this.registerBackButtonAction();
     });
   }
 
-  setPageTransition() {
-    //页面进入过渡
-    this.app.viewWillEnter.subscribe(() => {
-      let options: NativeTransitionOptions = {
-        "direction"        : "left", // 'left|right|up|down', default 'left' (which is like 'next')
-        "duration"         :  400, // in milliseconds (ms), default 400
-        "slowdownfactor"   :   3, // overlap views (higher number is more) or no overlap (1). -1 doesn't slide at all. Default 4
-        "slidePixels"      :   20, // optional, works nice with slowdownfactor -1 to create a 'material design'-like effect. Default not set so it slides the entire page.
-        "iosdelay"         :  100, // ms to wait for the iOS webview to update before animation kicks in, default 60
-        "androiddelay"     :  150, // same as above but for Android, default 70
-        "fixedPixelsTop"   :    0, // the number of pixels of your fixed header, default 0 (iOS and Android)
-        "fixedPixelsBottom":   0 // the number of pixels of your fixed footer (f.i. a tab bar), default 0 (iOS and Android)
-      };
-
-      this.nativePageTransitions.slide(options)
-        .then(data=>{})
-        .catch(e=>{});
-      this.nativePageTransitions.executePendingTransition();
-    });
-
-    //页面离开过渡
-    this.app.viewDidLeave.subscribe(() => {
-      let options: NativeTransitionOptions = {
-        "direction"        : "right", // 'left|right|up|down', default 'left' (which is like 'next')
-        "duration"         :  400, // in milliseconds (ms), default 400
-        "slowdownfactor"   :   3, // overlap views (higher number is more) or no overlap (1). -1 doesn't slide at all. Default 4
-        "slidePixels"      :   20, // optional, works nice with slowdownfactor -1 to create a 'material design'-like effect. Default not set so it slides the entire page.
-        "iosdelay"         :  100, // ms to wait for the iOS webview to update before animation kicks in, default 60
-        "androiddelay"     :  150, // same as above but for Android, default 70
-        "fixedPixelsTop"   :    0, // the number of pixels of your fixed header, default 0 (iOS and Android)
-        "fixedPixelsBottom":   0 // the number of pixels of your fixed footer (f.i. a tab bar), default 0 (iOS and Android)
-      };
-
-      this.nativePageTransitions.slide(options)
-        .then(data=>{})
-        .catch(e=>{});
-    });
-
-    this.nativePageTransitions.cancelPendingTransition();
-  };
   go(item){
     this.selected = item;
   }
@@ -135,18 +93,32 @@ export class MyApp {
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
-      //如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-      // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive()
-      let activePortal = this.ionicApp._modalPortal.getActive();
-      if (activePortal) {
-        activePortal.dismiss().catch(() => {});
-        activePortal.onDidDismiss(() => {});
+      if (this.keybord.isOpen()) {
+        this.keybord.close();
         return;
       }
+      //如果是登录页
+      if (this.rootPage == AccountPage) {
+        this.showExit();
+        return;
+      }
+      //点击返回按钮隐藏toast或loading或Overlay
+      this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+      if (this.ionicApp._modalPortal) {
+        let activePortal = this.ionicApp._modalPortal.getActive();
+        if (activePortal) {
+          activePortal.dismiss().catch(() => {});
+          activePortal.onDidDismiss(() => {});
+          return;
+        }
+      }
+
+
       let activeVC = this.nav.getActive();
       let tabs = activeVC.instance.tabs;
-      let activeNav = tabs.getSelected();
-      return activeNav.canGoBack() ? activeNav.pop() : this.showExit()
+      let activeNav = tabs && tabs.getSelected();
+      return activeNav && (activeNav.canGoBack() ? activeNav.pop() : this.showExit());
+
     }, 1);
   }
 
