@@ -43,7 +43,7 @@ export class PublicpassengerPage {
     intentionTradeCode:'0',//商圈
     priceUnit:'1',
     sort:'1',
-    sxShow:'1',
+    customerType:'1',
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
@@ -167,19 +167,48 @@ export class PublicpassengerPage {
   }
   searchFloorNum = 0; //初始化搜索次数
   sx=0;
+  values:any;
+  sausage=[];
+  updateCucumber(val,index) {
+    this.values=val;
+    console.log('值' +val+this.sausage[index]);
+    // this.values=val;
+    this.params = {
+      customerSrc:"0",
+      orderBy:"DESC",
+      customerType:'1',
+    };
+    if(val == 1){
+      this.params.customerType='1';
+    }else if(val == 2){
+      this.params.customerType='2';
+    }else if(val == 3){
+      this.params.customerType='3';
+    }
+  }
+
   //重置
   reset(){
-    this.params = {
-      customerSrc:'0',
-      intentionDiviCode:'0',//区县
-      intentionRoom:'0', //居室
-      intentionTradeCode:'0',//商圈
-      priceUnit:'1',
-      sort:'1',
-      sxShow:'1' //筛选
-    };
-    this.search();
+    console.log('清除',this.sausage);
+    for(var i in this.sausage){
+      this.sausage[i]=false;
+    }
   }
+
+
+  //重置
+  // reset(){
+  //   this.params = {
+  //     customerSrc:'0',
+  //     intentionDiviCode:'0',//区县
+  //     intentionRoom:'0', //居室
+  //     intentionTradeCode:'0',//商圈
+  //     priceUnit:'1',
+  //     sort:'1',
+  //     sxShow:'1' //筛选
+  //   };
+  //   this.search();
+  // }
   //条数
   currentPage: number = 1;
   all = false;
@@ -321,10 +350,10 @@ export class PublicpassengerPage {
 class  PublicCustomerPageParams {
   customerSrc?:string;
   orderBy?:string;
-  intentionDiviCode:string;
-  intentionRoom:string;
-  intentionTradeCode:string;
-  priceUnit:string;
-  sort:string;
-  sxShow:string;
+  intentionDiviCode?:string;
+  intentionRoom?:string;
+  intentionTradeCode?:string;
+  priceUnit?:string;
+  sort?:string;
+  customerType?:string;
 }

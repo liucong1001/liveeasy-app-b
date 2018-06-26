@@ -1,37 +1,30 @@
-<!--<ion-header>-->
-
-  <!--<ion-navbar>-->
-    <!--<ion-title>公客列表</ion-title>-->
-    <!--<ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>-->
-  <!--</ion-navbar>-->
-
-<!--</ion-header>-->
 <ion-header>
-  <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="hoInput" (click)="pSearch()"></ion-searchbar>
+  <ion-navbar>
+    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="hoInput" (click)="pSearch()"></ion-searchbar>
+  </ion-navbar>
+  <ion-row class="houseMenu">
+    <ion-col col-4 class="tc" (click)="showMenu1()">
+      <span>{{searchDict}}</span>
+      <span *ngIf="!searchDict">区域</span>
+      <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </ion-col>
+    <ion-col col-4 class="tc" (click)="showMenu2()">
+      <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
+      <span [hidden]="searchFloorNum==2"> 户型</span>
+      <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </ion-col>
+
+    <ion-col col-4 class="tc" (click)="showMenu3()">
+      <span *ngIf="sx==2">{{filtrate(params.customerType)}}</span>
+      <span [hidden]="sx==2"> 筛选</span>
+      <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </ion-col>
+  </ion-row>
+
 </ion-header>
 
 <ion-content>
   <ion-grid class="p0">
-    <ion-row class="houseMenu">
-      <ion-col col-4 class="tc" (click)="showMenu1()">
-        <span>{{searchDict}}</span>
-        <span *ngIf="!searchDict">区域</span>
-        <ion-icon name="md-arrow-dropdown"></ion-icon>
-      </ion-col>
-      <ion-col col-4 class="tc" (click)="showMenu2()">
-        <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
-        <span [hidden]="searchFloorNum==2"> 户型</span>
-        <ion-icon name="md-arrow-dropdown"></ion-icon>
-      </ion-col>
-
-      <ion-col col-4 class="tc" (click)="showMenu3()">
-        <span *ngIf="sx==2">{{filtrate(params.sxShow)}}</span>
-        <span [hidden]="sx==2"> 筛选</span>
-        <ion-icon name="md-arrow-dropdown"></ion-icon>
-      </ion-col>
-    </ion-row>
-
-    <div style="margin-top: 43px"></div>
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
       <ion-col col-12 >
         <ion-row>
@@ -128,16 +121,21 @@
   </div>
 
   <!-- 筛选 -->
-  <div class="lists houseType" *ngIf="more">
-    <ion-list radio-group [(ngModel)]="params.sxShow" class="scrollC">
-      <ion-item *ngFor="let i of filtrateJson;">
+  <div class="lists houseType" [hidden]="!more">
+    <ion-list radio-group class="scrollC" >
+      <ion-item *ngFor="let i of filtrateJson;let index =index">
         <ion-label>{{i.name}}</ion-label>
-        <ion-radio value="{{i.val}}" (ionSelect)="sxClick()"></ion-radio>
+        <ion-checkbox (ionChange)="updateCucumber(i.val,index)" [(ngModel)]="sausage[index]"></ion-checkbox>
       </ion-item>
     </ion-list>
-    <!--<div class="p5 btns">-->
-    <!--<button ion-button full color="danger">确定</button>-->
-    <!--</div>-->
+    <ion-row class="btns">
+      <ion-col col-6>
+        <button ion-button full color="danger" style="background: #F0F0F0;color:#6A98C8;" (click)="reset()">重置</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full color="danger" (click)="sxClick()">确定</button>
+      </ion-col>
+    </ion-row>
   </div>
 
 </div>

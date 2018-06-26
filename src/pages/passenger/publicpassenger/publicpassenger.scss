@@ -1,9 +1,39 @@
 page-publicpassenger {
-
+  ion-header{
+    background:none !important;
+  }
+  .toolbar-background-ios{
+    background: #f8f8f8;
+  }
+  .bar-button-default-ios{
+    color: #000;
+  }
+  .item.item-ios .checkbox-ios{
+    position: absolute;
+    top: 8px;
+    right: 0;
+  }
+  .checkbox-ios .checkbox-checked{
+    border-color: #1ab394;
+    background-color: #1ab394;
+  }
+  .toolbar .searchbar-ios .searchbar-input{
+    background: #fff;
+    height: 2.6rem;
+  }
+  .houseMenu{
+    top: initial;
+  }
+  .toolbar-ios{
+    padding: 0;
+  }
+  .hoInput{
+    margin: 0 auto;
+  }
 }
 .telPhone{
   display: inline-block;
-  background: url(../assets/imgs/phone.png) no-repeat center ;
+  background: url(assets/imgs/phone.png) no-repeat center ;
   background-size:cover;
   width: 45px;
   height: 45px;

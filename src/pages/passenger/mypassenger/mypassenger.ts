@@ -42,14 +42,14 @@ export class MypassengerPage {
    * 列表搜索条件
    * @type {{}}
    */
+  values:any;
   params:CustomerPageParams = {
-     customerSrc:'0',
+    customerSrc:'0',
     intentionDiviCode:'0',//区县
     intentionRoom:'0', //居室
     intentionTradeCode:'0',//商圈
     priceUnit:'1',
     sort:'1',
-    sxShow:'1'
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider) {
@@ -146,7 +146,6 @@ export class MypassengerPage {
       }else{
         this.hasData = false;
       }
-
       //关闭搜索框子
       this.show = false;
       this.houseType = false;
@@ -159,19 +158,28 @@ export class MypassengerPage {
       }
     });
   }
+  // checks:boolean;
+  sausage=[];
+  updateCucumber(val,index) {
+    console.log('值' +val+this.sausage[index]);
+    this.values=val;
+    if(val == 1){
+      this.params.todayNoFollow='1';
+    }else if(val == 2){
+      this.params.threeDayNoFollow='2';
+    }else if(val == 3){
+      this.params.todayNoLook='3';
+    }else if(val == 4){
+      this.params.threeDayNoLook='4';
+    }
+  }
   sx=0;
   //重置
   reset(){
-   this.params = {
-      customerSrc:'0',
-      intentionDiviCode:'0',//区县
-      intentionRoom:'0', //居室
-      intentionTradeCode:'0',//商圈
-      priceUnit:'1',
-      sort:'1',
-     sxShow:'1' //筛选
-    };
-    this.search();
+    console.log('清除',this.sausage);
+    for(var i in this.sausage){
+      this.sausage[i]=false;
+    }
   }
 
   houseJSON = [
@@ -317,6 +325,8 @@ export class MypassengerPage {
     })
   };
 
+
+
 }
 
 /**
@@ -329,5 +339,8 @@ export class MypassengerPage {
     intentionTradeCode:string;
     priceUnit:string;
     sort:string;
-  sxShow:string;
+    threeDayNoFollow?:string;
+    threeDayNoLook?:string;
+    todayNoFollow?:string;
+    todayNoLook?:string;
  }

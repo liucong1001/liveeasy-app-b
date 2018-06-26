@@ -107,7 +107,89 @@
     }
   }
 }
-//tooltoolbar
-//.toolbar-title-ios {
-//  margin-top: 5px;
-//}
+//房源
+.houseMenu {
+
+  ion-col{
+    padding: 13px 0;
+    color: #555;
+    ion-icon{
+      vertical-align: middle;
+    }
+  }
+}
+
+.adds {
+  color: #1ab394;
+  font-size: 3rem;
+  font-weight: bold;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.houseStatus {
+  border-top: 1px solid #F5F5F5;
+  padding: 6px 0;
+  a {
+    color: #339999;
+    display: block;
+    border-right: 1px solid #f2f2f2;
+  }
+}
+.houseMain {
+  margin-bottom: 10px
+}
+.lists {
+  position: fixed; // top: 10%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 9999; // color: #000
+  height: 48.5%;
+  margin-top: -13px,
+  button {
+    border-radius: 5px;
+    margin-top: 13px;
+  }
+}
+
+.leftChange {
+  height: 100%;
+  overflow: scroll; // background: #aaa;
+  //border-bottom: 1px solid #F4F4F4;
+  a{
+    border-bottom: 1px solid #F5F5F5;
+    display: block;
+    padding: 13px 10px;
+  }
+  .item-block{
+    min-height:46px;
+  }
+}
+.scrollC{
+  overflow: scroll;
+  height: 100%;
+}
+.popLocation{
+  top: 89px;
+  position: relative
+}
+.pop ,.pops{
+  position: absolute;
+  left: 0;
+  top: 100px;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: .3;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  z-index:100;
+}
+.btns{
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 84%;
+}
+
