@@ -7,6 +7,7 @@ import {AddpassengerPage} from "../passenger/mypassenger/addpassenger/addpasseng
 import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";
 import {StatusBar} from "@ionic-native/status-bar";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -26,7 +27,6 @@ export class HomePage {
     // this.homeProvider.pageList().then();
     //   this.homeProvider.cpageList({a:'ad',name:'liu'}).then();
     //   this.homeProvider.gpageList({a:'11',b:'22'}).then();
-
 
   }
   ionViewWillEnter() {

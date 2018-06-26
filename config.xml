@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="tech.liveeasy.apps.agent" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>房贝</name>
-    <content original-src="index.html" src="http://192.168.0.111:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -16,7 +16,7 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="300" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
@@ -84,12 +84,6 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
         <preference name="CodePushDeploymentKey" value="_67l4A_Y9DN11GmLkc3Wk0rrPBxl89505932-72e4-46de-81fa-175372b59260" />
     </platform>
-    <allow-navigation href="http://192.168.1.113:8100" />
-    <allow-navigation href="http://192.168.1.120:8100" />
-    <allow-navigation href="http://192.168.0.125:8100" />
-    <allow-navigation href="http://192.168.0.111:8100" />
-    <engine name="android" spec="^6.4.0" />
-    <engine name="ios" spec="^4.4.0" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />

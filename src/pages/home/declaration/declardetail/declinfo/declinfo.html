@@ -144,8 +144,6 @@
             </ion-item>
           </ion-list>
         </ion-col>
-      </ion-row>
-      <ion-row>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
@@ -166,24 +164,24 @@
             </ion-item>
           </ion-list>
         </ion-col>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>户型：</span>
+                <span>{{this.propertyinfo.bedrooms}}室{{this.propertyinfo.halls}}厅</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
               <div class="pl12">
-                <span>户型：</span>
-                <span>{{this.propertyinfo}}</span>
-              </div>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        <ion-col col-6 class="p0">
-          <ion-list>
-            <ion-item>
-              <div class="pl12">
                 <span>朝向：</span>
-                <span>{{this.propertyinfo}}</span>
+                <span>{{orpipe(this.propertyinfo.orientation)}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -223,7 +221,7 @@
             <ion-item>
               <div class="pl12">
                 <span>是否有车位：</span>
-                <span>{{this.propertyinfo}}</span>
+                <span>{{this.orders.hasCarport=='1'?'有':'无'}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -238,7 +236,7 @@
             </ion-item>
           </ion-list>
         </ion-col>
-        <ion-col col-6 class="p0">
+       <ion-col col-6 class="p0">
           <ion-list>
             <ion-item>
               <div class="pl12">
@@ -262,6 +260,26 @@
           <ion-list>
             <ion-item>
               <div class="pl12">
+                <span>丘权号：</span>
+                <!--<span>{{this.orders.carportPropId}}</span>-->
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>房产登记时间：</span>
+                <!--<span>{{this.orders.carportPropId}}</span>-->
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
                 <span>房屋所有权证号：</span>
                 <span>{{this.orders.premPermitId}}</span>
               </div>
@@ -272,8 +290,18 @@
           <ion-list>
             <ion-item>
               <div class="pl12">
+                <span>是否有土地证：</span>
+                <span>{{this.orders.hasLandPermit =='1'?'有':'无'}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
                 <span>土地证号：</span>
-                <span>{{this.orders.landPermitId}}</span>
+                <span>{{this.orders}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -292,6 +320,159 @@
     </ion-grid>
   </div>
 
+  <!--业主信息-->
+  <div *ngIf="this.ownerinfo && this.nums == 2">
+    <ion-grid class="p0 m10" *ngFor="let item of this.ownerinfo">
+      <ion-row>
+        <ion-col col-12 class="p0" >
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>业主姓名：</span>
+                <span>{{item.ownerName}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>性别：</span>
+                <span>{{item.gender =='1'?'男':'女'}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>联系方式：</span>
+                <span>{{item.phone}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>身份证：</span>
+                <span>{{item.identifierId}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>户籍所在地：</span>
+                <span>{{censuspipe(item.identifierRegCode)}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>通讯所在地：</span>
+                <span>{{item.contactAddr}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!--合同信息-->
+  <div *ngIf="this.asslist && this.nums == 3">
+    <ion-grid class="p0 m10">
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>客户ID：</span>
+                <span>{{this.customer.customerSn}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>客户姓名：</span>
+                <span>{{this.customer.customerName}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>客户性别：</span>
+                <span>{{this.customer.customerGender=='1'?'男':'女'}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>客户电话：</span>
+                <span>{{this.customer.customerPhone}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>身份证：</span>
+                <span>{{this.orders.customerIdId}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>户籍所在地：</span>
+                <span>{{censuspipe(this.orders.cstmRegCode)}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>通讯地址：</span>
+                <span>{{this.orders.cstmAddrInfo}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
   <!--收款信息-->
   <div *ngIf="this.feelist && this.nums == 4">
@@ -355,8 +536,76 @@
     </ion-grid>
   </div>
 
-  <!---->
-  <!---->
-  <!---->
-  <!---->
+  <!--业绩类型-->
+  <div *ngIf="this.asslist && this.nums == 5">
+    <ion-grid class="p0 m10" *ngFor="let item of this.asslist">
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>分成角色：</span>
+                <span>{{item.roleInOrder}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>业绩比例：</span>
+                <span>{{item.assignRatio}}%</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>计提业绩金额	：</span>
+                <span>{{item.assignedPrice}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>分成人：</span>
+                <span>{{item.user.name}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>分成人联系方式：</span>
+                <span>{{item.user.mobile}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>分成人部门：</span>
+                <span>{{item.user.office.name}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
 </ion-content>

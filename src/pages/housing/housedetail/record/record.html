@@ -26,21 +26,12 @@
             <ion-item *ngIf="followUp == undefined" class="tc">暂无跟进记录</ion-item>
           </ion-list>
           <ion-list>
-            <ion-item class="updateHegiht" *ngFor="let item of followUp">
-              <ion-row>
-                <ion-col col-12>
-                  {{item.agentName}}
+            <ion-item class="updateHegiht p10" *ngFor="let item of followUp">
+                  <div>{{item.agentName}}</div>
                   <!--<a class="followTips">日常跟进</a>-->
-                </ion-col>
-                <ion-col col-12>
-                  {{item.content}}
-                </ion-col>
-                <ion-col col-12>
+                  <div class="m10">{{item.content}}</div>
                   <font color="#aaa" size="1">{{item.followupTimeVO}}</font>
-                </ion-col>
-              </ion-row>
             </ion-item>
-
           </ion-list>
         </div>
       </ion-slide>
@@ -50,26 +41,12 @@
                 <ion-item *ngIf="lookEmpty == undefined" class="tc">暂无空看记录</ion-item>
               </ion-list>
               <ion-list>
-                <ion-item class="updateHegiht" *ngFor="let items of lookEmpty">
-                  <ion-row>
-                    <ion-col col-12>
-                      {{items.agentName}}
+                <ion-item class="updateHegiht p10" *ngFor="let items of lookEmpty">
+                      <div>{{items.agentName}}</div>
                       <!--<a class="emptyTips">空看</a>-->
-                    </ion-col>
-                    <ion-col col-12>
-                      {{items.content}}
-                    </ion-col>
-                    <ion-col col-12>
-                        <ion-row>
-                            <ion-col col-4 >
-                                <img [src]="imgHeader+pic(items.followupPics)" width="200" height="100">
-                            </ion-col>
-                        </ion-row>
-                      </ion-col>
-                    <ion-col col-12>
-                      <font color="#aaa" size="1">{{items.followupTimeVO}}</font>
-                    </ion-col>
-                  </ion-row>
+                      <div class="m10"> {{items.content}}</div>
+                      <div><img [src]="imgHeader+pic(items.followupPics)" width="200" height="100"></div>
+                      <div><font color="#aaa" size="1">{{items.followupTimeVO}}</font></div>
                 </ion-item>
 
               </ion-list>

@@ -4,6 +4,7 @@ import {PublicCustomerProvider} from "../../../providers/public-customer/public-
 import {PropertyProvider} from "../../../providers/property/property";
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PublicpdetailPage} from "./publicpdetail/publicpdetail";
+import {PsearchPage} from "../psearch/psearch";
 
 /**
  公客列表
@@ -306,6 +307,9 @@ export class PublicpassengerPage {
   }
   gopublicpasger(){
     this.navCtrl.push(PublicpassengerPage)
+  }
+  pSearch(){
+    this.navCtrl.push(PsearchPage)
   }
 }
 

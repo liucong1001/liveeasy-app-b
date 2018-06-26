@@ -37,7 +37,5 @@ export class PassengerPage {
   publicpassenger(){
     this.navCtrl.push(PublicpassengerPage)
   }
-  pSearch(){
-    this.navCtrl.push(PsearchPage)
-  }
+
 }

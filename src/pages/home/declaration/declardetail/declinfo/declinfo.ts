@@ -18,19 +18,21 @@ export class DeclinfoPage {
   order:any;
   customer:any;
   nums:any;
-  orderics:any;
+  ownerinfo:any;
   propertyinfo:any;
   orders:any;
+  asslist:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.nums=navParams.get('val');
     console.log(this.nums)
     this.order=navParams.get('order');
     this.orders=navParams.get('order').order;
     this.feelist=navParams.get('order').feeList;
+    this.asslist=navParams.get('order').assList;
     this.customer=navParams.get('order').order.customer;
     this.propertyinfo=navParams.get('order').order.propertyInfo;
-    // JSON.parse(this.orderics=navParams.get('order').order.orderPics);
-    // console.log(JSON.parse(this.orderics));
+    this.ownerinfo=JSON.parse(navParams.get('order').order.ownerInfo);
+    console.log(this.ownerinfo);
     console.log(this.customer)
   }
 
@@ -75,6 +77,25 @@ export class DeclinfoPage {
     for(var i in this.payJSON){
       if(val == this.payJSON[i].val){
         return this.payJSON[i].name;
+      }
+    }
+  }
+
+  //报单房源——朝向
+  orJSON=[
+    {name:'东',val:1},
+    {name:'东南',val:2},
+    {name:'南',val:3},
+    {name:'西南',val:4},
+    {name:'西',val:5},
+    {name:'西北',val:6},
+    {name:'北',val:7},
+    {name:'东北',val:8},
+  ]
+  orpipe(val){
+    for(var i in this.orJSON){
+      if(val == this.orJSON[i].val){
+        return this.orJSON[i].name;
       }
     }
   }

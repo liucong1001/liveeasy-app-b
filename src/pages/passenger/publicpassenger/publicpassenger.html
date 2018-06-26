@@ -1,10 +1,13 @@
+<!--<ion-header>-->
+
+  <!--<ion-navbar>-->
+    <!--<ion-title>公客列表</ion-title>-->
+    <!--<ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>-->
+  <!--</ion-navbar>-->
+
+<!--</ion-header>-->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>公客列表</ion-title>
-    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>
-  </ion-navbar>
-
+  <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="hoInput" (click)="pSearch()"></ion-searchbar>
 </ion-header>
 
 <ion-content>

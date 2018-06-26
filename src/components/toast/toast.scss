@@ -17,3 +17,11 @@ toast {
     text-align: center;
   }
 }
+
+.toast-default{
+  > div{
+    background-color:#8e9093!important;
+    width: 200px;
+    text-align: center;
+  }
+}

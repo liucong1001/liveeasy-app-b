@@ -37,7 +37,7 @@
           <ion-col col-12 class="bgWhite p0">
             <ion-list>
               <ion-item class="pl12">
-                <ion-label>关闭类型：</ion-label>
+                <ion-label>关闭类型<i class="text-danger">*</i></ion-label>
                 <ion-select okText="确定"  cancelText="关闭" formControlName="customerStatus">
                   <ion-option value="0">设为无效</ion-option>
                   <ion-option value="1">设为他售</ion-option>
@@ -49,7 +49,7 @@
           </ion-col>
           <ion-col col-12 class="followMain bgWhite">
             <div>
-              关闭原因：
+              关闭原因<i class="text-danger">*</i>
             </div>
             <div>
               <textarea rows="10" placeholder="请填写内容" formControlName="content"></textarea>

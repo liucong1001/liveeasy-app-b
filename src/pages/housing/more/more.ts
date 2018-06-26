@@ -76,18 +76,18 @@ export class MorePage {
   ];
   //朝向
   cxJSON = [
-    {name:'全部',val:0},
-    {name:'东',val:1},
-    {name:'南',val:2},
-    {name:'西',val:3},
-    {name:'北',val:4},
-    {name:'南北',val:5},
-    {name:'双南',val:6},
-    {name:'东西',val:7},
-    {name:'东南',val:8},
-    {name:'西南',val:9},
-    {name:'东北',val:10},
-    {name:'西北',val:11},
+    {name:'全部',val:''},
+    {name:'东',val:'1'},
+    {name:'南',val:'2'},
+    {name:'西',val:'3'},
+    {name:'北',val:'4'},
+    {name:'南北',val:'5'},
+    {name:'双南',val:'6'},
+    {name:'东西',val:'7'},
+    {name:'东南',val:'8'},
+    {name:'西南',val:'9'},
+    {name:'东北',val:'10'},
+    {name:'西北',val:'11'},
   ];
 
 
@@ -130,16 +130,15 @@ export class MorePage {
   isActive2(item){
     return this.selected2 === item;
   }
-  resetTags(){
-    return  false;
-  }
+
   reset(){
-    console.log('清除');
+     this.tagsList=this.localStorageProvider.get('tagsList');
      this.searchMoreData.tagsArry =[];
      this.searchMoreData.tags=0;
-     this.searchMoreData.orientation='';
-      this.localStorageProvider.del('searchMoreData');
-
+     //清除朝向
+     this.choseDirect(this.cxJSON[0]);
+     console.log('清除',this.searchMoreData);
+     this.localStorageProvider.del('searchMoreData');
   }
   confirm(){
     console.log('确定',this.searchMoreData);

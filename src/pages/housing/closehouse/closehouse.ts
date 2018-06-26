@@ -31,6 +31,7 @@ export class ClosehousePage {
   applic=false;
   pending=false;
   data:any;
+  realtorSourceId:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,public toast:ToastComponent,
               public  closehouseProvider: ClosehouseProvider,
@@ -41,27 +42,28 @@ export class ClosehousePage {
 
     this.propertyProvider.getRecord(this.propertyid).then(res=>{
         this.data = res.data;
+        console.log(this.data)
 
       this.estatename = this.data.estateName;
       this.convid = this.data.convId;
       this.standardAddress = this.data.standardAddress;
       this.closetime=new Date().getTime();
       this.realtorId = this.data.realtorId;
+      this.realtorSourceId=this.data.realtorSourceId;
 
-
-      console.log(this.loginId,this.realtorId)
+      console.log(this.loginId,this.realtorSourceId)
       //判断归属人和操作人是否一致
-      if(this.realtorId == this.loginId){
+      if(this.realtorSourceId == this.loginId){
         //判断返回data.result是否显示处理申请信息
         this.closehouseProvider.getShow(this.propertyid).then(res => {
           console.log(this.propertyid)
           console.log(res);
-          // if(res.data.result == 1){
-          //   this.pending =true;
-          // }
+          if(res.data == 1){
+            this.pending =true;
+          }
         });
       }else {
-        console.log('你不是此房源归属人，请先申请');
+        this.toast.msg('你不是此房源归属人，请填写后申请！');
         this.subs=false;
         this.applic=true
       }

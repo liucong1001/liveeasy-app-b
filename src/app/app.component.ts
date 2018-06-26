@@ -132,6 +132,7 @@ export class MyApp {
     {name:'西北',val:11},
   ];
 
+
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
       //如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
