@@ -3,7 +3,11 @@
   <ion-navbar>
     <ion-title>我的客户
     </ion-title>
-    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()" style="color: #fff;top: 0.7rem;"></ion-icon>
+    <ion-buttons end (click)="addpassenger()">
+      <button ion-button icon-only>
+        <ion-icon name='md-add' class="adds"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

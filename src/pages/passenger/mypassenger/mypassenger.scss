@@ -29,3 +29,15 @@ page-mypassenger .tips a:nth-child(4) {
   width: 45px;
   height: 45px;
 }
+//-----------------
+page-mypassenger{
+  ion-navbar{
+    .adds{
+      color: #fff;
+      font-weight: 500;
+    }
+    .bar-button{
+      font-size: 1.5rem;
+    }
+  }
+}
