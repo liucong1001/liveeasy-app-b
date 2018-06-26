@@ -90,11 +90,12 @@
   .ion-page {
     ion-header {
       padding-top: 10px;
+      //padding-bottom: 10px;
       background-color: color($colors, first);
     }
-    //ion-content{
-    //  margin-top: 20px;
-    //}
+    ion-content{
+      //margin-top: 20px;
+    }
     .white-header {
       background-color: color($colors, white);
     }

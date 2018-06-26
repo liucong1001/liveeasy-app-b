@@ -44,7 +44,7 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleLightContent();//状态栏字体白色
+      statusBar.styleDefault();//状态栏字体白色
       // let status bar overlay webview 头部信号
       statusBar.overlaysWebView(true);
       // set status bar to white
@@ -58,7 +58,7 @@ export class MyApp {
       // this.setPageTransition();
 
       // 返回按键事件
-      // this.registerBackButtonAction();
+      this.registerBackButtonAction();
     });
   }
 
