@@ -7,8 +7,9 @@ import {errorHandler} from "@angular/platform-browser/src/browser";
 import {AccountPage} from "../../pages/account/account";
 import {Content,IonicPage, NavParams,App,Nav} from "ionic-angular";
 import {ToastComponent} from "../../components/toast/toast";
-
 import  {NavController} from "ionic-angular";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/timeout';
 
 /*
   Generated class for the HttpProvider provider.
@@ -20,6 +21,7 @@ import  {NavController} from "ionic-angular";
 export class HttpProvider {
   @ViewChild(Content) content: Content;
   @ViewChild(Nav) nav: Nav;
+   defaultTimeout = 10000;
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
               public toast:ToastComponent,public app: App,) {
               console.log('Hello HttpProvider Provider');
@@ -38,19 +40,22 @@ export class HttpProvider {
 
 
   public httpGet(url,params?):Promise<any>{
-    return this.http.get(url,{headers:this.headers,params:params},).toPromise().then(res=>{
+    return this.http.get(url,{headers:this.headers,params:params},).timeout(5000)
+      .toPromise().then(res=>{
       return res as any;
     }).catch(err=>{
       this.errResponse(err);
+      err.name=='TimeoutError'&&alert('连接超时!');
     })
   }
 
   public httpPost(url,params?):Promise<any>{
-    return this.http.post(url,params,{headers:this.headers}).toPromise().then(res=>{
-      console.log('成功!',res);
-      return res as any;
+    return this.http.post(url,params,{headers:this.headers}).timeout(5000)
+      .toPromise().then(res=>{
+          return res as any;
     }).catch(err=>{
       this.errResponse(err);
+      err.name=='TimeoutError'&&alert('连接超时!');
     })
   }
   //测试 没有权限
@@ -62,7 +67,6 @@ export class HttpProvider {
         this.errResponse(err);
     })
   };
-
 
 
   //formData表单

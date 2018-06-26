@@ -59,6 +59,8 @@ export class HousedetailPage {
 //房源标签
   houLabel:any;
   estateList:any;
+
+  lockStatus:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
@@ -92,8 +94,8 @@ export class HousedetailPage {
     loading.present();
 
     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
-      this.data = res.data;
-      if( this.data){
+      this.data = res&&res.data;
+      if( this.data&&res.success){
         loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
         this.form.patchValue({
@@ -129,29 +131,31 @@ export class HousedetailPage {
           var tagsArry = tagsStr.split(',');
           var arry = [];
           for(var i in tagsArry){
-            arry[i] = tagsArry[i].toString().replace(/\s/g, "")
+            arry[i] = tagsArry[i].toString().replace(/\s/g, "");
+            //判断锁定状态
+            if(tagsArry[i]==256){
+              this.lockStatus=true;
+            }
           }
 
           this.form.patchValue({
             tagsStr:arry
-          })
+          });
+
+
         }
         this.propertyid=this.data.propertyId;
         this.localStorageProvider.set('propertyid',this.data.propertyId);
         //获取房源标签
         this.houLabel=this.localStorageProvider.get('tagsList');
+      }else {
+        this.toast.msg('获取详情失败!');
+        loading.dismiss();
       }
-
     });
+
     this.propertyid =  this.navParams.data.propertyId;
-    console.log('获取详情id',this.navParams.data.propertyId );
-
-
-
-
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
-    console.log('获取存贮id',propertyId);
-    console.log('ionViewDidLoad HousedetailPage11');
   }
 
   form:FormGroup =this.fb.group({

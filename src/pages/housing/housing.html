@@ -84,7 +84,9 @@
                 </font>
               </ion-col>
             </ion-row>
-            <div class="tips" [ngClass]="{uDis:item.tagsStr}" *ngIf="tagPipe(item.tagsStr)">
+
+            <!--*ngIf="!tagPipe(item.tagsStr)"-->
+            <div class="tips" [ngClass]="{uDis:item.tagsStr}" >
               <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5">{{tagName(x)}}</a>
             </div>
             <div>

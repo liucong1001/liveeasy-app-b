@@ -1,3 +1,71 @@
+//------------
+
+page-housing {
+  .tips {
+    a {
+      display: inline-block;
+      font-size: xx-small;
+      padding: 1px 3px;
+      margin-right: 6px
+    }
+    a:first-child {
+      background: #FEEDE9;
+      color: #F98369;
+    }
+    a:nth-child(2) {
+      background: #E7F7F7;
+      color: #7DD4D0;
+    }
+    a:nth-child(3) {
+      background: #E9F6FC;
+      color: #69C2EC;
+    }
+    a:nth-child(4) {
+      background: #F6EAF5;
+      color: #C373BA;
+    }
+    a:nth-child(5) {
+      background: #E2F5ED;
+      color: #3DBD89;
+    }
+    a:nth-child(6) {
+      background: #E8F7E4;
+      color: #68CA47;
+    }
+    a:nth-child(7) {
+      background: #e3ebee;
+      color: #84abba;
+    }
+    a:nth-child(8) {
+      background: #feffcc;
+      color: #fec500;
+    }
+    a:nth-child(9) {
+      background: #ffe1e1;
+      color: #e08989;
+    }
+    a:nth-child(10) {
+      background: #f0f0da;
+      color: #d3ba64;
+    }
+  }
+
+  .serInput {
+    width: 87%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .toolbar-background-ios {
+    background-color: #f8f8f8;
+  }
+  .scroll-content{
+    top: 110px;
+    bottom: 55px;
+    margin: 0 !important;
+    border-top: none !important;
+  }
+}
+
 .uDis{
   height: 30px;
   overflow: hidden;
@@ -5,173 +73,13 @@
 .p15{
   padding:0 5px 15px;
 }
-.popLocation{
-  top: 101px;position: relative
-}
-.adds {
-  color: #1ab394;
-  font-size: 3rem;
-  font-weight: bold;
-  vertical-align: middle;
-  margin-left: 10px;
-  //position: absolute;
-  //right: 1.2rem;
-  //top: 0.6rem;
-}
 
-
-.houseMenu {
-  //background: #F8F8F8;
-  //position: fixed;
-  //width: 100%;
-  //z-index: 1;
-  //top: 42px;
-}
-
-.houseMenu ion-col {
-  // border: 1px solid;
-  padding: 13px 0;
-  color: #555;
-}
-
-.houseMenu ion-col ion-icon {
-  //position: relative;
-  //top: 3px;
-  //left: 5px;
-  vertical-align: middle;
-}
-
-page-housing .tips a {
-  display: inline-block;
-  font-size: xx-small;
-  padding: 1px 3px;
-  margin-right: 6px
-}
-
-page-housing .tips a:first-child {
-  background: #FEEDE9;
-  color: #F98369;
-}
-
-page-housing .tips a:nth-child(2) {
-  background: #E7F7F7;
-  color: #7DD4D0;
-}
-
-page-housing .tips a:nth-child(3) {
-  background: #E9F6FC;
-  color: #69C2EC;
-}
-
-page-housing .tips a:nth-child(4) {
-  background: #F6EAF5;
-  color: #C373BA;
-}
-
-page-housing .tips a:nth-child(5) {
-  background: #E2F5ED;
-  color: #3DBD89;
-}
-
-page-housing .tips a:nth-child(6) {
-  background: #E8F7E4;
-  color: #68CA47;
-}
-page-housing .tips a:nth-child(7) {
-  background: #e3ebee;
-  color: #84abba;
-}
-page-housing .tips a:nth-child(8) {
-  background: #feffcc;
-  color: #fec500;
-}
-page-housing .tips a:nth-child(9) {
-  background: #ffe1e1;
-  color: #e08989;
-}
-page-housing .tips a:nth-child(10) {
-  background: #f0f0da;
-  color: #d3ba64;
-}
-.houseStatus {
-  border-top: 1px solid #F5F5F5;
-  padding: 6px 0;
-}
-
-.houseStatus a {
-  color: #339999;
-  display: block;
-  border-right: 1px solid #f2f2f2;
-}
-
-.houseMain {
-  margin-bottom: 10px
-}
-.houseMain:first-child{
-  //margin-top: 46px;
-}
-.lists {
-  position: fixed; // top: 10%;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  z-index: 9999; // color: #000
-  height: 48.5%;
-  margin-top: -13px
-}
-
-.leftChange {
-  height: 100%;
-  overflow: scroll; // background: #aaa;
-  //border-bottom: 1px solid #F4F4F4;
-}
-.scrollC{
-  overflow: scroll;
-  height: 100%;
-}
-.leftChange a
-{
-  border-bottom: 1px solid #F5F5F5;
-  display: block;
-  padding: 13px 10px;
-}
-//.leftChange a:active{
-//background:#DB2924;
-//color:#fff;
-//}
-.leftChange .item-block{
-  min-height:46px;
-}
 .updateBg {
   background: #F8F8F8;
 }
 
-.lists button {
-  border-radius: 5px;
-  margin-top: 13px;
-}
-
-.pop,.pops {
-  position: absolute;
-  left: 0;
-  top: 100px;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: .3;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  z-index:100;
-}
 .houseType{
   padding: 0 25px;
-}
-
-.btns{
-  margin-bottom: 10px;
-  position: absolute;
-  bottom: 0;
-  width: 84%;
 }
 .item-radio-checked.item-ios ion-label {
   color: #1ab394;
@@ -197,26 +105,6 @@ text-align: center;
 color: #aaa;
 padding: 5px 0 12px;
 }
-//------------
-page-housing {
-  .serInput {
-    width: 87%;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .toolbar-background-ios {
-    background-color: #f8f8f8;
-  }
-  .houseMenu {
-    background-color: #fff;
-  }
-  .scroll-content{
-    top: 110px;
-    bottom: 55px;
-    margin: 0 !important;
-    border-top: none !important;
-  }
-}
 
 .refresh{
   margin: 40px 0 35px;
@@ -224,5 +112,4 @@ page-housing {
 
 #propertyHeader {
   background-color: #F8F8F8;
-
 }
