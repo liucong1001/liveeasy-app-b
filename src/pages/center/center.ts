@@ -7,6 +7,7 @@ import { MyaccountPage } from './myaccount/myaccount';
 import {AccountPage} from "../account/account";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the CenterPage page.
@@ -27,8 +28,10 @@ export class CenterPage {
   custposName:any;
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
-    public nativePageTransitions: NativePageTransitions
+    public nativePageTransitions: NativePageTransitions,
+              public statusBar: StatusBar
   ) {
+
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.name = this.localStorageProvider.get('loginInfo').name;
     this.gh=this.localStorageProvider.get('loginInfo').no;
@@ -36,7 +39,9 @@ export class CenterPage {
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
     console.log(this.name)
   }
-
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CenterPage');
   }

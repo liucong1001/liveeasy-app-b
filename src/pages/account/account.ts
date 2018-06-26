@@ -7,6 +7,7 @@ import {LoginProvider} from '../../providers/login/login'
 import {LocalStorageProvider} from  '../../providers/local-storage/local-storage'
 import {ToastComponent} from "../../components/toast/toast";
 import {BackButtonProvider} from "../../providers/common/backButton";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the AccountPage page.
  *
@@ -27,7 +28,7 @@ export class AccountPage {
     permissionList = []; //权限存储
     constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,
                 public loginProvider:LoginProvider,public localStorageProvider:LocalStorageProvider,
-               public toast:ToastComponent,public backButtonProvider:BackButtonProvider,private platform: Platform,
+               public toast:ToastComponent,public backButtonProvider:BackButtonProvider,private statusBar: StatusBar,
                 private app: App) {
 
               // this.platform.ready().then(() => {
@@ -35,7 +36,9 @@ export class AccountPage {
               // });
     }
 
-
+    ionViewWillEnter() {
+      this.statusBar.styleDefault();
+    }
     ionViewDidLoad() {
       // 存储系统中存在登录ticket记录直接跳转到主界面
       if(this.localStorageProvider.get('ticket')){
@@ -71,5 +74,9 @@ export class AccountPage {
             // console.log('失败',err.error.msg);
         })
     }
+
+  registerBackButtonAction() {
+      return null;
+  }
 
 }

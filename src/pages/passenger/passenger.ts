@@ -4,6 +4,7 @@ import { AddpassengerPage } from './mypassenger/addpassenger/addpassenger';
 import { MypassengerPage } from './mypassenger/mypassenger';
 import {PsearchPage} from "./psearch/psearch";
 import { PublicpassengerPage } from './publicpassenger/publicpassenger';
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the PassengerPage page.
  *
@@ -18,9 +19,12 @@ import { PublicpassengerPage } from './publicpassenger/publicpassenger';
 })
 export class PassengerPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public statusBar: StatusBar) {
 
+  }
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerPage');
   }

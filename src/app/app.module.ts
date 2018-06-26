@@ -91,7 +91,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       LoginPageModule,HousingPageModule,CenterPageModule,AllsearchPageModule,
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs
-        preloadModules: true,
+        preloadModules: false,
         mode: 'ios',          //把所有平台设置为iOS风格：
         modalEnter: 'modal-slide-in',
         modalLeave: 'modal-slide-out',

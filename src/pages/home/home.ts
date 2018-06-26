@@ -6,6 +6,7 @@ import {AddhousePage} from "../housing/addhouse/addhouse";
 import {AddpassengerPage} from "../passenger/mypassenger/addpassenger/addpassenger";
 import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";
+import {StatusBar} from "@ionic-native/status-bar";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,7 +15,7 @@ export class HomePage {
   associate=false;
   pop=false;
   notificationNews = [];
-  constructor(public navCtrl: NavController,public homeProvider:HomeProvider) {
+  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,public statusBar: StatusBar) {
     // // 测试接口
     // this.homeProvider.test().then(res=>{
     //   console.log('test成功',res);
@@ -28,7 +29,9 @@ export class HomePage {
 
 
   }
-
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   ionViewDidLoad(){
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}

@@ -40,15 +40,15 @@ export class MyApp {
     console.log('rootPage是',this.rootPage);
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
-    console.log(this.tagsList)
+    console.log(this.tagsList);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      statusBar.styleLightContent();
       // let status bar overlay webview 头部信号
       statusBar.overlaysWebView(true);
       // set status bar to white
-      // statusBar.backgroundColorByHexString('#ffffff');
+      statusBar.backgroundColorByHexString('#ffffff');
       headerColor.tint('#DC143C');
       splashScreen.hide();
       //android 6 以上动态获取权限
@@ -58,7 +58,7 @@ export class MyApp {
       // this.setPageTransition();
 
       // 返回按键事件
-      // this.registerBackButtonAction();
+      this.registerBackButtonAction();
     });
   }
 
@@ -131,7 +131,6 @@ export class MyApp {
     {name:'东北',val:10},
     {name:'西北',val:11},
   ];
-
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {

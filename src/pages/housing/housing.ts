@@ -22,6 +22,7 @@ import {visibilityToggle} from "../../components/animations/toggle.animation";
 import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
 import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the HousingPage page.
  *
@@ -113,12 +114,12 @@ export class HousingPage {
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
               public localStorageProvider: LocalStorageProvider,
               public configProvider: ConfigProvider,
+              public statusBar: StatusBar,
               public addhouseProvider: AddhouseProvider,
               public customerProvider:CustomerProvider,
               menu: MenuController,public toast:ToastComponent,
   ) {
       // console.log('页面数据',this.pageData);
-
       menu.enable(true); //menus-功能开启
       if(!navParams.get('item')){
         this.floorName = '';
@@ -275,7 +276,9 @@ export class HousingPage {
     };
     this.search();
   }
-
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
     this.search();
