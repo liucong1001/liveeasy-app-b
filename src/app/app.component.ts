@@ -49,8 +49,8 @@ export class MyApp {
       // let status bar overlay webview 头部信号
       statusBar.overlaysWebView(true);
       // set status bar to white
-      statusBar.backgroundColorByHexString('#ffffff');
-      headerColor.tint('#DC143C');
+      //statusBar.backgroundColorByHexString('#ffffff');
+      headerColor.tint('#1ab394');
       splashScreen.hide();
       //android 6 以上动态获取权限
       //检测版本更新

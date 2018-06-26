@@ -89,7 +89,7 @@
 .platform-android {
   .ion-page {
     ion-header {
-      padding-top: 5px;
+      padding-top: $cordova-ios-statusbar-padding;
       background-color: color($colors, first);
     }
     .white-header {
