@@ -10,6 +10,12 @@
 <ion-content>
 
   <form [formGroup]="form" *ngIf="data" >
+    <div class="bgWhite p10 " *ngIf="lockStatus">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+       &nbsp;房源已经锁定，无法下架、修改发布房源信息、上传或删除图片，修改或删除业主委托书，修改或删除钥匙
+    </font>
+    </div>
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房源ID：{{data.convId}}</ion-label>
@@ -297,7 +303,7 @@
           <button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button class="redact" color="light" (click)="save()">确认修改</button>
+          <button ion-button class="redact" color="light" (click)="save()" [disabled]="lockStatus">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>

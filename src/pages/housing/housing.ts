@@ -23,6 +23,7 @@ import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
 import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
 import {StatusBar} from "@ionic-native/status-bar";
+
 /**
  * Generated class for the HousingPage page.
  *
@@ -82,6 +83,7 @@ export class HousingPage {
   type: string;
   area: any;
   tagsList = [];
+  tagsListPage =[];
   estateList = []; //楼盘列表
   district:any;
   aeraShow=true;
@@ -132,25 +134,26 @@ export class HousingPage {
 
     this.customerProvider.area().then(res=>{
       console.log('区域', res);
-      this.area = res.data.distrs;
-      if(this.area){
-        this.area.unshift({name:'不限',id:'99'});
+      if(res){
+        this.area = res.data.distrs;
+        if(this.area){
+          this.area.unshift({name:'不限',id:'99'});
+        }
+        /**
+         * 区域和房源标签合成一个接口
+         */
+        this.tagsList = res.data.tags; //房源标签
+        this.localStorageProvider.set('tagsList',this.tagsList);
       }
-      /**
-       * 区域和房源标签合成一个接口
-       */
-      this.tagsList = res.data.tags; //房源标签
-      this.localStorageProvider.set('tagsList',this.tagsList);
+
     });
 
 
 
     //房源标签
-    // this.addhouseProvider.estateTagsSelect(6).then(res => {
-    //   this.tagsList = res.data;
-    //   console.log('房源列表', this.tagsList);
-    //    this.localStorageProvider.set('tagsList',this.tagsList);
-    // });
+    this.addhouseProvider.estateTagsSelect().then(res => {
+       this.tagsListPage = res.data;
+    });
   }
 
   isActive(item) {
@@ -235,32 +238,30 @@ export class HousingPage {
     this.pageData = null;
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
-       console.log('结束时间内容',res.data.totalRecords);
-       this.totalRecords = res.data.totalRecords;
-       this.pageData = res.data.result;
-       this.firstPageData = res.data.result;
-       // console.log(this.pageData)
-       // console.log('查询到的页面数据',this.pageData);
-       // console.log('是否有数据',res.data.hasOwnProperty('result'));
-        if(res.data.hasOwnProperty('result')){
+       if(res){
+         console.log('结束时间内容',res.data.totalRecords);
+         this.totalRecords = res.data.totalRecords;
+         this.pageData = res.data.result;
+         this.firstPageData = res.data.result;
+         if(res.data.hasOwnProperty('result')){
            this.hasData  = true;
-        }else{
+         }else{
            this.hasData = false;
-        }
-        console.log('hasData',this.hasData);
-       this.totalPages = res.data.totalPages;
-        //关闭搜索框子
-       this.show = false;
-       this.houseType = false;
-       this.more = false;
-       this.pop = false;
-       this.housingEstate = false;
+         }
+         console.log('hasData',this.hasData);
+         this.totalPages = res.data.totalPages;
+         //关闭搜索框子
+         this.show = false;
+         this.houseType = false;
+         this.more = false;
+         this.pop = false;
+         this.housingEstate = false;
 
-       //户型搜索条件字显示
-       if(this.searchFloorNum ==1){
-          this.searchFloorNum = 2;
+         //户型搜索条件字显示
+         if(this.searchFloorNum ==1){
+           this.searchFloorNum = 2;
+         }
        }
-       console.log('次数',this.searchFloorNum);
 
      });
   }
@@ -483,9 +484,9 @@ export class HousingPage {
 
   //房源标签code转换为name
   tagName(code) {
-    for (var i in this.tagsList) {
-      if (code == this.tagsList[i].tagCode) {
-        return this.tagsList[i].tagDesc
+    for (var i in this.tagsListPage) {
+      if (code == this.tagsListPage[i].tagCode) {
+        return this.tagsListPage[i].tagDesc
       }
     }
   }

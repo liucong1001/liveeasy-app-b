@@ -43,9 +43,7 @@ export class PassengerdetailPage {
               public events: Events) {
 
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
-       this.data = res;
-       console.log('详情',this.data);
-
+        this.data = res;
         this.form.patchValue({
           customerId:this.data.customerId,
           customerName:this.data.customerName,
@@ -67,11 +65,15 @@ export class PassengerdetailPage {
           maxBedroom:this.data.maxBedroom,
           minHall:this.data.minHall,
           maxHall:this.data.maxHall,
+          //其他
+          requiredDemands:this.data.requiredDemands,
+          againstDemands:this.data.againstDemands,
+          comments:this.data.comments,
+          contactFreeTmArray:this.data.contactFreeTm&&this.data.contactFreeTm.split("-"),
+          contactFreeTm1:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0],
+          contactFreeTm2:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1],
         });
-
     });
-
-      console.log('赋值之后',this.form.value);
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
       this.customerSrcList = res;
@@ -125,6 +127,9 @@ export class PassengerdetailPage {
     decorations:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
+    contactFreeTmArray:[],//免打扰时间
+    contactFreeTm1:[''],//免打扰时间开始
+    contactFreeTm2:[''],//免打扰时间结束
     comments:[''],//备注
   });
 

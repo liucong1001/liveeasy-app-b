@@ -94,6 +94,9 @@ export class AddpassengerPage {
     decorations:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
+    contactFreeTmArray:[[]],//免打扰时间
+    contactFreeTm1:[''],//免打扰时间开始
+    contactFreeTm2:[''],//免打扰时间结束
     comments:[''],//备注
   });
 
@@ -178,6 +181,19 @@ export class AddpassengerPage {
       console.log('表单',this.form.value);
     }
 
+  }
+
+  getcontactFreeTm1(event){
+    // this.form.value.contactFreeTmArray
+    var startTime = event.hour +':'+event.minute ;
+    this.form.value.contactFreeTmArray[0] = startTime;
+     console.log('时间',event,startTime);
+  }
+
+  getcontactFreeTm2(event){
+    var endTime = event.hour +':'+event.minute ;
+    this.form.value.contactFreeTmArray[1] = endTime;
+    console.log('表单',this.form.value);
   }
 
 
