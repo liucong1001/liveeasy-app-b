@@ -5,7 +5,6 @@ import {AddpassengerPageModule} from "./mypassenger/addpassenger/addpassenger.mo
 import {CloseprivateguestPageModule} from "./mypassenger/closeprivateguest/closeprivateguest.module";
 import {MypassengerPageModule} from "./mypassenger/mypassenger.module";
 import {PublicpassengerPageModule} from "./publicpassenger/publicpassenger.module";
-import {PsearchPageModule} from "./psearch/psearch.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import {PsearchPageModule} from "./psearch/psearch.module";
     IonicPageModule.forChild(PassengerPage),
     MypassengerPageModule,
     PublicpassengerPageModule,
-    PsearchPageModule,
   ],
 })
 export class PassengerPageModule {}

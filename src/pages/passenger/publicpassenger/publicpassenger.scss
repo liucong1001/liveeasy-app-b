@@ -1,12 +1,6 @@
 page-publicpassenger {
-  ion-header{
-    background:none !important;
-  }
-  .toolbar-background-ios{
+  .houseMenu{
     background: #f8f8f8;
-  }
-  .bar-button-default-ios{
-    color: #000;
   }
   .item.item-ios .checkbox-ios{
     position: absolute;
@@ -33,7 +27,7 @@ page-publicpassenger {
 }
 .telPhone{
   display: inline-block;
-  background: url(assets/imgs/phone.png) no-repeat center ;
+  background: url(../assets/imgs/phone.png) no-repeat center ;
   background-size:cover;
   width: 45px;
   height: 45px;

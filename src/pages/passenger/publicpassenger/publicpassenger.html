@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="hoInput" (click)="pSearch()"></ion-searchbar>
+    <ion-title>公客列表</ion-title>
   </ion-navbar>
   <ion-row class="houseMenu">
     <ion-col col-4 class="tc" (click)="showMenu1()">
@@ -74,10 +74,10 @@
       抱歉，找不到数据
     </div>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!hasData">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
-        loadingText="加载中...">
+        loadingText="加载中">
 
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
@@ -130,10 +130,10 @@
     </ion-list>
     <ion-row class="btns">
       <ion-col col-6>
-        <button ion-button full color="danger" style="background: #F0F0F0;color:#6A98C8;" (click)="reset()">重置</button>
+        <button ion-button full color="danger" class="radius" style="background: #F0F0F0;color:#6A98C8;" (click)="reset()">重置</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button full color="danger" (click)="sxClick()">确定</button>
+        <button ion-button full color="danger" class="radius" (click)="sxClick()">确定</button>
       </ion-col>
     </ion-row>
   </div>

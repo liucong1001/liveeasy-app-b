@@ -1,6 +1,6 @@
 page-mypassenger {
-  ion-header{
-    //background: none !important;
+  .houseMenu{
+    background: #f8f8f8;
   }
   .item.item-ios .checkbox-ios{
     position: absolute;
@@ -52,7 +52,7 @@ page-mypassenger {
 }
 .telPhone{
   display: inline-block;
-  background: url(assets/imgs/phone.png) no-repeat center ;
+  background: url(../assets/imgs/phone.png) no-repeat center ;
   background-size:cover;
   width: 45px;
   height: 45px;

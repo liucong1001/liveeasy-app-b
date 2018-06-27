@@ -400,7 +400,7 @@ export class HousingPage {
     this.navCtrl.push(AddhousePage);
   }
 
-  //上拉刷新
+  //下拉刷新
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
 

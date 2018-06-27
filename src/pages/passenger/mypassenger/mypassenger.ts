@@ -7,7 +7,7 @@ import { PassengerfollowPage } from './passengerfollow/passengerfollow';
 import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
-
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -52,7 +52,7 @@ export class MypassengerPage {
     sort:'1',
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
-              public propertyProvider: PropertyProvider) {
+              public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
     this.customerProvider.area().then(res=>{
       this.area = res.data.distrs;
       if(this.area){
@@ -222,7 +222,7 @@ export class MypassengerPage {
   //条数
   currentPage:number =1;
   all = false;
-  //下拉加载
+  //上拉加载
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       infiniteScroll.complete();
@@ -250,6 +250,46 @@ export class MypassengerPage {
 
   }
   searchFloorNum = 0; //初始化搜索次数
+  totalRecords :any;//查询到的总条数；
+  firstPageData = [];
+  //下拉刷新
+  doRefresh(refresher) {
+    console.log(this.params)
+    console.log('上拉刷新Begin async operation', refresher);
+
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
+      console.log('结束时间内容',res.data.totalRecords);
+
+      this.totalRecords = res.data.totalRecords;
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+      let newCount = this.checkUpdateCount(res.data.result);
+      this.firstPageData = res.data.result;
+
+      console.log('Async operation has ended');
+      refresher.complete();
+      if (newCount > 0 ) {
+        this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+      } else {
+        this.toast.defaultMsg('middle','暂无更新');
+      }
+    });
+  }
+
+  checkUpdateCount(result) {
+    let count = 0;
+    result = result || [];
+    this.firstPageData = this.firstPageData || [];
+    for (let item in result) {
+      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      if (rs.length == 0) {
+        count ++;
+      }
+    }
+    return count;
+  }
+
+
   //menu
   showMenu1(){
     if(this.show==false || this.houseType == true || this.more == true ){
