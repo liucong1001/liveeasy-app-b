@@ -251,7 +251,7 @@
             <ion-item>
               <div class="pl12">
                 <span>产权性质：</span>
-                <span>{{this.propertyinfo}}</span>
+                <span>{{buzzpipe(this.propertyinfo.buzzOwnerType)}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -271,7 +271,7 @@
             <ion-item>
               <div class="pl12">
                 <span>房产登记时间：</span>
-                <!--<span>{{this.orders.carportPropId}}</span>-->
+                <span>{{this.orders.permitRegTime}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -311,7 +311,7 @@
             <ion-item>
               <div class="pl12">
                 <span>抵押情况：</span>
-                <span>{{this.propertyinfo}}</span>
+                <span>{{pmpipe(this.propertyinfo.propertyMortgage)}}</span>
               </div>
             </ion-item>
           </ion-list>

@@ -99,4 +99,34 @@ export class DeclinfoPage {
       }
     }
   }
+//报单房源——抵押情况
+  pmJSON=[
+    {name:'无',val:0},
+    {name:'一押',val:1},
+    {name:'二押',val:2},
+  ]
+  pmpipe(val){
+    for(var i in this.pmJSON){
+      if(val == this.pmJSON[i].val){
+        return this.pmJSON[i].name;
+      }
+    }
+  }
+  //报单房源——产权性质
+buzzJSON=[
+  {name:'其他',val:0},
+    {name:'商品房',val:1},
+    {name:'公房',val:2},
+    {name:'经适房',val:3},
+  {name:'房改房',val:4},
+  {name:'拆迁安置房',val:5},
+
+  ]
+  buzzpipe(val){
+    for(var i in this.buzzJSON){
+      if(val == this.buzzJSON[i].val){
+        return this.buzzJSON[i].name;
+      }
+    }
+  }
 }

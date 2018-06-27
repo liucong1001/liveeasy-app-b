@@ -80,6 +80,9 @@
     background: #1ab394;
     border: 0;
   }
+  .button-ios.activated{
+    background:#1ab394 ;
+  }
 }
 .red{
   background: red;
@@ -148,7 +151,8 @@
   width: 100%;
   background: #fff;
   z-index: 9999; // color: #000
-
+  margin-top: -13px;
+  //overflow: auto;
   margin-top: -13px;
   overflow:auto;
   button {
@@ -173,7 +177,7 @@
 }
 .scrollC{
   overflow: scroll;
-  height: 100%;
+  height: 410px;
 }
 .popLocation{
   top: 112px;
