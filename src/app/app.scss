@@ -148,8 +148,9 @@
   width: 100%;
   background: #fff;
   z-index: 9999; // color: #000
-  height: 48.5%;
-  margin-top: -13px,
+
+  margin-top: -13px;
+  overflow:auto;
   button {
     border-radius: 5px;
     margin-top: 13px;
@@ -157,8 +158,9 @@
 }
 
 .leftChange {
-  height: 100%;
-  overflow: scroll; // background: #aaa;
+  height: 410px;
+  overflow: scroll;
+  // background: #aaa;
   //border-bottom: 1px solid #F4F4F4;
   a{
     border-bottom: 1px solid #F5F5F5;
@@ -174,7 +176,7 @@
   height: 100%;
 }
 .popLocation{
-  top: 101px;
+  top: 112px;
   position: relative
 }
 .pop ,.pops{
