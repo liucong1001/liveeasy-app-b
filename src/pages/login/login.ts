@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccountPage } from '../account/account';
 import {TabsPage} from "../tabs/tabs";
+import {StatusBar} from "@ionic-native/status-bar";
 declare var $: any;
 /**
  * Generated class for the LoginPage page.
@@ -18,11 +19,18 @@ declare var $: any;
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public statusBar: StatusBar
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
   }
   goAccount() {
     this.navCtrl.setRoot(AccountPage);
@@ -53,6 +61,6 @@ export class LoginPage {
     // })
 
   }
- 
+
 
 }

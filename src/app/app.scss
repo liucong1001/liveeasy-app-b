@@ -91,6 +91,9 @@
     ion-header {
       padding-top: $cordova-ios-statusbar-padding;
       background-color: color($colors, first);
+      .houseMenu {
+        background-color: color($colors, white);
+      }
     }
     .white-header {
       background-color: color($colors, white);
