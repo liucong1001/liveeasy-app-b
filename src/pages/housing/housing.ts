@@ -548,7 +548,7 @@ export class HousingPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.navCtrl.push(AllsearchPage,{floorName:this.floorName});
+    this.navCtrl.push(AllsearchPage,{floorName:this.floorName},{animate:false});
   }
 
   mores(){

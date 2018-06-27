@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
@@ -25,6 +25,7 @@ export class AllsearchPage {
   search:any;
   timer:any; //获取焦点定时器
   @ViewChild('searchBar') searchBar:Searchbar;
+  @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
@@ -64,8 +65,12 @@ export class AllsearchPage {
   ionViewDidEnter(){
     this.timer= setInterval(()=>{
       this.searchBar.setFocus();
-    },0)
+    },0);
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.pop({animate:false});
+    };
   }
+
   //页面离开
   ionViewCanLeave(){
     window.clearInterval(this.timer);
@@ -86,7 +91,7 @@ export class AllsearchPage {
   }
 
   back(){
-    this.navCtrl.pop();
+    this.navCtrl.pop({animate:false});
   }
 
   chose(item){
