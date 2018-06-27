@@ -164,12 +164,14 @@
 .leftChange {
   height: 410px;
   overflow: scroll;
+
   // background: #aaa;
   //border-bottom: 1px solid #F4F4F4;
   a{
     border-bottom: 1px solid #F5F5F5;
     display: block;
-    padding: 13px 10px;
+    padding: 13px 10px 13px 15px;
+
   }
   .item-block{
     min-height:46px;
