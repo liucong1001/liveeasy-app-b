@@ -6,6 +6,7 @@ import {HousedetailPage} from "../housedetail";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Events } from 'ionic-angular';
 import {PropertyProvider} from "../../../../providers/property/property";
+import {StatusBar} from "@ionic-native/status-bar";
 @IonicPage()
 @Component({
   selector: 'page-searchhouse',
@@ -21,7 +22,7 @@ export class SearchhousePage {
   @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient,) {
+              private http:HttpClient,public statusBar: StatusBar) {
 
   }
 
@@ -44,7 +45,9 @@ export class SearchhousePage {
     })
   }
 
-
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchhousePage');
    this.floorList = this.localStorageProvider.get('floorList');

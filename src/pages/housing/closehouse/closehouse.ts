@@ -86,9 +86,10 @@ export class ClosehousePage {
       this.closehouseProvider.getClose({
         propertyId:this.propertyid,
         propertyStatus:this.form.value.propertyStatus,
-        closeTime:this.closetime,
-        invalidReason:this.form.value.invalidReason,
-        closeDesc:this.form.value.closeDesc
+        applyTime:this.closetime,
+        invalidReason:null,
+        closeDesc:this.form.value.closeDesc,
+        realtorId:this.realtorSourceId,
       }).then(res => {
         console.log(res);
         if(res.success){
@@ -105,9 +106,10 @@ export class ClosehousePage {
         this.closehouseProvider.getClose({
           propertyId:this.propertyid,
           propertyStatus:this.form.value.propertyStatus,
-          closeTime:this.closetime,
+          applyTime:this.closetime,
           invalidReason:this.form.value.invalidReason,
-          closeDesc:this.form.value.closeDesc
+          closeDesc:this.form.value.closeDesc,
+          realtorId:this.realtorSourceId
         }).then(res => {
           console.log(res);
           if(res.success){
@@ -131,15 +133,16 @@ export class ClosehousePage {
     this.closehouseProvider.getClose({
       propertyId:this.propertyid,
       //当前操作人id
-      propertyStatus:this.form.value.propertyStatus,
+      propertyStatus:parseInt(this.form.value.propertyStatus),
       // closeTime:this.closetime,
       invalidReason:this.form.value.invalidReason,
       closeDesc:this.form.value.closeDesc,
       applyTime:new Date().getTime(),
+      realtorId:this.realtorSourceId
     }).then(res => {
       console.log(res);
       this.navCtrl.parent.select(1);
-      this.toast.msg('提交成功，请等候同意!');
+      this.toast.msg('提交成功，请等候归属人同意!');
     });
   }
 

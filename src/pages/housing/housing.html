@@ -1,7 +1,7 @@
 <ion-header id="propertyHeader">
   <ion-navbar>
     <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"   class="serInput" (click)="allSearch()"></ion-searchbar>
-    <ion-icon ios="ios-add" md="md-add" class="adds " (click)="addHouse()"></ion-icon>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
   </ion-navbar>
 
   <ion-row class="houseMenu" >
@@ -26,7 +26,7 @@
       <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
-    <ion-col col-3 class="tc" menuToggle>
+    <ion-col col-3 class="tc" (click)="mores()">
       更多
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
@@ -117,7 +117,7 @@
     <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
-        加载数据中...
+        <div class="m5">加载数据中</div>
       </div>
       <div *ngIf="!hasData"  class="tc">
         抱歉！没有找到数据

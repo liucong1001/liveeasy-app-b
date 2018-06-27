@@ -126,9 +126,9 @@ a{
 .back-button-text{
     display: none;
 }
-.bar-button-default-ios{
-    color:#fff;
-}
+/*.bar-button-default-ios{*/
+    /*color:#fff;*/
+/*}*/
 
 .searchbar-ios .searchbar-input{
   background: #fff;
@@ -168,9 +168,9 @@ a{
  } */
 
 /* header public */
-.toolbar-background-ios{
-    background: #1ab394;
-}
+/*.toolbar-background-ios{*/
+    /*background: #1ab394;*/
+/*}*/
 .toolbar-title-ios {
     color: #fff;
 }
