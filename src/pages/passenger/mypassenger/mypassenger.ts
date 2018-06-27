@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams,Navbar } from 'ionic-angular';
 import { AddpassengerPage } from './addpassenger/addpassenger';
 import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
@@ -8,6 +8,7 @@ import { CloseprivateguestPage } from './closeprivateguest/closeprivateguest';
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
+import {PassengerPage} from "../passenger";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -51,6 +52,8 @@ export class MypassengerPage {
     priceUnit:'1',
     sort:'1',
   };
+  @ViewChild('navbar') navBar: Navbar;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
     this.customerProvider.area().then(res=>{
@@ -68,6 +71,20 @@ export class MypassengerPage {
 
   ionViewDidLoad() {
     this.search();
+  }
+  ionViewDidEnter() {
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(PassengerPage);
+      // this.navBarShow = false;
+      this.navCtrl.pop({animate:false});
+
+    };
+  }
+  navbar=true;
+  ionViewWillUnload(){
+    // window.history.back();
+    this.navbar =false;
+    // ;alert('4545')
   }
 
   selected :any;

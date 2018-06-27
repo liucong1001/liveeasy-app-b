@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {PublicCustomerProvider} from "../../../providers/public-customer/public-customer";
 import {PropertyProvider} from "../../../providers/property/property";
 import {CustomerProvider} from "../../../providers/customer/customer";
@@ -44,6 +44,7 @@ export class PublicpassengerPage {
     sort:'1',
     customerType:'1',
   };
+  @ViewChild('navbar') navBar: Navbar;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
               public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,public toast:ToastComponent,) {
@@ -64,6 +65,13 @@ export class PublicpassengerPage {
     this.search();
     // this.sxClick();
   }
+
+  ionViewDidEnter() {
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.pop({animate:false});
+    };
+  }
+
   selected :any;
   isActive(item) {
     return this.selected === item;

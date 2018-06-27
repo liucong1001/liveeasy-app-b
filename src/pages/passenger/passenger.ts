@@ -31,10 +31,11 @@ export class PassengerPage {
     this.navCtrl.push(AddpassengerPage)
   }
   passenger(){
-    this.navCtrl.push(MypassengerPage)
+    this.navCtrl.push(MypassengerPage,null,{animate:false})
   }
+
   publicpassenger(){
-    this.navCtrl.push(PublicpassengerPage)
+    this.navCtrl.push(PublicpassengerPage,null,{animate:false})
   }
 
 }

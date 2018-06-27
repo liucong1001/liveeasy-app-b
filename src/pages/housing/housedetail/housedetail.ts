@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
 import {SearchhousePage} from "./searchhouse/searchhouse";
 import {RecordPage} from "./record/record";
 import { LookhousePage } from './lookhouse/lookhouse';
@@ -61,6 +61,7 @@ export class HousedetailPage {
   estateList:any;
 
   lockStatus:any;
+  @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
@@ -156,6 +157,12 @@ export class HousedetailPage {
 
     this.propertyid =  this.navParams.data.propertyId;
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
+  }
+
+  ionViewDidEnter() {
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.pop({animate:false});
+    };
   }
 
   form:FormGroup =this.fb.group({

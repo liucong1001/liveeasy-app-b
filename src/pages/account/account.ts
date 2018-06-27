@@ -62,7 +62,9 @@ export class AccountPage {
               this.localStorageProvider.set('ticket',res.ticket);
               //权限
                console.log('权限',res.data.menus);
-
+               this.findPermission(res.data.menus);
+               this.localStorageProvider.set('permissionArry',this.permissionArry);
+               console.log('结果',this.permissionArry);
             }else{
               this.loginBtn = false;
               this.toast.defaultMsg('top','账号或密码有误!');
@@ -74,6 +76,17 @@ export class AccountPage {
             // console.log('失败',err.error.msg);
         })
     }
+  permissionArry =[];
+  // 遍历树
+  findPermission(data){
+      for(var i in data){
+          if(data[i].permission){
+            // console.log('权限值',data[i].permission);
+             this.permissionArry.push(data[i].permission);
+          }
+        this.findPermission(data[i].childrens);
+      }
+  }
 
   registerBackButtonAction() {
       return null;

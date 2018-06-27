@@ -1,17 +1,19 @@
-<ion-header>
-  <ion-navbar>
-    <ion-toolbar no-border-top>
-      <ion-searchbar placeholder="楼盘搜索"  #searchBar   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
-      <ion-buttons end>
-        <button ion-button icon-only color="dark">
-          取消
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content>
+  <ion-header class="searchFloorHeader">
+    <ion-navbar>
+      <ion-toolbar no-border-top>
+        <ion-searchbar placeholder="楼盘搜索"  #searchBar   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
+        <ion-buttons end>
+          <button ion-button icon-only color="dark">
+            取消
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
+
   <ion-list>
       <ion-item *ngFor="let item of floor"  class="pl12">
       <ion-label>{{item.keyword}}</ion-label>
