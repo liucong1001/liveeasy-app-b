@@ -4,7 +4,7 @@ import {PublicCustomerProvider} from "../../../providers/public-customer/public-
 import {PropertyProvider} from "../../../providers/property/property";
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PublicpdetailPage} from "./publicpdetail/publicpdetail";
-
+import {ToastComponent} from "../../../components/toast/toast";
 /**
  公客列表
  */
@@ -46,7 +46,7 @@ export class PublicpassengerPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
-              public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,) {
+              public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,public toast:ToastComponent,) {
     this.customerProvider.area().then(res=>{
       this.area = res.data.distrs;
       if(this.area){
@@ -237,6 +237,44 @@ export class PublicpassengerPage {
       });
     }, 1000);
 
+  }
+
+  totalRecords :any;//查询到的总条数；
+  firstPageData = [];
+  //下拉刷新
+  doRefresh(refresher) {
+    console.log(this.params)
+    console.log('上拉刷新Begin async operation', refresher);
+
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
+      console.log('结束时间内容',res.data.totalRecords);
+
+      this.totalRecords = res.data.totalRecords;
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
+      let newCount = this.checkUpdateCount(res.data.result);
+      this.firstPageData = res.data.result;
+
+      console.log('Async operation has ended');
+      refresher.complete();
+      if (newCount > 0 ) {
+        this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+      } else {
+        this.toast.defaultMsg('middle','暂无更新');
+      }
+    });
+  }
+  checkUpdateCount(result) {
+    let count = 0;
+    result = result || [];
+    this.firstPageData = this.firstPageData || [];
+    for (let item in result) {
+      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      if (rs.length == 0) {
+        count ++;
+      }
+    }
+    return count;
   }
 
   //进入详情页
