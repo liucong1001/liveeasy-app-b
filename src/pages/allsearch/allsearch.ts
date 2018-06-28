@@ -7,6 +7,7 @@ import { Events } from 'ionic-angular';
 import {PropertyProvider} from "../../providers/property/property";
 import {HousingPage} from "../housing/housing";
 import {HomePage} from "../home/home";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the AllsearchPage page.
  *
@@ -28,7 +29,7 @@ export class AllsearchPage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient) {
+              private http:HttpClient, public nativePageTransitions: NativePageTransitions,) {
     this.search = navParams.get('floorName');
 
   }
@@ -67,7 +68,8 @@ export class AllsearchPage {
       this.searchBar.setFocus();
     },0);
     this.navBar.backButtonClick = () => {
-      this.navCtrl.pop({animate:false});
+       // this.navCtrl.pop({animate:false});
+       this.openWin(HousingPage,null);
     };
   }
   //页面即将离开
@@ -102,4 +104,19 @@ export class AllsearchPage {
     this.search = item;
     this.getFloorKey(item)
   }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
+
+
 }
