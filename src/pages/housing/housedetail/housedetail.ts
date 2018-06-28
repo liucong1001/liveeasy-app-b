@@ -18,6 +18,8 @@ import { Events } from 'ionic-angular';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
 import {ToastComponent} from "../../../components/toast/toast";
 import { LoadingController, Loading } from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+
 /**
  * Generated class for the HousedetailPage page.
  *
@@ -65,7 +67,9 @@ export class HousedetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
+              public statusBar: StatusBar,
               public loadingCtrl: LoadingController) {
+
 
 
 
@@ -87,7 +91,9 @@ export class HousedetailPage {
   tagsSelect(value){
     this.form.value.tags= this.tagsSum(value);
   };
-
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   ionViewDidLoad() {
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
@@ -159,11 +165,6 @@ export class HousedetailPage {
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
   }
 
-  ionViewDidEnter() {
-    this.navBar.backButtonClick = () => {
-      this.navCtrl.pop({animate:false});
-    };
-  }
 
   form:FormGroup =this.fb.group({
     adminDivisionCode:[''],//楼盘相对应区域
