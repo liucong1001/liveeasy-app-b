@@ -76,6 +76,6 @@ export class CenterPage {
     };
 
     this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage);
+    this.navCtrl.push(goPage,{}, {animate: false});
   }
 }

@@ -36,22 +36,18 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 @Component({
   selector: 'page-housing',
   templateUrl: 'housing.html',
-  //  visibilityToggle,
-//   animations:[
-//     trigger('fadeInOut', [
-//       transition(':enter', [   // :enter is alias to 'void => *'
-//         style({opacity:0,height:0}),
-//         animate(400, style({opacity:1,height:350}))
-//       ]),
-//       transition(':leave', [   // :leave is alias to '* => void'
-//         style({opacity:0,height:0}),
-//         animate(400, style({opacity:0}))
-//       ])
-//
-//     ])
-//
-//
-// ],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate(100)
+      ]),
+      transition('* => void', [
+        animate(100, style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
 })
 export class HousingPage {
   @ViewChild('myTabs') tabRef: Tabs;
@@ -82,6 +78,7 @@ export class HousingPage {
   totalPages: number;//总页数
   imgHeader: string; //线上图片默认头地址
   type: string;
+
   area: any;
   tagsList = [];
   tagsListPage =[];
@@ -433,7 +430,7 @@ export class HousingPage {
     };
 
     this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 
   checkUpdateCount(result) {
