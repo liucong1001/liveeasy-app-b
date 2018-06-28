@@ -1,8 +1,12 @@
 <ion-header>
-
   <ion-navbar #navbar color="first" >
     <ion-title>房源详情</ion-title>
-    <span class="records" (click)="record()">记录</span>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="record()">
+        记录
+      </button>
+    </ion-buttons>
+    <!--<span class="records" (click)="record()">记录</span>-->
   </ion-navbar>
 
 </ion-header>
