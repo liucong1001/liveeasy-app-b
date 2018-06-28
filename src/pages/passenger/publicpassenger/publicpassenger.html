@@ -66,23 +66,19 @@
           </ion-col>
         </ion-row>
       </ion-col>
-      <!--<ion-col col-12 class="houseStatus">-->
-      <!--<ion-row>-->
-      <!--<ion-col col-4 class="tc" (click)="goFollow()">-->
-      <!--<a>跟进</a>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-4 class="tc" (click)="golook()">-->
-      <!--<a>约看</a>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-4 class="tc" (click)="closePrivateGuest()">-->
-      <!--<a>关闭</a>-->
-      <!--</ion-col>-->
-      <!--</ion-row>-->
-      <!--</ion-col>-->
     </ion-row>
 
-    <div *ngIf="pageData==null" class="tc">
-      抱歉，找不到数据
+    <!--<div *ngIf="pageData==null" class="tc">-->
+      <!--抱歉，找不到数据-->
+    <!--</div>-->
+    <div class="content_page">
+      <div *ngIf="hasData&&pageData ==null" class="tc">
+        <ion-spinner item-start name="ios"></ion-spinner>
+        加载数据中...
+      </div>
+      <div *ngIf="!hasData"  class="tc">
+        抱歉！没有找到数据
+      </div>
     </div>
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
@@ -92,6 +88,8 @@
 
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+    <div *ngIf="all&&hasData" class="sTips">已加载全部
+    </div>
     <!--<div *ngIf="all&&hasData" class="sTips">已加载全部-->
     <!--</div>-->
   </ion-grid>

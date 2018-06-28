@@ -57,6 +57,7 @@ export class AllsearchPage {
 
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick = this.backButtonClick;
     console.log('ionViewDidLoad AllsearchPage');
     this.floorList = this.localStorageProvider.get('floorList');
     if(this.floorList ==null){this.floorList = []}
@@ -68,13 +69,8 @@ export class AllsearchPage {
       this.searchBar.setFocus();
     },0);
     this.navBar.backButtonClick = () => {
-       // this.navCtrl.pop({animate:false});
-       this.openWin(HousingPage,null);
+        this.navCtrl.pop({animate:false});
     };
-  }
-  //页面即将离开
-  ionViewWillLeave(){
-    window.clearInterval(this.timer);
   }
   //页面离开
   ionViewCanLeave(){
@@ -103,6 +99,20 @@ export class AllsearchPage {
     console.log('历史选择的',item);
     this.search = item;
     this.getFloorKey(item)
+  }
+
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 
   //------跳转页面过渡--------//

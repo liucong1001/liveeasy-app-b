@@ -1,33 +1,33 @@
 <ion-header id="propertyHeader">
   <ion-navbar>
-    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"  class="serInput" (tap)="allSearch()" disabled></ion-searchbar>
+    <ion-searchbar  #searchBar placeholder="楼盘搜索" [(ngModel)]="floorName"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>
 
   <ion-row class="houseMenu" >
-    <ion-col col-3 class="tc" tappable (click)="showMenu1()">
+    <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
 
-      <span >{{searchDict}}{{ searchArea}} </span>
+      <span [ngClass]="{color:this.searchDict}">{{searchDict}}{{ searchArea}} </span>
       <span *ngIf="!searchDict">区域</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
-    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()">
+    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
-      <span *ngIf="searchFloorNum==2">{{housePipe(params.bedroomType)}}</span>
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType !=0}">{{housePipe(params.bedroomType)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
 
     </ion-col>
-    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()">
+    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <!--<span [ngClass]="{xiaoQu:params.estateId}" >{{ estatePipe(params.estateId)}}</span>-->
       <!--ngIf="params.hasElevator==null"-->
-      <span >{{elevatorPipe(params.hasElevator) }}</span>
+      <span [ngClass]="{color:params.hasElevator =='1' || '0'}">{{elevatorPipe(params.hasElevator) }}</span>
       <!--*ngIf="params.hasElevator!=null"-->
       <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
-    <ion-col col-3 class="tc" tappable (click)="mores()">
-      更多
+    <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
+      <span [ngClass]="{color:this.orientation != '' || this.tags !=''}">更多</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
   </ion-row>
