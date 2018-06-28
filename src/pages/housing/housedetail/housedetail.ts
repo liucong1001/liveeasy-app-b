@@ -36,8 +36,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
   templateUrl: 'housedetail.html',
 })
 export class HousedetailPage {
-  sensitiveInfo =false;
-  showInfos=true;
+  sensitiveInfo =true;
   follow=false;
   data:PropertyModel;
   //更多
@@ -156,6 +155,11 @@ export class HousedetailPage {
         this.localStorageProvider.set('propertyid',this.data.propertyId);
         //获取房源标签
         this.houLabel=this.localStorageProvider.get('tagsList');
+        //敏感信息
+        if(this.data.notShow){
+          this.sensitiveInfo = false;
+        }
+
       }else {
         this.toast.msg('获取详情失败!');
         loading.dismiss();
@@ -277,14 +281,8 @@ export class HousedetailPage {
       propertyid:this.propertyid,
     });
   }
-  // goRedact(){
-  //   this.navCtrl.push(RedacthousePage);
-  // }
-  showInfo(){
-    this.sensitiveInfo =true;
-    this.showInfos=false;
-    this.follow=true;
-  }
+
+
 
   //楼盘搜索页面
   goserach(){

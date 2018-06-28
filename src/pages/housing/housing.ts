@@ -449,14 +449,20 @@ export class HousingPage {
   //条数
   currentPage: number = 1;
   all = false;
+  pageResult :any;
   //上拉加载
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       infiniteScroll.complete();
-      this.currentPage++;
+      if(this.currentPage==1){
+        this.currentPage=3
+      }else {
+        this.currentPage++;
+      }
+
       console.log('加载完成后，关闭刷新', this.currentPage);
 
-      if (this.currentPage >= this.totalPages) {
+      if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
@@ -464,6 +470,7 @@ export class HousingPage {
        }else {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+          this.pageResult = res.data.result;
           for (let i = 0; i < res.data.result.length; i++) {
             this.pageData.push(res.data.result[i]);
           }

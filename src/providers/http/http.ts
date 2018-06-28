@@ -40,22 +40,22 @@ export class HttpProvider {
 
 
   public httpGet(url,params?):Promise<any>{
-    return this.http.get(url,{headers:this.headers,params:params},).timeout(5000)
+    return this.http.get(url,{headers:this.headers,params:params},).timeout(8000)
       .toPromise().then(res=>{
       return res as any;
     }).catch(err=>{
       this.errResponse(err);
-      err.name=='TimeoutError'&&alert('连接超时!');
+      err.name=='TimeoutError'&&this.toast.defaultMsg('top','连接超时!');
     })
   }
 
   public httpPost(url,params?):Promise<any>{
-    return this.http.post(url,params,{headers:this.headers}).timeout(5000)
+    return this.http.post(url,params,{headers:this.headers}).timeout(8000)
       .toPromise().then(res=>{
           return res as any;
     }).catch(err=>{
       this.errResponse(err);
-      err.name=='TimeoutError'&&alert('连接超时!');
+      err.name=='TimeoutError'&&this.toast.defaultMsg('top','连接超时!');
     })
   }
   //测试 没有权限
@@ -96,17 +96,17 @@ export class HttpProvider {
   errResponse(err){
     switch (err.status){
       case 401 :console.log('错误代码',err.status);
-        alert('错误代码'+err.status);
+        this.toast.defaultMsg('top','错误代码'+err.status);
         this.reset();
         break;
       case 403 :console.log('错误代码',err.status),this.reset();
-        alert('错误代码'+err.status);
+        this.toast.defaultMsg('top','错误代码'+err.status);
         break;
       case 500 :console.log('错误代码',err.status);
-        alert('服务器异常');
+        this.toast.defaultMsg('top','服务器异常!');
         break;
       case 504 :console.log('错误代码',err.status);
-        alert('服务器连接超时');
+        this.toast.defaultMsg('top','服务器连接超时!');
         break;
   }}
 

@@ -116,7 +116,7 @@ export class MyApp {
       let activeNav = tabs && tabs.getSelected();
 
       if (activeNav) {
-        if (activeNav === LoginPage) {
+        if (activeNav === AccountPage) {
           return this.showExit();
         }
         if (activeNav.canGoBack()) {

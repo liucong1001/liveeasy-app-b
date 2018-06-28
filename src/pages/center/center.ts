@@ -58,7 +58,6 @@ export class CenterPage {
     this.openWin(UpdatepwdPage)
   }
   reset(){
-
     localStorage.clear();
     this.content.resize();
     let myModal = this.modalCtrl.create(AccountPage);
