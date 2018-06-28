@@ -1,9 +1,12 @@
 page-mypassenger {
+  .scroll-content{
+    border-top: 0 !important;
+  }
   .houseMain ion-col[col-12]:first-child{
     padding-left: 18px;
   }
   .houseMenu{
-    background: #f8f8f8;
+    background: #fff;
   }
   .item.item-ios .checkbox-ios{
     position: absolute;

@@ -10,19 +10,19 @@
          </ion-buttons>
        </ion-navbar>
        <ion-row class="houseMenu">
-         <ion-col col-4 class="tc" tappable (click)="showMenu1()">
-           <span>{{searchDict}}</span>
+         <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
+           <span [ngClass]="{color:this.searchDict}">{{searchDict}}</span>
            <span *ngIf="!searchDict">区域</span>
            <ion-icon name="md-arrow-dropdown"></ion-icon>
          </ion-col>
-         <ion-col col-4 class="tc" tappable (click)="showMenu2()">
+         <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
-           <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
+           <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom !=0}">{{housePipe(params.intentionRoom)}}</span>
            <span [hidden]="searchFloorNum==2"> 户型</span>
            <ion-icon name="md-arrow-dropdown"></ion-icon>
          </ion-col>
-         <ion-col col-4 class="tc" tappable (click)="showMenu3()">
-           <span *ngIf="sx==2" class="ellipsis" style="display: inline-block;width: 65px;">{{filtrate(this.values)}}</span>
+         <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
+           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;width: 65px;">{{filtrate(this.values)}}</span>
            <span [hidden]="sx==2"> 筛选</span>
            <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
            <ion-icon name="md-arrow-dropdown" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
@@ -46,7 +46,7 @@
       refreshingText="正在加载数据中...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-grid class="p0">
+  <ion-grid class="p0" style="    margin-top: 2px;">
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
         <ion-col col-12 >
             <ion-row>
