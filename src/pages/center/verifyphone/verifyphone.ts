@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 declare var $:any;
 /**
  * Generated class for the VerifyphonePage page.
@@ -14,12 +15,15 @@ declare var $:any;
   templateUrl: 'verifyphone.html',
 })
 export class VerifyphonePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public navCtrl: NavController,
+              public nativePageTransitions: NativePageTransitions,
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VerifyphonePage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   sendMsg() {
     var validCode = true;
@@ -42,7 +46,20 @@ export class VerifyphonePage {
         }, 1000)
       }
     // })
+  }
 
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 
 }
