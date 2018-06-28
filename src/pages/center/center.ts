@@ -1,5 +1,5 @@
 import { Component ,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Content ,ModalController} from 'ionic-angular';
 import { AboutusPage } from './aboutus/aboutus';
 import { HelpPage } from './help/help';
 import { UpdatepwdPage } from './updatepwd/updatepwd';
@@ -27,7 +27,7 @@ export class CenterPage {
   gh:any;
   custposName:any;
   @ViewChild(Content) content: Content;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
     public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar
   ) {
@@ -61,7 +61,9 @@ export class CenterPage {
 
     localStorage.clear();
     this.content.resize();
-    this.navCtrl.push(AccountPage);
+    let myModal = this.modalCtrl.create(AccountPage);
+    myModal.present();
+    // this.navCtrl.push(AccountPage);
     this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
   }
 

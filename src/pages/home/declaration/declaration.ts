@@ -33,7 +33,7 @@ export class DeclarationPage {
    * @type {{}}
    */
   params:CustomerPageParams = {
-    orderStatus:'1' //居室
+    orderStatus:'5' //居室
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private customerProvider:CustomerProvider,private homeProvider:HomeProvider,
