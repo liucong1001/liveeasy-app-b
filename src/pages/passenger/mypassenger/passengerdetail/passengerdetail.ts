@@ -8,6 +8,7 @@ import {CustomerProvider} from "../../../../providers/customer/customer";
 import {MypassengerPage} from "../../mypassenger/mypassenger";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ToastComponent} from "../../../../components/toast/toast";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -40,7 +41,7 @@ export class PassengerdetailPage {
  data :any;
   estateName:'';
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
+  constructor(public navCtrl: NavController,public toast:ToastComponent,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events) {
 
@@ -197,7 +198,7 @@ export class PassengerdetailPage {
     // console.log('body:',body);
     this.customerProvider.update(this.form.value).then(res=>{
       if (res.success){
-        alert('修改客户成功!');
+        this.toast.msg('修改客户成功!');
         this.openWin(MypassengerPage);
       }
     },err=>{

@@ -61,9 +61,6 @@ export class ClosehousePage {
         this.closehouseProvider.getShow(this.propertyid).then(res => {
           console.log(this.propertyid)
           console.log(res);
-          if(res.data == 1){
-            this.pending =true;
-          }
         });
       }else {
         this.toast.msg('你不是此房源归属人，请填写后申请！');

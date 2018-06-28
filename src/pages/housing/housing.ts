@@ -135,6 +135,40 @@ export class HousingPage {
       this.floorName = this.navParams.get('item').keyword;
       this.params.estateId = this.navParams.get('item').id;
     }
+
+    // console.log('页面数据',this.pageData);
+    //   this.menu.enable(true); //menus-功能开启
+      if(!navParams.get('item')){
+        this.floorName = '';
+        this.params.estateId = '';
+      }else {
+        this.floorName = navParams.get('item').keyword;
+        this.params.estateId = navParams.get('item').id;
+      }
+
+
+    this.customerProvider.area().then(res=>{
+      console.log('区域', res);
+      if(res){
+        this.area = res.data.distrs;
+        if(this.area){
+          this.area.unshift({name:'不限',id:'99'});
+        }
+        /**
+         * 区域和房源标签合成一个接口
+         */
+        this.tagsList = res.data.tags; //房源标签
+        this.localStorageProvider.set('tagsList',this.tagsList);
+      }
+
+    });
+
+
+
+    //房源标签
+    this.addhouseProvider.estateTagsSelect().then(res => {
+       this.tagsListPage = res.data;
+    });
   }
 
   isActive(item) {
@@ -323,7 +357,6 @@ export class HousingPage {
     }else {
       this.searchFloorNum =1;
     }
-    this.searchFloorNum =1;
     if (this.houseType == false || this.show == true || this.more == true || this.housingEstate == true) {
       this.houseType = true;
       this.show = false;
@@ -596,6 +629,7 @@ export class HousingPage {
   }
 
   mores(){
+
     this.events.subscribe('moreSearchBevents', (params) => {
       // 接收B页面发布的数据
       console.log('接收更多为: ', params);

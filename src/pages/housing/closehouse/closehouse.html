@@ -70,7 +70,7 @@
         <ion-col col-12 class="bgWhite p10">
           <button ion-button full color="danger" class="radius"  [disabled]="form.invalid" *ngIf="subs" (click)="subClose()">确定</button>
           <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="subApplic()" *ngIf="applic">提交申请</button>
-          <button ion-button tappable (click)="pendings()" *ngIf="pending">您有一条待处理申请</button>
+          <!--<button ion-button tappable (click)="pendings()" *ngIf="pending">您有一条待处理申请</button>-->
         </ion-col>
       </ion-row>
     </ion-grid>

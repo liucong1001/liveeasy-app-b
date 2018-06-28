@@ -6,6 +6,7 @@ import {MsgdetailPageModule} from "./msgdetail/msgdetail.module";
 import {DeclardetailPageModule} from "./declaration/declardetail/declardetail.module";
 import {DeclarationPageModule} from "./declaration/declaration.module";
 import {MsgdetailPage} from "./msgdetail/msgdetail";
+import {CheckhousePageModule} from "./checkhouse/checkhouse.module";
 @NgModule({
   declarations: [
     HomePage
@@ -13,7 +14,8 @@ import {MsgdetailPage} from "./msgdetail/msgdetail";
   imports: [
     IonicPageModule.forChild(HomePage),
     MsgdetailPageModule,
-    DeclarationPageModule
+    DeclarationPageModule,
+    CheckhousePageModule
   ],
 })
 export class HomePageModule {}

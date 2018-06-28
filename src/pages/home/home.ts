@@ -9,6 +9,7 @@ import {AllsearchPage} from "../allsearch/allsearch";
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {CheckhousePage} from "./checkhouse/checkhouse";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -41,6 +42,9 @@ export class HomePage {
   msgDetail(){
     this.openWin(MsgdetailPage)
   }
+  checkhouse(){
+  this.openWin(CheckhousePage);
+}
 
   godeclara(){
   this.openWin(DeclarationPage)
