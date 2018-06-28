@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {PropertyProvider} from "../../../../providers/property/property";
 import {RoleModel} from "../../../../model/property/role.model";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the RolepeoplePage page.
  *
@@ -18,7 +19,8 @@ import {RoleModel} from "../../../../model/property/role.model";
 export class RolepeoplePage {
   propertyid:any;
   data:RoleModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public nativePageTransitions: NativePageTransitions,
               public localStorageProvider: LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid= navParams.get('propertyid');
     console.log(this.propertyid);
@@ -32,6 +34,20 @@ export class RolepeoplePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RolepeoplePage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
+//------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
 
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 }

@@ -1,10 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Nav, NavController, NavParams,Content } from 'ionic-angular';
+import {Events, IonicPage, Nav, NavController, NavParams, Content, Navbar} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {TabsPage} from "../../tabs/tabs";
 import {HousingPage} from "../housing";
 import {MyApp} from "../../../app/app.component"
 import { NgZone  } from '@angular/core';
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the MorePage page.
  *
@@ -30,17 +31,19 @@ export class MorePage {
     orientation:'',
   };
 
-
+  @ViewChild(Navbar) navBar: Navbar;
   selected:any;
   selected2:any;
   rootPage:any = MyApp ;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
-              public events: Events, private zone: NgZone) {
+              public events: Events, private zone: NgZone,
+              public nativePageTransitions: NativePageTransitions,) {
 
 
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick = this.backButtonClick;
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
     console.log(this.tagsList);
@@ -147,6 +150,21 @@ export class MorePage {
       // 发布 bevents事件
       this.events.publish('moreSearchBevents', this.searchMoreData);
     });
+  }
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Events, IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import { PfollowrecordPage } from './pfollowrecord/pfollowrecord';
 import { PlookrecordPage } from './plookrecord/plookrecord';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -7,6 +7,7 @@ import {AddhouseProvider} from "../../../../providers/addhouse/addhouse";
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {MypassengerPage} from "../../mypassenger/mypassenger";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -38,7 +39,8 @@ export class PassengerdetailPage {
   intentionTradeCodeId:string;  //用于转换商圈
  data :any;
   estateName:'';
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fb:FormBuilder,
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events) {
 
@@ -102,6 +104,7 @@ export class PassengerdetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerdetailPage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   form:FormGroup =this.fb.group({
     customerId:['',Validators.required],
@@ -203,4 +206,19 @@ export class PassengerdetailPage {
 
   }
 
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 }

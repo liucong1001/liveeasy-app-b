@@ -1,11 +1,12 @@
 import { Component ,ViewChild} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
+import {AlertController, IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
 import { CloseprivateguestPage } from '../../../mypassenger/closeprivateguest/closeprivateguest';
 import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger';
 import {ToastComponent} from "../../../../../components/toast/toast";
 import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {ClosePage} from "./close/close";
 import {PassengerdetailPage} from "../passengerdetail";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -25,7 +26,8 @@ export class PlookrecordPage {
   lRecord:any;
   customerid:any;
   params:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public customerProvider:CustomerProvider,
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
     this.customerid=navParams.get('id').customerId;
     console.log(this.customerid)
@@ -38,6 +40,7 @@ export class PlookrecordPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlookrecordPage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   //添加active
   goToSlide(index) {
@@ -102,5 +105,21 @@ item:item,
   }
   addHouse(){
     this.navCtrl.push(AddpassengerPage)
+  }
+
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 }
