@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {HousingPage} from "../../housing/housing";
 import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
+import {BelongerPage} from "./belonger/belonger";
 /**
  * Generated class for the ClosehousePage page.
  *
@@ -145,6 +146,10 @@ export class ClosehousePage {
       this.toast.msg('提交成功，请等候归属人同意!');
     });
   }
-
+  pendings(){
+    this.navCtrl.push(BelongerPage,{
+      data:this.form.value,
+    })
+  }
 
 }

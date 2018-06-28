@@ -20,8 +20,12 @@ export class DeclardetailPage {
   orderDetail:any;
   allOrder:any;
   feelist:any;
+  orderStatus:any;
+  JSON:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private homeProvider:HomeProvider,) {
     this.orderid=navParams.get('item').orderId;
+    this.orderStatus=navParams.get('item').orderStatus;
+    this.JSON=navParams.get('json')
     console.log(this.orderid);
     this.homeProvider.decldetail(this.orderid).then(res=>{
       this.allOrder=res.data;
@@ -57,6 +61,12 @@ goInfo(val){
       }
     }
   }
-
+  stapipe(val){
+    for(var i in this.JSON){
+      if(val == this.JSON[i].val){
+        return this.JSON[i].name;
+      }
+    }
+  }
 
 }

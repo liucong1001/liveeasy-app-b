@@ -33,7 +33,7 @@ export class DeclarationPage {
    * @type {{}}
    */
   params:CustomerPageParams = {
-    orderStatus:'5' //居室
+    // orderStatus:'5' //居室
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private customerProvider:CustomerProvider,private homeProvider:HomeProvider,
@@ -238,7 +238,8 @@ export class DeclarationPage {
 
   declarationDetail(item){
     this.navCtrl.push(DeclardetailPage,{
-      item:item
+      item:item,
+      json:this.stateJSON,
     })
   }
 
@@ -248,5 +249,5 @@ export class DeclarationPage {
  * 定义搜索参数类
  */
 class CustomerPageParams {
-  orderStatus:string;
+  // orderStatus:string;
 }

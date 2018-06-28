@@ -3,18 +3,18 @@
     <ion-title>公客列表</ion-title>
   </ion-navbar>
   <ion-row class="houseMenu">
-    <ion-col col-4 class="tc" (click)="showMenu1()">
+    <ion-col col-4 class="tc" tappable (click)="showMenu1()">
       <span>{{searchDict}}</span>
       <span *ngIf="!searchDict">区域</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
-    <ion-col col-4 class="tc" (click)="showMenu2()">
+    <ion-col col-4 class="tc" tappable (click)="showMenu2()">
       <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
 
-    <ion-col col-4 class="tc" (click)="showMenu3()">
+    <ion-col col-4 class="tc" tappable (click)="showMenu3()">
       <span *ngIf="sx==2">{{filtrate(params.customerType)}}</span>
       <span [hidden]="sx==2"> 筛选</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
@@ -39,7 +39,7 @@
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
       <ion-col col-12 >
         <ion-row>
-          <ion-col col-9 (click)="gopassengerDetail(item)">
+          <ion-col col-9 tappable (click)="gopassengerDetail(item)">
             <div class="ellipsis tips">
               <font size="3">{{item.customerName}}</font>
               <!--急-->

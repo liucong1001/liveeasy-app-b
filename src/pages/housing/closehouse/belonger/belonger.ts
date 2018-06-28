@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'belonger.html',
 })
 export class BelongerPage {
-
+  data:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.data=navParams.get('data');
+    console.log(this.data)
   }
 
   ionViewDidLoad() {

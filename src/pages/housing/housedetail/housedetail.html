@@ -282,31 +282,27 @@
       </button>
     </ion-list>
     <ion-list class="m10">
-      <button ion-item class="pl12" (click)="lookHouse()">
+      <button ion-item class="pl12" tappable (click)="lookHouse()">
         房源实勘
       </button>
-      <button ion-item class="pl12" (click)="letterOfAttorney()">
+      <button ion-item class="pl12" tappable (click)="letterOfAttorney()">
         业主委托书
       </button>
-      <button ion-item class="pl12" (click)="goKey()">
+      <button ion-item class="pl12" tappable (click)="goKey()">
         钥匙
       </button>
-      <button ion-item class="pl12" (click)="rolepeople()">
+      <button ion-item class="pl12" tappable (click)="rolepeople()">
         角色人
         <font color="#aaa" class="changes"></font>
       </button>
     </ion-list>
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
-          <!--<button ion-button full color="danger" *ngIf="showInfos" (click)="showInfo()" class="radius">调取敏感信息</button>-->
-          <button ion-button full color="danger" disabled  class="radius" style="background-color: #ccc">申请授权</button>
-        </ion-col>
-        <ion-col col-4>
+        <ion-col col-6>
           <!--<button ion-button full color="danger" *ngIf="follow" class="radius" (click)="goFollow()">跟进</button>-->
           <button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-6>
           <button ion-button class="redact" color="light" (click)="save()" [disabled]="lockStatus">确认修改</button>
         </ion-col>
       </ion-row>
