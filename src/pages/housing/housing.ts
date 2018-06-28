@@ -53,7 +53,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
   ]
 })
 export class HousingPage {
-  @ViewChild('myTabs') tabRef: Tabs;
   visibility = 'hidden';
   showFilter = false;
   // 列表搜索表单隐藏显示切换
@@ -289,7 +288,6 @@ export class HousingPage {
     console.log('ionViewDidLoad HousingPage');
     this.search();
     this.imgHeader = this.configProvider.set().img;
-    // this.tabRef.select(1);
   }
 
   //menu

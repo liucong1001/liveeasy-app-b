@@ -69,9 +69,10 @@ export class PublicpassengerPage {
   }
 
   ionViewDidEnter() {
-    this.navBar.backButtonClick = () => {
-      this.navCtrl.pop({animate:false});
-    };
+    // this.navBar.backButtonClick = () => {
+    //   this.navCtrl.pop({animate:false});
+    // };
+
   }
 
   selected :any;

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
 import { HousedetailPage } from './housedetail';
 import {ComponentsModule} from '../../../components/components.module';
 import {DescPageModule} from "./desc/desc.module";
@@ -10,6 +9,7 @@ import {RecordPageModule} from "./record/record.module";
 import {RolepeoplePageModule} from "./rolepeople/rolepeople.module";
 import {SearchhousePageModule} from "./searchhouse/searchhouse.module";
 import {DirectivesModule} from "../../../directives/directives.module";
+import {IonicPageModule} from "ionic-angular";
 
 @NgModule({
   declarations: [
@@ -18,7 +18,6 @@ import {DirectivesModule} from "../../../directives/directives.module";
   imports: [
     DirectivesModule,
     IonicPageModule.forChild(HousedetailPage),
-    ComponentsModule,
     ComponentsModule,
     DescPageModule,
     KeyPageModule,

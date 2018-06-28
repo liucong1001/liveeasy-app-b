@@ -128,9 +128,10 @@ export class MyApp {
             iosdelay: 50
           };
 
-          activeNav.pop({animate:false}, ()=> this.nativePageTransitions.slide(options)
+          this.nativePageTransitions.slide(options)
             .then()
-            .catch());
+            .catch()
+          activeNav.pop({animate:false, duration: 0});
         } else {
           this.showExit()
 

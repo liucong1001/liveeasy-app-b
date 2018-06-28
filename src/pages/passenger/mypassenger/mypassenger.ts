@@ -76,12 +76,12 @@ export class MypassengerPage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   ionViewDidEnter() {
-    this.navBar.backButtonClick = () => {
-      // this.navCtrl.push(PassengerPage);
-      // this.navBarShow = false;
-      this.navCtrl.pop({animate:false});
-
-    };
+    // this.navBar.backButtonClick = () => {
+    //   // this.navCtrl.push(PassengerPage);
+    //   // this.navBarShow = false;
+    //   this.navCtrl.pop({animate:false});
+    //
+    // };
   }
   navbar=true;
   ionViewWillUnload(){
