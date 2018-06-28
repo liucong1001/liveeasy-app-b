@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SearchPage} from "./search/search";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {MypassengerPage} from "../mypassenger";
 @IonicPage()
 @Component({
   selector: 'page-passengerlook',
@@ -41,7 +42,7 @@ export class PassengerlookPage {
       console.log('接收数据为: ', params);
       this.events.unsubscribe('bevents');
     });
-    this.navCtrl.push(SearchhousePage);
+    this.openWin(SearchhousePage);
   }
 
   looks(){
@@ -53,7 +54,7 @@ export class PassengerlookPage {
       console.log(res);
       if(res.success){
         this.toast.msg('约看成功!');
-        this.navCtrl.pop()
+        this.openWin(MypassengerPage)
       }else{
         this.toast.error('约看失败！');
       }
@@ -74,5 +75,18 @@ export class PassengerlookPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

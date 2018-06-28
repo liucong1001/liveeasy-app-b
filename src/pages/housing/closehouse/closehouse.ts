@@ -150,7 +150,7 @@ export class ClosehousePage {
     });
   }
   pendings(){
-    this.navCtrl.push(BelongerPage,{
+    this.openWin(BelongerPage,{
       data:this.form.value,
     })
   }
@@ -168,6 +168,18 @@ export class ClosehousePage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 }

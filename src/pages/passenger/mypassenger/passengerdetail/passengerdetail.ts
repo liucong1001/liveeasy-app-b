@@ -161,12 +161,12 @@ export class PassengerdetailPage {
   }
 
   passengerLook(){
-    this.navCtrl.push(PlookrecordPage,{
+    this.openWin(PlookrecordPage,{
       id:this.data,
     })
   }
   passengerFollow(){
-    this.navCtrl.push(PfollowrecordPage,{
+    this.openWin(PfollowrecordPage,{
       id:this.data,
     })
   }
@@ -184,7 +184,7 @@ export class PassengerdetailPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.navCtrl.push(SearchhousePage);
+    this.openWin(SearchhousePage);
   }
   save(){
     console.log('编辑客户',this.form.value);
@@ -198,7 +198,7 @@ export class PassengerdetailPage {
     this.customerProvider.update(this.form.value).then(res=>{
       if (res.success){
         alert('修改客户成功!');
-        this.navCtrl.push(MypassengerPage);
+        this.openWin(MypassengerPage);
       }
     },err=>{
       alert('修改失败！');
@@ -220,5 +220,18 @@ export class PassengerdetailPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

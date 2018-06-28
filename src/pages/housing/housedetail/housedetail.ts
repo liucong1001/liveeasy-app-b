@@ -277,7 +277,7 @@ export class HousedetailPage {
     actionSheet.present();
   }
   record(){
-    this.navCtrl.push(RecordPage,{
+    this.openWin(RecordPage,{
       propertyid:this.propertyid,
     });
   }
@@ -293,7 +293,7 @@ export class HousedetailPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.navCtrl.push(SearchhousePage);
+    this.openWin(SearchhousePage);
   };
 
   estateChange(Value){
@@ -310,7 +310,7 @@ export class HousedetailPage {
 
 
   letterOfAttorney(){
-    this.navCtrl.push(LetteratorneyPage,{
+    this.openWin(LetteratorneyPage,{
       propertyid:this.propertyid,
       estateId:this.data.estateId,
     })
@@ -321,11 +321,11 @@ export class HousedetailPage {
    */
 
   lookHouse(){
-    this.navCtrl.push(LookhousePage,{item:this.data});
+    this.openWin(LookhousePage,{item:this.data});
   }
 
   rolepeople(){
-    this.navCtrl.push(RolepeoplePage,{
+    this.openWin(RolepeoplePage,{
       propertyid:this.propertyid,
     })
   }
@@ -384,7 +384,7 @@ export class HousedetailPage {
   // }
   //跟进
   goFollow(){
-    this.navCtrl.push(FollowPage,{
+    this.openWin(FollowPage,{
       propertyid: this.data.propertyId,
       estatename: this.data.estateName,
       convid: this.data.convId,
@@ -394,7 +394,7 @@ export class HousedetailPage {
 
   //钥匙
   goKey(){
-    this.navCtrl.push(KeyPage,{
+    this.openWin(KeyPage,{
       propertyid:this.propertyid,
       item:this.data,
     })
@@ -423,7 +423,7 @@ export class HousedetailPage {
       // 取消订阅
       this.events.unsubscribe('content');
     });
-    this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
+    this.openWin(DescPage,{content:this.form.value.propertyDesc});
   }
 
   //户型
@@ -452,5 +452,18 @@ export class HousedetailPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

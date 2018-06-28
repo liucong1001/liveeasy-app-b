@@ -289,7 +289,7 @@ export class PublicpassengerPage {
 
   //进入详情页
   gopassengerDetail(item){
-    this.navCtrl.push(PublicpdetailPage, {
+    this.openWin(PublicpdetailPage, {
       item:item,
       customerId:item.customerId,
     });
@@ -382,7 +382,7 @@ export class PublicpassengerPage {
     }
   }
   gopublicpasger(){
-    this.navCtrl.push(PublicpassengerPage)
+    this.openWin(PublicpassengerPage)
   }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
@@ -397,6 +397,18 @@ export class PublicpassengerPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }
 

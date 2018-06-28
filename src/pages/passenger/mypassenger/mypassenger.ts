@@ -364,23 +364,23 @@ export class MypassengerPage {
     }
   }
   addpassenger(){
-    this.navCtrl.push(AddpassengerPage)
+    this.openWin(AddpassengerPage)
   }
   gopassengerDetail(item){
-    this.navCtrl.push(PassengerdetailPage,{customerId:item.customerId});
+    this.openWin(PassengerdetailPage,{customerId:item.customerId});
   }
   goFollow(item){
-    this.navCtrl.push(PassengerfollowPage,{
+    this.openWin(PassengerfollowPage,{
       item:item,
     })
   }
   golook(item){
-    this.navCtrl.push(PassengerlookPage,{
+    this.openWin(PassengerlookPage,{
       item:item,
     })
   }
   closePrivateGuest(item){
-    this.navCtrl.push(CloseprivateguestPage,{
+    this.openWin(CloseprivateguestPage,{
       item:item,
     })
   };
@@ -399,7 +399,18 @@ export class MypassengerPage {
     this.navCtrl.pop({animate:false});
   }
 
+//------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
 
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
 }
 
 /**

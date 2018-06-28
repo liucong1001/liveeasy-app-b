@@ -99,12 +99,12 @@ export class PlookrecordPage {
     }
 
   close(item){
-    this.navCtrl.push(ClosePage,{
+    this.openWin(ClosePage,{
 item:item,
     })
   }
   addHouse(){
-    this.navCtrl.push(AddpassengerPage)
+    this.openWin(AddpassengerPage)
   }
 
 
@@ -121,5 +121,18 @@ item:item,
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

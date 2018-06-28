@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {MypassengerPage} from "../mypassenger";
 /**
  * Generated class for the PassengerfollowPage page.
  *
@@ -50,7 +51,7 @@ export class PassengerfollowPage {
       console.log(res);
       if(res.success){
         this.toast.msg('跟进成功!');
-        this.navCtrl.pop()
+        this.openWin(MypassengerPage)
       }else{
         this.toast.error('跟进失败！');
       }
@@ -71,5 +72,18 @@ export class PassengerfollowPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

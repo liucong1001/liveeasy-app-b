@@ -8,6 +8,7 @@ import {DeclarationPage} from "./declaration/declaration";
 import {AllsearchPage} from "../allsearch/allsearch";
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -16,7 +17,9 @@ export class HomePage {
   associate=false;
   pop=false;
   notificationNews = [];
-  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,public statusBar: StatusBar,
+  constructor(public navCtrl: NavController,
+              public nativePageTransitions: NativePageTransitions,
+              public homeProvider:HomeProvider,public statusBar: StatusBar,
              ) {
 
   }
@@ -30,21 +33,33 @@ export class HomePage {
   }
 
   addhouse(){
-    this.navCtrl.push(AddhousePage)
+    this.openWin(AddhousePage)
   }
   addpassenger(){
-    this.navCtrl.push(AddpassengerPage)
+    this.openWin(AddpassengerPage)
   }
   msgDetail(){
-    this.navCtrl.push(MsgdetailPage)
+    this.openWin(MsgdetailPage)
   }
 
   godeclara(){
-  this.navCtrl.push(DeclarationPage)
+  this.openWin(DeclarationPage)
 }
   floorName = '';
   allSearch(){
-    this.navCtrl.push(AllsearchPage,{floorName:this.floorName,index:1})
-}
+    this.openWin(AllsearchPage,{floorName:this.floorName,index:1})
+  }
+//------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
 
 }

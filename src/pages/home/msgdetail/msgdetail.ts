@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
-import { MdetailsPage } from '../mdetails/mdetails';
+import { MdetailsPage } from './mdetails/mdetails';
 import {HomeProvider} from "../../../providers/home/home";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
@@ -33,7 +33,7 @@ export class MsgdetailPage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   goMdetails(item){
-    this.navCtrl.push(MdetailsPage,{news:item})
+    this.openWin(MdetailsPage,{news:item})
   }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
@@ -48,6 +48,19 @@ export class MsgdetailPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 
