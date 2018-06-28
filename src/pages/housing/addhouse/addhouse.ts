@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, App} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
@@ -9,6 +9,7 @@ import {HousingPage} from "../housing";
 import {DescPage} from "../housedetail/desc/desc";
 import { Events } from 'ionic-angular';
 import {ToastComponent} from "../../../components/toast/toast";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -33,8 +34,10 @@ export class AddhousePage {
   showHx=false;
   HxRight=true;
   HxDown=false;
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,private addhouseProvider:AddhouseProvider,
+              private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
+              private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
               public app: App) {
      //楼盘列表
@@ -127,6 +130,7 @@ export class AddhousePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddhousePage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
 
   presentActionSheet() {
@@ -273,6 +277,21 @@ export class AddhousePage {
       this.HxRight=true;
       this.HxDown=false;
     }
+  }
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 
 }

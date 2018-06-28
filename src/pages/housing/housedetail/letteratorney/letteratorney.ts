@@ -1,5 +1,5 @@
- import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
+ import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {HousingPage} from "../../housing";
@@ -9,6 +9,7 @@ import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail";
 import {ConfigProvider} from "../../../../providers/config/config";
 import {ToastComponent} from "../../../../components/toast/toast";
+ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the LetteratorneyPage page.
@@ -39,8 +40,9 @@ export class LetteratorneyPage {
   permission=true;
   agentname:any;
   maxImagesCount = true;
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
-              public localStorageProvider:LocalStorageProvider,
+              public localStorageProvider:LocalStorageProvider, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent,
               public navParams: NavParams,public configProvider: ConfigProvider,
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
@@ -92,6 +94,7 @@ export class LetteratorneyPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick = this.backButtonClick;
     console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
@@ -203,5 +206,20 @@ export class LetteratorneyPage {
       // propertyId   showIntention=false;
 
     });
+  }
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 }

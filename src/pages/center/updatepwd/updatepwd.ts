@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {HttpClient} from '@angular/common/http';
@@ -8,6 +8,7 @@ import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {AccountPage} from "../../account/account";
 import {tick} from "@angular/core/testing";
 import {ToastComponent} from "../../../components/toast/toast";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 @IonicPage()
 @Component({
   selector: 'page-updatepwd',
@@ -17,9 +18,10 @@ export class UpdatepwdPage {
   loginName:string;
   tips=false;
   pwd=false;
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,public toast:ToastComponent,
-              public  updprovider: UpdatepwdProvider,
+              public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
   }
   form:FormGroup =this.fb.group({
@@ -29,6 +31,7 @@ export class UpdatepwdPage {
   });
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdatepwdPage');
+    this.navBar.backButtonClick = this.backButtonClick;
   }
 
   update(){
@@ -62,4 +65,17 @@ export class UpdatepwdPage {
     }
   }
 
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 }

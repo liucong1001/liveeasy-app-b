@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {FileTransfer,FileUploadOptions, FileTransferObject} from "@ionic-native/file-transfer";
 import {FileProvider} from "../../../providers/file/file";
@@ -10,6 +10,7 @@ import {HousingPage} from "../housing";
 import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {ToastComponent} from "../../../components/toast/toast";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the AddlookPage page.
  *
@@ -35,9 +36,10 @@ export class AddlookPage {
   formData:any;
   standardAddress:any;
   fileTransfer: FileTransferObject = this.transfer.create();
-
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
-              private camera: Camera,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
+              private camera: Camera,
+              public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
     this.data = navParams.get('item');
@@ -50,6 +52,7 @@ export class AddlookPage {
     console.log('带看',this.data,this.data.convId);
     this.fileProvider.getTicker(this.data.estateId+'/'+this.data.propertyId+'/').then();
     this.imgHeader = this.configProvider.set().img;
+    this.navBar.backButtonClick = this.backButtonClick;
   }
 
 
@@ -195,5 +198,20 @@ export class AddlookPage {
          alert('添加失败'+err);
       })
     }
+
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 
 }

@@ -176,13 +176,13 @@
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
+        <ion-input type="number" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
+        <ion-input type="number" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
     </ion-list>

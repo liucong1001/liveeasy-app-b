@@ -69,6 +69,7 @@ import {HomePageModule} from "../pages/home/home.module";
 import {BackButtonProvider} from "../providers/common/backButton";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     MyApp,

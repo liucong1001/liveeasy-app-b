@@ -109,7 +109,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.customer" class="tc p10">暂无数据</div>
   <!--报单房源-->
   <div *ngIf="this.propertyinfo && this.nums == 1">
     <ion-grid class="p0 m10">
@@ -319,7 +319,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.propertyinfo" class="tc p10">暂无数据</div>
   <!--业主信息-->
   <div *ngIf="this.ownerinfo && this.nums == 2">
     <ion-grid class="p0 m10" *ngFor="let item of this.ownerinfo">
@@ -391,7 +391,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.ownerinfo" class="tc p10">暂无数据</div>
   <!--合同信息-->
   <div *ngIf="this.asslist && this.nums == 3">
     <ion-grid class="p0 m10">
@@ -473,7 +473,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.asslist && this.nums == 3" class="tc p10">暂无数据</div>
   <!--收款信息-->
   <div *ngIf="this.feelist && this.nums == 4">
     <ion-grid class="p0 m10" *ngFor="let i of this.feelist">
@@ -535,7 +535,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.feelist" class="tc p10">暂无数据</div>
   <!--业绩类型-->
   <div *ngIf="this.asslist && this.nums == 5">
     <ion-grid class="p0 m10" *ngFor="let item of this.asslist">
@@ -607,5 +607,5 @@
       </ion-row>
     </ion-grid>
   </div>
-
+  <div *ngIf="!this.asslist && this.nums ==5" class="tc p10">暂无数据</div>
 </ion-content>

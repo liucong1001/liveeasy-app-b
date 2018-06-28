@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row *ngFor="let item of notificationNews; index as i;"   (click)="goMdetails(item)">
+  <ion-row *ngFor="let item of notificationNews; index as i;" tappable (click)="goMdetails(item)">
     <ion-col col-12 class="tc">
       <font size="1">{{item.publishTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</font>
     </ion-col>

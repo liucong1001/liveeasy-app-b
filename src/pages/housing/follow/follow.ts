@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController  } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {FollowProvider} from '../../../providers/follow/follow'
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the FollowPage page.
  *
@@ -24,10 +25,11 @@ export class FollowPage {
   followuptime:any;
   convid:any;
   standardAddress:any;
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,
               public toast:ToastComponent,
-              public  followProvider: FollowProvider,
+              public  followProvider: FollowProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
 
     this.propertyid = navParams.get('propertyid');
@@ -41,6 +43,7 @@ export class FollowPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FollowPage');
+    this.navBar.backButtonClick = this.backButtonClick;
 
   }
   form:FormGroup =this.fb.group({
@@ -69,5 +72,20 @@ export class FollowPage {
       });
   console.log(this.form.value)
 }
+
+//------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 
 }

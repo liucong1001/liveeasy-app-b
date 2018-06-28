@@ -18,7 +18,7 @@
               <span>{{this.orderDetail.createTime}}</span>
             </div>
             <div class="m5">当前环节：
-              <span><font color="red">报单完成</font></span>
+              <span><font color="red">{{stapipe(orderStatus)}}</font></span>
             </div>
             <div class="m5">
               <font>报单人：
@@ -43,7 +43,7 @@
             <!--&lt;!&ndash;</div>&ndash;&gt;-->
           <!--</div>-->
         </ion-item>
-        <button ion-item class="pl12 m10" *ngFor="let item of numJOSN" (click)="goInfo(item.val)">
+        <button ion-item class="pl12 m10" *ngFor="let item of numJOSN"  tappable (click)="goInfo(item.val)">
           {{item.name}}
         </button>
 

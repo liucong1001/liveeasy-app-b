@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
 import {RecordProvider} from '../../../../providers/record/record';
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
 import {ConfigProvider} from "../../../../providers/config/config";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the RecordPage page.
  *
@@ -25,8 +26,9 @@ export class RecordPage {
   nones=false;
   have=false;
   propertyid:any;
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public http: HttpClient,
+              public http: HttpClient, public nativePageTransitions: NativePageTransitions,
               public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider,
               public  configProvider:ConfigProvider) {
     this.propertyid = navParams.get('propertyid');
@@ -38,6 +40,7 @@ export class RecordPage {
   }
   imgHeader:string; //线上图片默认头地址
   ionViewDidLoad() {
+    this.navBar.backButtonClick = this.backButtonClick;
     console.log('ionViewDidLoad RecordPage');
     this.imgHeader = this.configProvider.set().img;
   }
@@ -62,6 +65,19 @@ export class RecordPage {
   pic(data){
     return JSON.parse(data)[0].thumbnail
   }
+//------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
 
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 }
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ActionSheetController} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {PropertyModel} from "../../../../model/property/property.model";
 import {PropertyProvider} from "../../../../providers/property/property";
@@ -7,6 +7,7 @@ import {ConfigProvider} from "../../../../providers/config/config";
 import {HousedetailPage} from "../housedetail";
 import {ToastComponent} from "../../../../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 
 /**
@@ -32,7 +33,9 @@ export class LookhousePage {
   imgHeader: string; //线上图片默认头地址
   imgJson :any;
   edit = false;
-  constructor(public navCtrl: NavController,private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
+              private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,) {
     this.data = navParams.get('item');
@@ -50,6 +53,7 @@ export class LookhousePage {
 
  imgData = [];
   ionViewDidLoad() {
+    this.navBar.backButtonClick = this.backButtonClick;
     this.imgHeader = this.configProvider.set().img;
   }
 
@@ -159,5 +163,19 @@ export class LookhousePage {
       }
     }
     return false;
+  }
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
   }
 }

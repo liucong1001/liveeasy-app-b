@@ -118,5 +118,9 @@ export  class PropertyModel {
    */
   propertyDesc:any;
   standardAddress?:any;
+  /**
+   * 敏感信息隐藏
+   */
+  notShow?:any;
 
 }
