@@ -120,18 +120,20 @@ export class MyApp {
           return this.showExit();
         }
         if (activeNav.canGoBack()) {
+          this.nativePageTransitions.cancelPendingTransition();
           let options: NativeTransitionOptions = {
             direction: 'right',
             duration: 400,
             slowdownfactor: 3,
             iosdelay: 50
           };
-          this.nativePageTransitions.slide(options)
+
+          activeNav.pop({animate:false}, ()=> this.nativePageTransitions.slide(options)
             .then()
-            .catch();
-          activeNav.pop({animate:false});
+            .catch());
         } else {
-          this.showExit();
+          this.showExit()
+
         }
       }
 

@@ -48,13 +48,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
           transform: 'translateY(100%)'
         }),
         animate('.5s ease-in')
-      ]),
-      transition('* => void', [
-        animate('.5s .3s ease-out',
-          style({
-          opacity: 0,
-          transform: 'translateY(-100%)'
-        }))
       ])
     ])
   ]
@@ -443,7 +436,7 @@ export class HousingPage {
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 400,
-      slowdownfactor: -1,
+      slowdownfactor: 3,
       iosdelay: 50
     };
 
@@ -488,8 +481,11 @@ export class HousingPage {
        }else {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-          for (let i = 0; i < res.data.result.length; i++) {
-            this.pageData.push(res.data.result[i]);
+
+          if (res.data.result) {
+            for (let i = 0; i < res.data.result.length; i ++) {
+              setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+            }
           }
           // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
         });
