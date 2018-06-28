@@ -4,7 +4,7 @@
     <ion-toolbar no-border-top>
       <ion-searchbar placeholder="楼盘搜索"  #searchBar   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
       <ion-buttons end>
-        <button ion-button icon-only color="dark">
+        <button ion-button icon-only color="#333" tappable (click)="back()">
           取消
         </button>
       </ion-buttons>
