@@ -45,7 +45,7 @@ export class HttpProvider {
       return res as any;
     }).catch(err=>{
       this.errResponse(err);
-      err.name=='TimeoutError'&&this.toast.defaultMsg('top','连接超时!');
+      err.name=='TimeoutError'&&this.toast.error('连接超时!');
     })
   }
 
@@ -55,7 +55,7 @@ export class HttpProvider {
           return res as any;
     }).catch(err=>{
       this.errResponse(err);
-      err.name=='TimeoutError'&&this.toast.defaultMsg('top','连接超时!');
+      err.name=='TimeoutError'&&this.toast.error('连接超时!');
     })
   }
   //测试 没有权限
@@ -96,17 +96,17 @@ export class HttpProvider {
   errResponse(err){
     switch (err.status){
       case 401 :console.log('错误代码',err.status);
-        this.toast.defaultMsg('top','错误代码'+err.status);
+        this.toast.error('错误代码'+err.status);
         this.reset();
         break;
       case 403 :console.log('错误代码',err.status),this.reset();
-        this.toast.defaultMsg('top','错误代码'+err.status);
+        this.toast.error('错误代码'+err.status);
         break;
       case 500 :console.log('错误代码',err.status);
-        this.toast.defaultMsg('top','服务器异常!');
+        this.toast.error('服务器异常!');
         break;
       case 504 :console.log('错误代码',err.status);
-        this.toast.defaultMsg('top','服务器连接超时!');
+        this.toast.error('服务器连接超时!');
         break;
   }}
 
