@@ -1,6 +1,6 @@
 
 import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
-import {Events, IonicPage, MenuController, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -123,42 +123,18 @@ export class HousingPage {
               public addhouseProvider: AddhouseProvider,
               public customerProvider:CustomerProvider,
               public nativePageTransitions: NativePageTransitions,
-              menu: MenuController,public toast:ToastComponent,
+              public toast:ToastComponent,
               private renderer:Renderer
   ) {
       // console.log('页面数据',this.pageData);
-      menu.enable(true); //menus-功能开启
-      if(!navParams.get('item')){
-        this.floorName = '';
-        this.params.estateId = '';
-      }else {
-        this.floorName = navParams.get('item').keyword;
-        this.params.estateId = navParams.get('item').id;
-      }
-
-
-    this.customerProvider.area().then(res=>{
-      console.log('区域', res);
-      if(res){
-        this.area = res.data.distrs;
-        if(this.area){
-          this.area.unshift({name:'不限',id:'99'});
-        }
-        /**
-         * 区域和房源标签合成一个接口
-         */
-        this.tagsList = res.data.tags; //房源标签
-        this.localStorageProvider.set('tagsList',this.tagsList);
-      }
-
-    });
-
-
-
-    //房源标签
-    this.addhouseProvider.estateTagsSelect().then(res => {
-       this.tagsListPage = res.data;
-    });
+      // menu.enable(true); //menus-功能开启
+    if(!this.navParams.get('item')){
+      this.floorName = '';
+      this.params.estateId = '';
+    }else {
+      this.floorName = this.navParams.get('item').keyword;
+      this.params.estateId = this.navParams.get('item').id;
+    }
   }
 
   isActive(item) {
@@ -291,6 +267,28 @@ export class HousingPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
+
+    this.customerProvider.area().then(res=>{
+      console.log('区域', res);
+      if(res){
+        this.area = res.data.distrs;
+        if(this.area){
+          this.area.unshift({name:'不限',id:'99'});
+        }
+        /**
+         * 区域和房源标签合成一个接口
+         */
+        this.tagsList = res.data.tags; //房源标签
+        this.localStorageProvider.set('tagsList',this.tagsList);
+      }
+
+    });
+
+    //房源标签
+    this.addhouseProvider.estateTagsSelect().then(res => {
+      this.tagsListPage = res.data;
+    });
+
     this.search();
     this.imgHeader = this.configProvider.set().img;
   }
@@ -481,39 +479,36 @@ export class HousingPage {
   pageResult :any;
   //上拉加载
   doInfinite(infiniteScroll) {
-    setTimeout(() => {
-      infiniteScroll.complete();
-      if(this.currentPage==1){
-        this.currentPage=3
-      }else {
-        this.currentPage++;
-      }
+    if(this.currentPage==1){
+      this.currentPage=3
+    }else {
+      this.currentPage++;
+    }
 
-      console.log('加载完成后，关闭刷新', this.currentPage);
+    console.log('加载完成后，关闭刷新', this.currentPage);
 
-      if (this.pageResult&&this.pageResult.length<10) {
-        //如果都加载完成的情况，就直接 disable ，移除下拉加载
-        infiniteScroll.enable(false);
-        //toast提示
-        this.all = true;
-       }else {
-        this.all = false;
-        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-
-          if (res.data.result) {
-            for (let i = 0; i < res.data.result.length; i ++) {
-              setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
-            }
+    if (this.pageResult&&this.pageResult.length<10) {
+      //如果都加载完成的情况，就直接 disable ，移除下拉加载
+      infiniteScroll.enable(false);
+      //toast提示
+      this.all = true;
+    }else {
+      this.all = false;
+      this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+        infiniteScroll.complete();
+        if (res.data.result) {
+          for (let i = 0; i < res.data.result.length; i ++) {
+            setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
           }
-          // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
-        });
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete(function () {
-        console.log('数据请求完成');
+        }
+        // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
       });
-    }, 1000);
+    }
+
+    console.log('Async operation has ended');
+    infiniteScroll.complete(function () {
+      console.log('数据请求完成');
+    });
 
   }
 

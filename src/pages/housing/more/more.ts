@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Nav, NavController, NavParams, Content, Navbar} from 'ionic-angular';
+import {Events, IonicPage, Nav, NavController, NavParams, Navbar} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {TabsPage} from "../../tabs/tabs";
 import {HousingPage} from "../housing";
@@ -19,8 +19,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
   templateUrl: 'more.html',
 })
 export class MorePage {
-  // @ViewChild('content') nav: Nav;
-  @ViewChild(Content) content: Content;
   tagsList:any;
   tagsStr = [];
   orientation:any; //朝向
