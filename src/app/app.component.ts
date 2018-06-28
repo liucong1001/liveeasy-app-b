@@ -12,6 +12,7 @@ import {AccountPage} from "../pages/account/account";
 
 import {LocalStorageProvider} from "../providers/local-storage/local-storage";
 import {TabsPage} from "../pages/tabs/tabs";
+import {LoginPage} from "../pages/login/login";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,7 @@ export class MyApp {
   tagsList:any;
   selected:any;
   //app退出设置
-  @ViewChild('content') nav: Nav;
+  @ViewChild('navRoot') nav: Nav;
   toast: any = ToastController;
   backButtonPressed: boolean = false;  //用于判断返回键是否触发
 
@@ -96,11 +97,6 @@ export class MyApp {
         this.keybord.close();
         return;
       }
-      //如果是登录页
-      if (this.rootPage == AccountPage) {
-        this.showExit();
-        return;
-      }
       //点击返回按钮隐藏toast或loading或Overlay
       this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
       if (this.ionicApp._modalPortal) {
@@ -114,9 +110,15 @@ export class MyApp {
 
 
       let activeVC = this.nav.getActive();
+
+
       let tabs = activeVC.instance.tabs;
       let activeNav = tabs && tabs.getSelected();
+
       if (activeNav) {
+        if (activeNav === LoginPage) {
+          return this.showExit();
+        }
         if (activeNav.canGoBack()) {
           let options: NativeTransitionOptions = {
             direction: 'right',
@@ -124,10 +126,10 @@ export class MyApp {
             slowdownfactor: 3,
             iosdelay: 50
           };
-
           this.nativePageTransitions.slide(options)
             .then()
             .catch();
+          activeNav.pop({animate:false});
         } else {
           this.showExit();
         }

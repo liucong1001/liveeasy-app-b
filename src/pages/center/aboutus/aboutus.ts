@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from '@ionic-native/native-page-transitions';
 
 /**
@@ -15,7 +15,7 @@ import {NativePageTransitions, NativeTransitionOptions} from '@ionic-native/nati
   templateUrl: 'aboutus.html',
 })
 export class AboutusPage {
-
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public nativePageTransitions: NativePageTransitions
               ) {
@@ -24,20 +24,10 @@ export class AboutusPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutusPage');
     // this.nativePageTransitions.cancelPendingTransition();
+    this.navBar.backButtonClick = this.backButtonClick;
   }
 
-  ionViewWillLeave() {
-
-    // let options: NativeTransitionOptions = {
-    //   direction: 'up',
-    //   duration: 500,
-    //   slowdownfactor: 3,
-    //   slidePixels: 20,
-    //   iosdelay: 100,
-    //   androiddelay: 150,
-    //   fixedPixelsTop: 0,
-    //   fixedPixelsBottom: 60
-    // };
+  backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
       direction: 'right',
       duration: 400,
@@ -48,8 +38,6 @@ export class AboutusPage {
     this.nativePageTransitions.slide(options)
       .then()
       .catch();
-
+    this.navCtrl.pop({animate:false});
   }
-
-
 }
