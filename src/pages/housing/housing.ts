@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {Events, IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
+
+import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
+import {Events, IonicPage, MenuController, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -17,7 +18,6 @@ import {CustomerProvider} from "../../providers/customer/customer";
 import {AllsearchPage} from "../allsearch/allsearch";
 import {SearchhousePage} from "./housedetail/searchhouse/searchhouse";
 import {Tabs} from 'ionic-angular';
-import {Injectable,ViewChild} from '@angular/core';
 import {visibilityToggle} from "../../components/animations/toggle.animation";
 import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
@@ -114,6 +114,7 @@ export class HousingPage {
   offset = 100;
   orientation:any;
   tags:any;
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -124,8 +125,9 @@ export class HousingPage {
               public customerProvider:CustomerProvider,
               public nativePageTransitions: NativePageTransitions,
               menu: MenuController,public toast:ToastComponent,
+              private renderer:Renderer
   ) {
-    // console.log('页面数据',this.pageData);
+      // console.log('页面数据',this.pageData);
       menu.enable(true); //menus-功能开启
       if(!navParams.get('item')){
         this.floorName = '';
@@ -286,12 +288,18 @@ export class HousingPage {
   }
   ionViewWillEnter() {
     this.statusBar.styleDefault();
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
     this.search();
     this.imgHeader = this.configProvider.set().img;
     // this.tabRef.select(1);
+  }
+
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
   }
 
   //menu
