@@ -38,13 +38,23 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
   templateUrl: 'housing.html',
   animations: [
     trigger('flyInOut', [
-      state('in', style({transform: 'translateX(0)'})),
+      state('in',
+        style({opacity: 1, transform: 'translateY(0)'}),
+
+        ),
       transition('void => *', [
-        style({transform: 'translateX(-100%)'}),
-        animate(100)
+        style({
+          opacity: 0,
+          transform: 'translateY(100%)'
+        }),
+        animate('.5s ease-in')
       ]),
       transition('* => void', [
-        animate(100, style({transform: 'translateX(100%)'}))
+        animate('.5s .3s ease-out',
+          style({
+          opacity: 0,
+          transform: 'translateY(-100%)'
+        }))
       ])
     ])
   ]
@@ -73,7 +83,7 @@ export class HousingPage {
   more = false;
   pop = false;
   housingEstate = false;
-  pageData = [PropertyModel];
+  pageData = [];
   firstPageData = [];
   totalPages: number;//总页数
   imgHeader: string; //线上图片默认头地址
@@ -234,16 +244,19 @@ export class HousingPage {
        }
     }
 
-    this.pageData = null;
+    this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
        if(res){
          console.log('结束时间内容',res.data.totalRecords);
          this.totalRecords = res.data.totalRecords;
-         this.pageData = res.data.result;
          this.firstPageData = res.data.result;
          if(res.data.hasOwnProperty('result')){
            this.hasData  = true;
+           this.pageData = [];
+           for (let i = 0; i < res.data.result.length; i ++) {
+             setTimeout(()=> this.pageData.push(res.data.result[i]),150 * i);
+           }
          }else{
            this.hasData = false;
          }
@@ -406,13 +419,18 @@ export class HousingPage {
     this.propertyProvider.pageSearch(1,this.params).then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
       this.totalRecords = res.data.totalRecords;
-      this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
       this.firstPageData = res.data.result;
+      refresher.complete();
+      if (res.data.result && res.data.result.length > 0) {
+        this.pageData = [];
+        for (let i = 0; i < res.data.result.length; i ++) {
+          setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+        }
+      }
 
       console.log('Async operation has ended');
-      refresher.complete();
       if (newCount > 0 ) {
         this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
       } else {
@@ -464,8 +482,10 @@ export class HousingPage {
        }else {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-          for (let i = 0; i < res.data.result.length; i++) {
-            this.pageData.push(res.data.result[i]);
+          if (res.data && res.data.result) {
+            for (let i = 0; i < res.data.result.length; i ++) {
+              setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+            }
           }
           // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
         });

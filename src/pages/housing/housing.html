@@ -49,9 +49,9 @@
   </ion-refresher>
 
   <ion-grid class="p0 relative" >
-    <ion-row class="bgWhite houseMain" [@flyInOut]="'in'"  *ngFor=" let item of pageData; index as i;">
+    <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
       <!--<h3>{{i+1}}</h3>-->
-      <ion-col col-12 tappable (click)="goHouseDetail(item)">
+      <ion-col col-12 tappable (click)="goHouseDetail(item)" >
         <ion-row>
           <ion-col col-4 >
             <img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"
@@ -113,7 +113,6 @@
       </ion-col>
     </ion-row>
 
-
     <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
@@ -137,7 +136,7 @@
 </ion-content>
 <div class="popLocation">
   <!-- 区域 -->
-  <ion-grid class="lists p0  animated bounceIn"  [hidden]="!show" [ngClass]="{transitions:show}" style="">
+  <ion-grid class="lists p0" [hidden]="!show" [ngClass]="{transitions:show}" style="">
     <ion-row *ngIf="aeraShow">
       <ion-col col-12 class="p0">
         <div class="leftChange">
