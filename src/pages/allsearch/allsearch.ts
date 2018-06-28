@@ -70,7 +70,10 @@ export class AllsearchPage {
       this.navCtrl.pop({animate:false});
     };
   }
-
+  //页面即将离开
+  ionViewWillLeave(){
+    window.clearInterval(this.timer);
+  }
   //页面离开
   ionViewCanLeave(){
     window.clearInterval(this.timer);

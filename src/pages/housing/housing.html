@@ -1,6 +1,6 @@
 <ion-header id="propertyHeader">
   <ion-navbar>
-    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"  class="serInput" tappable (click)="allSearch()" disabled></ion-searchbar>
+    <ion-searchbar placeholder="楼盘搜索" [(ngModel)]="floorName"  class="serInput" (tap)="allSearch()" disabled></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>
 
@@ -112,6 +112,7 @@
         </ion-row>
       </ion-col>
     </ion-row>
+
 
     <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
