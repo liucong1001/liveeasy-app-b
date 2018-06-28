@@ -23,6 +23,7 @@ import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
 import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
 import {StatusBar} from "@ionic-native/status-bar";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the HousingPage page.
@@ -119,6 +120,7 @@ export class HousingPage {
               public statusBar: StatusBar,
               public addhouseProvider: AddhouseProvider,
               public customerProvider:CustomerProvider,
+              public nativePageTransitions: NativePageTransitions,
               menu: MenuController,public toast:ToastComponent,
   ) {
       // console.log('页面数据',this.pageData);
@@ -366,7 +368,7 @@ export class HousingPage {
   }
  //
   goFollow(item) {
-    this.navCtrl.push(FollowPage, {
+    this.openWin(FollowPage, {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
@@ -375,11 +377,11 @@ export class HousingPage {
   }
 
   goAddLook(item) {
-    this.navCtrl.push(AddlookPage, {item: item,standardAddress:item.standardAddress});
+    this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
   }
 
   goCloseHouse(item) {
-    this.navCtrl.push(ClosehousePage, {
+    this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
       estatename: item.estateName,
       convid: item.convId,
@@ -391,13 +393,13 @@ export class HousingPage {
 
   goHouseDetail(item) {
     this.localStorageProvider.set('propertyIdDetail',item.propertyId);
-    this.navCtrl.push(HousedetailPage, {
+    this.openWin(HousedetailPage, {
       propertyId:item.propertyId,
     });
   }
 
   addHouse() {
-    this.navCtrl.push(AddhousePage);
+    this.openWin(AddhousePage);
   }
 
   //下拉刷新
@@ -420,6 +422,18 @@ export class HousingPage {
         this.toast.defaultMsg('middle','暂无更新');
       }
     });
+  }
+
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param);
   }
 
   checkUpdateCount(result) {
@@ -548,7 +562,7 @@ export class HousingPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.navCtrl.push(AllsearchPage,{floorName:this.floorName},{animate:false});
+    this.openWin(AllsearchPage,{floorName:this.floorName});
   }
 
   mores(){
@@ -568,7 +582,7 @@ export class HousingPage {
       // 取消订阅
       this.events.unsubscribe('moreSearchBevents');
     });
-    this.navCtrl.push(MorePage);
+    this.openWin(MorePage);
   }
 
 

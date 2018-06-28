@@ -37,7 +37,6 @@ export class MyApp {
       if(!this.localStorageProvider.get('ticket')){
           this.rootPage = AccountPage;
       }
-
     console.log('rootPage是',this.rootPage);
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
@@ -117,7 +116,25 @@ export class MyApp {
       let activeVC = this.nav.getActive();
       let tabs = activeVC.instance.tabs;
       let activeNav = tabs && tabs.getSelected();
-      return activeNav && (activeNav.canGoBack() ? activeNav.pop() : this.showExit());
+      if (activeNav) {
+        if (activeNav.canGoBack()) {
+          let options: NativeTransitionOptions = {
+            direction: 'right',
+            duration: 400,
+            slowdownfactor: 3,
+            iosdelay: 50
+          };
+
+          this.nativePageTransitions.slide(options)
+            .then()
+            .catch();
+        } else {
+          this.showExit();
+        }
+      }
+
+
+      return activeNav;
 
     }, 1);
   }
