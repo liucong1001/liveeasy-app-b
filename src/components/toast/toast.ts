@@ -68,6 +68,21 @@ export class ToastComponent {
     toast.present();
   }
 
+  errorBlack(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'middle',
+      cssClass:' toast-black'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
     showToastWithCloseButton(msg) {
       const toast = this.toastCtrl.create({
         message: msg,

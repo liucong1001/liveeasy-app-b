@@ -326,10 +326,26 @@ export class HousingPage {
     this.search();
     this.imgHeader = this.configProvider.set().img;
   }
+    //禁用调出键盘
+  // ionViewDidEnter(){
+  //   let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+  //   this.renderer.setElementAttribute(input, 'disabled', 'true');
+  // }
 
-  ionViewDidEnter(){
-    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-    this.renderer.setElementAttribute(input, 'disabled', 'true');
+  searchMore(){
+    var data=  this.localStorageProvider.get('searchMoreData');
+    // (data.orientation ==''||data.orientation ==null) &&
+     if(data){
+           if(data.tags==0){
+               return false
+           }
+           else {
+               return true
+           }
+
+     }else {
+       return false;
+     }
   }
 
   //menu

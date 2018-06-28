@@ -27,7 +27,7 @@
       <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
-      <span [ngClass]="{color:this.orientation != '' || this.tags !=''}">更多</span>
+      <span [ngClass]="{color:searchMore()}">更多</span>
       <ion-icon name="md-arrow-dropdown"></ion-icon>
     </ion-col>
   </ion-row>

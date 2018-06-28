@@ -91,7 +91,9 @@ export class MorePage {
     {name:'西北',val:'11'},
   ];
 
-
+  resetDiret(){
+    return false;
+  }
   // 房源标签
   choseTag(item){
     item.active = !item.active;
@@ -125,9 +127,8 @@ export class MorePage {
     }else{
       return this.selected === item;
     }
-
-
   };
+
   isActive2(item){
     return this.selected2 === item;
   }
@@ -138,6 +139,7 @@ export class MorePage {
      this.searchMoreData.tags=0;
      //清除朝向
      this.choseDirect(this.cxJSON[0]);
+      // this.resetDiret();
      console.log('清除',this.searchMoreData);
      this.localStorageProvider.del('searchMoreData');
   }
