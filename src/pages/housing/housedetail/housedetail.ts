@@ -363,7 +363,9 @@ export class HousedetailPage {
     this.propertyProvider.updates(formData).then(res=>{
       if(res.success){
         this.toast.msg('修改成功!');
-        this.navCtrl.setRoot(HousingPage);
+        setTimeout(()=>{
+          this.navCtrl.setRoot(HousingPage);
+        });
       }else{
         this.toast.error('修改失败！');
       }

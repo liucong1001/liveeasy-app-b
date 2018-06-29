@@ -225,9 +225,12 @@ export class AddhousePage {
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
-       this.toast.alert('录入成功!');
+       this.toast.msg('录入成功!');
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
-         this.navCtrl.setRoot(HousingPage);
+        setTimeout(()=>{
+          this.navCtrl.setRoot(HousingPage);
+        });
+
       }else {
         this.toast.error('录入失败！');
       }

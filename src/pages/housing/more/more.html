@@ -8,17 +8,15 @@
 
 <div>
   <ion-label>房源标签(可多选)</ion-label>
-  <a *ngFor="let bq of tagsList;let i = index" [ngClass]="{'active': bq.active||initTags(bq)}" tappable (click)="choseTag(bq,i)">{{bq.tagDesc}}</a>
-  <!--<ion-select okText="确定" cancelText="关闭"    [(ngModel)]="tags"  multiple="true" [placeholder]="'请选择房源标签'">-->
-    <!--<ion-option value="{{item.tagCode}}" *ngFor="let item of tagsList;let i = index">{{item.tagDesc}}</ion-option>-->
-  <!--</ion-select>-->
+  <a *ngFor="let bq of tagsList;let i = index"
+     [ngClass]="{'active': bq.active||initTags(bq)}" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
 </div>
 
 <div>
 <h4>
 朝向
 </h4>
-<a *ngFor="let i of cxJSON" [ngClass]="{'active': isActive(i)}" tappable (click)="choseDirect(i)" >{{i.name}}</a>
+<a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'active': isActive(i)}" tappable (click)="choseDirect(i)" [hidden]="index==0" >{{i.name}}</a>
 </div>
 <div>
 <h4>其他</h4>

@@ -34,13 +34,13 @@
       </button>
     </ion-list>
     <ion-list>
-      <div class="hdRightInfo1" *ngIf="sensitiveInfo">
+      <div class="hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-item class="pl12">
           <ion-label>栋号</ion-label>
           <ion-input type="text" class="tr" formControlName="buildingNo"></ion-input>
         </ion-item>
       </div>
-      <div class="hdRightInfo1" *ngIf="sensitiveInfo">
+      <div class="hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-item class="pl12">
           <ion-label>单元</ion-label>
           <ion-input type="number" pattern="[0-9]*" class="tr" formControlName="unitNo"></ion-input>
@@ -56,7 +56,7 @@
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>房间号</ion-label>
         <ion-input type="text" placeholder="请输入房间号" formControlName="houseNo" class="p0">
         </ion-input>
@@ -87,31 +87,6 @@
         </ion-item>
         <span class="hdRightInfo">万</span>
       </div>
-      <!--<ion-item class="pl12">-->
-      <!--<ion-label>户型</ion-label>-->
-      <!--<ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">-->
-      <!--<ion-option value="1">一室</ion-option>-->
-      <!--<ion-option value="2">二室</ion-option>-->
-      <!--<ion-option value="3">三室</ion-option>-->
-      <!--<ion-option value="4">四室</ion-option>-->
-      <!--<ion-option value="5">五室</ion-option>-->
-      <!--</ion-select>-->
-      <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'">-->
-      <!--<ion-option value="1">1厅</ion-option>-->
-      <!--<ion-option value="2">2厅</ion-option>-->
-      <!--<ion-option value="3">3厅</ion-option>-->
-      <!--<ion-option value="4">4厅</ion-option>-->
-      <!--<ion-option value="5">5厅</ion-option>-->
-      <!--</ion-select>-->
-      <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'">-->
-      <!--<ion-option value="1">1卫</ion-option>-->
-      <!--<ion-option value="2">2卫</ion-option>-->
-      <!--<ion-option value="3">3卫</ion-option>-->
-      <!--<ion-option value="4">4卫</ion-option>-->
-      <!--<ion-option value="5">5卫</ion-option>-->
-      <!--</ion-select>-->
-      <!--</ion-item>-->
-
 
       <ion-list (click)="clickHx()">
         <button ion-item class="pl12" *ngIf="HxRight">
@@ -199,14 +174,14 @@
       </ion-item>
     </ion-list>
     <ion-list class="m10">
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主姓名</ion-label>
         <ion-input type="text" placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contact"  [control]="form.get('contact')"  ></valid-error>
 
-      <ion-item class="pl12" *ngIf="sensitiveInfo">
+      <ion-item class="pl12" [hidden]="!sensitiveInfo">
         <ion-label>业主性别</ion-label>
         <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
           <ion-option value="male">男</ion-option>
@@ -214,13 +189,13 @@
         </ion-select>
       </ion-item>
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主电话1</ion-label>
         <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主电话2</ion-label>
         <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
@@ -281,7 +256,7 @@
         房源描述
       </button>
     </ion-list>
-    <ion-list class="m10">
+    <ion-list class="m10" [hidden]="!sensitiveInfo">
       <button ion-item class="pl12" tappable (click)="lookHouse()">
         房源实勘
       </button>
@@ -303,7 +278,7 @@
           <button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>
         </ion-col>
         <ion-col col-6>
-          <button ion-button class="redact" color="light" (click)="goedit()">确认修改</button>
+          <button ion-button class="redact" color="light" (click)="save()" [disabled]="lockStatus">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -326,7 +301,7 @@
         选择楼盘
         <font color="#aaa" class="changes">碧桂园生态城</font>
       </button>
-      <ion-item class="pl12" *ngIf="sensitiveInfo">
+      <ion-item class="pl12" [hidden]="!sensitiveInfo">
         <ion-label>栋号</ion-label>
         <ion-select>
           <ion-option value="change" selected>2栋</ion-option>
@@ -334,7 +309,7 @@
           <ion-option value="n64">2栋</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item class="pl12" *ngIf="sensitiveInfo">
+      <ion-item class="pl12" [hidden]="!sensitiveInfo">
         <ion-label>单元</ion-label>
         <ion-select>
           <ion-option value="change" selected>2单元</ion-option>
@@ -350,17 +325,17 @@
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>房间号</ion-label>
         <ion-input type="text" value="202" class="p0">
         </ion-input>
       </ion-item>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主姓名</ion-label>
         <ion-input type="text" value="张三">
         </ion-input>
       </ion-item>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主电话1</ion-label>
         <ion-input type="text" value="1555555555">
         </ion-input>
@@ -400,7 +375,7 @@
         选择楼盘
         <font color="#aaa" class="changes">碧桂园生态城</font>
       </button>
-      <ion-item class="pl12" *ngIf="sensitiveInfo">
+      <ion-item class="pl12" [hidden]="!sensitiveInfo">
         <ion-label>栋号</ion-label>
         <ion-select>
           <ion-option value="change" selected>2栋</ion-option>
@@ -408,7 +383,7 @@
           <ion-option value="n64">2栋</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item class="pl12" *ngIf="sensitiveInfo">
+      <ion-item class="pl12" [hidden]="!sensitiveInfo">
         <ion-label>单元</ion-label>
         <ion-select>
           <ion-option value="change" selected>2单元</ion-option>
@@ -424,7 +399,7 @@
         </ion-item>
         <span class="hdRightInfo">层</span>
       </div>
-      <ion-item class="pl12 hdRightInfo1" *ngIf="sensitiveInfo">
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>房间号</ion-label>
         <ion-input type="text" value="202" class="p0">
         </ion-input>

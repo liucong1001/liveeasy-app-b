@@ -49,11 +49,10 @@ export class MorePage {
     if(this.localStorageProvider.get('searchMoreData')){
       this.searchMoreData = this.localStorageProvider.get('searchMoreData');
     }
-
     console.log('进入 MorePage',this.searchMoreData);
   }
+  
   initTags(item){
-
     if(this.searchMoreData.tagsArry.length>1){
       //初始化选中状态
       this.searchMoreData.tagsArry = this.searchMoreData.tagsArry;

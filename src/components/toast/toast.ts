@@ -32,6 +32,7 @@ export class ToastComponent {
       duration: 2000,
       position: 'middle',
       cssClass:' toast-success',
+      dismissOnPageChange:true,
     });
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
@@ -45,6 +46,7 @@ export class ToastComponent {
       duration: 2000,
       position: position,
       cssClass:'toast-default ',
+      dismissOnPageChange:true,
     });
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');

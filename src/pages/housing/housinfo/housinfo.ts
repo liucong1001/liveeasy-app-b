@@ -38,8 +38,9 @@ export class HousinfoPage {
       this.slider.slideNext(300,true);
     },2000);
   }
+
   edit(){
-    this.openWin(HousedetailPage)
+    this.openWin(HousedetailPage,{propertyId:this.navParams.get('propertyId')});
   }
 
 

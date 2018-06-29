@@ -91,7 +91,10 @@ export class KeyPage {
       console.log(res);
       if(res.success){
         this.toast.msg('上传成功!');
-        this.navCtrl.pop()
+        setTimeout(()=>{
+           this.navCtrl.pop();
+        },500)
+
       }else{
         this.toast.error('上传失败！');
       }
@@ -127,8 +130,10 @@ export class KeyPage {
     }).then(res => {
       console.log(res);
       if(res.success){
-        this.toast.msg('修改成功!')
-        this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+         this.toast.msg('修改成功!');
+         setTimeout(()=>{
+           this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+         },500)
       }else{
         this.toast.error('修改失败！');
       }
