@@ -182,12 +182,9 @@ export class PublicpassengerPage {
   updateCucumber(val,index) {
     this.values=val;
     console.log('值' +val+this.sausage[index]);
-    // this.values=val;
-    this.params = {
-      customerSrc:"0",
-      orderBy:"DESC",
-      customerType:'1',
-    };
+    this.params.customerSrc = '0';
+    this.params.orderBy= 'DESC';
+    this.params.customerType = '1';
     if(val == 1){
       this.params.customerType='1';
     }else if(val == 2){
