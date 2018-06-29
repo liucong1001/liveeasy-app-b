@@ -28,7 +28,7 @@ export class RolepeoplePage {
       console.log(res)
       this.data = res.data;
       console.log('获取',this.data);
-      console.log('校色人',this.data.initRealtorName)
+      // console.log('校色人',this.data.initRealtorName)
     });
   }
 

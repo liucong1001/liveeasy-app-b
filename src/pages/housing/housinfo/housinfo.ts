@@ -36,23 +36,24 @@ export class HousinfoPage {
   }
 
 
-  // @ViewChild('mySlider') slider:Slides;
-  //   // mySlideOptions={
-  //   //   autoplay:2000,
-  //   //   initialSlide:0,
-  //   //   pager:true,
-  //   //   loop:true,
-  //   //   speed:300
-  //   // };
+  @ViewChild('mySlider') slider:Slides;
+    mySlideOptions={
+      autoplay:2000,
+      initialSlide:0,
+      pager:true,
+      loop:true,
+      speed:300
+    };
+  imgJson :any; //实勘图
   letteratorneyImgJson:any;
   keyImgJson:any;
 
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;
 
-    // setInterval(()=>{
-    //   this.slider.slideNext(300,true);
-    // },2000);
+    setInterval(()=>{
+      this.slider.slideNext(300,true);
+    },2000);
 
     console.log('ionViewDidLoad HousinfoPage');
     let loading = this.loadingCtrl.create({
@@ -62,6 +63,11 @@ export class HousinfoPage {
     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
         if(res.success){
           this.houseData=res.data;
+          // JSON.parse(this.data.propertyPics)
+          if(res.data.propertyPics){
+            this.imgJson = JSON.parse(res.data.propertyPics);
+          }
+
           loading.dismiss();
         }
     });
@@ -103,7 +109,7 @@ export class HousinfoPage {
     this.openWin(HousedetailPage,{propertyId:this.navParams.get('propertyId')});
   }
   rolepeople(){
-    this.openWin(RolepeoplePage);
+    this.openWin(RolepeoplePage,{propertyId:this.navParams.get('propertyid')});
   };
 
   //房源标签转换（字符串转为数组）
