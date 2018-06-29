@@ -323,6 +323,7 @@ export class HousingPage {
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
       this.tagsListPage = res.data;
+      this.localStorageProvider.set('tagsListPage',this.tagsListPage);
     });
 
     this.search();
@@ -469,9 +470,10 @@ export class HousingPage {
 
   goHouseDetail(item) {
     this.localStorageProvider.set('propertyIdDetail',item.propertyId);
-    this.openWin(HousinfoPage, {
-      propertyId:item.propertyId,
-    });
+    // this.openWin(HousinfoPage, {
+    //   propertyId:item.propertyId,
+    // });
+    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId,})
   }
 
   addHouse() {

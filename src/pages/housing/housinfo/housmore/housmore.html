@@ -7,31 +7,31 @@
 </ion-header>
 
 
-<ion-content padding class="bgWhite">
+<ion-content padding class="bgWhite" *ngIf="data">
   <div class="xqCss">
     <h6>小区信息</h6>
     <ion-row>
       <ion-col col-12>
-        栋号：sss
+        栋号：{{data.buildingNo}}
       </ion-col>
       <ion-col col-12>
-        单元：sss
+        单元：{{data.unitNo}}
       </ion-col>
       <ion-col col-12>
-        楼层：sss
+        楼层：{{data.floorNo}}
       </ion-col>
       <ion-col col-12>
-        房间号：sss
+        房间号：{{data.houseNo}}
       </ion-col>
 
       <ion-col col-12>
-        建筑类型：sss
+        建筑类型：{{data.buildingType}}
       </ion-col>
       <ion-col col-12>
-        楼户比例：sss
+        楼户比例：{{data.elevators}}梯  {{data.apartments}}户
       </ion-col>
       <ion-col col-12>
-        配备电梯：sss
+        配备电梯：{{data.hasElevator}}
       </ion-col>
     </ion-row>
   </div>
@@ -39,16 +39,16 @@
     <h6>业主信息</h6>
     <ion-row>
       <ion-col col-12>
-        业主姓名：sss
+        业主姓名：{{data.contact}}
       </ion-col>
       <ion-col col-12>
-        业主性别：sss
+        业主性别：{{data.sex}}
       </ion-col>
       <ion-col col-12>
-        业主电话：sss
+        业主电话：{{data.contactInfo}}
       </ion-col>
       <ion-col col-12>
-        业主电话1：sss
+        业主电话1：{{data.contactInfo2}}
       </ion-col>
     </ion-row>
 

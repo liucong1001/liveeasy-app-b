@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="houseData">
   <ion-slides #mySlider  style="width:100%;height: 200px;">
     <ion-slide>
       <img src="assets/imgs/banner.png" width="100%">
@@ -28,47 +28,62 @@
       <ion-row>
         <ion-col col-4>
           <p>总价</p>
-          <div>430万</div>
+          <div>{{houseData.propertyPrice}}万</div>
         </ion-col>
         <ion-col col-4>
           <p>户型</p>
-          <div>430万</div>
+          <div>
+            {{houseData.bedrooms}}室
+            {{houseData.halls}}厅
+            {{houseData.bathrooms}}卫
+            {{houseData.kitchens}}厨
+            {{houseData.balconies}}阳
+          </div>
         </ion-col>
         <ion-col col-4>
           <p>面积</p>
-          <div>430万</div>
+          <div>{{houseData.spaceSize}}m²</div>
         </ion-col>
       </ion-row>
     </ion-grid>
     <div class="m10 ">
       <!--房源标签-->
       <div class="tips">
-        <a class="">dddd</a>
+        <!--[ngClass]="{uDis:item.tagsStr}"-->
+        <div class="tips"  >
+          <a *ngFor=" let x of tagPipe(houseData.tagsStr)" class="m5">{{tagName(x)}}</a>
+        </div>
       </div>
+
       <!--房源信息-->
       <ion-grid class="p0">
         <ion-row>
           <ion-col col-6>
-            价格：sss
+            价格：{{houseData.propertyPrice}}
           </ion-col>
           <ion-col col-6>
-            户型：sssssss
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>
-            朝向：sss
-          </ion-col>
-          <ion-col col-6>
-            装修：sss
+            户型：
+            {{houseData.bedrooms}}室
+            {{houseData.halls}}厅
+            {{houseData.bathrooms}}卫
+            {{houseData.kitchens}}厨
+            {{houseData.balconies}}阳
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-6>
-            建筑面积：sss
+            朝向：{{ orentationPipe(houseData.orientation) }}
           </ion-col>
           <ion-col col-6>
-            套内面积：sss
+            装修：{{ decorationPipe(houseData.decoration)}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            建筑面积：{{houseData.spaceSize}}
+          </ion-col>
+          <ion-col col-6>
+            套内面积：{{houseData.innerSpaceSize}}
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -81,32 +96,46 @@
   <div class="m10 bgWhite describe">
     <div>房源描述</div>
     <div class="m10">
-      撒大苏打
+      {{houseData.propertyDesc}}
     </div>
   </div>
-  <div class="m10 bgWhite wt">
+  <div class="m10 bgWhite wt" *ngIf="letteratorneyData">
     <ion-row>
       <ion-col col-8>
         <div class="m5">业主委托书</div>
-        <p>编号：方法</p>
-        <p class="m5">类型：福福福</p>
-        <p >起始时间：方法</p>
+        <p>编号：{{letteratorneyData.delegateDocSn}}</p>
+        <p class="m5">类型：{{letteratorneyData.delegateStyle}}</p>
+        <p >起始时间：{{letteratorneyData.delegateBeginTm}}</p>
       </ion-col>
-      <ion-col col-4>
-        <img src="" width="100%" height="80" class="m5">
-      </ion-col>
+
+      <!--<ion-col col-4>-->
+        <!--<img src="" width="100%" height="80" class="m5">-->
+      <!--</ion-col>-->
+      <div class="attorneyPic bgWhite" *ngFor="let item of letteratorneyImgJson">
+        <p>{{item.desc}}</p>
+        <div class="m10">
+          <img [src]="imgHeader+item.thumbnail" alt="" class="img_upload">
+        </div>
+      </div>
+
     </ion-row>
   </div>
-  <div class="m10 bgWhite wt">
+  <div class="m10 bgWhite wt" *ngIf="keyData">
     <ion-row>
       <ion-col col-8>
         <div class="m5">钥匙</div>
-        <p>钥匙编号：方法</p>
-        <p class="m5">钥匙存储地址：福福福</p>
+        <p>钥匙编号：{{keyData.keySn}}</p>
+        <p class="m5">钥匙存储地址：{{keyData.keyAddress}}</p>
       </ion-col>
-      <ion-col col-4>
-        <img src="" width="100%" height="80" class="m5">
-      </ion-col>
+      <!--<ion-col col-4>-->
+        <!--<img src="" width="100%" height="80" class="m5">-->
+      <!--</ion-col>-->
+      <div class="attorneyPic bgWhite" *ngFor="let item of keyImgJson;let i =index">
+        <div class="m10">
+          <!--[imgGallery]="{data:imgJson,index:i}"-->
+          <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:keyImgJson,index:i}"   class="img_upload">
+        </div>
+      </div>
     </ion-row>
   </div>
   <ion-list class="m10">
