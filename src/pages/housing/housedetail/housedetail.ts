@@ -105,6 +105,7 @@ export class HousedetailPage {
         this.form.patchValue({
           buildingNo: this.data.buildingNo,
           estateName:this.data.estateName,
+          estateId:this.data.estateId,
           unitNo: this.data.unitNo,
           floorNo: this.data.floorNo,
           houseNo: this.data.houseNo,

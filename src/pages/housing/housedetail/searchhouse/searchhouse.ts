@@ -14,8 +14,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
   templateUrl: 'searchhouse.html',
 })
 export class SearchhousePage {
-
-
   estateList:[any];//楼盘
   callback:any;
   search:any;

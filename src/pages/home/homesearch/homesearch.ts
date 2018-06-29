@@ -1,26 +1,24 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
-import {AddhouseProvider} from "../../providers/addhouse/addhouse";
-import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {IonicPage, ModalController, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
 import { Events } from 'ionic-angular';
-import {PropertyProvider} from "../../providers/property/property";
-import {HousingPage} from "../housing/housing";
-import {HomePage} from "../home/home";
+import {PropertyProvider} from "../../../providers/property/property";
+import {HousingPage} from "../../housing/housing";
+import {HomePage} from "../../home/home";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {AccountPage} from "../../account/account";
 /**
- * Generated class for the AllsearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  首页楼盘搜索
  */
 
 @IonicPage()
 @Component({
-  selector: 'page-allsearch',
-  templateUrl: 'allsearch.html',
+  selector: 'page-homesearch',
+  templateUrl: 'homesearch.html',
 })
-export class AllsearchPage {
+export class HomesearchPage {
   estateList:[any];//楼盘
   callback:any;
   search:any;
@@ -29,7 +27,7 @@ export class AllsearchPage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient, public nativePageTransitions: NativePageTransitions,) {
+              private http:HttpClient, public nativePageTransitions: NativePageTransitions,public modalCtrl: ModalController) {
     this.search = navParams.get('floorName');
   }
 
@@ -68,7 +66,9 @@ export class AllsearchPage {
       this.searchBar.setFocus();
     },0);
     this.navBar.backButtonClick = () => {
-        this.navCtrl.pop({animate:false});
+       // this.navCtrl.pop({animate:false});
+       this.navCtrl.setRoot(HomePage)
+      //  window.location.reload(); HomePage
     };
   }
   //页面离开
@@ -78,16 +78,11 @@ export class AllsearchPage {
   floorList :Array<any>;
 
   select(item){
-
     if(item&&this.floorList.indexOf(item.keyword)==-1){
       this.floorList.push(item.keyword);
       this.localStorageProvider.set('floorList',this.floorList);
     }
-
-    this.navCtrl.pop().then(() => {
-      // 发布 bevents事件
-      this.events.publish('bevents', item);
-    });
+    this.navCtrl.push(HousingPage,{item:item});
   }
 
   back(){
@@ -126,6 +121,5 @@ export class AllsearchPage {
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
-
 
 }
