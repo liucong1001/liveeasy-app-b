@@ -119,15 +119,16 @@ export class LookhousePage {
     this.addArry(this.chuFangImg,this.imgData);
     this.addArry(this.woShenJianImg,this.imgData);
     this.addArry(this.otherImg,this.imgData);
-
     this.formData.arrPic =  JSON.stringify(this.imgData);
-
      console.log('提交',this.imgData,this.formData);
      this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
         if(res.success){
           console.log('成功返回的数据',res);
           this.toast.msg('上传成功!');
-          this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
+          setTimeout(()=>{
+            this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
+          });
+
         }else {
           this.toast.error('上传失败!');
         }
