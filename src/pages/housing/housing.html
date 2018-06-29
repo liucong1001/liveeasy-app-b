@@ -9,13 +9,13 @@
 
       <span [ngClass]="{color:this.searchDict}">{{searchDict}}{{ searchArea}} </span>
       <span *ngIf="!searchDict">区域</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
       <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType !=0}">{{housePipe(params.bedroomType)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.bedroomType !=0}"></ion-icon>
 
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
@@ -24,11 +24,11 @@
       <span [ngClass]="{color:params.hasElevator =='1' || '0'}">{{elevatorPipe(params.hasElevator) }}</span>
       <!--*ngIf="params.hasElevator!=null"-->
       <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{upIcon:params.estateId}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.hasElevator != ''}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchMore()}"></ion-icon>
     </ion-col>
   </ion-row>
 

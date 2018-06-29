@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar #navbar color="first" >
-    <ion-title>房源详情</ion-title>
+    <ion-title>房源修改</ion-title>
     <ion-buttons end>
       <button ion-button icon-only tappable (click)="record()">
         记录
@@ -15,10 +15,10 @@
 
   <form [formGroup]="form" *ngIf="data" >
     <div class="bgWhite p10 " *ngIf="lockStatus">
-    <font color="red">
-      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
-       &nbsp;房源已经锁定，无法下架、修改发布房源信息、上传或删除图片，修改或删除业主委托书，修改或删除钥匙
-    </font>
+      <font color="red">
+        <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+        &nbsp;房源已经锁定，无法下架、修改发布房源信息、上传或删除图片，修改或删除业主委托书，修改或删除钥匙
+      </font>
     </div>
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
@@ -29,7 +29,7 @@
       <button ion-item class="pl12">
         选择楼盘
         <font color="#aaa" class="changes">
-           <span >{{form.value.estateName}}</span>
+          <span >{{form.value.estateName}}</span>
         </font>
       </button>
     </ion-list>
@@ -88,28 +88,28 @@
         <span class="hdRightInfo">万</span>
       </div>
       <!--<ion-item class="pl12">-->
-        <!--<ion-label>户型</ion-label>-->
-        <!--<ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">-->
-          <!--<ion-option value="1">一室</ion-option>-->
-          <!--<ion-option value="2">二室</ion-option>-->
-          <!--<ion-option value="3">三室</ion-option>-->
-          <!--<ion-option value="4">四室</ion-option>-->
-          <!--<ion-option value="5">五室</ion-option>-->
-        <!--</ion-select>-->
-        <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'">-->
-          <!--<ion-option value="1">1厅</ion-option>-->
-          <!--<ion-option value="2">2厅</ion-option>-->
-          <!--<ion-option value="3">3厅</ion-option>-->
-          <!--<ion-option value="4">4厅</ion-option>-->
-          <!--<ion-option value="5">5厅</ion-option>-->
-        <!--</ion-select>-->
-        <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'">-->
-          <!--<ion-option value="1">1卫</ion-option>-->
-          <!--<ion-option value="2">2卫</ion-option>-->
-          <!--<ion-option value="3">3卫</ion-option>-->
-          <!--<ion-option value="4">4卫</ion-option>-->
-          <!--<ion-option value="5">5卫</ion-option>-->
-        <!--</ion-select>-->
+      <!--<ion-label>户型</ion-label>-->
+      <!--<ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">-->
+      <!--<ion-option value="1">一室</ion-option>-->
+      <!--<ion-option value="2">二室</ion-option>-->
+      <!--<ion-option value="3">三室</ion-option>-->
+      <!--<ion-option value="4">四室</ion-option>-->
+      <!--<ion-option value="5">五室</ion-option>-->
+      <!--</ion-select>-->
+      <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'">-->
+      <!--<ion-option value="1">1厅</ion-option>-->
+      <!--<ion-option value="2">2厅</ion-option>-->
+      <!--<ion-option value="3">3厅</ion-option>-->
+      <!--<ion-option value="4">4厅</ion-option>-->
+      <!--<ion-option value="5">5厅</ion-option>-->
+      <!--</ion-select>-->
+      <!--<ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'">-->
+      <!--<ion-option value="1">1卫</ion-option>-->
+      <!--<ion-option value="2">2卫</ion-option>-->
+      <!--<ion-option value="3">3卫</ion-option>-->
+      <!--<ion-option value="4">4卫</ion-option>-->
+      <!--<ion-option value="5">5卫</ion-option>-->
+      <!--</ion-select>-->
       <!--</ion-item>-->
 
 
@@ -303,7 +303,7 @@
           <button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>
         </ion-col>
         <ion-col col-6>
-          <button ion-button class="redact" color="light" (click)="save()" [disabled]="lockStatus">确认修改</button>
+          <button ion-button class="redact" color="light" (click)="goedit()">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>

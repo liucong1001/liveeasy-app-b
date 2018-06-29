@@ -24,6 +24,7 @@ import {MorePage} from "./more/more";
 import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
 import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {HousinfoPage} from "./housinfo/housinfo";
 
 /**
  * Generated class for the HousingPage page.
@@ -461,7 +462,7 @@ export class HousingPage {
 
   goHouseDetail(item) {
     this.localStorageProvider.set('propertyIdDetail',item.propertyId);
-    this.openWin(HousedetailPage, {
+    this.openWin(HousinfoPage, {
       propertyId:item.propertyId,
     });
   }

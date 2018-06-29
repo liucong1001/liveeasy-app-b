@@ -25,7 +25,7 @@ import {IonicPageModule} from "ionic-angular";
     LookhousePageModule,
     RecordPageModule,
     RolepeoplePageModule,
-    SearchhousePageModule
+    SearchhousePageModule,
   ],
 })
 export class HousedetailPageModule {}

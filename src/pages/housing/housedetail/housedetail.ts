@@ -22,10 +22,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
- * Generated class for the HousedetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ 房源修改页面
  */
 
 @IonicPage({
@@ -382,6 +379,7 @@ export class HousedetailPage {
   //     }
   //   }
   // }
+
   //跟进
   goFollow(){
     this.openWin(FollowPage,{
