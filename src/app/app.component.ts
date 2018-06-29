@@ -54,6 +54,7 @@ export class MyApp {
       //statusBar.backgroundColorByHexString('#ffffff');
       headerColor.tint('#1ab394');
       splashScreen.hide();
+      this.setKeyBorder();
       //android 6 以上动态获取权限
       //检测版本更新
       //appUpdate.checkVersion();
