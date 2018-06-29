@@ -173,15 +173,20 @@ export class PublicpassengerPage {
       if(this.sx ==1){
         this.sx = 2;
       }
+      if(this.info ==false){
+        this.sx=1;
+      }
     });
   }
   searchFloorNum = 0; //初始化搜索次数
   sx=0;
   values:any;
   sausage=[];
+  info:any;
   updateCucumber(val,index) {
     this.values=val;
     console.log('值' +val+this.sausage[index]);
+    this.info=this.sausage[index];
     this.params.customerSrc = '0';
     this.params.orderBy= 'DESC';
     this.params.customerType = '1';

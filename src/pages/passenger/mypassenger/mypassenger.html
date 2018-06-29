@@ -19,13 +19,13 @@
 
            <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
            <span [hidden]="searchFloorNum==2"> 户型</span>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.intentionRoom !=0}"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum == 2}"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
-           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values == 'false')}}</span>
+           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values)}}</span>
            <span [hidden]="sx==2"> 筛选</span>
            <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.values}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
          </ion-col>
        </ion-row>
 

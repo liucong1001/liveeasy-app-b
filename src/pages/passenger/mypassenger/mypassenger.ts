@@ -176,13 +176,18 @@ export class MypassengerPage {
       if(this.sx ==1){
         this.sx = 2;
       }
+      if(this.info == false){
+        this.sx=1
+      }
     });
   }
   // checks:boolean;
   sausage=[];
+  info:any;
   updateCucumber(val,index) {
     console.log('值' +val+this.sausage[index]);
     this.values=val;
+    this.info=this.sausage[index]
     console.log(this.values)
     if(val == 1){
       this.params.todayNoFollow='1';

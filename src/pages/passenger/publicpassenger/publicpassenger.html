@@ -3,21 +3,21 @@
     <ion-title>公客列表</ion-title>
   </ion-navbar>
   <ion-row class="houseMenu">
-    <ion-col col-4 class="tc" tappable (click)="showMenu1()">
-      <span>{{searchDict}}</span>
+    <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
+      <span [ngClass]="{color:this.searchDict}">{{searchDict}}</span>
       <span *ngIf="!searchDict">区域</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
     </ion-col>
-    <ion-col col-4 class="tc" tappable (click)="showMenu2()">
-      <span *ngIf="searchFloorNum==2">{{housePipe(params.intentionRoom)}}</span>
+    <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
     </ion-col>
 
-    <ion-col col-4 class="tc" tappable (click)="showMenu3()">
-      <span *ngIf="sx==2">{{filtrate(params.customerType)}}</span>
+    <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
+      <span *ngIf="sx==2" [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
       <span [hidden]="sx==2"> 筛选</span>
-      <ion-icon name="md-arrow-dropdown"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2}"></ion-icon>
     </ion-col>
   </ion-row>
 
@@ -95,7 +95,7 @@
   </ion-grid>
 
 </ion-content>
-<div class="popLocation">
+<div class="popLocation" style="top: 120px;">
   <!-- 区域 -->
   <ion-grid class="lists p0" *ngIf="show">
     <ion-row>
