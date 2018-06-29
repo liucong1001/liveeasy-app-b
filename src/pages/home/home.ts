@@ -10,6 +10,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {CheckhousePage} from "./checkhouse/checkhouse";
+import {HomesearchPage} from "./homesearch/homesearch";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -44,14 +45,14 @@ export class HomePage {
   }
   checkhouse(){
   this.openWin(CheckhousePage);
-}
+  }
 
   godeclara(){
-  this.openWin(DeclarationPage)
-}
+    this.openWin(DeclarationPage)
+  }
   floorName = '';
-  allSearch(){
-    this.openWin(AllsearchPage,{floorName:this.floorName,index:1})
+  search(){
+    this.openWin(HomesearchPage,{floorName:this.floorName})
   }
 //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

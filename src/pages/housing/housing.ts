@@ -1,6 +1,6 @@
 
 import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {Events, IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -25,6 +25,7 @@ import { trigger,style,transition,animate,keyframes,query,stagger,group, state, 
 import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousinfoPage} from "./housinfo/housinfo";
+import {HomesearchPage} from "../home/homesearch/homesearch";
 
 /**
  * Generated class for the HousingPage page.
@@ -115,6 +116,7 @@ export class HousingPage {
   orientation:any;
   tags:any;
   @ViewChild('searchBar') searchBar:Searchbar;
+  @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -127,7 +129,6 @@ export class HousingPage {
               public toast:ToastComponent,
               private renderer:Renderer
   ) {
-      // console.log('页面数据',this.pageData);
       // menu.enable(true); //menus-功能开启
     if(!this.navParams.get('item')){
       this.floorName = '';
@@ -331,7 +332,13 @@ export class HousingPage {
   ionViewDidEnter(){
     let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
     this.renderer.setElementAttribute(input, 'disabled', 'true');
+
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.push(HomesearchPage);
+    };
+
   }
+
 
   searchMore(){
     var data=  this.localStorageProvider.get('searchMoreData');

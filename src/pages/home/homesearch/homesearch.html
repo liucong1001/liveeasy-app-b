@@ -1,0 +1,41 @@
+
+
+<ion-header >
+  <ion-navbar #navbar >
+    <ion-toolbar no-border-top>
+      <ion-searchbar #searchBar  placeholder="楼盘搜索"   [(ngModel)]="search"  (ionChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
+      <ion-buttons end>
+        <button ion-button icon-only color="dark" tappable (click)="back()">
+          取消
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="searchContent">
+  <!--<h3>首页楼盘搜索</h3>-->
+  <ion-list>
+    <ion-item *ngFor="let item of floor"  class="pl12">
+      <ion-label>{{item.keyword}}</ion-label>
+      <ion-radio value="{{item.id}}" (ionSelect)="select(item)"></ion-radio>
+    </ion-item>
+    <ion-item *ngIf="floor.length==0&&edit">
+      未找到，相关房源
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="!edit&&floorList" class="hisRecord">
+    <ion-list *ngIf="search">
+      <ion-item (click)="select(null)">
+        <span class="clearFloor">清空条件</span>
+      </ion-item>
+    </ion-list>
+    <p class="p10">历史记录</p>
+    <div>
+      <a (click)="chose(x)" *ngFor="let x of floorList ">{{x}}</a>
+    </div>
+  </div>
+
+</ion-content>
+

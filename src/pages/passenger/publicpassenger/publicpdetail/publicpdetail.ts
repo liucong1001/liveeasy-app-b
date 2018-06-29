@@ -5,6 +5,7 @@ import { PfollowrecordPage } from '../../mypassenger/passengerdetail/pfollowreco
 import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ToastComponent} from "../../../../components/toast/toast";
 
 /**
  * Generated class for the PublicpdetailPage page.
@@ -29,14 +30,19 @@ export class PublicpdetailPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public navParams: NavParams,public customerProvider:CustomerProvider) {
+              public navParams: NavParams,public customerProvider:CustomerProvider,
+              public toast:ToastComponent) {
     this.customerId=navParams.get('customerId');
     console.log(navParams.data);
 
     this.customerProvider.getPublicDetail(this.customerId).then(res=>{
-      this.data = res.data;
-      this.datas=res.data.entity;
-       // console.log('公客详情',res);
+      if(res.success){
+        this.data = res.data;
+        this.datas=res.data.entity;
+      }else {
+        this.toast.defaultMsg('middle',res.msg)
+      }
+
     });
     //
     this.customerProvider.customeroGrageInfo().then(res=>{
