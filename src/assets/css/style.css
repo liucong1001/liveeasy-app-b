@@ -48,7 +48,7 @@
     padding:0 5px
 }
 .p10{
-    padding: 10px
+    padding: 10px !important;
 }
 .p15{
     padding: 15px

@@ -1,3 +1,38 @@
 page-housinfo {
-
+  .wrap{
+    padding:0 15px;
+    h4{
+      border-bottom: 1px solid #f8f8f8;
+      padding: 15px 0;
+      margin: 0;
+    }
+    ion-grid{
+      border-bottom: 1px solid #f8f8f8;
+      padding:8px 0;
+    }
+    button{
+      background: #f8f8f8;
+      color: #1ab394;
+      border-radius: 50px;
+      font-size: 1.5rem;
+    }
+  }
+  .describe{
+    padding:15px 15px 8px;
+  }
+  .wt{
+    padding: 2px 15px 8px;
+    div:first-child{
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+  }
+  ion-footer{
+    padding: 0;
+    .edit{
+      background:none;
+      color:#1ab394;
+      border: 1px solid #1ab394;
+    }
+  }
 }

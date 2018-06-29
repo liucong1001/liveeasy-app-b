@@ -2,6 +2,8 @@ import { Component,ViewChild  } from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {HousmorePage} from "./housmore/housmore";
+import {RolepeoplePage} from "../housedetail/rolepeople/rolepeople";
 
 /**
 房源详情页面
@@ -39,10 +41,15 @@ export class HousinfoPage {
     },2000);
   }
 
+  goMore(){
+    this.openWin(HousmorePage);
+  }
   edit(){
     this.openWin(HousedetailPage,{propertyId:this.navParams.get('propertyId')});
   }
-
+  rolepeople(){
+    this.openWin(RolepeoplePage);
+  }
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

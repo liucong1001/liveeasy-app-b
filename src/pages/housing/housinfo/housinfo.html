@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides #mySlider  style="width:100%;border: 1px solid;height: 200px;">
+  <ion-slides #mySlider  style="width:100%;height: 200px;">
     <ion-slide>
       <img src="assets/imgs/banner.png" width="100%">
     </ion-slide>
@@ -22,7 +22,108 @@
       <img src="assets/imgs/banner.png" width="100%">
     </ion-slide>
   </ion-slides>
-<ion-footer>
-  <button ion-button (click)="edit()">编辑</button>
-</ion-footer>
+  <div class="wrap bgWhite">
+    <h4>标题</h4>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <p>总价</p>
+          <div>430万</div>
+        </ion-col>
+        <ion-col col-4>
+          <p>户型</p>
+          <div>430万</div>
+        </ion-col>
+        <ion-col col-4>
+          <p>面积</p>
+          <div>430万</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="m10 ">
+      <!--房源标签-->
+      <div class="tips">
+        <a class="">dddd</a>
+      </div>
+      <!--房源信息-->
+      <ion-grid class="p0">
+        <ion-row>
+          <ion-col col-6>
+            价格：sss
+          </ion-col>
+          <ion-col col-6>
+            户型：sssssss
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            朝向：sss
+          </ion-col>
+          <ion-col col-6>
+            装修：sss
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            建筑面积：sss
+          </ion-col>
+          <ion-col col-6>
+            套内面积：sss
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!--更多(业主信息,小区信息)-->
+      <div class="p10">
+        <button ion-button color="danger" full (click)="goMore()">更多房源信息</button>
+      </div>
+    </div>
+  </div>
+  <div class="m10 bgWhite describe">
+    <div>房源描述</div>
+    <div class="m10">
+      撒大苏打
+    </div>
+  </div>
+  <div class="m10 bgWhite wt">
+    <ion-row>
+      <ion-col col-8>
+        <div class="m5">业主委托书</div>
+        <p>编号：方法</p>
+        <p class="m5">类型：福福福</p>
+        <p >起始时间：方法</p>
+      </ion-col>
+      <ion-col col-4>
+        <img src="" width="100%" height="80" class="m5">
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="m10 bgWhite wt">
+    <ion-row>
+      <ion-col col-8>
+        <div class="m5">钥匙</div>
+        <p>钥匙编号：方法</p>
+        <p class="m5">钥匙存储地址：福福福</p>
+      </ion-col>
+      <ion-col col-4>
+        <img src="" width="100%" height="80" class="m5">
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list class="m10">
+    <button ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
+      角色人
+      <font color="#aaa" class="changes"></font>
+    </button>
+  </ion-list>
+
 </ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-6 class="p10">
+      <button ion-button >跟进</button>
+    </ion-col>
+    <ion-col col-6 class="p10">
+      <button ion-button (click)="edit()" class="edit">编辑</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

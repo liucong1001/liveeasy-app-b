@@ -56,18 +56,11 @@ export class ClosehousePage {
 
       console.log(this.loginId,this.realtorSourceId)
       //判断归属人和操作人是否一致
-      if(this.realtorSourceId == this.loginId){
-        //判断返回data.result是否显示处理申请信息
-        this.closehouseProvider.getShow(this.propertyid).then(res => {
-          console.log(this.propertyid)
-          console.log(res);
-        });
-      }else {
+      if(this.realtorSourceId != this.loginId){
         this.toast.msg('你不是此房源归属人，请填写后申请！');
         this.subs=false;
         this.applic=true
       }
-
     });
 
 
@@ -142,8 +135,12 @@ export class ClosehousePage {
       realtorId:this.realtorSourceId
     }).then(res => {
       console.log(res);
-      this.navCtrl.parent.select(1);
-      this.toast.msg('提交成功，请等候归属人同意!');
+      if(res.success){
+        this.localStorageProvider.set('propertyid',this.propertyid);
+        this.localStorageProvider.set('data',this.form.value);
+        this.navCtrl.parent.select(1);
+        this.toast.msg('提交成功，请等候归属人同意!');
+      }
     });
   }
   pendings(){

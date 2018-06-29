@@ -6,57 +6,8 @@ page-housing {
   .houseMenu{
     background: #fff;
   }
-  .tips {
-    a {
-      display: inline-block;
-      font-size: xx-small;
-      padding: 1px 3px;
-      margin-right: 6px
-    }
-    a:first-child {
-      background: #FEEDE9;
-      color: #F98369;
-    }
-    a:nth-child(2) {
-      background: #E7F7F7;
-      color: #7DD4D0;
-    }
-    a:nth-child(3) {
-      background: #E9F6FC;
-      color: #69C2EC;
-    }
-    a:nth-child(4) {
-      background: #F6EAF5;
-      color: #C373BA;
-    }
-    a:nth-child(5) {
-      background: #E2F5ED;
-      color: #3DBD89;
-    }
-    a:nth-child(6) {
-      background: #E8F7E4;
-      color: #68CA47;
-    }
-    a:nth-child(7) {
-      background: #e3ebee;
-      color: #84abba;
-    }
-    a:nth-child(8) {
-      background: #feffcc;
-      color: #fec500;
-    }
-    a:nth-child(9) {
-      background: #ffe1e1;
-      color: #e08989;
-    }
-    a:nth-child(10) {
-      background: #f0f0da;
-      color: #d3ba64;
-    }
-  }
-
   .serInput {
-    width: 87%;
+    width:90%;
     display: inline-block;
     vertical-align: middle;
   }
@@ -69,6 +20,57 @@ page-housing {
     margin: 0 !important;
     border-top: none !important;
   }
+
+}
+
+.tips {
+  a {
+    display: inline-block;
+    font-size: xx-small;
+    padding: 1px 3px;
+    margin-right: 6px
+  }
+  a:first-child {
+    background: #FEEDE9;
+    color: #F98369;
+  }
+  a:nth-child(2) {
+    background: #E7F7F7;
+    color: #7DD4D0;
+  }
+  a:nth-child(3) {
+    background: #E9F6FC;
+    color: #69C2EC;
+  }
+  a:nth-child(4) {
+    background: #F6EAF5;
+    color: #C373BA;
+  }
+  a:nth-child(5) {
+    background: #E2F5ED;
+    color: #3DBD89;
+  }
+  a:nth-child(6) {
+    background: #E8F7E4;
+    color: #68CA47;
+  }
+  a:nth-child(7) {
+    background: #e3ebee;
+    color: #84abba;
+  }
+  a:nth-child(8) {
+    background: #feffcc;
+    color: #fec500;
+  }
+  a:nth-child(9) {
+    background: #ffe1e1;
+    color: #e08989;
+  }
+  a:nth-child(10) {
+    background: #f0f0da;
+    color: #d3ba64;
+  }
+
 }
 
 .uDis{
@@ -104,6 +106,7 @@ page-housing {
 }
 .upIcon{
   top: -2px !important;
+  color: #1ab394 !important;
 }
 .sTips{
 text-align: center;
