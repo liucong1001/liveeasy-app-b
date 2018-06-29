@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {App, Platform, Nav, ToastController, IonicApp, Keyboard} from 'ionic-angular';
+import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,7 +12,8 @@ import {AccountPage} from "../pages/account/account";
 
 import {LocalStorageProvider} from "../providers/local-storage/local-storage";
 import {TabsPage} from "../pages/tabs/tabs";
-import {LoginPage} from "../pages/login/login";
+
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,6 +34,7 @@ export class MyApp {
               private headerColor: HeaderColor,
               public app: App,
               public keybord: Keyboard,
+              public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController
               ) {
       if(!this.localStorageProvider.get('ticket')){
@@ -90,11 +92,17 @@ export class MyApp {
     {name:'西北',val:11},
   ];
 
+  setKeyBorder() {
+    this.keybord.hideKeyboardAccessoryBar(false);
+    if (this.device.platform === 'iOS') {
+      this.keybord.disableScroll(true);
+    }
+  }
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
-      if (this.keybord.isOpen()) {
-        this.keybord.close();
+      if (this.kb.isOpen()) {
+        this.kb.close();
         return;
       }
       //点击返回按钮隐藏toast或loading或Overlay

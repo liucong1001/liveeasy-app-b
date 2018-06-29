@@ -68,6 +68,8 @@ import { AllsearchPageModule } from './../pages/allsearch/allsearch.module';
 import {HomePageModule} from "../pages/home/home.module";
 import {BackButtonProvider} from "../providers/common/backButton";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Keyboard } from '@ionic-native/keyboard';
+
 
 
 @NgModule({
@@ -138,6 +140,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ToastComponent,
       PhotoViewer,
       BackButtonProvider,
+      Keyboard,
       {
         provide: HAMMER_GESTURE_CONFIG,
         useClass: ionicGalleryModal.GalleryModalHammerConfig,
