@@ -37,11 +37,11 @@
     <h4>{{houseData.estateName}}</h4>
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-3>
           <p>总价</p>
           <div>{{houseData.propertyPrice}}万</div>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-6>
           <p>户型</p>
           <div>
             {{houseData.bedrooms}}室
@@ -51,7 +51,7 @@
             {{houseData.balconies}}阳
           </div>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-3>
           <p>面积</p>
           <div>{{houseData.spaceSize}}m²</div>
         </ion-col>
@@ -82,20 +82,21 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
-            朝向：{{ orentationPipe(houseData.orientation) }}
+          <ion-col col-7>
+            套内面积：{{houseData.innerSpaceSize}}
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-5>
             装修：{{ decorationPipe(houseData.decoration)}}
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-7>
             建筑面积：{{houseData.spaceSize}}
           </ion-col>
-          <ion-col col-6>
-            套内面积：{{houseData.innerSpaceSize}}
+          <ion-col col-5>
+            朝向：{{ orentationPipe(houseData.orientation) }}
           </ion-col>
+
         </ion-row>
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
