@@ -170,7 +170,7 @@
   a{
     border-bottom: 1px solid #F5F5F5;
     display: block;
-    padding: 13px 10px 13px 15px;
+    padding: 13px 10px 13px 22px;
 
   }
   .item-block{
@@ -206,8 +206,14 @@
 //筛选选中样式
 .color{
   color: #1ab394 !important;
+  ion-icon{
+    color: #1ab394;
+  }
 }
 textarea{
   //-webkit-tap-highlight-color:;
   outline: none;
+}
+.activated{
+  background: none !important;
 }

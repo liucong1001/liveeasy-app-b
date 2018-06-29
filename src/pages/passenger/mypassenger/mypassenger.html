@@ -13,19 +13,19 @@
          <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
            <span [ngClass]="{color:this.searchDict}">{{searchDict}}</span>
            <span *ngIf="!searchDict">区域</span>
-           <ion-icon name="md-arrow-dropdown"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
-           <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom !=0}">{{housePipe(params.intentionRoom)}}</span>
+           <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
            <span [hidden]="searchFloorNum==2"> 户型</span>
-           <ion-icon name="md-arrow-dropdown"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.intentionRoom !=0}"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
-           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;width: 65px;">{{filtrate(this.values)}}</span>
+           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values == 'false')}}</span>
            <span [hidden]="sx==2"> 筛选</span>
            <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
-           <ion-icon name="md-arrow-dropdown" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.values}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
          </ion-col>
        </ion-row>
 
@@ -114,7 +114,7 @@
   </ion-grid>
   </ion-content>
 
-<div class="popLocation">
+<div class="popLocation" style="top: 120px;">
   <!-- 区域 -->
   <ion-grid class="lists p0" *ngIf="show">
     <ion-row>
@@ -163,6 +163,7 @@
       </ion-col>
     </ion-row>
   </div>
+
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>
 

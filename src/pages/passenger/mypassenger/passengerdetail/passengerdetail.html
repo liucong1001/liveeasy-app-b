@@ -9,12 +9,12 @@
     <form [formGroup]="form">
       <ion-list>
         <ion-item class="pl12 hdRightInfo1">
-          <ion-label>客户姓名</ion-label>
+          <ion-label>客户姓名<i class="text-danger">*</i></ion-label>
           <ion-input type="text" placeholder="请输入" formControlName="customerName">
           </ion-input>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>客户性别</ion-label>
+          <ion-label>客户性别<i class="text-danger">*</i></ion-label>
           <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender">
             <ion-option value="1">男</ion-option>
             <ion-option value="2">女</ion-option>
@@ -22,17 +22,17 @@
         </ion-item>
         <ion-item class="pl12 hdRightInfo1">
           <ion-label>客户手机</ion-label>
-          <ion-input type="text" placeholder="请输入手机号" formControlName="customerPhone">
+          <ion-input type="number" placeholder="请输入手机号" formControlName="customerPhone">
           </ion-input>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>客户来源</ion-label>
-          <ion-select okText="确定"    [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc">
+          <ion-label>客户来源<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定" disabled  [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc">
             <ion-option [value]="item.value"  *ngFor="let item of customerSrcList  "> {{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>客户归属</ion-label>
+          <ion-label>客户归属<i class="text-danger">*</i></ion-label>
           <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId">
             <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
           </ion-select>
@@ -69,7 +69,7 @@
 
             <ion-item (click)="goserach()">
               <button ion-item class="pl12">
-                选择楼盘<i class="text-danger">*</i>
+                意向楼盘
                 <font color="#aaa" class="changes">
                   <span >{{estateName}}</span>
                 </font>
@@ -213,7 +213,7 @@
       <ion-grid>
         <ion-row class="p10">
           <ion-col col-4>
-          <button ion-button color="danger" full type="button" (click)="save()" class="radius">确认修改</button>
+          <button ion-button color="danger" full type="button" (click)="save()" class="radius" [disabled]="form.invalid">确认修改</button>
           </ion-col>
           <ion-col col-4>
               <button class="radius updateBtn" tappable (click)="passengerLook()">约看</button>

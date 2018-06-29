@@ -183,6 +183,7 @@ export class MypassengerPage {
   updateCucumber(val,index) {
     console.log('值' +val+this.sausage[index]);
     this.values=val;
+    console.log(this.values)
     if(val == 1){
       this.params.todayNoFollow='1';
     }else if(val == 2){
