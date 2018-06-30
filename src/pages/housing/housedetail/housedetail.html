@@ -215,6 +215,22 @@
           <ion-option value="3">板塔结合</ion-option>
         </ion-select>
       </ion-item>
+
+      <ion-item class="pl12">
+        <ion-label>配备电梯</ion-label>
+        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">有</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="pl12">
+        <ion-label>房屋用途</ion-label>
+        <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="{{x.val}}" *ngFor="let x of buzzTypeJson">{{x.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
       <div class="allStyle">
         <ion-row>
           <ion-col col-4 class="p0">
@@ -230,13 +246,7 @@
           </ion-col>
         </ion-row>
       </div>
-      <ion-item class="pl12">
-        <ion-label>配备电梯</ion-label>
-        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭">
-          <ion-option value="0">无</ion-option>
-          <ion-option value="1">有</ion-option>
-        </ion-select>
-      </ion-item>
+
     </ion-list>
 
     <ion-item class="pl12 m10">

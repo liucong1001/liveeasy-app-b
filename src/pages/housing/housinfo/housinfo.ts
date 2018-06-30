@@ -116,7 +116,9 @@ export class HousinfoPage {
 
   edit(){
     this.openWin(HousedetailPage,{propertyId:this.navParams.get('propertyId')});
+    // this.openWin();
   }
+
   rolepeople(){
     this.openWin(RolepeoplePage,{propertyId:this.navParams.get('propertyid')});
   };

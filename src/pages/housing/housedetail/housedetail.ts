@@ -67,8 +67,6 @@ export class HousedetailPage {
               public loadingCtrl: LoadingController) {
 
 
-
-
   }
 
 
@@ -102,7 +100,9 @@ export class HousedetailPage {
       if( this.data&&res.success){
         loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
+        console.log('房源buzzType',this.data.buzzType);
         this.form.patchValue({
+          buzzType:this.data.buzzType,
           buildingNo: this.data.buildingNo,
           estateName:this.data.estateName,
           estateId:this.data.estateId,
@@ -198,16 +198,16 @@ export class HousedetailPage {
       })
     ]),//业主信息
     contact:['',Validators.required],
-    contactInfo:['',[Validators.required, Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)]],
-    contactInfo2:['',Validators.pattern(/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/)],
+    contactInfo:['',[Validators.required, Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)]],
+    contactInfo2:['',Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)],
     sex:['male',Validators.required],
     tags:['0'],//房源标签
     tagsStr:[],//列表
     infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
-    buildingType:['0'],//建筑类型
+    buildingType:['0',Validators.required],//建筑类型
     buzzOwnerType:['0'],//交易权属
-    buzzType:['0'],
-    hasElevator:['0'],//配备电梯
+    buzzType:['0',Validators.required], //房屋用途
+    hasElevator:['0',Validators.required],//配备电梯
     positionInBuilding:['2'],
     propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],
@@ -246,7 +246,12 @@ export class HousedetailPage {
     ],
   };
 
-
+  //房屋用途
+  buzzTypeJson = [
+    {name:'出售',val:'1'},
+    {name:'售租',val:'2'},
+    {name:'租售',val:'3'},
+  ];
 
     presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

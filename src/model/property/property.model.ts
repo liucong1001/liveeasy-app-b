@@ -130,4 +130,6 @@ export  class PropertyModel {
    * 1 万元    2 元
    */
   propertyPriceUnit?:any;
+
+  buzzType?:any;
 }

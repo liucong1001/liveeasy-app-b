@@ -23,6 +23,7 @@ export class HousmorePage {
     public statusBar: StatusBar
   ) {
      this.data = navParams.get('item');
+     console.log('房源信息',this.data);
   }
 
   //状态栏文字颜色修改-白色
@@ -51,6 +52,11 @@ export class HousmorePage {
         return this.buildingTypeJson[i].name;
       }
     }
+  }
+
+  // JSON.parse
+  contactPipe(data){
+    return JSON.parse(data);
   }
 
 }
