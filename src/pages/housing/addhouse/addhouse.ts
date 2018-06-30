@@ -80,10 +80,10 @@ export class AddhousePage {
      sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
-     buildingType:['0'],//建筑类型
+     buildingType:['0',Validators.required],//建筑类型
      buzzOwnerType:['0'],//交易权属
-     buzzType:['0'],
-    hasElevator:['0'],//配备电梯
+     buzzType:['1',Validators.required],//房屋用途
+    hasElevator:['0',Validators.required],//配备电梯
     positionInBuilding:['2'],
     propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],
@@ -125,6 +125,15 @@ export class AddhousePage {
       contactInfo2:[
         new ErrorMessage('pattern', '手机号码格式不正确！'),
       ],
+      buildingType:[
+        new ErrorMessage('required','建筑类型必须要填写！'),
+      ],
+      buzzType:[
+        new ErrorMessage('required','房屋用途必须要填写！'),
+      ],
+      hasElevator:[
+        new ErrorMessage('required','是否配备电梯必须要填写！'),
+      ],
     };
 
 
@@ -132,6 +141,12 @@ export class AddhousePage {
     console.log('ionViewDidLoad AddhousePage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
+   //房屋用途
+  buzzTypeJson = [
+    {name:'出售',val:'1'},
+    {name:'售租',val:'2'},
+    {name:'租售',val:'3'},
+  ];
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

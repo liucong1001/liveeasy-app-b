@@ -189,16 +189,16 @@
 
     <ion-list (click)="clickIntention()">
       <button ion-item class="pl12" *ngIf="right">
-        <font>更多</font>
+        <font>更多<i class="text-danger">*</i></font>
       </button>
       <ion-item class="pl12" *ngIf="down" >
-        <font>更多</font>
+        <font>更多<i class="text-danger">*</i></font>
         <i class="iconfont icon-xia"></i>
       </ion-item>
     </ion-list>
     <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
-        <ion-label>建筑类型</ion-label>
+        <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭">
           <ion-option value="0">未知</ion-option>
           <ion-option value="1" >塔楼</ion-option>
@@ -206,10 +206,25 @@
           <ion-option value="3">板塔结合</ion-option>
         </ion-select>
       </ion-item>
+
+      <ion-item class="pl12">
+        <ion-label>配备电梯<i class="text-danger">*</i></ion-label>
+        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">有</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
+        <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭">
+          <ion-option value="{{x.val}}" *ngFor="let x of buzzTypeJson">{{x.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
       <div class="allStyle">
         <ion-row>
           <ion-col col-4 class="p0">
-           <span class="upHe">楼户比例</span>
+            <span class="upHe">楼户比例</span>
           </ion-col>
           <ion-col col-4>
             <input type="number"  formControlName="elevators"  class="upI" />
@@ -221,13 +236,6 @@
           </ion-col>
         </ion-row>
       </div>
-      <ion-item class="pl12">
-        <ion-label>配备电梯</ion-label>
-        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭">
-          <ion-option value="0">无</ion-option>
-          <ion-option value="1">有</ion-option>
-        </ion-select>
-      </ion-item>
     </ion-list>
 
     <ion-list class="m10">
