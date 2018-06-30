@@ -115,10 +115,7 @@ export class HousinfoPage {
   //跟进
   goFollow(){
     this.openWin(FollowPage,{
-      // propertyid: this.navParams.get('propertyId'),
-      // estatename: this.data.estateName,
-      // convid: this.data.convId,
-      // standardAddress:this.data.standardAddress,
+      item:this.houseData
     })
   }
 

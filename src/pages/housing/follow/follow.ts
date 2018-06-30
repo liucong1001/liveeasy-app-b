@@ -32,12 +32,13 @@ export class FollowPage {
               public  followProvider: FollowProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
 
-    this.propertyid = navParams.get('propertyid');
-    this.estatename = navParams.get('estatename');
-    this.convid = navParams.get('convid');
-    this.standardAddress = navParams.get('standardAddress');
+    this.propertyid = navParams.get('item').propertyId;
+    this.estatename = navParams.get('item').estateName;
+    this.convid = navParams.get('item').convId;
+    this.standardAddress = navParams.get('item').standardAddress;
     this.followuptime=new Date().getTime();
     console.log('跟进',navParams);
+    console.log(this.propertyid)
 
   }
 
