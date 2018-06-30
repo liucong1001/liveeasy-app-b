@@ -66,6 +66,7 @@
           <div>
             <ion-textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></ion-textarea>
           </div>
+          <valid-error [errors]="errors.closeDesc"  [control]="form.get('closeDesc')"></valid-error>
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
           <button ion-button full color="danger" class="radius"  [disabled]="form.invalid" *ngIf="subs" (click)="subClose()">确定</button>

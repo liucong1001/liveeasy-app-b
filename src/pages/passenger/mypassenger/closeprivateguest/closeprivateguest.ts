@@ -4,6 +4,7 @@ import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 /**
  * Generated class for the CloseprivateguestPage page.
  *
@@ -37,9 +38,15 @@ export class CloseprivateguestPage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   form:FormGroup =this.fb.group({
-    content:['',Validators.required],
     customerStatus:['',Validators.required],
+    content:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]], //委托书编号
   });
+  errors={
+    content:[
+      new ErrorMessage('pattern','不能输入特殊符号'),
+    ],
+  };
+
   closes(){
     this.customerProvider.prclose({
       customerStatus:this.form.value.customerStatus,

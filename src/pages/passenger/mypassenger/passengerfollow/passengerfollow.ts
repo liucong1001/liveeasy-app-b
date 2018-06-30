@@ -5,6 +5,7 @@ import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {MypassengerPage} from "../mypassenger";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 /**
  * Generated class for the PassengerfollowPage page.
  *
@@ -39,8 +40,13 @@ export class PassengerfollowPage {
   }
   form:FormGroup =this.fb.group({
     followupCode:['1',Validators.required],
-    content:['',Validators.required],
+    content:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]],
   });
+  errors={
+    content:[
+      new ErrorMessage('pattern','不能输入特殊符号'),
+    ],
+  };
 
   follows(){
     this.customerProvider.prfollow({

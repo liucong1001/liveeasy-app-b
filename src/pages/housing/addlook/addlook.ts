@@ -11,6 +11,8 @@ import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
  * Generated class for the AddlookPage page.
  *
@@ -37,7 +39,7 @@ export class AddlookPage {
   standardAddress:any;
   fileTransfer: FileTransferObject = this.transfer.create();
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
+  constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
@@ -54,8 +56,7 @@ export class AddlookPage {
     this.imgHeader = this.configProvider.set().img;
     this.navBar.backButtonClick = this.backButtonClick;
   }
-
-
+  
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       // title: '更多',

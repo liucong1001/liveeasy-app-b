@@ -9,6 +9,7 @@ import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
 import {BelongerPage} from "./belonger/belonger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
  * Generated class for the ClosehousePage page.
  *
@@ -68,8 +69,13 @@ export class ClosehousePage {
   form:FormGroup =this.fb.group({
     propertyStatus:['',Validators.required],
     invalidReason:[''],
-    closeDesc:['',Validators.required],
+    closeDesc:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]],
   });
+  errors={
+    closeDesc:[
+      new ErrorMessage('pattern','不能输入特殊符号'),
+    ],
+  };
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClosehousePage');
     this.navBar.backButtonClick = this.backButtonClick;
