@@ -9,6 +9,7 @@ import {PropertyModel} from "../../../model/property/property.model";
 import { LoadingController, Loading } from 'ionic-angular';
 import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {FollowPage} from "../follow/follow";
 /**
 房源详情页面
  */
@@ -111,6 +112,15 @@ export class HousinfoPage {
   rolepeople(){
     this.openWin(RolepeoplePage,{propertyId:this.navParams.get('propertyid')});
   };
+  //跟进
+  goFollow(){
+    this.openWin(FollowPage,{
+      // propertyid: this.navParams.get('propertyId'),
+      // estatename: this.data.estateName,
+      // convid: this.data.convId,
+      // standardAddress:this.data.standardAddress,
+    })
+  }
 
   //房源标签转换（字符串转为数组）
   tagPipe(data) {
