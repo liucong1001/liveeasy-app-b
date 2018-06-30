@@ -303,29 +303,6 @@ export class HousingPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
-
-    this.customerProvider.area().then(res=>{
-      console.log('区域', res);
-      if(res){
-        this.area = res.data.distrs;
-        if(this.area){
-          this.area.unshift({name:'不限',id:'99'});
-        }
-        /**
-         * 区域和房源标签合成一个接口
-         */
-        this.tagsList = res.data.tags; //房源标签
-        this.localStorageProvider.set('tagsList',this.tagsList);
-      }
-
-    });
-
-    //房源标签
-    this.addhouseProvider.estateTagsSelect().then(res => {
-      this.tagsListPage = res.data;
-      this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-    });
-
     this.search();
     this.imgHeader = this.configProvider.set().img;
   }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component, Renderer, ViewChild} from '@angular/core';
+import {Navbar, NavController, Searchbar} from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../housing/addhouse/addhouse";
@@ -19,9 +19,11 @@ export class HomePage {
   associate=false;
   pop=false;
   notificationNews = [];
+  @ViewChild('navbar') navBar: Navbar;
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public homeProvider:HomeProvider,public statusBar: StatusBar
+              public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer
              ) {
 
   }
@@ -33,6 +35,17 @@ export class HomePage {
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}
     });
+  }
+
+  //禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
+
+    // this.navBar.backButtonClick = () => {
+    //   this.navCtrl.push(HomesearchPage);
+    // };
+
   }
 
   addhouse(){
