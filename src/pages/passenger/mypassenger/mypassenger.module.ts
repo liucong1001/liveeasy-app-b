@@ -8,6 +8,7 @@ import {CloseprivateguestPageModule} from "./closeprivateguest/closeprivateguest
 import {SearchPageModule} from "./passengerlook/search/search.module";
 import {AddpassengerPageModule} from "./addpassenger/addpassenger.module";
 import {PassengerdetailPageModule} from "./passengerdetail/passengerdetail.module";
+import {DescsPageModule} from "./descs/descs.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {PassengerdetailPageModule} from "./passengerdetail/passengerdetail.modul
     CloseprivateguestPageModule,
     PassengerfollowPageModule,
     PassengerlookPageModule,
-    PassengerdetailPageModule
+    PassengerdetailPageModule,
+    DescsPageModule
   ],
 })
 export class MypassengerPageModule {}

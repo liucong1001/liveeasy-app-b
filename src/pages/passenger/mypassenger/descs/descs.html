@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="first">
+    <ion-title *ngIf="val == 1">
+      核心需求点
+    </ion-title>
+    <ion-title *ngIf="val == 2">
+      核心抵触点
+    </ion-title>
+    <ion-title *ngIf="val == 3">
+      备注
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <form>
+    <textarea type="text" id="" cols="30" rows="10" name="content"  [(ngModel)]="content" placeholder="请填写内容...." class="ustyle"></textarea>
+    <button ion-button block color="danger" class="m10">确定</button>
+  </form>
+</ion-content>

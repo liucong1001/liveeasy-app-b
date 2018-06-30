@@ -9,6 +9,7 @@ import {MypassengerPage} from "../../mypassenger/mypassenger";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ToastComponent} from "../../../../components/toast/toast";
+import {DescsPage} from "../descs/descs";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -207,7 +208,11 @@ export class PassengerdetailPage {
 
   }
 
-
+  desc(val){
+    this.openWin(DescsPage,{
+      val:val,
+    })
+  }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {

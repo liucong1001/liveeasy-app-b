@@ -7,6 +7,7 @@ import {LocalStorageProvider} from "../../../providers/local-storage/local-stora
 import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
  * Generated class for the FollowPage page.
  *
@@ -48,9 +49,14 @@ export class FollowPage {
 
   }
   form:FormGroup =this.fb.group({
-    followupCode:['1',Validators.required], //类型
-    content:['',Validators.required],//内容
+    followupCode:['',Validators.required],//内容
+    content:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]], //委托书编号
   });
+  errors={
+    content:[
+      new ErrorMessage('pattern','不能输入特殊符号'),
+    ],
+  };
 
   subFollow(){
       // alert('222');

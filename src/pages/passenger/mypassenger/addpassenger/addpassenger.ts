@@ -9,6 +9,7 @@ import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {DescsPage} from "../descs/descs";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -217,6 +218,12 @@ export class AddpassengerPage {
     })
 
   }
+
+  desc(val){
+    this.openWin(DescsPage,{
+      val:val,
+    })
+  }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
@@ -230,5 +237,18 @@ export class AddpassengerPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+//------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

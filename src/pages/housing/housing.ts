@@ -423,10 +423,7 @@ export class HousingPage {
  //
   goFollow(item) {
     this.openWin(FollowPage, {
-      propertyid: item.propertyId,
-      estatename: item.estateName,
-      convid: item.convId,
-      standardAddress:item.standardAddress
+      item:item
     });
   }
 

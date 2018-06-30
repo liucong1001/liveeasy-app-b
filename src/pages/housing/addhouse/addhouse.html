@@ -20,7 +20,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" formControlName="buildingNo">
+          <ion-input type="text" formControlName="buildingNo" pattern="^[A-Za-z0-9]+$">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">栋</span>
@@ -28,12 +28,13 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
+        <ion-input type="text" pattern="^[A-Za-z0-9]+$" formControlName="unitNo" placeholder="请填写您的单元(请填写英文或数字)"></ion-input>
       </ion-item>
+      <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
+          <ion-input type="text" pattern="^[A-Za-z0-9]+$" formControlName="floorNo" placeholder="请填写英文或数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
@@ -41,9 +42,10 @@
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" placeholder="请输入房间号" formControlName="houseNo" class="p0">
+        <ion-input type="text" pattern="^[A-Za-z0-9]+$" placeholder="请输入房间号" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.houseNo"  [control]="form.get('houseNo')"  ></valid-error>
     </ion-list>
     <ion-list class="m10">
       <div class="hdRightInfo">
