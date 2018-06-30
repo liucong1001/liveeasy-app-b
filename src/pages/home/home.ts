@@ -21,12 +21,13 @@ export class HomePage {
   notificationNews = [];
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public homeProvider:HomeProvider,public statusBar: StatusBar,
+              public homeProvider:HomeProvider,public statusBar: StatusBar
              ) {
 
   }
+  //状态栏文字颜色修改-黑色
   ionViewWillEnter() {
-    this.statusBar.styleLightContent();
+    this.statusBar.styleDefault();
   }
   ionViewDidLoad(){
     this.homeProvider.getNotification().then(res=>{

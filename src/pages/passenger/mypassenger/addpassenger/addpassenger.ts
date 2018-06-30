@@ -8,6 +8,7 @@ import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchho
 import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -40,7 +41,8 @@ export class AddpassengerPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
-              public events: Events) {
+              public events: Events,public statusBar: StatusBar
+  ) {
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
        this.customerSrcList = res;
@@ -65,6 +67,10 @@ export class AddpassengerPage {
     this.addhouseProvider.estateListSelect().then(res=>{
       this.estateList = res.data.result;
     });
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
 
   ionViewDidLoad() {

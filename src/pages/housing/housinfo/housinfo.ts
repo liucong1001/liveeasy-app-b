@@ -10,6 +10,7 @@ import { LoadingController, Loading } from 'ionic-angular';
 import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {FollowPage} from "../follow/follow";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
 房源详情页面
  */
@@ -29,7 +30,8 @@ export class HousinfoPage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,) {
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,
+              ) {
 
           this.data=navParams.get('propertyId');
           console.log(this.data);
@@ -48,6 +50,11 @@ export class HousinfoPage {
   imgJson :any; //实勘图
   letteratorneyImgJson:any;
   keyImgJson:any;
+
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
 
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;

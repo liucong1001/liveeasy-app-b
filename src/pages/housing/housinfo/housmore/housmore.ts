@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {PropertyModel} from "../../../../model/property/property.model";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the HousmorePage page.
@@ -16,10 +17,18 @@ import {PropertyModel} from "../../../../model/property/property.model";
 })
 export class HousmorePage {
   data:PropertyModel;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public statusBar: StatusBar
+  ) {
      this.data = navParams.get('item');
   }
 
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousmorePage');
   }

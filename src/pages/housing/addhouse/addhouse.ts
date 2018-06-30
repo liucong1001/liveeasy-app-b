@@ -10,6 +10,7 @@ import {DescPage} from "../housedetail/desc/desc";
 import { Events } from 'ionic-angular';
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -39,7 +40,8 @@ export class AddhousePage {
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
               private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
-              public app: App) {
+              public app: App,public statusBar: StatusBar
+  ) {
      //楼盘列表
 
     //房源标签
@@ -136,6 +138,10 @@ export class AddhousePage {
       ],
     };
 
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddhousePage');
