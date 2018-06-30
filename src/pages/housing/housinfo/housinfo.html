@@ -4,14 +4,20 @@
 <ion-header>
   <ion-navbar color="first">
     <ion-title>房源详情</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only tappable (click)="record()">
+        记录
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content *ngIf="houseData">
   <!--propertyPics-->
   <ion-slides #mySlider  style="" autoplay="3000" pager="true" loop="true" paginationType="fraction">
     <ion-slide *ngIf="!imgJson">
-      <img src="assets/imgs/banner.png">
+      <img src="assets/imgs/banner.png" width="100%">
     </ion-slide>
     <!--assets/imgs/default.jpg-->
     <ng-container *ngIf="imgJson"  >

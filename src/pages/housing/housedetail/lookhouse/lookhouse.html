@@ -6,11 +6,11 @@
   <ion-content>
     <!-- 实勘审核中不能修改 -->
     <form>
-      <!--<div class="bgWhite p10">-->
-        <!--<font color="red">-->
-          <!--<ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>-->
-          <!--&nbsp;实勘图正在审核，审核期间不允许删除图片</font>-->
-      <!--</div>-->
+      <div class="bgWhite p10" [hidden]="tips">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          &nbsp;录入房源后72小时内不可上传实勘图!</font>
+      </div>
       <ion-list class="m10" *ngIf="!edit" >
 
         <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i = index" >
@@ -27,7 +27,7 @@
 
       <ion-list class="m10" *ngIf="edit">
         <div class="attorneyPic bgWhite">
-          <span>门牌号:</span>
+          <span>门牌号:{{this.createdTime| date:'yyyy年MM月dd日'}}</span>
           <upload [useDir]="useDir" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite">

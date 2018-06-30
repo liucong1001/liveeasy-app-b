@@ -31,7 +31,7 @@ export class RecordPage {
               public http: HttpClient, public nativePageTransitions: NativePageTransitions,
               public  recordprovider: RecordProvider,public localStorageProvider: LocalStorageProvider,
               public  configProvider:ConfigProvider) {
-    this.propertyid = navParams.get('propertyid');
+    this.propertyid = navParams.get('item').propertyId;
     this.recordprovider.getRecord(this.propertyid).then(res => {
       console.log(res);
         this.followUp = res.data.propFollowupInfos;

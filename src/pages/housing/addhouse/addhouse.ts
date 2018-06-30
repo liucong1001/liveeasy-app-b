@@ -247,6 +247,7 @@ export class AddhousePage {
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
        this.toast.msg('录入成功!');
+
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
           this.navCtrl.setRoot(HousingPage);

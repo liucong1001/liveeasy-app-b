@@ -11,6 +11,7 @@ import {ConfigProvider} from "../../../providers/config/config";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {FollowPage} from "../follow/follow";
 import {StatusBar} from "@ionic-native/status-bar";
+import {RecordPage} from "../housedetail/record/record";
 /**
 房源详情页面
  */
@@ -124,6 +125,12 @@ export class HousinfoPage {
     this.openWin(FollowPage,{
       item:this.houseData
     })
+  }
+  //记录
+  record(){
+    this.openWin(RecordPage,{
+      item:this.houseData
+    });
   }
 
   //房源标签转换（字符串转为数组）

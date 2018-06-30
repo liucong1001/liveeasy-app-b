@@ -33,12 +33,17 @@ export class LookhousePage {
   imgHeader: string; //线上图片默认头地址
   imgJson :any;
   edit = false;
+  createdTime:any;
+  nowTime:any;
+  timer:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,) {
     this.data = navParams.get('item');
+    //获取时间
+    this.createdTime=new Date(navParams.get('item').createdTime).toISOString()
     this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
     // propertyPics
