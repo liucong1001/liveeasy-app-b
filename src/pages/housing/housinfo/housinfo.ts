@@ -12,6 +12,8 @@ import {LocalStorageProvider} from "../../../providers/local-storage/local-stora
 import {FollowPage} from "../follow/follow";
 import {StatusBar} from "@ionic-native/status-bar";
 import {RecordPage} from "../housedetail/record/record";
+import {HomePage} from "../../home/home";
+import {HousingPage} from "../housing";
 /**
 房源详情页面
  */
@@ -28,14 +30,15 @@ export class HousinfoPage {
   keyData:any;
   imgHeader: string;
   tagsListPage =[];
+  propertyId:string;
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,
               ) {
 
-          this.data=navParams.get('propertyId');
-          console.log(this.data);
+          // this.data=navParams.get('propertyId');
+          // console.log(this.data);
           this.tagsListPage = this.localStorageProvider.get('tagsListPage');
   }
 
@@ -65,23 +68,38 @@ export class HousinfoPage {
     },2000);
 
     console.log('ionViewDidLoad HousinfoPage');
-    let loading = this.loadingCtrl.create({
-      content: '数据加载中...'
-    });
-    loading.present();
-    this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
-        if(res.success){
-          this.houseData=res.data;
-          // JSON.parse(this.data.propertyPics)
-          if(res.data.propertyPics){
-            this.imgJson = JSON.parse(res.data.propertyPics);
-          }
 
-          loading.dismiss();
-        }
-    });
+ if(this.navParams.get('item')){
+   //如果是从列表页过来  直接传递数据 不请求 （一次调用详情接口）
+     this.houseData = this.navParams.get('item');
+     this.propertyId = this.houseData.propertyId;
+     if(this.navParams.get('item').propertyPics){
+       this.imgJson = JSON.parse(this.navParams.get('item').propertyPics);
+     }
+ }else if(this.navParams.get('propertyId')){
+     let loading = this.loadingCtrl.create({
+       content: '数据加载中...'
+     });
+     loading.present();
+     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
+         if(res.success){
+           this.houseData=res.data;
+           this.propertyId = this.houseData.propertyId;
+           if(res.data.propertyPics){
+             this.imgJson = JSON.parse(res.data.propertyPics);
+           }
+
+           loading.dismiss();
+         }
+     });
+ }
+
+
+
+
+
      //业主委托书
-    this.propertyProvider.adetail(this.navParams.data.propertyId).then(res=>{
+    this.propertyProvider.adetail(this.propertyId).then(res=>{
 
       if(res.msg == 1){
         this.letteratorneyData = res.data;
@@ -89,7 +107,7 @@ export class HousinfoPage {
       }
     });
     //钥匙信息
-    this.propertyProvider.keydetail(this.navParams.data.propertyId).then(res=>{
+    this.propertyProvider.keydetail(this.propertyId).then(res=>{
         if(res.success&&res.data){
           this.keyData = res.data;
          console.log('钥匙',res.data);
@@ -104,10 +122,18 @@ export class HousinfoPage {
 
   }
 
+  //进入页面后执行
+  ionViewDidEnter(){
+    this.navBar.backButtonClick = () => {
 
-  ngOnInit(){//页面加载完成后自己调用
-
+      if(this.navParams.get('notReloadPage')){
+        this.navCtrl.pop();
+      }else {
+        this.navCtrl.setRoot(HousingPage);
+      }
+    };
   }
+
 
   goMore(){
      this.openWin(HousmorePage,{item:this.houseData});
@@ -115,12 +141,12 @@ export class HousinfoPage {
   }
 
   edit(){
-    this.openWin(HousedetailPage,{propertyId:this.navParams.get('propertyId')});
+    this.openWin(HousedetailPage,{propertyId:this.propertyId});
     // this.openWin();
   }
 
   rolepeople(){
-    this.openWin(RolepeoplePage,{propertyId:this.navParams.get('propertyid')});
+    this.openWin(RolepeoplePage,{propertyId:this.propertyId});
   };
   //跟进
   goFollow(){

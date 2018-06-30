@@ -20,6 +20,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import { LoadingController, Loading } from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {HousinfoPage} from "../housinfo/housinfo";
 
 /**
  房源修改页面
@@ -370,8 +371,9 @@ export class HousedetailPage {
       if(res.success){
         this.toast.msg('修改成功!');
         setTimeout(()=>{
-          this.navCtrl.setRoot(HousingPage);
-        });
+          // this.navCtrl.setRoot(HousingPage);
+          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+        },500);
       }else{
         this.toast.error('修改失败！');
       }

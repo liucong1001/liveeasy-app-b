@@ -66,9 +66,7 @@ export class HomesearchPage {
       this.searchBar.setFocus();
     },0);
     this.navBar.backButtonClick = () => {
-       // this.navCtrl.pop({animate:false});
        this.navCtrl.setRoot(HomePage)
-      //  window.location.reload(); HomePage
     };
   }
   //页面离开

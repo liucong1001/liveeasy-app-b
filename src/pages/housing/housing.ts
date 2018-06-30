@@ -450,7 +450,7 @@ export class HousingPage {
     // this.openWin(HousinfoPage, {
     //   propertyId:item.propertyId,
     // });
-    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId,})
+    this.navCtrl.push(HousinfoPage,{item:item,notReloadPage:true})
   }
 
   addHouse() {
