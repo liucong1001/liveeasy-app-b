@@ -8,6 +8,7 @@ import {HousedetailPage} from "../housedetail";
 import {ToastComponent} from "../../../../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 
 /**
@@ -36,14 +37,32 @@ export class LookhousePage {
   createdTime:any;
   nowTime:any;
   timer:any;
+  wrap:any;
+  showTip = false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,) {
     this.data = navParams.get('item');
+    // console.log('实勘详情',this.data,this.data.createdTime);
+
     //获取时间
-    this.createdTime=new Date(navParams.get('item').createdTime).toISOString()
+    function getOffsetDays(time1, time2) {
+      var offsetTime = Math.abs(time1 - time2);
+      return Math.floor(offsetTime / (3600 * 24 * 1e3));
+    }
+
+    this.wrap = getOffsetDays(Date.now(), (new Date(navParams.get('item').createdTime)).getTime());
+     if(this.wrap==0){
+        this.showTip = true;
+     } else {
+        this.showTip = false;
+     }
+    // this.createdTime=new Date(navParams.get('item').createdTime);
+    // var now = new Date();
+    console.log('创建事件',this.createdTime,'现在',this.wrap);
+
     this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
     // propertyPics

@@ -208,10 +208,47 @@ export class PassengerdetailPage {
 
   }
 
+
   desc(val){
-    this.openWin(DescsPage,{
-      val:val,
-    })
+
+    this.events.subscribe('content', (params) => {
+      // 接收B页面发布的数据
+      console.log('接收数据为: ', params);
+      if(params){
+        if(params.num==1){
+          this.form.controls['requiredDemands'].setValue(params.val);
+        };
+        if(params.num==2){
+          this.form.controls['againstDemands'].setValue(params.val);
+        };
+        if(params.num==3){
+          this.form.controls['comments'].setValue(params.val);
+        };
+      }
+
+      // 取消订阅
+      this.events.unsubscribe('content');
+    });
+
+
+    if(val==1){
+      this.openWin(DescsPage,{
+        val:1,
+        content:this.form.value.requiredDemands
+      });
+    }
+    if(val==2){
+      this.openWin(DescsPage,{
+        val:2,
+        content:this.form.value.againstDemands
+      });
+    }
+    if(val==3){
+      this.openWin(DescsPage,{
+        val:3,
+        content:this.form.value.comments
+      });
+    }
   }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

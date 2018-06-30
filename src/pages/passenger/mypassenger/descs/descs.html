@@ -16,6 +16,6 @@
 <ion-content padding>
   <form>
     <textarea type="text" id="" cols="30" rows="10" name="content"  [(ngModel)]="content" placeholder="请填写内容...." class="ustyle"></textarea>
-    <button ion-button block color="danger" class="m10">确定</button>
+    <button ion-button block color="danger" class="m10" (click)="save()">确定</button>
   </form>
 </ion-content>
