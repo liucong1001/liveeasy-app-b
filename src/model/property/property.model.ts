@@ -122,5 +122,12 @@ export  class PropertyModel {
    * 敏感信息隐藏
    */
   notShow?:any;
-
+  /**
+   * 均价
+   */
+  propertyPerPrice?:any;
+  /**
+   * 1 万元    2 元
+   */
+  propertyPriceUnit?:any;
 }

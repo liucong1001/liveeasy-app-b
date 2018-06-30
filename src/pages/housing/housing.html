@@ -77,7 +77,7 @@
               <ion-col col-7 class="tr p0">
                 <font color="red" class="font12">
                   <span
-                    *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*1000 | toParseInt}}</span>
+                    *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
                   元/㎡
                   <!--<sup>2</sup>-->

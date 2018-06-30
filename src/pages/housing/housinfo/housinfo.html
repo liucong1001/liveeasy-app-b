@@ -14,8 +14,8 @@
       <img src="assets/imgs/banner.png" width="100%" height="200px">
     </ion-slide>
     <!--assets/imgs/default.jpg-->
-    <ng-container *ngIf="imgJson" >
-      <ion-slide  *ngFor="let item of imgJson;let i = index" >
+    <ng-container *ngIf="imgJson"  >
+      <ion-slide  *ngFor="let item of imgJson;let i = index"  pager="true">
         <img [src]="imgHeader+item.imagePath" width="100%">
       </ion-slide>
     </ng-container>
@@ -26,7 +26,10 @@
       <ion-row>
         <ion-col col-3>
           <p>总价</p>
-          <div>{{houseData.propertyPrice}}万</div>
+          <div>
+            {{houseData.propertyPrice}}
+            {{houseData.propertyPriceUnit==1?'万元':'元'}}
+           </div>
         </ion-col>
         <ion-col col-6>
           <p>户型</p>
@@ -65,12 +68,14 @@
             {{houseData.balconies}}阳
           </ion-col>
           <ion-col col-5>
-            价格：{{houseData.propertyPrice}}
+            均价：
+            {{unitPrice(houseData)}} 元/m²
+            <!--<span>{{houseData.propertyPriceUnit==1?'万元':'元'}}/m²</span>-->
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            套内面积：{{houseData.innerSpaceSize}}
+            套内面积：{{houseData.innerSpaceSize}}m²
           </ion-col>
           <ion-col col-5>
             装修：{{ decorationPipe(houseData.decoration)}}
@@ -78,7 +83,7 @@
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            建筑面积：{{houseData.spaceSize}}
+            建筑面积：{{houseData.spaceSize}}m²
           </ion-col>
           <ion-col col-5>
             朝向：{{ orentationPipe(houseData.orientation) }}
