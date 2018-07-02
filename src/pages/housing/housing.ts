@@ -641,7 +641,9 @@ export class HousingPage {
       }else {
         this.params.tags = params.tags;
         this.params.orientation = params.orientation;
-        // this.params.
+        this.params. propertyPriceStart = params.propertyPriceStart;
+        this.params. propertyPriceEnd = params.propertyPriceEnd;
+        // this.params. propertyPriceStart  propertyPriceEnd
         console.log('搜索',this.floorName,this.params.estateId);
       }
        this.search();
@@ -670,5 +672,7 @@ class  PropertyPageParams {
   tags?:any;
   hasElevator?:any;//是否有电梯
   orientation?:any;//朝向
+  propertyPriceStart?:any; //价格范围  开始
+  propertyPriceEnd?:any; //价格范围  结束
 }
 

@@ -30,12 +30,15 @@ export class ImgGalleryDirective {
   gallery(data,index){
     var photos = [];
     for(var i in data){
-      photos.push({url:this.imgHeader+data[i].imagePath})
+      var item = Number(i)+1;
+      photos.push({url:this.imgHeader+data[i].imagePath,title: data[i].desc+' '+item+' - '+data.length,type:'asd'})
     }
+
     let modal = this.modalCtrl.create(GalleryModal, {
       photos: photos,
-      initialSlide: index
+      initialSlide: index,
     });
     modal.present();
   }
+
 }

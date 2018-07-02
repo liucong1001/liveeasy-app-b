@@ -21,9 +21,15 @@
 
     <h4 style="margin: 20px 0 0">价格</h4>
     <ion-list>
+      <ion-row>
+        <ion-col  class="middleGreen">
+          {{structure.lower}}万-{{structure.upper}}万
+        </ion-col>
+      </ion-row>
+
       <ion-item>
-        <ion-range dualKnobs="true" pin="true" [(ngModel)]="structure"  (ionChange)="onChange($event)" style="padding:20px 0">
-          <ion-label range-left>0元</ion-label>
+        <ion-range dualKnobs="true" pin="true" min="0" max="1000" step="10"  [(ngModel)]="structure"  (ionChange)="onChange($event)" style="padding:20px 0">
+          <ion-label range-left>0</ion-label>
           <ion-label range-right>不限</ion-label>
         </ion-range>
       </ion-item>

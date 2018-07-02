@@ -27,6 +27,8 @@ export class MorePage {
     tags:0,
     tagsArry:[],
     orientation:'',
+    propertyPriceStart:'0',
+    propertyPriceEnd:'1000',
   };
 
   @ViewChild(Navbar) navBar: Navbar;
@@ -34,15 +36,21 @@ export class MorePage {
   selected2:any;
   rootPage:any = MyApp ;
 
-  structure: any = {lower: 33, upper: 60};
+  structure: any = {lower: 0, upper: 1000};
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,
               public nativePageTransitions: NativePageTransitions,) {
 
   }
 
+
+
   onChange(ev: any) {
-    console.log('Changed', ev);
+    this.searchMoreData.propertyPriceStart = this.structure.lower.toString();
+    this.searchMoreData.propertyPriceEnd = this.structure.upper.toString();
+
+
+    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
   }
 
   ionViewDidLoad() {
@@ -53,6 +61,8 @@ export class MorePage {
 
     if(this.localStorageProvider.get('searchMoreData')){
       this.searchMoreData = this.localStorageProvider.get('searchMoreData');
+      this.structure.lower = this.searchMoreData.propertyPriceStart;
+      this.structure.upper = this.searchMoreData.propertyPriceEnd;
     }
     console.log('进入 MorePage',this.searchMoreData);
   }
@@ -144,6 +154,11 @@ export class MorePage {
      //清除朝向
      this.choseDirect(this.cxJSON[0]);
       // this.resetDiret();
+    //价格；
+    this.structure = {lower: 0, upper: 1000};
+    this.searchMoreData.propertyPriceStart = '0';
+    this.searchMoreData.propertyPriceStart = '1000';
+
      console.log('清除',this.searchMoreData);
      this.localStorageProvider.del('searchMoreData');
   }

@@ -17,7 +17,48 @@ page-housinfo {
   }
   .addCss{
     background-color: #1ab394 !important;
+    //transition: opacity 1s;
+    -webkit-animation-name: fadeInOut;
+    -webkit-animation-duration: 500ms;
   }
+
+  @-webkit-keyframes fadeInOut {
+    0% {
+      opacity:0;
+    }
+    25% {
+      opacity:0.25;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    75% {
+      opacity:0.75;
+    }
+    100%{
+      opacity:1;
+    }
+  }
+
+  .removeCss{
+    background-color: #1ab394 !important;
+    -webkit-animation-name: fadeOut;
+    -webkit-animation-duration: 500ms;
+  }
+  @-webkit-keyframes fadeOut {
+    0% {
+      opacity:1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100%{
+      opacity:0;
+    }
+  }
+
   ion-navbar{
     background-color: rgba(0,0,0,0);
   }

@@ -3,9 +3,9 @@
 -->
 <ion-header>
   <ion-navbar #navbar color="first" [ngClass]="{addCss:classFlag}">
-    <!--<ion-title>房源详情</ion-title>-->
+    <ion-title [hidden]="!classFlag">房源详情</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only tappable (click)="record()">
+      <button ion-button icon-only tappable (click)="record()" >
         记录
       </button>
     </ion-buttons>
@@ -46,8 +46,8 @@
             {{houseData.bedrooms}}室
             {{houseData.halls}}厅
             {{houseData.bathrooms}}卫
-            {{houseData.kitchens}}厨
-            {{houseData.balconies}}阳
+            <!--{{houseData.kitchens}}厨-->
+            <!--{{houseData.balconies}}阳-->
           </div>
         </ion-col>
         <ion-col col-3>
@@ -68,15 +68,15 @@
       <!--房源信息-->
       <ion-grid class="p0">
         <ion-row>
-          <ion-col col-7>
-            户型：
-            {{houseData.bedrooms}}室
-            {{houseData.halls}}厅
-            {{houseData.bathrooms}}卫
-            {{houseData.kitchens}}厨
-            {{houseData.balconies}}阳
-          </ion-col>
-          <ion-col col-5>
+          <!--<ion-col col-7>-->
+            <!--户型：-->
+            <!--{{houseData.bedrooms}}室-->
+            <!--{{houseData.halls}}厅-->
+            <!--{{houseData.bathrooms}}卫-->
+            <!--{{houseData.kitchens}}厨-->
+            <!--{{houseData.balconies}}阳-->
+          <!--</ion-col>-->
+          <ion-col col-8>
             均价：
             {{unitPrice(houseData)}} 元/m²
             <!--<span>{{houseData.propertyPriceUnit==1?'万元':'元'}}/m²</span>-->

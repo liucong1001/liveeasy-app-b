@@ -43,8 +43,8 @@ export class HousinfoPage {
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
   }
   scrollHandler(event) {
-    console.log(this.content.scrollTop);
-    if (this.content.scrollTop >= 150){
+    // console.log(event);
+    if (this.content.scrollTop >= 10){
       // alert(2)
       this.classFlag=true;
     }else if(this.content.scrollTop < 10){
