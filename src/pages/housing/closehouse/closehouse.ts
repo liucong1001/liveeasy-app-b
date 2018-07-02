@@ -69,13 +69,13 @@ export class ClosehousePage {
   form:FormGroup =this.fb.group({
     propertyStatus:['',Validators.required],
     invalidReason:[''],
-    closeDesc:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]],
+    closeDesc:['',[Validators.required]],
   });
-  errors={
-    closeDesc:[
-      new ErrorMessage('pattern','不能输入特殊符号'),
-    ],
-  };
+  // errors={
+  //   closeDesc:[
+  //     new ErrorMessage('pattern','不能输入特殊符号'),
+  //   ],
+  // };
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClosehousePage');
     this.navBar.backButtonClick = this.backButtonClick;

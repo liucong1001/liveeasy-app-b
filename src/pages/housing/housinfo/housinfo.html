@@ -2,8 +2,8 @@
   房源详情页面
 -->
 <ion-header>
-  <ion-navbar #navbar color="first">
-    <ion-title>房源详情</ion-title>
+  <ion-navbar #navbar color="first" [ngClass]="{addCss:classFlag}">
+    <!--<ion-title>房源详情</ion-title>-->
     <ion-buttons end>
       <button ion-button icon-only tappable (click)="record()">
         记录
@@ -13,7 +13,8 @@
 
 </ion-header>
 
-<ion-content *ngIf="houseData">
+<ion-content *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
+
   <!--propertyPics-->
   <ion-slides #mySlider  style="" autoplay="3000" pager="true" loop="true" paginationType="fraction">
     <ion-slide *ngIf="!imgJson">
@@ -154,6 +155,7 @@
       <font color="#aaa" class="changes"></font>
     </button>
   </ion-list>
+
 </ion-content>
 <ion-footer>
   <ion-row>

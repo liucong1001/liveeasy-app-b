@@ -1,5 +1,5 @@
-import { Component,ViewChild  } from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
+import { Component,ViewChild,NgZone} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams, Slides,Content } from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -32,16 +32,26 @@ export class HousinfoPage {
   tagsListPage =[];
   propertyId:string;
   @ViewChild('navbar') navBar: Navbar;
+  @ViewChild(Content) content: Content;
+  classFlag=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,
               ) {
-
-          // this.data=navParams.get('propertyId');
-          // console.log(this.data);
-          this.tagsListPage = this.localStorageProvider.get('tagsListPage');
+    // this.data=navParams.get('propertyId');
+    // console.log(this.data);
+    this.tagsListPage = this.localStorageProvider.get('tagsListPage');
   }
-
+  scrollHandler(event) {
+    console.log(this.content.scrollTop);
+    if (this.content.scrollTop >= 150){
+      // alert(2)
+      this.classFlag=true;
+    }else if(this.content.scrollTop < 10){
+      this.classFlag=false;
+    }
+  }
+flag=false;
 
   @ViewChild('mySlider') slider:Slides;
     mySlideOptions={
@@ -55,13 +65,15 @@ export class HousinfoPage {
   letteratorneyImgJson:any;
   keyImgJson:any;
 
+
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
-  }
 
+  }
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;
+
 
     setInterval(()=>{
       this.slider.slideNext(300,true);
@@ -117,15 +129,11 @@ export class HousinfoPage {
 
         }
     })
-
-
-
   }
 
   //进入页面后执行
   ionViewDidEnter(){
     this.navBar.backButtonClick = () => {
-
       if(this.navParams.get('notReloadPage')){
         this.navCtrl.pop();
       }else {

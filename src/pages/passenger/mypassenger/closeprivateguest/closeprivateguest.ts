@@ -39,13 +39,13 @@ export class CloseprivateguestPage {
   }
   form:FormGroup =this.fb.group({
     customerStatus:['',Validators.required],
-    content:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]], //委托书编号
+    content:['',[Validators.required]], //委托书编号
   });
-  errors={
-    content:[
-      new ErrorMessage('pattern','不能输入特殊符号'),
-    ],
-  };
+  // errors={
+  //   content:[
+  //     new ErrorMessage('pattern','不能输入特殊符号'),
+  //   ],
+  // };
 
   closes(){
     this.customerProvider.prclose({

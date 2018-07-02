@@ -50,13 +50,9 @@ export class FollowPage {
   }
   form:FormGroup =this.fb.group({
     followupCode:['',Validators.required],//内容
-    content:['',[Validators.required, Validators.pattern(/(^[_,.!\n\w\u4e00-\u9fa5]*$)/)]], //委托书编号
+    content:['',[Validators.required]], //委托书编号
   });
-  errors={
-    content:[
-      new ErrorMessage('pattern','不能输入特殊符号'),
-    ],
-  };
+
 
   subFollow(){
       // alert('222');

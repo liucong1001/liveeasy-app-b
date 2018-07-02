@@ -52,7 +52,7 @@
           <div>
             <ion-textarea rows="10" placeholder="请填写内容" formControlName="content"></ion-textarea>
           </div>
-          <valid-error [errors]="errors.content"  [control]="form.get('content')"></valid-error>
+          <!--<valid-error [errors]="errors.content"  [control]="form.get('content')"></valid-error>-->
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
           <button ion-button full color="danger" class="radius" (click)="follows()" [disabled]="form.invalid">添加跟进</button>
