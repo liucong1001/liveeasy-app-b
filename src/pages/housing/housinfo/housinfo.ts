@@ -47,6 +47,7 @@ export class HousinfoPage {
     if (this.content.scrollTop >= 10){
       // alert(2)
       this.classFlag=true;
+
     }else if(this.content.scrollTop < 10){
       this.classFlag=false;
     }

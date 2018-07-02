@@ -1,7 +1,7 @@
 <!--
   房源详情页面
 -->
-<ion-header>
+<ion-header [ngClass]="{headerCss:classFlag}">
   <ion-navbar #navbar color="first" [ngClass]="{addCss:classFlag}">
     <ion-title [hidden]="!classFlag">房源详情</ion-title>
     <ion-buttons end>
