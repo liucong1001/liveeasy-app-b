@@ -2,23 +2,21 @@ page-housinfo {
   .tips a{
     font-size: 1.4rem;
   }
+  .pops{
+    top: 0;
+    height: 200px;
+    background: rgba(0,0,0,.5);
+  }
   .toolbar-ios-first{
     .toolbar-background-ios{
       background: none !important;
     }
-      //.bar-button-default-ios{
-      //  color: #aaa !important;
-      //}
   }
-
   ion-header{
     background: none !important;
   }
   .addCss{
     background-color: #1ab394 !important;
-    //.bar-button-default-ios{
-    //  color: #fff !important;
-    //}
   }
   ion-navbar{
     background-color: rgba(0,0,0,0);

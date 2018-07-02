@@ -33,11 +33,16 @@ export class MorePage {
   selected:any;
   selected2:any;
   rootPage:any = MyApp ;
+
+  structure: any = {lower: 33, upper: 60};
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,
               public nativePageTransitions: NativePageTransitions,) {
 
+  }
 
+  onChange(ev: any) {
+    console.log('Changed', ev);
   }
 
   ionViewDidLoad() {
@@ -51,7 +56,7 @@ export class MorePage {
     }
     console.log('进入 MorePage',this.searchMoreData);
   }
-  
+
   initTags(item){
     if(this.searchMoreData.tagsArry.length>1){
       //初始化选中状态

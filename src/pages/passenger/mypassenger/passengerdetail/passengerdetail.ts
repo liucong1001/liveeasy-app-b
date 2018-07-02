@@ -41,11 +41,14 @@ export class PassengerdetailPage {
   intentionTradeCodeId:string;  //用于转换商圈
  data :any;
   estateName:'';
+  selectOptionGs:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public toast:ToastComponent,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events) {
-
+    this.selectOptionGs={
+      title:'客户归属'
+    }
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
         this.data = res;
         this.form.patchValue({

@@ -14,19 +14,21 @@
 </ion-header>
 
 <ion-content *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
-
+  <!--<div class="pops"></div>-->
   <!--propertyPics-->
   <ion-slides #mySlider  style="" autoplay="3000" pager="true" loop="true" paginationType="fraction">
+
     <ion-slide *ngIf="!imgJson">
       <img src="assets/imgs/banner.png" width="100%">
     </ion-slide>
     <!--assets/imgs/default.jpg-->
-    <ng-container *ngIf="imgJson"  >
+    <ng-container *ngIf="imgJson">
       <ion-slide  *ngFor="let item of imgJson;let i = index"  pager="true">
         <img [src]="imgHeader+item.imagePath"  [imgGallery]="{data:imgJson,index:i}" width="100%">
       </ion-slide>
     </ng-container>
   </ion-slides>
+
   <div class="wrap bgWhite">
     <h4>{{houseData.estateName}}</h4>
     <ion-grid>

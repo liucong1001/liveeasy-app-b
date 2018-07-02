@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户归属<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId">
+          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId" [selectOptions]="selectOptionGs">
             <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
