@@ -153,6 +153,7 @@ export class HousingPage {
       console.log('区域', res);
       if(res){
         this.area = res.data.distrs;
+        this.localStorageProvider.set('distrs',this.area);
         if(this.area){
           this.area.unshift({name:'不限',id:'99'});
         }
