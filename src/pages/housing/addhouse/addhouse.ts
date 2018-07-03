@@ -11,6 +11,7 @@ import { Events } from 'ionic-angular';
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import { Keyboard } from '@ionic-native/keyboard';
 /**
  * Generated class for the AddhousePage page.
  *
@@ -36,7 +37,8 @@ export class AddhousePage {
   HxRight=true;
   HxDown=false;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+  constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
+              public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
               private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
@@ -46,7 +48,9 @@ export class AddhousePage {
 
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
+    this.keyboard.show();
   }
+
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
