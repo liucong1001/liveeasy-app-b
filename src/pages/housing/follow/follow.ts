@@ -49,7 +49,7 @@ export class FollowPage {
 
   }
   form:FormGroup =this.fb.group({
-    followupCode:['',Validators.required],//内容
+    followupCode:['1',Validators.required],//内容
     content:['',[Validators.required]], //委托书编号
   });
 

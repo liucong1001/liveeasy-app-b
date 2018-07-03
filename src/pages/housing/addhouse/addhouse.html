@@ -20,7 +20,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" formControlName="buildingNo" pattern="^[A-Za-z0-9]+$">
+          <ion-input type="text" formControlName="buildingNo" pattern="^[A-Za-z0-9]+$" placeholder="请填写您的单元(请填写英文或数字)">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">栋</span>
@@ -28,13 +28,13 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" pattern="^[A-Za-z0-9]+$" formControlName="unitNo" placeholder="请填写您的单元(请填写英文或数字)"></ion-input>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[A-Za-z0-9]+$" formControlName="floorNo" placeholder="请填写英文或数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
+          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
@@ -42,7 +42,7 @@
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" pattern="^[A-Za-z0-9]+$" placeholder="请输入房间号" formControlName="houseNo" class="p0">
+        <ion-input type="number" pattern="[0-9]*" placeholder="请输入数字" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.houseNo"  [control]="form.get('houseNo')"  ></valid-error>
@@ -51,7 +51,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" formControlName="spaceSize" placeholder="请填写数字">
+          <ion-input type="number" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -59,7 +59,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="number" formControlName="innerSpaceSize" placeholder="请填写数字">
+          <ion-input type="number" pattern="[0-9]*" formControlName="innerSpaceSize" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -67,7 +67,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number" pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
@@ -164,10 +164,10 @@
     <ion-list class="m10">
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主姓名<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" placeholder="请填写业主姓名" formControlName="contact">
+        <ion-input type="text" pattern="^[_,.!\n\w\u4e00-\u9fa5]*$" placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
-      <valid-error [errors]="errors.contact"  [control]="form.get('contact')"  ></valid-error>
+      <valid-error [errors]="errors.contact"  [control]="form.get('contact')"></valid-error>
       <ion-item class="pl12">
         <ion-label>业主性别</ion-label>
         <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
@@ -178,13 +178,13 @@
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" placeholder="请填写业主电话"  formControlName="contactInfo">
+        <ion-input type="number" pattern="[0-9]*" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="number" placeholder="可选填" formControlName="contactInfo2" >
+        <ion-input type="number" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
     </ion-list>
