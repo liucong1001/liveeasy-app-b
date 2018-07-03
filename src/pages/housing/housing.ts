@@ -449,7 +449,7 @@ export class HousingPage {
     // this.openWin(HousinfoPage, {
     //   propertyId:item.propertyId,
     // });
-    this.navCtrl.push(HousinfoPage,{item:item,notReloadPage:true})
+    this.openWin(HousinfoPage,{item:item,notReloadPage:true})
   }
 
   addHouse() {
@@ -470,7 +470,9 @@ export class HousingPage {
       if (res.data.result && res.data.result.length > 0) {
         this.pageData = [];
         for (let i = 0; i < res.data.result.length; i ++) {
-          setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+
+          this.pageData.push(res.data.result[i])
+          // setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
         }
       }
 

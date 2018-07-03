@@ -16,16 +16,16 @@
     </div>
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
-        <ion-label>房源ID：{{data.convId}}</ion-label>
+        <ion-label>房源ID：{{data.convId.slice(6)}}</ion-label>
       </ion-item>
     </ion-list>
-    <ion-list (click)="goserach()">
-      <button ion-item class="pl12">
-        选择楼盘
-        <font color="#aaa" class="changes">
+    <ion-list>
+      <ion-item  class="pl12">
+        楼盘名称：
+        <!--<font color="#aaa" class="changes">-->
           <span >{{form.value.estateName}}</span>
-        </font>
-      </button>
+        <!--</font>-->
+      </ion-item>
     </ion-list>
     <ion-list>
       <div class="hdRightInfo1" [hidden]="!sensitiveInfo">

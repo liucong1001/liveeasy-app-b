@@ -30,7 +30,11 @@
   </ion-slides>
 
   <div class="wrap bgWhite">
-    <h4>{{houseData.estateName}}</h4>
+    <h4>
+      {{houseData.estateName}}
+      {{houseData.bedrooms}}室
+      {{houseData.halls}}厅
+    </h4>
     <ion-grid>
       <ion-row>
         <ion-col col-4>
@@ -51,7 +55,7 @@
           </div>
         </ion-col>
         <ion-col col-4 class="infoPadding">
-          <p>面积</p>
+          <p>建筑面积</p>
           <div class="houseInfo">{{houseData.spaceSize}}m²</div>
         </ion-col>
       </ion-row>
@@ -125,7 +129,7 @@
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
       <div class="p10">
-        <button ion-button color="danger" full (click)="goMore()">更多房源信息</button>
+        <button ion-button color="danger" full (click)="goMore()">更多信息</button>
       </div>
     </div>
   </div>

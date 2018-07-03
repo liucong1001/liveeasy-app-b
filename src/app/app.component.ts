@@ -57,7 +57,7 @@ export class MyApp {
       this.setKeyBorder();
       //android 6 以上动态获取权限
       //检测版本更新
-      //appUpdate.checkVersion();
+      appUpdate.checkVersion();
       // 返回按键事件
       this.registerBackButtonAction();
     });

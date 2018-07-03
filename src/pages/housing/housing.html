@@ -60,7 +60,11 @@
           </ion-col>
           <ion-col col-8>
             <div class="ellipsis">
-              <font size="3">{{item.estateName}}</font>
+              <font size="3">
+                {{item.estateName}}
+                {{item.bedrooms}}室
+                {{item.halls}}厅
+              </font>
             </div>
             <p class="m5 ellipsis" >
               <font size="2" color="#aaa">
@@ -75,7 +79,7 @@
                   </span>
               </ion-col>
               <ion-col col-7 class="tr p0">
-                <font color="red" class="font12">
+                <font color="red" class="font12 unitPrice">
                   <span
                     *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>

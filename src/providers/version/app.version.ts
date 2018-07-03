@@ -19,7 +19,7 @@ export class VersionProvider {
               private appVersion: AppVersion,
               private device: Device,
               private appUpdate: VersionUpdateProvider){
-    this.versionJsonUrl = "https://objectnull.oss-cn-beijing.aliyuncs.com/upload/uploader-android";
+    this.versionJsonUrl = "https://www.pgyer.com/liveeasyApp";
   }
 
   /**

@@ -43,7 +43,7 @@ export class ToastComponent {
   defaultMsg(position,message) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 2000,
+      duration: 1000,
       position: position,
       cssClass:'toast-default ',
       dismissOnPageChange:true,
