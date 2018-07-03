@@ -207,7 +207,7 @@ export class HousedetailPage {
     infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
     buildingType:['0',Validators.required],//建筑类型
     buzzOwnerType:['0'],//交易权属
-    buzzType:['0',Validators.required], //房屋用途
+    buzzType:['1',Validators.required], //房屋用途
     hasElevator:['0',Validators.required],//配备电梯
     positionInBuilding:['2'],
     propertyLife:['1'], //房屋年限

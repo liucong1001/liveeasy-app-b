@@ -34,7 +34,7 @@ export class HousmorePage {
     console.log('ionViewDidLoad HousmorePage');
   }
 
-  jianzhuJ
+
   // <ion-option value="0">未知</ion-option>
   //   <ion-option value="1" >塔楼</ion-option>
   //   <ion-option value="2">板楼</ion-option>

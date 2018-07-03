@@ -162,7 +162,7 @@ export class MyApp {
       this.toastCtrl.create({
         message: '再按一次退出应用',
         duration: 2000,
-        position: 'top'
+        position: 'middle'
       }).present();
       this.backButtonPressed = true;
       setTimeout(() => this.backButtonPressed = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false

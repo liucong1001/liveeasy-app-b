@@ -143,6 +143,38 @@ flag=false;
     };
   }
 
+  buildingTypeJson = [
+    {name:'--',val:'0'},
+    {name:'塔楼',val:'1'},
+    {name:'板楼',val:'2'},
+    {name:'板塔结合',val:'3'},
+  ]
+
+  buildingTypePipe(data){
+    for(var i in this.buildingTypeJson){
+      if(data == this.buildingTypeJson[i].val){
+        return this.buildingTypeJson[i].name;
+      }
+    }
+  }
+
+
+  //房屋用途
+  buzzTypeJson = [
+    {name:'出售',val:'1'},
+    {name:'售租',val:'2'},
+    {name:'租售',val:'3'},
+  ];
+//通用转换
+  houseInfoPipe(data,Arry){
+      for(var i in Arry){
+        if(data == Arry[i].val ){
+          return Arry[i].name
+        }
+      }
+  }
+
+
 
   goMore(){
      this.openWin(HousmorePage,{item:this.houseData});

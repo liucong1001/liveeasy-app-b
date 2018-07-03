@@ -171,6 +171,7 @@ export class HousingPage {
     //房源标签
     this.addhouseProvider.estateTagsSelect().then(res => {
        this.tagsListPage = res.data;
+       this.localStorageProvider.set('tagsListPage',this.tagsListPage);
     });
   }
 

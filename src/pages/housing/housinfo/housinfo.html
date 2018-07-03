@@ -33,16 +33,16 @@
     <h4>{{houseData.estateName}}</h4>
     <ion-grid>
       <ion-row>
-        <ion-col col-3>
+        <ion-col col-4>
           <p>总价</p>
-          <div>
+          <div class="houseInfo">
             {{houseData.propertyPrice}}
             {{houseData.propertyPriceUnit==1?'万元':'元'}}
            </div>
         </ion-col>
-        <ion-col col-6>
+        <ion-col col-4  class="middleHouseType infoPadding">
           <p>户型</p>
-          <div>
+          <div class="houseInfo">
             {{houseData.bedrooms}}室
             {{houseData.halls}}厅
             {{houseData.bathrooms}}卫
@@ -50,9 +50,9 @@
             <!--{{houseData.balconies}}阳-->
           </div>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-4 class="infoPadding">
           <p>面积</p>
-          <div>{{houseData.spaceSize}}m²</div>
+          <div class="houseInfo">{{houseData.spaceSize}}m²</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -76,29 +76,52 @@
             <!--{{houseData.kitchens}}厨-->
             <!--{{houseData.balconies}}阳-->
           <!--</ion-col>-->
-          <ion-col col-8>
-            均价：
+          <ion-col col-6>
+            单价：
             {{unitPrice(houseData)}} 元/m²
             <!--<span>{{houseData.propertyPriceUnit==1?'万元':'元'}}/m²</span>-->
           </ion-col>
+          <ion-col col-6>
+            朝向：{{ orentationPipe(houseData.orientation) }}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-7>
-            套内面积：{{houseData.innerSpaceSize}}m²
+
+          <ion-col col-6>
+            楼层：{{houseData.floorNo}}
           </ion-col>
-          <ion-col col-5>
+
+          <ion-col col-6>
             装修：{{ decorationPipe(houseData.decoration)}}
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-7>
+          <ion-col col-6>
             建筑面积：{{houseData.spaceSize}}m²
           </ion-col>
-          <ion-col col-5>
-            朝向：{{ orentationPipe(houseData.orientation) }}
+          <ion-col col-6>
+            套内面积：{{houseData.innerSpaceSize}}m²
           </ion-col>
 
         </ion-row>
+
+        <ion-row>
+            <ion-col col-6>
+              建筑类型：{{ buildingTypePipe( houseData.buildingType) }}
+            </ion-col>
+            <ion-col col-6>
+              楼户比例：{{houseData.elevators}}梯  {{houseData.apartments}}  <span *ngIf="houseData.apartments">户</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+           <ion-col col-6>
+              用途：{{ houseInfoPipe(houseData.buzzType,buzzTypeJson) }}
+           </ion-col>
+          <ion-col col-6>
+            配备电梯：{{houseData.hasElevator==0?'无':'有'}}
+          </ion-col>
+        </ion-row>
+
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
       <div class="p10">

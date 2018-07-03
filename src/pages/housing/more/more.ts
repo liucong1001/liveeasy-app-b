@@ -28,7 +28,7 @@ export class MorePage {
     tagsArry:[],
     orientation:'',
     propertyPriceStart:'0',
-    propertyPriceEnd:'1000',
+    propertyPriceEnd:'10000',
   };
 
   @ViewChild(Navbar) navBar: Navbar;
@@ -36,7 +36,7 @@ export class MorePage {
   selected2:any;
   rootPage:any = MyApp ;
 
-  structure: any = {lower: 0, upper: 1000};
+  structure: any = {lower: 0, upper: 10000};
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,
               public nativePageTransitions: NativePageTransitions,) {
@@ -155,9 +155,9 @@ export class MorePage {
      this.choseDirect(this.cxJSON[0]);
       // this.resetDiret();
     //价格；
-    this.structure = {lower: 0, upper: 1000};
+    this.structure = {lower: 0, upper: 10000};
     this.searchMoreData.propertyPriceStart = '0';
-    this.searchMoreData.propertyPriceStart = '1000';
+    this.searchMoreData.propertyPriceStart = '10000';
 
      console.log('清除',this.searchMoreData);
      this.localStorageProvider.del('searchMoreData');
