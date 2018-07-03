@@ -48,10 +48,12 @@ export class AddhousePage {
 
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
-    this.keyboard.show();
+
   }
 
-
+gos(){
+  this.keyboard.show();
+}
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
       estate:[''],//楼盘
