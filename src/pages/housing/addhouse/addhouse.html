@@ -28,7 +28,7 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)" style="ime-mode:auto"></ion-input>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
@@ -164,7 +164,7 @@
     <ion-list class="m10">
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主姓名<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" placeholder="请填写业主姓名" formControlName="contact" style="mode:inactive">
+        <ion-input type="text" pattern="\-?\d+(\.\d{0,})?" placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contact"  [control]="form.get('contact')"></valid-error>
