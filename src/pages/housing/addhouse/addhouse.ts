@@ -106,16 +106,16 @@ export class AddhousePage {
         buildingNo:[
             new ErrorMessage('required','楼栋号必须要填写！'),
             new ErrorMessage('maxLength','这个长度太长了'),
-            new ErrorMessage('pattern','请填写英文或数字'),
+            new ErrorMessage('pattern','请填写数字'),
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
-          new ErrorMessage('pattern','请填写英文或数字'),
+          new ErrorMessage('pattern','请填写数字'),
         ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
             new ErrorMessage('maxLength','楼层名称太长了'),
-          new ErrorMessage('pattern','请填写英文或数字'),
+          new ErrorMessage('pattern','请填写数字'),
         ],
       houseNo:[
         new ErrorMessage('pattern','请填写英文或数字'),
