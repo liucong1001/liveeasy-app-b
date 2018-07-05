@@ -1,5 +1,26 @@
 //------------
 page-housing {
+  .esRow{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    width: 40px;
+    display: inline-block;
+  }
+  .down{
+    top: -8px;
+  }
+  .range-ios.range-has-pin{
+    padding: 0;
+  }
+  .range-ios {
+    .range-bar{
+      height: 2px;
+    }
+    .range-bar-active{
+      background: #1ab394;
+    }
+  }
   .bar-button-default-ios{
     color: #000;
   }
@@ -31,7 +52,7 @@ page-housing {
     display: inline-block;
     //font-size: xx-small;
     //font-weight: bolder;
-    font-size: 13px;
+    font-size: 1.3rem;
     padding: 1px 3px;
     margin-right: 6px
   }

@@ -108,6 +108,8 @@ export class HousingPage {
     tags:0,
     orientation:'',
     hasElevator:'',
+    propertyPriceStart:'', //价格范围  开始
+    propertyPriceEnd:'', //价格范围  结束
   };
   //楼盘搜索
   searchFloorName:any;
@@ -287,6 +289,8 @@ export class HousingPage {
 
      });
   }
+
+
   //重置
   reset(){
     this.params= {
@@ -318,12 +322,14 @@ export class HousingPage {
     };
 
   }
-
+  datas:any;
 
   searchMore(){
     var data=  this.localStorageProvider.get('searchMoreData');
+    this.datas=data;
     // (data.orientation ==''||data.orientation ==null) &&
      if(data){
+
            if(data.tags==0){
                return false
            }
@@ -581,13 +587,25 @@ export class HousingPage {
     {name:'五室',val:5},
     {name:'五室以上',val:6},
   ];
+  structure:any = {lower: 0, upper: 5000};
+  onChange(ev:any) {
+    this.params.propertyPriceStart=this.structure.lower.toString();
+    this.params.propertyPriceEnd=this.structure.upper.toString();
+    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
+  }
 
   hasElevatorJson = [
-    {name:'不限',val:null},
-    {name:'无',val:'0'},
-    {name:'有',val:'1'},
+    {name:'不限',val:0},
+    {start:'100',val:'1'},
+    {start:'100',end:'500',val:'2'},
+    {start:'500',end:'1000',val:'3'},
+    {start:'1000',end:'1500',val:'4'},
+    {start:'1500',end:'2000',val:'5'},
+    {start:'2000',end:'2500',val:'6'},
+    {start:'2500',end:'3000',val:'7'},
+    {start:'3000',end:'3500',val:'8'},
+    {start:'5000',val:'9'},
   ];
-
 //户型转换
   housePipe(data){
      for(var i in this.houseJSON){
@@ -596,7 +614,7 @@ export class HousingPage {
         }
      }
   }
-  //小区转化
+  //小区转换
   // estatePipe(data){
   //    for(var i in this.estateList){
   //      if(data ==this.estateList[i].estateId){
@@ -608,11 +626,23 @@ export class HousingPage {
   elevatorPipe(val){
     for(var i in this.hasElevatorJson){
       if(this.hasElevatorJson[i].val==val){
-        return this.hasElevatorJson[i].name;
+        return this.hasElevatorJson[i];
       }
     }
   }
   floorName = '';
+  start:any;
+  ends:any;
+  price:any;
+  selectPrice(){
+    console.log('交割',this.price)
+    this.start=this.elevatorPipe(this.price).start;
+    this.ends=this.elevatorPipe(this.price).end;
+    console.log(this.elevatorPipe(this.price).end)
+    this.params.propertyPriceStart=this.start;
+    this.params.propertyPriceEnd=this.ends;
+    this.search();
+  }
   allSearch(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
@@ -637,9 +667,6 @@ export class HousingPage {
     this.events.subscribe('moreSearchBevents', (params) => {
       // 接收B页面发布的数据
       console.log('接收更多为: ', params);
-      this.orientation=params.orientation;
-      this.tags=params.tags;
-      console.log(this.orientation,this.tags)
       if(!params){
         this.params.tags = 0;
       }else {
@@ -657,8 +684,27 @@ export class HousingPage {
     this.openWin(MorePage);
   }
 
-
-
+  cxJSON = [
+    {name:'全部',val:''},
+    {name:'东',val:'1'},
+    {name:'南',val:'2'},
+    {name:'西',val:'3'},
+    {name:'北',val:'4'},
+    {name:'南北',val:'5'},
+    {name:'双南',val:'6'},
+    {name:'东西',val:'7'},
+    {name:'东南',val:'8'},
+    {name:'西南',val:'9'},
+    {name:'东北',val:'10'},
+    {name:'西北',val:'11'},
+  ];
+  cxPipe(data){
+    for(var i in this.cxJSON){
+      if(data == this.cxJSON[i].val){
+        return this.cxJSON[i].name;
+      }
+    }
+  }
 
 }
 

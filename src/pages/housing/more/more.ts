@@ -27,15 +27,13 @@ export class MorePage {
     tags:0,
     tagsArry:[],
     orientation:'',
-    propertyPriceStart:'0',
-    propertyPriceEnd:'1000',
+    hasElevator:'',
   };
-
   @ViewChild(Navbar) navBar: Navbar;
   selected:any;
   selected2:any;
   rootPage:any = MyApp ;
-
+  selected3:any;
   structure: any = {lower: 0, upper: 1000};
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,
@@ -43,15 +41,6 @@ export class MorePage {
 
   }
 
-
-
-  onChange(ev: any) {
-    this.searchMoreData.propertyPriceStart = this.structure.lower.toString();
-    this.searchMoreData.propertyPriceEnd = this.structure.upper.toString();
-
-
-    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
-  }
 
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;
@@ -61,8 +50,7 @@ export class MorePage {
 
     if(this.localStorageProvider.get('searchMoreData')){
       this.searchMoreData = this.localStorageProvider.get('searchMoreData');
-      this.structure.lower = this.searchMoreData.propertyPriceStart;
-      this.structure.upper = this.searchMoreData.propertyPriceEnd;
+
     }
     console.log('进入 MorePage',this.searchMoreData);
   }
@@ -105,6 +93,12 @@ export class MorePage {
     {name:'西北',val:'11'},
   ];
 
+  //电梯
+  dtJson = [
+    {name:'全部',val:''},
+    {name:'无',val:'0'},
+    {name:'有',val:'1'},
+  ];
   resetDiret(){
     return false;
   }
@@ -134,6 +128,11 @@ export class MorePage {
   choseOther(item){
     this.selected2 = item;
   }
+  //电梯
+  choseDt(item){
+    this.selected3 = item;
+    this.searchMoreData.hasElevator=item.val;
+  }
 
   isActive(item) {
     if(item.val==this.searchMoreData.orientation){
@@ -146,6 +145,9 @@ export class MorePage {
   isActive2(item){
     return this.selected2 === item;
   }
+  isActive3(item){
+    return this.selected3 === item;
+  }
 
   reset(){
      this.tagsList=this.localStorageProvider.get('tagsList');
@@ -153,12 +155,8 @@ export class MorePage {
      this.searchMoreData.tags=0;
      //清除朝向
      this.choseDirect(this.cxJSON[0]);
-      // this.resetDiret();
-    //价格；
-    this.structure = {lower: 0, upper: 1000};
-    this.searchMoreData.propertyPriceStart = '0';
-    this.searchMoreData.propertyPriceStart = '1000';
-
+     //清除
+    this.choseDt(this.dtJson[0]);
      console.log('清除',this.searchMoreData);
      this.localStorageProvider.del('searchMoreData');
   }

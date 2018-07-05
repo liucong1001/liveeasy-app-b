@@ -20,12 +20,11 @@
 
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
-      <!--<span [ngClass]="{xiaoQu:params.estateId}" >{{ estatePipe(params.estateId)}}</span>-->
-      <!--ngIf="params.hasElevator==null"-->
-      <span [ngClass]="{color:params.hasElevator =='1' || '0'}">{{elevatorPipe(params.hasElevator) }}</span>
-      <!--*ngIf="params.hasElevator!=null"-->
-      <span [hidden]="params.hasElevator=='0'||params.hasElevator=='1'"> 电梯 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.hasElevator != ''}"></ion-icon>
+      <span [ngClass]="{color:start,esRow:ends}">
+        {{start}}<span *ngIf="ends">-</span>{{ends}}<span *ngIf="ends">万</span>
+      </span>
+      <span [hidden]="start">价格 </span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:start,down:ends}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
@@ -48,9 +47,15 @@
       refreshingText="正在加载数据中...">
     </ion-refresher-content>
   </ion-refresher>
+
   <ion-grid class="p0 relative" >
+    <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;" *ngIf="searchMore()">已选：
+      <a *ngFor="let i of datas.tagsArry;let i =index;">
+        {{tagName(i)}}
+      </a>/&nbsp;{{cxPipe(datas.orientation)}}&nbsp;</p>
+
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
-      <!--<h3>{{i+1}}</h3>-->
+
       <ion-col col-12 tappable (click)="goHouseDetail(item)" >
         <ion-row>
           <ion-col col-4 >
@@ -80,10 +85,10 @@
               </ion-col>
               <ion-col col-7 class="tr p0">
                 <font color="red" class="font12 unitPrice">
-                  <span
-                    *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}</span>
+                  <span style="font-size: 1.5rem"
+                        *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
-                  元/㎡
+
                   <!--<sup>2</sup>-->
                 </font>
               </ion-col>
@@ -123,7 +128,7 @@
         <ion-spinner item-start name="ios"></ion-spinner>
         <div class="m5">加载数据中</div>
       </div>
-      <div *ngIf="!hasData"  class="tc">
+      <div *ngIf="!hasData"  class="tc" style="margin-top: 15px">
         抱歉！没有找到数据
       </div>
     </div>
@@ -198,42 +203,57 @@
   <!-- 户型 -->
   <div class="lists houseType" [hidden]="!houseType" >
     <ion-list radio-group [(ngModel)]="params.bedroomType" class="scrollC">
-      <ion-item *ngFor="let y of houseJSON">
+      <ion-item *ngFor="let y of houseJSON" class="tc">
         <ion-label>{{y.name}}</ion-label>
         <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>
     </ion-list>
-    <!--<div class="btns">-->
-    <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
-    <!--</div>-->
+
   </div>
 
-  <!-- 电梯 -->
+  <!-- 价格 -->
   <div class="lists houseType" [hidden]="!housingEstate" >
-    <ion-list radio-group [(ngModel)]="params.hasElevator" class="scrollC">
-      <ion-item *ngFor="let y of hasElevatorJson">
-        <ion-label>{{y.name}}</ion-label>
-        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
+    <ion-list radio-group class="scrollC"  [(ngModel)]="price" style="height: 207px">
+      <ion-item *ngFor="let y of hasElevatorJson"  class="tc" >
+        <ion-label *ngIf="y.name=='不限'">{{y.name}}</ion-label>
+        <ion-label *ngIf="y.name!='不限'">{{y.start}}<span *ngIf="y.val ==1">万以下</span><span *ngIf="y.val ==9">以上</span><span *ngIf="y.end">{{-y.end}}万</span></ion-label>
+        <ion-radio value={{y.val}} (ionSelect)="selectPrice()"></ion-radio>
       </ion-item>
     </ion-list>
+    <ion-list style="height: 166px;">
+      <ion-row>
+        <ion-col col-12 class="middleGreen tc" style="margin-top: 10px">
+          {{structure.lower}}万-{{structure.upper}}万
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-range dualKnobs="true" pin="true" min="0" max="1000" step="50"  [(ngModel)]="structure"  (ionChange)="onChange($event)">
+          <ion-label range-left>0</ion-label>
+          <ion-label range-right>5000万</ion-label>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+    <div class="btns">
+      <button ion-button full color="danger" (click)="search()">确定</button>
+    </div>
   </div>
   <!-- 更多 -->
-  <div class="lists houseType" *ngIf="more">
-    <ion-list radio-group [(ngModel)]="params.param" class="scrollC">
-      <ion-item>
-        <ion-label>只看我的房源</ion-label>
-        <ion-radio  value="6" (ionSelect)="search()"></ion-radio>
-      </ion-item>
+  <!--<div class="lists houseType" *ngIf="more">-->
+    <!--<ion-list radio-group [(ngModel)]="params.param" class="scrollC">-->
+      <!--<ion-item>-->
+        <!--<ion-label>只看我的房源</ion-label>-->
+        <!--<ion-radio  value="6" (ionSelect)="search()"></ion-radio>-->
+      <!--</ion-item>-->
 
-      <ion-item>
-        <ion-label>待处理申请关闭</ion-label>
-        <ion-radio value="1" (ionSelect)="search()"></ion-radio>
-      </ion-item>
-    </ion-list>
-    <!--<div class="p15 btns">-->
-    <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
-    <!--</div>-->
-  </div>
+      <!--<ion-item>-->
+        <!--<ion-label>待处理申请关闭</ion-label>-->
+        <!--<ion-radio value="1" (ionSelect)="search()"></ion-radio>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+    <!--&lt;!&ndash;<div class="p15 btns">&ndash;&gt;-->
+    <!--&lt;!&ndash;<button ion-button full color="danger" (click)="search()">确定</button>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--</div>-->
 
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>

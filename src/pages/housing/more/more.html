@@ -19,27 +19,10 @@
 <a *ngFor="let item of qtJSON" [ngClass]="{'active': isActive2(item)}" tappable (click)="choseOther(item)">{{item.name}}</a>
 </div>
 
-    <h4 style="margin: 20px 0 0">价格</h4>
-    <ion-list>
-      <ion-row>
-
-        <ion-col col-12 class="middleGreen">
-          {{structure.lower}}万-{{structure.upper}}万
-        </ion-col>
-
-        <!--<ion-col col-12 class="middleGreen">-->
-          <!--1000万以上-->
-        <!--</ion-col>-->
-
-      </ion-row>
-
-      <ion-item>
-        <ion-range dualKnobs="true" pin="true" min="0" max="1000" step="50"  [(ngModel)]="structure"  (ionChange)="onChange($event)" style="padding:20px 0">
-          <ion-label range-left>0</ion-label>
-          <ion-label range-right>不限</ion-label>
-        </ion-range>
-      </ion-item>
-    </ion-list>
+  <div class="outer">
+    <h4>电梯</h4>
+    <a *ngFor="let item of dtJson;let index =index" [ngClass]="{'active': isActive3(item)}" tappable (click)="choseDt(item)" [hidden]="index==0">{{item.name}}</a>
+  </div>
 
 
 </ion-content>
