@@ -1,5 +1,11 @@
 //------------
 page-housing {
+  .activated{
+    background: none !important;
+  }
+  .range-ios .range-pin{
+    display: none !important;
+  }
   .esRow{
     overflow: hidden;
     text-overflow:ellipsis;
@@ -8,7 +14,7 @@ page-housing {
     display: inline-block;
   }
   .down{
-    top: -8px;
+    margin-top: -8px;
   }
   .range-ios.range-has-pin{
     padding: 0;
@@ -53,7 +59,7 @@ page-housing {
     //font-size: xx-small;
     //font-weight: bolder;
     font-size: 1.3rem;
-    padding: 1px 3px;
+    padding: 0 3px;
     margin-right: 6px
   }
   a:first-child {
@@ -100,7 +106,7 @@ page-housing {
 }
 
 .uDis{
-  height: 30px;
+  height: 25px;
   overflow: hidden;
 }
 .p15{

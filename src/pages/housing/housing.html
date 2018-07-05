@@ -8,9 +8,9 @@
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
 
-      <span [ngClass]="{color:this.searchDict}">{{searchDict}}{{ searchArea}} </span>
+      <span [ngClass]="{color:this.searchDict !='不限'}">{{searchDict}}{{ searchArea}} </span>
       <span *ngIf="!searchDict">区域</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict!='' && this.searchDict !='不限'}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
@@ -20,11 +20,11 @@
 
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
-      <span [ngClass]="{color:start,esRow:ends}">
-        {{start}}<span *ngIf="ends">-</span>{{ends}}<span *ngIf="ends">万</span>
+      <span [ngClass]="{color:starts,esRow:ends}">
+        {{starts}}<span *ngIf="starts == 100">万</span><span *ngIf="ends">-</span>{{ends}}<span *ngIf="ends">万</span>
       </span>
-      <span [hidden]="start">价格 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:start,down:ends}"></ion-icon>
+      <span [hidden]="starts">价格 </span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
@@ -52,7 +52,9 @@
     <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;" *ngIf="searchMore()">已选：
       <a *ngFor="let i of datas.tagsArry;let i =index;">
         {{tagName(i)}}
-      </a>/&nbsp;{{cxPipe(datas.orientation)}}&nbsp;</p>
+      </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>&nbsp;
+      <span *ngIf="datas.hasElevator">/&nbsp;{{datas.hasElevator=='0'?'无':'有'}}</span>
+    </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
 
@@ -61,8 +63,9 @@
           <ion-col col-4 >
             <img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"
                   [lazyLoad]="imgHeader+pic(item?.propertyPics)"
-                  alt="" width="90%" height="100px">
+                  alt="" width="90%" height="90px">
           </ion-col>
+
           <ion-col col-8>
             <div class="ellipsis">
               <font size="3">
@@ -71,38 +74,43 @@
                 {{item.halls}}厅
               </font>
             </div>
-            <p class="m5 ellipsis" >
-              <font size="2" color="#aaa">
-                <!--ID:<span>{{item.convId}}</span>-->
-                <span class="font12">{{item.standardAddress}}</span>
-              </font>
-            </p>
-            <ion-row>
-              <ion-col col-5 class="p0 ellipsis">
-                  <span class="font12">建面 <span>{{item.spaceSize}}㎡</span>
-                    <!--<sup>2</sup>-->
-                  </span>
-              </ion-col>
-              <ion-col col-7 class="tr p0">
-                <font color="red" class="font12 unitPrice">
-                  <span style="font-size: 1.5rem"
-                        *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
-                  <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
-
-                  <!--<sup>2</sup>-->
-                </font>
-              </ion-col>
-            </ion-row>
-
-            <!--*ngIf="!tagPipe(item.tagsStr)"-->
             <div class="tips" [ngClass]="{uDis:item.tagsStr}" >
               <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5">{{tagName(x)}}</a>
             </div>
-            <div>
-              <!--realtorName-->
-              <span class="font12">{{item.createdTime | date:'yyyy/MM/dd'}}录入</span>
-              <span class="font12">归属人：{{item. realtorId }}</span>
-            </div>
+            <!--<p class="m5 ellipsis" >-->
+              <!--<font size="2" color="#aaa">-->
+                <!--&lt;!&ndash;ID:<span>{{item.convId}}</span>&ndash;&gt;-->
+                <!--<span class="font12">{{item.standardAddress}}</span>-->
+              <!--</font>-->
+            <!--</p>-->
+
+            <ion-row>
+              <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 2px 0">
+                <span>{{item.bedrooms}}室{{item.halls}}厅</span>
+                <span>/&nbsp;{{item.spaceSize}}㎡</span>
+                <span *ngIf="item.hasElevator !=0">/&nbsp;{{cxPipe(item.hasElevator)}}</span>
+                <span>/&nbsp;{{item.estateName}}</span>
+              </ion-col>
+              <!--*ngIf="!tagPipe(item.tagsStr)"-->
+
+              <ion-col col-12 class="p0" style="margin: 2px 0">
+                <span class="unitPrice">{{item.propertyPrice}}
+            {{item.propertyPriceUnit==1?'万':'元'}}</span>
+                <span style="font-size: 1.2rem;color: #aaa">
+                  <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
+                  <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
+
+                  <!--<sup>2</sup>-->
+                </span>
+              </ion-col>
+            </ion-row>
+
+
+            <!--<div>-->
+              <!--&lt;!&ndash;realtorName&ndash;&gt;-->
+              <!--<span class="font12">{{item.createdTime | date:'yyyy/MM/dd'}}录入</span>-->
+              <!--<span class="font12">归属人：{{item. realtorId }}</span>-->
+            <!--</div>-->
           </ion-col>
         </ion-row>
       </ion-col>
@@ -227,13 +235,14 @@
     <ion-list style="height: 166px;">
       <ion-row>
         <ion-col col-12 class="middleGreen tc" style="margin-top: 10px">
-          {{structure.lower}}万-{{structure.upper}}万
+          {{structure.lower}}
+          -<span *ngIf="structure.upper != 5000">{{structure.upper}}万</span><span *ngIf="structure.upper == 5000">不限</span>
         </ion-col>
       </ion-row>
       <ion-item>
-        <ion-range dualKnobs="true" pin="true" min="0" max="1000" step="50"  [(ngModel)]="structure"  (ionChange)="onChange($event)">
+        <ion-range dualKnobs="true" pin="true" min="0" max="5000" step="50"  [(ngModel)]="structure" (ionChange)="onChange($event)">
           <ion-label range-left>0</ion-label>
-          <ion-label range-right>5000万</ion-label>
+          <ion-label range-right>不限</ion-label>
         </ion-range>
       </ion-item>
     </ion-list>

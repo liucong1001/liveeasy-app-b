@@ -48,7 +48,7 @@ export class HousinfoPage {
       // alert(2)
       this.classFlag=true;
 
-    }else if(this.content.scrollTop < 10){
+    }else if(this.content.scrollTop < 50){
       this.classFlag=false;
     }
   }
@@ -259,13 +259,13 @@ flag=false;
 
   //均价处理
   unitPrice(data){
-      var perPrice;
-      if(data.propertyPriceUnit==1){
-        perPrice = data.propertyPrice*10000/data.spaceSize;
-     }else if(data.propertyPriceUnit==2){
-        perPrice = data.propertyPrice/data.spaceSize;
-      }
-      return perPrice.toFixed(2);
+    var perPrice;
+    if(data.propertyPriceUnit==1){
+      perPrice = data.propertyPrice*10000/data.spaceSize;
+    }else if(data.propertyPriceUnit==2){
+      perPrice = data.propertyPrice/data.spaceSize;
+    }
+    return perPrice.toFixed(2);
   }
 
 

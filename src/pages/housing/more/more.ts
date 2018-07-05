@@ -6,6 +6,7 @@ import {HousingPage} from "../housing";
 import {MyApp} from "../../../app/app.component"
 import { NgZone  } from '@angular/core';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the MorePage page.
  *
@@ -36,7 +37,7 @@ export class MorePage {
   selected3:any;
   structure: any = {lower: 0, upper: 1000};
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
-              public events: Events, private zone: NgZone,
+              public events: Events, private zone: NgZone,public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,) {
 
   }
@@ -119,11 +120,19 @@ export class MorePage {
    }
 
   }
+  flag=false;
   //朝向 orientation
   choseDirect(item){
-    this.selected = item;
+    this.selected = item
     this.searchMoreData.orientation  = item.val;
   }
+  isActive(item) {
+    if(item.val==this.searchMoreData.orientation){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  };
   //其他
   choseOther(item){
     this.selected2 = item;
@@ -132,21 +141,21 @@ export class MorePage {
   choseDt(item){
     this.selected3 = item;
     this.searchMoreData.hasElevator=item.val;
+    console.log(item.val)
   }
 
-  isActive(item) {
-    if(item.val==this.searchMoreData.orientation){
-     return  true;
-    }else{
-      return this.selected === item;
-    }
-  };
+
 
   isActive2(item){
     return this.selected2 === item;
+
   }
   isActive3(item){
-    return this.selected3 === item;
+    if(item.val==this.searchMoreData.hasElevator){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
   }
 
   reset(){
@@ -183,5 +192,8 @@ export class MorePage {
       .catch();
     this.navCtrl.pop({animate:false});
   }
-
+//状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
 }

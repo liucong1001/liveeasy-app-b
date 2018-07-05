@@ -1,6 +1,6 @@
 
 import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
-import {Events, IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {Alert, Events, IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -341,13 +341,21 @@ export class HousingPage {
     var data=  this.localStorageProvider.get('searchMoreData');
     this.datas=data;
     // (data.orientation ==''||data.orientation ==null) &&
+    // console.log(data.hasElevator,data.orientation)
      if(data){
-
-           if(data.tags==0){
-               return false
+           if(data.tags!=0){
+             // console.log(2);
+               return true;
+           }else if(data.hasElevator !=''){
+             // console.log(3)
+             return true;
+           }
+           else if(data.orientation !=''){
+             // console.log(4)
+             return true;
            }
            else {
-               return true
+               return false;
            }
 
      }else {
@@ -607,12 +615,7 @@ export class HousingPage {
     {name:'五室',val:5},
     {name:'五室以上',val:6},
   ];
-  structure:any = {lower: 0, upper: 5000};
-  onChange(ev:any) {
-    this.params.propertyPriceStart=this.structure.lower.toString();
-    this.params.propertyPriceEnd=this.structure.upper.toString();
-    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
-  }
+
 
   hasElevatorJson = [
     {name:'不限',val:0},
@@ -655,6 +658,14 @@ export class HousingPage {
   price:any;
   starts:any;
   ends:any;
+  structure:any = {lower: 0, upper:5000};
+  onChange(ev:any) {
+    console.log(this.starts,this.ends)
+
+    this.params.propertyPriceStart=this.structure.lower.toString();
+    this.params.propertyPriceEnd=this.structure.upper.toString();
+    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
+  }
   selectPrice(){
     console.log('交割',this.price)
     this.time=this.elevatorPipe(this.price);
@@ -664,7 +675,11 @@ export class HousingPage {
     this.params.propertyPriceStart=this.starts;
     this.params.propertyPriceEnd=this.ends;
     this.search();
+    if(this.starts,this.ends){
+      this.structure= {lower: this.starts, upper:this.ends};
+    }
   }
+
   allSearch(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
@@ -727,6 +742,7 @@ export class HousingPage {
       }
     }
   }
+
 
 }
 

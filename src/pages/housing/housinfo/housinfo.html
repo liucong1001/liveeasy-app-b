@@ -5,8 +5,9 @@
   <ion-navbar #navbar color="first" [ngClass]="{addCss:classFlag}">
     <ion-title [hidden]="!classFlag">房源详情</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only tappable (click)="record()" >
-        记录
+      <button ion-button icon-only tappable >
+        <ion-icon name="guanzhu"></ion-icon>
+        <ion-icon name="fenxiang"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -187,12 +188,27 @@
 
 </ion-content>
 <ion-footer>
-  <ion-row>
-    <ion-col col-6 class="p10">
-      <button ion-button (click)="goFollow()">跟进</button>
+  <ion-row class="footers">
+    <ion-col col-2 class="tc"  (click)="record()">
+      <img src="assets/imgs/record.png" style="display: block;margin: 0 auto;" width="20" height="20">
+      <span>记录</span>
     </ion-col>
-    <ion-col col-6 class="p10">
-      <button ion-button (click)="edit()" class="edit">编辑</button>
+    <ion-col col-5>
+      <button ion-button style="background: #fff;color: #1ab394;border: 1px solid #1ab394" tappable (click)="goFollow()">跟进</button>
+    </ion-col>
+    <ion-col col-5>
+      <button ion-button tappable (click)="edit()">编辑</button>
     </ion-col>
   </ion-row>
+  <!--<ion-row>-->
+    <!--<ion-col col-4 class="p10">-->
+      <!--<button ion-button (click)="goFollow()">跟进</button>-->
+    <!--</ion-col>-->
+    <!--<ion-col col-4 class="p10">-->
+      <!--<button ion-button (click)="goFollow()">记录</button>-->
+    <!--</ion-col>-->
+    <!--<ion-col col-4 class="p10">-->
+      <!--<button ion-button (click)="edit()" class="edit">编辑</button>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
 </ion-footer>

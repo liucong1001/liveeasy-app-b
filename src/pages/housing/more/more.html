@@ -5,29 +5,26 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="bgWhite mores">
-<div class="outer">
-  <h4>房源标签(可多选)</h4>
-  <a *ngFor="let bq of tagsList;let i = index"
-     [ngClass]="{'active': bq.active||initTags(bq)}" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
-</div>
-<div class="outer">
-<h4>朝向</h4>
-<a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'active': isActive(i)}" tappable (click)="choseDirect(i)" [hidden]="index==0" >{{i.name}}</a>
-</div>
-<div class="outer">
-<h4>其他</h4>
-<a *ngFor="let item of qtJSON" [ngClass]="{'active': isActive2(item)}" tappable (click)="choseOther(item)">{{item.name}}</a>
-</div>
-
-  <div class="outer">
-    <h4>电梯</h4>
-    <a *ngFor="let item of dtJson;let index =index" [ngClass]="{'active': isActive3(item)}" tappable (click)="choseDt(item)" [hidden]="index==0">{{item.name}}</a>
-  </div>
-
-
+    <div class="outer">
+      <h4>房源标签(可多选)</h4>
+      <a *ngFor="let bq of tagsList;let i = index"
+         [ngClass]="{'active': bq.active||initTags(bq)}" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
+    </div>
+    <div class="outer">
+    <h4>朝向</h4>
+    <a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'update':flag,'active': isActive(i)}" tappable (click)="choseDirect(i)" [hidden]="index==0" >{{i.name}}</a>
+    </div>
+    <div class="outer">
+    <h4>其他</h4>
+    <a *ngFor="let item of qtJSON" [ngClass]="{'active': isActive2(item)}" tappable (click)="choseOther(item)">{{item.name}}</a>
+    </div>
+    <div class="outer">
+      <h4>电梯</h4>
+      <a *ngFor="let item of dtJson;let index =index" [ngClass]="{'active': isActive3(item)}" tappable (click)="choseDt(item)" [hidden]="index==0">{{item.name}}</a>
+    </div>
 </ion-content>
 <ion-footer>
-  <ion-row class="footer">
+  <ion-row class="footers">
     <ion-col col-6>
       <button ion-button style="background: #fff;color: #aaa" tappable (click)="reset()">清除</button>
     </ion-col>
