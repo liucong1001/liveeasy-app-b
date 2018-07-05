@@ -10,7 +10,7 @@ import {ToastComponent} from "../../components/toast/toast";
 import  {NavController} from "ionic-angular";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/timeout';
-
+import 'rxjs/add/operator/catch';
 /*
   Generated class for the HttpProvider provider.
 
@@ -54,17 +54,19 @@ export class HttpProvider {
       .toPromise().then(res=>{
           return res as any;
     }).catch(err=>{
-      this.errResponse(err);
-      err.name=='TimeoutError'&&this.toast.errorBlack('连接超时!');
+        err.name=='TimeoutError'&&this.toast.errorBlack('连接超时!');
+        this.errResponse(err);
+
     })
   }
   //测试 没有权限
   public httpPostTest(url,params?):Promise<any>{
     return this.http.post(url,params).toPromise().then(res=>{
       // console.log();
-      return res as any;
+       return res as any;
+
     }).catch(err=>{
-        this.errResponse(err);
+     this.errResponse(err);
     })
   };
 
@@ -94,20 +96,42 @@ export class HttpProvider {
   }
 
   errResponse(err){
-    switch (err.status){
-      case 401 :console.log('错误代码',err.status);
-        this.toast.errorBlack('错误代码'+err.status);
-        this.reset();
-        break;
-      case 403 :console.log('错误代码',err.status),this.reset();
-        this.toast.errorBlack('错误代码'+err.status);
-        break;
-      case 500 :console.log('错误代码',err.status);
-        this.toast.errorBlack('服务器异常!');
-        break;
-      case 504 :console.log('错误代码',err.status);
-        this.toast.errorBlack('服务器连接超时!');
-        break;
-  }}
+    // switch (err.status){
+    //   case 401 :console.log('错误代码',err.status);
+    //     this.toast.errorBlack('错误代码'+err.status);
+    //     // this.reset();
+    //     break;
+    //   case 403 :console.log('错误代码',err.status),this.reset();
+    //     this.toast.errorBlack('错误代码'+err.status);
+    //     break;
+    //   case 500 :console.log('错误代码',err.status);
+    //     this.toast.errorBlack('服务器异常!');
+    //     break;
+    //   case 504 :console.log('错误代码',err.status);
+    //     this.toast.errorBlack('服务器连接超时!');
+    //     break;
+    //     }
+
+    if(err.status==401){
+      this.toast.errorBlack('错误代码'+err.status);
+       this.reset();
+    }
+
+    if(err.status==403){
+      this.toast.errorBlack('错误代码'+err.status);
+    }
+
+    if(err.status==500){
+      this.toast.errorBlack('服务器异常!');
+    }
+
+    if(err.status==504){
+      this.toast.errorBlack('服务器连接超时!');
+    }
+
+    throw  err
+  }
+
+
 
 }

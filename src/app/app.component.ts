@@ -40,10 +40,9 @@ export class MyApp {
       if(!this.localStorageProvider.get('ticket')){
           this.rootPage = AccountPage;
       }
-    console.log('rootPage是',this.rootPage);
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
-    console.log(this.tagsList);
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

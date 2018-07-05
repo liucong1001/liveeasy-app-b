@@ -26,6 +26,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
 /**
  * Generated class for the HousingPage page.
@@ -119,6 +120,8 @@ export class HousingPage {
   tags:any;
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild('navbar') navBar: Navbar;
+
+  badHttp = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -259,6 +262,7 @@ export class HousingPage {
     this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params).then(res=>{
+
        if(res){
          console.log('结束时间内容',res.data.totalRecords);
          this.totalRecords = res.data.totalRecords;
@@ -286,7 +290,16 @@ export class HousingPage {
            this.searchFloorNum = 2;
          }
        }
+       this.badHttp = false;
 
+     }).catch(err=>{
+       // if(err.name=="TimeoutError"){
+       //      this.badHttp = true;
+       //  }
+        if(err){
+          this.badHttp = true;
+        }
+       console.log('错误返回',err);
      });
   }
 
@@ -482,7 +495,6 @@ export class HousingPage {
         }
       }
 
-      console.log('Async operation has ended');
       if (newCount > 0 ) {
         this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
       } else {
@@ -522,36 +534,44 @@ export class HousingPage {
   pageResult :any;
   //上拉加载
   doInfinite(infiniteScroll) {
-    if(this.currentPage==1){
-      this.currentPage=3
-    }else {
-      this.currentPage++;
-    }
 
-    console.log('加载完成后，关闭刷新', this.currentPage);
+    setTimeout(()=>{
+      infiniteScroll.complete();
+      if(this.currentPage==1){
+        this.currentPage=3
+      }else {
+        this.currentPage++;
+      }
 
-    if (this.pageResult&&this.pageResult.length<10) {
-      //如果都加载完成的情况，就直接 disable ，移除下拉加载
-      infiniteScroll.enable(false);
-      //toast提示
-      this.all = true;
-    }else {
-      this.all = false;
-      this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
-        infiniteScroll.complete();
-        if (res.data.result) {
-          for (let i = 0; i < res.data.result.length; i ++) {
-            setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+      if (this.pageResult&&this.pageResult.length<10) {
+        //如果都加载完成的情况，就直接 disable ，移除下拉加载
+         infiniteScroll.enable(false);
+        //toast提示
+        this.all = true;
+      }else {
+        this.all = false;
+        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+          this.pageResult = res.data.result;
+          console.log('pageResult--',this.pageResult);
+          if (res.data.result) {
+            for (let i = 0; i < res.data.result.length; i ++) {
+              this.pageData.push(res.data.result[i]);
+              // setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
+            }
+          }else {
+          //  this.pageResult ==undefined  为空 没有数据  （加载全部）
+            infiniteScroll.enable(false);
+            this.all = true;
           }
-        }
-        // console.log('下加载分数据2',res.data.result,'分页内容',this.pageData);
-      });
-    }
+        });
+      }
 
-    console.log('Async operation has ended');
-    infiniteScroll.complete(function () {
-      console.log('数据请求完成');
-    });
+      console.log('Async operation has ended');
+      infiniteScroll.complete(function () {
+        console.log('数据请求完成');
+      });
+
+    },1000);
 
   }
 

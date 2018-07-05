@@ -23,9 +23,10 @@ export class HomePage {
   @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer
+              public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
+              public localStorageProvider: LocalStorageProvider,
              ) {
-
+    this.localStorageProvider.del('searchMoreData');
   }
   //状态栏文字颜色修改-黑色
   ionViewWillEnter() {

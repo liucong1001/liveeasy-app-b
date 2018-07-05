@@ -5,6 +5,8 @@ import { MypassengerPage } from './mypassenger/mypassenger';
 import { PublicpassengerPage } from './publicpassenger/publicpassenger';
 import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+
 /**
  * Generated class for the PassengerPage page.
  *
@@ -21,8 +23,9 @@ export class PassengerPage {
 
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public navParams: NavParams, public statusBar: StatusBar) {
-
+              public navParams: NavParams, public statusBar: StatusBar,
+              public localStorageProvider: LocalStorageProvider,) {
+    this.localStorageProvider.del('searchMoreData');
   }
   ionViewWillEnter() {
     this.statusBar.styleLightContent();

@@ -36,14 +36,14 @@ export class CenterPage {
     this.name = this.localStorageProvider.get('loginInfo').name;
     this.gh=this.localStorageProvider.get('loginInfo').no;
     this.custposName =this.localStorageProvider.get('loginInfo') .custPosName
-    this.photo = 'assets/imgs/center.jpg'
-    console.log(this.name);
+    this.photo = 'assets/imgs/center.jpg';
+    this.localStorageProvider.del('searchMoreData');
   }
   ionViewWillEnter() {
     this.statusBar.styleDefault();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CenterPage');
+
   }
   goaccount(){
     this.openWin(MyaccountPage);

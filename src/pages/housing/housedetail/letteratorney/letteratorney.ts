@@ -133,7 +133,8 @@ export class LetteratorneyPage {
       delegateDocSn:this.form.value.delegateDocSn,
       delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
       delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
-      delegateDocPics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
+      delegateDocPics: JSON.stringify(this.imgData),
+       // delegateDocPics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
       if(res.success){
@@ -148,7 +149,7 @@ export class LetteratorneyPage {
       // this.navCtrl.pop()
     });
     console.log(this.form.value);
-    console.log(new Date(this.form.value.delegateBeginTm).getTime())
+    console.log(new Date(this.form.value.delegateBeginTm).getTime());
     console.log(new Date(this.form.value.delegateEndTm).getTime())
   }
 

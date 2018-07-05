@@ -122,6 +122,10 @@
       </ion-col>
     </ion-row>
 
+    <!--网络错误处理-->
+    <div *ngIf="badHttp">
+      <img src="{{configProvider.set().errorImg}}"  class="errHttp" alt="">
+    </div>
 
     <div class="content_page">
       <div *ngIf="hasData&&pageData ==null" class="tc">
@@ -133,7 +137,7 @@
       </div>
     </div>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData&&!badHttp">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="正在加载中...">
