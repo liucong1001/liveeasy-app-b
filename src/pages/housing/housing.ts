@@ -631,15 +631,17 @@ export class HousingPage {
     }
   }
   floorName = '';
-  start:any;
-  ends:any;
+  time:any;
   price:any;
+  starts:any;
+  ends:any;
   selectPrice(){
     console.log('交割',this.price)
-    this.start=this.elevatorPipe(this.price).start;
-    this.ends=this.elevatorPipe(this.price).end;
-    console.log(this.elevatorPipe(this.price).end)
-    this.params.propertyPriceStart=this.start;
+    this.time=this.elevatorPipe(this.price);
+    this.starts=this.time.start;
+    this.ends=this.time.end;
+    console.log(this.ends)
+    this.params.propertyPriceStart=this.starts;
     this.params.propertyPriceEnd=this.ends;
     this.search();
   }
