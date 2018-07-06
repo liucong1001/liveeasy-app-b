@@ -43,11 +43,9 @@ export class HousinfoPage {
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
   }
   scrollHandler(event) {
-    // console.log(event);
     if (this.content.scrollTop >= 10){
       // alert(2)
       this.classFlag=true;
-
     }else if(this.content.scrollTop < 50){
       this.classFlag=false;
     }
@@ -85,6 +83,7 @@ flag=false;
  if(this.navParams.get('item')){
    //如果是从列表页过来  直接传递数据 不请求 （一次调用详情接口）
      this.houseData = this.navParams.get('item');
+     console.log(this.houseData)
      this.propertyId = this.houseData.propertyId;
      if(this.navParams.get('item').propertyPics){
        this.imgJson = JSON.parse(this.navParams.get('item').propertyPics);
@@ -97,6 +96,7 @@ flag=false;
      this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
          if(res.success){
            this.houseData=res.data;
+           console.log(this.houseData)
            this.propertyId = this.houseData.propertyId;
            if(res.data.propertyPics){
              this.imgJson = JSON.parse(res.data.propertyPics);

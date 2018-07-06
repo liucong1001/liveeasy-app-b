@@ -1,4 +1,7 @@
 page-housinfo {
+  .default{
+    color: #999;
+  }
   ion-header{
     ion-icon{
       font-size: 2.5rem !important;
@@ -98,13 +101,13 @@ page-housinfo {
   .wrap{
     padding:0 15px;
     h4{
-      border-bottom: 1px solid #f8f8f8;
+      border-bottom: 1px solid #f3f3f3;
       padding: 15px 0;
       margin: 0;
     }
     ion-grid{
-      border-bottom: 1px solid #f8f8f8;
-      padding:8px 0;
+      border-bottom: 1px solid #f3f3f3;
+      padding:12px 0;
     }
     button{
       background: #f8f8f8;
@@ -126,7 +129,9 @@ page-housinfo {
   ion-footer{
     background: #fff;
     padding: 28px 0;
+    border-top: 1px solid #f1f1f1;
     .footers {
+
       ion-col{
         padding:0 10px;
         margin:3px 0;
@@ -140,13 +145,16 @@ page-housinfo {
   }
   .houseInfo{
     color: #FA5741;
+    margin-top: 4px;
   }
   .middleHouseType{
-    border-left:1px solid  #f7F7F7;
-    border-right:1px solid  #f7F7F7 ;
+    border-left:1px solid  #f3f3f3;
+    border-right:1px solid  #f3f3f3 ;
   }
   .infoPadding{
-    padding-left: 10px!important;
+    padding-left: 20px!important;
+    //border: 1px solid;
+    //margin: 8px 0;
   }
 
 

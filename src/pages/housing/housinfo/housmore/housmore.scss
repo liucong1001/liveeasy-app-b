@@ -1,6 +1,13 @@
 page-housmore {
+  font-size: 1.5rem;
+  .default{
+    color: #999;
+  }
+  h6{
+    font-weight: 500;
+  }
   .xqCss{
-    border-bottom: 1px solid #f8f8f8;
+    border-bottom: 1px solid #f4f4f4;
     padding: 10px 0 15px;
     ion-col{
       padding: 6px 0;
