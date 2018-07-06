@@ -187,7 +187,7 @@ flag=false;
   }
 
   rolepeople(){
-    this.openWin(RolepeoplePage,{propertyId:this.propertyId});
+    this.openWin(RolepeoplePage,{propertyid:this.propertyId});
   };
   //跟进
   goFollow(){

@@ -50,14 +50,18 @@ export class VersionUpdateProvider {
     alert.present();
 
     const fileTransfer: FileTransferObject = this.transfer.create();
+
     const apk = this.file.externalRootDirectory + 'app.apk'; //apk保存的目录
-    fileTransfer.download(apkUrl, apk).then(() => {
-      this.fileOpener.open(apk, 'application/vnd.android.package-archive').then(() =>{
-        console.log('File is opened')
-      }).catch(e => {
-        console.log('Error openening file', e)
-      });
+
+    fileTransfer.download(apkUrl, apk).then((res) => {
+      console.log('download',apkUrl,'res',res,'APK---------',apk);
+        this.fileOpener.open(apk, 'application/vnd.android.package-archive').then(() =>{
+          console.log('File is opened')
+        }).catch(e => {
+          console.log('Error openening file', e)
+        });
     });
+
     fileTransfer.onProgress((event: ProgressEvent) => {
       let num = Math.floor(event.loaded / event.total * 100);
       if (num === 100) {

@@ -11,9 +11,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list class="tc p10" *ngIf="this.data == undefined">
-    暂无数据！
-  </ion-list>
+
   <ion-list *ngIf="data">
     <ion-item class="updateHegiht"  *ngIf="data.initRealtorName != undefined">
       <ion-row>
@@ -134,5 +132,9 @@
       <!--</ion-row>-->
     <!--</ion-item>-->
 
+  </ion-list>
+
+  <ion-list class="tc p10" *ngIf="this.data == undefined ">
+    暂无数据！
   </ion-list>
 </ion-content>

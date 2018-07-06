@@ -20,15 +20,16 @@ export class RolepeoplePage {
   propertyid:any;
   data:RoleModel;
   @ViewChild(Navbar) navBar: Navbar;
+  hasData = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public nativePageTransitions: NativePageTransitions,
               public localStorageProvider: LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid= navParams.get('propertyid');
     console.log(this.propertyid);
     this.propertyProvider.role(this.propertyid).then(res => {
-      console.log(res)
+      console.log(res);
       this.data = res.data;
+      this.hasData = true;
       console.log('获取',this.data);
-      // console.log('校色人',this.data.initRealtorName)
     });
   }
 

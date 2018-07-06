@@ -8,6 +8,7 @@ import {AccountPage} from "../account/account";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {VersionProvider} from "../../providers/version/app.version";
 
 /**
  * Generated class for the CenterPage page.
@@ -29,7 +30,7 @@ export class CenterPage {
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
     public nativePageTransitions: NativePageTransitions,
-              public statusBar: StatusBar
+              public statusBar: StatusBar, private appUpdate: VersionProvider
   ) {
 
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
@@ -64,6 +65,11 @@ export class CenterPage {
     myModal.present();
     // this.navCtrl.push(AccountPage);
     this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
+  }
+
+  updateVersion(){
+    console.log('开始检测版本更新');
+    this.appUpdate.checkVersion();
   }
 
   openWin(goPage) {

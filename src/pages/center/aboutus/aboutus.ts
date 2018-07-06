@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from '@ionic-native/native-page-transitions';
+import {AppVersion} from "@ionic-native/app-version";
 
 /**
  * Generated class for the AboutusPage page.
@@ -16,8 +17,9 @@ import {NativePageTransitions, NativeTransitionOptions} from '@ionic-native/nati
 })
 export class AboutusPage {
   @ViewChild(Navbar) navBar: Navbar;
+  versionNumber :string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public nativePageTransitions: NativePageTransitions
+              public nativePageTransitions: NativePageTransitions,  private appVersion: AppVersion,
               ) {
   }
 
@@ -25,6 +27,13 @@ export class AboutusPage {
     console.log('ionViewDidLoad AboutusPage');
     // this.nativePageTransitions.cancelPendingTransition();
     this.navBar.backButtonClick = this.backButtonClick;
+    this.appVersion.getVersionCode().then(res=>{
+      console.log('获取版本',res);
+    });
+    this.appVersion.getVersionNumber().then(res=>{
+        this.versionNumber =res;
+      console.log('getVersionNumber',res);
+    })
   }
 
   backButtonClick = (e: UIEvent) => {
