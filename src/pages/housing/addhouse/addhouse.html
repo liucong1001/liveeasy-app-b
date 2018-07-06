@@ -28,13 +28,13 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)" (tap)="gos()"></ion-input>
+        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" (tap)="gos()" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
+          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
