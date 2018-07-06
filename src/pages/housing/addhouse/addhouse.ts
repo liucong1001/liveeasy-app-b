@@ -49,12 +49,8 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
 
-
   }
 
-// gos(){
-//   this.keyboard.show();
-// }
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
@@ -63,7 +59,7 @@ export class AddhousePage {
       estateId:[''],
       buildingNo:['',Validators.required], //楼栋号
       unitNo:['',Validators.required],//单元号
-      floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
+      floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
       spaceSize:['',Validators.required],//建筑面积
       innerSpaceSize:[''],//套内面积
@@ -104,26 +100,32 @@ export class AddhousePage {
     elevators:[''],//梯
     apartments:[''],//户
   });
+
     tip(){
       this.toast.alert('alert默认消息');
       this.toast.msg('成功操作');
       this.toast.error('失败操作');
     }
+
+  test(){
+      console.log('测试',this.form.value);
+   }
+
  //表单验证消息
     errors={
         buildingNo:[
             new ErrorMessage('required','楼栋号必须要填写！'),
-            new ErrorMessage('maxLength','这个长度太长了'),
+            // new ErrorMessage('maxLength','这个长度太长了'),
             new ErrorMessage('pattern','请填写数字'),
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
-          new ErrorMessage('pattern','请填写数字'),
+            new ErrorMessage('pattern','请填写数字'),
         ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
-            new ErrorMessage('maxLength','楼层名称太长了'),
-          new ErrorMessage('pattern','请填写数字'),
+            // new ErrorMessage('maxLength','楼层名称太长了'),
+            new ErrorMessage('pattern','请填写数字'),
         ],
       houseNo:[
         new ErrorMessage('pattern','请填写英文或数字'),
@@ -248,10 +250,10 @@ export class AddhousePage {
        desc:'',
      };
 
-    this.form.value.contacts.push(man2);
+     this.form.value.contacts.push(man2);
      console.log('第二个人',man2,'联系人',this.form.value.contacts);
-     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-
+      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+     console.log(this.form,'表单不合法性',this.form.invalid,'内容',this.form.value);
     if(this.form.invalid){
       return false;
     }

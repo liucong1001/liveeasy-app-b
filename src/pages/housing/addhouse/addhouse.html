@@ -6,7 +6,6 @@
 
 </ion-header>
 <ion-content>
-  <!--(ngSubmit)="save()"-->
   <form [formGroup]="form" >
     <ion-list (click)="goserach()" >
       <button ion-item class="pl12">
@@ -20,7 +19,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" formControlName="buildingNo" pattern="^[A-Za-z0-9]+$" placeholder="请填写您的单元(请填写英文或数字)">
+          <ion-input type="text" formControlName="buildingNo"  placeholder="请填写您的单元(请填写英文或数字)">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">栋</span>
@@ -59,7 +58,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="innerSpaceSize" placeholder="请填写数字">
+          <ion-input type="number"  pattern="[0-9]*" formControlName="innerSpaceSize" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -67,7 +66,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
@@ -164,13 +163,14 @@
     <ion-list class="m10">
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主姓名<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" pattern="\-?\d+(\.\d{0,})?" placeholder="请填写业主姓名" formControlName="contact">
+        <!--pattern="\-?\d+(\.\d{0,})?"-->
+        <ion-input type="text"  placeholder="请填写业主姓名" formControlName="contact">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contact"  [control]="form.get('contact')"></valid-error>
       <ion-item class="pl12">
         <ion-label>业主性别</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="sex" >
+        <ion-select okText="确定"  cancelText="关闭" formControlName="sex"  (ionChange)="test()">
           <ion-option value="male">男</ion-option>
           <ion-option value="female">女</ion-option>
         </ion-select>
@@ -187,6 +187,7 @@
         <ion-input type="number" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
     </ion-list>
 
     <ion-list (click)="clickIntention()">
@@ -256,7 +257,12 @@
     </ion-list>
     <ion-grid>
       <ion-row>
-        <button type="button" (click)="save()"   [disabled]="form.invalid" ion-button full color="danger"  class="radius">提交</button>
+        <!--<ion-col>-->
+          <!--{{form.value | json}}-->
+        <!--</ion-col>-->
+        <button ion-button full color="danger"  [disabled]="form.invalid" type="button" (click)="save()" class="radius">提交</button>
+
+        <!--<button type="button" (click)="save()"    ion-button full color="danger"  class="radius">提交</button>-->
       </ion-row>
     </ion-grid>
   </form>

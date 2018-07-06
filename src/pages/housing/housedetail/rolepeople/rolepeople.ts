@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, Navbar, NavController, NavParams} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {PropertyProvider} from "../../../../providers/property/property";
 import {RoleModel} from "../../../../model/property/role.model";
@@ -20,16 +20,29 @@ export class RolepeoplePage {
   propertyid:any;
   data:RoleModel;
   @ViewChild(Navbar) navBar: Navbar;
-  hasData = false;
+  hasData :boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public nativePageTransitions: NativePageTransitions,
-              public localStorageProvider: LocalStorageProvider,public propertyProvider: PropertyProvider) {
+              public localStorageProvider: LocalStorageProvider,public propertyProvider: PropertyProvider,
+              public loadingCtrl: LoadingController) {
     this.propertyid= navParams.get('propertyid');
     console.log(this.propertyid);
+
+    // let loading = this.loadingCtrl.create({
+    //   content: '数据加载中...'
+    // });
+    // loading.present();
+
     this.propertyProvider.role(this.propertyid).then(res => {
-      console.log(res);
-      this.data = res.data;
-      this.hasData = true;
-      console.log('获取',this.data);
+      // loading.dismiss();
+      if(res.success){
+        console.log(res);
+        this.data = res.data;
+        this.hasData = true;
+        console.log('获取',this.data);
+      }else {
+        this.hasData = false;
+      }
+
     });
   }
 

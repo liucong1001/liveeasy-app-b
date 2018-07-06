@@ -46,10 +46,21 @@ page-housing {
   }
   .scroll-content{
     top: 110px;
-    bottom: 55px;
+   bottom: 55px;
     margin: 0 !important;
     border-top: none !important;
   }
+
+.fromHomeSearch{
+  .scroll-content{
+    bottom: 0px!important;
+  }
+
+}
+
+  //.scroll-contentHome{
+  //  bottom:0px;
+  //}
 
 }
 

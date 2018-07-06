@@ -63,6 +63,8 @@ export class VersionProvider {
           if (versionInfo.buildVersionNo > result) {
             this.appUpdate.detectionUpgrade(versionInfo.url, versionInfo.show || true);
             //TODO IOS页面单独处理
+
+
           }
         });
 

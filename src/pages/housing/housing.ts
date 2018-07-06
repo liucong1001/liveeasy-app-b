@@ -122,6 +122,7 @@ export class HousingPage {
   @ViewChild('navbar') navBar: Navbar;
 
   badHttp = false;
+  comFromHomeSearch = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -134,6 +135,12 @@ export class HousingPage {
               public toast:ToastComponent,
               private renderer:Renderer
   ) {
+
+    console.log('lastPage上一个页面',this.navCtrl.last());
+    if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
+       this.comFromHomeSearch = true;
+    }
+
       // menu.enable(true); //menus-功能开启
     if(!this.navParams.get('item')){
       this.floorName = '';

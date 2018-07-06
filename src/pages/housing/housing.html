@@ -34,7 +34,7 @@
 
 </ion-header>
 
-<ion-content no-bounce >
+<ion-content no-bounce  [ngClass]="{'fromHomeSearch':comFromHomeSearch }" >
 
   <ion-refresher
     [pullMax]="480"
