@@ -60,6 +60,13 @@ export class HousedetailPage {
   houLabel:any;
   estateList:any;
   lockStatus:any;
+  //
+  selectCz:any;
+  selectZx:any;
+  selectJx:any;
+  selectDt:any;
+  selectYt:any;
+  selectSex:any
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
@@ -67,7 +74,24 @@ export class HousedetailPage {
               public statusBar: StatusBar,
               public loadingCtrl: LoadingController) {
 
-
+    this.selectCz = {
+      title: '朝向',
+    };
+    this.selectZx = {
+      title: '装修',
+    };
+    this.selectJx = {
+      title: '建筑类型',
+    };
+    this.selectDt = {
+      title: '配备电梯',
+    };
+    this.selectYt = {
+      title: '房屋用途',
+    };
+    this.selectSex={
+      title:'业主性别'
+    }
   }
 
 
@@ -180,7 +204,8 @@ export class HousedetailPage {
     estateId:[''],
     buildingNo:['',Validators.required], //楼栋号
     unitNo:['',Validators.required],//单元号
-    floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
+    // floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
+    floorNo:['',[Validators.required]],//楼层
     houseNo:['',Validators.required],//房间号
     spaceSize:['',Validators.required],//建筑面积
     innerSpaceSize:['',Validators.required],//套内面积
@@ -227,13 +252,19 @@ export class HousedetailPage {
     buildingNo:[
       new ErrorMessage('required','楼栋号必须要填写！'),
       new ErrorMessage('maxLength','这个长度太长了'),
+      new ErrorMessage('pattern', '请填写英文或数字'),
     ],
     unitNo:[
       new ErrorMessage('required','单元号必须要填写！'),
+      new ErrorMessage('pattern', '请填写数字'),
     ],
     floorNo:[
       new ErrorMessage('required','楼层必须要填写！'),
-      new ErrorMessage('maxLength','楼层名称太长了'),
+      // new ErrorMessage('maxLength','楼层名称太长了'),
+      new ErrorMessage('pattern', '请填写数字'),
+    ],
+    houseNo:[
+      new ErrorMessage('pattern', '请填写数字'),
     ],
     contact:[
       new ErrorMessage('required','业主姓名必须要填写！'),
@@ -249,6 +280,23 @@ export class HousedetailPage {
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
   };
+
+  /**
+   * 验证面积
+   */
+  sizeCheck=false;
+  sizes(){
+    if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
+
+      if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
+        console.log('室内面积不能大于建筑面积');
+        this.sizeCheck = true;
+      }else {
+        this.sizeCheck = false;
+      }
+      console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
+    }
+  }
 
   //房屋用途
   buzzTypeJson = [
@@ -375,7 +423,7 @@ export class HousedetailPage {
         this.toast.msg('修改成功!');
         setTimeout(()=>{
           // this.navCtrl.setRoot(HousingPage);
-          this.openWin(HousinfoPage,{propertyId:this.propertyid});
+          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
         },500);
       }else{
         this.toast.error('修改失败！');

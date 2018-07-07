@@ -136,14 +136,16 @@ page-housinfo {
         background: none !important;
       }
     }
-    .wt{
-      padding: 2px 15px 8px;
-      div:first-child{
-        font-size: 1.6rem;
-        margin-bottom: 8px;
-      }
-    }
+
 }
+  .wt{
+    padding: 2px 12px 8px;
+    div:first-child{
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+  }
+
   ion-footer{
     background: #fff;
     padding: 28px 0;

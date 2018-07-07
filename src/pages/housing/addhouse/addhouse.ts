@@ -81,9 +81,9 @@ export class AddhousePage {
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
       estate:[''],//楼盘
-      estateName:[''],
+      estateName:['',[Validators.required]],
       estateId:[''],
-      buildingNo:['',[Validators.required,Validators.maxLength(5)]], //楼栋号
+      buildingNo:['',[Validators.required]], //楼栋号
       unitNo:['',Validators.required],//单元号
       floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
@@ -141,17 +141,12 @@ export class AddhousePage {
     errors={
         buildingNo:[
             new ErrorMessage('required','楼栋号必须要填写！'),
-
-            new ErrorMessage('pattern','请填写数字'),
+            new ErrorMessage('pattern','请填写英文或数字'),
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
             new ErrorMessage('pattern','请填写中文或英文'),
         ],
-      spaceSize:[
-        new ErrorMessage('required','建筑必须要填写！'),
-        new ErrorMessage('maxLength','超出长度'),
-      ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
             // new ErrorMessage('maxLength','楼层名称太长了'),
@@ -162,7 +157,7 @@ export class AddhousePage {
       ],
       contact:[
            new ErrorMessage('required','业主姓名必须要填写！'),
-        new ErrorMessage('pattern','请填写数字'),
+        new ErrorMessage('pattern','请填写中文或英文'),
       ],
       sex:[
           new ErrorMessage('required','业主性别必须要填写！'),
@@ -183,12 +178,6 @@ export class AddhousePage {
       hasElevator:[
         new ErrorMessage('required','是否配备电梯必须要填写！'),
       ],
-      spaceSize:[
-        new ErrorMessage('pattern','楼层名称太长了'),
-      ],
-      innerSpaceSize:[
-        new ErrorMessage('pattern','楼层名称太长了'),
-      ]
     };
 
   //状态栏文字颜色修改-白色
@@ -321,7 +310,7 @@ export class AddhousePage {
 
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
-          this.openWin(HousingPage);
+          this.navCtrl.setRoot(HousingPage);
           // this.navCtrl.setRoot(HousingPage);
         },1000);
 
