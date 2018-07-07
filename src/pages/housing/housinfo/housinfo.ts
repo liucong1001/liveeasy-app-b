@@ -90,10 +90,10 @@ flag=false;
        this.imgJson = JSON.parse(this.navParams.get('item').propertyPics);
      }
  }else if(this.navParams.get('propertyId')){
-     let loading = this.loadingCtrl.create({
-       content: '数据加载中...'
-     });
-     loading.present();
+     // let loading = this.loadingCtrl.create({
+     //   content: '数据加载中...'
+     // });
+     // loading.present();
      this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
          if(res.success){
            this.houseData=res.data;
@@ -103,13 +103,10 @@ flag=false;
              this.imgJson = JSON.parse(res.data.propertyPics);
            }
 
-           loading.dismiss();
+           // loading.dismiss();
          }
      });
  }
-
-
-
 
 
      //业主委托书

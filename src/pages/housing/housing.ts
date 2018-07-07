@@ -706,7 +706,10 @@ export class HousingPage {
     });
     this.navCtrl.push(AllsearchPage,{floorName:this.floorName});
   }
-
+  spaceSizeName:'';
+  decorationName:'';
+  buildingTypeName:'';
+  buzzTypeName:'';
   mores(){
 
     this.events.subscribe('moreSearchBevents', (params) => {
@@ -719,8 +722,20 @@ export class HousingPage {
         this.params.orientation = params.orientation;
         this.params. propertyPriceStart = params.propertyPriceStart;
         this.params. propertyPriceEnd = params.propertyPriceEnd;
+        //liu
+        this.params['spaceSizeStart']=params.spaceSizeStart;
+        this.params['spaceSizeEnd']=params.spaceSizeEnd;
+        this.params['decoration']=params.decoration;
+        this.params['buildingType']=params.buildingType;
+        this.params['buzzType']=params.buzzType;
+
+        this.spaceSizeName = params.spaceSizeName;
+        this.decorationName =params.decorationName;
+        this.buildingTypeName =params.buildingTypeName;
+        this.buzzTypeName= params.buzzTypeName;
+        console.log('接收到',params);
         // this.params. propertyPriceStart  propertyPriceEnd
-        console.log('搜索',this.floorName,this.params.estateId);
+        // console.log('搜索',this.floorName,this.params.estateId);
       }
        this.search();
       // 取消订阅

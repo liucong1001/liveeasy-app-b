@@ -54,6 +54,9 @@
         {{tagName(i)}}
       </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>&nbsp;
       <span *ngIf="datas.hasElevator">/&nbsp;{{datas.hasElevator=='0'?'无':'有'}}</span>
+      <span *ngIf="spaceSizeName">/{{spaceSizeName}}</span>
+      <span  *ngIf="decorationName">/{{decorationName}}</span>
+      <span  *ngIf="buildingTypeName">/{{buildingTypeName}}</span>
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
@@ -94,13 +97,12 @@
               <!--*ngIf="!tagPipe(item.tagsStr)"-->
 
               <ion-col col-12 class="p0" style="margin: 2px 0">
-                <span class="unitPrice">{{item.propertyPrice}}
-            {{item.propertyPriceUnit==1?'万':'元'}}</span>
-                <span style="font-size: 1.2rem;color: #aaa">
+                <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>
+                <span class="unitPrice" *ngIf="item.propertyPrice!=0"> {{item.propertyPriceUnit==1?'万':'元'}}</span>
+                <span class="errorPrice"   *ngIf="item.propertyPrice==0">价格异常</span>
+                <span style="font-size: 1.2rem;color: #aaa" *ngIf="item.propertyPrice!=0">
                   <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
-
-                  <!--<sup>2</sup>-->
                 </span>
               </ion-col>
             </ion-row>

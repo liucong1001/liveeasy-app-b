@@ -14,14 +14,32 @@
     <h4>朝向</h4>
     <a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'update':flag,'active': isActive(i)}" tappable (click)="choseDirect(i)" [hidden]="index==0" >{{i.name}}</a>
     </div>
-    <div class="outer">
-    <h4>其他</h4>
-    <a *ngFor="let item of qtJSON" [ngClass]="{'active': isActive2(item)}" tappable (click)="choseOther(item)">{{item.name}}</a>
-    </div>
+    <!--<div class="outer">-->
+    <!--<h4>其他</h4>-->
+    <!--<a *ngFor="let item of qtJSON" [ngClass]="{'active': isActive2(item)}" tappable (click)="choseOther(item)">{{item.name}}</a>-->
+    <!--</div>-->
     <div class="outer">
       <h4>电梯</h4>
       <a *ngFor="let item of dtJson;let index =index" [ngClass]="{'active': isActive3(item)}" tappable (click)="choseDt(item)" [hidden]="index==0">{{item.name}}</a>
     </div>
+    <div class="outer">
+      <h4>建筑面积</h4>
+      <a *ngFor="let i of spaceSizeJson;let index =index" [ngClass]="{'update':flag,'active': isActive7(i)}" tappable (click)="choseSpaceSize(i)"  [hidden]="index==0" >{{i.name}}</a>
+
+    </div>
+    <div class="outer">
+        <h4>装修</h4>
+        <a *ngFor="let i of decorationJson;let index =index" [ngClass]="{'update':flag,'active': isActive4(i)}" tappable (click)="chosedecoration(i)" [hidden]="index==0" >{{i.name}}</a>
+    </div>
+    <div class="outer">
+      <h4>建筑类型</h4>
+      <a *ngFor="let i of buildingTypeJson;let index =index" [ngClass]="{'update':flag,'active': isActive5(i)}" tappable (click)="chosebuildingType(i)" [hidden]="index==0" >{{i.name}}</a>
+    </div>
+    <div class="outer">
+      <h4>房屋用途</h4>
+      <a *ngFor="let i of buzzTypeJson;let index =index" [ngClass]="{'update':flag,'active': isActive6(i)}" tappable (click)="chosebuzzType(i)" [hidden]="index==0"  >{{i.name}}</a>
+    </div>
+
 </ion-content>
 <ion-footer>
   <ion-row class="footers">

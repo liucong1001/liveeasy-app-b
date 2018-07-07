@@ -36,6 +36,7 @@ export class MorePage {
   rootPage:any = MyApp ;
   selected3:any;
   structure: any = {lower: 0, upper: 1000};
+  spaceSize:any ;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,) {
@@ -51,7 +52,13 @@ export class MorePage {
 
     if(this.localStorageProvider.get('searchMoreData')){
       this.searchMoreData = this.localStorageProvider.get('searchMoreData');
+      // alert(this.searchMoreData.tagsArry.length);
+      //建筑面积赋状态
 
+      // spaceSizeVal
+       this.spaceSize =  this.searchMoreData['spaceSizeVal'];
+      // {name:'110-130㎡',start:110,end:130, val:'5'},
+      // this.isActive7(this.spaceSizeJson[3]);
     }
     console.log('进入 MorePage',this.searchMoreData);
   }
@@ -60,12 +67,29 @@ export class MorePage {
     if(this.searchMoreData.tagsArry.length>1){
       //初始化选中状态
       this.searchMoreData.tagsArry = this.searchMoreData.tagsArry;
-      for(var i in this.searchMoreData.tagsArry ){
-        if(item.tagCode == this.searchMoreData.tagsArry[i] ){
-          item.active =true;
-          return item.active;
+
+      if(this.searchMoreData.tagsArry.length>1){
+        console.log('多个');
+        for(var i in this.searchMoreData.tagsArry ){
+          if(item.tagCode == this.searchMoreData.tagsArry[i] ){
+            item.active = true;
+            return item.active;
+          }
         }
       }
+
+      if(this.searchMoreData.tagsArry.length==1){
+        console.log('单个');
+        // for(var i in this.searchMoreData.tagsArry ){
+          if(item.tagCode == this.searchMoreData.tagsArry[i] ){
+            return true
+            // item.active =true;
+            // return item.active;
+          }
+        // }
+      }
+
+
     }
   }
 
@@ -100,6 +124,39 @@ export class MorePage {
     {name:'无',val:'0'},
     {name:'有',val:'1'},
   ];
+  //装修
+  decorationJson = [
+    {name:'全部',val:''},
+    {name:'毛坯',val:'1'},
+    {name:'清水',val:'2'},
+    {name:'精装',val:'3'},
+    {name:'豪装',val:'4'},
+  ];
+  //建筑类型
+  buildingTypeJson=[
+    {name:'全部',val:''},
+    {name:'未知',val:'0'},
+    {name:'塔楼',val:'1'},
+    {name:'板楼',val:'2'},
+    {name:'板塔结合',val:'3'},
+  ];
+  //房屋用途
+  buzzTypeJson = [
+    {name:'全部',val:''},
+    {name:'出售',val:'1'},
+    {name:'售租',val:'2'},
+    {name:'租售',val:'3'},
+  ];
+  spaceSizeJson = [
+     {name:'50㎡',start:0,end:50, val:'1'},
+     {name:'50-70㎡',start:50,end:70, val:'2'},
+    {name:'70-90㎡',start:70,end:90, val:'3'},
+    {name:'90-110㎡',start:90,end:110, val:'4'},
+    {name:'110-130㎡',start:110,end:130, val:'5'},
+    {name:'130-150㎡',start:130,end:150, val:'6'},
+    {name:'150-200㎡',start:150,end:200, val:'7'},
+    {name:'200㎡以上',start:200,end:9999, val:'8'},
+    ];
   resetDiret(){
     return false;
   }
@@ -144,11 +201,33 @@ export class MorePage {
     console.log(item.val)
   }
 
-
-
+  //装修
+  chosedecoration(item){
+   this.searchMoreData['decoration'] = item.val;
+   this.searchMoreData['decorationName'] = item.name;
+  }
+  //建筑类型
+  chosebuildingType(item){
+   this.searchMoreData['buildingType'] = item.val;
+   this.searchMoreData['buildingTypeName'] = item.name;
+  }
+  //房屋用途
+  chosebuzzType(item){
+   this.searchMoreData['buzzType'] = item.val;
+    this.searchMoreData['buzzTypeName'] = item.name;
+   console.log('搜索条件',this.searchMoreData);
+  }
+  //建筑面积
+  choseSpaceSize(item){
+    this.spaceSize =item.val;
+    this.searchMoreData['spaceSizeStart'] =   item.start.toString();
+    this.searchMoreData['spaceSizeEnd'] = item.end.toString();
+    this.searchMoreData['spaceSizeVal'] = item.val;
+    this.searchMoreData['spaceSizeName'] = item.name;
+    console.log('选择的面积',item);
+  }
   isActive2(item){
     return this.selected2 === item;
-
   }
   isActive3(item){
     if(item.val==this.searchMoreData.hasElevator){
@@ -157,6 +236,38 @@ export class MorePage {
       return this.selected === item;
     }
   }
+  isActive4(item){
+    if(item.val==this.searchMoreData['decoration']){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
+
+  isActive5(item){
+    if(item.val==this.searchMoreData['buildingType']){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
+
+  isActive6(item){
+    if(item.val==this.searchMoreData['buzzType']){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
+  //建筑面积
+  isActive7(item){
+    if(item.val==this.spaceSize){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
+
 
   reset(){
      this.tagsList=this.localStorageProvider.get('tagsList');
@@ -166,6 +277,10 @@ export class MorePage {
      this.choseDirect(this.cxJSON[0]);
      //清除
     this.choseDt(this.dtJson[0]);
+    this.choseSpaceSize(this.spaceSizeJson[0]);
+    this.chosedecoration(this.decorationJson[0]);
+    this.chosebuildingType(this.buildingTypeJson[0]);
+    this.chosebuzzType(this.buildingTypeJson[0]);
      console.log('清除',this.searchMoreData);
      this.localStorageProvider.del('searchMoreData');
   }
@@ -191,9 +306,14 @@ export class MorePage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
-  }
-//状态栏文字颜色修改-白色
+  };
+ //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
   }
+
+  onChange($event){
+    console.log('价格',this.spaceSize);
+  }
+
 }
