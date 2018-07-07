@@ -226,6 +226,14 @@ export class MorePage {
     this.searchMoreData['spaceSizeName'] = item.name;
     console.log('选择的面积',item);
   }
+  isActive1(item){
+    if(item.tagCode==this.searchMoreData['tags']){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
+
   isActive2(item){
     return this.selected2 === item;
   }

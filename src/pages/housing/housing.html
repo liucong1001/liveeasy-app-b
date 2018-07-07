@@ -56,9 +56,9 @@
       </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>&nbsp;
       <span *ngIf="datas.hasElevator">/&nbsp;{{datas.hasElevator=='0'?'无':'有'}}</span>
       <span *ngIf="spaceSizeName">/{{spaceSizeName}}</span>
-      <span  *ngIf="decorationName">/{{decorationName}}</span>
-      <span  *ngIf="buildingTypeName">/{{buildingTypeName}}</span>
-      <span  *ngIf="buzzTypeName">/{{buzzTypeName}}</span>
+      <span  *ngIf="decorationName"  [hidden]="decorationName=='全部'">/{{decorationName}}</span>
+      <span  *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">/{{buildingTypeName}}</span>
+      <span  *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">/{{buzzTypeName}}</span>
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">

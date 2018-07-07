@@ -8,7 +8,7 @@
     <div class="outer">
       <h4>房源标签(可多选)</h4>
       <a *ngFor="let bq of tagsList;let i = index"
-         [ngClass]="{'active': bq.active||initTags(bq)}" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
+         [ngClass]="{'active': bq.active||initTags(bq)||isActive1(bq) }" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
     </div>
     <div class="outer">
     <h4>朝向</h4>
