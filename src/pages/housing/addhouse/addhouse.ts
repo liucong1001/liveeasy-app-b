@@ -37,6 +37,12 @@ export class AddhousePage {
   showHx=false;
   HxRight=true;
   HxDown=false;
+  selectCz:any;
+  selectZx:any;
+  selectJx:any;
+  selectDt:any;
+  selectYt:any;
+  selectSex:any
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
               public actionSheetCtrl: ActionSheetController,
@@ -45,6 +51,25 @@ export class AddhousePage {
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
               public app: App,public statusBar: StatusBar
   ) {
+    this.selectCz = {
+      title: '朝向',
+    };
+    this.selectZx = {
+      title: '装修',
+    };
+    this.selectJx = {
+      title: '建筑类型',
+    };
+    this.selectDt = {
+      title: '配备电梯',
+    };
+    this.selectYt = {
+      title: '房屋用途',
+    };
+    this.selectSex={
+      title:'业主性别'
+    }
+
      //楼盘列表
 
     //房源标签
@@ -62,8 +87,8 @@ export class AddhousePage {
       unitNo:['',Validators.required],//单元号
       floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
-      spaceSize:['',Validators.required],//建筑面积
-      innerSpaceSize:[''],//套内面积
+      spaceSize:['',Validators.required,],//建筑面积
+      innerSpaceSize:['',],//套内面积
       propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
@@ -111,12 +136,12 @@ export class AddhousePage {
     errors={
         buildingNo:[
             new ErrorMessage('required','楼栋号必须要填写！'),
-            // new ErrorMessage('maxLength','这个长度太长了'),
+
             new ErrorMessage('pattern','请填写数字'),
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
-            new ErrorMessage('pattern','请填写数字'),
+            new ErrorMessage('pattern','请填写中文或英文'),
         ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
@@ -128,6 +153,7 @@ export class AddhousePage {
       ],
       contact:[
            new ErrorMessage('required','业主姓名必须要填写！'),
+        new ErrorMessage('pattern','请填写数字'),
       ],
       sex:[
           new ErrorMessage('required','业主性别必须要填写！'),
@@ -148,6 +174,12 @@ export class AddhousePage {
       hasElevator:[
         new ErrorMessage('required','是否配备电梯必须要填写！'),
       ],
+      spaceSize:[
+        new ErrorMessage('pattern','楼层名称太长了'),
+      ],
+      innerSpaceSize:[
+        new ErrorMessage('pattern','楼层名称太长了'),
+      ]
     };
 
   //状态栏文字颜色修改-白色
@@ -159,6 +191,24 @@ export class AddhousePage {
     console.log('ionViewDidLoad AddhousePage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
+
+  /**
+   * 验证面积
+   */
+  sizeCheck=false;
+  sizes(){
+    if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
+
+      if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
+        console.log('室内面积不能大于建筑面积');
+        this.sizeCheck = true;
+      }else {
+        this.sizeCheck = false;
+      }
+      console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
+    }
+  }
+
    //房屋用途
   buzzTypeJson = [
     {name:'出售',val:'1'},
@@ -258,11 +308,11 @@ export class AddhousePage {
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
-       this.toast.msg('录入成功!');
+       this.toast.msg('录入成功');
 
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
-          this.openWin(HousedetailPage);
+          this.openWin(HousingPage);
           // this.navCtrl.setRoot(HousingPage);
         },1000);
 

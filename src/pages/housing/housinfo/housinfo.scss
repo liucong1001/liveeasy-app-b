@@ -117,15 +117,33 @@ page-housinfo {
     }
   }
   .describe{
-    padding:15px 15px 8px;
-  }
-  .wt{
-    padding: 2px 15px 8px;
-    div:first-child{
-      font-size: 1.6rem;
-      margin-bottom: 8px;
+    padding:5px 15px 8px;
+    .item-ios.item-block .item-inner{
+      border: 0;
     }
-  }
+    //文本行
+    .clamp{
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 25px;
+    }
+    button{
+      min-height: 3.6rem;
+      .activated{
+        background: none !important;
+      }
+    }
+    .wt{
+      padding: 2px 15px 8px;
+      div:first-child{
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+    }
+}
   ion-footer{
     background: #fff;
     padding: 28px 0;
@@ -158,14 +176,4 @@ page-housinfo {
   .infoPadding{
     padding-left: 8px!important;
   }
-
-  //文本行
-.clamp{
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 }

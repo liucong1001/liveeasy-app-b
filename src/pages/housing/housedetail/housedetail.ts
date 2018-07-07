@@ -375,7 +375,7 @@ export class HousedetailPage {
         this.toast.msg('修改成功!');
         setTimeout(()=>{
           // this.navCtrl.setRoot(HousingPage);
-          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+          this.openWin(HousinfoPage,{propertyId:this.propertyid});
         },500);
       }else{
         this.toast.error('修改失败！');

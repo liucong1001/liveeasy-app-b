@@ -185,15 +185,16 @@
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主电话1</ion-label>
-        <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
+        <ion-input type="number" pattern="[0-9]*"  placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="text" placeholder="可选填" formControlName="contactInfo2" >
+        <ion-input type="number" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
     </ion-list>
 
     <ion-list (click)="clickIntention()">
@@ -282,7 +283,7 @@
           <!--<button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>-->
         <!--</ion-col>-->
         <ion-col col-12>
-          <button ion-button class="redact" color="light" (click)="save()" [disabled]="lockStatus">确认修改</button>
+          <button ion-button full color="danger" class="radius" (click)="save()" [disabled]="lockStatus">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>
