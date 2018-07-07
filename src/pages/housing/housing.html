@@ -1,7 +1,7 @@
 <ion-header id="propertyHeader">
   <!---->
   <ion-navbar #navbar>
-    <ion-searchbar  #searchBar placeholder="楼盘搜索" [(ngModel)]="floorName"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
+    <ion-searchbar  #searchBar placeholder="请输入小区或商圈名" [(ngModel)]="floorName"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>
 

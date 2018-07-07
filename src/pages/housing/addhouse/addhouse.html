@@ -27,13 +27,13 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
+        <ion-input type="number" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
+          <ion-input type="number" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
@@ -41,7 +41,7 @@
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="[0-9]*" placeholder="请输入数字" formControlName="houseNo" class="p0">
+        <ion-input type="number" placeholder="请输入数字" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.houseNo"  [control]="form.get('houseNo')"  ></valid-error>
@@ -50,7 +50,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字">
+          <ion-input type="number"  formControlName="spaceSize" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -218,7 +218,7 @@
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
-        <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
+        <ion-label>房屋用途</ion-label>
         <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭">
           <ion-option value="{{x.val}}" *ngFor="let x of buzzTypeJson">{{x.name}}</ion-option>
         </ion-select>

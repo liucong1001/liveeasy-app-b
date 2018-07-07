@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the MdetailsPage page.
@@ -17,7 +18,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 export class MdetailsPage {
   @ViewChild(Navbar) navBar: Navbar;
   news:object;
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController,public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams) {
    this.news = navParams.get('news');
@@ -39,5 +40,9 @@ export class MdetailsPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
 }

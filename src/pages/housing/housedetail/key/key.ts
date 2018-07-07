@@ -69,12 +69,17 @@ export class KeyPage {
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
   }
-
+//进入页面后执行
+  ionViewDidEnter(){
+    this.navBar.backButtonClick = () => {
+      this.openWin(HousedetailPage,{propertyId:this.propertyid});
+    };
+  }
 
   form:FormGroup =this.fb.group({
     keySn:['',Validators.required],
     keyAddress:['',Validators.required],
-    keyDlgtFilePics:['',Validators.required],
+    keyDlgtFilePics:[''],
   });
 //上传钥匙信息
   goYc(){
@@ -154,5 +159,17 @@ export class KeyPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

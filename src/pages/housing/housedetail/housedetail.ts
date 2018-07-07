@@ -87,10 +87,13 @@ export class HousedetailPage {
     this.form.value.tags= this.tagsSum(value);
   };
   ionViewWillEnter() {
+    this.navBar.backButtonClick = () => {
+      this.openWin(HousinfoPage,{propertyId:this.propertyid});
+    };
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });

@@ -93,8 +93,14 @@ export class LetteratorneyPage {
 
   }
 
+  //进入页面后执行
+  ionViewDidEnter(){
+    this.navBar.backButtonClick = () => {
+      this.openWin(HousedetailPage,{propertyId:this.propertyid});
+    };
+  }
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
     console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
@@ -104,7 +110,7 @@ export class LetteratorneyPage {
     delegateDocSn:['',[Validators.required, Validators.pattern(/^[\da-zA-Z]+$/)]], //委托书编号
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:[''],//结束时间
-    delegateDocPics:['',Validators.required],//委托书图片
+    delegateDocPics:[''],//委托书图片
     delegateStyle:[''] //状态
   });
 
@@ -226,5 +232,17 @@ export class LetteratorneyPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

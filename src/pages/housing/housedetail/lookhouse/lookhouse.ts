@@ -9,6 +9,7 @@ import {ToastComponent} from "../../../../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {HousingPage} from "../../housing";
 
 
 /**
@@ -77,7 +78,7 @@ export class LookhousePage {
 
  imgData = [];
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+
     this.imgHeader = this.configProvider.set().img;
   }
 
@@ -134,6 +135,13 @@ export class LookhousePage {
      }
   }
 
+  //进入页面后执行
+  ionViewDidEnter(){
+    this.navBar.backButtonClick = () => {
+      this.openWin(HousedetailPage,{propertyId:this.data.propertyId});
+    };
+  }
+
   save(){
     this.imgData = [];
     this.addArry(this.menPaiImg,this.imgData);
@@ -151,7 +159,7 @@ export class LookhousePage {
           this.toast.msg('上传成功!');
           setTimeout(()=>{
             this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
-          });
+          },100);
 
         }else {
           this.toast.error('上传失败!');
@@ -202,5 +210,17 @@ export class LookhousePage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

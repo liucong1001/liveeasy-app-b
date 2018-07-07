@@ -6,7 +6,7 @@
   <ion-content>
     <!-- 实勘审核中不能修改 -->
     <form>
-      <div class="bgWhite p10" >
+      <div class="bgWhite" >
         <font color="red" *ngIf="showTip">
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           &nbsp;录入房源后24小时内不可上传实勘图!</font>
@@ -27,37 +27,37 @@
 
       <ion-list class="m10" *ngIf="edit">
         <div class="attorneyPic bgWhite">
-          <span>门牌号:{{this.createdTime| date:'yyyy年MM月dd日'}}</span>
+          <span class="lookHeadLine">门牌号：</span>
           <upload [useDir]="useDir" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite">
-          <span>户型图</span>
+          <span class="lookHeadLine">户型图：</span>
           <upload [useDir]="useDir" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
-          <span>客厅图</span>
+          <span class="lookHeadLine">客厅图：</span>
           <upload [useDir]="useDir" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
-          <span>卧室图</span>
+          <span class="lookHeadLine">卧室图：</span>
           <upload [useDir]="useDir" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
-          <span>厨房图</span>
+          <span class="lookHeadLine">厨房图：</span>
           <upload [useDir]="useDir" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
-          <span>卫生间图</span>
+          <span class="lookHeadLine">卫生间图：</span>
           <upload [useDir]="useDir" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
-          <span>其他图</span>
+          <span class="lookHeadLine">其他图：</span>
           <upload [useDir]="useDir" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"></upload>
         </div>
         </ion-list>
       <!--[disabled]="form.invalid"-->
       <div class="p15" [hidden]="showTip">
-        <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">修改图片</button>
+        <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">确认修改</button>
         <button ion-button full color="danger" class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
       </div>
     </form>

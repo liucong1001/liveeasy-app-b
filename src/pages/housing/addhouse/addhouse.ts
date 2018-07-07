@@ -12,6 +12,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
+import {HousedetailPage} from "../housedetail/housedetail";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -106,11 +107,6 @@ export class AddhousePage {
       this.toast.msg('成功操作');
       this.toast.error('失败操作');
     }
-
-  test(){
-      console.log('测试',this.form.value);
-   }
-
  //表单验证消息
     errors={
         buildingNo:[
@@ -266,8 +262,9 @@ export class AddhousePage {
 
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
-          this.navCtrl.setRoot(HousingPage);
-        });
+          this.openWin(HousedetailPage);
+          // this.navCtrl.setRoot(HousingPage);
+        },1000);
 
       }else {
         this.toast.error('录入失败！');
@@ -333,6 +330,19 @@ export class AddhousePage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 }
