@@ -57,10 +57,10 @@
       <span *ngIf="spaceSizeName">/{{spaceSizeName}}</span>
       <span  *ngIf="decorationName">/{{decorationName}}</span>
       <span  *ngIf="buildingTypeName">/{{buildingTypeName}}</span>
+      <span  *ngIf="buzzTypeName">/{{buzzTypeName}}</span>
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
-
       <ion-col col-12 tappable (click)="goHouseDetail(item)" >
         <ion-row>
           <ion-col col-4 >
