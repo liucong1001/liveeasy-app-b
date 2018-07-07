@@ -14,6 +14,8 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {RecordPage} from "../housedetail/record/record";
 import {HomePage} from "../../home/home";
 import {HousingPage} from "../housing";
+import {ToastComponent} from "../../../components/toast/toast";
+import {DescribePage} from "./describe/describe";
 /**
 房源详情页面
  */
@@ -34,13 +36,14 @@ export class HousinfoPage {
   @ViewChild('navbar') navBar: Navbar;
   @ViewChild(Content) content: Content;
   classFlag=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+  constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,
               ) {
     // this.data=navParams.get('propertyId');
     // console.log(this.data);
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
+
   }
   scrollHandler(event) {
     // console.log(event)
@@ -52,6 +55,7 @@ export class HousinfoPage {
     }
   }
 flag=false;
+  fyDescribe=false;
 
   @ViewChild('mySlider') slider:Slides;
     mySlideOptions={
@@ -206,7 +210,9 @@ flag=false;
       return data.split(",");
     }
   }
-
+  tip(){
+    this.toast.msg('此功能暂未开发');
+  }
   //房源标签code转换为name
   tagName(code) {
     for (var i in this.tagsListPage) {
@@ -266,8 +272,12 @@ flag=false;
     return perPrice.toFixed(2);
   }
 
-
-
+  //房源描述
+  describes(){
+    this.openWin(DescribePage,{
+    item:this.houseData,
+    })
+  }
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

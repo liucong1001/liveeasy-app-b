@@ -66,7 +66,12 @@ export class HousedetailPage {
   selectJx:any;
   selectDt:any;
   selectYt:any;
-  selectSex:any
+  selectSex:any;
+  selectS:any;
+  selectT:any;
+  selectC:any;
+  selectW:any;
+  selectY:any;
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
@@ -91,6 +96,21 @@ export class HousedetailPage {
     };
     this.selectSex={
       title:'业主性别'
+    }
+    this.selectS={
+      title:'室'
+    }
+    this.selectT={
+      title:'厅'
+    }
+    this.selectC={
+      title:'厨'
+    }
+    this.selectW={
+      title:'卫'
+    }
+    this.selectY={
+      title:'阳'
     }
   }
 

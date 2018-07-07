@@ -13,6 +13,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
 import {HousedetailPage} from "../housedetail/housedetail";
+import {HomePage} from "../../home/home";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -42,7 +43,12 @@ export class AddhousePage {
   selectJx:any;
   selectDt:any;
   selectYt:any;
-  selectSex:any
+  selectSex:any;
+  selectS:any;
+  selectT:any;
+  selectC:any;
+  selectW:any;
+  selectY:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
               public actionSheetCtrl: ActionSheetController,
@@ -69,6 +75,24 @@ export class AddhousePage {
     this.selectSex={
       title:'业主性别'
     }
+
+
+    this.selectS={
+      title:'室'
+    }
+    this.selectT={
+      title:'厅'
+    }
+    this.selectC={
+      title:'厨'
+    }
+    this.selectW={
+      title:'卫'
+    }
+    this.selectY={
+      title:'阳'
+    }
+
 
      //楼盘列表
 
@@ -188,6 +212,11 @@ export class AddhousePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddhousePage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  ionViewDidEnter(){
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.setRoot(HousingPage);
+    };
   }
 
   /**

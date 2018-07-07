@@ -4,6 +4,7 @@ import { HousinfoPage } from './housinfo';
 import {HousmorePageModule} from "./housmore/housmore.module";
 import {ComponentsModule} from "../../../components/components.module";
 import {DirectivesModule} from "../../../directives/directives.module";
+import {DescribePageModule} from "./describe/describe.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {DirectivesModule} from "../../../directives/directives.module";
   imports: [
     IonicPageModule.forChild(HousinfoPage),
     HousmorePageModule,
-    ComponentsModule,DirectivesModule
+    ComponentsModule,DirectivesModule,
+    DescribePageModule
   ],
 })
 export class HousinfoPageModule {}

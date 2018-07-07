@@ -8,9 +8,10 @@
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
 
-      <span [ngClass]="{color:this.searchDict !='不限'}">{{ searchArea}} </span>
+      <span [ngClass]="{color:this.searchArea !='不限',esRow:this.searchArea}" style="width: 30px;">{{ searchArea}} </span>
       <span *ngIf="!searchArea">区域</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict!='' && this.searchDict !='不限'}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea" [ngClass]="{color: this.searchArea !='不限' && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
@@ -227,7 +228,7 @@
 
   <!-- 价格 -->
   <div class="lists houseType" [hidden]="!housingEstate" >
-    <ion-list radio-group class="scrollC"  [(ngModel)]="price" style="height: 207px">
+    <ion-list radio-group class="scrollC updateLine"  [(ngModel)]="price" style="height: 207px">
       <ion-item *ngFor="let y of hasElevatorJson"  class="tc" >
         <ion-label *ngIf="y.name=='不限'">{{y.name}}</ion-label>
         <ion-label *ngIf="y.name!='不限'">{{y.start}}<span *ngIf="y.val ==1">万以下</span><span *ngIf="y.val ==9">以上</span><span *ngIf="y.end">{{-y.end}}万</span></ion-label>
@@ -236,9 +237,8 @@
     </ion-list>
     <ion-list style="height: 166px;">
       <ion-row>
-        <ion-col col-12 class="middleGreen tc" style="margin-top: 10px">
-          {{structure.lower}}
-          -<span *ngIf="structure.upper != 5000">{{structure.upper}}万</span><span *ngIf="structure.upper == 5000">不限</span>
+        <ion-col col-12 class="middleGreen tc" style="border-top: 1px solid #f3f3f3;padding: 10px 0">
+          {{structure.lower}}&nbsp;—&nbsp;<span *ngIf="structure.upper != 5000">{{structure.upper}}万</span><span *ngIf="structure.upper == 5000">不限</span>
         </ion-col>
       </ion-row>
       <ion-item>

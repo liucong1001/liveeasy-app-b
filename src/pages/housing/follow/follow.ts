@@ -8,6 +8,7 @@ import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {HousedetailPage} from "../housedetail/housedetail";
 /**
  * Generated class for the FollowPage page.
  *
@@ -66,7 +67,10 @@ export class FollowPage {
         console.log(res);
         if(res.success){
           this.toast.msg('跟进成功!');
-          this.navCtrl.pop()
+          // this.navCtrl.pop()
+          setTimeout(()=>{
+            this.navCtrl.pop();
+          },1000);
         }else{
           this.toast.error('跟进失败！');
         }

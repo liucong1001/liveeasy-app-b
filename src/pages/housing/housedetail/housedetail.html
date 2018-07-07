@@ -94,17 +94,17 @@
 
       <ion-list (click)="clickHx()">
         <button ion-item class="pl12" *ngIf="HxRight">
-          <font>户型</font>
+          <font>户型<i class="text-danger">*</i></font>
         </button>
         <ion-item class="pl12" *ngIf="HxDown" >
-          <font>户型</font>
+          <font>户型<i class="text-danger">*</i></font>
           <i class="iconfont icon-xia"></i>
         </ion-item>
       </ion-list>
       <ion-list *ngIf="showHx">
         <ion-item class="pl12">
-          <ion-label>室</ion-label>
-          <ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'">
+          <ion-label>室<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'" [selectOptions]="selectS">
             <ion-option value="1">一室</ion-option>
             <ion-option value="2">二室</ion-option>
             <ion-option value="3">三室</ion-option>
@@ -113,8 +113,8 @@
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>厅</ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'">
+          <ion-label>厅<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'" [selectOptions]="selectT">
             <ion-option value="1">1厅</ion-option>
             <ion-option value="2">2厅</ion-option>
             <ion-option value="3">3厅</ion-option>
@@ -123,8 +123,8 @@
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>卫</ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'">
+          <ion-label>卫<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'" [selectOptions]="selectW">
             <ion-option value="1">1卫</ion-option>
             <ion-option value="2">2卫</ion-option>
             <ion-option value="3">3卫</ion-option>
@@ -133,8 +133,8 @@
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>厨</ion-label>
-          <ion-select okText="确定"  cancelText="关闭"   formControlName="kitchens"  [placeholder]="'请选择'">
+          <ion-label>厨<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定"  cancelText="关闭"   formControlName="kitchens"  [placeholder]="'请选择'" [selectOptions]="selectC">
             <ion-option value="1">一厨</ion-option>
             <ion-option value="2">二厨</ion-option>
             <ion-option value="3">三厨</ion-option>
@@ -143,8 +143,8 @@
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
-          <ion-label>阳</ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'">
+          <ion-label>阳<i class="text-danger">*</i></ion-label>
+          <ion-select okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'" [selectOptions]="selectY">
             <ion-option value="1">一阳</ion-option>
             <ion-option value="2">二阳</ion-option>
             <ion-option value="3">三阳</ion-option>
@@ -287,13 +287,13 @@
       <!--</button>-->
     </ion-list>
     <ion-grid>
-      <ion-row class="txt-center">
+      <ion-row>
         <!--<ion-col col-6>-->
           <!--&lt;!&ndash;<button ion-button full color="danger" *ngIf="follow" class="radius" (click)="goFollow()">跟进</button>&ndash;&gt;-->
           <!--<button ion-button full color="danger" class="radius" (click)="goFollow()">跟进</button>-->
         <!--</ion-col>-->
         <ion-col col-12>
-          <button ion-button full color="danger" class="radius" (click)="save()" [disabled]="lockStatus">确认修改</button>
+          <button ion-button class="status" full color="danger" class="radius" (click)="save()" [disabled]="lockStatus">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>

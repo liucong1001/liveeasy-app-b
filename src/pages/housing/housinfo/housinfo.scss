@@ -1,15 +1,12 @@
 page-housinfo {
   .defaults{
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   ion-header{
     ion-icon{
       font-size: 2.5rem !important;
       margin: 0 5px;
     }
-  }
-  .activated{
-    background: #1ab394 !important;
   }
   .tips a{
     font-size: 1.4rem;
@@ -123,7 +120,7 @@ page-housinfo {
     }
     //文本行
     .clamp{
-      text-overflow: ellipsis;
+
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -156,10 +153,13 @@ page-housinfo {
         margin:3px 0;
       }
     }
-    .edit{
+    .follows{
       background:none;
       color:#1ab394;
       border: 1px solid #1ab394;
+    }
+    .compile.activated{
+      background: #1ab394 !important;
     }
   }
   .houseInfo{
@@ -172,7 +172,7 @@ page-housinfo {
     width: 1px;
     background: #f3f3f3;
     right: 6px;
-    top:5px;
+    top:6px;
 
   }
   .infoPadding{

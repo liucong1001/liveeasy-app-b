@@ -5,6 +5,7 @@ import {LocalStorageProvider} from "../../../../providers/local-storage/local-st
 import {HttpClient} from '@angular/common/http';
 import {ConfigProvider} from "../../../../providers/config/config";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {AddhousePage} from "../../addhouse/addhouse";
 /**
  * Generated class for the RecordPage page.
  *
@@ -65,6 +66,9 @@ export class RecordPage {
   pic(data){
     return JSON.parse(data)[0].thumbnail
   }
+  addHouse() {
+    this.openWin(AddhousePage);
+  }
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
@@ -78,6 +82,18 @@ export class RecordPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
+  }
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
   }
 }
 

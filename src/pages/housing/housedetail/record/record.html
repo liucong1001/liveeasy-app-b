@@ -2,18 +2,24 @@
 
   <ion-navbar color="first">
     <ion-title>记录</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only tappable (click)="tip()">
+        <ion-icon name="add" class="adds" tappable (click)="addHouse()" style="color: #fff"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-grid>
+  <ion-grid  class="bgWhite">
     <ion-row>
-      <ion-col class="tc" [ngClass]="{'active-tab':index==0}" (click)="goToSlide(0)">
+      <ion-col class="tc menuPad" [ngClass]="{'active-tab':index==0}" (click)="goToSlide(0)">
         跟进记录
       </ion-col>
-      <ion-col class="tc" [ngClass]="{'active-tab':index==1}" (click)="goToSlide(1)">
+      <ion-col class="tc menuPad" [ngClass]="{'active-tab':index==1}" (click)="goToSlide(1)">
           空看记录
       </ion-col>
     </ion-row>

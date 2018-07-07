@@ -1,5 +1,10 @@
 //------------
 page-housing {
+  .updateLine{
+    .item-ios.item-block .item-inner{
+      border: 0;
+    }
+  }
   .activated{
     background: none !important;
   }
