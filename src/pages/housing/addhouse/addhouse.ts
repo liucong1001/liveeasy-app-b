@@ -83,12 +83,12 @@ export class AddhousePage {
       estate:[''],//楼盘
       estateName:[''],
       estateId:[''],
-      buildingNo:['',Validators.required], //楼栋号
+      buildingNo:['',[Validators.required,Validators.maxLength(5)]], //楼栋号
       unitNo:['',Validators.required],//单元号
       floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
-      spaceSize:['',Validators.required,],//建筑面积
-      innerSpaceSize:['',],//套内面积
+      spaceSize:['',[Validators.required,Validators.maxLength(10)]],//建筑面积
+      innerSpaceSize:[''],//套内面积
       propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
@@ -132,6 +132,11 @@ export class AddhousePage {
       this.toast.msg('成功操作');
       this.toast.error('失败操作');
     }
+
+  test(){
+      console.log('测试',this.form.value);
+   }
+
  //表单验证消息
     errors={
         buildingNo:[
@@ -143,6 +148,10 @@ export class AddhousePage {
             new ErrorMessage('required','单元号必须要填写！'),
             new ErrorMessage('pattern','请填写中文或英文'),
         ],
+      spaceSize:[
+        new ErrorMessage('required','建筑必须要填写！'),
+        new ErrorMessage('maxLength','超出长度'),
+      ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
             // new ErrorMessage('maxLength','楼层名称太长了'),

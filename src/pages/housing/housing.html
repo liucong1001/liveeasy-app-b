@@ -8,8 +8,8 @@
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
 
-      <span [ngClass]="{color:this.searchDict !='不限'}">{{searchDict}}{{ searchArea}} </span>
-      <span *ngIf="!searchDict">区域</span>
+      <span [ngClass]="{color:this.searchDict !='不限'}">{{ searchArea}} </span>
+      <span *ngIf="!searchArea">区域</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict!='' && this.searchDict !='不限'}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
@@ -200,7 +200,7 @@
             </ion-item>
             <ion-item *ngFor=" let items of district;let i = index" >
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.id}}" (ionSelect)="search()"></ion-radio>
+              <ion-radio value="{{items.id}}" (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
           <div *ngIf="hTips">暂无该地区！</div>

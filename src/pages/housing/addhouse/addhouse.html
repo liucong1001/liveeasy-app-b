@@ -55,6 +55,9 @@
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <div *ngIf="form.value.spaceSize>1000000000" class="valid-error">
+        <p>*超出长度!</p>
+      </div>
       <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
@@ -63,6 +66,9 @@
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
+        <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
+          <p>*超出长度!</p>
+        </div>
       </div>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>

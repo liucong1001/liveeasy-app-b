@@ -208,6 +208,7 @@ export class HousingPage {
   bx(){
     console.log('参数',this.params);
     this.params.area ='';
+    this.searchArea = '不限';
     this.search();
   }
   //电梯
@@ -222,10 +223,12 @@ export class HousingPage {
       this.params.districtCode = '';
       this.params.estateId = '';
       this.params.area = '';
+      this.searchArea = '不限';
       this.search();
     }
 
-    this.searchDict = item.name;
+    // this.searchDict = item.name;
+
 
     this.selected = item;
     this.aeraShow=false;
@@ -234,6 +237,7 @@ export class HousingPage {
     this.params.districtCode = item.code;
     this.propertyProvider.search2(item.id).then(res => {
       this.district=res.data;
+      console.log('asdsd',this.district);
       if(this.district == undefined){
           // alert('暂无该地区!')
         this.hTips=true
@@ -667,18 +671,15 @@ export class HousingPage {
   ends:any;
   structure:any = {lower: 0, upper:5000};
   onChange(ev:any) {
-    console.log(this.starts,this.ends)
-
     this.params.propertyPriceStart=this.structure.lower.toString();
     this.params.propertyPriceEnd=this.structure.upper.toString();
-    // console.log('Changed', this.structure,'搜索',this.searchMoreData);
   }
+
   selectPrice(){
-    console.log('交割',this.price)
     this.time=this.elevatorPipe(this.price);
     this.starts=this.time.start;
     this.ends=this.time.end;
-    console.log(this.ends)
+    console.log(this.ends);
     this.params.propertyPriceStart=this.starts;
     this.params.propertyPriceEnd=this.ends;
     this.search();
@@ -748,6 +749,11 @@ export class HousingPage {
         return this.cxJSON[i].name;
       }
     }
+  }
+
+  selectArea(item){
+     this.searchArea= item.name;
+    this.search();
   }
 
 
