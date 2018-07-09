@@ -1,12 +1,8 @@
 page-housedetail{
-  status.activated{
-    background: #1ab394 !important;
+  .button-ios-danger.activated{
+    background-color: #1ab394 !important;
   }
 }
-.button-ios-danger.activated{
-  background: #1ab394;
-}
-
 .button-ios-danger{
   background: #1ab394;
 }
@@ -14,13 +10,6 @@ page-housedetail{
   background: red !important;
   color: #fff !important;
 }
-//.records{
-//  position: absolute;
-//  right: 17px;
-//  top: 13px;
-//  font-size: 16px;
-//  color: #fff;
-//}
 .redact{
     background: none;
     color: #1ab394;

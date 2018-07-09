@@ -46,7 +46,7 @@ export class HousinfoPage {
 
   }
   scrollHandler(event) {
-    // console.log(event)
+
     if (this.content.scrollTop >= 10){
       // alert(2)
       this.classFlag=true;

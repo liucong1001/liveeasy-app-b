@@ -61,13 +61,12 @@ export class RecordPage {
     this.index = index;
     // console.log(index)
   }
-
+  addHouse() {
+    this.openWin(AddhousePage);
+  }
 
   pic(data){
     return JSON.parse(data)[0].thumbnail
-  }
-  addHouse() {
-    this.openWin(AddhousePage);
   }
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

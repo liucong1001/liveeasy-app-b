@@ -21,7 +21,7 @@ export class DescribePage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
     this.propertydesc=navParams.get('item').propertyDesc;
-    console.log(this.propertydesc)
+    // console.log(this.propertydesc)
   }
 
   ionViewDidLoad() {

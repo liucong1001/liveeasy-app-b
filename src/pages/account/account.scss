@@ -1,4 +1,8 @@
-page-account .logos{
-
-  padding:50px 0 65px;
+page-account {
+  .logos {
+    padding: 50px 0 65px;
+  }
+  .button-ios-danger.activated{
+    background-color: #1ab394 !important;
+  }
 }

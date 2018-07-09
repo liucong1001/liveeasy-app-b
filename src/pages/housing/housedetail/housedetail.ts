@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar, Content} from 'ionic-angular';
 import {SearchhousePage} from "./searchhouse/searchhouse";
 import {RecordPage} from "./record/record";
 import { LookhousePage } from './lookhouse/lookhouse';
@@ -114,7 +114,6 @@ export class HousedetailPage {
     }
   }
 
-
   //房源标签处理
   tagsSum(data){
     var str =  data.toString();
@@ -132,7 +131,7 @@ export class HousedetailPage {
   };
   ionViewWillEnter() {
     this.navBar.backButtonClick = () => {
-      this.openWin(HousinfoPage,{propertyId:this.propertyid});
+      this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
     };
     this.statusBar.styleLightContent();
   }

@@ -67,18 +67,18 @@
           <ion-col col-4 >
             <img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"
                   [lazyLoad]="imgHeader+pic(item?.propertyPics)"
-                  alt="" width="90%" height="90px">
+                  alt="" width="95%" height="70">
           </ion-col>
 
           <ion-col col-8>
-            <div class="ellipsis">
+            <div class="clamp">
               <font size="3">
                 {{item.estateName}}
                 {{item.bedrooms}}室
                 {{item.halls}}厅
               </font>
             </div>
-            <div class="tips" [ngClass]="{uDis:item.tagsStr}" >
+            <div class="tips" [ngClass]="{uDis:item.tagsStr}" style="margin-top: 2px ">
               <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5">{{tagName(x)}}</a>
             </div>
             <!--<p class="m5 ellipsis" >-->
@@ -89,7 +89,7 @@
             <!--</p>-->
 
             <ion-row>
-              <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 2px 0">
+              <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 3px 0">
                 <span>{{item.bedrooms}}室{{item.halls}}厅</span>
                 <span>/&nbsp;{{item.spaceSize}}㎡</span>
                 <span *ngIf="item.hasElevator !=0">/&nbsp;{{cxPipe(item.hasElevator)}}</span>
@@ -97,7 +97,7 @@
               </ion-col>
               <!--*ngIf="!tagPipe(item.tagsStr)"-->
 
-              <ion-col col-12 class="p0" style="margin: 2px 0">
+              <ion-col col-12 class="p0">
                 <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>
                 <span class="unitPrice" *ngIf="item.propertyPrice!=0"> {{item.propertyPriceUnit==1?'万':'元'}}</span>
                 <span class="errorPrice"   *ngIf="item.propertyPrice==0">价格异常</span>
@@ -121,13 +121,13 @@
       <ion-col col-12 class="houseStatus">
         <ion-row>
           <ion-col col-4 class="tc" tappable (click)="goFollow(item)">
-            <a>跟进</a>
+            <a class="fWeight">跟进</a>
           </ion-col>
           <ion-col col-4 class="tc" tappable (click)="goAddLook(item)">
-            <a>带看</a>
+            <a class="fWeight">带看</a>
           </ion-col>
           <ion-col col-4 class="tc" tappable (click)="goCloseHouse(item)">
-            <a>关闭</a>
+            <a class="fWeight">关闭</a>
           </ion-col>
         </ion-row>
       </ion-col>

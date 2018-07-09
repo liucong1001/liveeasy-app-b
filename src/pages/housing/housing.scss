@@ -1,5 +1,14 @@
 //------------
 page-housing {
+  .clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .fWeight{
+    font-weight: 700;
+  }
   .updateLine{
     .item-ios.item-block .item-inner{
       border: 0;
@@ -62,15 +71,7 @@ page-housing {
   }
 
 }
-
-  //.scroll-contentHome{
-  //  bottom:0px;
-  //}
-
 }
-
-
-
 .uDis{
   height: 25px;
   overflow: hidden;
