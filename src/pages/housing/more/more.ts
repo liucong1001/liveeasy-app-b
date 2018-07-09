@@ -132,6 +132,13 @@ export class MorePage {
     {name:'精装',val:'3'},
     {name:'豪装',val:'4'},
   ];
+  //楼层
+  floorJson = [
+    {name:'地下',val:'-1'},
+    {name:'底层',val:'1'},
+    {name:'中层',val:'2'},
+    {name:'高层',val:'3'},
+  ];
   //建筑类型
   buildingTypeJson=[
     {name:'全部',val:''},
@@ -144,7 +151,7 @@ export class MorePage {
   buzzTypeJson = [
     {name:'全部',val:''},
     {name:'出售',val:'1'},
-    {name:'售租',val:'2'},
+    {name:'出租',val:'2'},
     {name:'租售',val:'3'},
   ];
   spaceSizeJson = [
@@ -275,7 +282,14 @@ export class MorePage {
       return this.selected === item;
     }
   }
-
+//楼层
+  isActive8(item){
+    if(item.val==this.spaceSize){
+      return  true;
+    }else{
+      return this.selected === item;
+    }
+  }
 
   reset(){
      this.tagsList=this.localStorageProvider.get('tagsList');

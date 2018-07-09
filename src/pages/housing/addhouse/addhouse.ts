@@ -239,7 +239,7 @@ export class AddhousePage {
    //房屋用途
   buzzTypeJson = [
     {name:'出售',val:'1'},
-    {name:'售租',val:'2'},
+    {name:'出租',val:'2'},
     {name:'租售',val:'3'},
   ];
 
