@@ -36,10 +36,10 @@
       <h4>建筑类型</h4>
       <a *ngFor="let i of buildingTypeJson;let index =index" [ngClass]="{'active': isActive5(i)}" tappable (click)="chosebuildingType(i)" [hidden]="index==0" >{{i.name}}</a>
     </div>
-    <div class="outer">
-      <h4>房屋用途</h4>
-      <a *ngFor="let i of buzzTypeJson;let index =index" [ngClass]="{'active': isActive6(i)}" tappable (click)="chosebuzzType(i)" [hidden]="index==0"  >{{i.name}}</a>
-    </div>
+    <!--<div class="outer">-->
+      <!--<h4>房屋用途</h4>-->
+      <!--<a *ngFor="let i of buzzTypeJson;let index =index" [ngClass]="{'active': isActive6(i)}" tappable (click)="chosebuzzType(i)" [hidden]="index==0"  >{{i.name}}</a>-->
+    <!--</div>-->
   <!--<div class="outer">-->
     <!--<h4>楼层</h4>-->
     <!--<a *ngFor="let i of floorJson;let index =index" [ngClass]="{'active': isActive8(i)}" tappable (click)="chosedecoration(i)" [hidden]="index==0" >{{i.name}}</a>-->
