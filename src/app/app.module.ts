@@ -69,6 +69,7 @@ import {HomePageModule} from "../pages/home/home.module";
 import {BackButtonProvider} from "../providers/common/backButton";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Keyboard } from '@ionic-native/keyboard';
+import { PermissionProvider } from '../providers/permission/permission';
 
 
 
@@ -145,6 +146,7 @@ import { Keyboard } from '@ionic-native/keyboard';
         provide: HAMMER_GESTURE_CONFIG,
         useClass: ionicGalleryModal.GalleryModalHammerConfig,
       },
+      PermissionProvider,
 
     ]
 })

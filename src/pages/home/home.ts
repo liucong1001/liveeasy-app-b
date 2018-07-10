@@ -11,6 +11,7 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {CheckhousePage} from "./checkhouse/checkhouse";
 import {HomesearchPage} from "./homesearch/homesearch";
+import {TabsPage}from "./../tabs/tabs";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -69,6 +70,12 @@ export class HomePage {
   search(){
     this.openWin(HomesearchPage,{floorName:this.floorName})
   }
+
+  gohomeSource(){
+    console.log('房源列表');
+    this.navCtrl.parent.select(1);
+  }
+
 //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
     let options: NativeTransitionOptions = {

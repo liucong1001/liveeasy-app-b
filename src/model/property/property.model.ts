@@ -13,6 +13,10 @@ export  class PropertyModel {
 
   convId:string;
   /**
+   * 房源编号后6位
+   */
+  convIdReq:string;
+  /**
    * 楼盘名称
    */
   estateName:string;

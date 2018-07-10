@@ -139,7 +139,11 @@ flag=false;
     this.navBar.backButtonClick = () => {
       if(this.navParams.get('notReloadPage')){
         this.navCtrl.pop();
+        this.navCtrl.parent.select(1);
       }else {
+        // this.navCtrl.push(HousingPage);
+        // this.navCtrl.popToRoot();
+         this.navCtrl.parent.select(1);
         this.navCtrl.setRoot(HousingPage);
       }
     };

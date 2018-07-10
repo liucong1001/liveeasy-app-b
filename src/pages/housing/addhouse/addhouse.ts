@@ -214,9 +214,9 @@ export class AddhousePage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   ionViewDidEnter(){
-    this.navBar.backButtonClick = () => {
-      this.navCtrl.setRoot(HousingPage);
-    };
+    // this.navBar.backButtonClick = () => {
+    //   this.navCtrl.setRoot(HousingPage);
+    // };
   }
 
   /**
@@ -339,8 +339,9 @@ export class AddhousePage {
 
         // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
+          // this.navCtrl.setR(HousingPage);
+          this.navCtrl.parent.select(1);
           this.navCtrl.setRoot(HousingPage);
-          // this.navCtrl.setRoot(HousingPage);
         },1000);
 
       }else {

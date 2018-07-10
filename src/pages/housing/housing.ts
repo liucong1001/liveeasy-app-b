@@ -342,7 +342,8 @@ export class HousingPage {
     this.renderer.setElementAttribute(input, 'disabled', 'true');
 
     this.navBar.backButtonClick = () => {
-      this.navCtrl.push(HomesearchPage);
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
     };
 
   }
@@ -519,6 +520,13 @@ export class HousingPage {
       } else {
         this.toast.defaultMsg('middle','暂无更新');
       }
+
+
+    }).catch(err=>{
+      if(err){
+        this.badHttp = true;
+        refresher.complete();
+      }
     });
   }
 
@@ -557,7 +565,7 @@ export class HousingPage {
     setTimeout(()=>{
       infiniteScroll.complete();
       if(this.currentPage==1){
-        this.currentPage=3
+        this.currentPage=4
       }else {
         this.currentPage++;
       }
