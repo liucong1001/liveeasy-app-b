@@ -5,7 +5,7 @@ import {HousmorePageModule} from "./housmore/housmore.module";
 import {ComponentsModule} from "../../../components/components.module";
 import {DirectivesModule} from "../../../directives/directives.module";
 import {DescribePageModule} from "./describe/describe.module";
-
+import {BaiduMapModule } from "angular2-baidu-map";
 @NgModule({
   declarations: [
     HousinfoPage,
@@ -14,7 +14,8 @@ import {DescribePageModule} from "./describe/describe.module";
     IonicPageModule.forChild(HousinfoPage),
     HousmorePageModule,
     ComponentsModule,DirectivesModule,
-    DescribePageModule
+    DescribePageModule,
+    BaiduMapModule,
   ],
 })
 export class HousinfoPageModule {}

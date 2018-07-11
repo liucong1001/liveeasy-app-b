@@ -70,7 +70,7 @@ import {BackButtonProvider} from "../providers/common/backButton";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Keyboard } from '@ionic-native/keyboard';
 import { PermissionProvider } from '../providers/permission/permission';
-
+import {BaiduMapModule } from "angular2-baidu-map";
 
 
 @NgModule({
@@ -104,6 +104,7 @@ import { PermissionProvider } from '../providers/permission/permission';
       }),
       ionicGalleryModal.GalleryModalModule,
       BrowserAnimationsModule,
+      BaiduMapModule.forRoot({ak:'8azVgQbZR9irKHBOsqMzi8CAT7l1gtjt'}),
     ],
     bootstrap: [IonicApp],
     providers: [
@@ -147,6 +148,7 @@ import { PermissionProvider } from '../providers/permission/permission';
         useClass: ionicGalleryModal.GalleryModalHammerConfig,
       },
       PermissionProvider,
+
 
     ]
 })

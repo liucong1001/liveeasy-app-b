@@ -16,6 +16,9 @@ import {HomePage} from "../../home/home";
 import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {DescribePage} from "./describe/describe";
+import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
+// import {BaiduMapModule } from "angular2-baidu-map";
+
 /**
 房源详情页面
  */
@@ -24,6 +27,13 @@ import {DescribePage} from "./describe/describe";
 @Component({
   selector: 'page-housinfo',
   templateUrl: 'housinfo.html',
+  styles: [`
+        baidu-map{
+            width: 100%;
+            height: 300px;
+            display: block;
+        }
+    `]
 })
 export class HousinfoPage {
   data:any;
@@ -36,6 +46,8 @@ export class HousinfoPage {
   @ViewChild('navbar') navBar: Navbar;
   @ViewChild(Content) content: Content;
   classFlag=false;
+  //百度地图
+  opts:any;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,public app: App
@@ -132,7 +144,55 @@ flag=false;
 
         }
     })
+
+    //baidu map
+    this.opts = {
+      // 地图中心坐标
+      center: {
+        longitude: 116.4177150000,
+        latitude: 40.0612540000
+      },
+      zoom: 17,
+      // 地图上的坐标
+      markers: [{
+        longitude: 116.4177150000,
+        latitude: 40.0612540000,
+        title: '华泰汽车集团',
+        content: '朝阳区立水桥',
+        autoDisplayInfoWindow: true
+      }],
+      geolocationCtrl: {
+        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_RIGHT
+      },
+      scaleCtrl: {
+        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT
+      },
+      overviewCtrl: {
+        isOpen: true
+      },
+      navCtrl: {
+        type: NavigationControlType.BMAP_NAVIGATION_CONTROL_LARGE
+      }
+    };
+
+    // this.offlineOpts = {
+    //   retryInterval: 5000,
+    //   txt: '没有网络'
+    // };
   }
+
+
+  // 刚加载加载地图信息
+  loadMap(e:any) {
+    console.log(e);
+  }
+
+  // 单机地图坐标, 打印信息
+  clickMarker(marker:any) {
+    console.log(marker);
+  }
+
+
 
   //进入页面后执行
   ionViewDidEnter(){
