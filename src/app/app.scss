@@ -263,3 +263,10 @@ textarea{
 .clear.activated{
   background: none !important;
 }
+//refresher
+.refresher-pulling-icon, .refresher-refreshing-icon{
+  font-size: 25px;
+}
+.refresher-pulling-text, .refresher-refreshing-text{
+  font-size: 14px;
+}

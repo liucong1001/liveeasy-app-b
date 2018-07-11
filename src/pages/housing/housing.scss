@@ -1,13 +1,14 @@
 //------------
 page-housing {
+.refreshTip{
+  padding: 10px;
+  background: #fff;
+}
   .clamp{
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-  .fWeight{
-    font-weight: 700;
   }
   .updateLine{
     .item-ios.item-block .item-inner{
@@ -49,6 +50,7 @@ page-housing {
   }
   .houseMenu{
     background: #fff;
+    border-bottom: 1px solid #f7f7f7;
   }
   .serInput {
     width:89%;
@@ -60,7 +62,7 @@ page-housing {
   }
   .scroll-content{
     top: 110px;
-   bottom: 55px;
+    bottom: 55px;
     margin: 0 !important;
     border-top: none !important;
   }

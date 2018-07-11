@@ -494,11 +494,18 @@ export class HousingPage {
   addHouse() {
     this.openWin(AddhousePage);
   }
-
+  num :any;
+  timer:any;
+  not=false;
+  haveData=false;
   //下拉刷新
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
-
+    console.log(refresher.deltaY)
+    if(refresher.pullingIcon !='arrow-dropdown'){
+      // alert(2);
+      refresher.pullingText='松开推荐'
+    }
     this.propertyProvider.pageSearch(1,this.params).then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
       this.totalRecords = res.data.totalRecords;
@@ -516,9 +523,28 @@ export class HousingPage {
       }
 
       if (newCount > 0 ) {
-        this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+        this.num=3;
+        this.haveData=true;
+        this.timer=setInterval(()=>{
+          this.num--;
+          if(this.num===0){
+            this.haveData=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
+        // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
       } else {
-        this.toast.defaultMsg('middle','暂无更新');
+        // this.toast.defaultMsg('middle','暂无更新');
+        this.not=true;
+        this.num=3;
+        this.timer=setInterval(()=>{
+          this.num--;
+          // console.log(this.num)
+          if(this.num===0){
+            this.not=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
       }
 
 
