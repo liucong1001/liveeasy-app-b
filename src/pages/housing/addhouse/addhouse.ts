@@ -99,6 +99,7 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
 
+    this.localStorageProvider.set('cxJSON',this.cxJSON);
   }
 
 
@@ -422,5 +423,19 @@ export class AddhousePage {
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
+
+  //朝向
+  cxJSON = [
+    {name:'东',val:'1'},
+    {name:'东南',val:'2'},
+    {name:'南',val:'3'},
+    {name:'西南',val:'4'},
+    {name:'西',val:'5'},
+    {name:'西北',val:'6'},
+    {name:'北',val:'7'},
+    {name:'东北',val:'8'},
+    {name:'南北',val:'9'},
+    {name:'东西',val:'10'},
+  ];
 
 }

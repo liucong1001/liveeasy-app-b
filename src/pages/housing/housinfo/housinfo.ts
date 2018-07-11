@@ -1,5 +1,5 @@
 import { Component,ViewChild,NgZone} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides,Content } from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App} from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -38,7 +38,7 @@ export class HousinfoPage {
   classFlag=false;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,public app: App
               ) {
     // this.data=navParams.get('propertyId');
     // console.log(this.data);
@@ -137,15 +137,33 @@ flag=false;
   //进入页面后执行
   ionViewDidEnter(){
     this.navBar.backButtonClick = () => {
-      if(this.navParams.get('notReloadPage')){
-        this.navCtrl.pop();
-        this.navCtrl.parent.select(1);
-      }else {
-        // this.navCtrl.push(HousingPage);
-        // this.navCtrl.popToRoot();
-         this.navCtrl.parent.select(1);
-        this.navCtrl.setRoot(HousingPage);
+      console.log('刷新reloadpage',this.navParams.get('notReloadPage'),);
+
+
+      if(this.app.getActiveNavs()[0]['index']==1){
+        if(this.navParams.get('notReloadPage')){
+          // this.navCtrl.pop();
+          this.navCtrl.parent.select(1);
+        }else {
+          // this.navCtrl.push(HousingPage);
+          // this.navCtrl.popToRoot();
+          this.navCtrl.parent.select(1);
+          this.navCtrl.setRoot(HousingPage);
+        }
       }
+      //从首页搜索楼盘进入
+      if(this.app.getActiveNavs()[0]['index']==0){
+        if(this.navParams.get('notReloadPage')){
+          this.navCtrl.pop();
+          // this.navCtrl.parent.select(1);
+        }else {
+          // this.navCtrl.push(HousingPage);
+          // this.navCtrl.popToRoot();
+          this.navCtrl.parent.select(1);
+          this.navCtrl.setRoot(HousingPage);
+        }
+      }
+
     };
   }
 
@@ -154,7 +172,7 @@ flag=false;
     {name:'塔楼',val:'1'},
     {name:'板楼',val:'2'},
     {name:'板塔结合',val:'3'},
-  ]
+  ];
 
   buildingTypePipe(data){
     for(var i in this.buildingTypeJson){
@@ -230,16 +248,15 @@ flag=false;
   cxJSON = [
     // {name:'全部',val:''},
     {name:'东',val:'1'},
-    {name:'南',val:'2'},
-    {name:'西',val:'3'},
-    {name:'北',val:'4'},
-    {name:'南北',val:'5'},
-    {name:'双南',val:'6'},
-    {name:'东西',val:'7'},
-    {name:'东南',val:'8'},
-    {name:'西南',val:'9'},
-    {name:'东北',val:'10'},
-    {name:'西北',val:'11'},
+    {name:'东南',val:'2'},
+    {name:'南',val:'3'},
+    {name:'西南',val:'4'},
+    {name:'西',val:'5'},
+    {name:'西北',val:'6'},
+    {name:'北',val:'7'},
+    {name:'东北',val:'8'},
+    {name:'南北',val:'9'},
+    {name:'东西',val:'10'},
   ];
 
   orentationPipe(data){

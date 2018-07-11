@@ -22,6 +22,7 @@ export class UploadComponent {
   @Input() position: string; //（例如：add）
   @Input() desc: string; //描述（例如：“门牌图”）
   @Input() max:number;
+  @Input() src:Array<any>;
   @Output() successEvent = new EventEmitter<any>();
   showTip = true;//是否展示引导上产框框
 
@@ -39,7 +40,22 @@ export class UploadComponent {
               private imagePicker:ImagePicker,private base64: Base64,public configProvider: ConfigProvider
   ) {
     this.imgHeader = this.configProvider.set().img;
+
+
   }
+
+  ngOnInit(){
+    for( var i in this.src ){
+      if(this.desc == this.src[i].desc){
+        this.imgData.push(this.src[i]);
+
+        this.successEvent.emit({item:this.src[i],data:this.imgData});
+      }
+    }
+    // console.log('组件init'+this.desc,this.imgData,'SRc',this.src);
+  }
+
+
   //触发调用事件
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

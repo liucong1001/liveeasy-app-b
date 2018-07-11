@@ -106,16 +106,15 @@ export class MorePage {
   cxJSON = [
     {name:'全部',val:''},
     {name:'东',val:'1'},
-    {name:'南',val:'2'},
-    {name:'西',val:'3'},
-    {name:'北',val:'4'},
-    {name:'南北',val:'5'},
-    {name:'双南',val:'6'},
-    {name:'东西',val:'7'},
-    {name:'东南',val:'8'},
-    {name:'西南',val:'9'},
-    {name:'东北',val:'10'},
-    {name:'西北',val:'11'},
+    {name:'东南',val:'2'},
+    {name:'南',val:'3'},
+    {name:'西南',val:'4'},
+    {name:'西',val:'5'},
+    {name:'西北',val:'6'},
+    {name:'北',val:'7'},
+    {name:'东北',val:'8'},
+    {name:'南北',val:'9'},
+    {name:'东西',val:'10'},
   ];
 
   //电梯

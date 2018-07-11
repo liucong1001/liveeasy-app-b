@@ -46,7 +46,7 @@ export class LookhousePage {
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,) {
     this.data = navParams.get('item');
-    // console.log('实勘详情',this.data,this.data.createdTime);
+    console.log('实勘详情',this.data);
 
     //获取时间
     function getOffsetDays(time1, time2) {
@@ -69,6 +69,7 @@ export class LookhousePage {
     // propertyPics
     if(this.data.propertyPics){
       this.imgJson = JSON.parse(this.data.propertyPics); //默认展示有图片
+      // console.log('有图片',this.imgJson);
     }else{
       this.edit = true;
     }
@@ -100,7 +101,7 @@ export class LookhousePage {
   keTinImg = [];
   keTin(event){
     console.log('客厅图',event);
-    this.imgData.push(event.pic);
+    // this.imgData.push(event.pic);
     this.keTinImg = event.data;
   }
   woShiImg = [];
@@ -143,14 +144,14 @@ export class LookhousePage {
   }
 
   save(){
-    this.imgData = [];
-    this.addArry(this.menPaiImg,this.imgData);
-    this.addArry(this.huxinImg,this.imgData);
-    this.addArry(this.keTinImg,this.imgData);
-    this.addArry(this.woShiImg,this.imgData);
-    this.addArry(this.chuFangImg,this.imgData);
-    this.addArry(this.woShenJianImg,this.imgData);
-    this.addArry(this.otherImg,this.imgData);
+    // this.imgData = [];
+    // this.addArry(this.menPaiImg,this.imgData);
+    // this.addArry(this.huxinImg,this.imgData);
+    // this.addArry(this.keTinImg,this.imgData);
+    // this.addArry(this.woShiImg,this.imgData);
+    // this.addArry(this.chuFangImg,this.imgData);
+    // this.addArry(this.woShenJianImg,this.imgData);
+    // this.addArry(this.otherImg,this.imgData);
     this.formData.arrPic =  JSON.stringify(this.imgData);
      console.log('提交',this.imgData,this.formData);
      this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
@@ -170,8 +171,34 @@ export class LookhousePage {
   }
 
   update(){
-      this.edit = true;
+      // this.edit = true;
+    this.imgData = [];
+    this.addArry(this.menPaiImg,this.imgData);
+    this.addArry(this.huxinImg,this.imgData);
+    this.addArry(this.keTinImg,this.imgData);
+    this.addArry(this.woShiImg,this.imgData);
+    this.addArry(this.chuFangImg,this.imgData);
+    this.addArry(this.woShenJianImg,this.imgData);
+    this.addArry(this.otherImg,this.imgData);
+    this.formData.arrPic =  JSON.stringify(this.imgData);
+    console.log('提交',this.imgData,this.formData);
+    this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
+      if(res.success){
+        console.log('成功返回的数据',res);
+        this.toast.msg('上传成功!');
+        setTimeout(()=>{
+          this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
+        });
+
+      }else {
+        this.toast.error('上传失败!');
+      }
+    },err=>{
+      this.toast.error('上传失败!');
+    })
+
   }
+
   textArrt =[];
   isShow(name){
     // var title = name;

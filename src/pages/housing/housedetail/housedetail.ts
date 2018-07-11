@@ -131,7 +131,7 @@ export class HousedetailPage {
   };
   ionViewWillEnter() {
     this.navBar.backButtonClick = () => {
-      this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+      this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
     };
     this.statusBar.styleLightContent();
   }

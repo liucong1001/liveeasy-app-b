@@ -93,10 +93,10 @@
               <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 3px 0">
                 <span>{{item.bedrooms}}室{{item.halls}}厅</span>
                 <span>/&nbsp;{{item.spaceSize}}㎡</span>
-                <span *ngIf="item.hasElevator !=0">/&nbsp;{{cxPipe(item.hasElevator)}}</span>
+                <span >/&nbsp;{{cxPipe(item.orientation)}}</span>
                 <span>/&nbsp;{{item.estateName}}</span>
               </ion-col>
-              <!--*ngIf="!tagPipe(item.tagsStr)"-->
+
 
               <ion-col col-12 class="p0">
                 <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>

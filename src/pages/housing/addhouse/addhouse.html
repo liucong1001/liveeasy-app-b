@@ -146,14 +146,7 @@
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectCz">
-          <ion-option value="1">东</ion-option>
-          <ion-option value="2">东南</ion-option>
-          <ion-option value="3">南</ion-option>
-          <ion-option value="4">西南</ion-option>
-          <ion-option value="5">西</ion-option>
-          <ion-option value="6">西北</ion-option>
-          <ion-option value="7">北</ion-option>
-          <ion-option value="8">东北</ion-option>
+          <ion-option *ngFor="let item of cxJSON"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">

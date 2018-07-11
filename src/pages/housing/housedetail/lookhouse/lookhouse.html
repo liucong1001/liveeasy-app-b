@@ -11,52 +11,50 @@
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           &nbsp;录入房源后24小时内不可上传实勘图!</font>
       </div>
-      <ion-list class="m10" *ngIf="!edit" >
-
+      <ion-list class="m10" *ngIf="!edit"  [hidden]="true">
         <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i = index" >
-
             <span>{{item.desc}}</span>
             <div>
               <img [src]="imgHeader+item.thumbnail" alt="" title="{{item.desc}}"  [imgGallery]="{data:imgJson,index:i}"
                    class="img_upload">
             </div>
-
         </div>
-
       </ion-list>
-
-      <ion-list class="m10" *ngIf="edit">
+      <!--*ngIf="edit"-->
+      <ion-list class="m10" >
         <div class="attorneyPic bgWhite">
           <span class="lookHeadLine">门牌号：</span>
-          <upload [useDir]="useDir" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
+          <!--[hidden] ='showTip'-->
+          <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite">
           <span class="lookHeadLine">户型图：</span>
-          <upload [useDir]="useDir" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">客厅图：</span>
-          <upload [useDir]="useDir" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)"></upload>
+          <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卧室图：</span>
-          <upload [useDir]="useDir" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">厨房图：</span>
-          <upload [useDir]="useDir" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)"></upload>
+          <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卫生间图：</span>
-          <upload [useDir]="useDir" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"></upload>
+          <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">其他图：</span>
-          <upload [useDir]="useDir" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"></upload>
         </div>
         </ion-list>
       <!--[disabled]="form.invalid"-->
-      <div class="p15" [hidden]="showTip">
+      <!--[hidden]="showTip"-->
+      <div class="p15" >
         <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">确认修改</button>
         <button ion-button full color="danger" class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
       </div>
