@@ -1,0 +1,100 @@
+<ion-header>
+
+  <ion-navbar #navbar color="first">
+    <ion-title>数据统计</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row>
+    <ion-col col-3 class="bgWhite storeList">
+      <a class="tc" *ngFor="let i of storeJSON">{{i.name}}</a>
+    </ion-col>
+    <ion-col col-9 class="storeMain">
+        <div class="bgWhite topMain">
+          <div class="tc seaTitle">当前搜索条件</div>
+          <div class="tc">
+            <span>
+              武昌一店
+              <ion-icon name="close"></ion-icon>
+            </span>
+          </div>
+        </div>
+      <div class="bgWhite contents">
+        <div class="tc">
+          <ion-datetime placeholder="请选择时间" name="one1" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+        </div>
+        <div class="defaults tc">—</div>
+        <div class="tc">
+          <ion-datetime placeholder="请选择时间" name="one" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+        </div>
+
+      </div>
+
+      <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet" class="bgWhite">
+          <ion-segment-button value="house">
+            房源
+          </ion-segment-button>
+          <ion-segment-button value="passenger">
+            客户
+          </ion-segment-button>
+          <ion-segment-button value="login">
+            登录
+          </ion-segment-button>
+          <ion-segment-button value="bd">
+            报单
+          </ion-segment-button>
+          <ion-segment-button value="kpi">
+            KPI
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+
+      <div [ngSwitch]="pet" class="bgWhite tableList" style="">
+          <table width="100%" *ngSwitchCase="'house'" style="border: 1px solid #f2f2f2;">
+            <tr class="tc">
+              <td >新增房源</td>
+              <td>8</td>
+            </tr>
+          </table>
+        <ion-list *ngSwitchCase="'passenger'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="assets/img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'login'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="assets/img/thumbnail-duckling-3.jpg">
+            </ion-thumbnail>
+            <h2>Dewey</h2>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'bd'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="assets/img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'kpi'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="assets/img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+        </ion-list>
+
+      </div>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

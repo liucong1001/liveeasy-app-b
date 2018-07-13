@@ -6,8 +6,8 @@
 
 </ion-header>
 <ion-content padding>
-  <form>
-    <textarea name="" id="" cols="30" rows="10" placeholder="您有什么好的想法或建议...."></textarea>
-    <button ion-button block color="danger" class="m10">确认提交</button>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <ion-textarea formControlName="content" cols="30" rows="10" placeholder="您有什么好的想法或建议...."></ion-textarea>
+    <button ion-button block color="danger" class="m10" [disabled]="form.invalid">确认提交</button>
   </form>
 </ion-content>

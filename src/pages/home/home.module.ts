@@ -9,6 +9,7 @@ import {MsgdetailPage} from "./msgdetail/msgdetail";
 import {CheckhousePageModule} from "./checkhouse/checkhouse.module";
 import {HomesearchPage} from "./homesearch/homesearch";
 import {HomesearchPageModule} from "./homesearch/homesearch.module";
+import {StatisticsPageModule} from "./statistics/statistics.module";
 @NgModule({
   declarations: [
     HomePage
@@ -19,6 +20,7 @@ import {HomesearchPageModule} from "./homesearch/homesearch.module";
     DeclarationPageModule,
     CheckhousePageModule,
     HomesearchPageModule,
+    StatisticsPageModule
   ],
 })
 export class HomePageModule {}

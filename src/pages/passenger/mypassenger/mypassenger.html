@@ -28,11 +28,8 @@
            <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
          </ion-col>
        </ion-row>
-
      </ion-header>
-
   <ion-content>
-
 
 
   <ion-refresher
@@ -41,11 +38,13 @@
     (ionRefresh)="doRefresh($event)" class="refresh">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
-      pullingText="获取最新数据..."
+      pullingText="下拉推荐"
       refreshingSpinner="circles"
-      refreshingText="正在加载数据中...">
+      refreshingText="加载数据中">
     </ion-refresher-content>
   </ion-refresher>
+    <div class="tc refreshTip" *ngIf="not">暂无更新</div>
+    <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
   <ion-grid class="p0" style="    margin-top: 3px;">
     <ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
         <ion-col col-12 >

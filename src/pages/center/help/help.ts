@@ -1,7 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-
+import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 /**
  * Generated class for the HelpPage page.
  *
@@ -16,9 +18,29 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 })
 export class HelpPage {
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions) {
-  }
+  appVersion:any;
+  appId:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,
+              public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions) {
 
+      this.updprovider.version({}).then(res=>{
+        console.log(res)
+        this.appVersion=res.data.appVersion;
+        this.appId=res.data.applicationId;
+      })
+  }
+  save(){
+    this.updprovider.helps({
+      content:this.form.value.content,
+      appVersion:this.appVersion,
+      appId:this.appId,
+    }).then(res => {
+      console.log(res)
+    })
+  }
+  form:FormGroup =this.fb.group({
+    content:['',Validators.required],
+  });
   ionViewDidLoad() {
     console.log('ionViewDidLoad HelpPage');
     this.navBar.backButtonClick = this.backButtonClick;

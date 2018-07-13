@@ -127,9 +127,10 @@ export class MorePage {
   decorationJson = [
     {name:'全部',val:''},
     {name:'毛坯',val:'1'},
-    {name:'清水',val:'2'},
-    {name:'精装',val:'3'},
-    {name:'豪装',val:'4'},
+    {name:'简装',val:'2'},
+    {name:'中等装修',val:'3'},
+    {name:'精装',val:'4'},
+    {name:'豪装',val:'5'},
   ];
   //楼层
   floorJson = [

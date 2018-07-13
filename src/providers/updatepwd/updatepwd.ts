@@ -13,7 +13,11 @@ export class UpdatepwdProvider {
 
     private  oldPassword = this.configProvider.set().http+'/property/propertyInfo/editPassword';
     private  aaPassword = this.configProvider.set().http+'/sys/user/repass';
-    constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
+    private  helpPath = this.configProvider.set().http+'/feedback/appFeedbackInfo/insert';
+    //获取版本号
+  private  versionPath = this.configProvider.set().http+'/feedback/appInfo/findMaxVersion';
+
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
         console.log('Hello UpdatepwdProvider Provider');
     }
 
@@ -30,9 +34,10 @@ export class UpdatepwdProvider {
     return this.httpProvider.httpPost(this.aaPassword + "?opass=" + opass+"&npass="+npass);
   }
 
-    // public  login(username,password):Promise<any>{
-    //     return this.http.post(this.newsPassword+'?username='+username+'&password='+password,null).toPromise().then(res=>{
-    //         return  res  as any;
-    //     })
-    // }
+  helps(params?){
+    return this.httpProvider.httpPost(this.helpPath,params);
+  }
+  version(params?){
+    return this.httpProvider.httpGet(this.versionPath,params);
+  }
 }

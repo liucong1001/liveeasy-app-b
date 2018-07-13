@@ -1,0 +1,93 @@
+page-statistics {
+  ion-row{
+    height: 100%;
+  }
+  .storeList{
+    height: 100%;
+    overflow: scroll;
+    a{
+      display: block;
+      border-bottom: 1px solid #f7f7f7;
+      padding: 10px 0;
+    }
+  }
+  .storeMain{
+    margin-left: 3%;
+    width: 72%;
+    max-width: 72%;
+    height: 100%;
+    overflow: scroll;
+    .topMain{
+      padding: 15px 0;
+      .seaTitle{
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      span{
+        background: #1ab394;
+        color: #fff;
+        position: relative;
+        padding: 4px 8px;
+        padding-right: 26px;
+        display: inline-block;
+        font-size: 1.3rem;
+        margin: 5px;
+      }
+      ion-icon[name=close]{
+        font-size: 2.1em;
+        position: absolute;
+        top: 0;
+        right: 8px;
+        z-index: 99;
+      }
+    }
+    .contents{
+      padding: 10px 10px;
+      margin-top: 10px;
+      div{
+        width: 43%;
+        display: inline-block;
+      }
+      div:nth-child(2){
+        width: 10%;
+      }
+      ion-datetime{
+        width: 100%;
+        border: 1px solid #f1f1f1;
+      }
+      .datetime-ios{
+        padding: 5px 0;
+
+      }
+    }
+  }
+  ion-toolbar{
+    ion-segment{
+      padding: 10px 10px;
+    }
+    .segment-ios {
+      .segment-button{
+        border-color: #1ab394;
+        color:#1ab394;
+      }
+      .segment-button.segment-activated{
+        background-color: #1ab394;
+      }
+    }
+  }
+  .tableList{
+    padding: 10px;
+    table tr{
+      td{
+        width: 50%;
+        padding: 6px;
+        border-right: 1px solid #f2f2f2;
+        color: #aaa;
+      }
+      td:last-child{
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

@@ -88,77 +88,81 @@
               <ion-label class="centers">
                 <ion-row>
                   <ion-col col-6>
-                    <input type="number" class="separateIon" formControlName="minSpaceSize" placeholder="请填写数字">
+                    <input type="number" class="separateIon" formControlName="minSpaceSize" placeholder="请填写数字" (change)="areas()">
                     <span>至</span>
                   </ion-col>
                   <ion-col col-6>
-                    <input type="number" class="separateIon" formControlName="maxSpaceSize" placeholder="请填写数字">
+                    <input type="number" class="separateIon" formControlName="maxSpaceSize" placeholder="请填写数字" (change)="areas()">
                     <span class="suffixs">㎡</span>
                   </ion-col>
                 </ion-row>
               </ion-label>
             </ion-item>
+            <div *ngIf="areaCheck" class="p15">*结束面积不能小于开始面积</div>
             <ion-item class="pl12">
               <ion-label>价格要求</ion-label>
               <ion-label class="centers">
                 <ion-row>
                   <ion-col col-6>
-                    <input type="number" class="separateIon" placeholder="请填写数字">
+                    <input type="number" class="separateIon" formControlName="minPrice" placeholder="请填写数字" (change)="prices()">
                     <span>至</span>
                   </ion-col>
                   <ion-col col-6>
-                    <input type="number" class="separateIon" placeholder="请填写数字">
+                    <input type="number" class="separateIon" formControlName="maxPrice" placeholder="请填写数字" (change)="prices()">
                     <span class="suffixs">万元</span>
                   </ion-col>
                 </ion-row>
               </ion-label>
             </ion-item>
-
+        <div *ngIf="priceCheck" class="p15">*最高价格不能小于最低价格</div>
           <ion-item class="pl12">
             <ion-label>楼层要求</ion-label>
             <ion-label class="centers">
               <ion-row>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" placeholder="请填写数字" formControlName="minFloor">
+                  <input type="number" class="separateIon" placeholder="请填写数字" formControlName="minFloor" (change)="floors()">
                   <span>至</span>
                 </ion-col>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" placeholder="请填写数字" formControlName="maxFloor">
+                  <input type="number" class="separateIon" placeholder="请填写数字" formControlName="maxFloor" (change)="floors()">
                   <span>层</span>
                 </ion-col>
               </ion-row>
             </ion-label>
           </ion-item>
+        <div *ngIf="floorCheck" class="p15">*最高楼不能小于最低楼层</div>
           <ion-item class="pl12">
             <ion-label>居室要求</ion-label>
             <ion-label class="centers">
               <ion-row>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" formControlName="minBedroom" placeholder="请填写">
+                  <input type="number" class="separateIon" formControlName="minBedroom" placeholder="请填写" (change)="rooms()">
                   <span>至</span>
                 </ion-col>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" formControlName="maxBedroom" placeholder="请填写">
+                  <input type="number" class="separateIon" formControlName="maxBedroom" placeholder="请填写" (change)="rooms()">
                   <span>室</span>
                 </ion-col>
               </ion-row>
             </ion-label>
           </ion-item>
+          <div *ngIf="roomCheck" class="p15">*最多居室不能小于最少居室</div>
           <ion-item class="pl12">
             <ion-label>客厅要求</ion-label>
             <ion-label class="centers">
               <ion-row>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" formControlName="minHall" placeholder="请填写">
+                  <input type="number" class="separateIon" formControlName="minHall" placeholder="请填写" (change)="halls()">
                   <span>至</span>
                 </ion-col>
                 <ion-col col-6>
-                  <input type="number" class="separateIon" formControlName="maxHall" placeholder="请填写">
+                  <input type="number" class="separateIon" formControlName="maxHall" placeholder="请填写" (change)="halls()">
                   <span>厅</span>
                 </ion-col>
               </ion-row>
             </ion-label>
           </ion-item>
+          <div *ngIf="hallCheck" class="p15">*最多厅不能小于最少厅</div>
           <ion-item class="pl12">
             <ion-label>装修要求</ion-label>
             <ion-select okText="确定"   [placeholder]="'请选择'"  multiple="true" cancelText="关闭" formControlName="decorations">

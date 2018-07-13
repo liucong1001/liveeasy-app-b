@@ -12,6 +12,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {CheckhousePage} from "./checkhouse/checkhouse";
 import {HomesearchPage} from "./homesearch/homesearch";
 import {TabsPage}from "./../tabs/tabs";
+import {StatisticsPage} from "./statistics/statistics";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -62,7 +63,9 @@ export class HomePage {
   checkhouse(){
   this.openWin(CheckhousePage);
   }
-
+  gosta(){
+    this.openWin(StatisticsPage);
+  }
   godeclara(){
     this.openWin(DeclarationPage)
   }

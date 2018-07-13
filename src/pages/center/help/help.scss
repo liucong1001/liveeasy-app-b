@@ -1,4 +1,13 @@
-page-help textarea,
+page-help{
+  ion-textarea{
+    background: #fff;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+  }
+  .activated{
+    background: #1ab394 !important;
+  }
+}
 .ustyle{
     border: 0;
     width: 100%;
