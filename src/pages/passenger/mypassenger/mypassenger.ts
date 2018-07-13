@@ -279,6 +279,10 @@ export class MypassengerPage {
   totalRecords :any;//查询到的总条数；
   firstPageData = [];
   //下拉刷新
+  num :any;
+  timer:any;
+  not=false;
+  haveData=false;
   doRefresh(refresher) {
     console.log(this.params)
     console.log('上拉刷新Begin async operation', refresher);
@@ -295,9 +299,29 @@ export class MypassengerPage {
       console.log('Async operation has ended');
       refresher.complete();
       if (newCount > 0 ) {
-        this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+        console.log(newCount)
+        // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+        this.num=3;
+        this.haveData=true;
+        this.timer=setInterval(()=>{
+          this.num--;
+          if(this.num===0){
+            this.haveData=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
       } else {
-        this.toast.defaultMsg('middle','暂无更新');
+        // this.toast.defaultMsg('middle','暂无更新');
+        this.not=true;
+        this.num=3;
+        this.timer=setInterval(()=>{
+          this.num--;
+          // console.log(this.num)
+          if(this.num===0){
+            this.not=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
       }
     });
   }

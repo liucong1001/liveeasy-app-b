@@ -1,4 +1,12 @@
 page-statistics {
+  .activated{
+    background: #1ab394 !important;
+  }
+  .active{
+    background: #1ab394;
+    color: #fff;
+    border: 0;
+  }
   ion-row{
     height: 100%;
   }
@@ -8,7 +16,7 @@ page-statistics {
     a{
       display: block;
       border-bottom: 1px solid #f7f7f7;
-      padding: 10px 0;
+      padding: 12px 0;
     }
   }
   .storeMain{
@@ -78,14 +86,15 @@ page-statistics {
   }
   .tableList{
     padding: 10px;
-    table tr{
-      td{
+    table{
+      border: 1px solid #f2f2f2;
+      tr td{
         width: 50%;
         padding: 6px;
         border-right: 1px solid #f2f2f2;
         color: #aaa;
       }
-      td:last-child{
+      trtd:last-child{
         font-size: 1.8rem;
       }
     }

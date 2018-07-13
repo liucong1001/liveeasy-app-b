@@ -8,16 +8,16 @@
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
 
-      <span [ngClass]="{color:this.searchArea !='不限',esRow:this.searchArea}" style="width: 30px;">{{ searchArea}} </span>
+      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 30px;">{{ searchArea}} </span>
       <span *ngIf="!searchArea">区域</span>
-      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea" [ngClass]="{color: this.searchArea !='不限' && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
       <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
-      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType !=0}">{{housePipe(params.bedroomType)}}</span>
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType}">{{housePipe(params.bedroomType)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.bedroomType !=0}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.bedroomType !=''}"></ion-icon>
 
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
@@ -54,12 +54,12 @@
     <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;" *ngIf="searchMore()">已选：
       <a *ngFor="let i of datas.tagsArry;let i =index;">
         {{tagName(i)}}
-      </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>&nbsp;
+      </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>
       <span *ngIf="datas.hasElevator">/&nbsp;{{datas.hasElevator=='0'?'无':'有'}}</span>
-      <span *ngIf="spaceSizeName">/{{spaceSizeName}}</span>
-      <span  *ngIf="decorationName"  [hidden]="decorationName=='全部'">/{{decorationName}}</span>
-      <span  *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">/{{buildingTypeName}}</span>
-      <span  *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">/{{buzzTypeName}}</span>
+      <span *ngIf="spaceSizeName">/&nbsp;{{spaceSizeName}}</span>
+      <span  *ngIf="decorationName"  [hidden]="decorationName=='全部'">/&nbsp;{{decorationName}}</span>
+      <span  *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">/&nbsp;{{buildingTypeName}}</span>
+      <span  *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">/&nbsp;{{buzzTypeName}}</span>
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">

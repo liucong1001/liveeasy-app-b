@@ -155,6 +155,7 @@ export class MorePage {
     {name:'租售',val:'3'},
   ];
   spaceSizeJson = [
+     {name:'',start:0,end:0, val:'0'},
      {name:'50㎡',start:0,end:50, val:'1'},
      {name:'50-70㎡',start:50,end:70, val:'2'},
     {name:'70-90㎡',start:70,end:90, val:'3'},

@@ -15,12 +15,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StatisticsPage {
   pet: string = "puppies";
+  selected :any;
+  name:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StatisticsPage');
   }
+  go(i){
+    this.selected = i;
+    this.name=this.selected.name
+  }
+  isActive(i) {
+    return this.selected === i;
+  };
 
   storeJSON=[
     {name:'武昌一店'},

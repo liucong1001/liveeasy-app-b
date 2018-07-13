@@ -139,7 +139,7 @@
   z-index: 9999; // color: #000
   margin-top: -13px;
   overflow:auto;
-  top: 125px;
+  top: 122px;
   button {
     border-radius: 5px;
     margin-top: 13px;
@@ -266,4 +266,10 @@ textarea{
 }
 .refresher-pulling-text, .refresher-refreshing-text{
   font-size: 14px;
+}
+//
+.refreshTip{
+  padding: 10px;
+  background: #FFEAE5;
+  color: #EF8473;
 }
