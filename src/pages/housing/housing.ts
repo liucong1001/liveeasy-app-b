@@ -705,9 +705,10 @@ export class HousingPage {
     this.params.propertyPriceStart=this.structure.lower.toString();
     this.params.propertyPriceEnd=this.structure.upper.toString();
   }
-
+  name:any;
   selectPrice(){
     this.time=this.elevatorPipe(this.price);
+    this.name=this.time.name;
     this.starts=this.time.start;
     this.ends=this.time.end;
     console.log(this.ends);

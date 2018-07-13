@@ -17,15 +17,16 @@
 
       <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType}">{{housePipe(params.bedroomType)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.bedroomType !=''}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2}"></ion-icon>
 
     </ion-col>
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <span [ngClass]="{color:starts,esRow:ends}">
         {{starts}}<span *ngIf="starts == 100">万</span><span *ngIf="ends">-</span>{{ends}}<span *ngIf="ends">万</span>
       </span>
-      <span [hidden]="starts">价格 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
+      <span [hidden]="starts" *ngIf="name!='不限'">价格 </span>
+      <span *ngIf="name=='不限'" [ngClass]="{color:name=='不限'}">不限</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends,addCor:name=='不限'}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
