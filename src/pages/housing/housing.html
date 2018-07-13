@@ -66,9 +66,11 @@
       <ion-col col-12 tappable (click)="goHouseDetail(item)" >
         <ion-row>
           <ion-col col-4 >
-            <img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"
-                  [lazyLoad]="imgHeader+pic(item?.propertyPics)"
-                  alt="" width="90%" height="70">
+            <!--懒加载图片-->
+            <!--<img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"-->
+                  <!--[lazyLoad]="imgHeader+pic(item?.propertyPics)"-->
+                  <!--alt="" width="90%" height="70">-->
+            <img [src]=" item?.propertyPics?imgHeader+pic(item?.propertyPics):'assets/imgs/default.jpg'" alt="" width="90%" height="70">
           </ion-col>
 
           <ion-col col-8>
@@ -96,7 +98,6 @@
                 <span >/&nbsp;{{cxPipe(item.orientation)}}</span>
                 <span>/&nbsp;{{item.estateName}}</span>
               </ion-col>
-
 
               <ion-col col-12 class="p0">
                 <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>

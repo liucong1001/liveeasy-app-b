@@ -112,6 +112,8 @@ export class HousedetailPage {
     this.selectY={
       title:'阳'
     }
+
+
   }
 
   //房源标签处理
@@ -213,6 +215,12 @@ export class HousedetailPage {
 
     this.propertyid =  this.navParams.data.propertyId;
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
+
+
+     //图片处理
+     this.propertyProvider.getPropertyPicInfo(this.navParams.data.propertyId).then(res=>{
+
+     })
   }
 
 

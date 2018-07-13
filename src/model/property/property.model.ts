@@ -136,4 +136,13 @@ export  class PropertyModel {
   propertyPriceUnit?:any;
 
   buzzType?:any;
+
+  //权限控制字段
+  shareShow?:boolean;
+
+  closePropertyShow?:boolean;
+
+  applyStatus?:boolean;
+
+  realtorUpdateShow?:boolean;
 }

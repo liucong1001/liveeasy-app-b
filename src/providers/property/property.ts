@@ -9,7 +9,8 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 @Injectable()
 export class PropertyProvider {
 
-  private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
+  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
+  private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
@@ -22,6 +23,7 @@ export class PropertyProvider {
   //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';
+  // private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
@@ -31,6 +33,9 @@ export class PropertyProvider {
   private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
   //查找具体信息内容
   private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
+  //图片接口测试
+  private  getAuditInfo = this.configProvider.set().http + '/property/propertyAuditInfo/getAuditInfo.do';
+
   bedRType:any;
   districtId:any;
   propertyid:any;
@@ -133,4 +138,11 @@ export class PropertyProvider {
   getRecord(propertyId) {
     return this.httpProvider.httpPost(this.record, {propertyId:propertyId})
   }
+
+
+  //房源实勘图，业主委托书
+  getPropertyPicInfo(propertyId){
+    return this.httpProvider.httpPost(this.getAuditInfo, {propertyId:propertyId})
+  }
+
 }
