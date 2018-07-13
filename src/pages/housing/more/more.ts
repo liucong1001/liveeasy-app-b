@@ -188,15 +188,26 @@ export class MorePage {
   flag=false;
   //朝向 orientation
   choseDirect(item){
-    this.selected = item
-    this.searchMoreData.orientation  = item.val;
+    if(this.selected==item){
+       this.choseDirect(this.cxJSON[0]);
+    }else {
+      this.selected = item;
+      this.searchMoreData.orientation  = item.val;
+    }
+
+
   }
   isActive(item) {
+
+
     if(item.val==this.searchMoreData.orientation){
       return  true;
     }else{
       return this.selected === item;
     }
+
+
+
   };
   //其他
   choseOther(item){
@@ -204,20 +215,38 @@ export class MorePage {
   }
   //电梯
   choseDt(item){
-    this.selected3 = item;
-    this.searchMoreData.hasElevator=item.val;
+    if(this.selected3 == item){
+      this.choseDt(this.dtJson[0]);
+    }else {
+      this.selected3 = item;
+      this.searchMoreData.hasElevator=item.val;
+    }
+
     console.log(item.val)
   }
-
+  // this.selected3 = item;
+  selected4:any;
   //装修
   chosedecoration(item){
-   this.searchMoreData['decoration'] = item.val;
-   this.searchMoreData['decorationName'] = item.name;
+    if( this.selected4 == item){
+      this.chosedecoration(this.decorationJson[0]);
+    }else{
+      this.selected4 = item;
+      this.searchMoreData['decoration'] = item.val;
+      this.searchMoreData['decorationName'] = item.name;
+    }
+
   }
+  selected5:any;
   //建筑类型
   chosebuildingType(item){
-   this.searchMoreData['buildingType'] = item.val;
-   this.searchMoreData['buildingTypeName'] = item.name;
+    if(this.selected5 == item){
+      this.chosebuildingType(this.buildingTypeJson[0]);
+    }else{
+      this.selected5 = item;
+      this.searchMoreData['buildingType'] = item.val;
+      this.searchMoreData['buildingTypeName'] = item.name;
+    }
   }
   //房屋用途
   chosebuzzType(item){
@@ -227,12 +256,17 @@ export class MorePage {
   }
   //建筑面积
   choseSpaceSize(item){
-    this.spaceSize =item.val;
-    this.searchMoreData['spaceSizeStart'] =   item.start.toString();
-    this.searchMoreData['spaceSizeEnd'] = item.end.toString();
-    this.searchMoreData['spaceSizeVal'] = item.val;
-    this.searchMoreData['spaceSizeName'] = item.name;
-    console.log('选择的面积',item);
+    if(this.spaceSize ==item.val){
+      this.choseSpaceSize(this.spaceSizeJson[0]);
+    }else {
+      this.spaceSize =item.val;
+      this.searchMoreData['spaceSizeStart'] =   item.start.toString();
+      this.searchMoreData['spaceSizeEnd'] = item.end.toString();
+      this.searchMoreData['spaceSizeVal'] = item.val;
+      this.searchMoreData['spaceSizeName'] = item.name;
+      console.log('选择的面积',item);
+    }
+
   }
   isActive1(item){
     if(item.tagCode==this.searchMoreData['tags']){
