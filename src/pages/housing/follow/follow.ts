@@ -10,10 +10,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
 /**
- * Generated class for the FollowPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+   房源带看页面
  */
 
 @IonicPage()

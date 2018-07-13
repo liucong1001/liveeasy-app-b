@@ -14,10 +14,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
- * Generated class for the AddlookPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  添加带看页面
  */
 
 @IonicPage()
@@ -49,14 +46,11 @@ export class AddlookPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddlookPage',);
-    // this.data = this.navParams.get('item');
     console.log('带看',this.data,this.data.convId);
-    this.fileProvider.getTicker(this.data.estateId+'/'+this.data.propertyId+'/').then();
     this.imgHeader = this.configProvider.set().img;
     this.navBar.backButtonClick = this.backButtonClick;
   }
-  
+
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       // title: '更多',

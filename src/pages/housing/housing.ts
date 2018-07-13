@@ -475,10 +475,7 @@ export class HousingPage {
   goCloseHouse(item) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
-      estatename: item.estateName,
-      convid: item.convId,
-      realtorId:item.realtorId,
-      standardAddress:item.standardAddress,
+      item:item,
     })
 
   }

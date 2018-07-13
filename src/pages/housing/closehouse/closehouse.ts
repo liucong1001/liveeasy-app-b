@@ -41,12 +41,11 @@ export class ClosehousePage {
               public  closehouseProvider: ClosehouseProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid = navParams.get('propertyid');
-
     this.loginId=this.localStorageProvider.get('loginInfo').id;
-
-    this.propertyProvider.getRecord(this.propertyid).then(res=>{
-        this.data = res.data;
-        console.log(this.data)
+    this.data = navParams.get('item');
+    // this.propertyProvider.getRecord(this.propertyid).then(res=>{
+    //     this.data = res.data;
+      console.log('获取关闭',this.data);
 
       this.estatename = this.data.estateName;
       this.convid = this.data.convId;
@@ -55,14 +54,24 @@ export class ClosehousePage {
       this.realtorId = this.data.realtorId;
       this.realtorSourceId=this.data.realtorSourceId;
 
-      console.log(this.loginId,this.realtorSourceId)
+      console.log(this.loginId,this.realtorSourceId);
       //判断归属人和操作人是否一致
-      if(this.realtorSourceId != this.loginId){
+      // if(this.realtorSourceId != this.loginId){
+      //   this.toast.msg('你不是此房源归属人，请填写后申请！');
+      //   this.subs=false;
+      //   this.applic=true
+      // }
+      if(this.data.closePropertyShow==true&&this.data.applyStatus==true){
+        // this.toast.msg('你不是此房源归属人，请填写后申请！');
+        // this.subs=false;
+        // this.applic=true
+      }else {
         this.toast.msg('你不是此房源归属人，请填写后申请！');
         this.subs=false;
         this.applic=true
       }
-    });
+
+    // });
 
 
   }
