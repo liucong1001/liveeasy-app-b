@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {LocalStorageProvider} from "../../../../../providers/local-storage/local-storage";
+import {CodeValuePipe} from "../../../../../pipes/code-value/code-value";
 
 /**
  * Generated class for the DeclinfoPage page.
@@ -23,11 +25,14 @@ export class DeclinfoPage {
   propertyinfo:any;
   orders:any;
   asslist:any;
+  localCode:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController,public localStorageProvider: LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams) {
     this.nums=navParams.get('val');
+    this.localCode = this.localStorageProvider.get('codeData');
+    console.log(this.localCode)
     console.log(this.nums)
     this.order=navParams.get('order');
     this.orders=navParams.get('order').order;
@@ -87,30 +92,19 @@ export class DeclinfoPage {
   }
 
   //报单房源——朝向
-  orJSON=[
-    {name:'东',val:1},
-    {name:'东南',val:2},
-    {name:'南',val:3},
-    {name:'西南',val:4},
-    {name:'西',val:5},
-    {name:'西北',val:6},
-    {name:'北',val:7},
-    {name:'东北',val:8},
-  ]
+  orJSON:Array<{name:string;val:string}>;
   orpipe(val){
+    this.orJSON = new CodeValuePipe().transform(this.localCode['orientation']);
     for(var i in this.orJSON){
-      if(val == this.orJSON[i].val){
-        return this.orJSON[i].name;
+      if(val ==  this.orJSON[i].val){
+        return  this.orJSON[i].name;
       }
     }
   }
 //报单房源——抵押情况
-  pmJSON=[
-    {name:'无',val:0},
-    {name:'一押',val:1},
-    {name:'二押',val:2},
-  ]
+  pmJSON:Array<{name:string;val:string}>;
   pmpipe(val){
+    this.pmJSON = new CodeValuePipe().transform(this.localCode['propertyMortgage']);
     for(var i in this.pmJSON){
       if(val == this.pmJSON[i].val){
         return this.pmJSON[i].name;
@@ -118,16 +112,9 @@ export class DeclinfoPage {
     }
   }
   //报单房源——产权性质
-buzzJSON=[
-  {name:'其他',val:0},
-    {name:'商品房',val:1},
-    {name:'公房',val:2},
-    {name:'经适房',val:3},
-  {name:'房改房',val:4},
-  {name:'拆迁安置房',val:5},
-
-  ]
+  buzzJSON:Array<{name:string;val:string}>;
   buzzpipe(val){
+    this.buzzJSON = new CodeValuePipe().transform(this.localCode['buzzOwnerType']);
     for(var i in this.buzzJSON){
       if(val == this.buzzJSON[i].val){
         return this.buzzJSON[i].name;

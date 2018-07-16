@@ -14,6 +14,8 @@ export class HomeProvider {
     private  notificationPath =this.configProvider.set().http+ '/notification/notificationInfo/findNotifyByCompanyId';
     private  declarationPath =this.configProvider.set().http+ '/order/submitOrderInfo/pageList/1.do';
     private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
+    //数据统计
+    private statisPath=this.configProvider.set().http+'/statistics/statisticsInfo/getList'
     private  getDictCodePath = this.configProvider.set().http+ '/property/propertyInfo/getDictCode';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
@@ -77,4 +79,7 @@ export class HomeProvider {
        return this.httpProvider.httpGet(this.getDictCodePath);
      }
 
+    statis(params?){
+      return this.httpProvider.httpPost(this.statisPath,params);
+    }
 }

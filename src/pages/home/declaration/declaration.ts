@@ -5,6 +5,7 @@ import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
 import {DeclardetailPage} from "./declardetail/declardetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the MypassengerPage page.
@@ -39,7 +40,7 @@ export class DeclarationPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
-              public navParams: NavParams,
+              public navParams: NavParams,public statusBar: StatusBar,
               private customerProvider:CustomerProvider,private homeProvider:HomeProvider,
               public propertyProvider: PropertyProvider) {
   }
@@ -48,7 +49,11 @@ export class DeclarationPage {
     this.search();
     this.navBar.backButtonClick = this.backButtonClick;
   }
+//状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
 
+  }
   selected :any;
   isActive(item) {
     return this.selected === item;

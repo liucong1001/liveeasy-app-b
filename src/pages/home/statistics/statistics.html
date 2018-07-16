@@ -10,7 +10,7 @@
 <ion-content>
   <ion-row>
     <ion-col col-3 class="bgWhite storeList p0">
-      <a class="tc" *ngFor="let i of storeJSON" (click)="go(i)"  [ngClass]="{'active':isActive(i)}">{{i.name}}</a>
+      <a class="tc" *ngFor="let i of storeJSON" (click)="go(i)" [ngClass]="{'active':isActive(i),'defaultBg':aa}">{{i.name}}</a>
     </ion-col>
     <ion-col col-9 class="storeMain">
         <div class="bgWhite topMain">
@@ -22,13 +22,17 @@
           </div>
         </div>
       <div class="bgWhite contents">
-        <div class="tc">
-          <!--<ion-datetime placeholder="请选择时间" name="one1" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>-->
-        </div>
-        <div class="defaults tc">—</div>
-        <div class="tc">
-          <!--<ion-datetime placeholder="请选择时间" name="one" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>-->
-        </div>
+        <form [formGroup]="form">
+          <ion-list>
+            <ion-item>
+              <ion-datetime placeholder="请选择时间" formControlName="startTime" (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+            </ion-item>
+            <ion-item class="defaults">—</ion-item>
+            <ion-item>
+              <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+            </ion-item>
+          </ion-list>
+        </form>
 
       </div>
 
@@ -55,9 +59,10 @@
       <div [ngSwitch]="pet" class="bgWhite tableList" style="">
           <table width="100%" *ngSwitchCase="'house'">
             <tr class="tc">
-              <td >新增房源</td>
+              <td>新增房源</td>
               <td>8</td>
             </tr>
+
           </table>
         <table width="100%" *ngSwitchCase="'passenger'">
           <tr class="tc">

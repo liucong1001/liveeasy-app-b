@@ -1,10 +1,6 @@
 page-statistics {
-  .activated{
-    background: #1ab394 !important;
-  }
-  .active{
-    background: #1ab394;
-    color: #fff;
+  .active,.defaultBg{
+    color: #1ab394;
     border: 0;
   }
   ion-row{
@@ -20,11 +16,9 @@ page-statistics {
     }
   }
   .storeMain{
-    margin-left: 3%;
-    width: 72%;
-    max-width: 72%;
     height: 100%;
     overflow: scroll;
+    padding: 0 0 0 10px;
     .topMain{
       padding: 15px 0;
       .seaTitle{
@@ -51,18 +45,23 @@ page-statistics {
       }
     }
     .contents{
-      padding: 10px 10px;
+      padding: 0 10px;
       margin-top: 10px;
-      div{
-        width: 43%;
+      ion-item{
+        width: 44%;
         display: inline-block;
       }
-      div:nth-child(2){
-        width: 10%;
+      .item-ios.item-block .item-inner {
+        border: 0;
+      }
+      ion-item:nth-child(2){
+        width: 8%;
       }
       ion-datetime{
         width: 100%;
         border: 1px solid #f1f1f1;
+        text-align: center;
+        font-size: 1.4rem;
       }
       .datetime-ios{
         padding: 5px 0;

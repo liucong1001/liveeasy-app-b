@@ -27,13 +27,13 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户来源<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定" disabled  [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc">
+          <ion-select okText="确定" disabled  [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc" [selectOptions]="selectTitle('客户来源')">
             <ion-option [value]="item.value"  *ngFor="let item of customerSrcList  "> {{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户归属<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId" [selectOptions]="selectOptionGs">
+          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId" [selectOptions]="selectTitle('客户归属')">
             <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>

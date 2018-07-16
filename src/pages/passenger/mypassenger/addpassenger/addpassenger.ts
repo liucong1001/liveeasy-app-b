@@ -40,19 +40,13 @@ export class AddpassengerPage {
   shangQuan = [];//保存商圈
   intentionTradeCodeId:string;  //用于转换商圈
   type:string="";
-  selectOptions:any;
-  selectOptionGs:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events,public statusBar: StatusBar
   ) {
-    this.selectOptions = {
-      title: '客户来源',
-    };
-    this.selectOptionGs={
-      title:'客户归属'
-    }
+
+
     //客户来源
     this.customerProvider.customerSrcInfo().then(res=>{
        this.customerSrcList = res;
@@ -77,6 +71,10 @@ export class AddpassengerPage {
     this.addhouseProvider.estateListSelect().then(res=>{
       this.estateList = res.data.result;
     });
+  }
+  selectTitle(data){
+    var title = {title:data};
+    return title;
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {

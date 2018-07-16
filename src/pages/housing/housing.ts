@@ -658,7 +658,7 @@ export class HousingPage {
 
   hasElevatorJson = [
     {name:'不限',val:0},
-    {start:'100',val:'1'},
+    {start:'0',end:'100',val:'1'},
     {start:'100',end:'500',val:'2'},
     {start:'500',end:'1000',val:'3'},
     {start:'1000',end:'1500',val:'4'},
@@ -690,7 +690,7 @@ export class HousingPage {
   price:any;
   starts:any;
   ends:any;
-  structure:any = {lower: 0, upper:5000};
+  structure:any = {lower: 0, upper:500};
   onChange(ev:any) {
     this.params.propertyPriceStart=this.structure.lower.toString();
     this.params.propertyPriceEnd=this.structure.upper.toString();
@@ -707,6 +707,7 @@ export class HousingPage {
     this.search();
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
+      console.log(this.structure)
     }
   }
 

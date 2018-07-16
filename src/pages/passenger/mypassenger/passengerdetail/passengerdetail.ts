@@ -106,7 +106,10 @@ export class PassengerdetailPage {
     //   this.estateList = res.data.result;
     // });
   }
-
+  selectTitle(data){
+    var title = {title:data};
+    return title;
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerdetailPage');
     this.navBar.backButtonClick = this.backButtonClick;

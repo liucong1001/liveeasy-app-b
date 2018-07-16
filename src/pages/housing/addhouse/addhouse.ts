@@ -39,18 +39,6 @@ export class AddhousePage {
   showHx=false;
   HxRight=true;
   HxDown=false;
-  selectCz:any;
-  selectZx:any;
-  selectJx:any;
-  selectDt:any;
-  selectYt:any;
-  selectSex:any;
-  selectS:any;
-  selectT:any;
-  selectC:any;
-  selectW:any;
-  selectY:any;
-
   localCode:any;
   // cxJSON:Array<object>;//朝向
   // decorationJson:Array<object>;//装修
@@ -63,42 +51,6 @@ export class AddhousePage {
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
               public app: App,public statusBar: StatusBar
   ) {
-    this.selectCz = {
-      title: '朝向',
-    };
-    this.selectZx = {
-      title: '装修',
-    };
-    this.selectJx = {
-      title: '建筑类型',
-    };
-    this.selectDt = {
-      title: '配备电梯',
-    };
-    this.selectYt = {
-      title: '房屋用途',
-    };
-    this.selectSex={
-      title:'业主性别'
-    }
-
-
-    this.selectS={
-      title:'室'
-    }
-    this.selectT={
-      title:'厅'
-    }
-    this.selectC={
-      title:'厨'
-    }
-    this.selectW={
-      title:'卫'
-    }
-    this.selectY={
-      title:'阳'
-    }
-
 
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
