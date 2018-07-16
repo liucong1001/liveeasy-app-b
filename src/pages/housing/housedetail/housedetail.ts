@@ -73,6 +73,7 @@ export class HousedetailPage {
   selectW:any;
   selectY:any;
   @ViewChild('navbar') navBar: Navbar;
+  localCode:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
@@ -113,7 +114,7 @@ export class HousedetailPage {
       title:'阳'
     }
 
-
+    this.localCode = this.localStorageProvider.get('codeData');
   }
 
   //房源标签处理
@@ -325,13 +326,6 @@ export class HousedetailPage {
     }
   }
 
-  //房屋用途
-  buzzTypeJson = [
-    {name:'出售',val:'1'},
-    {name:'出租',val:'2'},
-    {name:'租售',val:'3'},
-  ];
-
     presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: '更多',
@@ -358,11 +352,11 @@ export class HousedetailPage {
     });
     actionSheet.present();
   }
-  record(){
-    this.openWin(RecordPage,{
-      propertyid:this.propertyid,
-    });
-  }
+    record(){
+      this.openWin(RecordPage,{
+        propertyid:this.propertyid,
+      });
+    }
 
 
 

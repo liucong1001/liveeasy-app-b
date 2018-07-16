@@ -14,6 +14,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {HomePage} from "../../home/home";
+import {CodeValuePipe} from "../../../pipes/code-value/code-value";
 /**
  * Generated class for the AddhousePage page.
  *
@@ -49,6 +50,11 @@ export class AddhousePage {
   selectC:any;
   selectW:any;
   selectY:any;
+
+  localCode:any;
+  // cxJSON:Array<object>;//朝向
+  // decorationJson:Array<object>;//装修
+  // buildingTypeJson:Array<object>;//建筑类型
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
               public actionSheetCtrl: ActionSheetController,
@@ -94,12 +100,12 @@ export class AddhousePage {
     }
 
 
-     //楼盘列表
-
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
-
-    this.localStorageProvider.set('cxJSON',this.cxJSON);
+    this.localCode = this.localStorageProvider.get('codeData');
+    // this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    // this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
+    // this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
   }
 
 
@@ -211,8 +217,15 @@ export class AddhousePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddhousePage');
+    // console.log('朝向',this.localStorageProvider.get('codeData').orientation);
     this.navBar.backButtonClick = this.backButtonClick;
+    // var arry =[];
+    // var data = this.localStorageProvider.get('codeData').orientation;
+    // for(var i in data){
+    //    arry.push({name:data[i],val:i})
+    // }
+
+    // orientation
   }
   ionViewDidEnter(){
     // this.navBar.backButtonClick = () => {
@@ -237,12 +250,6 @@ export class AddhousePage {
     }
   }
 
-   //房屋用途
-  buzzTypeJson = [
-    {name:'出售',val:'1'},
-    {name:'出租',val:'2'},
-    {name:'租售',val:'3'},
-  ];
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -423,19 +430,5 @@ export class AddhousePage {
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
-
-  //朝向
-  cxJSON = [
-    {name:'东',val:'1'},
-    {name:'东南',val:'2'},
-    {name:'南',val:'3'},
-    {name:'西南',val:'4'},
-    {name:'西',val:'5'},
-    {name:'西北',val:'6'},
-    {name:'北',val:'7'},
-    {name:'东北',val:'8'},
-    {name:'南北',val:'9'},
-    {name:'东西',val:'10'},
-  ];
 
 }

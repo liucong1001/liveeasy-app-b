@@ -14,7 +14,7 @@ export class HomeProvider {
     private  notificationPath =this.configProvider.set().http+ '/notification/notificationInfo/findNotifyByCompanyId';
     private  declarationPath =this.configProvider.set().http+ '/order/submitOrderInfo/pageList/1.do';
     private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
-
+    private  getDictCodePath = this.configProvider.set().http+ '/property/propertyInfo/getDictCode';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
@@ -72,5 +72,9 @@ export class HomeProvider {
       return this.httpProvider.httpGet(this.declDetailPath,{orderId:orderId});
     }
 
+     // 获取码值
+     getCode(){
+       return this.httpProvider.httpGet(this.getDictCodePath);
+     }
 
 }

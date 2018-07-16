@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { AddhousePage } from './addhouse';
 import {ComponentsModule} from "../../../components/components.module";
 import {ToastComponent} from "../../../components/toast/toast";
+import {PipesModule} from "../../../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import {ToastComponent} from "../../../components/toast/toast";
   imports: [
     IonicPageModule.forChild(AddhousePage),
       ComponentsModule,
+      PipesModule,
   ],
   // providers:[ToastComponent]
 })

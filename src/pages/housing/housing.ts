@@ -27,6 +27,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {errorHandler} from "@angular/platform-browser/src/browser";
+import {CodeValuePipe} from "../../pipes/code-value/code-value";
 
 /**
  * Generated class for the HousingPage page.
@@ -63,15 +64,6 @@ export class HousingPage {
     this.showFilter = !this.showFilter;
     this.visibility = this.showFilter ? 'shown' : 'hidden';
   }
-
-  toggle2(){
-
-  }
-
-  // state(){
-  //   return this.showFilter?'shown':'hidden';
-  // }
-
   classFlag = true;
   show = false;
   houseType = false;
@@ -123,6 +115,8 @@ export class HousingPage {
 
   badHttp = false;
   comFromHomeSearch = false;
+  localCode:any;
+  cxJSON:Array<{name:string;val:string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -135,7 +129,6 @@ export class HousingPage {
               public toast:ToastComponent,
               private renderer:Renderer
   ) {
-
     console.log('lastPage上一个页面',this.navCtrl.last());
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
@@ -185,6 +178,10 @@ export class HousingPage {
        this.tagsListPage = res.data;
        this.localStorageProvider.set('tagsListPage',this.tagsListPage);
     });
+    //朝向
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.cxJSON.unshift({name:'全部',val:''});
   }
 
   isActive(item) {
@@ -679,14 +676,7 @@ export class HousingPage {
         }
      }
   }
-  //小区转换
-  // estatePipe(data){
-  //    for(var i in this.estateList){
-  //      if(data ==this.estateList[i].estateId){
-  //        return this.estateList[i].estateName
-  //      }
-  //    }
-  // }
+
 
   elevatorPipe(val){
     for(var i in this.hasElevatorJson){
@@ -776,19 +766,8 @@ export class HousingPage {
     this.openWin(MorePage);
   }
 
-  cxJSON = [
-    {name:'全部',val:''},
-    {name:'东',val:'1'},
-    {name:'东南',val:'2'},
-    {name:'南',val:'3'},
-    {name:'西南',val:'4'},
-    {name:'西',val:'5'},
-    {name:'西北',val:'6'},
-    {name:'北',val:'7'},
-    {name:'东北',val:'8'},
-    {name:'南北',val:'9'},
-    {name:'东西',val:'10'},
-  ];
+
+
   cxPipe(data){
     for(var i in this.cxJSON){
       if(data == this.cxJSON[i].val){

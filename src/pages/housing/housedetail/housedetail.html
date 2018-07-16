@@ -157,25 +157,13 @@
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectCz">
-          <ion-option value="1">东</ion-option>
-          <ion-option value="2">东南</ion-option>
-          <ion-option value="3">南</ion-option>
-          <ion-option value="4">西南</ion-option>
-          <ion-option value="5">西</ion-option>
-          <ion-option value="6">西北</ion-option>
-          <ion-option value="7">北</ion-option>
-          <ion-option value="8">东北</ion-option>
-          <ion-option value="9">南北</ion-option>
-          <ion-option value="10">东西</ion-option>
+          <ion-option *ngFor="let item of localCode['orientation'] | codeValue"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectZx">
-          <ion-option [value]="1">毛坯</ion-option>
-          <ion-option [value]="2">清水</ion-option>
-          <ion-option [value]="3">精装</ion-option>
-          <ion-option [value]="4">豪装</ion-option>
+          <ion-option *ngFor="let item of localCode['decoration'] | codeValue"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -222,10 +210,7 @@
       <ion-item class="pl12">
         <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectJx">
-          <ion-option value="0">未知</ion-option>
-          <ion-option value="1" >塔楼</ion-option>
-          <ion-option value="2">板楼</ion-option>
-          <ion-option value="3">板塔结合</ion-option>
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode['buildingType'] | codeValue">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -240,7 +225,7 @@
       <ion-item class="pl12">
         <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectYt">
-          <ion-option value="{{x.val}}" *ngFor="let x of buzzTypeJson">{{x.name}}</ion-option>
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode['buzzType'] | codeValue">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -377,8 +362,6 @@
       </ion-row>
     </ion-grid>
   </form> -->
-
-
   <!-- 修改价格审核中 -->
   <!-- <form>
     <ion-list>

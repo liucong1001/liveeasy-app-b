@@ -19,14 +19,15 @@ export class PropertyProvider {
   //业主委托
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
   private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
-  private  adetailPath = this.configProvider.set().http+'/property/delegateDocInfo/detail'
+  private  adetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditDocInfoDetail.do';
   //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
-  private  keydetailPath = this.configProvider.set().http+'/property/propertyKeyInfo/keyDetail.do';
-  // private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
+  private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
+  // private  keydetailPath = this.configProvider.set().http+'/property/propertyInfo/detail';
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
+  private  shiKanDetailPath =  this.configProvider.set().http+'/property/propertyAuditInfo/getAuditPicsInfoDetail.do';
 
   // 楼盘模糊搜索 http://47.75.151.57:7077/live/search?keyword=1&site=4200
   //http://47.75.151.57:7077/live/search?keyword=11&site=4200
@@ -125,10 +126,17 @@ export class PropertyProvider {
     // var  data = {''}
     return this.httpProvider.httpPost(this.rolePath,{propertyId:propertyId})
   }
+
+
   //实勘图
   shiKanSave(arrPic,propertyId){
     return this.httpProvider.httpPostForm(this.shiKanPath,"arrPic=" + arrPic+"&propertyId="+propertyId);
   }
+  //实勘图详情
+   shikanDetail(propertyId){
+     return this.httpProvider.httpPost(this.shiKanDetailPath + '?propertyId='+ propertyId ,propertyId)
+   }
+
   //专用版楼盘搜索
   searchFloor(params){
     var site = '2000';

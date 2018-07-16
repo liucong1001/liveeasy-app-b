@@ -7,6 +7,7 @@ import {MyApp} from "../../../app/app.component"
 import { NgZone  } from '@angular/core';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {CodeValuePipe} from "../../../pipes/code-value/code-value";
 /**
  * Generated class for the MorePage page.
  *
@@ -37,9 +38,25 @@ export class MorePage {
   selected3:any;
   structure: any = {lower: 0, upper: 1000};
   spaceSize:any ;
+  localCode:any;
+  cxJSON:Array<{name:string;val:string}>;
+  decorationJson:Array<{name:string;val:string}>;
+  buildingTypeJson:Array<{name:string;val:string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider: LocalStorageProvider,
               public events: Events, private zone: NgZone,public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,) {
+    //朝向
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.cxJSON.unshift({name:'全部',val:''});
+
+    //装修
+    this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
+    this.decorationJson.unshift({name:'全部',val:''});
+
+    //建筑类型
+    this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
+    this.buildingTypeJson.unshift({name:'全部',val:''});
 
   }
 
@@ -102,20 +119,6 @@ export class MorePage {
     {name:'待审核实勘房源',val:2},
     {name:'待确认钥匙房源',val:3},
   ];
-  //朝向
-  cxJSON = [
-    {name:'全部',val:''},
-    {name:'东',val:'1'},
-    {name:'东南',val:'2'},
-    {name:'南',val:'3'},
-    {name:'西南',val:'4'},
-    {name:'西',val:'5'},
-    {name:'西北',val:'6'},
-    {name:'北',val:'7'},
-    {name:'东北',val:'8'},
-    {name:'南北',val:'9'},
-    {name:'东西',val:'10'},
-  ];
 
   //电梯
   dtJson = [
@@ -123,15 +126,7 @@ export class MorePage {
     {name:'无',val:'0'},
     {name:'有',val:'1'},
   ];
-  //装修
-  decorationJson = [
-    {name:'全部',val:''},
-    {name:'毛坯',val:'1'},
-    {name:'简装',val:'2'},
-    {name:'中等装修',val:'3'},
-    {name:'精装',val:'4'},
-    {name:'豪装',val:'5'},
-  ];
+
   //楼层
   floorJson = [
     {name:'地下',val:'-1'},
@@ -139,14 +134,7 @@ export class MorePage {
     {name:'中层',val:'2'},
     {name:'高层',val:'3'},
   ];
-  //建筑类型
-  buildingTypeJson=[
-    {name:'全部',val:''},
-    {name:'未知',val:'0'},
-    {name:'塔楼',val:'1'},
-    {name:'板楼',val:'2'},
-    {name:'板塔结合',val:'3'},
-  ];
+
   //房屋用途
   buzzTypeJson = [
     {name:'全部',val:''},

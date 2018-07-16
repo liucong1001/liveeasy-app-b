@@ -10,6 +10,7 @@ import {RolepeoplePageModule} from "./rolepeople/rolepeople.module";
 import {SearchhousePageModule} from "./searchhouse/searchhouse.module";
 import {DirectivesModule} from "../../../directives/directives.module";
 import {IonicPageModule} from "ionic-angular";
+import {PipesModule} from "../../../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {IonicPageModule} from "ionic-angular";
     RecordPageModule,
     RolepeoplePageModule,
     SearchhousePageModule,
+    PipesModule,
   ],
 })
 export class HousedetailPageModule {}

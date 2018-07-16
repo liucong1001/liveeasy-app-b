@@ -33,28 +33,7 @@ export class HousmorePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousmorePage');
   }
-
-
-  // <ion-option value="0">未知</ion-option>
-  //   <ion-option value="1" >塔楼</ion-option>
-  //   <ion-option value="2">板楼</ion-option>
-  //   <ion-option value="3">板塔结合</ion-option>
-  buildingTypeJson = [
-    {name:'未知',val:'0'},
-    {name:'塔楼',val:'1'},
-    {name:'板楼',val:'2'},
-    {name:'板塔结合',val:'3'},
-  ]
-
-  buildingTypePipe(data){
-    for(var i in this.buildingTypeJson){
-      if(data == this.buildingTypeJson[i].val){
-        return this.buildingTypeJson[i].name;
-      }
-    }
-  }
-
-  // JSON.parse
+  // 联系人
   contactPipe(data){
     return JSON.parse(data);
   }

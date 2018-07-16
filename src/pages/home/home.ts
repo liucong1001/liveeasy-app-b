@@ -13,6 +13,7 @@ import {CheckhousePage} from "./checkhouse/checkhouse";
 import {HomesearchPage} from "./homesearch/homesearch";
 import {TabsPage}from "./../tabs/tabs";
 import {StatisticsPage} from "./statistics/statistics";
+import {CodeValuePipe} from "../../pipes/code-value/code-value";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -23,12 +24,20 @@ export class HomePage {
   notificationNews = [];
   @ViewChild('navbar') navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
+  codeData:any;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,
              ) {
     this.localStorageProvider.del('searchMoreData');
+    this.homeProvider.getCode().then(res=>{
+        if(res.success){
+          this.localStorageProvider.set('codeData', JSON.parse(res.data) );
+          var data= JSON.parse(res.data);
+          console.log('朝向：----',new CodeValuePipe().transform(data['orientation']));
+        }
+    });
   }
   //状态栏文字颜色修改-黑色
   ionViewWillEnter() {
@@ -38,6 +47,8 @@ export class HomePage {
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}
     });
+
+
   }
 
   //禁用调出键盘

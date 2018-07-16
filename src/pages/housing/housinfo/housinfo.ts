@@ -17,6 +17,7 @@ import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
+import {CodeValuePipe} from "../../../pipes/code-value/code-value";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -46,27 +47,33 @@ export class HousinfoPage {
   @ViewChild('navbar') navBar: Navbar;
   @ViewChild(Content) content: Content;
   classFlag=false;
-  //百度地图
-  opts:any;
+  opts:any;//百度地图
+  localCode:any;
+  cxJSON:Array<{name:string;val:string}>;
+  buzzTypeJson:Array<{name:string;val:string}>;
+  decorationJson:Array<{name:string;val:string}>;
+  buildingTypeJson:Array<{name:string;val:string}>;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,public app: App
               ) {
-    // this.data=navParams.get('propertyId');
-    // console.log(this.data);
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
-
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.buzzTypeJson = new CodeValuePipe().transform(this.localCode['buzzType']);
+    this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
+    this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
   }
-  scrollHandler(event) {
 
+
+  scrollHandler(event) {
     if (this.content.scrollTop >= 10){
-      // alert(2)
       this.classFlag=true;
     }else if(this.content.scrollTop < 50){
       this.classFlag=false;
     }
   }
-flag=false;
+  flag=false;
   fyDescribe=false;
 
   @ViewChild('mySlider') slider:Slides;
@@ -106,10 +113,6 @@ flag=false;
        this.imgJson = JSON.parse(this.navParams.get('item').propertyPics);
      }
  }else if(this.navParams.get('propertyId')){
-     // let loading = this.loadingCtrl.create({
-     //   content: '数据加载中...'
-     // });
-     // loading.present();
      this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
          if(res.success){
            this.houseData=res.data;
@@ -118,8 +121,6 @@ flag=false;
            if(res.data.propertyPics){
              this.imgJson = JSON.parse(res.data.propertyPics);
            }
-
-           // loading.dismiss();
          }
      });
  }
@@ -127,23 +128,20 @@ flag=false;
 
      //业主委托书
     this.propertyProvider.adetail(this.propertyId).then(res=>{
-
-      if(res.msg == 1){
-        this.letteratorneyData = res.data;
-        this.letteratorneyImgJson = JSON.parse(res.data.delegateDocPics);
+      if(res.success&&res.data ){
+        this.letteratorneyData = JSON.parse(JSON.stringify(res.data.content));
+        console.log('业主委托书',this.letteratorneyData);
       }
     });
     //钥匙信息
     this.propertyProvider.keydetail(this.propertyId).then(res=>{
         if(res.success&&res.data){
-          this.keyData = res.data;
-         console.log('钥匙',res.data);
-          if(this.keyData.keyDlgtFilePics){
-            this.keyImgJson = JSON.parse(this.keyData.keyDlgtFilePics); //默认展示有图片
-          }
-
+          // this.keyData = res.data.content;
+          // this.keyData = JSON.parse(this.keyData.toString());
+          this.keyData = JSON.parse(JSON.stringify(res.data.content));
         }
-    })
+    });
+    this.propertyProvider.shikanDetail(this.propertyId).then();
 
     //baidu map
     this.opts = {
@@ -227,28 +225,7 @@ flag=false;
     };
   }
 
-  buildingTypeJson = [
-    {name:'--',val:'0'},
-    {name:'塔楼',val:'1'},
-    {name:'板楼',val:'2'},
-    {name:'板塔结合',val:'3'},
-  ];
 
-  buildingTypePipe(data){
-    for(var i in this.buildingTypeJson){
-      if(data == this.buildingTypeJson[i].val){
-        return this.buildingTypeJson[i].name;
-      }
-    }
-  }
-
-
-  //房屋用途
-  buzzTypeJson = [
-    {name:'出售',val:'1'},
-    {name:'售租',val:'2'},
-    {name:'租售',val:'3'},
-  ];
 //通用转换
   houseInfoPipe(data,Arry){
       for(var i in Arry){
@@ -258,16 +235,12 @@ flag=false;
       }
   }
 
-
-
   goMore(){
      this.openWin(HousmorePage,{item:this.houseData});
-    // this.navCtrl.push(HousmorePage,{item:this.houseData})
   }
 
   edit(){
     this.openWin(HousedetailPage,{propertyId:this.propertyId});
-    // this.openWin();
   }
 
   rolepeople(){
@@ -304,41 +277,11 @@ flag=false;
     }
   }
 
-  //朝向
-  cxJSON = [
-    // {name:'全部',val:''},
-    {name:'东',val:'1'},
-    {name:'东南',val:'2'},
-    {name:'南',val:'3'},
-    {name:'西南',val:'4'},
-    {name:'西',val:'5'},
-    {name:'西北',val:'6'},
-    {name:'北',val:'7'},
-    {name:'东北',val:'8'},
-    {name:'南北',val:'9'},
-    {name:'东西',val:'10'},
-  ];
-
   orentationPipe(data){
     for(var i in this.cxJSON){
        if(data == this.cxJSON[i].val){
           return this.cxJSON[i].name;
        }
-    }
-  }
-
-  decorationJson = [
-    {name:'毛坯',val:'1'},
-    {name:'简装',val:'2'},
-    {name:'中等装修',val:'3'},
-    {name:'精装',val:'4'},
-    {name:'豪装',val:'5'},
-  ];
-  decorationPipe (data){
-    for(var i in this.decorationJson){
-        if(data==this.decorationJson[i].val){
-            return this.decorationJson[i].name;
-        }
     }
   }
 
