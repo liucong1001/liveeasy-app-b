@@ -103,9 +103,11 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
     this.localCode = this.localStorageProvider.get('codeData');
-    // this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
-    // this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
-    // this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
+  }
+
+  selectTitle(data){
+     var title = {title:data};
+     return title;
   }
 
 

@@ -145,13 +145,13 @@
       </ion-list>
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectCz">
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectTitle('朝向')">
           <ion-option *ngFor="let item of localCode['orientation'] | codeValue"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectZx">
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectTitle('装修')">
           <ion-option *ngFor="let item of localCode['decoration'] | codeValue"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
