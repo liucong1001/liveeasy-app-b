@@ -18,6 +18,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
 import {CodeValuePipe} from "../../../pipes/code-value/code-value";
+import {AuditPage} from "./audit/audit";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -246,6 +247,9 @@ export class HousinfoPage {
   rolepeople(){
     this.openWin(RolepeoplePage,{propertyid:this.propertyId});
   };
+  goAudit(){
+    this.openWin(AuditPage);
+  }
   //跟进
   goFollow(){
     this.openWin(FollowPage,{

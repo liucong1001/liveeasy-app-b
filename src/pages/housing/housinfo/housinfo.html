@@ -39,13 +39,21 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4 class="p0">
-          <p class="tieDefault">总价</p>
+          <p class="abnormal">异常价格</p>
           <div class="houseInfo ellipsis">
             {{houseData.propertyPrice}}
             {{houseData.propertyPriceUnit==1?'万':'元'}}
-           </div>
+          </div>
           <div class="middleHouseType"></div>
         </ion-col>
+        <!--<ion-col col-4 class="p0">-->
+          <!--<p class="tieDefault">总价</p>-->
+          <!--<div class="houseInfo ellipsis">-->
+            <!--{{houseData.propertyPrice}}-->
+            <!--{{houseData.propertyPriceUnit==1?'万':'元'}}-->
+           <!--</div>-->
+          <!--<div class="middleHouseType"></div>-->
+        <!--</ion-col>-->
         <ion-col col-4  class="infoPadding p0">
           <p class="tieDefault">户型</p>
           <div class="houseInfo">
@@ -127,6 +135,14 @@
       <div class="p10">
         <button ion-button color="danger" full (click)="goMore()">更多信息</button>
       </div>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button class="priAudit" full (click)="goAudit()">价格审核</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button color="danger" full (click)="goMore()">更多信息</button>
+        </ion-col>
+      </ion-row>
     </div>
   </div>
   <div class="m10 bgWhite describe" *ngIf="houseData.propertyDesc">

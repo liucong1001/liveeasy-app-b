@@ -10,7 +10,10 @@
 <ion-content>
   <ion-row>
     <ion-col col-3 class="bgWhite storeList p0">
-      <a class="tc" *ngFor="let i of storeJSON" (click)="go(i)" [ngClass]="{'active':isActive(i),'defaultBg':aa}">{{i.name}}</a>
+      <a class="tc ellipsis" *ngFor="let i of department" (click)="go(i)" [ngClass]="{'active':isActive(i)}">
+        <span *ngIf="i.storeName">{{i.storeName}}</span>
+        <span *ngIf="!i.storeName">{{i.deptName}}</span>
+      </a>
     </ion-col>
     <ion-col col-9 class="storeMain">
         <div class="bgWhite topMain">
@@ -56,11 +59,27 @@
         </ion-segment>
       </ion-toolbar>
 
-      <div [ngSwitch]="pet" class="bgWhite tableList" style="">
-          <table width="100%" *ngSwitchCase="'house'">
+      <div [ngSwitch]="pet" class="bgWhite tableList">
+          <table width="100%" *ngSwitchCase="'house'" >
             <tr class="tc">
               <td>新增房源</td>
-              <td>8</td>
+              <td >{{xzNum}}</td>
+            </tr>
+            <tr class="tc">
+              <td>实勘房源</td>
+              <td >{{skNum}}</td>
+            </tr>
+            <tr class="tc">
+              <td>空看次数</td>
+              <td >{{kkNum}}</td>
+            </tr>
+            <tr class="tc">
+              <td>房源跟进次数</td>
+              <td >{{flNum}}</td>
+            </tr>
+            <tr class="tc">
+              <td>激活房源</td>
+              <td >{{jhNum}}</td>
             </tr>
 
           </table>

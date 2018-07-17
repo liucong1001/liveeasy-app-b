@@ -53,26 +53,27 @@
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
   <ion-grid class="p0 relative" >
-    <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;" *ngIf="searchMore()">已选：
-      <a *ngFor="let i of datas.tagsArry;let i =index;">
+    <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;" *ngIf="searchMore()">
+      <a style="padding: 1px 3px" *ngFor="let i of datas.tagsArry;let i =index;">
         {{tagName(i)}}
-      </a><span *ngIf="datas.orientation && datas.tagsArry.length!=0">/</span><span *ngIf="datas.orientation !=0">&nbsp;{{cxPipe(datas.orientation)}}</span>
-      <span *ngIf="datas.hasElevator">/&nbsp;{{datas.hasElevator=='0'?'无':'有'}}</span>
-      <span *ngIf="spaceSizeName">/&nbsp;{{spaceSizeName}}</span>
-      <span  *ngIf="decorationName"  [hidden]="decorationName=='全部'">/&nbsp;{{decorationName}}</span>
-      <span  *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">/&nbsp;{{buildingTypeName}}</span>
-      <span  *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">/&nbsp;{{buzzTypeName}}</span>
+      </a>
+      <span class="moreTip" *ngIf="datas.orientation !=0">{{cxPipe(datas.orientation)}}</span>
+      <span class="moreTip" *ngIf="datas.hasElevator">{{datas.hasElevator=='0'?'无':'有'}}</span>
+      <span class="moreTip" *ngIf="spaceSizeName">{{spaceSizeName}}</span>
+      <span class="moreTip" *ngIf="decorationName"  [hidden]="decorationName=='全部'">{{decorationName}}</span>
+      <span class="moreTip" *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">{{buildingTypeName}}</span>
+      <span class="moreTip" *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">{{buzzTypeName}}</span>
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
       <ion-col col-12 tappable (click)="goHouseDetail(item)" >
         <ion-row>
-          <ion-col col-4 >
+          <ion-col col-4 style="margin-top: 2px">
             <!--懒加载图片-->
             <!--<img  [offset]="offset" [defaultImage]="'assets/imgs/default.jpg'"-->
                   <!--[lazyLoad]="imgHeader+pic(item?.propertyPics)"-->
                   <!--alt="" width="90%" height="70">-->
-            <img [src]=" item?.propertyPics?imgHeader+pic(item?.propertyPics):'assets/imgs/default.jpg'" alt="" width="90%" height="70">
+            <img [src]=" item?.propertyPics?imgHeader+pic(item?.propertyPics):'assets/imgs/default.jpg'" alt="" width="85%" height="65">
           </ion-col>
 
           <ion-col col-8>

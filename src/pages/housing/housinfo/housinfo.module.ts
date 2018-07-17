@@ -6,6 +6,7 @@ import {ComponentsModule} from "../../../components/components.module";
 import {DirectivesModule} from "../../../directives/directives.module";
 import {DescribePageModule} from "./describe/describe.module";
 import {BaiduMapModule } from "angular2-baidu-map";
+import {AuditPageModule} from "./audit/audit.module";
 @NgModule({
   declarations: [
     HousinfoPage,
@@ -16,6 +17,7 @@ import {BaiduMapModule } from "angular2-baidu-map";
     ComponentsModule,DirectivesModule,
     DescribePageModule,
     BaiduMapModule,
+    AuditPageModule
   ],
 })
 export class HousinfoPageModule {}

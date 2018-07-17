@@ -1,0 +1,22 @@
+page-audit {
+  font-size: 1.5rem;
+  h6{
+    font-weight: 500;
+  }
+  .priAudit{
+    background: #F7604B !important;
+    color: #fff !important;
+  }
+  .priAudit.activated{
+    background: #F7604B !important;
+  }
+  .button-ios{
+    border-radius: 30px;
+  }
+  .yzCss ion-col[col-6]{
+    padding: 25px 10px 0;
+  }
+  .activated{
+    background: #1ab394 !important;
+  }
+}
