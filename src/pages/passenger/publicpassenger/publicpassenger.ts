@@ -6,6 +6,7 @@ import {CustomerProvider} from "../../../providers/customer/customer";
 import {PublicpdetailPage} from "./publicpdetail/publicpdetail";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  公客列表
  */
@@ -47,7 +48,7 @@ export class PublicpassengerPage {
   };
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController,
-              public nativePageTransitions: NativePageTransitions,
+              public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar,
               public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
               public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,public toast:ToastComponent,) {
     this.customerProvider.area().then(res=>{
@@ -74,7 +75,10 @@ export class PublicpassengerPage {
     // };
 
   }
-
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   selected :any;
   isActive(item) {
     return this.selected === item;

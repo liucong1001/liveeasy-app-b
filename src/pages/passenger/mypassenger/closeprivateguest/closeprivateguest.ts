@@ -4,7 +4,7 @@ import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the CloseprivateguestPage page.
  *
@@ -25,7 +25,8 @@ export class CloseprivateguestPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public customerProvider:CustomerProvider,
-              public toast:ToastComponent,) {
+              public toast:ToastComponent,
+              public statusBar: StatusBar,) {
     this.clientID=navParams.get('item').customerSn;
     this.clientName=navParams.get('item').customerName;
     this.clientPhone=navParams.get('item').customerPhone;
@@ -36,6 +37,10 @@ export class CloseprivateguestPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CloseprivateguestPage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
   form:FormGroup =this.fb.group({
     customerStatus:['',Validators.required],

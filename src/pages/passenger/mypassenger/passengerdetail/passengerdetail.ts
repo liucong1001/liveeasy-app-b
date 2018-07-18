@@ -10,6 +10,7 @@ import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchho
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {DescsPage} from "../descs/descs";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -43,7 +44,8 @@ export class PassengerdetailPage {
   estateName:'';
   selectOptionGs:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,public toast:ToastComponent,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
+  constructor(public navCtrl: NavController,public statusBar: StatusBar,
+              public toast:ToastComponent,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events) {
     this.selectOptionGs={
@@ -113,6 +115,10 @@ export class PassengerdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerdetailPage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
   form:FormGroup =this.fb.group({
     customerId:['',Validators.required],

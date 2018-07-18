@@ -6,6 +6,7 @@ import {ToastComponent} from "../../../../../../components/toast/toast";
 import {PlookrecordPage} from "../plookrecord";
 import {PassengerdetailPage} from "../../passengerdetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the ClosePage page.
  *
@@ -23,7 +24,7 @@ export class ClosePage {
   customerid:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
-              public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,
+              public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar,
               private fb:FormBuilder, public navParams: NavParams,public customerProvider:CustomerProvider,) {
     this.customerid=navParams.get('item');
     console.log(this.customerid)
@@ -38,6 +39,10 @@ export class ClosePage {
   form:FormGroup =this.fb.group({
     content:['',Validators.required],//内容
   });
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   sub(){
     this.customerProvider.mfinish(this.followupId,3,this.form.value.content).then(res => {
       console.log(res);

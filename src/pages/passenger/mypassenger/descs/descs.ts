@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
-
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the DescsPage page.
  *
@@ -17,7 +17,7 @@ export class DescsPage {
 val:any;
 content:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public events: Events) {
+              public events: Events,public statusBar: StatusBar,) {
     this.val=navParams.get('val');
     this.content = navParams.get('content');
   }
@@ -26,6 +26,10 @@ content:any;
     console.log('ionViewDidLoad DescsPage');
   }
 
+//状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   save(){
     var data = {
        num:this.navParams.get('val'),

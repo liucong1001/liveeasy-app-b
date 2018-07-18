@@ -24,7 +24,8 @@ export class PassengerfollowPage {
   clientName:any;
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController,
+              public statusBar: StatusBar, public navParams: NavParams,
   private fb:FormBuilder,public customerProvider:CustomerProvider,public nativePageTransitions: NativePageTransitions,
               public toast:ToastComponent,) {
     this.clientID=navParams.get('item').customerSn;
@@ -37,6 +38,10 @@ export class PassengerfollowPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerfollowPage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
   form:FormGroup =this.fb.group({
     followupCode:['1',Validators.required],

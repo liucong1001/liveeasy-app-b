@@ -10,6 +10,7 @@ import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
 import {PassengerPage} from "../passenger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -56,6 +57,7 @@ export class MypassengerPage {
   @ViewChild('navbar') navBar: Navbar;
 
   constructor(public navCtrl: NavController,
+              public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
     this.customerProvider.area().then(res=>{
@@ -82,6 +84,10 @@ export class MypassengerPage {
     //   this.navCtrl.pop({animate:false});
     //
     // };
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
   navbar=true;
   ionViewWillUnload(){

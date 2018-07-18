@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import { AddpassengerPage } from './mypassenger/addpassenger/addpassenger';
 import { MypassengerPage } from './mypassenger/mypassenger';
 import { PublicpassengerPage } from './publicpassenger/publicpassenger';
@@ -20,7 +20,7 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
   templateUrl: 'passenger.html',
 })
 export class PassengerPage {
-
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams, public statusBar: StatusBar,
@@ -43,6 +43,7 @@ export class PassengerPage {
   publicpassenger(){
     this.openWin(PublicpassengerPage,null)
   }
+
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
     let options: NativeTransitionOptions = {

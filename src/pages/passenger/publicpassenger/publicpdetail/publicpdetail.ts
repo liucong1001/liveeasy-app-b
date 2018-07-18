@@ -6,6 +6,7 @@ import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ToastComponent} from "../../../../components/toast/toast";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the PublicpdetailPage page.
@@ -30,6 +31,7 @@ export class PublicpdetailPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
+              public statusBar: StatusBar,
               public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent) {
     this.customerId=navParams.get('customerId');
@@ -53,6 +55,10 @@ export class PublicpdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PublicpdetailPage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
   clickIntention(){
     if(this.showIntention==false ){

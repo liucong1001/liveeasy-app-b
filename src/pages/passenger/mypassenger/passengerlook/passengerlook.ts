@@ -7,6 +7,7 @@ import {SearchPage} from "./search/search";
 import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchhouse";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {MypassengerPage} from "../mypassenger";
+import {StatusBar} from "@ionic-native/status-bar";
 @IonicPage()
 @Component({
   selector: 'page-passengerlook',
@@ -18,7 +19,7 @@ export class PassengerlookPage {
   clientName:any;
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+  constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public customerProvider:CustomerProvider,
               public toast:ToastComponent,  public events: Events) {
     this.clientID=navParams.get('item').customerSn;
@@ -36,6 +37,10 @@ export class PassengerlookPage {
     propertyId:[''],
     appointmentTm:['',Validators.required],
   });
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
 
   fy(){
     this.events.subscribe('bevents', (params) => {

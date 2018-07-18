@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Events } from 'ionic-angular';
 import {PropertyProvider} from "../../../../../providers/property/property";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 @IonicPage()
 @Component({
   selector: 'page-search',
@@ -17,7 +18,7 @@ export class SearchPage {
   estateList:[any];//楼盘
   callback:any;
   search:any;
-  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
+  constructor(public navCtrl: NavController,public statusBar: StatusBar,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
 
@@ -50,6 +51,10 @@ export class SearchPage {
     if(this.floorList ==null){this.floorList = []}
     console.log('历史',this.floorList);
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
 
 

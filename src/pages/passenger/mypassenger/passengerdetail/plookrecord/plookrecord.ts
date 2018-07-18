@@ -7,6 +7,7 @@ import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {ClosePage} from "./close/close";
 import {PassengerdetailPage} from "../passengerdetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -27,7 +28,7 @@ export class PlookrecordPage {
   customerid:any;
   params:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public customerProvider:CustomerProvider,
+  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
     this.customerid=navParams.get('id').customerId;
     console.log(this.customerid)
@@ -37,7 +38,10 @@ export class PlookrecordPage {
         this.lRecord=res.data.result
       });
   }
-
+//状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlookrecordPage');
     this.navBar.backButtonClick = this.backButtonClick;

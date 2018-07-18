@@ -4,6 +4,7 @@ import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger
 import {ToastComponent} from "../../../../../components/toast/toast";
 import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the PfollowrecordPage page.
  *
@@ -21,7 +22,7 @@ export class PfollowrecordPage {
   params:any;
   customerid:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+  constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public customerProvider:CustomerProvider,
               public toast:ToastComponent,) {
     this.customerid=navParams.get('id').customerId;
@@ -39,6 +40,10 @@ export class PfollowrecordPage {
   }
   addHouse(){
     this.navCtrl.push(AddpassengerPage)
+  }
+  //状态栏文字颜色修改-白色
+  ionViewWillEnter() {
+    this.statusBar.styleLightContent();
   }
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
