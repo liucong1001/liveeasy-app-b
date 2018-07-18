@@ -248,7 +248,7 @@ export class HousinfoPage {
     this.openWin(RolepeoplePage,{propertyid:this.propertyId});
   };
   goAudit(){
-    this.openWin(AuditPage);
+    this.openWin(AuditPage,{houseInfo:this.navParams.get('item')});
   }
   //跟进
   goFollow(){

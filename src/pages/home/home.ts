@@ -35,7 +35,6 @@ export class HomePage {
         if(res.success){
           this.localStorageProvider.set('codeData', JSON.parse(res.data) );
           var data= JSON.parse(res.data);
-          console.log('朝向：----',new CodeValuePipe().transform(data['orientation']));
         }
     });
   }

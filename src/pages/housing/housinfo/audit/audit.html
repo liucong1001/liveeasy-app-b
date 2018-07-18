@@ -11,13 +11,13 @@
     <h6>基础信息</h6>
     <ion-row>
       <ion-col col-12 >
-        <span class="defaults">房源ID：</span>
+        <span class="defaults">房源ID：{{data.convIdReq}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">所属楼盘：</span>
+        <span class="defaults">所属楼盘：{{data.estateName}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">区县：</span>
+        <span class="defaults">区县：{{distrsPipe(data.adminDivisionCode)}}</span>
       </ion-col>
       <ion-col col-12>
         <span class="defaults">商圈：</span>
@@ -28,16 +28,20 @@
     <h6>审核信息</h6>
     <ion-row>
       <ion-col col-12>
-        <span class="defaults">审核类型：</span>
+        <span class="defaults">审核类型： 价格异常</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">提交人：</span>
+        <span class="defaults">提交人：{{data.realtorId}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">提交时间：</span>
+        <span class="defaults">提交时间：{{data.createdTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">异常价格：</span>
+        <span class="defaults">异常价格：
+                      {{data.propertyAuditContentVo.abnormalPrice}}  &nbsp; &nbsp;
+                      {{data.propertyAuditContentVo.abnormalUnitPrice}}
+              <span *ngIf="data.propertyAuditContentVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
+        </span>
       </ion-col>
     </ion-row>
     <ion-row>

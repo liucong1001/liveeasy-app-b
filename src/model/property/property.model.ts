@@ -1,3 +1,5 @@
+import {PriceAbnormalModel} from "./priceAbnormal.model";
+
 /**
  * lc   房源-模型对象层
  */
@@ -145,4 +147,15 @@ export  class PropertyModel {
   applyStatus?:boolean;
 
   realtorUpdateShow?:boolean;
+  /**
+   * 异常价格
+   */
+  propertyAuditContentVo?:PriceAbnormalModel;
+  /**
+   * 区县码值
+   */
+  adminDivisionCode?:any;
+
+  realtorId?:any;
+
 }

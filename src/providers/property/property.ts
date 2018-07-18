@@ -20,7 +20,7 @@ export class PropertyProvider {
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
   private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
   private  adetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditDocInfoDetail.do';
-  //钥匙
+  //钥匙property/ propertyAuditInfo/getAuditKeyInfoDetail.do
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
   // private  keydetailPath = this.configProvider.set().http+'/property/propertyInfo/detail';
@@ -115,7 +115,7 @@ export class PropertyProvider {
   }
   //钥匙详情
   keydetail(propertyId) {
-    return this.httpProvider.httpPost(this.keydetailPath + '?propertyId='+ propertyId ,propertyId)
+    return this.httpProvider.httpPostForm(this.keydetailPath  ,'propertyId='+propertyId)
   }
   //钥匙修改
   keyupdate(params?) {

@@ -90,9 +90,9 @@ export class HousedetailPage {
     this.form.value.tags= this.tagsSum(value);
   };
   ionViewWillEnter() {
-    this.navBar.backButtonClick = () => {
-      this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
-    };
+    // this.navBar.backButtonClick = () => {
+    //   this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
+    // };
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
