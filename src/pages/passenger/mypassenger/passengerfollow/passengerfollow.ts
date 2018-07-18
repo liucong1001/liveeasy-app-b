@@ -6,6 +6,7 @@ import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {MypassengerPage} from "../mypassenger";
 import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  * Generated class for the PassengerfollowPage page.
  *
