@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {StatusBar} from "@ionic-native/status-bar";
 import {HomeProvider} from "../../../providers/home/home";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {PersonPage} from "./person/person";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 /**
  * Generated class for the StatisticsPage page.
@@ -23,54 +26,30 @@ export class StatisticsPage {
   data:any;
   department = [];
   personal=[];
-  status=[];
+  @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public homeProvider:HomeProvider,private fb:FormBuilder,
-              public statusBar: StatusBar, public navParams: NavParams) {
-    function unique4(array){
-      array.sort();
-      var re=[array[0]];
-      for(var i = 1; i < array.length; i++){
-        if( array[i] !== re[re.length-1])
-        {
-          re.push(array[i]);
-        }
-      }
-      return re;
-    }
+              public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
     this.homeProvider.statis({
-      startTime:this.startTime,
-      endTime:this.endTime,
+      startTime:'20180717',
+      endTime:'20180717',
     }).then(res=>{
-      // console.log(res.data)
       this.data=res.data;
       let sorted = this.groupBy(res.data, function(item){
-        return [item.deptId];
+        if(item.storeCode){
+          return [item.storeCode];
+        }else {
+          return [item.deptId];
+        }
       });
-      // console.log('部门',sorted);
+      console.log('部门',sorted);
       for (var i in sorted) {
         this.department.push(sorted[i][0]);
-        // let person = this.groupBy(sorted[i], function (item) {
-        //   return [item.personId];
-        // });
-        // for(var j in person){
-        //   this.personal.push(person[j]);
-        //
-        //   let status = this.groupBy(person[j], function(item){
-        //     return [item.statItem];
-        //   });
-        //   for(var h in status){
-        //     this.status.push(status[h]);
-        //   }
-        // }
       }
-      // console.log("部门",this.department);
-      // console.log("员工",this.personal);
-      // console.log("状态",this.status);
-
     });
 
   }
 
+  // 分组
   groupBy( array , f ) {
     let groups = {};
     array.forEach( function( o ) {
@@ -84,14 +63,13 @@ export class StatisticsPage {
   }
 
 
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad StatisticsPage');
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   form:FormGroup =this.fb.group({
     startTime:[''],
@@ -101,25 +79,65 @@ export class StatisticsPage {
   startTime:any;
   endTime:any;
   getcontactFreeTm1(event){
-    this.startTime=event.year+'0'+ event.month +'0'+event.day;
+    this.startTime=event.year+'0'+ event.month+event.day;
     console.log('时间',event,this.startTime);
+
   }
   getcontactFreeTm2(event){
-    this.endTime=event.year+'0'+ event.month +'0'+event.day;
+    this.department=[];
+    this.endTime=event.year+'0'+ event.month +event.day;
     this.homeProvider.statis({
       startTime:this.startTime,
       endTime:this.endTime,
     }).then(res=>{
-      console.log(res)
+      console.log(res);
+      this.data=res.data;
+      let sorted = this.groupBy(res.data, function(item){
+        if(item.storeCode){
+          return [item.storeCode];
+        }else {
+          return [item.deptId];
+        }
+      });
+      console.log('部门',sorted);
+      for (var i in sorted) {
+        this.department.push(sorted[i][0]);
+      }
     });
     console.log('表单',event);
   }
+
+
   id:any;
   xzNum=0;
   skNum=0;
   kkNum=0;
   flNum=0;
   jhNum=0;
+
+  searchs(item){
+    this.department=[];
+    this.homeProvider.statis({
+      startTime:item.start,
+      endTime:item.end,
+    }).then(res=>{
+      // console.log(res.data)
+      this.data=res.data;
+      let sorted = this.groupBy(res.data, function(item){
+        if(item.storeCode){
+          return [item.storeCode];
+        }else {
+          return [item.deptId];
+        }
+      });
+      console.log('部门',sorted);
+      for (var i in sorted) {
+        this.department.push(sorted[i][0]);
+      }
+    });
+  }
+
+
   go(i){
     this.selected = i;
     if(this.selected.storeName){
@@ -127,19 +145,29 @@ export class StatisticsPage {
     }else {
       this.name=this.selected.deptName;
     }
-    console.log(i.deptId)
+    console.log(i.deptId);
+    this.id=i.deptId;
     let sorted = this.groupBy(this.data, function(item){
+      if(item.storeCode){
+        return [item.storeCode];
+      }else {
         return [item.deptId==i.deptId];
+      }
       });
+
+    //循环前置空所属对象
+    this.personal=[];
+    this.xzNum=0;
+    this.skNum=0;
+    this.kkNum=0;
+    this.flNum=0;
+    this.jhNum=0;
+    //通过部门ID分组，循环数据
     for (var j in sorted){
-
       for(var h=0;h<sorted[j].length;h++){
-        if (sorted[j][h].deptId==i.deptId){
 
-            this.personal.push(sorted[j][h])
+        if (sorted[j][h].deptId==i.deptId || sorted[j][h].storeCode==i.deptId){
           if(sorted[j][h].statItem == 3001){
-              debugger;
-
             // console.log('3001',sorted[j][h]);
             this.xzNum+=sorted[j][h].stateValue;
           }
@@ -161,16 +189,22 @@ export class StatisticsPage {
           }
         }
       }
+      this.personal.push(sorted[j])
     }
     console.log('3001',this.xzNum +'/' + '3025',this.skNum +'/' + '3011',this.kkNum +'/'+
       '3012',this.flNum +'/' +'3007',this.jhNum )
+    console.log('员工',this.personal)
   }
+
+
+
+
   titleJSON=[
-    {name:'新增房源',val:'3001'},
-    {name:'实勘房源',val:'3025'},
-    {name:'空看次数',val:'3011'},
-    {name:'房源跟进次数',val:'3012'},
-    {name:'激活房源',val:'3007'}
+    {name:'昨天',start:'20180717',end:'20180717',val:0},
+    {name:'前天',start:'20180716',end:'20180716',val:1},
+    {name:'本周',start:'20180716',end:'20180722',val:2},
+    {name:'上周',start:'20180709',end:'20180715',val:3},
+    {name:'本月',start:'20180701',end:'20180731',val:4},
   ]
   tipipe(val){
     for(var i in this.titleJSON){
@@ -180,7 +214,41 @@ export class StatisticsPage {
     }
   }
 
+  persons(){
+    this.openWin(PersonPage,{
+      data:this.personal,
+      id:this.id,
+    })
+  }
+
   isActive(i) {
     return this.selected === i;
   };
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
+  //------返回处理--------//
+  backButtonClick = (e: UIEvent) => {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: 3,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+    this.navCtrl.pop({animate:false});
+  }
 }

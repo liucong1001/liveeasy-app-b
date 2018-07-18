@@ -28,7 +28,7 @@
         <form [formGroup]="form">
           <ion-list>
             <ion-item>
-              <ion-datetime placeholder="请选择时间" formControlName="startTime" (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+              <ion-datetime placeholder="请选择时间" formControlName="startTime"  (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
             </ion-item>
             <ion-item class="defaults">—</ion-item>
             <ion-item>
@@ -39,25 +39,45 @@
 
       </div>
 
+      <ion-list>
+        <button ion-item class="testCss" (click)="persons()">
+          查看员工
+        </button>
+      </ion-list>
+      <!--<div class="p15">-->
+        <!--<a *ngFor="let item of titleJSON" (click)="searchs(item)">{{tipipe(item.val)}}</a>-->
+
+      <!--</div>-->
+
       <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="pet" class="bgWhite">
-          <ion-segment-button value="house">
-            房源
-          </ion-segment-button>
-          <ion-segment-button value="passenger">
-            客户
-          </ion-segment-button>
-          <ion-segment-button value="login">
-            登录
-          </ion-segment-button>
-          <ion-segment-button value="bd">
-            报单
-          </ion-segment-button>
-          <ion-segment-button value="kpi">
-            KPI
+          <ion-segment-button *ngFor="let item of titleJSON" (click)="searchs(item)">
+            {{tipipe(item.val)}}
           </ion-segment-button>
         </ion-segment>
       </ion-toolbar>
+
+
+
+      <!--<ion-toolbar no-border-top>-->
+        <!--<ion-segment [(ngModel)]="pet" class="bgWhite">-->
+          <!--<ion-segment-button value="house">-->
+            <!--房源-->
+          <!--</ion-segment-button>-->
+          <!--<ion-segment-button value="passenger">-->
+            <!--客户-->
+          <!--</ion-segment-button>-->
+          <!--<ion-segment-button value="login">-->
+            <!--登录-->
+          <!--</ion-segment-button>-->
+          <!--<ion-segment-button value="bd">-->
+            <!--报单-->
+          <!--</ion-segment-button>-->
+          <!--<ion-segment-button value="kpi">-->
+            <!--KPI-->
+          <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+      <!--</ion-toolbar>-->
 
       <div [ngSwitch]="pet" class="bgWhite tableList">
           <table width="100%" *ngSwitchCase="'house'" >

@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar #navbar color="first">
+    <ion-title>门店详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row>
+    <ion-col col-3 class="bgWhite storeList p0">
+      <a class="tc ellipsis" *ngFor="let i of person" (click)="go(i)" [ngClass]="{'active':isActive(i)}">
+        {{i.personName}}
+      </a>
+    </ion-col>
+    <ion-col col-9 class="storeMain">
+      <div class="bgWhite topMain">
+        <div class="tc seaTitle">当前搜索条件</div>
+        <div class="tc">
+            <span *ngIf="selected">{{name}}
+              <ion-icon name="close"></ion-icon>
+            </span>
+        </div>
+      </div>
+      <div class="bgWhite m10" style="padding: 10px">
+        <div class="tc p15" *ngIf="!selected">请查询</div>
+        <table width="100%"  *ngIf="selected">
+          <tr class="tc">
+            <td>新增房源</td>
+            <td >{{xzNum}}</td>
+          </tr>
+          <tr class="tc">
+            <td>实勘房源</td>
+            <td >{{skNum}}</td>
+          </tr>
+          <tr class="tc">
+            <td>空看次数</td>
+            <td >{{kkNum}}</td>
+          </tr>
+          <tr class="tc">
+            <td>房源跟进次数</td>
+            <td >{{flNum}}</td>
+          </tr>
+          <tr class="tc">
+            <td>激活房源</td>
+            <td >{{jhNum}}</td>
+          </tr>
+
+        </table>
+
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
