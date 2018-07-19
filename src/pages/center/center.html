@@ -31,10 +31,16 @@
       帮助反馈
     </button>
     <!--(click)="updateVersion()"-->
-    <button ion-item class="pl12" tappable >
-      检测版本(暂不支持更新)
+    <button ion-item class="pl12" (click)="updateVersion()" tappable >
+      检测版本
+      <span>(当前版本:{{versionNumber}})</span>
     </button>
-
+    <ion-item  >
+      <a  class="linkDownload  pl12" href="https://www.pgyer.com/apiv2/app/install?appKey=9db9597481973c878648387bf30eaca0&_api_key=14eca046de7309cd5125d4e3bdb1afd1" >
+        浏览器下载最新
+        (apk:{{aLinKDownloadVersion}})
+      </a>
+    </ion-item>
   </ion-list>
   <ion-list class="m10">
     <button ion-item class="pl12" tappable (click)="updatepwd()">
