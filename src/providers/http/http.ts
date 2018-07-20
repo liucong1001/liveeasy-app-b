@@ -11,6 +11,7 @@ import  {NavController} from "ionic-angular";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/catch';
+import {ConfigProvider} from "../config/config";
 /*
   Generated class for the HttpProvider provider.
 
@@ -22,24 +23,34 @@ export class HttpProvider {
   @ViewChild(Content) content: Content;
   @ViewChild(Nav) nav: Nav;
    defaultTimeout = 10000;
+  headers:any;
+  headersForm:any;
+  headersFormJson:any;
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
-              public toast:ToastComponent,public app: App,) {
-              console.log('Hello HttpProvider Provider');
+              public toast:ToastComponent,public app: App,public configProvider:ConfigProvider) {
+              // console.log('Hello HttpProvider Provider');
+              console.log('htpp请求借口封装',this.configProvider.set().token);
   }
-  public headers = new HttpHeaders().set('Content-Type', 'application/json')
-    .set('token',this.localStorageProvider.get('ticket'))
-    .set('Access-Control-Allow-Origin','*');
 
-  public headersForm = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    .set('token',this.localStorageProvider.get('ticket'))
-    .set('Access-Control-Allow-Origin','*');
+  /**
+   * 获取最新header信息
+   */
+  getHeader (){
+  this.headers = new HttpHeaders().set('Content-Type', 'application/json')
+      .set('token',this.localStorageProvider.get('ticket'))
+      .set('Access-Control-Allow-Origin','*');
 
-  public headersFormJson = new HttpHeaders().set('Content-Type', 'application/json;charset=UTF-8')
-    .set('token',this.localStorageProvider.get('ticket'))
-    .set('Access-Control-Allow-Origin','*');
+  this.headersForm = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('token',this.localStorageProvider.get('ticket'))
+      .set('Access-Control-Allow-Origin','*');
 
+  this.headersFormJson = new HttpHeaders().set('Content-Type', 'application/json;charset=UTF-8')
+      .set('token',this.localStorageProvider.get('ticket'))
+      .set('Access-Control-Allow-Origin','*');
+  }
 
   public httpGet(url,params?):Promise<any>{
+   this. getHeader();
     return this.http.get(url,{headers:this.headers,params:params},).timeout(8000)
       .toPromise().then(res=>{
       return res as any;
@@ -50,6 +61,7 @@ export class HttpProvider {
   }
 
   public httpPost(url,params?):Promise<any>{
+    this. getHeader();
     return this.http.post(url,params,{headers:this.headers}).timeout(8000)
       .toPromise().then(res=>{
           return res as any;
@@ -73,6 +85,7 @@ export class HttpProvider {
 
   //formData表单
   public httpPostForm(url,params?):Promise<any>{
+    this. getHeader();
     return this.http.post(url,params,{headers:this.headersForm}).toPromise().then(res=>{
       return res as any;
     }).catch(err=>{

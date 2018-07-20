@@ -11,7 +11,10 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {VersionProvider} from "../../providers/version/app.version";
 import {HTTP} from "@ionic-native/http";
 import {AppVersion} from "@ionic-native/app-version";
-
+import { App } from 'ionic-angular';
+import {ConfigProvider} from "../../providers/config/config";
+import {Platform } from 'ionic-angular';
+import {ToastComponent} from "../../components/toast/toast";
 /**
  * Generated class for the CenterPage page.
  *
@@ -35,26 +38,35 @@ export class CenterPage {
   versionInfo:any;
   aLinKDownload:string;
   aLinKDownloadVersion:string;
+  showNewVersion = false;
+  ios = false;
+  android = false;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar, private appUpdate: VersionProvider,private http: HTTP,
-              private appVersion: AppVersion,
+              private appVersion: AppVersion,private app:App,public configProvider:ConfigProvider,private platform: Platform,
+              public toast:ToastComponent,
+
   ) {
 
-    // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.name = this.localStorageProvider.get('loginInfo').name;
     this.gh=this.localStorageProvider.get('loginInfo').no;
     this.custposName =this.localStorageProvider.get('loginInfo') .custPosName
     this.photo = 'assets/imgs/center.jpg';
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
-
-
     console.log('检测新版本');
     this.appVersion.getVersionNumber().then(res=>{
-      this.versionNumber =res;
+      this.versionNumber =res; //当前版本
       console.log('getVersionNumber',res);
     });
+    if (this.platform.is('ios')) {
+         console.log('ios','ios平台');
+         this.ios = true;
+    } else if (this.platform.is('android')) {
+        this.android = true;
+        console.log('android平台');
+    }
 
     /**
      * 获取最新版本
@@ -82,16 +94,19 @@ export class CenterPage {
         // let versionInfo = data.data.list[0].buildVersionNo;
         console.log('最新版本',versionInfo);
         // versionInfo.url = 'https://www.pgyer.com/apiv2/app/install?appKey='+versionInfo.appKey+'&_api_key='+params._api_key;
-        console.log('a标签11url', versionInfo.url);
+
         this.aLinKDownload = versionInfo.url;
-        this.aLinKDownloadVersion = versionInfo.buildVersion;
+        this.aLinKDownloadVersion = versionInfo.buildVersion;   //从网上获取最新版本号
+        if(this.aLinKDownloadVersion>this.versionNumber){
+           console.log('存在新版本!',this.aLinKDownloadVersion,this.versionNumber);
+           this.showNewVersion = true;
+           console.log('是否存在版本',this.showNewVersion);
+        }
 
       }
     }).catch((e)=> {
       console.error(JSON.stringify(e));
     })
-
-
 
   }
   ionViewWillEnter() {
@@ -119,11 +134,24 @@ export class CenterPage {
   }
   reset(){
     localStorage.clear();
+    this.configProvider.set().token = '';
     this.content.resize();
+    // window.location.reload();
+    // this.navCtrl.push(AccountPage);
+    // this.app.getActiveNavs()[0].setRoot("AccountPage");
     let myModal = this.modalCtrl.create(AccountPage);
     myModal.present();
     // this.navCtrl.push(AccountPage);
     this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
+  }
+
+  ionViewDidEnter(){
+    this.content.resize();
+  }
+
+
+  tip(){
+    this.toast.defaultMsg('top','当前已经是最新版本！');
   }
 
   updateVersion(){

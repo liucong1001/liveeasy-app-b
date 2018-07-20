@@ -41,13 +41,13 @@ export class HomePage {
   //状态栏文字颜色修改-黑色
   ionViewWillEnter() {
     this.statusBar.styleDefault();
+
   }
   ionViewDidLoad(){
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}
+      console.log('new',this.notificationNews);
     });
-
-
   }
 
   //禁用调出键盘
@@ -68,7 +68,7 @@ export class HomePage {
     this.openWin(AddpassengerPage)
   }
   msgDetail(){
-    this.openWin(MsgdetailPage)
+    this.notificationNews&&this.openWin(MsgdetailPage);
   }
   checkhouse(){
   this.openWin(CheckhousePage);

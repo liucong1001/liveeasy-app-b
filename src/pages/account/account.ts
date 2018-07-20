@@ -8,6 +8,7 @@ import {LocalStorageProvider} from  '../../providers/local-storage/local-storage
 import {ToastComponent} from "../../components/toast/toast";
 import {BackButtonProvider} from "../../providers/common/backButton";
 import {StatusBar} from "@ionic-native/status-bar";
+import {ConfigProvider} from "../../providers/config/config";
 /**
  * Generated class for the AccountPage page.
  *
@@ -29,7 +30,7 @@ export class AccountPage {
     constructor(public navCtrl: NavController, public navParams: NavParams,public http: HttpClient,
                 public loginProvider:LoginProvider,public localStorageProvider:LocalStorageProvider,
                public toast:ToastComponent,public backButtonProvider:BackButtonProvider,private statusBar: StatusBar,
-                private app: App) {
+                private app: App, private configProvider:ConfigProvider) {
 
               // this.platform.ready().then(() => {
               //   this.backButtonProvider.registerBackButtonAction(null);
@@ -54,17 +55,25 @@ export class AccountPage {
         this.loginProvider.login(this.username,this.password).then(res=>{
             if(res.success){
               this.loginBtn = false;
-              this.navCtrl.push(TabsPage);
-              this.app.getRootNav().setRoot(TabsPage);
+
               this.localStorageProvider.set('loginInfo',res.data);
               //存相关信息
               this.localStorageProvider.set('loginName',res.data.loginName);
               this.localStorageProvider.set('ticket',res.ticket);
+              // this.configProvider.set().token = res.ticket;
+
+
               //权限
                console.log('权限',res.data.menus);
                this.findPermission(res.data.menus);
                this.localStorageProvider.set('permissionArry',this.permissionArry);
                console.log('结果',this.permissionArry);
+
+
+              this.navCtrl.push(TabsPage);
+              // this.app.getRootNav().setRoot(TabsPage);
+              console.log('token值',this.configProvider.set().token);
+
             }else{
               this.loginBtn = false;
               this.toast.defaultMsg('top','账号或密码有误!');

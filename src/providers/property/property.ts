@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
 import {ConfigProvider} from "../config/config";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {HTTP} from "@ionic-native/http";
 /*
   房源接口
 */
@@ -10,7 +11,12 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 export class PropertyProvider {
 
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
+  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
+
   private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
+  private  pageListPath2 = 'http://47.75.144.138:45678/coco/api/query?qId=propQuery&update=1&status=1&buzzType=1&owner=1&page=2&rows=10';
+  // private  pageListPath2 = '/47.75.151.57:7077/live/search?keyword=2';
+
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
@@ -40,7 +46,8 @@ export class PropertyProvider {
   bedRType:any;
   districtId:any;
   propertyid:any;
-  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,) {
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,
+              private http2: HTTP,) {
     console.log('Hello PropertyProvider Provider');
   }
 
@@ -49,6 +56,11 @@ export class PropertyProvider {
     var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
     return   this.httpProvider.httpPost(this.pageListPath,data)
   }
+
+  page2(){
+    return   this.http.get(this.pageListPath2,);
+  }
+
   //添加空看
   insertEmptyLook(params?){
     return this.httpProvider.httpPost(this.insertEmptyLookPath,params)
