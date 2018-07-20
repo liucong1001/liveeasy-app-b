@@ -12,8 +12,8 @@ export class ConfigProvider {
     oss:'',
     http:'',
     img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
+    errorImg:'assets/imgs/http502.png',
   };
-
   constructor(public http: HttpClient) {
     console.log('Hello ConfigProvider Provider');
 
@@ -23,6 +23,7 @@ export class ConfigProvider {
         oss:'',
         http:'https://erp.liveeasy.tech/api/v1',
         img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
+        errorImg:'assets/imgs/http502.png',
       }
     }
   }

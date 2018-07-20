@@ -134,7 +134,6 @@ export class CenterPage {
   }
   reset(){
     localStorage.clear();
-    this.configProvider.set().token = '';
     this.content.resize();
     // window.location.reload();
     // this.navCtrl.push(AccountPage);
