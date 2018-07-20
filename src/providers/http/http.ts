@@ -28,8 +28,7 @@ export class HttpProvider {
   headersFormJson:any;
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
               public toast:ToastComponent,public app: App,public configProvider:ConfigProvider) {
-              // console.log('Hello HttpProvider Provider');
-              console.log('htpp请求借口封装',this.configProvider.set().token);
+
   }
 
   /**
