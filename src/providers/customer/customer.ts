@@ -23,6 +23,8 @@ export class CustomerProvider {
   private  prFollowPath=this.configProvider.set().http+'/customer/customerInfo/CustomerFollowUp';
   //我的客户——带看
   private  prlookPath=this.configProvider.set().http+'/customer/customerInfo/lookCustomer';
+  //带看搜索
+  private  lookseaPath=this.configProvider.set().http+'/customer/customerInfo/lookProperty'
   //关闭
   private  prclosePath=this.configProvider.set().http+'/customer/customerInfo/closeCustomer';
 //跟进记录
@@ -110,6 +112,10 @@ export class CustomerProvider {
   //我的客户——带看
   public prlook(params?){
     return this.httpProvider.httpPost(this.prlookPath,params);
+  }
+  //带看搜索
+  lookSearch(params){
+    return this.httpProvider.httpPost(this.lookseaPath,params);
   }
   //我的客户——关闭
   public prclose(params?){

@@ -22,8 +22,8 @@ import {ConfigProvider} from "../../providers/config/config";
     templateUrl: 'account.html',
 })
 export class AccountPage {
-    username:string = 'mylangyi';
-    password:string = 'le123456';
+    username:string = '';
+    password:string = '';
     url:string = "/login";
     loginBtn:boolean = false ;
     permissionList = []; //权限存储

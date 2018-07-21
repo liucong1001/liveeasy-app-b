@@ -37,19 +37,20 @@
             <ion-list>
               <button ion-item class="pl12 ">
                 <ion-label>房源编号</ion-label>
-                <ion-input formControlName="propertyId" disabled value="选择房源" tappable (click)="fy()"></ion-input>
+                <ion-input formControlName="property" *ngIf="!estateName" value="选择房源" tappable (click)="fy()"></ion-input>
+                <ion-input formControlName="property" *ngIf="estateName" value="{{estateName}}" tappable (click)="fy()"></ion-input>
               </button>
             </ion-list>
           </ion-col>
           <ion-col col-12 class="bgWhite p0">
             <ion-list>
-                <ion-item class="pl12">
+                <ion-item class="pl12" >
                     <ion-label>约看时间：</ion-label>
                     <ion-datetime displayFormat="YYYY/MM/DD" doneText="确定"  cancelText="取消" formControlName="appointmentTm" placeholder="请选择约看时间"></ion-datetime>
                 </ion-item>
             </ion-list>
           </ion-col>
-          <ion-col col-12 class="bgWhite p10">
+          <ion-col col-12 class="bgWhite p10 later">
             <button ion-button full color="danger" class="radius" (click)="looks()" [disabled]="form.invalid">添加约看</button>
           </ion-col>
         </ion-row>

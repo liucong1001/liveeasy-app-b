@@ -35,6 +35,7 @@ export class MorePage {
     buildingTypeArry:[],
     spaceSize:0,
     spaceSizeArry:[],
+    positionInBuilding:'',
   };
   @ViewChild(Navbar) navBar: Navbar;
   selected:any;
@@ -44,6 +45,8 @@ export class MorePage {
   structure: any = {lower: 0, upper: 1000};
   spaceSize:any ;
   localCode:any;
+  //楼层
+  positionInBuilding:any
   cxJSON:Array<{name:string;val:string}>;
   decorationJson:Array<{name:string;val:string}>;
   buildingTypeJson:Array<{name:string;val:string}>;
@@ -127,7 +130,7 @@ export class MorePage {
   //楼层
   floorJson = [
     {name:'地下',val:'-1'},
-    {name:'底层',val:'1'},
+    {name:'低层',val:'1'},
     {name:'中层',val:'2'},
     {name:'高层',val:'3'},
   ];
@@ -255,8 +258,16 @@ export class MorePage {
       console.log('选择的面积',item);
     }
   }
-
-
+  //楼层
+  choseFloor(item){
+    if( this.selected4 == item){
+      this.choseFloor(this.floorJson[0]);
+    }else{
+      this.selected4 = item;
+      this.searchMoreData['positionInBuilding'] = item.val;
+      this.searchMoreData['positionInBuildingName'] = item.name;
+    }
+  }
   isActive1(item){
     if(item.tagCode==this.searchMoreData['tags']){
       return  true;
@@ -308,7 +319,7 @@ export class MorePage {
   }
 //楼层
   isActive8(item){
-    if(item.val==this.spaceSize){
+    if(item.val==this.searchMoreData['positionInBuilding']){
       return  true;
     }else{
       return this.selected === item;

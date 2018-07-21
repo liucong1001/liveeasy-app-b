@@ -1,136 +1,120 @@
-<ion-header>
+<ion-header class="bgWhite">
 
   <ion-navbar #navbar color="first">
     <ion-title>数据统计</ion-title>
   </ion-navbar>
-
+  <ion-row class="houseMenu bgWhite">
+    <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{'color':show}">
+      <span *ngIf="staff==2" [ngClass]="{'color':personName}">{{personName}}</span>
+      <span *ngIf="staff==1">部门员工</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
+    </ion-col>
+    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{'color':time}">
+      <span *ngIf="tm1 && tm2 &&times != 1" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
+      <span *ngIf="times == 2" [ngClass]="{'color':timeName}">{{timeName}}</span>
+      <span *ngIf="times == 1">时间查询</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':tm1 || tm2,'color':timeName}"></ion-icon>
+    </ion-col>
+    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu3()" >
+      <span *ngIf="fast==2" [ngClass]="{'color':fastName}">{{fastName}}</span>
+      <span *ngIf="fast==1">快速查询</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':fastName}"></ion-icon>
+    </ion-col>
+  </ion-row>
 </ion-header>
 
 
 <ion-content>
-  <ion-row>
-    <ion-col col-3 class="bgWhite storeList p0">
-      <a class="tc ellipsis" *ngFor="let i of department" (click)="go(i)" [ngClass]="{'active':isActive(i)}">
-        <span *ngIf="i.storeName">{{i.storeName}}</span>
-        <span *ngIf="!i.storeName">{{i.deptName}}</span>
-      </a>
-    </ion-col>
-    <ion-col col-9 class="storeMain">
-        <div class="bgWhite topMain">
-          <div class="tc seaTitle">当前搜索条件</div>
-          <div class="tc">
-            <span *ngIf="selected">{{name}}
-              <ion-icon name="close"></ion-icon>
-            </span>
-          </div>
+  <table width="100%" class="bgWhite m10">
+    <tr class="tc" *ngFor="let i of tableJSON">
+      <td>{{i.name}}</td>
+      <td>{{i.result}}</td>
+    </tr>
+
+  </table>
+</ion-content>
+<div class="popLocation">
+  <!-- 员工 -->
+  <ion-grid class="lists p0" [hidden]="!show">
+    <ion-row *ngIf="all">
+      <ion-col col-12>
+        <div class="leftChange">
+          <a *ngFor=" let item of department" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">
+            <span *ngIf="item.storeName">{{item.storeName}}</span>
+            <span *ngIf="!item.storeName">{{item.deptName}}</span>
+          </a>
         </div>
-      <div class="bgWhite contents">
-        <form [formGroup]="form">
-          <ion-list>
-            <ion-item>
-              <ion-datetime placeholder="请选择时间" formControlName="startTime"  (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
-            </ion-item>
-            <ion-item class="defaults">—</ion-item>
-            <ion-item>
-              <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="full">
+      <ion-col col-7 class="p0" [ngClass]="{'col-12': person}">
+        <div class="leftChange">
+          <a *ngFor=" let item of department" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">
+            <span *ngIf="item.storeName">{{item.storeName}}</span>
+            <span *ngIf="!item.storeName">{{item.deptName}}</span>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col col-5 class="p0">
+        <div class="leftChange updateBg">
+          <ion-list radio-group>
+            <!--<ion-item class="tc">-->
+            <!--<ion-label>不限</ion-label>-->
+            <!--<ion-radio  (ionSelect)="tests()"></ion-radio>-->
+            <!--</ion-item>-->
+            <ion-item *ngFor="let item of person" class="tc">
+              <ion-label>{{item.personName}}</ion-label>
+              <ion-radio value="{{item.personId}}" (ionSelect)="searchs(item)"></ion-radio>
             </ion-item>
           </ion-list>
-        </form>
+          <div *ngIf="!person">暂无</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      </div>
+  <!-- 时间查询 -->
+  <div class="lists houseType" [hidden]="!time" >
+    <ion-list radio-group class="scrollC">
+      <ion-item *ngFor="let item of titleJSON" class="tc">
+        <ion-label>{{item.name}}</ion-label>
+        <ion-radio (ionSelect)="timer(item)"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <form [formGroup]="form">
+      <ion-row class="tc">
+        <ion-col col-5>
+          <ion-datetime placeholder="请选择时间" formControlName="startTime"  (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+        </ion-col>
+        <ion-col col-2>
+          至
+        </ion-col>
+        <ion-col col-5>
+          <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="fotBtn">
+      <ion-col col-5>
+        <button ion-button full color="danger" class="reset">重置</button>
+      </ion-col>
+      <ion-col col-2></ion-col>
+      <ion-col col-5>
+        <button ion-button full color="danger" class="sure" (click)="goTime()">确定</button>
+      </ion-col>
+    </ion-row>
+  </div>
 
-      <ion-list>
-        <button ion-item class="testCss" (click)="persons()">
-          查看员工
-        </button>
-      </ion-list>
-      <!--<div class="p15">-->
-        <!--<a *ngFor="let item of titleJSON" (click)="searchs(item)">{{tipipe(item.val)}}</a>-->
+  <!-- 快速查询 -->
+  <div class="lists houseType" [hidden]="!fastSearch" >
+    <ion-list radio-group class="updateLine scrollFast">
+      <ion-item *ngFor="let item of fastJSON"  class="tc" >
+        <ion-label>{{item.name}}</ion-label>
+        <ion-radio value={{item.val}} (ionSelect)="fasttips(item)"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
 
-      <!--</div>-->
+</div>
+<div class="pop" *ngIf="pop" (click)="pops()"></div>
 
-      <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="pet" class="bgWhite">
-          <ion-segment-button *ngFor="let item of titleJSON" (click)="searchs(item)">
-            {{tipipe(item.val)}}
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
-
-
-
-      <!--<ion-toolbar no-border-top>-->
-        <!--<ion-segment [(ngModel)]="pet" class="bgWhite">-->
-          <!--<ion-segment-button value="house">-->
-            <!--房源-->
-          <!--</ion-segment-button>-->
-          <!--<ion-segment-button value="passenger">-->
-            <!--客户-->
-          <!--</ion-segment-button>-->
-          <!--<ion-segment-button value="login">-->
-            <!--登录-->
-          <!--</ion-segment-button>-->
-          <!--<ion-segment-button value="bd">-->
-            <!--报单-->
-          <!--</ion-segment-button>-->
-          <!--<ion-segment-button value="kpi">-->
-            <!--KPI-->
-          <!--</ion-segment-button>-->
-        <!--</ion-segment>-->
-      <!--</ion-toolbar>-->
-
-      <div [ngSwitch]="pet" class="bgWhite tableList">
-          <table width="100%" *ngSwitchCase="'house'" >
-            <tr class="tc">
-              <td>新增房源</td>
-              <td >{{xzNum}}</td>
-            </tr>
-            <tr class="tc">
-              <td>实勘房源</td>
-              <td >{{skNum}}</td>
-            </tr>
-            <tr class="tc">
-              <td>空看次数</td>
-              <td >{{kkNum}}</td>
-            </tr>
-            <tr class="tc">
-              <td>房源跟进次数</td>
-              <td >{{flNum}}</td>
-            </tr>
-            <tr class="tc">
-              <td>激活房源</td>
-              <td >{{jhNum}}</td>
-            </tr>
-
-          </table>
-        <table width="100%" *ngSwitchCase="'passenger'">
-          <tr class="tc">
-            <td >新增房源</td>
-            <td>8</td>
-          </tr>
-        </table>
-
-        <table width="100%" *ngSwitchCase="'login'">
-          <tr class="tc">
-            <td >新增房源</td>
-            <td>8</td>
-          </tr>
-        </table>
-        <table width="100%" *ngSwitchCase="'bd'">
-          <tr class="tc">
-            <td >新增房源</td>
-            <td>8</td>
-          </tr>
-        </table>
-        <table width="100%" *ngSwitchCase="'kpi'">
-          <tr class="tc">
-            <td >新增房源</td>
-            <td>8</td>
-          </tr>
-        </table>
-
-      </div>
-
-    </ion-col>
-  </ion-row>
-</ion-content>

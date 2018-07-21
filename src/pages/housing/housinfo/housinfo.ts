@@ -54,6 +54,7 @@ export class HousinfoPage {
   buzzTypeJson:Array<{name:string;val:string}>;
   decorationJson:Array<{name:string;val:string}>;
   buildingTypeJson:Array<{name:string;val:string}>;
+  floorJSON:Array<{name:string;val:string}>;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,public app: App
@@ -64,6 +65,8 @@ export class HousinfoPage {
     this.buzzTypeJson = new CodeValuePipe().transform(this.localCode['buzzType']);
     this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
     this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
+    this.floorJSON=new CodeValuePipe().transform(this.localCode['building_height_type']);
+
   }
 
 
@@ -298,6 +301,15 @@ export class HousinfoPage {
       perPrice = data.propertyPrice/data.spaceSize;
     }
     return perPrice.toFixed(2);
+  }
+
+  //楼层等级处理
+  floorPipe(data){
+    for(var i in this.floorJSON){
+      if(data == this.floorJSON[i].val){
+        return this.floorJSON[i].name;
+      }
+    }
   }
 
   //房源描述

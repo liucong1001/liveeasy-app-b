@@ -224,6 +224,7 @@ export class HousingPage {
       this.params.estateId = '';
       this.params.area = '';
       this.searchArea = '不限';
+
       this.search();
     }
 
@@ -757,6 +758,7 @@ export class HousingPage {
   buildingTypeName:'';
   buzzTypeName:'';
   moreSearchData :any;
+  positionInBuilding:'';
   mores(){
 
     this.events.subscribe('moreSearchBevents', (params) => {
@@ -784,6 +786,9 @@ export class HousingPage {
         this.buildingTypeName =params.buildingTypeName;
         this.buzzTypeName= params.buzzTypeName;
         console.log('接收到11',this.moreSearchData);
+        this.positionInBuilding=params.positionInBuildingName;
+        console.log('接收到',params);
+        console.log(this.spaceSizeName,this.decorationName,this.buildingTypeName,this.buzzTypeName,this.positionInBuilding)
         // this.params. propertyPriceStart  propertyPriceEnd
         // console.log('搜索',this.floorName,this.params.estateId);
       }

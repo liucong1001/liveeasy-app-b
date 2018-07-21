@@ -1,10 +1,21 @@
+<ion-header>
+  <ion-navbar #navbar >
+    <ion-toolbar no-border-top>
+      <ion-searchbar placeholder="搜索"   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
+      <ion-buttons end>
+        <button ion-button icon-only color="dark" tappable (click)="back()">
+          取消
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
 <ion-content>
-  <ion-searchbar placeholder="搜索"   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
-  <span class="cancel" (click)="back()">取消</span>
+
   <ion-list>
     <ion-item *ngFor="let item of floor"  class="pl12">
-      <ion-label>{{item.keyword}}</ion-label>
-      <ion-radio value="{{item.id}}" (ionSelect)="select(item)"></ion-radio>
+      <ion-label>{{item.estateName}}</ion-label>
+      <ion-radio value="{{item.convId}}" (ionSelect)="select(item)"></ion-radio>
     </ion-item>
     <ion-item *ngIf="floor.length==0&&edit">
       未找到，相关房源

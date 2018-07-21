@@ -34,37 +34,44 @@ export class PassengerlookPage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   form:FormGroup =this.fb.group({
-    propertyId:[''],
+    property:[''],
     appointmentTm:['',Validators.required],
   });
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
   }
-
+  coveId:any;
+  estateName:any;
   fy(){
     this.events.subscribe('bevents', (params) => {
       console.log('接收数据为: ', params);
       this.events.unsubscribe('bevents');
+      this.coveId=params.convIdReq;
+      this.estateName=params.estateName;
     });
-    this.openWin(SearchhousePage);
+    this.openWin(SearchPage);
   }
 
   looks(){
     this.customerProvider.prlook({
-      propertyId:this.form.value.propertyId,
+      property:{convId:this.coveId},
       appointmentTm:new Date(this.form.value.appointmentTm).getTime(),
       customer:{customerId:this.customerid}
     }).then(res => {
       console.log(res);
       if(res.success){
         this.toast.msg('约看成功!');
-        this.openWin(MypassengerPage)
-      }else{
-        this.toast.error('约看失败！');
+        setTimeout(()=>{
+          this.openWin(MypassengerPage)
+        },500)
+      }else if (res.msg.indexOf('您已约看') !=-1){
+        this.toast.showLongToast('您已约看该客户，请先关闭约看');
+      }else {
+        this.toast.error('约看失败');
       }
     });
-    console.log(this.form.value)
+    // console.log(this.form.value)
   }
 
   //------返回处理--------//

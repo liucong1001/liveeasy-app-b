@@ -98,6 +98,7 @@ export class ToastComponent {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
+      position: 'top',
     });
     toast.present();
   }

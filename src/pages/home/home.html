@@ -21,7 +21,7 @@
         <img src="assets/imgs/menu3.png" alt="" width="45" height="45">
         <a>成功报单</a>
       </ion-col>
-      <ion-col col-3 tappable >
+      <ion-col col-3 tappable (click)="gosta()">
         <!--(click)="gosta()"-->
         <img src="assets/imgs/menu4.png" alt="" width="45" height="45">
         <a>数据统计</a>
@@ -50,54 +50,20 @@
          <span>暂无公告!</span>
       </div>
     </ion-item>
-    <ion-item tappable >
+    <ion-item tappable (click)="checkhouse(i)" *ngFor="let i of houseJSON">
       <!--(click)="checkhouse()"-->
       <ion-thumbnail item-start>
         <div class="leftImg">
-          <ion-icon name="tixing" class="uFont"></ion-icon>
+          <ion-icon name="{{i.icon}}" class="uFont"></ion-icon>
         </div>
       </ion-thumbnail>
       <ion-row>
         <ion-col col-6 class="plr">
-          <h2>关闭房源审核</h2>
+          <h2>{{i.name}}</h2>
         </ion-col>
-        <!--<ion-col col-6 class="tr">-->
-          <!--<font size="1" color="#aaa">04-01</font>-->
-        <!--</ion-col>-->
       </ion-row>
       <p class="ellipsis">暂未开发</p>
     </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <div class="leftImg leftImgAdjust">
-          <ion-icon name="notice1" class="uFont"></ion-icon>
-        </div>
-      </ion-thumbnail>
-      <ion-row>
-        <ion-col col-6 class="plr">
-          <h2>房源调整</h2>
-        </ion-col>
-        <!--<ion-col col-6 class="tr">-->
-          <!--<font size="1" color="#aaa">04-01</font>-->
-        <!--</ion-col>-->
-      </ion-row>
-      <p class="ellipsis">暂未开发</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <div class="leftImg">
-          <ion-icon name="tixing" class="uFont"></ion-icon>
-        </div>
-      </ion-thumbnail>
-      <ion-row>
-        <ion-col col-6 class="plr">
-          <h2>下架房源</h2>
-        </ion-col>
-        <!--<ion-col col-6 class="tr">-->
-          <!--<font size="1" color="#aaa">04-01</font>-->
-        <!--</ion-col>-->
-      </ion-row>
-      <p class="ellipsis">暂未开发</p>
-    </ion-item>
+
   </ion-list>
 </ion-content>

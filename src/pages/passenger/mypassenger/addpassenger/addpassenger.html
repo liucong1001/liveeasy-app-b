@@ -16,7 +16,7 @@
       <valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>客户性别<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender">
+        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender" [selectOptions]="selectTitle('客户性别')">
           <ion-option value="1">男</ion-option>
           <ion-option value="2">女</ion-option>
         </ion-select>

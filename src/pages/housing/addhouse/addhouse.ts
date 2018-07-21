@@ -101,7 +101,7 @@ export class AddhousePage {
      buzzOwnerType:['0'],//交易权属
      buzzType:['1',Validators.required],//房屋用途
     hasElevator:['0',Validators.required],//配备电梯
-    positionInBuilding:['2'],
+    positionInBuilding:['1'],//楼层等级
     propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],
     propertyPriceUnit:['1'],

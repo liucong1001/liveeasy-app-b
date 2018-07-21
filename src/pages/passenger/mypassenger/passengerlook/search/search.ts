@@ -7,6 +7,8 @@ import { Events } from 'ionic-angular';
 import {PropertyProvider} from "../../../../../providers/property/property";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {MypassengerPage} from "../../mypassenger";
+import {CustomerProvider} from "../../../../../providers/customer/customer";
 @IonicPage()
 @Component({
   selector: 'page-search',
@@ -19,15 +21,15 @@ export class SearchPage {
   callback:any;
   search:any;
   constructor(public navCtrl: NavController,public statusBar: StatusBar,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
-              public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
+              public localStorageProvider:LocalStorageProvider,public customerProvider:CustomerProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient) {
 
     //默认楼盘展示
   }
 
   getData(data){
-    var path = 'http://47.75.151.57:7077/live/search?keyword='+data+'&site=4201';
-    return  this.http.get(path).toPromise().then(res=>{
+    return this.customerProvider.lookSearch({}).then(res => {
+      // console.log(res);
       return res as any;
     });
   }
@@ -36,7 +38,10 @@ export class SearchPage {
   getFloorKey(event){
     console.log('mode',event);
     this.getData(event).then(res=>{
-      this.floor = res.result;
+      for (var i=0;i<res.data.length;i++){
+        this.floor.push(res.data[i])
+        // console.log(res.data[i])
+      }
       this.edit = true;
       if(this.search==''){
         this.edit =false;
@@ -48,9 +53,11 @@ export class SearchPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchhousePage');
     this.floorList = this.localStorageProvider.get('floorList');
-    if(this.floorList ==null){this.floorList = []}
+    if(this.floorList ==null){
+      this.floorList = []
+    }
     console.log('历史',this.floorList);
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -75,22 +82,11 @@ export class SearchPage {
 
   floorList :Array<any>;
   select(item){
-    // console.log('选择的',item.keyword);
-
-    // if(this.textArrt.indexOf(name) == -1){
-    //   this.textArrt.push(name);
-    //   console.log('名字',this.textArrt);
-    //   return true;
-    // }else {
-    //   return false;
-    // }
-
-    if(this.floorList.indexOf(item.keyword)==-1){
-      this.floorList.push(item.keyword);
+    //判断是否有值 true/false
+    if(this.floorList.indexOf(item.estateName)==-1){
+      console.log(this.floorList.push(item.estateName))
       this.localStorageProvider.set('floorList',this.floorList);
     }
-
-
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('bevents', item);
@@ -108,18 +104,18 @@ export class SearchPage {
   }
 
   //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
+  // backButtonClick = (e: UIEvent) => {
+  //   let options: NativeTransitionOptions = {
+  //     direction: 'right',
+  //     duration: 400,
+  //     slowdownfactor: 3,
+  //     iosdelay: 50
+  //   };
+  //
+  //   this.nativePageTransitions.slide(options)
+  //     .then()
+  //     .catch();
+  //   this.navCtrl.pop({animate:false});
+  // }
 }
 

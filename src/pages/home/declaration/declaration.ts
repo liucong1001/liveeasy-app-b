@@ -247,7 +247,7 @@ export class DeclarationPage {
   }
 
   declarationDetail(item){
-    this.navCtrl.push(DeclardetailPage,{
+    this.openWin(DeclardetailPage,{
       item:item,
       json:this.stateJSON,
     })
@@ -267,7 +267,23 @@ export class DeclarationPage {
       .catch();
     this.navCtrl.pop({animate:false});
   }
+
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
 }
+
+
 
 /**
  * 定义搜索参数类

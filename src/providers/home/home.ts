@@ -17,6 +17,8 @@ export class HomeProvider {
     //数据统计
     private statisPath=this.configProvider.set().http+'/statistics/statisticsInfo/getList'
     private  getDictCodePath = this.configProvider.set().http+ '/property/propertyInfo/getDictCode';
+    //待办消息
+    private  msgPath = this.configProvider.set().http+ '/workbench/messageInfo/pageList.do';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
@@ -82,4 +84,20 @@ export class HomeProvider {
     statis(params?){
       return this.httpProvider.httpPost(this.statisPath,params);
     }
+    //待办消息
+    msgs(currentPage,params){
+      var  data = {
+        currentPage: currentPage,
+        hasCount:true,
+        limit:10,
+        offset:0,
+        order:'asc',
+        params:{
+          ...params,
+        },
+        totalPages:0,
+        totalRecords:0
+      };
+    return this.httpProvider.httpPost(this.msgPath,data);
+  }
 }
