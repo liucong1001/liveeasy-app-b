@@ -8,11 +8,11 @@
     <div class="outer">
       <h4>房源标签(可多选)</h4>
       <a *ngFor="let bq of tagsList;let i = index"
-         [ngClass]="{'active': bq.active||initTags(bq)||isActive1(bq) }" tappable (click)="choseTag(bq,i)" >{{bq.tagDesc}}</a>
+         [ngClass]="{'active': bq.active||initTags(bq,'tagCode','tagsArry')||isActive1(bq) }" tappable (click)="choseTag(bq)" >{{bq.tagDesc}}</a>
     </div>
     <div class="outer">
-    <h4>朝向</h4>
-    <a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'active': isActive(i)}" tappable (click)="choseDirect(i)" [hidden]="index==0" >{{i.name}}</a>
+     <h4>朝向</h4>
+     <a *ngFor="let i of cxJSON;let index =index" [ngClass]="{'active': i.active||initTags(i,'val','orientationArry')||isActive(i)}" tappable (click)="choseMultIple(i,'orientation','orientationArry')" [hidden]="index==0" >{{i.name}}</a>
     </div>
     <!--<div class="outer">-->
     <!--<h4>其他</h4>-->
@@ -24,17 +24,17 @@
     </div>
     <div class="outer">
       <h4>建筑面积</h4>
-      <a *ngFor="let i of spaceSizeJson;let index =index" [ngClass]="{'active': isActive7(i)}" tappable (click)="choseSpaceSize(i)"  [hidden]="index==0" >{{i.name}}</a>
-
+      <!--choseSpaceSize(i)-->
+      <a *ngFor="let i of spaceSizeJson;let index =index" [ngClass]="{'active': i.active||initTags(i,'val','spaceSizeArry')||isActive7(i)}" tappable (click)="choseMultIple(i,'spaceSize','spaceSizeArry')"  [hidden]="index==0" >{{i.name}}</a>
     </div>
     <div class="outer">
         <h4>装修</h4>
-        <a *ngFor="let i of decorationJson;let index =index" [ngClass]="{'active': isActive4(i)}" tappable (click)="chosedecoration(i)" [hidden]="index==0" >{{i.name}}</a>
+        <a *ngFor="let i of decorationJson;let index =index" [ngClass]="{'active': i.active||initTags(i,'val','decorationArry')||isActive4(i)}" tappable (click)="choseMultIple(i,'decoration','decorationArry')" [hidden]="index==0" >{{i.name}}</a>
     </div>
 
     <div class="outer">
       <h4>建筑类型</h4>
-      <a *ngFor="let i of buildingTypeJson;let index =index" [ngClass]="{'active': isActive5(i)}" tappable (click)="chosebuildingType(i)" [hidden]="index==0" >{{i.name}}</a>
+      <a *ngFor="let i of buildingTypeJson;let index =index" [ngClass]="{'active': i.active||initTags(i,'val','buildingTypeArry')||isActive5(i)}" tappable (click)="choseMultIple(i,'buildingType','buildingTypeArry')" [hidden]="index==0||i.val==0" >{{i.name}}</a>
     </div>
     <!--<div class="outer">-->
       <!--<h4>房屋用途</h4>-->

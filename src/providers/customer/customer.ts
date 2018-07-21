@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpProvider} from "../http/http";
 import {ConfigProvider} from "../config/config";
-
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /*
  客源接口
 */
@@ -33,7 +33,7 @@ export class CustomerProvider {
   private  finishPath=this.configProvider.set().http+'/customer/customerInfo/updateFollowStatus';
 
 
-  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider,public localStorageProvider: LocalStorageProvider) {
     console.log('Hello CustomerProvider Provider');
   }
 
@@ -44,12 +44,14 @@ export class CustomerProvider {
   }
   //区域
   area(){
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var city = loginUserDistrict.substring(0,4);
     var data = {
       type:'4',
-      cityToFor:'4201',
+      cityToFor:city,
       num:6
     };
-    return   this.httpProvider.httpPost(this.areaPath+'?cityToFor=4201&num=6',0);
+    return   this.httpProvider.httpPost(this.areaPath+'?cityToFor='+city+'&num=6',0);
   }
   //商圈
   tradingArea(){

@@ -51,7 +51,7 @@ import {CodeValuePipe} from "../../pipes/code-value/code-value";
           opacity: 0,
           transform: 'translateY(100%)'
         }),
-        animate('.5s ease-in')
+        animate('.35s ease-in')
       ])
     ])
   ]
@@ -182,6 +182,9 @@ export class HousingPage {
     this.localCode = this.localStorageProvider.get('codeData');
     this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
     this.cxJSON.unshift({name:'全部',val:''});
+
+
+
   }
 
   isActive(item) {
@@ -332,6 +335,10 @@ export class HousingPage {
     console.log('ionViewDidLoad HousingPage');
     this.search();
     this.imgHeader = this.configProvider.set().img;
+    /**
+     * 祥哥 房源列表搜索接口
+      */
+    // this.propertyProvider.page2().toPromise().then();
   }
     //禁用调出键盘
   ionViewDidEnter(){
@@ -644,6 +651,22 @@ export class HousingPage {
       }
     }
   }
+  //标签列表字段中是否存在“某个”房源标签
+  ishasTag(data,dataList,item){
+    if(dataList){
+      var arry = dataList.split(",");
+       var arryNoSpace = [];
+      for (var i in arry){
+        arryNoSpace.push(arry[i].trim().replace(/\s/g,"")); //去掉标签数组中的空格
+      }
+      if(arryNoSpace.indexOf(data)!=-1){
+        return true
+      }else {
+        return false;
+      }
+    }
+  }
+
 
   houseJSON = [
     {name:'不限',val:0},
@@ -733,14 +756,18 @@ export class HousingPage {
   decorationName:'';
   buildingTypeName:'';
   buzzTypeName:'';
+  moreSearchData :any;
   mores(){
 
     this.events.subscribe('moreSearchBevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收更多为: ', params);
+
+      console.log('接收更多条件为: ', params );
       if(!params){
         this.params.tags = 0;
       }else {
+        this.moreSearchData = params;
+
         this.params.tags = params.tags;
         this.params.orientation = params.orientation;
         this.params. propertyPriceStart = params.propertyPriceStart;
@@ -756,7 +783,7 @@ export class HousingPage {
         this.decorationName =params.decorationName;
         this.buildingTypeName =params.buildingTypeName;
         this.buzzTypeName= params.buzzTypeName;
-        console.log('接收到',params);
+        console.log('接收到11',this.moreSearchData);
         // this.params. propertyPriceStart  propertyPriceEnd
         // console.log('搜索',this.floorName,this.params.estateId);
       }

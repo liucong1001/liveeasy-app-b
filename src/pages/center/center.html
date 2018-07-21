@@ -37,7 +37,7 @@
     </button>
 
     <ion-item>
-      <a *ngIf="!showNewVersion" (tap)="tip()">检测版本</a>
+      <a *ngIf="!showNewVersion" (tap)="tip()" class="linkDownload  pl12">检测版本</a>
       <a *ngIf="showNewVersion&&android"  class="linkDownload  pl12"
          href="https://www.pgyer.com/liveeasyApp" >
         检测版本

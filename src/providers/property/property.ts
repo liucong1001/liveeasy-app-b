@@ -85,6 +85,10 @@ export class PropertyProvider {
 
   //列表条件搜索
   pageSearch(currentPage,params){
+    // this.localStorageProvider.get('loginInfo')['office.area.code']
+    console.log('城市代码----------------',);
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserProvince = loginUserDistrict.substring(0,4);
     var  data = {
       currentPage: currentPage,
       hasCount:false,
@@ -94,7 +98,8 @@ export class PropertyProvider {
       offset:0,
       order:'asc',
       params:{
-        loginUserProvince:'42',
+        loginUserDistrict:loginUserDistrict,
+        loginUserProvince:loginUserProvince,
         orderBy:'1',
         propertyPriceUnit:'1',
         ...params,

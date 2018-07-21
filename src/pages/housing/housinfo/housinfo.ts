@@ -307,6 +307,22 @@ export class HousinfoPage {
     })
   }
 
+  //标签列表字段中是否存在“某个”房源标签
+  ishasTag(data,dataList,item){
+    if(dataList){
+      var arry = dataList.split(",");
+      var arryNoSpace = [];
+      for (var i in arry){
+        arryNoSpace.push(arry[i].trim().replace(/\s/g,"")); //去掉标签数组中的空格
+      }
+      if(arryNoSpace.indexOf(data)!=-1){
+        return true
+      }else {
+        return false;
+      }
+    }
+  }
+
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
