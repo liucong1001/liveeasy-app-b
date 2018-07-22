@@ -342,6 +342,7 @@ export class HousingPage {
      * 祥哥 房源列表搜索接口
       */
     // this.propertyProvider.page2().toPromise().then();
+    console.log('更多是否存在',this.moreSearchData);
   }
     //禁用调出键盘
   ionViewDidEnter(){
