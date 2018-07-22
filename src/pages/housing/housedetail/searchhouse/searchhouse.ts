@@ -24,10 +24,16 @@ export class SearchhousePage {
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
               private http:HttpClient,public statusBar: StatusBar) {
 
+
   }
 
   getData(data){
-    var path = 'http://47.75.151.57:7077/live/search?keyword='+data+'&site=4201';
+
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var city = loginUserDistrict.substring(0,4);
+
+
+    var path = 'http://47.75.151.57:7077/live/search?keyword='+data+'&site='+city;
     return  this.http.get(path).toPromise().then(res=>{
       return res as any;
     });

@@ -21,7 +21,7 @@
         <img src="assets/imgs/menu3.png" alt="" width="45" height="45">
         <a>成功报单</a>
       </ion-col>
-      <ion-col col-3 tappable (click)="gosta()">
+      <ion-col col-3 tappable >
         <!--(click)="gosta()"-->
         <img src="assets/imgs/menu4.png" alt="" width="45" height="45">
         <a>数据统计</a>
@@ -50,8 +50,8 @@
          <span>暂无公告!</span>
       </div>
     </ion-item>
-    <ion-item tappable (click)="checkhouse(i)" *ngFor="let i of houseJSON">
-      <!--(click)="checkhouse()"-->
+    <ion-item tappable  *ngFor="let i of houseJSON" >
+      <!--(click)="checkhouse(i)"-->
       <ion-thumbnail item-start>
         <div class="leftImg">
           <ion-icon name="{{i.icon}}" class="uFont"></ion-icon>

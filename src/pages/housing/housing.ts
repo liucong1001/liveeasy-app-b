@@ -224,7 +224,8 @@ export class HousingPage {
       this.params.estateId = '';
       this.params.area = '';
       this.searchArea = '不限';
-
+      this.hTips=false;
+      // console.log('点击不限=====');
       this.search();
     }
 
@@ -238,7 +239,7 @@ export class HousingPage {
     this.params.districtCode = item.code;
     this.propertyProvider.search2(item.id).then(res => {
       this.district=res.data;
-      console.log('asdsd',this.district);
+      // console.log('asdsd',this.district);
       if(this.district == undefined){
           // alert('暂无该地区!')
         this.hTips=true
@@ -246,6 +247,7 @@ export class HousingPage {
         this.hTips=false;
       }
     })
+    console.log('bolean',this.hTips);
   }
 
 
