@@ -116,7 +116,11 @@ export class PropertyProvider {
       owner:'b8fb56fbff16402a9a57a12446938c20',
       ...params,
     };
-    return this.http.get(this.pageListPath,{params:data}).toPromise();
+    return this.http.get(this.pageListPath,{params:data}).toPromise().then(
+      res=>{
+        return res as any;
+      }
+    );
 
   }
 
