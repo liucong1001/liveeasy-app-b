@@ -368,6 +368,7 @@ export class PublicpassengerPage {
       this.show=false;
       this.pop=false;
     }
+
   }
   showMenu2(){
     if(this.searchFloorNum == 2){

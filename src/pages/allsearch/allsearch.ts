@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Platform, Searchbar} from 'ionic-angular';
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
@@ -27,9 +27,13 @@ export class AllsearchPage {
   timer:any; //获取焦点定时器
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild('navbar') navBar: Navbar;
+  backButtonPressed: boolean = false;  //用于判断返回键是否触发
+
+  private registerBackEvent: Function;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient, public nativePageTransitions: NativePageTransitions,) {
+              private http:HttpClient, public nativePageTransitions: NativePageTransitions,public platform: Platform,) {
     this.search = navParams.get('floorName');
   }
 
@@ -53,7 +57,6 @@ export class AllsearchPage {
       if(this.search==''){
         this.edit =false;
       }
-
     })
   }
 
@@ -67,13 +70,14 @@ export class AllsearchPage {
   }
   //进入页面后执行
   ionViewDidEnter(){
-    this.timer= setInterval(()=>{
+    this.timer= setTimeout(()=>{
       this.searchBar.setFocus();
-    },0);
+    },100);
     this.navBar.backButtonClick = () => {
         this.navCtrl.pop({animate:false});
     };
   }
+
   //页面离开
   ionViewCanLeave(){
     window.clearInterval(this.timer);
@@ -86,6 +90,7 @@ export class AllsearchPage {
       this.floorList.push(item.keyword);
       this.localStorageProvider.set('floorList',this.floorList);
     }
+    console.log('清空条件',item);
 
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
@@ -100,7 +105,11 @@ export class AllsearchPage {
   chose(item){
     console.log('历史选择的',item);
     this.search = item;
-    this.getFloorKey(item)
+    this.getFloorKey(item);
+  }
+
+  onClear(event){
+    this.search = '';
   }
 
   backButtonClick = (e: UIEvent) => {

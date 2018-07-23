@@ -13,10 +13,10 @@ export class PropertyProvider {
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
 
-  private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
-  private  pageListPath2 = 'http://47.75.144.138:45678/coco/api/query?qId=propQuery&update=1&status=1&buzzType=1&owner=1&page=2&rows=10';
+  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
+  // private  pageListPath2 = 'http://47.75.144.138:45678/coco/api/query?qId=propQuery&update=1&status=1&buzzType=1&owner=1&page=2&rows=10';
   // private  pageListPath2 = '/47.75.151.57:7077/live/search?keyword=2';
-
+  private  pageListPath = 'https://c.liveeasy.tech/property/api/v1/query';
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
@@ -57,9 +57,9 @@ export class PropertyProvider {
     return   this.httpProvider.httpPost(this.pageListPath,data)
   }
 
-  page2(){
-    return   this.http.get(this.pageListPath2,);
-  }
+  // page2(){
+  //   return   this.http.get(this.pageListPath2,);
+  // }
 
   //添加空看
   insertEmptyLook(params?){
@@ -85,29 +85,41 @@ export class PropertyProvider {
 
   //列表条件搜索
   pageSearch(currentPage,params){
-    // this.localStorageProvider.get('loginInfo')['office.area.code']
-    console.log('城市代码----------------',);
+    // console.log('城市代码----------------',);
+    // var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    // var loginUserProvince = loginUserDistrict.substring(0,4);
+    // var  data = {
+    //   currentPage: currentPage,
+    //   hasCount:false,
+    //   limit:10,
+    //   totalRecords:0,
+    //   totalPages:0,
+    //   offset:0,
+    //   order:'asc',
+    //   params:{
+    //     loginUserDistrict:loginUserDistrict,
+    //     loginUserProvince:loginUserProvince,
+    //     orderBy:'1',
+    //     propertyPriceUnit:'1',
+    //     ...params,
+    //   },
+    // };
+    // console.log('开始请求时间',new Date());
+    // return this.httpProvider.httpPost(this.pageListPath,data)
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
     var loginUserProvince = loginUserDistrict.substring(0,4);
     var  data = {
-      currentPage: currentPage,
-      hasCount:false,
-      limit:10,
-      totalRecords:0,
-      totalPages:0,
-      offset:0,
-      order:'asc',
-      params:{
-        loginUserDistrict:loginUserDistrict,
-        loginUserProvince:loginUserProvince,
-        orderBy:'1',
-        propertyPriceUnit:'1',
-        ...params,
-      },
+      page: currentPage,
+      qId:'properties',
+      city:loginUserProvince,
+      division:loginUserDistrict,
+      owner:'b8fb56fbff16402a9a57a12446938c20',
+      ...params,
     };
-    console.log('开始请求时间',new Date());
-    return this.httpProvider.httpPost(this.pageListPath,data)
+    return this.http.get(this.pageListPath,{params:data}).toPromise();
+
   }
+
   //修改房源
   updates(params?) {
     // var data = {};

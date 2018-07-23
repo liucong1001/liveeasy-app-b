@@ -92,17 +92,18 @@ export class HousingPage {
    * @type {{}}
    */
   params:PropertyPageParams = {
-    district:'',
-    area:'',
-    bedroomType:'0',
-    districtCode:'',
-    estateId:'',
-    param:'1', //默认搜索是1,只看我的6,
-    tags:0,
-    orientation:'',
-    hasElevator:'',
-    propertyPriceStart:'', //价格范围  开始
-    propertyPriceEnd:'', //价格范围  结束
+
+     area:'9bb7da04deee404b9bd6f92c575ff0c6',
+    // district:'',
+    // bedroomType:'0',
+    // districtCode:'',
+    // estateId:'',
+    // param:'1', //默认搜索是1,只看我的6,
+    // tags:0,
+    // orientation:'',
+    // hasElevator:'',
+    // propertyPriceStart:'', //价格范围  开始
+    // propertyPriceEnd:'', //价格范围  结束
   };
   //楼盘搜索
   searchFloorName:any;
@@ -137,7 +138,7 @@ export class HousingPage {
       // menu.enable(true); //menus-功能开启
     if(!this.navParams.get('item')){
       this.floorName = '';
-      this.params.estateId = '';
+      // this.params.estateId = '';
     }else {
       this.floorName = this.navParams.get('item').keyword;
       this.params.estateId = this.navParams.get('item').id;
@@ -147,7 +148,7 @@ export class HousingPage {
     //   this.menu.enable(true); //menus-功能开启
       if(!navParams.get('item')){
         this.floorName = '';
-        this.params.estateId = '';
+        // this.params.estateId = '';
       }else {
         this.floorName = navParams.get('item').keyword;
         this.params.estateId = navParams.get('item').id;
@@ -596,7 +597,7 @@ export class HousingPage {
     setTimeout(()=>{
       infiniteScroll.complete();
       if(this.currentPage==1){
-        this.currentPage=4
+        this.currentPage=2
       }else {
         this.currentPage++;
       }
@@ -824,8 +825,8 @@ export class HousingPage {
  * 定义搜索条件类
  */
 class  PropertyPageParams {
-  district:string;
-  area:string; //商圈
+  district?:string;
+  area?:string; //商圈
   bedroomType?:string;//户室
   city?:string;
   districtCode?:string;

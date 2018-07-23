@@ -113,6 +113,7 @@ export class MypassengerPage {
     console.log('查询商圈',item);
     this.searchDict = item.name;
     this.selected = item;//激活css选中状态
+    console.log('激活状态',this.selected);
      //用code值匹配相应商圈
     this.district = [];
     for(var i in this.tradingArea){

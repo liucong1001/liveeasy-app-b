@@ -63,9 +63,9 @@ export class SearchhousePage {
 
   }
   ionViewDidEnter(){
-    this.timer= setInterval(()=>{
+    this.timer= setTimeout(()=>{
       this.searchBar.setFocus();
-    },0)
+    },100);
   }
 
 

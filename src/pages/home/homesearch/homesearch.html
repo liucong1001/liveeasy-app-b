@@ -3,7 +3,8 @@
 <ion-header >
   <ion-navbar #navbar >
     <ion-toolbar no-border-top>
-      <ion-searchbar #searchBar  placeholder="请输入小区或商圈名"   [(ngModel)]="search"  (ionChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
+      <ion-searchbar #searchBar  placeholder="请输入小区或商圈名"   [(ngModel)]="search"  (ionChange)="getFloorKey($event)"
+                     (ionClear)="onClear($event)"   class="serInput"></ion-searchbar>
       <ion-buttons end>
         <button ion-button icon-only color="dark" tappable (click)="back()">
           取消

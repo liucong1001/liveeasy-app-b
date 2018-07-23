@@ -64,7 +64,7 @@ export class MorePage {
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;
     //标签
-    this.tagsList=this.localStorageProvider.get('tagsList');
+    this.tagsList=this.localStorageProvider.get('tagsListPage');
     console.log(this.tagsList);
 
     if(this.localStorageProvider.get('searchMoreData')){
@@ -315,7 +315,7 @@ export class MorePage {
   }
 
   reset(){
-    this.tagsList=this.localStorageProvider.get('tagsList');
+    this.tagsList=this.localStorageProvider.get('tagsListPage');
     this.searchMoreData.tagsArry =[];
     this.searchMoreData.tags=0;
     //清除朝向

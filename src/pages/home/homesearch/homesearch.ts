@@ -66,9 +66,10 @@ export class HomesearchPage {
   }
   //进入页面后执行
   ionViewDidEnter(){
-    this.timer= setInterval(()=>{
+    this.timer= setTimeout(()=>{
       this.searchBar.setFocus();
-    },0);
+    },100);
+
     this.navBar.backButtonClick = () => {
        this.navCtrl.setRoot(HomePage)
     };
@@ -85,6 +86,10 @@ export class HomesearchPage {
       this.localStorageProvider.set('floorList',this.floorList);
     }
     this.navCtrl.push(HousingPage,{item:item});
+  }
+
+  onClear(event){
+    this.search = '';
   }
 
   back(){

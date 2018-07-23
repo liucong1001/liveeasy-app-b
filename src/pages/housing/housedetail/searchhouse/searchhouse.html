@@ -2,7 +2,8 @@
 <ion-header class="white-header">
   <ion-navbar>
     <ion-toolbar no-border-top>
-      <ion-searchbar placeholder="请输入小区或商圈名"  #searchBar   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"  class="serInput"></ion-searchbar>
+      <ion-searchbar placeholder="请输入小区或商圈名"  #searchBar   [(ngModel)]="search"  (ngModelChange)="getFloorKey($event)"
+                     (ionClear)="onClear($event)"   class="serInput"></ion-searchbar>
       <ion-buttons end>
         <button ion-button icon-only color="#333" tappable (click)="back()">
           取消

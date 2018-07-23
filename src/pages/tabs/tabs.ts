@@ -28,9 +28,9 @@ export class TabsPage {
       {tabTitle:'我的',icon:'wode',component:CenterPage},
     ];
     //房源权限
-    if(!this.permission.has('erp:property:input:index')){
-       this.pages.splice(1,1);
-    }
+    // if(!this.permission.has('erp:property:input:index')){
+    //    this.pages.splice(1,1);
+    // }
   }
 
   ionViewDidLoad() {
