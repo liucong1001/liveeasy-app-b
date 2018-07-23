@@ -135,14 +135,11 @@
           <span class="defaults"> 录入时间：</span>{{houseData.createdTime | date:'yyyy/MM/dd'}}
         </ion-col>
         <ion-col col-5>
-          <span class="defaults"> 楼层：</span>{{houseData.realtorId}}
+          <span class="defaults"> 归属人：</span>
+          <!--{{ floorPipe(houseData.positionInBuilding)}}-->
+          {{houseData.realtorId}}
         </ion-col>
       </ion-row>
-        <ion-row>
-          <ion-col col-7>
-            <span class="defaults"> 归属人：</span>{{floorPipe(houseData.positionInBuilding)}}
-          </ion-col>
-        </ion-row>
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
       <div class="p10" *ngIf="houseData.propertyPrice!=0">
