@@ -92,8 +92,7 @@ export class HousingPage {
    * @type {{}}
    */
   params:PropertyPageParams = {
-
-     area:'9bb7da04deee404b9bd6f92c575ff0c6',
+     area:'',
     // district:'',
     // bedroomType:'0',
     // districtCode:'',

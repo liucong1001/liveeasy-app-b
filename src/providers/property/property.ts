@@ -113,7 +113,9 @@ export class PropertyProvider {
       qId:'properties',
       city:loginUserProvince,
       division:loginUserDistrict,
-      owner:'b8fb56fbff16402a9a57a12446938c20',
+      // owner:'b8fb56fbff16402a9a57a12446938c20',
+      owner:this.localStorageProvider.get('loginInfo')['company']['id'],
+      // owner:this.localStorageProvider.get('loginInfo')['office']['area']['id'],
       ...params,
     };
     return this.http.get(this.pageListPath,{params:data}).toPromise().then(
