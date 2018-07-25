@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
+import {Component, ViewChild, Renderer} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar,Searchbar} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {FileTransfer,FileUploadOptions, FileTransferObject} from "@ionic-native/file-transfer";
 import {FileProvider} from "../../../providers/file/file";
@@ -34,10 +34,11 @@ export class AddlookPage {
   nowDateFile :any;
   formData:any;
   standardAddress:any;
+  @ViewChild('searchBar') searchBar:Searchbar;
   fileTransfer: FileTransferObject = this.transfer.create();
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
-              private camera: Camera,
+              private camera: Camera,private renderer:Renderer,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
@@ -195,7 +196,17 @@ export class AddlookPage {
          alert('添加失败'+err);
       })
     }
+//禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
 
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
+    };
+
+  }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {

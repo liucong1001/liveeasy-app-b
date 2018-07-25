@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild, Renderer} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
@@ -25,7 +25,8 @@ export class PassengerfollowPage {
   clientName:any;
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,
+  @ViewChild('searchBar') searchBar:Searchbar;
+  constructor(public navCtrl: NavController,private renderer:Renderer,
               public statusBar: StatusBar, public navParams: NavParams,
   private fb:FormBuilder,public customerProvider:CustomerProvider,public nativePageTransitions: NativePageTransitions,
               public toast:ToastComponent,) {
@@ -85,7 +86,17 @@ export class PassengerfollowPage {
       .catch();
     this.navCtrl.pop({animate:false});
   }
+//禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
 
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
+    };
+
+  }
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
     let options: NativeTransitionOptions = {

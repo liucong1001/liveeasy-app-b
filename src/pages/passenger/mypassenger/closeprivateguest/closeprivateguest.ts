@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild, Renderer} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angular';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -23,8 +23,9 @@ export class CloseprivateguestPage {
   clientName:any;
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
-              private fb:FormBuilder,public customerProvider:CustomerProvider,
+              private fb:FormBuilder,public customerProvider:CustomerProvider,private renderer:Renderer,
               public toast:ToastComponent,
               public statusBar: StatusBar,) {
     this.clientID=navParams.get('item').customerSn;
@@ -68,6 +69,19 @@ export class CloseprivateguestPage {
     });
     console.log(this.form.value)
   }
+
+//禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
+
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
+    };
+
+  }
+
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {

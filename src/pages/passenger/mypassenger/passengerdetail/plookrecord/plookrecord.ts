@@ -88,9 +88,9 @@ export class PlookrecordPage {
                 console.log(res);
                 if(res.success){
                   this.toast.msg('完成成功');
-                  // window.location.reload(false);
-                  // this.navCtrl.push(PassengerdetailPage)
-                  this.navCtrl.pop();
+                  setTimeout(()=>{
+                    this.navCtrl.pop();
+                  },200);
                 }else {
                   this.toast.error('完成失败')
                 }

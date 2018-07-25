@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild, Renderer} from '@angular/core';
+import {Events, IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angular';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -18,9 +18,10 @@ export class PassengerlookPage {
   clientID:any;
   clientName:any;
   clientPhone:any;
+  @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
-              private fb:FormBuilder,public customerProvider:CustomerProvider,
+              private fb:FormBuilder,public customerProvider:CustomerProvider,private renderer:Renderer,
               public toast:ToastComponent,  public events: Events) {
     this.clientID=navParams.get('item').customerSn;
     this.clientName=navParams.get('item').customerName;
@@ -34,7 +35,6 @@ export class PassengerlookPage {
     this.navBar.backButtonClick = this.backButtonClick;
   }
   form:FormGroup =this.fb.group({
-    property:[''],
     appointmentTm:['',Validators.required],
   });
   //状态栏文字颜色修改-白色
@@ -49,6 +49,7 @@ export class PassengerlookPage {
       this.events.unsubscribe('bevents');
       this.coveId=params.convIdReq;
       this.estateName=params.estateName;
+      console.log(this.coveId)
     });
     this.openWin(SearchPage);
   }

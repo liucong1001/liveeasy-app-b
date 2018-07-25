@@ -35,10 +35,10 @@
         <ion-row>
           <ion-col col-12 class="bgWhite p0">
             <ion-list>
-              <button ion-item class="pl12 ">
+              <button ion-item class="pl12" (click)="fy()">
                 <ion-label>房源编号</ion-label>
-                <ion-input formControlName="property" *ngIf="!estateName" value="选择房源" tappable (click)="fy()"></ion-input>
-                <ion-input formControlName="property" *ngIf="estateName" value="{{estateName}}" tappable (click)="fy()"></ion-input>
+                <ion-label class="tr" *ngIf="!estateName" tappable >选择房源</ion-label>
+                <ion-label class="tr" *ngIf="estateName" tappable>{{estateName}}</ion-label>
               </button>
             </ion-list>
           </ion-col>

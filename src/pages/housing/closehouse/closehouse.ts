@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
+import {Component,Renderer, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar,Searchbar} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ClosehouseProvider} from '../../../providers/closehouse/closehouse'
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
@@ -36,8 +36,9 @@ export class ClosehousePage {
   data:any;
   realtorSourceId:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              public http: HttpClient,public toast:ToastComponent,
+              public http: HttpClient,public toast:ToastComponent,private renderer:Renderer,
               public  closehouseProvider: ClosehouseProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid = navParams.get('propertyid');
@@ -164,6 +165,17 @@ export class ClosehousePage {
     this.openWin(BelongerPage,{
       data:this.form.value,
     })
+  }
+  //禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
+
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
+    };
+
   }
 
   //------返回处理--------//

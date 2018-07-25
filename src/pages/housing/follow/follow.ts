@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, Navbar} from 'ionic-angular';
+import {Component, Renderer, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar,Searchbar} from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {FollowProvider} from '../../../providers/follow/follow'
@@ -25,8 +25,9 @@ export class FollowPage {
   convid:any;
   standardAddress:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              public http: HttpClient,
+              public http: HttpClient,private renderer:Renderer,
               public toast:ToastComponent,
               public  followProvider: FollowProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
@@ -76,6 +77,17 @@ export class FollowPage {
       });
   console.log(this.form.value)
 }
+//禁用调出键盘
+  ionViewDidEnter(){
+    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+    this.renderer.setElementAttribute(input, 'disabled', 'true');
+
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.popToRoot();
+    };
+
+  }
 
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
