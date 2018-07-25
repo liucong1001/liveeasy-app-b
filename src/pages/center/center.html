@@ -3,16 +3,16 @@
     <!--<ion-icon name="shezhi"></ion-icon>-->
   <!--</div>-->
   <ion-grid class="bgWhite cHead">
-    <ion-row class="plr">
+    <ion-row>
       <ion-col col-3>
         <div class="imgWrap">
           <img src="{{photo}}"  class="cLeftImg" alt="" width="100%" height="100%">
         </div>
       </ion-col>
-      <ion-col col-9 class="cRightMain">
+      <ion-col col-9 class="cRightMain" style="    margin-top: 6px;">
         <div>
             <font size="4">{{name}}</font>
-          <a class="followTips" *ngIf="this.custposName == '' ">{{custposName}}</a>
+          <a class="followTips" *ngIf="this.custposName">{{custposName}}</a>
         </div>
         <!--<div  class="m5">-->
           <!--<font size="2" color="#aaa">武昌一店</font>-->

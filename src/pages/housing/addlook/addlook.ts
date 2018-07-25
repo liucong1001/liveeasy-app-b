@@ -184,7 +184,9 @@ export class AddlookPage {
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
         if(res.success){
           this.toast.msg('添加成功!');
-          this.navCtrl.pop();
+          setTimeout(()=>{
+            this.navCtrl.pop();
+          },200);
         }else {
           this.toast.error('添加失败!');
           console.log('失败',res);

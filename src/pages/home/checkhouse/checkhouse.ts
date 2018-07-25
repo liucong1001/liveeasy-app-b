@@ -25,12 +25,8 @@ export class CheckhousePage {
   hasData = true;
   /**
    * 列表搜索条件
-   * @type {{}}
    */
   values:any;
-  // params:CustomerPageParams = {
-  //   operationCode:'0'
-  // };
   val:any;
   code:any;
   @ViewChild('navbar') navBar: Navbar;
@@ -112,6 +108,7 @@ export class CheckhousePage {
   timer:any;
   not=false;
   haveData=false;
+  newCount:any;
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
 
@@ -122,6 +119,7 @@ export class CheckhousePage {
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
+      this.newCount=newCount;
       this.firstPageData = res.data.result;
 
       console.log('Async operation has ended');

@@ -21,8 +21,7 @@
         <img src="assets/imgs/menu3.png" alt="" width="45" height="45">
         <a>成功报单</a>
       </ion-col>
-      <ion-col col-3 tappable >
-        <!--(click)="gosta()"-->
+      <ion-col col-3 tappable (click)="gosta()">
         <img src="assets/imgs/menu4.png" alt="" width="45" height="45">
         <a>数据统计</a>
       </ion-col>
@@ -47,11 +46,10 @@
         <span class="newsTip"  *ngIf="i==0">{{item.notificationTitle}}  {{item.notificationCont}}   {{item.postPersonId}}</span>
       </div>
       <div class="ellipsis newsList" *ngIf="!notificationNews">
-         <span>暂无公告!</span>
+         <span>暂无数据</span>
       </div>
     </ion-item>
-    <ion-item tappable  *ngFor="let i of houseJSON" >
-      <!--(click)="checkhouse(i)"-->
+    <ion-item tappable  *ngFor="let i of houseJSON" (click)="checkhouse(i)">
       <ion-thumbnail item-start>
         <div class="leftImg">
           <ion-icon name="{{i.icon}}" class="uFont"></ion-icon>
@@ -62,7 +60,10 @@
           <h2>{{i.name}}</h2>
         </ion-col>
       </ion-row>
-      <p class="ellipsis">暂未开发</p>
+      <p class="ellipsis" *ngIf="this.check || this.adjust || this.close">
+        您有一条消息待处理
+      </p>
+      <p class="ellipsis" *ngIf="!this.check || !this.adjust || !this.close">暂无数据</p>
     </ion-item>
 
   </ion-list>

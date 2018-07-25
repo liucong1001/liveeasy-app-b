@@ -123,7 +123,9 @@ export class ClosehousePage {
           console.log(res);
           if(res.success){
             this.toast.msg('关闭成功!');
-            this.navCtrl.setRoot(HousingPage)
+            setTimeout(()=>{
+              this.navCtrl.setRoot(HousingPage)
+            },200);
           }else{
             this.toast.error('关闭失败！');
           }

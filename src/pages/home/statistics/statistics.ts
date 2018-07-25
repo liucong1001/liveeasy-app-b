@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {PersonPage} from "./person/person";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {ToastComponent} from "../../../components/toast/toast";
 
 /**
  * Generated class for the StatisticsPage page.
@@ -41,7 +42,7 @@ export class StatisticsPage {
   // end:any;
   statItem:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,private fb:FormBuilder,
+  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
 
     //本周
@@ -91,86 +92,96 @@ export class StatisticsPage {
       startTime:parseInt(this.yesterday),
       endTime:parseInt(this.yesterday),
     }).then(res=>{
-      this.data=res.data;
-      let sorted = this.groupBy(res.data, function(item){
-        if(item.storeCode){
-          return [item.storeCode];
-        }else {
-          return [item.deptId];
+      if(res.success){
+        if(res.data){
+          this.data=res.data
+          alert(this.data)
+          let sorted = this.groupBy(res.data, function(item){
+            if(item.storeCode){
+              return [item.storeCode];
+            }else {
+              return [item.deptId];
+            }
+          });
+          console.log('部门',sorted);
+          for (var i in sorted) {
+            this.department.push(sorted[i][0]);
+          }
+          for (var all in sorted){
+            for (var aa=0;aa<sorted[all].length;aa++){
+              if(sorted[all][aa].statItem == 3001){
+                this.tableJSON[0].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 3025){
+                // console.log('3025',sorted[j][h]);
+                this.tableJSON[1].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 3011){
+                // console.log('3011',sorted[j][h]);
+                this.tableJSON[2].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 3012){
+                // console.log('3012',sorted[j][h]);
+                this.tableJSON[3].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 3007){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[4].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4018){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[5].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4019){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[6].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4020){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[7].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4021){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[8].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4022){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[9].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 4023){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[10].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 5018){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[11].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 5019){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[12].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 5020){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[13].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 5021){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[14].result+=sorted[all][aa].stateValue;
+              }
+              if(sorted[all][aa].statItem == 5022){
+                // console.log('3007',sorted[j][h]);
+                this.tableJSON[15].result+=sorted[all][aa].stateValue;
+              }
+            }
+            console.log(this.tableJSON)
+          }
+          }else {
+          this.toast.error('暂无数据');
         }
-      });
-      console.log('部门',sorted);
-      for (var i in sorted) {
-        this.department.push(sorted[i][0]);
+      }else {
+        this.toast.error('暂无数据');
       }
-      for (var all in sorted){
-        for (var aa=0;aa<sorted[all].length;aa++){
-          if(sorted[all][aa].statItem == 3001){
-            this.tableJSON[0].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 3025){
-            // console.log('3025',sorted[j][h]);
-            this.tableJSON[1].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 3011){
-            // console.log('3011',sorted[j][h]);
-            this.tableJSON[2].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 3012){
-            // console.log('3012',sorted[j][h]);
-            this.tableJSON[3].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 3007){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[4].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4018){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[5].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4019){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[6].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4020){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[7].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4021){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[8].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4022){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[9].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 4023){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[10].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 5018){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[11].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 5019){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[12].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 5020){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[13].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 5021){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[14].result+=sorted[all][aa].stateValue;
-          }
-          if(sorted[all][aa].statItem == 5022){
-            // console.log('3007',sorted[j][h]);
-            this.tableJSON[15].result+=sorted[all][aa].stateValue;
-          }
-        }
-        console.log(this.tableJSON)
-      }
+
     });
 
     //时间查询

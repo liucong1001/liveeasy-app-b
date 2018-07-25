@@ -67,7 +67,7 @@ export class FollowPage {
           // this.navCtrl.pop()
           setTimeout(()=>{
             this.navCtrl.pop();
-          },1000);
+          },200);
         }else{
           this.toast.error('跟进失败！');
         }

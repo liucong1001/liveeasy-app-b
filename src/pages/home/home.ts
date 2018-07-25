@@ -26,16 +26,35 @@ export class HomePage {
   @ViewChild('searchBar') searchBar:Searchbar;
   codeData:any;
   code:any;
+  check=[];
+  adjust=[];
+  close=[];
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,
              ) {
     this.localStorageProvider.del('searchMoreData');
-    //获取待办消息接口
-    this.homeProvider.msgs(1,{operationCode:this.code }).then(res =>{
+    //获取待办消息接口-
+    this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
       console.log(res);
+      for(var i in res.data.result){
+        console.log(res.data.result[i])
+        if(res.data.result[i].operationCode == '3033'){
+          //关闭房源审核
+          this.check.push(res.data.result[i]);
+
+        }
+        if(res.data.result[i].operationCode == '3030'){
+          //房源调整
+          this.adjust.push(res.data.result[i])
+        }
+        if(res.data.result[i].operationCode == '3005'){
+          this.close.push(res.data.result[i])
+        }
+      }
     });
+    console.log(this.check,this.adjust,this.close)
     this.homeProvider.getCode().then(res=>{
         if(res.success){
           this.localStorageProvider.set('codeData', JSON.parse(res.data) );
@@ -87,7 +106,7 @@ export class HomePage {
   }
   //
   houseJSON=[
-    {name:'关闭房源审核',val:'1',icon:'tixing',code:'3004'},
+    {name:'关闭房源审核',val:'1',icon:'tixing',code:'3033'},
     {name:'房源调整',val:'2',icon:'notice1',code:'3030'},
     {name:'关闭房源',val:'3',icon:'tixing',code:'3005'},
   ]
