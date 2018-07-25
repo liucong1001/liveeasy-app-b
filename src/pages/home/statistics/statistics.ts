@@ -94,6 +94,7 @@ export class StatisticsPage {
     }).then(res=>{
       if(res.success){
         if(res.data){
+          console.log(res.data)
           this.data=res.data
           alert(this.data)
           let sorted = this.groupBy(res.data, function(item){

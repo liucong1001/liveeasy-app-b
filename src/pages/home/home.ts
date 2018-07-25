@@ -37,9 +37,7 @@ export class HomePage {
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
     this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
-      console.log(res);
       for(var i in res.data.result){
-        console.log(res.data.result[i])
         if(res.data.result[i].operationCode == '3033'){
           //关闭房源审核
           this.check.push(res.data.result[i]);
