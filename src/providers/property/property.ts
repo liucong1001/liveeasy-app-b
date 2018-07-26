@@ -107,7 +107,7 @@ export class PropertyProvider {
       qId:qId,
       qType:qType,
       city:loginUserProvince,
-      division:loginUserDistrict,
+      // division:loginUserDistrict,
       owner:this.localStorageProvider.get('loginInfo')['company']['id'],
       ...params,
     };

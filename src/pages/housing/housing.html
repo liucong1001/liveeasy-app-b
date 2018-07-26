@@ -7,28 +7,28 @@
 
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
-
-      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 30px;">{{ searchArea}} </span>
-      <span *ngIf="!searchArea">区域</span>
-      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
-      <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea"></ion-icon>
+      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 30px;" *ngIf="searchArea&&searchArea!='不限'">
+        {{ searchArea}}
+      </span>
+      <span *ngIf="!searchArea||searchArea=='不限'">区域</span>
+      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-      <!--{{housePipe(params.bedrooms)}}-->
-      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedrooms||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.bedrooms)}}</span>
-      <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2}"></ion-icon>
+      <span *ngIf="searchFloorNum==2&&!bedroomUnlimt" [ngClass]="{color:params.bedrooms||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.bedrooms)}}</span>
+      <span  *ngIf="searchFloorNum!=2||bedroomUnlimt" > 户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2&&!bedroomUnlimt}"></ion-icon>
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <span [ngClass]="{color:starts,esRow:ends}">
        <span *ngIf="starts !=0"> {{starts}}</span>{{ends}}
-        <!--<span *ngIf="ends == 100">万</span><span *ngIf="ends">-</span>{{ends}}<span *ngIf="ends">万</span>-->
       </span>
-      <span [hidden]="starts" *ngIf="name!='不限'">价格 </span>
-      <span *ngIf="name=='不限'" [ngClass]="{color:name=='不限'}">不限</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends,addCor:name=='不限'}"></ion-icon>
+      <!--*ngIf="name!='不限'"-->
+      <span [hidden]="starts" >价格 </span>
+      <!--<span *ngIf="name=='不限'" [ngClass]="{color:name=='不限'}">不限</span>-->
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>

@@ -93,16 +93,7 @@ export class HousingPage {
    */
   params:PropertyPageParams = {
      area:'',
-    // district:'',
-    // bedrooms:'0',
-    // districtCode:'',
-    // estateId:'',
-    // param:'1', //默认搜索是1,只看我的6,
-    // tags:0,
-    // orientation:'',
-    // hasElevator:'',
-    // propertyPriceStart:'', //价格范围  开始
-    // propertyPriceEnd:'', //价格范围  结束
+    division:'',
   };
   //楼盘搜索
   searchFloorName:any;
@@ -133,7 +124,6 @@ export class HousingPage {
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
     }
-
       // menu.enable(true); //menus-功能开启
     if(!this.navParams.get('item')){
       this.floorName = '';
@@ -160,7 +150,7 @@ export class HousingPage {
         this.area = res.data.distrs;
         this.localStorageProvider.set('distrs',this.area);
         if(this.area){
-          this.area.unshift({name:'不限',id:'99'});
+          this.area.unshift({name:'不限11',id:'99'});
         }
         /**
          * 区域和房源标签合成一个接口
@@ -182,6 +172,9 @@ export class HousingPage {
     this.localCode = this.localStorageProvider.get('codeData');
     this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
     this.cxJSON.unshift({name:'全部',val:''});
+    //查询列表，行政区参数
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    this.params.division = loginUserDistrict;
   }
 
 
@@ -193,9 +186,9 @@ export class HousingPage {
   allCity = false;
   unlimited(){
     this.allCity = true;
-    this.params.district = '';
-    this.params.districtCode = '';
-    this.params.area = '';
+    // this.params.district = '';
+    this.params.division = '2333';
+    this.params.area = '' ;
     this.search('propQuery');
     // this.isActive('');
     // this.reset();
@@ -207,36 +200,32 @@ export class HousingPage {
   cityId:any;
   bx(){
     console.log('参数',this.params);
-    this.params.area ='';
+     this.params.area = '' ;
     this.searchArea = '不限';
     this.search('propQuery');
   }
   //电梯
   dt(){
     console.log('参数',this.params);
-    this.params.area ='';
+     this.params.area  = '';
     this.search('propQuery');
   }
   go(item) {
-    // this.allCity = false;
+
     if(item.id=='99'){
-      this.params.districtCode = '';
-      this.params.estateId = '';
-      this.params.area = '';
+      this.params.division = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+       this.params.area = '';
       this.searchArea = '不限';
       this.hTips=false;
-      // console.log('点击不限=====');
       this.search('propQuery');
     }
-
-    // this.searchDict = item.name;
 
 
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
-    this.params.district = item.id;
-    this.params.districtCode = item.code;
+    // this.params.district = item.id;
+    this.params.division = item.code;
     this.propertyProvider.search2(item.id).then(res => {
       this.district=res.data;
       // console.log('asdsd',this.district);
@@ -246,7 +235,7 @@ export class HousingPage {
       }else {
         this.hTips=false;
       }
-    })
+    });
     console.log('bolean',this.hTips);
   }
 
@@ -328,10 +317,10 @@ export class HousingPage {
   //重置
   reset(){
     this.params= {
-      district:'',
+      // district:'',
       area:'',
       bedrooms:'0',
-      districtCode:'420103',
+      division:'420103',
       estateId:'',
       param:'1', //默认搜索是1,只看我的6,
     };
@@ -871,11 +860,11 @@ export class HousingPage {
  * 定义搜索条件类
  */
 class  PropertyPageParams {
-  district?:string;
+  // district?:string;
   area?:string; //商圈
   bedrooms?:string;//户室
   city?:string;
-  districtCode?:string;
+  division?:string;
   estateId?:string;//小区
   param?:string;
   tags?:any;
@@ -884,7 +873,6 @@ class  PropertyPageParams {
   propertyPriceStart?:any; //价格范围  开始
   propertyPriceEnd?:any; //价格范围  结束
   price?:any;
-  division?:any;
   space?:any;//建筑面积
   decoration?:any;//装修程度
   buildType?:any;//建筑类型
