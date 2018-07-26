@@ -78,7 +78,7 @@ export class CustomerProvider {
         ...params,
       },
     };
-    return this.httpProvider.httpPost(this.pageListPath,data)
+    return this.httpProvider.httpGet(this.pageListPath,data)
   }
  //客户来源
   customerSrcInfo(){

@@ -26,7 +26,7 @@ export class PublicCustomerProvider {
         ...params,
       },
     };
-    return this.httpProvider.httpPost(this.pageListPath,data)
+    return this.httpProvider.httpGet(this.pageListPath,data)
   }
 
 }

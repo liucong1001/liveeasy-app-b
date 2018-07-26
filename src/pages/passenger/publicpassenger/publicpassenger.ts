@@ -129,7 +129,7 @@ export class PublicpassengerPage {
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
+    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
 
@@ -157,7 +157,7 @@ export class PublicpassengerPage {
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
+    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
 
@@ -240,7 +240,7 @@ export class PublicpassengerPage {
         this.all = true;
       }else {
         this.all = false;
-        this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+        this.publicCustomerProvider.pageSearch(this.currentPage,this.params).then(res=>{
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
           }
@@ -267,7 +267,7 @@ export class PublicpassengerPage {
     console.log(this.params)
     console.log('上拉刷新Begin async operation', refresher);
 
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
+    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
 
       this.totalRecords = res.data.totalRecords;
