@@ -42,7 +42,7 @@ export class CustomerProvider {
   //分页列表
   page(currentPage){
     var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
-    return   this.httpProvider.httpPost(this.pageListPath,data)
+    return   this.httpProvider.httpGet(this.pageListPath,data)
   }
   //区域
   area(){
@@ -98,7 +98,7 @@ export class CustomerProvider {
   }
   //根据ID获取客户详情
   getDetail(customerId){
-     return this.httpProvider.httpPost(this.detailPath+'?customerId='+customerId);
+     return this.httpProvider.httpGet(this.detailPath+'?customerId='+customerId);
   }
   //编辑客户
   update(params){

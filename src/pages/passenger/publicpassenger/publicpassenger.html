@@ -9,9 +9,13 @@
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
-      <span [hidden]="searchFloorNum==2"> 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
+      <!--<span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>-->
+      <!--<span [hidden]="searchFloorNum==2"> 户型</span>-->
+      <!--<ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>-->
+
+      <span *ngIf="searchFloorNum==2&&!bedroomUnlimt" [ngClass]="{color:params.intentionRoom||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.intentionRoom)}}</span>
+      <span  *ngIf="searchFloorNum!=2||bedroomUnlimt" > 户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2&&!bedroomUnlimt}"></ion-icon>
     </ion-col>
 
     <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">

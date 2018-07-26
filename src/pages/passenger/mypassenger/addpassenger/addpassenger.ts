@@ -10,6 +10,7 @@ import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import {DescsPage} from "../descs/descs";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -40,8 +41,10 @@ export class AddpassengerPage {
   shangQuan = [];//保存商圈
   intentionTradeCodeId:string;  //用于转换商圈
   type:string="";
+  aa:any;
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,
+  constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
+              public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events,public statusBar: StatusBar
   ) {
@@ -54,6 +57,15 @@ export class AddpassengerPage {
     //客户归属
     this.customerProvider.agentList().then(res=>{
        this.agentList = res;
+       console.log(this.agentList)
+      for(var i in this.agentList){
+        if(this.agentList[i].id == this.localStorageProvider.get('loginInfo').id){
+          console.log(this.agentList[i].id)
+          this.form.patchValue({
+            agentId:this.agentList[i].id
+          })
+        }
+      }
     });
     //客户等级
     this.customerProvider.customeroGrageInfo().then(res=>{

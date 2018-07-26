@@ -125,7 +125,14 @@ export class PublicpassengerPage {
   /**
    * 列表搜索
    */
+  bedroomUnlimt = false;
   search(){
+    if(this.params.intentionRoom=='0'){
+      this.bedroomUnlimt =true;
+      delete  this.params.intentionRoom ;
+    }
+
+
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
@@ -263,6 +270,7 @@ export class PublicpassengerPage {
   timer:any;
   not=false;
   haveData=false;
+  newCount:any;
   doRefresh(refresher) {
     console.log(this.params)
     console.log('上拉刷新Begin async operation', refresher);
@@ -274,6 +282,7 @@ export class PublicpassengerPage {
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
+      this.newCount=newCount;
       this.firstPageData = res.data.result;
 
       console.log('Async operation has ended');

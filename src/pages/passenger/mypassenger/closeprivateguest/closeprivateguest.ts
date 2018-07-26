@@ -32,7 +32,12 @@ export class CloseprivateguestPage {
     this.clientName=navParams.get('item').customerName;
     this.clientPhone=navParams.get('item').customerPhone;
     this.customerid=navParams.get('item').customerId;
-    console.log(this.customerid)
+    console.log(this.customerid);
+
+  }
+  selectTitle(data){
+    var title = {title:data};
+    return title;
   }
 
   ionViewDidLoad() {
@@ -44,7 +49,7 @@ export class CloseprivateguestPage {
     this.statusBar.styleLightContent();
   }
   form:FormGroup =this.fb.group({
-    customerStatus:['',Validators.required],
+    customerStatus:['2',Validators.required],
     content:['',[Validators.required]], //委托书编号
   });
   // errors={

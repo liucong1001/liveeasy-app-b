@@ -33,7 +33,7 @@
       </ion-item>
     </ion-list>
     <p class="p10">历史记录</p>
-    <div>
+    <div *ngIf="floorList">
       <a (click)="chose(x)" *ngFor="let x of floorList ">{{x}}</a>
     </div>
   </div>

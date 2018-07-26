@@ -11,15 +11,18 @@
        </ion-navbar>
        <ion-row class="houseMenu">
          <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
-           <span [ngClass]="{color:this.searchDict}">{{searchDict}}</span>
-           <span *ngIf="!searchDict">区域</span>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
+           <span [ngClass]="{color:this.searchDict}" *ngIf="searchDict&&searchDict!='不限'">{{searchDict}}</span>
+           <span *ngIf="!searchDict||searchDict=='不限'">区域</span>
+           <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-
+           <!--<span *ngIf="searchFloorNum==2&&!bedroomUnlimt" [ngClass]="{color:params.intentionRoom||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.intentionRoom)}}</span>-->
+           <!--<span  *ngIf="searchFloorNum!=2||bedroomUnlimt" > 户型</span>-->
+           <!--<ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2&&!bedroomUnlimt}"></ion-icon>-->
            <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
            <span [hidden]="searchFloorNum==2"> 户型</span>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum == 2}"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
            <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values)}}</span>

@@ -690,7 +690,7 @@ export class HousingPage {
     {start:'2000',end:'2500',val:'6'},
     {start:'2500',end:'3000',val:'7'},
     {start:'3000',end:'3500',val:'8'},
-    {start:'5000',val:'9'},
+    {start:'5000',end:'0',val:'9'},
   ];
 //户型转换
   housePipe(data){
@@ -716,9 +716,9 @@ export class HousingPage {
   ends:any;
   structure:any = {lower: 0, upper:500};
   onChange(ev:any) {
-    // this.params.propertyPriceStart=this.structure.lower.toString();
-    // this.params.propertyPriceEnd=this.structure.upper.toString();
-    this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
+    console.log(this.structure.lower,this.structure.upper)
+      this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
+
   }
 
   name:any;
@@ -728,8 +728,6 @@ export class HousingPage {
     this.starts=this.time.start;
     this.ends=this.time.end;
     console.log(this.ends);
-    // this.params.propertyPriceStart=this.starts;
-    // this.params.propertyPriceEnd=this.ends;
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
     }else{

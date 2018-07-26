@@ -25,9 +25,7 @@
       <span [ngClass]="{color:starts,esRow:ends}">
        <span *ngIf="starts !=0"> {{starts}}</span>{{ends}}
       </span>
-      <!--*ngIf="name!='不限'"-->
       <span [hidden]="starts" >价格 </span>
-      <!--<span *ngIf="name=='不限'" [ngClass]="{color:name=='不限'}">不限</span>-->
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
@@ -261,8 +259,8 @@
         <ion-label *ngIf="y.name=='不限'">{{y.name}}</ion-label>
         <ion-label *ngIf="y.name!='不限'">
           <span *ngIf="y.val==1">{{y.end}}万以下</span>
-          <span *ngIf="y.start!='0' && y.end">{{y.start}}{{-y.end}}万</span>
-           <span *ngIf="y.val ==9">{{y.start}}万以上</span>
+          <span *ngIf="y.start!='' && y.val !=1 && y.val !=9">{{y.start}}{{-y.end}}万</span>
+          <span *ngIf="y.val ==9">{{y.start}}万以上</span>
         </ion-label>
         <ion-radio value={{y.val}} (ionSelect)="selectPrice()"></ion-radio>
       </ion-item>
