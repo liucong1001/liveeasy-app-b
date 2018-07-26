@@ -12,7 +12,7 @@ export class CodeValuePipe implements PipeTransform {
   transform(value: any, ...args) {
     var arry=[];
     for(var i in value){
-      arry.push({name:value[i],val:i});
+      arry.push({name:value[i],val: i });
     }
     return  arry;
   }

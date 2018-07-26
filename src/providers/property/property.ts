@@ -83,39 +83,32 @@ export class PropertyProvider {
     return this.httpProvider.httpPost(this.pageListPath,data)
   }
 
-  //列表条件搜索
-  pageSearch(currentPage,params){
-    // console.log('城市代码----------------',);
-    // var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
-    // var loginUserProvince = loginUserDistrict.substring(0,4);
-    // var  data = {
-    //   currentPage: currentPage,
-    //   hasCount:false,
-    //   limit:10,
-    //   totalRecords:0,
-    //   totalPages:0,
-    //   offset:0,
-    //   order:'asc',
-    //   params:{
-    //     loginUserDistrict:loginUserDistrict,
-    //     loginUserProvince:loginUserProvince,
-    //     orderBy:'1',
-    //     propertyPriceUnit:'1',
-    //     ...params,
-    //   },
-    // };
-    // console.log('开始请求时间',new Date());
-    // return this.httpProvider.httpPost(this.pageListPath,data)
+
+  /**
+   * 列表条件搜索
+   *
+   * @param currentPage
+   * @param params
+   * @param qId  查询配置，列表用properties， 查询用propQuery
+   * @returns {Promise<any>}
+   */
+  pageSearch(currentPage,params,qId){
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
     var loginUserProvince = loginUserDistrict.substring(0,4);
+    var qType;
+    if(qId == 'propQuery'){
+      qType ='dynamic';
+    }else if (qId == 'properties') {
+      qType= 'fixed';
+    }
+
     var  data = {
       page: currentPage,
-      qId:'properties',
+      qId:qId,
+      qType:qType,
       city:loginUserProvince,
       division:loginUserDistrict,
-      // owner:'b8fb56fbff16402a9a57a12446938c20',
       owner:this.localStorageProvider.get('loginInfo')['company']['id'],
-      // owner:this.localStorageProvider.get('loginInfo')['office']['area']['id'],
       ...params,
     };
     return this.http.get(this.pageListPath,{params:data}).toPromise().then(

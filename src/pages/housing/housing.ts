@@ -94,7 +94,7 @@ export class HousingPage {
   params:PropertyPageParams = {
      area:'',
     // district:'',
-    // bedroomType:'0',
+    // bedrooms:'0',
     // districtCode:'',
     // estateId:'',
     // param:'1', //默认搜索是1,只看我的6,
@@ -182,10 +182,10 @@ export class HousingPage {
     this.localCode = this.localStorageProvider.get('codeData');
     this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
     this.cxJSON.unshift({name:'全部',val:''});
-
-
-
   }
+
+
+
 
   isActive(item) {
     return this.selected === item;
@@ -196,7 +196,7 @@ export class HousingPage {
     this.params.district = '';
     this.params.districtCode = '';
     this.params.area = '';
-    this.search();
+    this.search('propQuery');
     // this.isActive('');
     // this.reset();
   }
@@ -209,13 +209,13 @@ export class HousingPage {
     console.log('参数',this.params);
     this.params.area ='';
     this.searchArea = '不限';
-    this.search();
+    this.search('propQuery');
   }
   //电梯
   dt(){
     console.log('参数',this.params);
     this.params.area ='';
-    this.search();
+    this.search('propQuery');
   }
   go(item) {
     // this.allCity = false;
@@ -226,7 +226,7 @@ export class HousingPage {
       this.searchArea = '不限';
       this.hTips=false;
       // console.log('点击不限=====');
-      this.search();
+      this.search('propQuery');
     }
 
     // this.searchDict = item.name;
@@ -262,10 +262,15 @@ export class HousingPage {
 
   hasData = true;
   totalRecords :any;//查询到的总条数；
+  bedroomUnlimt = false;
   /**
    * 列表搜索
    */
-  search(){
+  search(qId){
+    if(this.params.bedrooms=='0'){
+      this.bedroomUnlimt =true;
+     delete  this.params.bedrooms ;
+    }
 
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
@@ -275,22 +280,22 @@ export class HousingPage {
 
     this.pageData = [];
     this.hasData  = true;
-     this.propertyProvider.pageSearch(1,this.params).then(res=>{
-
+     this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
        if(res){
          console.log('结束时间内容',res.data.totalRecords);
          this.totalRecords = res.data.totalRecords;
          this.firstPageData = res.data.result;
-         if(res.data.hasOwnProperty('result')){
+         // res.data.hasOwnProperty('result')
+         if(res.data.result){
            this.hasData  = true;
            this.pageData = [];
            for (let i = 0; i < res.data.result.length; i ++) {
              setTimeout(()=> this.pageData.push(res.data.result[i]),150 * i);
            }
-         }else{
+         }else  {
+           console.log('没有数据!');
            this.hasData = false;
          }
-         console.log('hasData',this.hasData);
          this.totalPages = res.data.totalPages;
          //关闭搜索框子
          this.show = false;
@@ -303,6 +308,8 @@ export class HousingPage {
          if(this.searchFloorNum ==1){
            this.searchFloorNum = 2;
          }
+        //将下拉currentPage重置
+         this.currentPage = 1;
        }
        this.badHttp = false;
 
@@ -323,12 +330,12 @@ export class HousingPage {
     this.params= {
       district:'',
       area:'',
-      bedroomType:'0',
+      bedrooms:'0',
       districtCode:'420103',
       estateId:'',
       param:'1', //默认搜索是1,只看我的6,
     };
-    this.search();
+    this.search('propQuery');
   }
   ionViewWillEnter() {
     this.statusBar.styleDefault();
@@ -336,7 +343,7 @@ export class HousingPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HousingPage');
-    this.search();
+    this.search('properties');
     this.imgHeader = this.configProvider.set().img;
     /**
      * 祥哥 房源列表搜索接口
@@ -511,7 +518,7 @@ export class HousingPage {
       // alert(2);
       refresher.pullingText='松开推荐'
     }
-    this.propertyProvider.pageSearch(1,this.params).then(res=>{
+    this.propertyProvider.pageSearch(1,this.params,'properties').then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
       this.totalRecords = res.data.totalRecords;
       this.totalPages = res.data.totalPages;
@@ -600,6 +607,7 @@ export class HousingPage {
       }else {
         this.currentPage++;
       }
+      // this.currentPage++;
 
       if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
@@ -608,7 +616,7 @@ export class HousingPage {
         this.all = true;
       }else {
         this.all = false;
-        this.propertyProvider.pageSearch(this.currentPage,this.params).then(res => {
+        this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult = res.data.result;
           console.log('pageResult--',this.pageResult);
           if (res.data.result) {
@@ -719,9 +727,11 @@ export class HousingPage {
   ends:any;
   structure:any = {lower: 0, upper:500};
   onChange(ev:any) {
-    this.params.propertyPriceStart=this.structure.lower.toString();
-    this.params.propertyPriceEnd=this.structure.upper.toString();
+    // this.params.propertyPriceStart=this.structure.lower.toString();
+    // this.params.propertyPriceEnd=this.structure.upper.toString();
+    this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
   }
+
   name:any;
   selectPrice(){
     this.time=this.elevatorPipe(this.price);
@@ -729,9 +739,16 @@ export class HousingPage {
     this.starts=this.time.start;
     this.ends=this.time.end;
     console.log(this.ends);
-    this.params.propertyPriceStart=this.starts;
-    this.params.propertyPriceEnd=this.ends;
-    this.search();
+    // this.params.propertyPriceStart=this.starts;
+    // this.params.propertyPriceEnd=this.ends;
+    if(this.starts==undefined||this.ends==undefined){
+      delete  this.params.price;
+    }else{
+      this.params.price = this.starts + ',' + this.ends;
+    }
+
+
+    this.search('propQuery');
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
       console.log(this.structure)
@@ -750,7 +767,7 @@ export class HousingPage {
           this.params.estateId = params.id;
           console.log('搜索',this.floorName,this.params.estateId);
         }
-        this.search();
+        this.search('propQuery');
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
@@ -762,40 +779,70 @@ export class HousingPage {
   buzzTypeName:'';
   moreSearchData :any;
   positionInBuilding:'';
+  duplicates(arr) {
+    var newArr = [];
+    for(var i=0;i<arr.length;i++){
+      var count = 0;
+      for(var j=0;j<arr.length;j++){
+        if(arr[i]===arr[j]){
+          count++;
+        }
+      }
+      if(count>1 && newArr.indexOf(arr[i])===-1){
+        newArr.push(arr[i]);
+      }
+    }
+    return newArr;
+  }
   mores(){
-
     this.events.subscribe('moreSearchBevents', (params) => {
       // 接收B页面发布的数据
-
       console.log('接收更多条件为: ', params );
       if(!params){
         this.params.tags = 0;
       }else {
         this.moreSearchData = params;
 
-        this.params.tags = params.tags;
-        this.params.orientation = params.orientation;
-        this.params. propertyPriceStart = params.propertyPriceStart;
-        this.params. propertyPriceEnd = params.propertyPriceEnd;
-        //liu
-        this.params['spaceSizeStart']=params.spaceSizeStart;
-        this.params['spaceSizeEnd']=params.spaceSizeEnd;
-        this.params['decoration']=params.decoration;
-        this.params['buildingType']=params.buildingType;
-        this.params['buzzType']=params.buzzType;
+        if(params.tags!=0){this.params.tags = params.tags}else{ delete this.params.tags};
 
-        this.spaceSizeName = params.spaceSizeName;
-        this.decorationName =params.decorationName;
-        this.buildingTypeName =params.buildingTypeName;
-        this.buzzTypeName= params.buzzTypeName;
+        if(params.orientation!=0){this.params.orientation = params.orientation} else {delete this.params.orientation};
+        if(params.hasElevator!=0){this.params.elevators = params.hasElevator} else {this.params.elevators};
+        if(params.spaceSize!=0){
+          // spaceSizeList
+          var arry = [];
+          var arryList = '';
+          for(var i in params.spaceSizeList){
+            arry.push(params.spaceSizeList[i]['start']);
+            arry.push(params.spaceSizeList[i]['end']);
+            arryList +=params.spaceSizeList[i]['start']+','+params.spaceSizeList[i]['end']+';';
+          }
+          // console.log('开始的元素',arry);
+          // console.log('查找的重复元素',this.duplicates(arry));
+
+          for(var i in arry){
+             for(var y in this.duplicates(arry) ){
+                if(arry[i]== this.duplicates(arry)[y]){
+                  console.log('item重复',arry[i],i);
+                  var index = arry.indexOf(arry[i]);
+                  if(index>-1){arry.splice(index,1)}
+                }
+             }
+
+          }
+          // console.log('去重复之后',arry);
+          // console.log('查询面积----',arry);
+          this.params.space = arryList;
+        }else {
+          delete this.params.space
+        }
+
+        if(params.decoration!=0){this.params.decoration = params.decoration}else {delete this.params.decoration}
+        if(params.buildType!=0){this.params.buildType = params.buildType}else {delete this.params.buildType}
+        if(params.position!=0){this.params.position = params.position}else {delete this.params.position}
+
         console.log('接收到11',this.moreSearchData);
-        this.positionInBuilding=params.positionInBuildingName;
-        console.log('接收到',params);
-        console.log(this.spaceSizeName,this.decorationName,this.buildingTypeName,this.buzzTypeName,this.positionInBuilding)
-        // this.params. propertyPriceStart  propertyPriceEnd
-        // console.log('搜索',this.floorName,this.params.estateId);
       }
-       this.search();
+       this.search('propQuery');
       // 取消订阅
       this.events.unsubscribe('moreSearchBevents');
     });
@@ -814,7 +861,7 @@ export class HousingPage {
 
   selectArea(item){
      this.searchArea= item.name;
-    this.search();
+    this.search('propQuery');
   }
 
 
@@ -826,15 +873,21 @@ export class HousingPage {
 class  PropertyPageParams {
   district?:string;
   area?:string; //商圈
-  bedroomType?:string;//户室
+  bedrooms?:string;//户室
   city?:string;
   districtCode?:string;
   estateId?:string;//小区
   param?:string;
   tags?:any;
-  hasElevator?:any;//是否有电梯
+  elevators?:any;//是否有电梯
   orientation?:any;//朝向
   propertyPriceStart?:any; //价格范围  开始
   propertyPriceEnd?:any; //价格范围  结束
+  price?:any;
+  division?:any;
+  space?:any;//建筑面积
+  decoration?:any;//装修程度
+  buildType?:any;//建筑类型
+  position?:any;//楼层位置
 }
 

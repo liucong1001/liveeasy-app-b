@@ -13,13 +13,14 @@
       <ion-icon name="md-arrow-dropdown" *ngIf="searchArea" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
       <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea"></ion-icon>
     </ion-col>
-    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
 
-      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedroomType}">{{housePipe(params.bedroomType)}}</span>
+    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
+      <!--{{housePipe(params.bedrooms)}}-->
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedrooms||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.bedrooms)}}</span>
       <span [hidden]="searchFloorNum==2"> 户型</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2}"></ion-icon>
-
     </ion-col>
+
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <span [ngClass]="{color:starts,esRow:ends}">
        <span *ngIf="starts !=0"> {{starts}}</span>{{ends}}
@@ -56,30 +57,48 @@
 
     <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;"  *ngIf="moreSearchData">
       <ng-container *ngIf="datas">
+
         <a style="padding: 1px 3px" *ngFor="let i of datas.tagsArry;let i =index;"   >
           {{tagName(i)}}
         </a>
-        <!--ngIf=" params['orientationArry'].length()>1"-->
-        <!--<ng-container  *ngIf="moreSearchData">-->
-        <!--<span class="moreTip"   *ngFor="let i of moreSearchData['orientationArry'] ">-->
-        <!--{{cxPipe(i)}}-->
-        <!--</span>-->
-        <!--</ng-container>-->
-        <span class="moreTip" *ngIf="datas.orientation !=0">{{cxPipe(datas.orientation)}}</span>
 
-        <span class="moreTip" *ngIf="datas.hasElevator">{{datas.hasElevator=='0'?'无':'有'}}</span>
+        <ng-container  *ngIf="moreSearchData">
+        <span class="moreTip"   *ngFor="let i of moreSearchData['orientationArry'] ">
+        {{cxPipe(i)}}
+        </span>
+        </ng-container>
       </ng-container>
 
-      <span class="moreTip" *ngIf="spaceSizeName">{{spaceSizeName}}</span>
-      <!--<ng-container  *ngIf="moreSearchData">-->
-      <!--<span class="moreTip"  *ngFor="let i of moreSearchData['decorationArry'] "  >-->
-      <!--{{i}}-->
-      <!--</span>-->
-      <!--</ng-container>-->
-      <span class="moreTip" *ngIf="decorationName"  [hidden]="decorationName=='全部'">{{decorationName}}</span>
+      <ng-container *ngIf="moreSearchData['hasElevatorArry']">
+        <span class="moreTip" *ngFor="let item of moreSearchData['hasElevatorList']" >
+           <span *ngIf="item.active"> {{item.name}}</span>
+        </span>
+      </ng-container>
 
-      <span class="moreTip" *ngIf="buildingTypeName" [hidden]="buildingTypeName=='全部'">{{buildingTypeName}}</span>
-      <span class="moreTip" *ngIf="buzzTypeName" [hidden]="buzzTypeName=='全部'">{{buzzTypeName}}</span>
+      <ng-container *ngIf="moreSearchData['spaceSizeArry']">
+        <span class="moreTip" *ngFor="let item of moreSearchData['spaceSizeList']" >
+           <span *ngIf="item.active"> {{item.name}}</span>
+        </span>
+      </ng-container>
+
+      <ng-container  *ngIf="moreSearchData['decorationArry']">
+        <span class="moreTip"  *ngFor="let item of moreSearchData['decorationList'] "  >
+           <span *ngIf="item.active">{{item.name}}</span>
+        </span>
+      </ng-container>
+
+      <ng-container  *ngIf="moreSearchData['buildTypeArry']">
+        <span class="moreTip"  *ngFor="let item of moreSearchData['buildTypeList'] "  >
+           <span *ngIf="item.active">{{item.name}}</span>
+        </span>
+      </ng-container>
+
+      <ng-container  *ngIf="moreSearchData['positionArry']">
+        <span class="moreTip"  *ngFor="let item of moreSearchData['positionList'] "  >
+           <span *ngIf="item.active">{{item.name}}</span>
+        </span>
+      </ng-container>
+
     </p>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
@@ -228,10 +247,10 @@
 
   <!-- 户型 -->
   <div class="lists houseType" [hidden]="!houseType" >
-    <ion-list radio-group [(ngModel)]="params.bedroomType" class="scrollC">
+    <ion-list radio-group [(ngModel)]="params.bedrooms" class="scrollC">
       <ion-item *ngFor="let y of houseJSON" class="tc">
         <ion-label>{{y.name}}</ion-label>
-        <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
+        <ion-radio value={{y.val}} (ionSelect)="search('propQuery')"></ion-radio>
       </ion-item>
     </ion-list>
 
@@ -264,7 +283,7 @@
       </ion-item>
     </ion-list>
     <div class="btns">
-      <button ion-button full color="danger" (click)="search()">确定</button>
+      <button ion-button full color="danger" (click)="search('propQuery')">确定</button>
     </div>
   </div>
   <!-- 更多 -->
