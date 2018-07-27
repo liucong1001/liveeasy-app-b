@@ -89,6 +89,7 @@ export class PublicpassengerPage {
     if(item.id == '99'){
       this.params.intentionDiviCode ='0';
       this.params.intentionTradeCode = '0';
+      this.searchArea = '不限';
       this.search();
     }
 
@@ -125,14 +126,7 @@ export class PublicpassengerPage {
   /**
    * 列表搜索
    */
-  bedroomUnlimt = false;
   search(){
-    if(this.params.intentionRoom=='0'){
-      this.bedroomUnlimt =true;
-      delete  this.params.intentionRoom ;
-    }
-
-
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
@@ -157,9 +151,16 @@ export class PublicpassengerPage {
       if(this.searchFloorNum ==1){
         this.searchFloorNum = 2;
       }
+      if(this.searchFloorNum ==2 && this.params.intentionRoom=='0'){
+        this.searchFloorNum=1;
+      }
     });
   }
-
+  searchArea='';
+  selectArea(items){
+    this.searchArea= items.name;
+    this.search();
+  }
   sxClick(){
     this.pageData = null;
     this.hasData  = true;
@@ -380,10 +381,10 @@ export class PublicpassengerPage {
 
   }
   showMenu2(){
-    if(this.searchFloorNum == 2){
-      this.searchFloorNum =2;
+    if(this.searchFloorNum ==1){
+      this.searchFloorNum = 1;
     }else {
-      this.searchFloorNum =1;
+      this.searchFloorNum =2;
     }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
@@ -402,7 +403,6 @@ export class PublicpassengerPage {
     }else {
       this.sx =1;
     }
-
     if(this.more == false || this.show == true || this.houseType==true){
       this.show=false;
       this.pop=true;

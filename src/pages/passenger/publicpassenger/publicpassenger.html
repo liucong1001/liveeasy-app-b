@@ -4,18 +4,17 @@
   </ion-navbar>
   <ion-row class="houseMenu">
     <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
-      <span [ngClass]="{color:this.searchDict}">{{searchDict}}</span>
-      <span *ngIf="!searchDict">区域</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:this.searchDict}"></ion-icon>
+      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 40px;" *ngIf="searchArea&&searchArea!='不限'">
+        {{ searchArea}}
+      </span>
+      <span *ngIf="!searchArea||searchArea=='不限'">区域</span>
+      <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-      <!--<span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>-->
-      <!--<span [hidden]="searchFloorNum==2"> 户型</span>-->
-      <!--<ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>-->
-
-      <span *ngIf="searchFloorNum==2&&!bedroomUnlimt" [ngClass]="{color:params.intentionRoom||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.intentionRoom)}}</span>
-      <span  *ngIf="searchFloorNum!=2||bedroomUnlimt" > 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2&&!bedroomUnlimt}"></ion-icon>
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
+      <span  *ngIf="searchFloorNum==0 || searchFloorNum==1">户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
     </ion-col>
 
     <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
@@ -115,7 +114,7 @@
           <ion-list radio-group [(ngModel)]="params.intentionTradeCode" >
             <ion-item *ngFor=" let items of district;let i = index" >
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.code}}"  (ionSelect)="search()"></ion-radio>
+              <ion-radio value="{{items.code}}"  (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
           <div *ngIf="district ==false && selected?.id!=99">暂无该地区！</div>
@@ -148,7 +147,7 @@
         <button ion-button full color="danger" class="radius" style="background: #F0F0F0;color:#6A98C8;" (click)="reset()">重置</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button full color="danger" class="radius" (click)="sxClick()">确定</button>
+        <button ion-button full color="danger" class="radius update" (click)="sxClick()">确定</button>
       </ion-col>
     </ion-row>
   </div>

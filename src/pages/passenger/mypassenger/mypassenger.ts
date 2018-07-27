@@ -11,6 +11,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {PassengerPage} from "../passenger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -106,6 +107,7 @@ export class MypassengerPage {
     if(item.id == '99'){
       this.params.intentionDiviCode ='0';
       this.params.intentionTradeCode = '0';
+      this.searchArea = '不限';
       this.search();
     }
 
@@ -119,8 +121,10 @@ export class MypassengerPage {
     for(var i in this.tradingArea){
        if(this.tradingArea[i].code.substring(0,6) == item.code){
           this.district.push(this.tradingArea[i]);
+
        }
     }
+    console.log(this.district)
     if(this.district.length>1){
       this.district.unshift({name:'不限',code:'0'});
     }
@@ -128,17 +132,10 @@ export class MypassengerPage {
 
   }
 
-
   /**
    * 列表搜索
    */
-  bedroomUnlimt = false;
   search(){
-    if(this.params.intentionRoom=='0'){
-      this.bedroomUnlimt =true;
-      delete  this.params.intentionRoom ;
-    }
-
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
@@ -162,37 +159,47 @@ export class MypassengerPage {
       if(this.searchFloorNum ==1){
         this.searchFloorNum = 2;
       }
-
+      if(this.searchFloorNum ==2 && this.params.intentionRoom=='0'){
+        this.searchFloorNum=1;
+      }
     });
   }
-
+  searchArea='';
+  selectArea(items){
+    this.searchArea= items.name;
+    this.search();
+  }
   sxClick(){
-    this.pageData = null;
-    this.hasData  = true;
-    console.log('搜索',this.params);
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
-      this.pageData = res.data.result;
-      this.totalPages = res.data.totalPages;
+    if(this.values){
+      alert(2);
+    }
+      this.pageData = null;
+      this.hasData  = true;
+      console.log('搜索',this.params);
+      this.customerProvider.pageSearch(1,this.params).then(res=>{
+        this.pageData = res.data.result;
+        this.totalPages = res.data.totalPages;
 
-      if(res.data.hasOwnProperty('result')){
-        this.hasData  = true;
-      }else{
-        this.hasData = false;
-      }
-      //关闭搜索框子
-      this.show = false;
-      this.houseType = false;
-      this.more = false;
-      this.pop = false;
-      // this.housingEstate = false;
-      //户型搜索条件字显示
-      if(this.sx ==1){
-        this.sx = 2;
-      }
-      if(this.info == false){
-        this.sx=1
-      }
-    });
+        if(res.data.hasOwnProperty('result')){
+          this.hasData  = true;
+        }else{
+          this.hasData = false;
+        }
+        //关闭搜索框子
+        this.show = false;
+        this.houseType = false;
+        this.more = false;
+        this.pop = false;
+        // this.housingEstate = false;
+        //户型搜索条件字显示
+        if(this.sx ==1){
+          this.sx = 2;
+        }
+        if(this.info == false){
+          this.sx=1
+        }
+      });
+
   }
   // checks:boolean;
   sausage=[];
@@ -368,11 +375,10 @@ export class MypassengerPage {
     }
   }
   showMenu2(){
-    // this.searchFloorNum =1;
-    if(this.searchFloorNum == 2){
-      this.searchFloorNum =2;
+    if(this.searchFloorNum ==1){
+      this.searchFloorNum = 1;
     }else {
-      this.searchFloorNum =1;
+      this.searchFloorNum =2;
     }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;

@@ -69,7 +69,7 @@ export class HomeProvider {
           ...params,
         },
       };
-      return this.httpProvider.httpPost(this.declarationPath,data);
+      return this.httpProvider.httpGet(this.declarationPath,data);
     }
 
     decldetail(orderId){
