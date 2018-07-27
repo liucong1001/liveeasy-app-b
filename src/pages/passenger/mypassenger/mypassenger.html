@@ -24,10 +24,10 @@
            <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
          </ion-col>
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
-           <span [ngClass]="{color:this.values}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values)}}</span>
+           <span [ngClass]="{color:filtrate(this.values)!='筛选'}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values)}}</span>
            <span [hidden]="sx==2"> 筛选</span>
            <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2&&filtrate(this.values)!='筛选'}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
          </ion-col>
        </ion-row>
      </ion-header>
@@ -149,7 +149,7 @@
   <!-- 筛选 [(ngModel)]="checks" -->
   <div class="lists houseType" [hidden]="!more">
     <ion-list radio-group  class="scrollC" >
-      <ion-item *ngFor="let i of filtrateJson;let index =index">
+      <ion-item *ngFor="let i of filtrateJson;let index =index" [hidden]="index==0">
         <ion-label>{{i.name}}</ion-label>
         <ion-checkbox (ionChange)="updateCucumber(i.val,index)" [(ngModel)]="sausage[index]"></ion-checkbox>
       </ion-item>

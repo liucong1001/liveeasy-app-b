@@ -170,8 +170,8 @@ export class MypassengerPage {
     this.search();
   }
   sxClick(){
-    if(this.values){
-      alert(2);
+    if(!this.values){
+      this.values='0'
     }
       this.pageData = null;
       this.hasData  = true;
@@ -239,6 +239,7 @@ export class MypassengerPage {
   ];
 
   filtrateJson = [
+    {name:'筛选',val:0},
     {name:'今日未跟进',val:1},
     {name:'超过三日未跟进',val:2},
     {name:'今日有约看',val:3},
