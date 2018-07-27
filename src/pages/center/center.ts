@@ -155,14 +155,7 @@ export class CenterPage {
   }
 
   updateVersion(){
-    console.log('开始检测版本更新');
-
-    // this.http.get("https://b.liveeasy.tech/api/v1/app/appInfo/findMaxAppVersion",
-    //   {},{}).then(
-    //   res=>{
-    //     console.log("下载11：" , res.data);
-    //   }
-    // );
+    console.log('开始检测版本更新1');
     this.appUpdate.checkVersion();
   }
 
@@ -173,7 +166,6 @@ export class CenterPage {
       slowdownfactor: -1,
       iosdelay: 50
     };
-
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage,{}, {animate: false});
   }

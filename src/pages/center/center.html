@@ -34,9 +34,12 @@
     <button   ion-item class="pl12" (click)="updateVersion()" tappable >
       检测版本
       <!--<span>(当前版本:{{versionNumber}})</span>-->
+      <ion-badge item-end color="danger" *ngIf="showNewVersion">
+        新版本
+      </ion-badge>
     </button>
 
-    <button ion-item class="pl12" >
+    <button ion-item class="pl12" *ngIf="showNewVersion&&ios" >
       <a *ngIf="!showNewVersion" (tap)="tip()">检测版本</a>
       <a *ngIf="showNewVersion&&ios"  class="linkDownload  pl12"
          href="https://www.pgyer.com/liveeasyAppIos" >
