@@ -14,7 +14,7 @@ import {LocalStorageProvider} from "../providers/local-storage/local-storage";
 import {TabsPage} from "../pages/tabs/tabs";
 
 import { Keyboard } from '@ionic-native/keyboard';
-
+import {AndroidPermissions} from "@ionic-native/android-permissions";
 @Component({
   templateUrl: 'app.html'
 })
@@ -35,7 +35,8 @@ export class MyApp {
               public app: App,
               public keybord: Keyboard,
               public kb: KB,
-              private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController
+              private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
+              private androidPermissions: AndroidPermissions
               ) {
       if(!this.localStorageProvider.get('ticket')){
           this.rootPage = AccountPage;
@@ -55,8 +56,16 @@ export class MyApp {
       splashScreen.hide();
       this.setKeyBorder();
       //android 6 以上动态获取权限
+      if (this.device.platform == "Android") {
+        this.androidPermissions.requestPermissions([
+          this.androidPermissions.PERMISSION.CAMERA,
+          this.androidPermissions.PERMISSION.GET_ACCOUNTS,
+          this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES,
+          this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+          this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+        ]);
+      }
       //检测版本更新
-      // appUpdate.checkVersion();
       // 返回按键事件
       this.registerBackButtonAction();
     });

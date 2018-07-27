@@ -21,6 +21,7 @@
         "@angular/http": "5.2.10",
         "@angular/platform-browser": "5.2.10",
         "@angular/platform-browser-dynamic": "5.2.10",
+        "@ionic-native/android-permissions": "^4.10.1",
         "@ionic-native/app-update": "^4.7.0",
         "@ionic-native/app-version": "^4.7.0",
         "@ionic-native/base64": "^4.7.0",
@@ -80,7 +81,7 @@
         "zone.js": "0.8.26"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "3.1.9",
+        "@ionic/app-scripts": "^3.1.11",
         "typescript": "~2.6.2"
     },
     "description": "An Ionic project",
@@ -105,7 +106,8 @@
             "cordova-plugin-nativestorage": {},
             "com-badrit-base64": {},
             "cordova-plugin-image-picker": {},
-            "com-sarriaroman-photoviewer": {}
+            "com-sarriaroman-photoviewer": {},
+            "cordova-plugin-android-permissions": {}
         },
         "platforms": [
             "android",

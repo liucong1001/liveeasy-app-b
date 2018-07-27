@@ -71,6 +71,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Keyboard } from '@ionic-native/keyboard';
 import { PermissionProvider } from '../providers/permission/permission';
 import {BaiduMapModule } from "angular2-baidu-map";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
 
 
 @NgModule({
@@ -148,7 +149,7 @@ import {BaiduMapModule } from "angular2-baidu-map";
         useClass: ionicGalleryModal.GalleryModalHammerConfig,
       },
       PermissionProvider,
-
+      AndroidPermissions,
 
     ]
 })

@@ -102,6 +102,7 @@ export class CenterPage {
            this.showNewVersion = true;
            console.log('是否存在版本',this.showNewVersion);
         }
+        console.log('版本对比',this.aLinKDownloadVersion,this.versionNumber);
 
       }
     }).catch((e)=> {
@@ -155,6 +156,13 @@ export class CenterPage {
 
   updateVersion(){
     console.log('开始检测版本更新');
+
+    // this.http.get("https://b.liveeasy.tech/api/v1/app/appInfo/findMaxAppVersion",
+    //   {},{}).then(
+    //   res=>{
+    //     console.log("下载11：" , res.data);
+    //   }
+    // );
     this.appUpdate.checkVersion();
   }
 

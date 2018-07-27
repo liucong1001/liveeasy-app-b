@@ -31,30 +31,24 @@
       帮助反馈
     </button>
     <!--(click)="updateVersion()"-->
-    <button [hidden]="true"  ion-item class="pl12" (click)="updateVersion()" tappable >
+    <button   ion-item class="pl12" (click)="updateVersion()" tappable >
       检测版本
-      <span>(当前版本:{{versionNumber}})</span>
+      <!--<span>(当前版本:{{versionNumber}})</span>-->
     </button>
 
-    <button ion-item class="pl12">
+    <button ion-item class="pl12" >
       <a *ngIf="!showNewVersion" (tap)="tip()">检测版本</a>
-      <a *ngIf="showNewVersion&&android"  class="linkDownload  pl12"
-         href="https://www.pgyer.com/liveeasyApp" >
-        检测版本
-        <!--(发现新版本:{{aLinKDownloadVersion}})-->
-      </a>
       <a *ngIf="showNewVersion&&ios"  class="linkDownload  pl12"
          href="https://www.pgyer.com/liveeasyAppIos" >
         检测版本
-        <!--(发现新版本:{{aLinKDownloadVersion}})-->
       </a>
       <ion-badge item-end color="danger" *ngIf="showNewVersion">
         新版本
       </ion-badge>
-      <!--<a *ngIf="showNewVersion"  class="linkDownload  pl12" href="https://www.pgyer.com/apiv2/app/install?appKey=9db9597481973c878648387bf30eaca0&_api_key=14eca046de7309cd5125d4e3bdb1afd1" >-->
-        <!--检测版本(发现新版本:{{aLinKDownloadVersion}})-->
-      <!--</a>-->
     </button>
+
+
+
   </ion-list>
   <ion-list class="m10">
     <button ion-item class="pl12" tappable (click)="updatepwd()">
