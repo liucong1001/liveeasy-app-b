@@ -335,6 +335,20 @@ export class HousinfoPage {
     }
   }
 
+
+
+  //------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
@@ -348,19 +362,6 @@ export class HousinfoPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
-  };
-
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 }

@@ -186,17 +186,10 @@
     <ion-list [hidden]="!rest">
       <button ion-item class="pl12" (click)="desc(1)">
         <span>核心需求点</span>
-        <!--<ion-input type="text"  placeholder="" formControlName="requiredDemands">-->
-        <!--</ion-input>-->
       </button>
       <button ion-item class="pl12" (click)="desc(2)">
         <span>核心抵触点</span>
       </button>
-      <!--<ion-item class="pl12">-->
-        <!--<ion-label>核心抵触点</ion-label>-->
-        <!--<ion-input type="text" placeholder="" formControlName="againstDemands">-->
-        <!--</ion-input>-->
-      <!--</ion-item>-->
       <ion-item class="pl12">
         <ion-label>免打扰时段开始时间</ion-label>
         <ion-datetime placeholder="请选择开始时间" formControlName="contactFreeTm1" (ionChange)="getcontactFreeTm1($event)" displayFormat="HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>
@@ -205,12 +198,6 @@
         <ion-label>免打扰时段结束时间</ion-label>
         <ion-datetime placeholder="请选择结束时间" formControlName="contactFreeTm2" (ionChange)="getcontactFreeTm2($event)" displayFormat="HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>
       </ion-item>
-
-      <!--<ion-item class="pl12">-->
-        <!--<ion-label>备注</ion-label>-->
-        <!--<ion-input type="text" placeholder="" formControlName="comments">-->
-        <!--</ion-input>-->
-      <!--</ion-item>-->
       <button ion-item class="pl12" (click)="desc(3)">
         <span>备注</span>
       </button>

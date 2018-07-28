@@ -150,7 +150,7 @@ export class HousingPage {
         this.area = res.data.distrs;
         this.localStorageProvider.set('distrs',this.area);
         if(this.area){
-          this.area.unshift({name:'不限11',id:'99'});
+          this.area.unshift({name:'不限',id:'99'});
         }
         /**
          * 区域和房源标签合成一个接口

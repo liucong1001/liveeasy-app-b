@@ -75,7 +75,7 @@ export class PassengerdetailPage {
           maxBedroom:this.data.maxBedroom,
           minHall:this.data.minHall,
           maxHall:this.data.maxHall,
-          decorations:this.data.decorations,
+          decorationArray:this.data.decorationArray,
           //其他
           requiredDemands:this.data.requiredDemands,
           againstDemands:this.data.againstDemands,
@@ -143,7 +143,7 @@ export class PassengerdetailPage {
     maxBedroom:[''],//最多居室
     minHall:[''],//最少厅
     maxHall:[''],//最多厅
-    decorations:[],//装修要求
+    decorationArray:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
     contactFreeTmArray:[],//免打扰时间
@@ -264,6 +264,88 @@ export class PassengerdetailPage {
       });
     }
   }
+
+
+
+  /**
+   验证
+   */
+  //验证面积
+  areaCheck=false;
+  priceCheck=false;
+  floorCheck=false;
+  roomCheck=false;
+  hallCheck=false;
+  areas(){
+    if(this.form.value.minSpaceSize&&this.form.value.maxSpaceSize){
+      if(parseInt(this.form.value.maxSpaceSize) < parseInt(this.form.value.minSpaceSize)){
+        console.log('结束面积不能小于开始面积');
+        this.areaCheck = true;
+      }else {
+        this.areaCheck = false;
+      }
+    }
+    console.log(this.form.value.minSpaceSize,)
+  }
+  //价格
+  prices(){
+    if(this.form.value.minPrice&&this.form.value.maxPrice){
+      if(parseInt(this.form.value.maxPrice) < parseInt(this.form.value.minPrice)){
+        console.log('最高价格不能小于最低价格');
+        this.priceCheck = true;
+      }else {
+        this.priceCheck = false;
+      }
+    }
+  }
+  //楼层
+  floors(){
+    if(this.form.value.minFloor&&this.form.value.maxFloor){
+      if(parseInt(this.form.value.maxFloor) < parseInt(this.form.value.minFloor)){
+        console.log('最高楼不能小于最低楼层');
+        this.floorCheck = true;
+      }else {
+        this.floorCheck = false;
+      }
+    }
+  }
+  //居室
+  rooms(){
+    if(this.form.value.minBedroom&&this.form.value.maxBedroom){
+      if(parseInt(this.form.value.maxBedroom) < parseInt(this.form.value.minBedroom)){
+        console.log('最多居室不能小于最少居室');
+        this.roomCheck = true;
+      }else {
+        this.roomCheck = false;
+      }
+    }
+  }
+  //客厅
+  halls(){
+    if(this.form.value.minHall&&this.form.value.maxHall){
+      if(parseInt(this.form.value.maxHall) < parseInt(this.form.value.minHall)){
+        console.log('最多厅不能小于最少厅');
+        this.hallCheck = true;
+      }else {
+        this.hallCheck = false;
+      }
+    }
+  }
+
+  getcontactFreeTm1(event){
+    // this.form.value.contactFreeTmArray
+    var startTime = event.hour +':'+event.minute ;
+    this.form.value.contactFreeTmArray[0] = startTime;
+    console.log('时间',event,startTime);
+  }
+
+  getcontactFreeTm2(event){
+    var endTime = event.hour +':'+event.minute ;
+    this.form.value.contactFreeTmArray[1] = endTime;
+    console.log('表单',this.form.value);
+  }
+
+
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
@@ -291,4 +373,5 @@ export class PassengerdetailPage {
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
+
 }
