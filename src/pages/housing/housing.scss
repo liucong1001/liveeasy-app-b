@@ -42,9 +42,10 @@ page-housing {
     white-space: nowrap;
     width: 40px;
     display: inline-block;
+    vertical-align: middle;
   }
   .down{
-    margin-top: -8px;
+    //margin-top: -8px;
   }
   .range-ios.range-has-pin{
     padding: 0;

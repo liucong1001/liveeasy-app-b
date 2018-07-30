@@ -23,7 +23,7 @@
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <span [ngClass]="{color:starts,esRow:ends}">
-       <span *ngIf="starts !=0"> {{starts}}</span>{{ends}}
+       <span *ngIf="starts !=0">{{starts}}</span>{{ends}}
       </span>
       <span [hidden]="starts" >价格 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
@@ -280,7 +280,7 @@
     <ion-list style="height: 166px;">
       <ion-row>
         <ion-col col-12 class="middleGreen tc" style="border-top: 1px solid #f3f3f3;padding: 10px 0;margin: 0 -10px;">
-          {{structure.lower}}&nbsp;—&nbsp;<span *ngIf="structure.upper != 5000">{{structure.upper}}万</span><span *ngIf="structure.upper == 5000">不限</span>
+         {{structure.lower}}&nbsp;—&nbsp;<span *ngIf="structure.upper != 5000">{{structure.upper}}万</span><span *ngIf="structure.upper == 5000">不限</span>
         </ion-col>
       </ion-row>
       <ion-item>
