@@ -7,7 +7,6 @@ import {MyApp} from "../../../app/app.component"
 import { NgZone  } from '@angular/core';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
-import {ArryCodeValueProvider} from "../../../providers/arry-code-value/arry-code-value";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 /**
  * Generated class for the MorePage page.

@@ -261,7 +261,6 @@ export class HousingPage {
        }
     }
 
-
     // console.log('商圈',this.district);
   }
 
@@ -888,7 +887,7 @@ export class HousingPage {
 
   selectArea(item){
      this.searchArea= item.name;
-    this.search('propQuery');
+     this.search('propQuery');
   }
 
 

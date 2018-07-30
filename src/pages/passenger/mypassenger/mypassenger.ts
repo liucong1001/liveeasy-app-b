@@ -155,9 +155,8 @@ export class MypassengerPage {
         }
       }
     }
-
+    console.log('查询来商圈',this.district);
     this.params.intentionDiviCode = item.code;
-
   }
 
   /**
