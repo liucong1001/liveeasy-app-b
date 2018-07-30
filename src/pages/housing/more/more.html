@@ -9,7 +9,7 @@
     <h4>房源标签</h4>
     <!-- initTags(item,'tagCode','tagsArry') -->
     <a *ngFor="let item of tagsList | reversePipe:'val' ;let index = index  ;"
-       [ngClass]="{'active': item.active||initTags(item,'tagCode','tagsArry')||isActiveBase(item,'tagCode','tags',selected) }"
+       [ngClass]="{'active': item.active||initTags(item,'val','tagsArry')||isActiveBase(item,'val','tags',selected) }"
        tappable (click)="choseMultIple(item,'tags','tagsArry','tagsList')" >{{item.name}}</a>
   </div>
   <div class="outer">
@@ -28,7 +28,7 @@
     <h4>建筑面积</h4>
     <!--||isActiveBase(item,'val','spaceSize',selected3)-->
     <a *ngFor="let item of spaceSizeJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','spaceSizeArry')}"
+       [ngClass]="{'active': item.active||initTags(item,'val','spaceSizeArry')||isActiveBase(item,'val','spaceSize',selected)}"
        tappable (click)="choseMultIple(item,'spaceSize','spaceSizeArry','spaceSizeList')"  [hidden]="index==0" >{{item.name}}</a>
   </div>
   <div class="outer">
@@ -41,7 +41,7 @@
   <div class="outer">
     <h4>建筑类型</h4>
     <a *ngFor="let item of buildTypeJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','buildTypeArry')||isActiveBase(item,'val','buildTypeType',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','buildTypeArry')||isActiveBase(item,'val','buildType',selected)}"
        tappable (click)="choseMultIple(item,'buildType','buildTypeArry','buildTypeList')" [hidden]="index==0" >{{item.name}}</a>
   </div>
   <div class="outer">

@@ -25,12 +25,11 @@
 
 
 <ion-content>
-  <table width="100%" class="bgWhite m10">
+  <table width="100%" class="bgWhite m10" [hidden]="errStatus">
     <tr class="tc" *ngFor="let i of tableJSON">
       <td>{{i.name}}</td>
       <td>{{i.result}}</td>
     </tr>
-
   </table>
 </ion-content>
 <div class="popLocation">

@@ -42,6 +42,7 @@ export class StatisticsPage {
   // end:any;
   statItem:any;
   @ViewChild(Navbar) navBar: Navbar;
+  errStatus :boolean;
   constructor(public navCtrl: NavController,public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
 
@@ -174,13 +175,16 @@ export class StatisticsPage {
                 this.tableJSON[15].result+=sorted[all][aa].stateValue;
               }
             }
-            console.log(this.tableJSON)
+            console.log(this.tableJSON);
+            this.errStatus = false;
           }
           }else {
           this.toast.error('暂无数据');
+          this.errStatus = true;
         }
       }else {
         this.toast.error('暂无数据');
+        this.errStatus = true;
       }
 
     });
