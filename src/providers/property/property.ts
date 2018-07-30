@@ -12,7 +12,6 @@ export class PropertyProvider {
 
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
-
   // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
   // private  pageListPath2 = 'http://47.75.144.138:45678/coco/api/query?qId=propQuery&update=1&status=1&buzzType=1&owner=1&page=2&rows=10';
   // private  pageListPath2 = '/47.75.151.57:7077/live/search?keyword=2';
@@ -20,13 +19,18 @@ export class PropertyProvider {
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
+
+  //房源标签
+  // private  tagsListPath = 'https://c.liveeasy.tech/property/api/v1/query?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type';
+  private  tagsListPath ='https://d.liveeasy.tech/property/api/v1/query?qId=dict&dictType=property_tag_desc';
+  private  divisionPath = 'https://d.liveeasy.tech/property/api/v1/query';
   //角色人
   private  rolePath = this.configProvider.set().http+ '/property/propertyInfo/propertyDetail';
   //业主委托
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
   private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
   private  adetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditDocInfoDetail.do';
-  //钥匙property/ propertyAuditInfo/getAuditKeyInfoDetail.do
+  //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
   // private  keydetailPath = this.configProvider.set().http+'/property/propertyInfo/detail';
@@ -35,8 +39,7 @@ export class PropertyProvider {
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
   private  shiKanDetailPath =  this.configProvider.set().http+'/property/propertyAuditInfo/getAuditPicsInfoDetail.do';
 
-  // 楼盘模糊搜索 http://47.75.151.57:7077/live/search?keyword=1&site=4200
-  //http://47.75.151.57:7077/live/search?keyword=11&site=4200
+  // 楼盘模糊搜索
   private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
   //查找具体信息内容
   private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
@@ -56,10 +59,6 @@ export class PropertyProvider {
     var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
     return   this.httpProvider.httpPost(this.pageListPath,data)
   }
-
-  // page2(){
-  //   return   this.http.get(this.pageListPath2,);
-  // }
 
   //添加空看
   insertEmptyLook(params?){
@@ -119,6 +118,26 @@ export class PropertyProvider {
 
   }
 
+  //房源标签
+  getTagsList(){
+     return  this.http.get(this.tagsListPath).toPromise().then(res=>{
+       return res as any ;
+     })
+  }
+  //行政区划
+  getDivision(){
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserProvince = loginUserDistrict.substring(0,4);
+    var data = {
+      qId:'division',
+      qCate:'3',
+      code:loginUserProvince,
+    };
+    return  this.http.get(this.divisionPath,{params:data}).toPromise().then(res=>{
+      return res as any ;
+    })
+  }
+
   //修改房源
   updates(params?) {
     // var data = {};
@@ -170,7 +189,7 @@ export class PropertyProvider {
     var site = '2000';
     return this.httpProvider.httpGet(this.floorSearchPath+params+'&site='+site)
   }
- // 根据id查询内容
+  // 根据id查询内容
   getRecord(propertyId) {
     return this.httpProvider.httpPost(this.record, {propertyId:propertyId})
   }

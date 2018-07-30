@@ -15,8 +15,9 @@ export class HomeProvider {
     private  declarationPath =this.configProvider.set().http+ '/order/submitOrderInfo/pageList/1.do';
     private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
     //数据统计
-    private statisPath=this.configProvider.set().http+'/statistics/statisticsInfo/getList'
-    private  getDictCodePath = this.configProvider.set().http+ '/property/propertyInfo/getDictCode';
+    private statisPath=this.configProvider.set().http+'/statistics/statisticsInfo/getList';
+
+    private  getDictCodePath = 'https://c.liveeasy.tech/property/api/v1/query?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type';
     //待办消息
     private  msgPath = this.configProvider.set().http+ '/workbench/messageInfo/pageList.do';
 
@@ -78,7 +79,9 @@ export class HomeProvider {
 
      // 获取码值
      getCode(){
-       return this.httpProvider.httpGet(this.getDictCodePath);
+       return  this.http.get(this.getDictCodePath).toPromise().then(res=>{
+         return res as any ;
+       })
      }
 
     statis(params?){

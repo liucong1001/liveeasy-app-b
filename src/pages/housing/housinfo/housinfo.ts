@@ -17,8 +17,8 @@ import {HousingPage} from "../housing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
-import {CodeValuePipe} from "../../../pipes/code-value/code-value";
 import {AuditPage} from "./audit/audit";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -61,12 +61,12 @@ export class HousinfoPage {
               ) {
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
     this.localCode = this.localStorageProvider.get('codeData');
-    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
-    this.buzzTypeJson = new CodeValuePipe().transform(this.localCode['buzzType']);
-    this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
-    this.buildingTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
-    this.floorJSON=new CodeValuePipe().transform(this.localCode['building_height_type']);
 
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
+    this.buzzTypeJson = new ArryCodeValuePipe().transform(this.localCode,'buzz_type');
+    this.decorationJson = new ArryCodeValuePipe().transform(this.localCode,'decoration');
+    this.buildingTypeJson = new ArryCodeValuePipe().transform(this.localCode,'building_type');
+    this.floorJSON=new ArryCodeValuePipe().transform(this.localCode,'building_height_type')
   }
 
 
@@ -278,8 +278,8 @@ export class HousinfoPage {
   //房源标签code转换为name
   tagName(code) {
     for (var i in this.tagsListPage) {
-      if (code == this.tagsListPage[i].tagCode) {
-        return this.tagsListPage[i].tagDesc
+      if (code == parseFloat(this.tagsListPage[i].val) ) {
+        return this.tagsListPage[i].name
       }
     }
   }

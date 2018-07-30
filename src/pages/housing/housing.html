@@ -199,47 +199,59 @@
 <div class="popLocation">
   <!-- 区域 -->
   <ion-grid class="lists p0" [hidden]="!show" [ngClass]="{transitions:show}" style="">
-    <ion-row *ngIf="aeraShow">
-      <ion-col col-12 class="p0">
-        <div class="leftChange">
-          <!--<a (click)="unlimited()" [ngClass]="{'active': isActive}">不限</a>-->
-          <a *ngFor=" let item of area" (click)="go(item)">{{item.name}}</a>
-        </div>
-      </ion-col>
-    </ion-row>
 
-    <!--点击后显示-->
-    <ion-row *ngIf="tradArea">
+    <!--<ion-row *ngIf="aeraShow">-->
+      <!--<ion-col col-12 class="p0">-->
+        <!--<div class="leftChange">-->
+          <!--&lt;!&ndash;<a (click)="unlimited()" [ngClass]="{'active': isActive}">不限</a>&ndash;&gt;-->
+          <!--<a *ngFor=" let item of area" (click)="go(item)">{{item.name}}</a>-->
+        <!--</div>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--&lt;!&ndash;点击后显示&ndash;&gt;-->
+    <!--<ion-row *ngIf="tradArea">-->
+      <!--<ion-col col-6 class="p0">-->
+        <!--<div class="leftChange">-->
+          <!--<a *ngFor=" let item of area" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">{{item.name}}</a>-->
+        <!--</div>-->
+      <!--</ion-col>-->
+      <!--<ion-col col-6 class="p0">-->
+        <!--<div class="leftChange updateBg">-->
+          <!--<ion-list radio-group [(ngModel)]="params.area">-->
+            <!--<ion-item *ngIf="this.district != unde">-->
+              <!--<ion-label>不限</ion-label>-->
+              <!--<ion-radio value="0" (ionSelect)="bx()"></ion-radio>-->
+            <!--</ion-item>-->
+            <!--<ion-item *ngFor=" let items of district;let i = index" >-->
+              <!--<ion-label>{{items.name}}</ion-label>-->
+              <!--<ion-radio value="{{items.id}}" (ionSelect)="selectArea(items)"></ion-radio>-->
+            <!--</ion-item>-->
+          <!--</ion-list>-->
+          <!--<div *ngIf="hTips && selected.id!=99 ">暂无该地区！</div>-->
+        <!--</div>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+
+    <ion-row>
       <ion-col col-6 class="p0">
         <div class="leftChange">
-          <!--<a (click)="unlimited()" [ngClass]="{'active': isActive(this.area)}">不限</a>-->
-          <!--选择{{selected | json}}-->
-          <a *ngFor=" let item of area" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">{{item.name}}</a>
+          <a *ngFor=" let item of area"   [ngClass]="{'active': isActive(item)}" (click)="go(item)">{{item.name}}</a>
         </div>
-        <!--<div class="p5 ">-->
-        <!--<button ion-button full color="light">重置</button>-->
-        <!--</div>-->
       </ion-col>
       <ion-col col-6 class="p0">
         <div class="leftChange updateBg">
-          <ion-list radio-group [(ngModel)]="params.area">
-            <ion-item *ngIf="this.district != unde">
-              <ion-label>不限</ion-label>
-              <ion-radio value="0" (ionSelect)="bx()"></ion-radio>
-            </ion-item>
+          <ion-list radio-group [(ngModel)]="params.division" >
             <ion-item *ngFor=" let items of district;let i = index" >
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.id}}" (ionSelect)="selectArea(items)"></ion-radio>
+              <ion-radio value="{{items.code}}"  (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
-          <div *ngIf="hTips && selected.id!=99 ">暂无该地区！</div>
+          <div  *ngIf="district==undefined">暂无该地区！</div>
         </div>
-        <!--<div class="p5 ">-->
-        <!--<button ion-button full color="danger" (click)="search()">确定</button>-->
-        <!--</div>-->
       </ion-col>
     </ion-row>
   </ion-grid>
+
 
   <!-- 户型 -->
   <div class="lists houseType" [hidden]="!houseType" >

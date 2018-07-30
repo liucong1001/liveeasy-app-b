@@ -13,7 +13,8 @@ import {CheckhousePage} from "./checkhouse/checkhouse";
 import {HomesearchPage} from "./homesearch/homesearch";
 import {TabsPage}from "./../tabs/tabs";
 import {StatisticsPage} from "./statistics/statistics";
-import {CodeValuePipe} from "../../pipes/code-value/code-value";
+import {PropertyProvider} from "../../providers/property/property";
+import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -29,10 +30,11 @@ export class HomePage {
   check=[];
   adjust=[];
   close=[];
+  addHomeTag = [] ;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
-              public localStorageProvider: LocalStorageProvider,
+              public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
              ) {
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
@@ -52,14 +54,25 @@ export class HomePage {
         }
       }
     });
-    console.log(this.check,this.adjust,this.close)
     this.homeProvider.getCode().then(res=>{
         if(res.success){
-          this.localStorageProvider.set('codeData', JSON.parse(res.data) );
-          var data= JSON.parse(res.data);
-          console.log(data)
+           this.localStorageProvider.set('codeData', res.data);
+
+
+          //添加，修改房源的标签 (不存在学区房)
+          var tagsList = new ArryCodeValuePipe().transform(this.localStorageProvider.get('codeData'),'property_tag_desc');
+          for(var item of tagsList){
+            if( parseFloat(item['val'])<=64&&parseFloat(item['val'])!=8){
+              this.addHomeTag.push(item);
+            }
+          }
+          this.localStorageProvider.set('tagsList',this.addHomeTag);
+
         }
     });
+
+
+
   }
 
 
@@ -72,7 +85,6 @@ export class HomePage {
   ionViewDidLoad(){
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}
-      console.log('new',this.notificationNews);
     });
   }
 
@@ -120,7 +132,6 @@ export class HomePage {
   }
 
   gohomeSource(){
-    console.log('房源列表');
     this.navCtrl.parent.select(1);
   }
 

@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {LocalStorageProvider} from "../../../../../providers/local-storage/local-storage";
-import {CodeValuePipe} from "../../../../../pipes/code-value/code-value";
+import {ArryCodeValuePipe} from "../../../../../pipes/arry-code-value/arry-code-value";
 
 /**
  * Generated class for the DeclinfoPage page.
@@ -94,7 +94,7 @@ export class DeclinfoPage {
   //报单房源——朝向
   orJSON:Array<{name:string;val:string}>;
   orpipe(val){
-    this.orJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.orJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     for(var i in this.orJSON){
       if(val ==  this.orJSON[i].val){
         return  this.orJSON[i].name;
@@ -104,7 +104,7 @@ export class DeclinfoPage {
 //报单房源——抵押情况
   pmJSON:Array<{name:string;val:string}>;
   pmpipe(val){
-    this.pmJSON = new CodeValuePipe().transform(this.localCode['propertyMortgage']);
+    this.pmJSON = new ArryCodeValuePipe().transform(this.localCode,'property_mortgage');
     for(var i in this.pmJSON){
       if(val == this.pmJSON[i].val){
         return this.pmJSON[i].name;
@@ -114,7 +114,7 @@ export class DeclinfoPage {
   //报单房源——产权性质
   buzzJSON:Array<{name:string;val:string}>;
   buzzpipe(val){
-    this.buzzJSON = new CodeValuePipe().transform(this.localCode['buzzOwnerType']);
+    this.buzzJSON =  new ArryCodeValuePipe().transform(this.localCode,'buzz_owner_type');
     for(var i in this.buzzJSON){
       if(val == this.buzzJSON[i].val){
         return this.buzzJSON[i].name;

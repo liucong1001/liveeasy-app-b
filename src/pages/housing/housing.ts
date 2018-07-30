@@ -27,7 +27,8 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {errorHandler} from "@angular/platform-browser/src/browser";
-import {CodeValuePipe} from "../../pipes/code-value/code-value";
+
+import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 
 /**
  * Generated class for the HousingPage page.
@@ -120,7 +121,9 @@ export class HousingPage {
               public toast:ToastComponent,
               private renderer:Renderer
   ) {
-    console.log('lastPage上一个页面',this.navCtrl.last());
+
+    this.localCode = this.localStorageProvider.get('codeData');
+
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
     }
@@ -133,8 +136,6 @@ export class HousingPage {
       this.params.estateId = this.navParams.get('item').id;
     }
 
-    // console.log('页面数据',this.pageData);
-    //   this.menu.enable(true); //menus-功能开启
       if(!navParams.get('item')){
         this.floorName = '';
         // this.params.estateId = '';
@@ -144,37 +145,50 @@ export class HousingPage {
       }
 
 
-    this.customerProvider.area().then(res=>{
-      console.log('区域', res);
-      if(res){
-        this.area = res.data.distrs;
-        this.localStorageProvider.set('distrs',this.area);
-        if(this.area){
-          this.area.unshift({name:'不限',id:'99'});
-        }
-        /**
-         * 区域和房源标签合成一个接口
-         */
-        this.tagsList = res.data.tags; //房源标签
-        this.localStorageProvider.set('tagsList',this.tagsList);
-      }
-
-    });
+    // this.customerProvider.area().then(res=>{
+    //   console.log('区域', res);
+    //   if(res){
+    //     this.area = res.data.distrs;
+    //     this.localStorageProvider.set('distrs',this.area);
+    //     if(this.area){
+    //       this.area.unshift({name:'不限11',id:'99'});
+    //     }
+    //   }
+    // });
 
 
 
     //房源标签
-    this.addhouseProvider.estateTagsSelect().then(res => {
-       this.tagsListPage = res.data;
-       this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-    });
+    // this.addhouseProvider.estateTagsSelect().then(res => {
+    //    this.tagsListPage = res.data;
+    //    this.localStorageProvider.set('tagsListPage',this.tagsListPage);
+    // });
+    this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
+    this.localStorageProvider.set('tagsListPage',this.tagsListPage);
+    console.log('房源标签',this.tagsListPage);
+
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
-    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     this.cxJSON.unshift({name:'全部',val:''});
     //查询列表，行政区参数
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
     this.params.division = loginUserDistrict;
+
+
+    console.log('area',this.localStorageProvider.get('area'));
+    if(this.localStorageProvider.get('area')==null){
+      //行政区划
+      this.propertyProvider.getDivision().then(res=>{
+        console.log('行政区划',res);
+        this.area = res.data.data;
+        this.localStorageProvider.set('area',this.area);
+        this.area.unshift({name:'不限',id:'99',code:'99'});
+      });
+    }else {
+      this.area = this.localStorageProvider.get('area');
+      this.area.unshift({name:'不限',id:'99',code:'99'});
+    }
   }
 
 
@@ -211,7 +225,6 @@ export class HousingPage {
     this.search('propQuery');
   }
   go(item) {
-
     if(item.id=='99'){
       this.params.division = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
        this.params.area = '';
@@ -219,24 +232,55 @@ export class HousingPage {
       this.hTips=false;
       this.search('propQuery');
     }
-
-
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
-    // this.params.district = item.id;
     this.params.division = item.code;
-    this.propertyProvider.search2(item.id).then(res => {
-      this.district=res.data;
-      // console.log('asdsd',this.district);
-      if(this.district == undefined){
-          // alert('暂无该地区!')
-        this.hTips=true
-      }else {
-        this.hTips=false;
+    // this.propertyProvider.search2(item.id).then(res => {
+    //   this.district=res.data;
+    //   // console.log('asdsd',this.district);
+    //   if(this.district == undefined){
+    //       // alert('暂无该地区!')
+    //     this.hTips=true
+    //   }else {
+    //     this.hTips=false;
+    //   }
+    // });
+    this.district =[];
+    for(var i of this.area){
+       if(item.code==i['code']){
+         this.district = i['area'];
+         console.log('this.district',this.district);
+         if(this.district!=undefined){
+           this.district.unshift({name:'不限',code:'0'});
+           this.district = this.uniqueArray(this.district,'name');
+           console.log('最终',this.district);
+         }
+        // [{name:'不8限',code:'0'}].concat(this.district);
+         this.district = Array.from((new Set(this.district)));
+       }
+    }
+
+
+    // console.log('商圈',this.district);
+  }
+
+   uniqueArray(array, key){
+    var result = [array[0]];
+    for(var i = 1; i < array.length; i++){
+      var item = array[i];
+      var repeat = false;
+      for (var j = 0; j < result.length; j++) {
+        if (item[key] == result[j][key]) {
+          repeat = true;
+          break;
+        }
       }
-    });
-    console.log('bolean',this.hTips);
+      if (!repeat) {
+        result.push(item);
+      }
+    }
+    return result;
   }
 
 
@@ -244,8 +288,6 @@ export class HousingPage {
     console.log(this.type)
     this.localStorageProvider.set('bedroom', this.type);
     this.propertyProvider.houseType({}).then(res => {
-      // this.pageData=res.data;
-      console.log('数据', res.data);
     })
   }
 
@@ -263,7 +305,6 @@ export class HousingPage {
 
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
-         // console.log('选择',this.district[i].estateName)
        }
     }
 
@@ -271,7 +312,6 @@ export class HousingPage {
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
        if(res){
-         console.log('结束时间内容',res.data.totalRecords);
          this.totalRecords = res.data.totalRecords;
          this.firstPageData = res.data.result;
          // res.data.hasOwnProperty('result')
@@ -647,8 +687,8 @@ export class HousingPage {
   //房源标签code转换为name
   tagName(code) {
     for (var i in this.tagsListPage) {
-      if (code == this.tagsListPage[i].tagCode) {
-        return this.tagsListPage[i].tagDesc
+      if (code == parseFloat(this.tagsListPage[i].val) ) {
+        return this.tagsListPage[i].name
       }
     }
   }

@@ -72,6 +72,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { PermissionProvider } from '../providers/permission/permission';
 import {BaiduMapModule } from "angular2-baidu-map";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
+import { ArryCodeValueProvider } from '../providers/arry-code-value/arry-code-value';
 
 
 @NgModule({
@@ -150,6 +151,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
       },
       PermissionProvider,
       AndroidPermissions,
+    ArryCodeValueProvider,
 
     ]
 })

@@ -14,7 +14,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {HomePage} from "../../home/home";
-import {CodeValuePipe} from "../../../pipes/code-value/code-value";
+
 /**
  * Generated class for the AddhousePage page.
  *

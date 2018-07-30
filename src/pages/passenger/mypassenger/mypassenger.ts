@@ -12,6 +12,7 @@ import {PassengerPage} from "../passenger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -59,18 +60,34 @@ export class MypassengerPage {
 
   constructor(public navCtrl: NavController,
               public statusBar: StatusBar,
-              public nativePageTransitions: NativePageTransitions,public navParams: NavParams,private customerProvider:CustomerProvider,
-              public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
-    this.customerProvider.area().then(res=>{
-      this.area = res.data.distrs;
-      if(this.area){
-        this.area.unshift({name:'不限',id:'99'});
-      }
+              public nativePageTransitions: NativePageTransitions,
+              public navParams: NavParams,private customerProvider:CustomerProvider,
+              public propertyProvider: PropertyProvider,public toast:ToastComponent,
+              public localStorageProvider: LocalStorageProvider,) {
 
-    });
-    this.customerProvider.tradingArea().then(res=>{
-      this.tradingArea = res;
-    })
+    // this.customerProvider.area().then(res=>{
+    //   this.area = res.data.distrs;
+    //   if(this.area){
+    //     this.area.unshift({name:'不限',id:'99'});
+    //   }
+    // });
+    if(!this.localStorageProvider.get('area')){
+      //行政区划
+      this.propertyProvider.getDivision().then(res=>{
+        console.log('行政区划',res);
+        this.area = res.data.data;
+        this.localStorageProvider.set('area',this.area);
+        this.area.unshift({name:'不限',id:'99',code:'99'});
+      });
+    }else {
+      this.area = this.localStorageProvider.get('area');
+      this.area.unshift({name:'不限',id:'99',code:'99'});
+    }
+
+    // this.customerProvider.tradingArea().then(res=>{
+    //   this.tradingArea = res;
+    // })
+
 
   }
 
@@ -117,17 +134,28 @@ export class MypassengerPage {
     this.selected = item;//激活css选中状态
     console.log('激活状态',this.selected);
      //用code值匹配相应商圈
-    this.district = [];
-    for(var i in this.tradingArea){
-       if(this.tradingArea[i].code.substring(0,6) == item.code){
-          this.district.push(this.tradingArea[i]);
+    // this.district = [];
+    // for(var i in this.tradingArea){
+    //    if(this.tradingArea[i].code.substring(0,6) == item.code){
+    //       this.district.push(this.tradingArea[i]);
+    //
+    //    }
+    // }
+    // console.log(this.district)
+    // if(this.district.length>1){
+    //   this.district.unshift({name:'不限',code:'0'});
+    // }
 
-       }
+    this.district = [];
+    for(var i of this.area){
+      if(item.code==i['code']){
+        this.district = i['area'];
+        if(this.district&&this.district.length>1){
+          this.district.unshift({name:'不限',code:'0'});
+        }
+      }
     }
-    console.log(this.district)
-    if(this.district.length>1){
-      this.district.unshift({name:'不限',code:'0'});
-    }
+
     this.params.intentionDiviCode = item.code;
 
   }

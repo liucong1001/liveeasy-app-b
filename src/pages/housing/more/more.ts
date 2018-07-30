@@ -7,7 +7,8 @@ import {MyApp} from "../../../app/app.component"
 import { NgZone  } from '@angular/core';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
-import {CodeValuePipe} from "../../../pipes/code-value/code-value";
+import {ArryCodeValueProvider} from "../../../providers/arry-code-value/arry-code-value";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 /**
  * Generated class for the MorePage page.
  *
@@ -83,13 +84,15 @@ export class MorePage {
   //初始化数据
   initData(){
     //朝向
-    this.cxJSON = new CodeValuePipe().transform(this.localCode['orientation']);
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     this.cxJSON.unshift({name:'全部',val:''});
+    console.log('朝向',this.cxJSON);
+
     //装修
-    this.decorationJson = new CodeValuePipe().transform(this.localCode['decoration']);
+    this.decorationJson = new ArryCodeValuePipe().transform(this.localCode,'decoration');
     this.decorationJson.unshift({name:'全部',val:''});
     //建筑类型
-    this.buildTypeJson = new CodeValuePipe().transform(this.localCode['buildingType']);
+    this.buildTypeJson = new ArryCodeValuePipe().transform(this.localCode,'building_type');
     this.buildTypeJson.unshift({name:'全部',val:''});
 
 
@@ -232,11 +235,11 @@ export class MorePage {
   //朝向 orientation
   choseMultIple(item,attrName,attrNameArry,attrNameList){
     item.active = !item.active;
-    if(attrName =='tags'){
-      var value = item.tagCode;
-    }else {
+    // if(attrName =='tags'){
+    //   var value = item.tagCode;
+    // }else {
       var value = item.val;
-    }
+    // }
 
     if(item.active){
       this.searchMoreData[attrNameArry].push(parseFloat(value));

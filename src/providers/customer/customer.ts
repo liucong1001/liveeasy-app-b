@@ -74,9 +74,7 @@ export class CustomerProvider {
       totalPages:0,
       offset:0,
       order:'asc',
-      params:{
-        ...params,
-      },
+      ...params
     };
     return this.httpProvider.httpGet(this.pageListPath,data)
   }

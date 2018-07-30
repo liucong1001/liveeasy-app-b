@@ -69,6 +69,8 @@ export class HousedetailPage {
               public loadingCtrl: LoadingController) {
 
     this.localCode = this.localStorageProvider.get('codeData');
+    //获取房源标签
+    this.houLabel=this.localStorageProvider.get('tagsList');
   }
   selectTitle(data){
     var title = {title:data};
@@ -90,9 +92,9 @@ export class HousedetailPage {
     this.form.value.tags= this.tagsSum(value);
   };
   ionViewWillEnter() {
-    // this.navBar.backButtonClick = () => {
-    //   this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
-    // };
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
+    };
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
@@ -153,13 +155,11 @@ export class HousedetailPage {
           this.form.patchValue({
             tagsStr:arry
           });
-
-
+          console.log('标签赋值',arry,this.houLabel);
         }
         this.propertyid=this.data.propertyId;
         this.localStorageProvider.set('propertyid',this.data.propertyId);
-        //获取房源标签
-        this.houLabel=this.localStorageProvider.get('tagsList');
+
         //敏感信息
         if(this.data.notShow){
           this.sensitiveInfo = false;
