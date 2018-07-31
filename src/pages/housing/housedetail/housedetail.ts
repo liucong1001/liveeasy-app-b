@@ -363,7 +363,7 @@ export class HousedetailPage {
     })
   }
 
-
+  addContactBolean = true;
   //表单提交
   save(){
 
@@ -374,28 +374,27 @@ export class HousedetailPage {
       delete this.form.value.tagsStr;
     }
 
+   if(this.addContactBolean){
+     // 联系人
+     this.form.value.contacts[0].contact = this.form.value.contact;
+     this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
+     this.form.value.contacts[0].sex = this.form.value.sex;
+     var man2 ={
+       contact:this.form.value.contact,
+       contactInfo:this.form.value.contactInfo2,
+       sex:this.form.value.sex,
+       contactType:'mobile',
+       desc:'',
+     };
+     this.form.value.contacts.push(man2);
+     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+     var formData = {
+       propertyId:this.propertyid,
+       ...this.form.value
+     };
+     this.addContactBolean = false;
+   }
 
-    // 联系人
-    this.form.value.contacts[0].contact = this.form.value.contact;
-    this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
-    this.form.value.contacts[0].sex = this.form.value.sex;
-
-    var man2 ={
-      contact:this.form.value.contact,
-      contactInfo:this.form.value.contactInfo2,
-      sex:this.form.value.sex,
-      contactType:'mobile',
-      desc:'',
-    };
-
-    this.form.value.contacts.push(man2);
-    console.log('第二个人',man2,'联系人',this.form.value.contacts);
-    this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-
-    var formData = {
-      propertyId:this.propertyid,
-      ...this.form.value
-    };
     this.propertyProvider.updates(formData).then(res=>{
       if(res.success){
         this.toast.msg('修改成功!');

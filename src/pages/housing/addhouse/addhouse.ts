@@ -12,8 +12,6 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
-import {HousedetailPage} from "../housedetail/housedetail";
-import {HomePage} from "../../home/home";
 
 /**
  * Generated class for the AddhousePage page.
@@ -269,14 +267,14 @@ export class AddhousePage {
     console.log('标签',this.form.value.tags,this.form.value);
   }
 
+  addContactBolean = true;
   save(){
-    this.tagsSelect(this.form.value.tags);
-    console.log('触发save方法',this.form.value.contacts);
-    // 联系人
+   if(this.addContactBolean){
+     this.tagsSelect(this.form.value.tags);
+     // 联系人
      this.form.value.contacts[0].contact = this.form.value.contact;
      this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
      this.form.value.contacts[0].sex = this.form.value.sex;
-
      var man2 ={
        contact:this.form.value.contact,
        contactInfo:this.form.value.contactInfo2,
@@ -284,24 +282,21 @@ export class AddhousePage {
        contactType:'mobile',
        desc:'',
      };
-
      this.form.value.contacts.push(man2);
-     console.log('第二个人',man2,'联系人',this.form.value.contacts);
-      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-     console.log(this.form,'表单不合法性',this.form.invalid,'内容',this.form.value);
+     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+     this.addContactBolean = false;
+   }
+
+
     if(this.form.invalid){
       return false;
     }
-
     console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
        this.toast.msg('录入成功');
-
-        // this.app.getActiveNavs()[0].setRoot("HousingPage");
         setTimeout(()=>{
-          // this.navCtrl.setR(HousingPage);
           this.navCtrl.parent.select(1);
           this.navCtrl.setRoot(HousingPage);
         },1000);
@@ -309,7 +304,6 @@ export class AddhousePage {
       }else {
         this.toast.error('录入失败！');
       }
-
     },err=>{
       this.toast.error('录入失败！');
     })

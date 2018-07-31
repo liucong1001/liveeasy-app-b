@@ -247,7 +247,7 @@
     <ion-item class="pl12 m10">
       <ion-label>房源标签</ion-label>
       <ion-select okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
-        <ion-option value="{{item.val}}" *ngFor="let item of houLabel;let i = index">{{item.name}}</ion-option>
+        <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-list (click)="godesc()" class="m10">

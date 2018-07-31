@@ -34,6 +34,8 @@ export class PropertyProvider {
   private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
   //图片接口测试
   private  getAuditInfo = this.configProvider.set().http + '/property/propertyAuditInfo/getAuditInfo.do';
+  //房源详情图片（钥匙，业主委托书，实勘图）
+  private  propertyPics = this.configProvider.set().http+ '/property/propertyAuditInfo';
 
   /**
    * https://c.liveeasy.tech 接口
@@ -204,6 +206,10 @@ export class PropertyProvider {
     return  this.http.get(this.getDictCodePath).toPromise().then(res=>{
       return res as any ;
     })
+  }
+
+  getPropertyPics(propertyId:string){
+      return  this.httpProvider.httpPost(this.propertyPics,{propertyId:propertyId})
   }
 
 

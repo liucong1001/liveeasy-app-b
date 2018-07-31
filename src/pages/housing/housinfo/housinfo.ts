@@ -130,22 +130,23 @@ export class HousinfoPage {
  }
 
 
-     //业主委托书
-    this.propertyProvider.adetail(this.propertyId).then(res=>{
-      if(res.success&&res.data ){
-        this.letteratorneyData = JSON.parse(JSON.stringify(res.data.content));
-        console.log('业主委托书',this.letteratorneyData);
-      }
-    });
-    //钥匙信息
-    this.propertyProvider.keydetail(this.propertyId).then(res=>{
-        if(res.success&&res.data){
-          // this.keyData = res.data.content;
-          // this.keyData = JSON.parse(this.keyData.toString());
-          this.keyData = JSON.parse(JSON.stringify(res.data.content));
-        }
-    });
-    this.propertyProvider.shikanDetail(this.propertyId).then();
+    //  //业主委托书
+    // this.propertyProvider.adetail(this.propertyId).then(res=>{
+    //   if(res.success&&res.data ){
+    //     this.letteratorneyData = JSON.parse(JSON.stringify(res.data.content));
+    //     console.log('业主委托书',this.letteratorneyData);
+    //   }
+    // });
+    // //钥匙信息
+    // this.propertyProvider.keydetail(this.propertyId).then(res=>{
+    //     if(res.success&&res.data){
+    //       // this.keyData = res.data.content;
+    //       // this.keyData = JSON.parse(this.keyData.toString());
+    //       this.keyData = JSON.parse(JSON.stringify(res.data.content));
+    //     }
+    // });
+    // this.propertyProvider.shikanDetail(this.propertyId).then();
+    // this.propertyProvider.getPropertyPics(this.propertyId).then();
 
     //baidu map
     this.opts = {

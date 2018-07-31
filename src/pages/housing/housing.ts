@@ -228,23 +228,15 @@ export class HousingPage {
       this.params.division = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
        this.params.area = '';
       this.searchArea = '不限';
-      this.hTips=false;
+      // this.hTips=false;
+      this.district = [];
       this.search('propQuery');
     }
+
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
     this.params.division = item.code;
-    // this.propertyProvider.search2(item.id).then(res => {
-    //   this.district=res.data;
-    //   // console.log('asdsd',this.district);
-    //   if(this.district == undefined){
-    //       // alert('暂无该地区!')
-    //     this.hTips=true
-    //   }else {
-    //     this.hTips=false;
-    //   }
-    // });
     this.district =[];
     for(var i of this.area){
        if(item.code==i['code']){
@@ -253,14 +245,12 @@ export class HousingPage {
          if(this.district!=undefined){
            this.district.unshift({name:'不限',code:'0'});
            this.district = this.uniqueArray(this.district,'name');
-           console.log('最终',this.district);
+         }else {
+           this.district = [];
          }
-        // [{name:'不8限',code:'0'}].concat(this.district);
-         this.district = Array.from((new Set(this.district)));
        }
     }
-
-    // console.log('商圈',this.district);
+    console.log('商圈',this.district);
   }
 
    uniqueArray(array, key){
@@ -785,11 +775,11 @@ export class HousingPage {
       console.log('接收数据为: ', params);
         if(!params){
           this.floorName = '';
-          this.params.estateId = '';
+          this.params.estate = '';
         }else {
           this.floorName = params.keyword;
-          this.params.estateId = params.id;
-          console.log('搜索',this.floorName,this.params.estateId);
+          this.params.estate = params.id;
+          console.log('搜索',this.floorName,this.params.estate);
         }
         this.search('propQuery');
       // 取消订阅
@@ -912,5 +902,6 @@ class  PropertyPageParams {
   decoration?:any;//装修程度
   buildType?:any;//建筑类型
   position?:any;//楼层位置
+  estate?:any;//楼盘搜索
 }
 
