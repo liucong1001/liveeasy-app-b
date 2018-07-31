@@ -31,6 +31,7 @@ export class HomePage {
   adjust=[];
   close=[];
   addHomeTag = [] ;
+  res=[];
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
@@ -39,11 +40,12 @@ export class HomePage {
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
     this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
+      this.res=res;
       for(var i in res.data.result){
         if(res.data.result[i].operationCode == '3033'){
           //关闭房源审核
           this.check.push(res.data.result[i]);
-
+          console.log(this.check)
         }
         if(res.data.result[i].operationCode == '3030'){
           //房源调整
@@ -107,10 +109,12 @@ export class HomePage {
     this.notificationNews&&this.openWin(MsgdetailPage);
   }
   checkhouse(i){
-      this.openWin(CheckhousePage,{
-        item:i,
-        val:i.val,
-      });
+    this.openWin(CheckhousePage,{
+      item:i,
+      val:i.val,
+      res:this.res
+    });
+
   }
   //
   houseJSON=[

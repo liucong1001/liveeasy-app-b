@@ -7,7 +7,7 @@
 
   <ion-row class="houseMenu" >
     <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
-      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 30px;" *ngIf="searchArea&&searchArea!='不限'">
+      <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 60px;" *ngIf="searchArea&&searchArea!='不限'">
         {{ searchArea}}
       </span>
       <span *ngIf="!searchArea||searchArea=='不限'">区域</span>
@@ -51,7 +51,8 @@
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
   <ion-grid class="p0 relative" >
-    <p class="bgWhite tips " style="padding: 15px 12px;overflow: scroll;white-space:nowrap;"  *ngIf="moreSearchData">
+    <div class="bgWhite tips showTips" style="overflow: scroll;white-space:nowrap;"  *ngIf="moreSearchData">
+      <!--<div style="padding: 15px 12px;" ></div>-->
       <ng-container *ngIf="datas">
 
         <a style="padding: 1px 3px" *ngFor="let i of datas.tagsArry;let i =index;"   >
@@ -66,36 +67,36 @@
       </ng-container>
 
       <ng-container *ngIf="moreSearchData['hasElevatorArry']">
-        <span class="moreTip" *ngFor="let item of moreSearchData['hasElevatorList']" >
+        <a class="moreTip" *ngFor="let item of moreSearchData['hasElevatorList']" >
            <span *ngIf="item.active"> {{item.name}}</span>
-        </span>
+        </a>
       </ng-container>
 
       <ng-container *ngIf="moreSearchData['spaceSizeArry']">
-        <span class="moreTip" *ngFor="let item of moreSearchData['spaceSizeList']" >
+        <a class="moreTip" *ngFor="let item of moreSearchData['spaceSizeList']" >
            <span *ngIf="item.active"> {{item.name}}</span>
-        </span>
+        </a>
       </ng-container>
 
       <ng-container  *ngIf="moreSearchData['decorationArry']">
-        <span class="moreTip"  *ngFor="let item of moreSearchData['decorationList'] "  >
+        <a class="moreTip"  *ngFor="let item of moreSearchData['decorationList'] "  >
            <span *ngIf="item.active">{{item.name}}</span>
-        </span>
+        </a>
       </ng-container>
 
       <ng-container  *ngIf="moreSearchData['buildTypeArry']">
-        <span class="moreTip"  *ngFor="let item of moreSearchData['buildTypeList'] "  >
+        <a class="moreTip"  *ngFor="let item of moreSearchData['buildTypeList'] "  >
            <span *ngIf="item.active">{{item.name}}</span>
-        </span>
+        </a>
       </ng-container>
 
       <ng-container  *ngIf="moreSearchData['positionArry']">
-        <span class="moreTip"  *ngFor="let item of moreSearchData['positionList'] "  >
+        <a class="moreTip"  *ngFor="let item of moreSearchData['positionList'] "  >
            <span *ngIf="item.active">{{item.name}}</span>
-        </span>
+        </a>
       </ng-container>
 
-    </p>
+    </div>
 
     <ion-row class="bgWhite houseMain" [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
       <ion-col col-12 tappable (click)="goHouseDetail(item)" >

@@ -121,7 +121,6 @@ export class HousingPage {
               public toast:ToastComponent,
               private renderer:Renderer
   ) {
-
     this.localCode = this.localStorageProvider.get('codeData');
 
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
@@ -532,6 +531,7 @@ export class HousingPage {
   timer:any;
   not=false;
   haveData=false;
+  newCount:any;
   //下拉刷新
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
@@ -545,6 +545,7 @@ export class HousingPage {
       this.totalRecords = res.data.totalRecords;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
+      this.newCount=newCount;
       this.firstPageData = res.data.result;
       refresher.complete();
       if (res.data.result && res.data.result.length > 0) {
