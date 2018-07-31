@@ -16,9 +16,9 @@
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-      <span *ngIf="searchFloorNum==2&&!bedroomUnlimt" [ngClass]="{color:params.bedrooms||bedroomUnlimt}"> {{bedroomUnlimt?'不限':housePipe(params.bedrooms)}}</span>
-      <span  *ngIf="searchFloorNum!=2||bedroomUnlimt" > 户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum ==2&&!bedroomUnlimt}"></ion-icon>
+      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedrooms}">{{housePipe(params.bedrooms)}}</span>
+      <span  *ngIf="searchFloorNum==0 || searchFloorNum==1">户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">

@@ -403,7 +403,7 @@ export class MypassengerPage {
     }
   }
   showMenu2(){
-    if(this.searchFloorNum ==1){
+    if(this.searchFloorNum ==0 || this.searchFloorNum ==1){
       this.searchFloorNum = 1;
     }else {
       this.searchFloorNum =2;

@@ -290,10 +290,10 @@ export class HousingPage {
    * 列表搜索
    */
   search(qId){
-    if(this.params.bedrooms=='0'){
-      this.bedroomUnlimt =true;
-     delete  this.params.bedrooms ;
-    }
+    // if(this.params.bedrooms=='0'){
+    //   this.bedroomUnlimt =true;
+    //  delete  this.params.bedrooms ;
+    // }
 
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
@@ -328,6 +328,9 @@ export class HousingPage {
          //户型搜索条件字显示
          if(this.searchFloorNum ==1){
            this.searchFloorNum = 2;
+         }
+         if(this.searchFloorNum ==2 && this.params.bedrooms=='0'){
+           this.searchFloorNum=1;
          }
         //将下拉currentPage重置
          this.currentPage = 1;
@@ -431,10 +434,10 @@ export class HousingPage {
   searchFloorNum = 0; //初始化搜索次数
   //户型搜索
   showMenu2() {
-    if(this.searchFloorNum == 2){
-      this.searchFloorNum =2;
+    if(this.searchFloorNum ==0 || this.searchFloorNum ==1){
+      this.searchFloorNum = 1;
     }else {
-      this.searchFloorNum =1;
+      this.searchFloorNum =2;
     }
     if (this.houseType == false || this.show == true || this.more == true || this.housingEstate == true) {
       this.houseType = true;
