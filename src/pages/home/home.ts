@@ -54,11 +54,9 @@ export class HomePage {
         }
       }
     });
-    this.homeProvider.getCode().then(res=>{
+    this.propertyProvider.getCode().then(res=>{
         if(res.success){
            this.localStorageProvider.set('codeData', res.data);
-
-
           //添加，修改房源的标签 (不存在学区房)
           var tagsList = new ArryCodeValuePipe().transform(this.localStorageProvider.get('codeData'),'property_tag_desc');
           for(var item of tagsList){

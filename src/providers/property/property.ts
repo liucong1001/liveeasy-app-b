@@ -10,20 +10,10 @@ import {HTTP} from "@ionic-native/http";
 @Injectable()
 export class PropertyProvider {
 
-  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageList.do';
-  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
-  // private  pageListPath = this.configProvider.set().http+'/property/propertyInfo/pageListForApp';
-  // private  pageListPath2 = 'http://47.75.144.138:45678/coco/api/query?qId=propQuery&update=1&status=1&buzzType=1&owner=1&page=2&rows=10';
-  // private  pageListPath2 = '/47.75.151.57:7077/live/search?keyword=2';
-  private  pageListPath = 'https://c.liveeasy.tech/property/api/v1/query';
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
 
-  //房源标签
-  // private  tagsListPath = 'https://c.liveeasy.tech/property/api/v1/query?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type';
-  private  tagsListPath ='https://d.liveeasy.tech/property/api/v1/query?qId=dict&dictType=property_tag_desc';
-  private  divisionPath = 'https://d.liveeasy.tech/property/api/v1/query';
   //角色人
   private  rolePath = this.configProvider.set().http+ '/property/propertyInfo/propertyDetail';
   //业主委托
@@ -33,7 +23,6 @@ export class PropertyProvider {
   //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
   private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
-  // private  keydetailPath = this.configProvider.set().http+'/property/propertyInfo/detail';
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
@@ -46,19 +35,30 @@ export class PropertyProvider {
   //图片接口测试
   private  getAuditInfo = this.configProvider.set().http + '/property/propertyAuditInfo/getAuditInfo.do';
 
+  /**
+   * https://c.liveeasy.tech 接口
+   * @type {string}
+   */
+  public propertyApi='/property/api/v1/query';
+
+  private  basePath = this.configProvider.set().cHttp+this.propertyApi;
+  private  tagsListPath = this.basePath+'?qId=dict&dictType=property_tag_desc';
+  private  getDictCodePath=this.basePath+'?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type';
+
+
   bedRType:any;
   districtId:any;
   propertyid:any;
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,
-              private http2: HTTP,) {
+             ) {
     console.log('Hello PropertyProvider Provider');
   }
 
-  //分页列表
-  page(currentPage){
-    var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
-    return   this.httpProvider.httpPost(this.pageListPath,data)
-  }
+  // //分页列表
+  // page(currentPage){
+  //   var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
+  //   return   this.httpProvider.httpPost(this.pageListPath,data)
+  // }
 
   //添加空看
   insertEmptyLook(params?){
@@ -75,12 +75,12 @@ export class PropertyProvider {
     var data = {"superDistrictId":districtId,'type':2};
     return this.httpProvider.httpGet(this.searchHousePath,data)
   }
-  //搜索房源——户型
-  houseType(params?) {
-    this.bedRType=this.localStorageProvider.get('bedroom');
-    var data = {"currentPage":1,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","bedroomType":this.bedRType,"tags":0,"loginUserProvince":"42"}}
-    return this.httpProvider.httpPost(this.pageListPath,data)
-  }
+  // //搜索房源——户型
+  // houseType(params?) {
+  //   this.bedRType=this.localStorageProvider.get('bedroom');
+  //   var data = {"currentPage":1,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","bedroomType":this.bedRType,"tags":0,"loginUserProvince":"42"}}
+  //   return this.httpProvider.httpPost(this.pageListPath,data)
+  // }
 
 
   /**
@@ -110,7 +110,7 @@ export class PropertyProvider {
       owner:this.localStorageProvider.get('loginInfo')['company']['id'],
       ...params,
     };
-    return this.http.get(this.pageListPath,{params:data}).toPromise().then(
+    return this.http.get(this.basePath,{params:data}).toPromise().then(
       res=>{
         return res as any;
       }
@@ -133,7 +133,7 @@ export class PropertyProvider {
       qCate:'3',
       code:loginUserProvince,
     };
-    return  this.http.get(this.divisionPath,{params:data}).toPromise().then(res=>{
+    return  this.http.get(this.basePath,{params:data}).toPromise().then(res=>{
       return res as any ;
     })
   }
@@ -199,5 +199,12 @@ export class PropertyProvider {
   getPropertyPicInfo(propertyId){
     return this.httpProvider.httpPost(this.getAuditInfo, {propertyId:propertyId})
   }
+  // 获取码值
+  getCode(){
+    return  this.http.get(this.getDictCodePath).toPromise().then(res=>{
+      return res as any ;
+    })
+  }
+
 
 }

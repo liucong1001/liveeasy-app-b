@@ -159,6 +159,7 @@ export class MorePage {
   }
 
   initTags(item,attr,arryAttr){
+    // console.log('赋值赋值！！',this.searchMoreData[arryAttr]);
     if(this.searchMoreData[arryAttr].length>1){
       //初始化选中状态
       this.searchMoreData[arryAttr] = this.searchMoreData[arryAttr];
@@ -171,13 +172,15 @@ export class MorePage {
           }
         }
       }
-      if(this.searchMoreData[arryAttr].length==1){
-        console.log('单个');
-        if(item[attr] == this.searchMoreData[arryAttr][i] ){
-          return true
-        }
+
+    }
+
+    if(this.searchMoreData[arryAttr].length==1){
+      if(item[attr] == this.searchMoreData[arryAttr][0] ){
+        return true
       }
     }
+
   }
 
   isActiveBase(item,val,sumAttr,selected){

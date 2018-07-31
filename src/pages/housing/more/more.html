@@ -7,47 +7,47 @@
 <ion-content padding class="bgWhite mores">
   <div class="outer">
     <h4>房源标签</h4>
-    <!-- initTags(item,'tagCode','tagsArry') -->
+    <!-- initTags(item,'tagCode','tagsArry')  ||isActiveBase(item,'val','tags',selected)-->
     <a *ngFor="let item of tagsList | reversePipe:'val' ;let index = index  ;"
-       [ngClass]="{'active': item.active||initTags(item,'val','tagsArry')||isActiveBase(item,'val','tags',selected) }"
+       [ngClass]="{'active': item.active||initTags(item,'val','tagsArry') }"
        tappable (click)="choseMultIple(item,'tags','tagsArry','tagsList')" >{{item.name}}</a>
   </div>
   <div class="outer">
     <h4>朝向</h4>
     <a *ngFor="let item of cxJSON;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','orientationArry')||isActiveBase(item,'val','orientation',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','orientationArry')}"
        tappable (click)="choseMultIple(item,'orientation','orientationArry','orientationList')" [hidden]="index==0" >{{item.name}}</a>
   </div>
   <div class="outer">
     <h4>电梯</h4>
     <a *ngFor="let item of dtJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','hasElevatorArry')||isActiveBase(item,'val','hasElevator',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','hasElevatorArry')}"
        tappable (click)="choseMultIple(item,'hasElevator','hasElevatorArry','hasElevatorList')" [hidden]="index==0">{{item.name}}</a>
   </div>
   <div class="outer">
     <h4>建筑面积</h4>
     <!--||isActiveBase(item,'val','spaceSize',selected3)-->
     <a *ngFor="let item of spaceSizeJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','spaceSizeArry')||isActiveBase(item,'val','spaceSize',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','spaceSizeArry')}"
        tappable (click)="choseMultIple(item,'spaceSize','spaceSizeArry','spaceSizeList')"  [hidden]="index==0" >{{item.name}}</a>
   </div>
   <div class="outer">
     <h4>装修</h4>
     <a *ngFor="let item of decorationJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','decorationArry')||isActiveBase(item,'val','decoration',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','decorationArry')}"
        tappable (click)="choseMultIple(item,'decoration','decorationArry','decorationList')" [hidden]="index==0" >{{item.name}}</a>
   </div>
 
   <div class="outer">
     <h4>建筑类型</h4>
     <a *ngFor="let item of buildTypeJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','buildTypeArry')||isActiveBase(item,'val','buildType',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','buildTypeArry')}"
        tappable (click)="choseMultIple(item,'buildType','buildTypeArry','buildTypeList')" [hidden]="index==0" >{{item.name}}</a>
   </div>
   <div class="outer">
     <h4>楼层位置</h4>
     <a *ngFor="let item of floorJson;let index =index"
-       [ngClass]="{'active': item.active||initTags(item,'val','positionArry')||isActiveBase(item,'val','position',selected)}"
+       [ngClass]="{'active': item.active||initTags(item,'val','positionArry')}"
        tappable (click)="choseMultIple(item,'position','positionArry','positionList')" [hidden]="index==0" >{{item.name}}</a>
   </div>
   <!--<div class="outer">-->

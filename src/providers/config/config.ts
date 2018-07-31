@@ -11,6 +11,7 @@ export class ConfigProvider {
     url:'',
     oss:'',
     http:'',
+    cHttp:'https://c.liveeasy.tech',
     img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
     errorImg:'assets/imgs/http502.png',
   };
@@ -22,6 +23,7 @@ export class ConfigProvider {
         url:'',
         oss:'',
         http:'https://erp.liveeasy.tech/api/v1',
+        cHttp:'https://c.liveeasy.tech',
         img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',
       }
