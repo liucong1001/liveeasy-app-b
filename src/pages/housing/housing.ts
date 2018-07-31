@@ -283,12 +283,6 @@ export class HousingPage {
   }
 
 
-  test() {
-    console.log(this.type)
-    this.localStorageProvider.set('bedroom', this.type);
-    this.propertyProvider.houseType({}).then(res => {
-    })
-  }
 
   hasData = true;
   totalRecords :any;//查询到的总条数；
