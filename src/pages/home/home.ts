@@ -32,6 +32,7 @@ export class HomePage {
   close=[];
   addHomeTag = [] ;
   res=[];
+  data:any;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
@@ -41,6 +42,7 @@ export class HomePage {
     //获取待办消息接口-
     this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
       this.res=res;
+      this.data=res.data.result;
       for(var i in res.data.result){
         if(res.data.result[i].operationCode == '3033'){
           //关闭房源审核
