@@ -26,11 +26,6 @@ page-housinfo {
     font-size: 1.4rem;
   }
 
-  .toolbar-ios-first{
-    .toolbar-background-ios{
-      background: none !important;
-    }
-  }
   ion-header{
     background: none !important;
   }
@@ -40,10 +35,10 @@ page-housinfo {
     -webkit-animation-name: fadeInOut;
     -webkit-animation-duration: 500ms;
   }
-  .headerCss{
-    background: #1ab394 !important;
-    display: block;
-  }
+  //.headerCss{
+  //  background: #1ab394 !important;
+  //  display: block;
+  //}
 
   @-webkit-keyframes fadeInOut {
     0% {

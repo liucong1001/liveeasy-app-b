@@ -10,7 +10,7 @@
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{'color':time}">
-      <span *ngIf="tm1 && tm2 &&times != 1" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
+      <span *ngIf="tm1 && tm2 && times == 3" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
       <span *ngIf="times == 2" [ngClass]="{'color':timeName}">{{timeName}}</span>
       <span *ngIf="times == 1">时间查询</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':tm1 || tm2,'color':timeName || tm1 || tm2}"></ion-icon>
@@ -25,7 +25,7 @@
 
 
 <ion-content>
-  <table width="100%" class="bgWhite m10" >
+  <table width="100%" class="bgWhite m10" [hidden]="errStatus">
     <tr class="tc" *ngFor="let i of tableJSON">
       <td>{{i.name}}</td>
       <td>{{i.result}}</td>
@@ -74,22 +74,28 @@
 
   <!-- 时间查询 -->
   <div class="lists houseType" [hidden]="!time" >
-    <ion-list radio-group class="scrollC">
-      <ion-item *ngFor="let item of titleJSON" class="tc">
+    <!--<ion-list radio-group class="scrollC">-->
+      <!--<ion-item *ngFor="let item of titleJSON;let index =index" class="tc">-->
+        <!--<ion-label>{{item.name}}</ion-label>-->
+        <!--<ion-radio (ionSelect)="timer(item)" [(ngModel)]="sausage[index]"></ion-radio>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+    <ion-list radio-group  class="scrollC" >
+      <ion-item *ngFor="let item of titleJSON;let index =index" [hidden]="index==0">
         <ion-label>{{item.name}}</ion-label>
-        <ion-radio (ionSelect)="timer(item)"></ion-radio>
+        <ion-checkbox (ionChange)="timer(item,index)" [(ngModel)]="sausage[index]"></ion-checkbox>
       </ion-item>
     </ion-list>
     <form [formGroup]="form">
       <ion-row class="tc">
         <ion-col col-5>
-          <ion-datetime placeholder="请选择时间" formControlName="startTime"  (ionChange)="getcontactFreeTm1($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+          <ion-datetime placeholder="请选择时间" formControlName="startTime"  (ionChange)="getcontactFreeTm1($event)"  displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
         </ion-col>
         <ion-col col-2>
           至
         </ion-col>
         <ion-col col-5>
-          <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)" displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+          <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)"  displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
         </ion-col>
       </ion-row>
     </form>

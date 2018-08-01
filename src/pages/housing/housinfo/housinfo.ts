@@ -46,7 +46,7 @@ export class HousinfoPage {
   tagsListPage =[];
   propertyId:string;
   @ViewChild('navbar') navBar: Navbar;
-  @ViewChild(Content) content: Content;
+  // @ViewChild(Content) content: Content;
   classFlag=false;
   opts:any;//百度地图
   localCode:any;
@@ -74,15 +74,13 @@ this.modals=navParams.get('modals');
       this.modals=true;
     }
   }
-
-
-  scrollHandler(event) {
-    if (this.content.scrollTop >= 10){
-      this.classFlag=true;
-    }else if(this.content.scrollTop < 50){
-      this.classFlag=false;
-    }
+  @ViewChild("header") header;
+  scrollHandler(e) {
+    let opacity = +(e.scrollTop / 150).toFixed(2);
+    opacity = opacity > 1 ? 1 : opacity;
+    this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
   }
+
   flag=false;
   fyDescribe=false;
 

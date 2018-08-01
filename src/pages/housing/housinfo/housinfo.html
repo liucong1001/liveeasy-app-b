@@ -1,9 +1,9 @@
 <!--
   房源详情页面
 -->
-<ion-header [ngClass]="{headerCss:classFlag}">
+<ion-header  no-border>
 
-  <ion-navbar  #navbar color="first" [ngClass]="{addCss:classFlag}">
+  <ion-navbar  #navbar color="first" transparent #header>
     <button  ion-button="bar-button" *ngIf="modals" (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>

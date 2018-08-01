@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Item, Navbar, NavController, NavParams} from 'ionic-angular';
 import {StatusBar} from "@ionic-native/status-bar";
 import {HomeProvider} from "../../../providers/home/home";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder,FormsModule , FormGroup, Validators} from "@angular/forms";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {PersonPage} from "./person/person";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
@@ -327,9 +327,15 @@ console.log(this.beforeDay)
     console.log('表单',event);
 
     this.clear();
-    if(this.times ==1){
-      this.times=2;
+    if(this.times ==2 || this.times ==1){
+      if(this.times==2){
+        for(var i in this.sausage){
+          this.sausage[i]=false;
+        }
+      }
+      this.times=3;
     }
+
   }
   startTime:any;
   endTime:any;
@@ -354,7 +360,7 @@ console.log(this.beforeDay)
   //时间查询
   times=1;
   timeName:any;
-  timer(item){
+  timer(item,index){
     this.getClear();
     this.department=[];
     this.timeName=item.name;
@@ -460,11 +466,21 @@ console.log(this.beforeDay)
     console.log('表单',event);
 
     this.clear();
-    if(this.times ==1){
+    if(this.times ==1 || this.times ==3){
+      if (this.times==3){
+        this.form.value.startTime='';
+        this.form.value.endTime='';
+      }
       this.times=2;
     }
   }
-
+  sausage=[];
+  reset(){
+    console.log('清除',this.sausage);
+    for(var i in this.sausage){
+      this.sausage[i]=false;
+    }
+  }
   //快速查询
   fast=1;
   fastName:any;
@@ -779,13 +795,13 @@ console.log(this.beforeDay)
       }
 
     }
-
     console.log(this.tableJSON);
     this.clear();
     if(this.staff ==1){
       this.staff=2;
     }
   }
+
 
   //table title
   tableJSON=[
