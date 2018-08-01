@@ -5,20 +5,13 @@ import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
 import {AddlookPage} from './addlook/addlook';
-import {HousedetailPage} from './housedetail/housedetail';
 import {AddhousePage} from './addhouse/addhouse';
 import {PropertyProvider} from "../../providers/property/property";
-// import {Pipe, PipeTransform} from '@angular/core';
-import {StringJsonPipe} from "../../pipes/string-json/string-json";
 import {ConfigProvider} from "../../providers/config/config";
-import {PropertyModel} from "../../model/property/property.model";
 import {AddhouseProvider} from "../../providers/addhouse/addhouse";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {CustomerProvider} from "../../providers/customer/customer";
 import {AllsearchPage} from "../allsearch/allsearch";
-import {SearchhousePage} from "./housedetail/searchhouse/searchhouse";
-import {Tabs} from 'ionic-angular';
-import {visibilityToggle} from "../../components/animations/toggle.animation";
 import {ToastComponent} from "../../components/toast/toast";
 import {MorePage} from "./more/more";
 import { trigger,style,transition,animate,keyframes,query,stagger,group, state, animateChild } from '@angular/animations';
@@ -26,8 +19,6 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
-import {errorHandler} from "@angular/platform-browser/src/browser";
-
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 
 /**
@@ -144,24 +135,7 @@ export class HousingPage {
       }
 
 
-    // this.customerProvider.area().then(res=>{
-    //   console.log('区域', res);
-    //   if(res){
-    //     this.area = res.data.distrs;
-    //     this.localStorageProvider.set('distrs',this.area);
-    //     if(this.area){
-    //       this.area.unshift({name:'不限11',id:'99'});
-    //     }
-    //   }
-    // });
 
-
-
-    //房源标签
-    // this.addhouseProvider.estateTagsSelect().then(res => {
-    //    this.tagsListPage = res.data;
-    //    this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-    // });
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
     console.log('房源标签',this.tagsListPage);
@@ -199,12 +173,9 @@ export class HousingPage {
   allCity = false;
   unlimited(){
     this.allCity = true;
-    // this.params.district = '';
     this.params.division = '2333';
     this.params.area = '' ;
     this.search('propQuery');
-    // this.isActive('');
-    // this.reset();
   }
 
   searchDict = '';
@@ -212,27 +183,26 @@ export class HousingPage {
   //搜索房源——区域——商圈
   cityId:any;
   bx(){
-    console.log('参数',this.params);
      this.params.area = '' ;
     this.searchArea = '不限';
     this.search('propQuery');
   }
   //电梯
   dt(){
-    console.log('参数',this.params);
      this.params.area  = '';
     this.search('propQuery');
   }
+  choseDivision=false;
   go(item) {
+    this.choseDivision = false;
     if(item.id=='99'){
       this.params.division = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
-       this.params.area = '';
+      this.params.area = '';
       this.searchArea = '不限';
-      // this.hTips=false;
       this.district = [];
       this.search('propQuery');
+      this.choseDivision = true;
     }
-
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
@@ -241,7 +211,6 @@ export class HousingPage {
     for(var i of this.area){
        if(item.code==i['code']){
          this.district = i['area'];
-         console.log('this.district',this.district);
          if(this.district!=undefined){
            this.district.unshift({name:'不限',code:'0'});
            this.district = this.uniqueArray(this.district,'name');
@@ -250,7 +219,6 @@ export class HousingPage {
          }
        }
     }
-    console.log('商圈',this.district);
   }
 
    uniqueArray(array, key){
@@ -280,11 +248,6 @@ export class HousingPage {
    * 列表搜索
    */
   search(qId){
-    // if(this.params.bedrooms=='0'){
-    //   this.bedroomUnlimt =true;
-    //  delete  this.params.bedrooms ;
-    // }
-
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
        }
@@ -339,18 +302,7 @@ export class HousingPage {
   }
 
 
-  //重置
-  reset(){
-    this.params= {
-      // district:'',
-      area:'',
-      bedrooms:'0',
-      division:'420103',
-      estateId:'',
-      param:'1', //默认搜索是1,只看我的6,
-    };
-    this.search('propQuery');
-  }
+
   ionViewWillEnter() {
     this.statusBar.styleDefault();
 
@@ -359,11 +311,6 @@ export class HousingPage {
     console.log('ionViewDidLoad HousingPage');
     this.search('properties');
     this.imgHeader = this.configProvider.set().img;
-    /**
-     * 祥哥 房源列表搜索接口
-      */
-    // this.propertyProvider.page2().toPromise().then();
-    console.log('更多是否存在',this.moreSearchData);
   }
     //禁用调出键盘
   ionViewDidEnter(){
@@ -374,10 +321,9 @@ export class HousingPage {
       // this.navCtrl.push(HomesearchPage);
       this.navCtrl.popToRoot();
     };
-
   }
-  datas:any;
 
+  datas:any;
   searchMore(){
     var data=  this.localStorageProvider.get('searchMoreData');
     this.datas=data;
@@ -623,7 +569,6 @@ export class HousingPage {
       }else {
         this.currentPage++;
       }
-      // this.currentPage++;
 
       if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
@@ -830,9 +775,6 @@ export class HousingPage {
             arry.push(params.spaceSizeList[i]['end']);
             arryList +=params.spaceSizeList[i]['start']+','+params.spaceSizeList[i]['end']+';';
           }
-          // console.log('开始的元素',arry);
-          // console.log('查找的重复元素',this.duplicates(arry));
-
           for(var i in arry){
              for(var y in this.duplicates(arry) ){
                 if(arry[i]== this.duplicates(arry)[y]){
@@ -878,14 +820,12 @@ export class HousingPage {
      this.search('propQuery');
   }
 
-
 }
 
 /**
  * 定义搜索条件类
  */
 class  PropertyPageParams {
-  // district?:string;
   area?:string; //商圈
   bedrooms?:string;//户室
   city?:string;

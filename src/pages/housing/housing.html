@@ -201,38 +201,6 @@
   <!-- 区域 -->
   <ion-grid class="lists p0" [hidden]="!show" [ngClass]="{transitions:show}" style="">
 
-    <!--<ion-row *ngIf="aeraShow">-->
-      <!--<ion-col col-12 class="p0">-->
-        <!--<div class="leftChange">-->
-          <!--&lt;!&ndash;<a (click)="unlimited()" [ngClass]="{'active': isActive}">不限</a>&ndash;&gt;-->
-          <!--<a *ngFor=" let item of area" (click)="go(item)">{{item.name}}</a>-->
-        <!--</div>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-    <!--&lt;!&ndash;点击后显示&ndash;&gt;-->
-    <!--<ion-row *ngIf="tradArea">-->
-      <!--<ion-col col-6 class="p0">-->
-        <!--<div class="leftChange">-->
-          <!--<a *ngFor=" let item of area" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">{{item.name}}</a>-->
-        <!--</div>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-6 class="p0">-->
-        <!--<div class="leftChange updateBg">-->
-          <!--<ion-list radio-group [(ngModel)]="params.area">-->
-            <!--<ion-item *ngIf="this.district != unde">-->
-              <!--<ion-label>不限</ion-label>-->
-              <!--<ion-radio value="0" (ionSelect)="bx()"></ion-radio>-->
-            <!--</ion-item>-->
-            <!--<ion-item *ngFor=" let items of district;let i = index" >-->
-              <!--<ion-label>{{items.name}}</ion-label>-->
-              <!--<ion-radio value="{{items.id}}" (ionSelect)="selectArea(items)"></ion-radio>-->
-            <!--</ion-item>-->
-          <!--</ion-list>-->
-          <!--<div *ngIf="hTips && selected.id!=99 ">暂无该地区！</div>-->
-        <!--</div>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-
     <ion-row>
       <ion-col col-6 class="p0">
         <div class="leftChange">
@@ -247,7 +215,7 @@
               <ion-radio value="{{items.id}}"  (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
-          <div  *ngIf="district.length==0" >暂无该地区！</div>
+          <div  *ngIf="district.length==0&&!choseDivision"  >暂无该地区！</div>
         </div>
       </ion-col>
     </ion-row>
@@ -295,24 +263,6 @@
       <button ion-button full color="danger" (click)="search('propQuery')">确定</button>
     </div>
   </div>
-  <!-- 更多 -->
-  <!--<div class="lists houseType" *ngIf="more">-->
-    <!--<ion-list radio-group [(ngModel)]="params.param" class="scrollC">-->
-      <!--<ion-item>-->
-        <!--<ion-label>只看我的房源</ion-label>-->
-        <!--<ion-radio  value="6" (ionSelect)="search()"></ion-radio>-->
-      <!--</ion-item>-->
-
-      <!--<ion-item>-->
-        <!--<ion-label>待处理申请关闭</ion-label>-->
-        <!--<ion-radio value="1" (ionSelect)="search()"></ion-radio>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-    <!--&lt;!&ndash;<div class="p15 btns">&ndash;&gt;-->
-    <!--&lt;!&ndash;<button ion-button full color="danger" (click)="search()">确定</button>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-  <!--</div>-->
-
 </div>
 <div class="pop" *ngIf="pop" (click)="pops()"></div>
 

@@ -11,7 +11,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ReversePipe implements PipeTransform {
   transform(value: any,key:string, ...args) {
     if(value){
-      console.log('asd',value);
       return value.sort(function (a,b) {
         var x = parseFloat(a[key]);
         var y = parseFloat(b[key]);

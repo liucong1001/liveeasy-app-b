@@ -44,8 +44,8 @@ export class PublicpassengerPage {
     intentionRoom:'0', //居室
     intentionTradeCode:'0',//商圈
     priceUnit:'1',
-    sort:'1',
-    customerType:'1',
+    // sort:'1',
+    // customerType:'1',
   };
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController,
@@ -112,27 +112,37 @@ export class PublicpassengerPage {
     this.searchDict = item.name;
     this.selected = item;//激活css选中状态
     //用code值匹配相应商圈
-    // this.district = [];
-    // for(var i in this.tradingArea){
-    //   if(this.tradingArea[i].code.substring(0,6) == item.code){
-    //     this.district.push(this.tradingArea[i]);
-    //   }
-    // }
-    // if(this.district.length>1){
-    //   this.district.unshift({name:'不限',code:'0'});
-    // }
     this.district = [];
     for(var i of this.area){
       if(item.code==i['code']){
         this.district = i['area'];
-        if(this.district&&this.district.length>1){
+        if(this.district!=undefined){
           this.district.unshift({name:'不限',code:'0'});
+          this.district = this.uniqueArray(this.district,'name');
+        }else {
+          this.district = [];
         }
       }
     }
-
     this.params.intentionDiviCode = item.code;
+  }
 
+  uniqueArray(array, key){
+    var result = [array[0]];
+    for(var i = 1; i < array.length; i++){
+      var item = array[i];
+      var repeat = false;
+      for (var j = 0; j < result.length; j++) {
+        if (item[key] == result[j][key]) {
+          repeat = true;
+          break;
+        }
+      }
+      if (!repeat) {
+        result.push(item);
+      }
+    }
+    return result;
   }
 
   /**

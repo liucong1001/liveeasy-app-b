@@ -191,14 +191,12 @@ export class AddhousePage {
   sizeCheck=false;
   sizes(){
     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
-
       if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
         console.log('室内面积不能大于建筑面积');
         this.sizeCheck = true;
       }else {
         this.sizeCheck = false;
       }
-      console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
     }
   }
 

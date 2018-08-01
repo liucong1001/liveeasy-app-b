@@ -22,6 +22,8 @@ export class PublicCustomerProvider {
       totalPages:0,
       offset:0,
       order:'asc',
+      orderBy: 'DESC',
+      hasCount:true,
       ... params,
     };
     return this.httpProvider.httpGet(this.pageListPath,data)
