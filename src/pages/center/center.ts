@@ -31,7 +31,7 @@ export class CenterPage {
   photo:any;
   name:any;
   gh:any;
-  custposName:any;
+  positionCateName:any;
   @ViewChild(Content) content: Content;
   private versionJsonUrl : any;
   versionNumber :string;
@@ -51,7 +51,7 @@ export class CenterPage {
 
     this.name = this.localStorageProvider.get('loginInfo').name;
     this.gh=this.localStorageProvider.get('loginInfo').no;
-    this.custposName =this.localStorageProvider.get('loginInfo') .custPosName
+    this.positionCateName =this.localStorageProvider.get('loginInfo').positionCateName;
     this.photo = 'assets/imgs/center.jpg';
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";

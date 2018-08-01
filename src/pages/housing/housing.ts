@@ -705,13 +705,12 @@ export class HousingPage {
     }else{
       this.params.price = this.starts + ',' + this.ends;
     }
-
-
     this.search('propQuery');
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
       console.log(this.structure)
     }
+
   }
 
   allSearch(){

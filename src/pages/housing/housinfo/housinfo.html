@@ -2,8 +2,11 @@
   房源详情页面
 -->
 <ion-header [ngClass]="{headerCss:classFlag}">
+
   <ion-navbar  #navbar color="first" [ngClass]="{addCss:classFlag}">
-    <!--<ion-title [hidden]="!classFlag">房源详情</ion-title>-->
+    <button  ion-button="bar-button" *ngIf="modals" (click)="dismiss()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
     <ion-buttons end>
       <button ion-button icon-only tappable (click)="tip()">
         <ion-icon name="guanzhu"></ion-icon>
@@ -13,9 +16,11 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
+
   <ion-slides #mySlider  style="" autoplay="3000" pager="true" loop="true" paginationType="fraction">
 
     <ion-slide *ngIf="!imgJson">

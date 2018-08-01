@@ -12,7 +12,7 @@
       <ion-col col-9 class="cRightMain" style="    margin-top: 6px;">
         <div>
             <font size="4">{{name}}</font>
-          <a class="followTips" *ngIf="this.custposName">{{custposName}}</a>
+          <a class="followTips" *ngIf="this.positionCateName">{{positionCateName}}</a>
         </div>
         <!--<div  class="m5">-->
           <!--<font size="2" color="#aaa">武昌一店</font>-->
@@ -59,7 +59,7 @@
     </button>
   </ion-list>
   <ion-list class="m10">
-    <ion-item class="tc" (click)="reset()">
+    <ion-item tappable class="tc" (click)="reset()">
         退出登录
     </ion-item>
   </ion-list>

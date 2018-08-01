@@ -113,7 +113,7 @@ export class CustomerProvider {
   }
   //带看搜索
   lookSearch(params){
-    return this.httpProvider.httpPost(this.lookseaPath,params);
+    return this.httpProvider.httpGet(this.lookseaPath,params);
   }
   //我的客户——关闭
   public prclose(params?){

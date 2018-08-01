@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams,Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Navbar,ModalController } from 'ionic-angular';
 
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
@@ -34,7 +34,7 @@ export class CheckhousePage {
   res:any;
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController,
-              public statusBar: StatusBar, public homeProvider:HomeProvider,
+              public statusBar: StatusBar, public homeProvider:HomeProvider,public modalCtrl: ModalController,
               public nativePageTransitions: NativePageTransitions,public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
     this.val=navParams.get('val')
@@ -79,7 +79,7 @@ export class CheckhousePage {
                 this.close.push(this.res.data.result[i])
               }
             }
-            console.log(this.check,this.close,this.adjust)
+            // console.log(this.check,this.close,this.adjust)
             if(this.check.length==0){
               if(this.val==1){
                 this.hasData=false;
@@ -208,10 +208,12 @@ export class CheckhousePage {
     return count;
   }
   go(item){
-    console.log(item.objectId)
-    this.openWin(HousinfoPage,{
-      propertyId:item.objectId,
-    })
+    console.log(item.objectId);
+    let profileModal = this.modalCtrl.create(HousinfoPage, { propertyId:item.objectId,modals:false});
+    profileModal.present();
+    // this.openWin(HousinfoPage,{
+    //   propertyId:item.objectId,
+    // })
   }
 
 //------返回处理--------//

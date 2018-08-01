@@ -1,5 +1,5 @@
 import { Component,ViewChild,NgZone} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController} from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -55,18 +55,24 @@ export class HousinfoPage {
   decorationJson:Array<{name:string;val:string}>;
   buildingTypeJson:Array<{name:string;val:string}>;
   floorJSON:Array<{name:string;val:string}>;
-  constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+  modals=false;
+  constructor(public navCtrl: NavController, public toast:ToastComponent,public viewCtrl: ViewController,
+              public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,public app: App
               ) {
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
     this.localCode = this.localStorageProvider.get('codeData');
-
+this.modals=navParams.get('modals');
     this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     this.buzzTypeJson = new ArryCodeValuePipe().transform(this.localCode,'buzz_type');
     this.decorationJson = new ArryCodeValuePipe().transform(this.localCode,'decoration');
     this.buildingTypeJson = new ArryCodeValuePipe().transform(this.localCode,'building_type');
-    this.floorJSON=new ArryCodeValuePipe().transform(this.localCode,'building_height_type')
+    this.floorJSON=new ArryCodeValuePipe().transform(this.localCode,'building_height_type');
+
+    if(this.modals == false){
+      this.modals=true;
+    }
   }
 
 
@@ -334,7 +340,9 @@ export class HousinfoPage {
     }
   }
 
-
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
