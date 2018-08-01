@@ -17,8 +17,8 @@
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
       <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedrooms}">{{housePipe(params.bedrooms)}}</span>
-      <span  *ngIf="searchFloorNum==0 || searchFloorNum==1">户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
+      <span  *ngIf="searchFloorNum==0 || searchFloorNum==1 || params.bedrooms==undefined">户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2&&params.bedrooms}"></ion-icon>
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
@@ -200,7 +200,6 @@
 <div class="popLocation">
   <!-- 区域 -->
   <ion-grid class="lists p0" [hidden]="!show" [ngClass]="{transitions:show}" style="">
-
     <ion-row>
       <ion-col col-6 class="p0">
         <div class="leftChange">
@@ -221,16 +220,15 @@
     </ion-row>
   </ion-grid>
 
-
   <!-- 户型 -->
   <div class="lists houseType" [hidden]="!houseType" >
-    <ion-list radio-group [(ngModel)]="params.bedrooms" class="scrollC">
+    <ion-list radio-group [(ngModel)]="paramsBedrooms" class="scrollC">
       <ion-item *ngFor="let y of houseJSON" class="tc">
         <ion-label>{{y.name}}</ion-label>
-        <ion-radio value={{y.val}} (ionSelect)="search('propQuery')"></ion-radio>
+        <ion-radio value={{y.val}}    (ionSelect)="selectBedRooms(y)"></ion-radio>
+        <!--search('propQuery')-->
       </ion-item>
     </ion-list>
-
   </div>
 
   <!-- 价格 -->

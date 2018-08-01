@@ -819,6 +819,14 @@ export class HousingPage {
      this.searchArea= item.name;
      this.search('propQuery');
   }
+  paramsBedrooms:any;
+  selectBedRooms(item){
+    this.params.bedrooms = this.paramsBedrooms;
+    if(item.val==0) {
+      delete this.params.bedrooms
+    }
+    this.search('propQuery');
+  }
 
 }
 

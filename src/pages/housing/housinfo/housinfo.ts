@@ -201,8 +201,6 @@ export class HousinfoPage {
   ionViewDidEnter(){
     this.navBar.backButtonClick = () => {
       console.log('刷新reloadpage',this.navParams.get('notReloadPage'),);
-
-
       if(this.app.getActiveNavs()[0]['index']==1){
         if(this.navParams.get('notReloadPage')){
           // this.navCtrl.pop();
