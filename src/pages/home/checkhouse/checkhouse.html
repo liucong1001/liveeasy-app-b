@@ -8,10 +8,10 @@
 <ion-content>
 
 
-  <ion-refresher
+  <ion-refresher *ngIf="val==1&&check.length!=0 || val==2&&adjust.length!=0 || val==3&&close.length!=0"
     [pullMax]="480"
     [pullMin]="180"
-    (ionRefresh)="doRefresh($event)" class="refresh">
+    (ionRefresh)="doRefresh($event)" class="refresh" >
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="下拉推荐"
@@ -50,7 +50,7 @@
         <div>加载数据中...</div>
       </div>
       <div *ngIf="!hasData"  class="tc p10">
-        抱歉！没有找到数据
+        暂无数据！
       </div>
     </div>
 

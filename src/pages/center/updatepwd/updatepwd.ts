@@ -36,26 +36,37 @@ export class UpdatepwdPage {
 
   update(){
     if (this.form.value.plainPassword != '') {
-      this.updprovider.getoldPassword({plainPassword:this.form.value.plainPassword}).then(res => {
-        console.log(res);
-        if (res.data == true){
-          console.log('旧密码正确');
-          this.pwd=false;
-          this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
-            if(res.success){
-              console.log(this.form.value.plainPassword)
-              console.log(res);
-              this.localStorageProvider.del('ticket');
-              this.navCtrl.push(AccountPage)
-            }else {
-              console.log(res)
-              this.toast.error('新旧密码不一致，请重新填写')
-            }
-          });
-        }else {
-          this.pwd=true;
-        }
-      })
+      this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
+              if(res.success){
+                console.log(this.form.value)
+                console.log(res);
+                this.localStorageProvider.del('ticket');
+                this.navCtrl.push(AccountPage)
+              }else {
+                console.log(res)
+                this.toast.error('新旧密码不一致，请重新填写')
+              }
+            });
+      // this.updprovider.getoldPassword({plainPassword:this.form.value.plainPassword}).then(res => {
+      //   console.log(res);
+      //   if (res.data == true){
+      //     console.log('旧密码正确');
+      //     this.pwd=false;
+      //     this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
+      //       if(res.success){
+      //         console.log(this.form.value.plainPassword)
+      //         console.log(res);
+      //         this.localStorageProvider.del('ticket');
+      //         this.navCtrl.push(AccountPage)
+      //       }else {
+      //         console.log(res)
+      //         this.toast.error('新旧密码不一致，请重新填写')
+      //       }
+      //     });
+      //   }else {
+      //     this.pwd=true;
+      //   }
+      // })
     }
     if(this.form.value.newPassword != ''){
       var reg = /^[\da-z]+$/i;

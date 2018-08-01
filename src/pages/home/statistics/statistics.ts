@@ -82,19 +82,19 @@ export class StatisticsPage {
     this.firstDay = (((new Date(date.getFullYear(), date.getMonth(), 1)).toLocaleDateString()).replace('/','0'))
     this.lastDay = (((new Date(date.getFullYear(), date.getMonth() + 1, 0)).toLocaleDateString()).replace('/','0'))
 
-    var a = new Date();
-    var result = (new Date(a.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
+    var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
     this.yesterday=(result.replace('/','0')).replace(/\//g,'');
+    console.log((new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString());
     //前天
-    this.beforeDay=(((new Date(a.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
-
+    this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
+console.log(this.beforeDay)
     //判断时间格式
     this.homeProvider.statis({
       startTime:parseInt(this.yesterday),
       endTime:parseInt(this.yesterday),
     }).then(res=>{
       if(res.success){
-        if(res.data){
+        if(res.hasOwnProperty('data')){
           console.log(res.data)
           this.data=res.data
           alert(this.data)
@@ -179,8 +179,8 @@ export class StatisticsPage {
             this.errStatus = false;
           }
           }else {
-          this.toast.error('暂无数据');
-          this.errStatus = true;
+          // this.toast.error('暂无数据');
+          // this.errStatus = true;
         }
       }else {
         this.toast.error('暂无数据');

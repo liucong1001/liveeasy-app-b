@@ -25,7 +25,7 @@
 
 
 <ion-content>
-  <table width="100%" class="bgWhite m10" [hidden]="errStatus">
+  <table width="100%" class="bgWhite m10" >
     <tr class="tc" *ngFor="let i of tableJSON">
       <td>{{i.name}}</td>
       <td>{{i.result}}</td>
@@ -95,7 +95,7 @@
     </form>
     <ion-row class="fotBtn">
       <ion-col col-5>
-        <button ion-button full color="danger" class="reset">重置</button>
+        <button ion-button full color="danger" class="reset" (click)="reset()">重置</button>
       </ion-col>
       <ion-col col-2></ion-col>
       <ion-col col-5>
