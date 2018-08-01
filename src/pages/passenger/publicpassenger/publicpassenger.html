@@ -127,7 +127,7 @@
   <!-- 价格 -->
   <div class="lists houseType" *ngIf="houseType">
     <ion-list radio-group [(ngModel)]="params.intentionRoom" class="scrollC">
-      <ion-item *ngFor="let y of houseJSON">
+      <ion-item *ngFor="let y of houseJSON" class="tc">
         <ion-label>{{y.name}}</ion-label>
         <ion-radio value={{y.val}} (ionSelect)="search()"></ion-radio>
       </ion-item>

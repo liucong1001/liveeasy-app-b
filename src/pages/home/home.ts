@@ -33,6 +33,7 @@ export class HomePage {
   addHomeTag = [] ;
   res=[];
   data:any;
+  tests=[];
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
@@ -43,11 +44,11 @@ export class HomePage {
     this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
       this.res=res;
       this.data=res.data.result;
+      console.log(res);
       for(var i in res.data.result){
         if(res.data.result[i].operationCode == '3033'){
           //关闭房源审核
           this.check.push(res.data.result[i]);
-          console.log(this.check)
         }
         if(res.data.result[i].operationCode == '3030'){
           //房源调整
@@ -114,7 +115,7 @@ export class HomePage {
     this.openWin(CheckhousePage,{
       item:i,
       val:i.val,
-      res:this.res
+      res:this.res,
     });
 
   }

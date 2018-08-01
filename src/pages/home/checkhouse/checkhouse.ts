@@ -8,6 +8,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {HomeProvider} from "../../../providers/home/home";
 import {HousinfoPage} from "../../housing/housinfo/housinfo";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -38,7 +39,7 @@ export class CheckhousePage {
               public propertyProvider: PropertyProvider,public toast:ToastComponent,) {
     this.val=navParams.get('val')
     this.code=navParams.get('item').code;
-    this.res=navParams.get('res')
+    this.res=navParams.get('res');
   }
 
   ionViewDidLoad() {
@@ -55,19 +56,46 @@ export class CheckhousePage {
   ionViewWillUnload(){
     this.navbar =false;
   }
-
+  check=[];
+  adjust=[];
+  close=[];
   search(){
     this.pageData = null;
     this.hasData  = true;
     // this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
-        this.pageData = this.res.data.result;
-        this.totalPages = this.res.data.totalPages;
-
-        if(this.res.data.hasOwnProperty('result')){
-          this.hasData  = true;
-        }else{
-          this.hasData = false;
-        }
+          this.pageData = this.res.data.result;
+          this.totalPages = this.res.data.totalPages;
+          if(this.res.data.hasOwnProperty('result')){
+            for(var i in this.res.data.result){
+              if(this.res.data.result[i].operationCode == '3033'){
+                //关闭房源审核
+                this.check.push(this.res.data.result[i]);
+              }
+              if(this.res.data.result[i].operationCode == '3030'){
+                //房源调整
+                this.adjust.push(this.res.data.result[i])
+              }
+              if(this.res.data.result[i].operationCode == '3005'){
+                this.close.push(this.res.data.result[i])
+              }
+            }
+            console.log(this.check,this.close,this.adjust)
+            if(this.check.length==0){
+              if(this.val==1){
+                this.hasData=false;
+              }
+            }else if (this.adjust.length==0){
+              if(this.val==2){
+                this.hasData=false;
+              }
+            }else if(this.close.length==0){
+              if(this.val==3){
+                this.hasData=false;
+              }
+            }
+          }else {
+            this.hasData=false;
+          }
     // });
   }
 
@@ -158,14 +186,27 @@ export class CheckhousePage {
     result = result || [];
     this.firstPageData = this.firstPageData || [];
     for (let item in result) {
-      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
-      if (rs.length == 0) {
-        count ++;
+      if(this.val==1){
+        var rs = this.check.find(check => check.propertyId == result[item].propertyId ) || [];
+        if (rs.length == 0) {
+          count ++;
+        }
+      }else if(this.val==2){
+        var rb = this.adjust.find(adjust => adjust.propertyId == result[item].propertyId ) || [];
+        console.log(this.adjust)
+        if (rb.length == 0) {
+          count ++;
+        }
+      }else if(this.val==3){
+        var rc = this.close.find(close => close.propertyId == result[item].propertyId ) || [];
+        if (rc.length == 0) {
+          count ++;
+        }
       }
+
     }
     return count;
   }
-
   go(item){
     console.log(item.objectId)
     this.openWin(HousinfoPage,{
