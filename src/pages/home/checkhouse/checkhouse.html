@@ -22,32 +22,27 @@
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
   <div>
-    <div *ngIf="val==1">
-      <ion-list *ngFor="let item of pageData; index as i;" (click)="go(item)">
-        <button ion-item class="pl12"  *ngIf="item.operationCode == 3033">
+      <ion-list  *ngIf="val==1">
+        <button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">
          {{item.messageContent}}
           <span class="readTips">未读</span>
         </button>
       </ion-list>
-    </div>
 
-    <div *ngIf="val==2">
-      <ion-list *ngFor="let item of pageData; index as i;" (click)="go(item)">
-        <button ion-item class="pl12"  *ngIf="item.operationCode == 3030">
+      <ion-list *ngIf="val==2">
+        <button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >
           {{item.messageContent}}
           <span class="readTips">未读</span>
         </button>
       </ion-list>
-    </div>
 
-    <div *ngIf="val==3">
-      <ion-list *ngFor="let item of pageData; index as i;" (click)="go(item)">
-        <button ion-item class="pl12"  *ngIf="item.operationCode == 3005">
+      <ion-list *ngIf="val==3">
+        <button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">
           {{item.messageContent}}
           <span class="readTips">未读</span>
         </button>
       </ion-list>
-    </div>
+
 
     <div class="content_page" style="margin-top: 20px">
       <div *ngIf="hasData&&pageData ==null" class="tc">

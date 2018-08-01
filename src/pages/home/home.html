@@ -60,10 +60,14 @@
           <h2>{{i.name}}</h2>
         </ion-col>
       </ion-row>
-      <p class="ellipsis" *ngIf="this.check.length!=0 || this.adjust.length!=0  || this.close.length!=0 ">
-        您有消息待处理
+      <p class="ellipsis">
+        <span *ngIf="i.code==3033 &&this.check.length!=0">您有消息待处理</span>
+        <span *ngIf="i.code==3030 &&this.adjust.length!=0">您有消息待处理</span>
+        <span *ngIf="i.code==3005 &&this.close.length!=0">您有消息待处理</span>
+        <span *ngIf="i.code==3033 &&this.check.length==0">暂无数据</span>
+        <span *ngIf="i.code==3030 &&this.adjust.length==0">暂无数据</span>
+        <span *ngIf="i.code==3005 &&this.close.length==0">暂无数据</span>
       </p>
-      <p class="ellipsis" *ngIf="!this.check || !this.adjust || !this.close || data == undefined">暂无数据</p>
     </ion-item>
 
   </ion-list>
