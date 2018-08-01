@@ -252,7 +252,6 @@ export class HousingPage {
        if(this.params.area ==this.district[i].estateId){
        }
     }
-
     this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{

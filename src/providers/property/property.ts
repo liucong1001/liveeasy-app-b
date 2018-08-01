@@ -99,6 +99,7 @@ export class PropertyProvider {
     var qType;
     if(qId == 'propQuery'){
       qType ='dynamic';
+      params.update =1;
     }else if (qId == 'properties') {
       qType= 'fixed';
     }
@@ -108,10 +109,10 @@ export class PropertyProvider {
       qId:qId,
       qType:qType,
       city:loginUserProvince,
-      // division:loginUserDistrict,
       owner:this.localStorageProvider.get('loginInfo')['company']['id'],
       ...params,
     };
+
     return this.http.get(this.basePath,{params:data}).toPromise().then(
       res=>{
         return res as any;
