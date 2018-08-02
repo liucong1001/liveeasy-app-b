@@ -56,15 +56,13 @@
     <div class="bgWhite showTips" style="overflow: scroll;white-space:nowrap;"  *ngIf="moreSearchData">
       <!--<div style="padding: 15px 12px;" ></div>-->
       <ng-container *ngIf="datas">
-
         <a class="moreTip" *ngFor="let i of datas.tagsArry;let i =index;"   >
           {{tagName(i)}}
         </a>
-
         <ng-container  *ngIf="moreSearchData">
-        <span class="moreTip"   *ngFor="let i of moreSearchData['orientationArry'] ">
+        <a class="moreTip"   *ngFor="let i of moreSearchData['orientationArry'] ">
         {{cxPipe(i)}}
-        </span>
+        </a>
         </ng-container>
       </ng-container>
 
