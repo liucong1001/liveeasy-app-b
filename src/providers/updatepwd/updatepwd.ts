@@ -12,7 +12,7 @@ import {ConfigProvider} from "../config/config";
 export class UpdatepwdProvider {
 
     private  oldPassword = this.configProvider.set().http+'/property/propertyInfo/editPassword';
-    private  aaPassword = this.configProvider.set().http+'/sys/user/repass';
+    private  aaPassword = 'https://erp.liveeasy.tech/admin/sys/user/repass.do';
     private  helpPath = this.configProvider.set().http+'/feedback/appFeedbackInfo/insert';
     //获取版本号
   private  versionPath = this.configProvider.set().http+'/feedback/appInfo/findMaxVersion';
@@ -20,18 +20,14 @@ export class UpdatepwdProvider {
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
         console.log('Hello UpdatepwdProvider Provider');
     }
-
-    //修改密码——判断密码一致
-    public getoldPassword(params?){
-        return this.httpProvider.httpGet(this.oldPassword,params);
-    }
-    //修改密码——提交新密码
-    // public postPassword(opass,npass){
-    //     return this.httpProvider.httpPost(this.aaPassword ,+ '?opass='+ opass  + '&npass=' +  npass);
-    //     // ?newPassword=123456&loginName=1
-    // }
+    //修改密码
   postPassword(opass,npass){
-    return this.httpProvider.httpPost(this.aaPassword + "?opass=" + opass+"&npass="+npass);
+    // return this.http.get(this.aaPassword+"?npass=" + npass+"&opass="+opass).toPromise().then(
+    //   res=>{
+    //     return res as any;
+    //   }
+    // );
+    return this.httpProvider.httpPost(this.aaPassword + "?npass=" + npass+"&opass="+opass);
   }
 
   helps(params?){

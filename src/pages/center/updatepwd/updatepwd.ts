@@ -26,7 +26,7 @@ export class UpdatepwdPage {
   }
   form:FormGroup =this.fb.group({
     plainPassword:['',Validators.required], //旧密码
-    newPassword:['',Validators.required],//新密码
+    newPassword:['',Validators.required,Validators.maxLength['21']],//新密码
     verifyPassword:[''],//确认新密码
   });
   ionViewDidLoad() {
@@ -43,39 +43,28 @@ export class UpdatepwdPage {
                 this.localStorageProvider.del('ticket');
                 this.navCtrl.push(AccountPage)
               }else {
-                console.log(res)
-                this.toast.error('新旧密码不一致，请重新填写')
+                console.log(res.msg)
+                var reg=/^[\u4E00-\u9FA5]+$/;
+                // if(!reg.test(res.msg)){
+                //   this.toast.error('旧密码错误，请重新填写')
+                // }else {
+                  this.toast.error(res.msg)
+                // }
               }
             });
-      // this.updprovider.getoldPassword({plainPassword:this.form.value.plainPassword}).then(res => {
-      //   console.log(res);
-      //   if (res.data == true){
-      //     console.log('旧密码正确');
-      //     this.pwd=false;
-      //     this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
-      //       if(res.success){
-      //         console.log(this.form.value.plainPassword)
-      //         console.log(res);
-      //         this.localStorageProvider.del('ticket');
-      //         this.navCtrl.push(AccountPage)
-      //       }else {
-      //         console.log(res)
-      //         this.toast.error('新旧密码不一致，请重新填写')
-      //       }
-      //     });
-      //   }else {
-      //     this.pwd=true;
-      //   }
-      // })
     }
+
+  }
+  checkes(){
     if(this.form.value.newPassword != ''){
-      var reg = /^[\da-z]+$/i;
+      var reg = /^[A-Za-z0-9]+$/;
       if (!reg.test(this.form.value.newPassword)) {
-        alert('请使用6-21字母和数字填写');
+        this.tips=true
+      }else {
+        this.tips=false;
       }
     }
   }
-
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
       direction: 'right',

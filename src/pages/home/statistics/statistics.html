@@ -13,7 +13,7 @@
       <span *ngIf="tm1 && tm2 && times == 3" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
       <span *ngIf="times == 2" [ngClass]="{'color':timeName}">{{timeName}}</span>
       <span *ngIf="times == 1">时间查询</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':tm1 || tm2,'color':timeName || tm1 || tm2}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':  times == 3,'color':times!=1}"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu3()" >
       <span *ngIf="fast==2" [ngClass]="{'color':fastName}">{{fastName}}</span>
@@ -74,16 +74,10 @@
 
   <!-- 时间查询 -->
   <div class="lists houseType" [hidden]="!time" >
-    <!--<ion-list radio-group class="scrollC">-->
-      <!--<ion-item *ngFor="let item of titleJSON;let index =index" class="tc">-->
-        <!--<ion-label>{{item.name}}</ion-label>-->
-        <!--<ion-radio (ionSelect)="timer(item)" [(ngModel)]="sausage[index]"></ion-radio>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-    <ion-list radio-group  class="scrollC" >
-      <ion-item *ngFor="let item of titleJSON;let index =index" [hidden]="index==0">
+    <ion-list radio-group class="scrollC" [(ngModel)]="sausage[index]">
+      <ion-item *ngFor="let item of titleJSON;let index =index" class="tc">
         <ion-label>{{item.name}}</ion-label>
-        <ion-checkbox (ionChange)="timer(item,index)" [(ngModel)]="sausage[index]"></ion-checkbox>
+        <ion-radio (ionSelect)="timer(item)"></ion-radio>
       </ion-item>
     </ion-list>
     <form [formGroup]="form">
