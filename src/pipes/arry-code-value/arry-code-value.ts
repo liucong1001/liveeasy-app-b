@@ -18,7 +18,7 @@ export class ArryCodeValuePipe implements PipeTransform {
           if(attr==value[i]['name']){
              var arry = value[i]['data'];
              for (var y in arry){
-                data.push({name:arry[y]['label'],val:arry[y]['value']})
+                data.push({name:arry[y]['label'],val: arry[y]['value'] })
              }
           }
        }
