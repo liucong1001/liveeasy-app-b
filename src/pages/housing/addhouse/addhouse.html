@@ -315,6 +315,32 @@
           </ion-col>
         </ion-row>
       </div>
+      <ion-item class="pl12">
+        <ion-label>挂牌时间</ion-label>
+        <ion-datetime placeholder="请选择时间" (ionChange)="gethangFreeTm2($event)"  displayFormat="YYYY-MM-DD" cancelText="关闭" doneText="确定"></ion-datetime>
+      </ion-item>
+
+      <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+        <ion-item class="pl12">
+          <ion-label>出售标签</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_life'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
+        <ion-item class="pl12">
+          <ion-label>租赁标签</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="0">拎包入住</ion-option>
+            <ion-option value="1">紧邻地铁</ion-option>
+            <ion-option value="2">钥匙房</ion-option>
+            <ion-option value="3">独卫</ion-option>
+            <ion-option value="4">家电齐全</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
     </ion-list>
 
     <ion-list class="m10">
