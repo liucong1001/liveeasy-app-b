@@ -25,21 +25,21 @@
       <ion-list  *ngIf="val==1">
         <button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">
          {{item.messageContent}}
-          <span class="readTips">未读</span>
+          <!--<span class="readTips">未读</span>-->
         </button>
       </ion-list>
 
       <ion-list *ngIf="val==2">
         <button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >
           {{item.messageContent}}
-          <span class="readTips">未读</span>
+          <!--<span class="readTips">未读</span>-->
         </button>
       </ion-list>
 
       <ion-list *ngIf="val==3">
         <button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">
           {{item.messageContent}}
-          <span class="readTips">未读</span>
+          <!--<span class="readTips">未读</span>-->
         </button>
       </ion-list>
 
