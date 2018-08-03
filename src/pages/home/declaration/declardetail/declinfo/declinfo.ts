@@ -26,6 +26,7 @@ export class DeclinfoPage {
   orders:any;
   asslist:any;
   localCode:any;
+  uers:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public localStorageProvider: LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
@@ -39,6 +40,7 @@ export class DeclinfoPage {
     this.feelist=navParams.get('order').feeList;
     this.asslist=navParams.get('order').assList;
     this.customer=navParams.get('order').order.customer;
+    this.uers=navParams.get('order').user;
     this.propertyinfo=navParams.get('order').order.propertyInfo;
     this.ownerinfo=JSON.parse(navParams.get('order').order.ownerInfo);
     console.log(this.ownerinfo);
@@ -122,6 +124,26 @@ export class DeclinfoPage {
     }
   }
 
+  //合同信息——贷款类型
+  loansJSON:Array<{name:string;val:string}>;
+  loanspipe(val){
+    this.loansJSON =  new ArryCodeValuePipe().transform(this.localCode,'loan_type');
+    for(var i in this.loansJSON){
+      if(val == this.loansJSON[i].val){
+        return this.loansJSON[i].name;
+      }
+    }
+  }
+  //合同信息——资金交接方式
+  deliverJSON:Array<{name:string;val:string}>;
+  deliverpipe(val){
+    this.deliverJSON =  new ArryCodeValuePipe().transform(this.localCode,'mny_deliver_type');
+    for(var i in this.deliverJSON){
+      if(val == this.deliverJSON[i].val){
+        return this.deliverJSON[i].name;
+      }
+    }
+  }
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
