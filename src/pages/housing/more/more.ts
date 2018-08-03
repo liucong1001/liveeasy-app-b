@@ -76,7 +76,7 @@ export class MorePage {
               public nativePageTransitions: NativePageTransitions,) {
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
-   this.initData();
+    this.initData();
 
   }
 
@@ -85,15 +85,12 @@ export class MorePage {
     //朝向
     this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     this.cxJSON.unshift({name:'全部',val:''});
-    console.log('朝向',this.cxJSON);
-
     //装修
     this.decorationJson = new ArryCodeValuePipe().transform(this.localCode,'decoration');
     this.decorationJson.unshift({name:'全部',val:''});
     //建筑类型
     this.buildTypeJson = new ArryCodeValuePipe().transform(this.localCode,'building_type');
     this.buildTypeJson.unshift({name:'全部',val:''});
-
 
     //更多
     //其他
@@ -155,7 +152,6 @@ export class MorePage {
     if(this.localStorageProvider.get('searchMoreData')){
       this.searchMoreData = this.localStorageProvider.get('searchMoreData');
     }
-    console.log('进入 MorePage',this.searchMoreData,this.tagsList,this.cxJSON,this.dtJson);
   }
 
   initTags(item,attr,arryAttr){
@@ -237,11 +233,7 @@ export class MorePage {
   //朝向 orientation
   choseMultIple(item,attrName,attrNameArry,attrNameList){
     item.active = !item.active;
-    // if(attrName =='tags'){
-    //   var value = item.tagCode;
-    // }else {
-      var value = item.val;
-    // }
+    var value = item.val;
 
     if(item.active){
       this.searchMoreData[attrNameArry].push(parseFloat(value));
@@ -250,17 +242,18 @@ export class MorePage {
       var indexArry  = this.searchMoreData[attrNameArry].indexOf(parseFloat(value));
       if(indexArry>-1){this.searchMoreData[attrNameArry].splice(indexArry,1)};
 
-      var indexArryList  = this.searchMoreData[attrNameList].indexOf(item);
-      if(indexArryList>-1){this.searchMoreData[attrNameList].splice(indexArry,1)};
+      for(var key in this.searchMoreData[attrNameList]){
+           if(this.searchMoreData[attrNameList][key]['val']==value){
+             this.searchMoreData[attrNameList].splice(key,1);
+           }
+      }
     }
     this.searchMoreData[attrName] = 0;
     // if(this.searchMoreData[attrNameArry]==false){this.searchMoreData[attrName] = 0;}
     for(var i in this.searchMoreData[attrNameArry]){
       this.searchMoreData[attrName]+= parseInt(this.searchMoreData[attrNameArry][i]) ;
     }
-    // console.log('参数：',item,attrName,attrNameArry);
-    console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
-
+    //  console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
   }
 
 

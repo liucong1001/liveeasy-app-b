@@ -18,11 +18,14 @@
            <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
            <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
          </ion-col>
+
+
          <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
            <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
            <span  *ngIf="searchFloorNum==0 || searchFloorNum==1">户型</span>
            <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2}"></ion-icon>
          </ion-col>
+
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
            <span [ngClass]="{color:filtrate(this.values)!='筛选'}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(this.values)}}</span>
            <span [hidden]="sx==2"> 筛选</span>
@@ -58,7 +61,8 @@
                   <a *ngIf="item.followLabel">{{item.followLabel==1?'急':''}}</a>
                     <!--约-->
                   <a *ngIf="item.lookLable">{{item.lookLable==1?'约':''}}</a>
-                  <!--<a>约</a>-->
+                  <!--<a>锁 isLock</a>-->
+                  <a *ngIf="item['isLock']">{{item['isLock']==1?'锁':''}}</a>
                 </div>
                 <p class="m5">
                   <font size="2" color="#aaa">ID:
