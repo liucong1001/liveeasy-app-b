@@ -97,10 +97,10 @@ export class AddhousePage {
      sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
-     buildingType:['0',Validators.required],//建筑类型
+     buildingType:['1',Validators.required],//建筑类型
      buzzOwnerType:['0'],//交易权属
      buzzType:['1',Validators.required],//房屋用途
-    hasElevator:['0',Validators.required],//配备电梯
+    hasElevator:['1',Validators.required],//配备电梯
     positionInBuilding:['1'],//楼层等级
     propertyLife:['1'], //房屋年限
     propertyMortgage:['0'],

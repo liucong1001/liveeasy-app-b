@@ -79,14 +79,14 @@
         </div>
       </div>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
-      <div class="hdRightInfo">
-        <ion-item class="pl12">
-          <ion-label>价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
-          </ion-input>
-        </ion-item>
-        <span class="hdRightInfo">万</span>
-      </div>
+      <!--<div class="hdRightInfo">-->
+        <!--<ion-item class="pl12">-->
+          <!--<ion-label>价格<i class="text-danger">*</i></ion-label>-->
+          <!--<ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">-->
+          <!--</ion-input>-->
+        <!--</ion-item>-->
+        <!--<span class="hdRightInfo">万</span>-->
+      <!--</div>-->
       <ion-list (click)="clickHx()">
         <button ion-item class="pl12" *ngIf="HxRight">
           <font>户型<i class="text-danger">*</i></font>
@@ -155,13 +155,13 @@
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectTitle('朝向')">
-          <ion-option *ngFor="let item of localCode | arryCodeValue : 'orientation'"  value="{{item.val}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of localCode | arryCodeValue : 'orientation' | reversePipe:'val'"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectTitle('装修')">
-          <ion-option *ngFor="let item of localCode | arryCodeValue : 'decoration'"  value="{{item.val}}">{{item.name}}</ion-option>
+          <ion-option *ngFor="let item of localCode | arryCodeValue : 'decoration' | reversePipe:'val'"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -208,7 +208,7 @@
       <ion-item class="pl12">
         <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
-          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type'">{{x.name}}</ion-option>
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type' | reversePipe:'val'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -291,13 +291,13 @@
       <ion-item class="pl12">
         <ion-label>房源类型</ion-label>
         <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
-          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_type'">{{x.name}}</ion-option>
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_type' | reversePipe:'val'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>房屋年限</ion-label>
         <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
-          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_life'">{{x.name}}</ion-option>
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_life' | reversePipe:'val' ">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
       <div class="allStyle">

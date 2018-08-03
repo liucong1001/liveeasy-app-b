@@ -781,7 +781,6 @@ export class HousingPage {
                   if(index>-1){arry.splice(index,1)}
                 }
              }
-
           }
           // console.log('去重复之后',arry);
           // console.log('查询面积----',arry);
@@ -816,7 +815,10 @@ export class HousingPage {
   selectArea(item){
      this.searchArea= item.name;
      this.search('propQuery');
+     console.log('选择到area',item,this.selected);
+     if(item.name=='不限'){this.searchArea=this.selected.name};
   }
+
   paramsBedrooms:any;
   selectBedRooms(item){
     this.params.bedrooms = this.paramsBedrooms;
