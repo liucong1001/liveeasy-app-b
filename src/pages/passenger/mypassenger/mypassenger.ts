@@ -241,19 +241,13 @@ export class MypassengerPage {
   sausage=[];
   info:any;
   updateCucumber(val,index) {
-    console.log('值' +val+this.sausage[index]);
     this.values=val;
-    this.info=this.sausage[index]
-    console.log(this.values)
-    if(val == 1){
-      this.params.todayNoFollow='1';
-    }else if(val == 2){
-      this.params.threeDayNoFollow='2';
-    }else if(val == 3){
-      this.params.todayNoLook='3';
-    }else if(val == 4){
-      this.params.threeDayNoLook='4';
-    }
+    this.info=this.sausage[index];
+
+     if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
+     if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
+     if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
+     if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
   }
   sx=0;
   //重置
