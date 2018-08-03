@@ -1,8 +1,7 @@
 <!--
   房源详情页面
 -->
-<ion-header  no-border>
-
+<ion-header  no-border [ngClass]="{updeteHeader:testHeader}">
   <ion-navbar  #navbar color="first" transparent #header>
     <button  ion-button="bar-button" *ngIf="modals" (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
@@ -35,7 +34,7 @@
   </ion-slides>
 
   <div class="wrap bgWhite">
-    <h4>
+    <h4 >
       {{houseData.estateName}}
       {{houseData.bedrooms}}室
       {{houseData.halls}}厅

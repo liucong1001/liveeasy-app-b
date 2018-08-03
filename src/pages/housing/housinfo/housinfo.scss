@@ -1,4 +1,7 @@
 page-housinfo {
+  ion-header{
+    background: none !important;
+  }
   .priAudit{
     background: #F7604B !important;
     color: #fff !important;
@@ -25,20 +28,16 @@ page-housinfo {
   .tips a{
     font-size: 1.4rem;
   }
-
-  ion-header{
-    background: none !important;
-  }
   .addCss{
     background-color: #1ab394 !important;
     //transition: opacity 1s;
     -webkit-animation-name: fadeInOut;
     -webkit-animation-duration: 500ms;
   }
-  //.headerCss{
-  //  background: #1ab394 !important;
-  //  display: block;
-  //}
+  .headerCss{
+    background: #1ab394 !important;
+    display: block;
+  }
 
   @-webkit-keyframes fadeInOut {
     0% {
@@ -174,7 +173,7 @@ page-housinfo {
   .houseInfo{
     //border: 1px solid;
     color: #FA5741;
-    margin-top: 6px;
+    margin-top: 2px;
   }
 
   .priceAbnormal{
@@ -193,4 +192,7 @@ page-housinfo {
   .infoPadding{
     padding-left: 8px!important;
   }
+}
+.updeteHeader{
+  background: #1ab394 !important;
 }

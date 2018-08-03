@@ -525,7 +525,7 @@
             <ion-item>
               <div class="pl12">
                 <span>按揭人：</span>
-                <span></span>
+                <span>{{this.orders.accommodatorNm}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -535,7 +535,17 @@
             <ion-item>
               <div class="pl12">
                 <span>按揭人联系方式：</span>
-                <span></span>
+                <span>{{this.orders.accommodatorPn}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-12 class="p0">
+          <ion-list>
+            <ion-item>
+              <div class="pl12">
+                <span>权证：</span>
+                <span>{{this.orders.staffName}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -545,27 +555,18 @@
             <ion-item>
               <div class="pl12">
                 <span>权证联系方式：</span>
-                <span></span>
+                <span>{{this.orders.staffPhone}}</span>
               </div>
             </ion-item>
           </ion-list>
         </ion-col>
-        <ion-col col-12 class="p0">
-          <ion-list>
-            <ion-item>
-              <div class="pl12">
-                <span>按揭人联系方式：</span>
-                <span></span>
-              </div>
-            </ion-item>
-          </ion-list>
-        </ion-col>
+
         <ion-col col-12 class="p0">
           <ion-list>
             <ion-item>
               <div class="pl12">
                 <span>其他：</span>
-                <span></span>
+                <span>{{this.orders.mortgageComment}}</span>
               </div>
             </ion-item>
           </ion-list>

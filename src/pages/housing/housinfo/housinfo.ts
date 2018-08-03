@@ -56,6 +56,7 @@ export class HousinfoPage {
   buildingTypeJson:Array<{name:string;val:string}>;
   floorJSON:Array<{name:string;val:string}>;
   modals=false;
+  testHeader=false;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public viewCtrl: ViewController,
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,public configProvider: ConfigProvider,
@@ -76,9 +77,23 @@ this.modals=navParams.get('modals');
   }
   @ViewChild("header") header;
   scrollHandler(e) {
+    // if((e.scrollTop / 150).toFixed(2)){
+    //
+    //
+    // }else {
+    //   this.testHeader=false;
+    // }
+
     let opacity = +(e.scrollTop / 150).toFixed(2);
-    opacity = opacity > 1 ? 1 : opacity;
-    this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
+    console.log(opacity)
+    if(opacity>0){
+      this.testHeader=true;
+      opacity = opacity > 1 ? 1 : opacity;
+      this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
+    }else {
+      this.testHeader=false;
+    }
+
   }
 
   flag=false;
