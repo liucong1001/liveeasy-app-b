@@ -18,9 +18,10 @@
     </ion-col>
 
     <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
-      <span *ngIf="sx==2" [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
-      <span [hidden]="sx==2"> 筛选</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2}"></ion-icon>
+      <span *ngIf="sx==2 && params.customerType!=1" [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
+      <span [hidden]="sx==2||params.customerType==1" > 筛选</span>
+      <span *ngIf="params.customerType==1">筛选</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2&&params.customerType!=1}"></ion-icon>
     </ion-col>
   </ion-row>
 
@@ -137,20 +138,13 @@
 
   <!-- 筛选 -->
   <div class="lists houseType" [hidden]="!more">
-    <ion-list radio-group class="scrollC" >
+    <ion-list radio-group class="scrollC">
       <ion-item *ngFor="let i of filtrateJson;let index =index">
         <ion-label>{{i.name}}</ion-label>
-        <ion-checkbox (ionChange)="updateCucumber(i.val,index)" [(ngModel)]="sausage[index]"></ion-checkbox>
+        <ion-radio (click)="sxClick(i.val)"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-row class="btns">
-      <ion-col col-6>
-        <button ion-button full color="danger" class="radius" style="background: #F0F0F0;color:#6A98C8;" (click)="reset()">重置</button>
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button full color="danger" class="radius update" (click)="sxClick()">确定</button>
-      </ion-col>
-    </ion-row>
+
   </div>
 
 </div>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // import { HomePage } from '../home/home';
-import { AccountPage } from '../account/account';
 import {TabsPage} from "../tabs/tabs";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {LoginPage} from "../login/login";
 // import { LoginPage } from '../login/login';
 /**
  * Generated class for the StartupPage page.
@@ -43,7 +43,7 @@ export class StartupPage {
     if(this.localStorageProvider.get('ticket')){
       this.navCtrl.push(TabsPage);
     }else {
-      this.navCtrl.setRoot(AccountPage);
+      this.navCtrl.setRoot(LoginPage);
     }
   }
 

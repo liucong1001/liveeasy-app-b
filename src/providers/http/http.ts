@@ -4,8 +4,7 @@ import {LocalStorageProvider} from '../local-storage/local-storage'
 import "rxjs/add/operator/map";
 import {catchError} from "rxjs/operators";
 import {errorHandler} from "@angular/platform-browser/src/browser";
-import {AccountPage} from "../../pages/account/account";
-import {Content,IonicPage, NavParams,App,Nav} from "ionic-angular";
+import {Content, IonicPage, NavParams, App, Nav, ModalController} from "ionic-angular";
 import {ToastComponent} from "../../components/toast/toast";
 import  {NavController} from "ionic-angular";
 import { Observable } from 'rxjs/Observable';
@@ -104,7 +103,7 @@ export class HttpProvider {
   reset(){
     localStorage.clear();
     window.location.reload();
-    this.app.getActiveNavs()[0].setRoot("AccountPage");
+    this.app.getActiveNavs()[0].setRoot("LoginPage");
   }
 
   errResponse(err){

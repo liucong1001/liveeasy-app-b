@@ -195,9 +195,24 @@ export class PublicpassengerPage {
     this.searchArea= items.name;
     this.search();
   }
-  sxClick(){
+  sxClick(val){
     this.pageData = null;
     this.hasData  = true;
+
+    this.values=val;
+    console.log('值' +val);
+    this.params.customerSrc = '0';
+    this.params.orderBy= 'DESC';
+    this.params.customerType = '1';
+    if(val == 1){
+      this.params.customerType='1';
+    }else if(val == 2){
+      this.params.customerType='2';
+    }else if(val == 3){
+      this.params.customerType='3';
+    }
+
+
     console.log('搜索',this.params);
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
@@ -219,9 +234,6 @@ export class PublicpassengerPage {
       if(this.sx ==1){
         this.sx = 2;
       }
-      if(this.info ==false){
-        this.sx=1;
-      }
     });
   }
   searchFloorNum = 0; //初始化搜索次数
@@ -229,29 +241,17 @@ export class PublicpassengerPage {
   values:any;
   sausage=[];
   info:any;
-  updateCucumber(val,index) {
-    this.values=val;
-    console.log('值' +val+this.sausage[index]);
-    this.info=this.sausage[index];
-    this.params.customerSrc = '0';
-    this.params.orderBy= 'DESC';
-    this.params.customerType = '1';
-    if(val == 1){
-      this.params.customerType='1';
-    }else if(val == 2){
-      this.params.customerType='2';
-    }else if(val == 3){
-      this.params.customerType='3';
-    }
-  }
+  // updateCucumber(val,index) {
+  //
+  // }
 
-  //重置
-  reset(){
-    console.log('清除',this.sausage);
-    for(var i in this.sausage){
-      this.sausage[i]=false;
-    }
-  }
+  // //重置
+  // reset(){
+  //   console.log('清除',this.sausage);
+  //   for(var i in this.sausage){
+  //     this.sausage[i]=false;
+  //   }
+  // }
 
 
   //重置

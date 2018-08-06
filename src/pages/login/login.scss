@@ -1,36 +1,41 @@
+page-login{
 
+}
+
+.logos {
+  padding: 50px 0 65px;
+}
+.button-ios-danger.activated{
+  background-color: #1ab394 !important;
+}
 .close ion-icon{
-    font-size: 30px;
+  font-size: 30px;
 }
 .goRegister{
-    line-height: 30px
+  line-height: 30px
 }
 .loginTitle{
-   padding: 20px 0 25px;
+  padding: 20px 0 25px;
 }
 .item-ios{
-    padding: 0;
-    font-size: 1.5rem
+  padding: 0;
+  font-size: 1.5rem
 }
 .sendMsg{
-    position: absolute;
-    right:0;
-    z-index: 1;
-    top: 6px;
-    color: #aaa;
-    padding: 11px 8px 11px 0;
+  position: absolute;
+  right:0;
+  z-index: 1;
+  top: 6px;
+  color: #aaa;
+  padding: 11px 8px 11px 0;
 }
 .m28{
-    margin: 28px 0 0;
+  margin: 28px 0 0;
 }
-.iconfont{
-    color: #D7D7D7;
-    margin: 0 10px;
-    font-size: 35px;
-}
+
 ion-footer{
-    padding: 0 0 40px;
+  padding: 0 0 40px;
 }
 ion-footer div:first-child{
-    padding:45px 0 30px;
+  padding:45px 0 30px;
 }

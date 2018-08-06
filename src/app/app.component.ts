@@ -2,19 +2,17 @@ import { Component,ViewChild  } from '@angular/core';
 import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-// import {AccountPage} from "../pages/account/account";
 import {VersionProvider} from "../providers/version/app.version";
 import {Device} from "@ionic-native/device";
 import {HeaderColor} from "@ionic-native/header-color";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {AccountPage} from "../pages/account/account";
 
 import {LocalStorageProvider} from "../providers/local-storage/local-storage";
 import {TabsPage} from "../pages/tabs/tabs";
 
 import { Keyboard } from '@ionic-native/keyboard';
 import {AndroidPermissions} from "@ionic-native/android-permissions";
+import {LoginPage} from "../pages/login/login";
 @Component({
   templateUrl: 'app.html'
 })
@@ -39,7 +37,7 @@ export class MyApp {
               private androidPermissions: AndroidPermissions
               ) {
       if(!this.localStorageProvider.get('ticket')){
-          this.rootPage = AccountPage;
+          this.rootPage = LoginPage;
       }
     //标签
     this.tagsList=this.localStorageProvider.get('tagsList');
@@ -133,7 +131,7 @@ export class MyApp {
       let activeNav = tabs && tabs.getSelected();
 
       if (activeNav) {
-        if (activeNav === AccountPage) {
+        if (activeNav === LoginPage) {
           return this.showExit();
         }
         if (activeNav.canGoBack()) {

@@ -5,10 +5,10 @@ import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageProvider} from '../../../providers/local-storage/local-storage'
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
-import {AccountPage} from "../../account/account";
 import {tick} from "@angular/core/testing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {LoginPage} from "../../login/login";
 @IonicPage()
 @Component({
   selector: 'page-updatepwd',
@@ -41,7 +41,7 @@ export class UpdatepwdPage {
                 console.log(this.form.value)
                 console.log(res);
                 this.localStorageProvider.del('ticket');
-                this.navCtrl.push(AccountPage)
+                this.navCtrl.push(LoginPage)
               }else {
                 console.log(res.msg)
                 var reg=/^[\u4E00-\u9FA5]+$/;

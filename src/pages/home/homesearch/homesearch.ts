@@ -8,7 +8,6 @@ import {PropertyProvider} from "../../../providers/property/property";
 import {HousingPage} from "../../housing/housing";
 import {HomePage} from "../../home/home";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {AccountPage} from "../../account/account";
 /**
   首页楼盘搜索
  */

@@ -51,8 +51,6 @@ import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 //启动加速
 
-import {AccountPageModule} from '../pages/account/account.module';
-
 import { StartupPageModule } from './../pages/startup/startup.module';
 
 import { PassengerPageModule } from './../pages/passenger/passenger.module';
@@ -92,7 +90,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
         LazyLoadImageModule,
       HomePageModule,
         //页面模块，
-      AccountPageModule,StartupPageModule,PassengerPageModule,
+      LoginPageModule,StartupPageModule,PassengerPageModule,
       LoginPageModule,HousingPageModule,CenterPageModule,AllsearchPageModule,
       IonicModule.forRoot(MyApp,{
         tabsHideOnSubPages: 'true',         //ionic3隐藏全部子页面tabs

@@ -4,7 +4,6 @@ import { AboutusPage } from './aboutus/aboutus';
 import { HelpPage } from './help/help';
 import { UpdatepwdPage } from './updatepwd/updatepwd';
 import { MyaccountPage } from './myaccount/myaccount';
-import {AccountPage} from "../account/account";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
@@ -15,6 +14,7 @@ import { App } from 'ionic-angular';
 import {ConfigProvider} from "../../providers/config/config";
 import {Platform } from 'ionic-angular';
 import {ToastComponent} from "../../components/toast/toast";
+import {LoginPage} from "../login/login";
 /**
  * Generated class for the CenterPage page.
  *
@@ -139,7 +139,7 @@ export class CenterPage {
     // window.location.reload();
     // this.navCtrl.push(AccountPage);
     // this.app.getActiveNavs()[0].setRoot("AccountPage");
-    let myModal = this.modalCtrl.create(AccountPage);
+    let myModal = this.modalCtrl.create(LoginPage);
     myModal.present();
     // this.navCtrl.push(AccountPage);
     this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
