@@ -28,7 +28,7 @@
         <ion-item class="pl12">
           <ion-label>客户来源<i class="text-danger">*</i></ion-label>
           <ion-select okText="确定" disabled  [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc" [selectOptions]="selectTitle('客户来源')">
-            <ion-option [value]="item.value"  *ngFor="let item of customerSrcList  "> {{item.label}}</ion-option>
+            <ion-option [value]="item.val"  *ngFor="let item of customerSrcList  "> {{item.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
@@ -40,7 +40,7 @@
         <ion-item class="pl12">
           <ion-label>客户等级</ion-label>
           <ion-select  okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerGrade">
-            <ion-option [value]="item.value" *ngFor="let item of customeroGrageInfoList  ">{{item.label}}</ion-option>
+            <ion-option [value]="item.val" *ngFor="let item of customeroGrageInfoList  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-list>
@@ -56,8 +56,8 @@
       <ion-list *ngIf="showIntention">
           <ion-item class="pl12">
             <ion-label>意向区域</ion-label>
-            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode">
-              <ion-option [value]="item.code" *ngFor="let item of area  ">{{item.name}}</ion-option>
+            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode" >
+              <ion-option [value]="item.code" *ngFor="let item of area" (ionSelect)="areaChange(item)">{{item.name}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item class="pl12">
@@ -194,7 +194,7 @@
           <span>备注</span>
         </button>
       </ion-list><ion-grid>
-        <ion-row class="p10">
+        <ion-row class="p10" [hidden]="data?.isLock==1">
           <ion-col col-4>
           <button ion-button color="danger" full type="button" (click)="save()" class="radius update" [disabled]="form.invalid">确认修改</button>
           </ion-col>

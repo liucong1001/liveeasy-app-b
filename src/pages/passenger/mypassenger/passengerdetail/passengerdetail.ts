@@ -11,6 +11,8 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {ToastComponent} from "../../../../components/toast/toast";
 import {DescsPage} from "../descs/descs";
 import {StatusBar} from "@ionic-native/status-bar";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -44,13 +46,17 @@ export class PassengerdetailPage {
   estateName:'';
   selectOptionGs:any;
   @ViewChild(Navbar) navBar: Navbar;
+  localCode:any;
   constructor(public navCtrl: NavController,public statusBar: StatusBar,
-              public toast:ToastComponent,public nativePageTransitions: NativePageTransitions, public navParams: NavParams,private fb:FormBuilder,
+              public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,
+              public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
-              public events: Events) {
+              public events: Events,  public localStorageProvider: LocalStorageProvider,) {
     this.selectOptionGs={
       title:'客户归属'
-    }
+    };
+    this.area = this.localStorageProvider.get('area');
+    this.localCode = this.localStorageProvider.get('codeData');
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
         this.data = res;
         this.form.patchValue({
@@ -84,31 +90,21 @@ export class PassengerdetailPage {
           contactFreeTm1:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0],
           contactFreeTm2:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1],
         });
+        for(var item of this.area){
+           if(item.code==this.data.intentionDiviCode){
+              this.areaChange(item);
+           }
+        }
     });
     //客户来源
-    this.customerProvider.customerSrcInfo().then(res=>{
-      this.customerSrcList = res;
-    });
+    this.customerSrcList = new ArryCodeValuePipe().transform(this.localCode,'cms_src');
     //客户归属
     this.customerProvider.agentList().then(res=>{
       this.agentList = res;
     });
     //客户等级
-    this.customerProvider.customeroGrageInfo().then(res=>{
-      this.customeroGrageInfoList = res;
-    });
-    //区域
-    this.customerProvider.area().then(res=>{
-      this.area = res.data.distrs;
-    });
-    //商圈
-    this.customerProvider.tradingArea().then(res=>{
-      this.tradingArea = res;
-    });
-    //楼盘列表
-    // this.addhouseProvider.estateListSelect().then(res=>{
-    //   this.estateList = res.data.result;
-    // });
+    this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
+
   }
   selectTitle(data){
     var title = {title:data};
@@ -343,6 +339,11 @@ export class PassengerdetailPage {
     var endTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[1] = endTime;
     console.log('表单',this.form.value);
+  }
+
+  areaChange(data){
+    console.log('区域',data);
+    this.tradingArea = data.area;
   }
 
 

@@ -601,7 +601,7 @@ export class HousingPage {
 
   }
 
-
+//todo 不用thumbnail  用imgpath拼接出来
   pic(data) {
     if (data) {
       return JSON.parse(data)[0].thumbnail

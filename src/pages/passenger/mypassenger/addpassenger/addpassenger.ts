@@ -11,6 +11,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {DescsPage} from "../descs/descs";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -42,6 +43,7 @@ export class AddpassengerPage {
   intentionTradeCodeId:string;  //用于转换商圈
   type:string="";
   aa:any;
+  localCode:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
@@ -49,11 +51,9 @@ export class AddpassengerPage {
               public events: Events,public statusBar: StatusBar
   ) {
 
-
+    this.localCode = this.localStorageProvider.get('codeData');
     //客户来源
-    this.customerProvider.customerSrcInfo().then(res=>{
-       this.customerSrcList = res;
-    });
+     this.customerSrcList = new ArryCodeValuePipe().transform(this.localCode,'cms_src');
     //客户归属
     this.customerProvider.agentList().then(res=>{
        this.agentList = res;
@@ -67,23 +67,12 @@ export class AddpassengerPage {
         }
       }
     });
-    //客户等级
-    this.customerProvider.customeroGrageInfo().then(res=>{
-       this.customeroGrageInfoList = res;
-    });
-    //区域
-    this.customerProvider.area().then(res=>{
-      this.area = res.data.distrs;
-    });
-    //商圈
-    this.customerProvider.tradingArea().then(res=>{
-     this.shangQuan = this.tradingArea = res;
-    });
-    //楼盘列表
-    this.addhouseProvider.estateListSelect().then(res=>{
-      this.estateList = res.data.result;
-    });
+   //客户等级
+   this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
+   this.area = this.localStorageProvider.get('area');
   }
+
+
   selectTitle(data){
     var title = {title:data};
     return title;
@@ -232,20 +221,19 @@ export class AddpassengerPage {
       this.restDown=false;
     }
   }
-
-  areaChange(event){
-
-    this.tradingArea = [];
-    if(this.shangQuan){
-      for(var i in this.shangQuan){
-        if(this.shangQuan[i].code.substring(0,6)==event){
-          this.tradingArea.push(this.shangQuan[i]);
-        }
-      }
-    }
-
-
-  }
+  //
+  // areaChange(event){
+  //
+  //   this.tradingArea = [];
+  //   if(this.shangQuan){
+  //     for(var i in this.shangQuan){
+  //       if(this.shangQuan[i].code.substring(0,6)==event){
+  //         this.tradingArea.push(this.shangQuan[i]);
+  //       }
+  //     }
+  //   }
+  //
+  // }
   estateName='';
   goserach(){
     this.events.subscribe('bevents', (params) => {
@@ -343,6 +331,11 @@ export class AddpassengerPage {
       });
     }
   }
+
+  areaChange(data){
+    this.tradingArea = data.area;
+  }
+
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {

@@ -84,13 +84,13 @@
           </ion-col>
       <ion-col col-12 class="houseStatus">
             <ion-row>
-              <ion-col col-4 class="tc" tappable (click)="goFollow(item)">
+              <ion-col col-4 class="tc" tappable (click)="goFollow(item)" [hidden]="item['isLock']==1">
                 <a>跟进</a>
               </ion-col>
-              <ion-col col-4 class="tc" tappable (click)="golook(item)">
+              <ion-col col-4 class="tc" tappable (click)="golook(item)"  [hidden]="item['isLock']==1">
                 <a>约看</a>
               </ion-col>
-              <ion-col col-4 class="tc" tappable (click)="closePrivateGuest(item)">
+              <ion-col col-4 class="tc" tappable (click)="closePrivateGuest(item)" [hidden]="item['isLock']==1">
                 <a>关闭</a>
               </ion-col>
             </ion-row>
