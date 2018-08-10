@@ -253,7 +253,9 @@ export class HousingPage {
     this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
-       if(res){
+       if(res.success){
+         this.badHttp = false;
+
          this.totalRecords = res.data.totalRecords;
          this.firstPageData = res.data.result;
          // res.data.hasOwnProperty('result')
@@ -284,8 +286,9 @@ export class HousingPage {
          }
         //将下拉currentPage重置
          this.currentPage = 1;
+       }else {
+         this.badHttp = true;
        }
-       this.badHttp = false;
 
      }).catch(err=>{
        // if(err.name=="TimeoutError"){
@@ -489,8 +492,8 @@ export class HousingPage {
         for (let i = 0; i < res.data.result.length; i ++) {
 
           this.pageData.push(res.data.result[i])
-          // setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
         }
+        this.badHttp = false;
       }
 
       if (newCount > 0 ) {

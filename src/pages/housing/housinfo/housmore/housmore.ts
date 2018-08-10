@@ -35,7 +35,7 @@ export class HousmorePage {
   }
   // 联系人
   contactPipe(data){
-    return JSON.parse(data);
+    return    data&&JSON.parse(data);
   }
 
 }

@@ -146,7 +146,7 @@
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
       <div class="p10" *ngIf="houseData.propertyPrice!=0">
-        <button  ion-button color="danger" full (click)="goMore()">更多信息</button>
+        <button  ion-button color="danger" full (click)="goMore()" disabled>更多信息</button>
       </div>
       <ion-row  *ngIf="houseData.propertyPrice==0">
         <ion-col col-6>

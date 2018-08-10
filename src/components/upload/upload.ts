@@ -48,12 +48,10 @@ export class UploadComponent {
     for( var i in this.src ){
       if(this.desc == this.src[i].desc){
         this.imgData.push(this.src[i]);
-
         this.successEvent.emit({item:this.src[i],data:this.imgData});
       }
-
     }
-    console.log('内部组件',this.src,this.imgData);
+    // console.log('内部组件',this.src,this.imgData);
   }
 
 
