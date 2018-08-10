@@ -117,10 +117,9 @@ export class HousingPage {
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
     }
-      // menu.enable(true); //menus-功能开启
+
     if(!this.navParams.get('item')){
-      this.floorName = '';
-      // this.params.estateId = '';
+       this.floorName = '';
     }else {
       this.floorName = this.navParams.get('item').keyword;
       this.params.estateId = this.navParams.get('item').id;
@@ -128,7 +127,6 @@ export class HousingPage {
 
       if(!navParams.get('item')){
         this.floorName = '';
-        // this.params.estateId = '';
       }else {
         this.floorName = navParams.get('item').keyword;
         this.params.estateId = navParams.get('item').id;
@@ -154,7 +152,7 @@ export class HousingPage {
       //行政区划
       this.propertyProvider.getDivision().then(res=>{
         console.log('行政区划',res);
-        this.area = res.data.data;
+        this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
         this.area.unshift({name:'不限',id:'99',code:'99'});
       });
@@ -459,7 +457,7 @@ export class HousingPage {
     // this.openWin(HousinfoPage, {
     //   propertyId:item.propertyId,
     // });
-    this.openWin(HousinfoPage,{item:item,notReloadPage:true})
+    this.openWin(HousinfoPage,{item:item,propertyId:item.propertyId,notReloadPage:true})
   }
 
   addHouse() {
@@ -577,9 +575,9 @@ export class HousingPage {
       }else {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
-          this.pageResult = res.data.result;
+          this.pageResult =res.data&&res.data.result;
           console.log('pageResult--',this.pageResult);
-          if (res.data.result) {
+          if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
               // setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
@@ -604,7 +602,7 @@ export class HousingPage {
 //todo 不用thumbnail  用imgpath拼接出来
   pic(data) {
     if (data) {
-      return JSON.parse(data)[0].thumbnail
+      return JSON.parse(data)[0].imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110'
     }
   }
 

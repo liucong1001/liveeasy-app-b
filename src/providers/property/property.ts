@@ -26,16 +26,18 @@ export class PropertyProvider {
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
-  private  shiKanDetailPath =  this.configProvider.set().http+'/property/propertyAuditInfo/getAuditPicsInfoDetail.do';
+  private  shiKanDetailPath =  this.configProvider.set().http+'/property/propertyPics/';
 
   // 楼盘模糊搜索
-  private  floorSearchPath = '/47.75.151.57:7077/live/search?keyword=';
+  private  floorSearchPath = 'https://web.liveeasy.tech/api/search';
   //查找具体信息内容
   private record = this.configProvider.set().http + '/property/propertyInfo/propertyDetail.do';
   //图片接口测试
   private  getAuditInfo = this.configProvider.set().http + '/property/propertyAuditInfo/getAuditInfo.do';
   //房源详情图片（钥匙，业主委托书，实勘图）
   private  propertyPics = this.configProvider.set().http+ '/property/propertyAuditInfo';
+  //价格审核通过
+  private  priceAuditPass = this.configProvider.set().http+'/property/propertyAuditInfo/claimAudit.do';
 
   /**
    * https://c.liveeasy.tech 接口
@@ -55,11 +57,6 @@ export class PropertyProvider {
     console.log('Hello PropertyProvider Provider');
   }
 
-  // //分页列表
-  // page(currentPage){
-  //   var data = {"currentPage":currentPage,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","tags":0,"loginUserProvince":"42"}}
-  //   return   this.httpProvider.httpPost(this.pageListPath,data)
-  // }
 
   //添加空看
   insertEmptyLook(params?){
@@ -76,12 +73,6 @@ export class PropertyProvider {
     var data = {"superDistrictId":districtId,'type':2};
     return this.httpProvider.httpGet(this.searchHousePath,data)
   }
-  // //搜索房源——户型
-  // houseType(params?) {
-  //   this.bedRType=this.localStorageProvider.get('bedroom');
-  //   var data = {"currentPage":1,"limit":10,"totalRecords":0,"totalPages":0,"offset":0,"params":{"orderBy":"1","propertyPriceUnit":"1","bedroomType":this.bedRType,"tags":0,"loginUserProvince":"42"}}
-  //   return this.httpProvider.httpPost(this.pageListPath,data)
-  // }
 
 
   /**
@@ -119,6 +110,22 @@ export class PropertyProvider {
     );
 
   }
+
+  /**
+   * 获取房源详情
+   * @param propertyId
+   * @returns {Promise<Object>}
+   */
+  getPropertyDetail(propertyId){
+     var data= {
+        qId:'property',
+       propId:propertyId,
+     };
+     return this.http.get(this.basePath,{params:data}).toPromise().then(res=>{
+       return res as any;
+     })
+  }
+
 
   //房源标签
   getTagsList(){
@@ -164,7 +171,7 @@ export class PropertyProvider {
   }
   //钥匙详情
   keydetail(propertyId) {
-    return this.httpProvider.httpPostForm(this.keydetailPath  ,'propertyId='+propertyId)
+    return this.httpProvider.httpPost(this.keydetailPath+'?propertyId='+propertyId)
   }
   //钥匙修改
   keyupdate(params?) {
@@ -181,15 +188,23 @@ export class PropertyProvider {
   shiKanSave(arrPic,propertyId){
     return this.httpProvider.httpPostForm(this.shiKanPath,"arrPic=" + arrPic+"&propertyId="+propertyId);
   }
-  //实勘图详情
+  //实勘图详情信息
    shikanDetail(propertyId){
-     return this.httpProvider.httpPost(this.shiKanDetailPath + '?propertyId='+ propertyId ,propertyId)
+     return this.httpProvider.httpGet(this.shiKanDetailPath + propertyId)
    }
 
   //专用版楼盘搜索
-  searchFloor(params){
-    var site = '2000';
-    return this.httpProvider.httpGet(this.floorSearchPath+params+'&site='+site)
+  searchFloor(keyword){
+
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var city = loginUserDistrict.substring(0,4);
+    var data = {
+      site:city,
+      keyword:keyword,
+    };
+    return this.http.get(this.floorSearchPath,{params:data}).toPromise().then(res=>{
+      return res as any ;
+    })
   }
   // 根据id查询内容
   getRecord(propertyId) {
@@ -211,6 +226,9 @@ export class PropertyProvider {
   getPropertyPics(propertyId:string){
       return  this.httpProvider.httpPost(this.propertyPics,{propertyId:propertyId})
   }
-
+ //价格异常审核通过 priceAuditPass
+  priceAuditConfirm(params){
+     return  this.httpProvider.httpPost(this.priceAuditPass,params)
+  }
 
 }

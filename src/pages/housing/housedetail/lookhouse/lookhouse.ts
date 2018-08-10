@@ -8,15 +8,12 @@ import {HousedetailPage} from "../housedetail";
 import {ToastComponent} from "../../../../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {el} from "@angular/platform-browser/testing/src/browser_util";
-import {HousingPage} from "../../housing";
+import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
+
 
 
 /**
- * Generated class for the LookhousePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  房源 - 实勘图
  */
 
 @IonicPage()
@@ -41,12 +38,31 @@ export class LookhousePage {
   wrap:any;
   showTip = false;
   @ViewChild(Navbar) navBar: Navbar;
+  propertyId:any;
+  lockhoseDetail:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
-              private camera: Camera,public toast:ToastComponent, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+              private camera: Camera,public toast:ToastComponent, public navParams: NavParams
+              ,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
-              private photoViewer: PhotoViewer,) {
+              private photoViewer: PhotoViewer,public localStorageProvider:LocalStorageProvider) {
     this.data = navParams.get('item');
-    console.log('实勘详情',this.data);
+    this.propertyId = navParams.get('propertyId');
+
+    this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
+      this.lockhoseDetail = res.data;
+      console.log('房源详情',this.lockhoseDetail);
+      if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').id&&this.lockhoseDetail.auditStatus==3){
+        this.imgJson = JSON.parse(this.lockhoseDetail.content).propertyPics;
+        console.log('房源图片', JSON.parse(this.lockhoseDetail.content).propertyPics);
+      }else if(this.lockhoseDetail.pics) {
+        this.imgJson = this.lockhoseDetail.pics&&JSON.parse(this.lockhoseDetail.pics);
+      }
+
+      if(!this.lockhoseDetail.content){
+        this.imgJson =[];
+      }
+    });
+
 
     //获取时间
     function getOffsetDays(time1, time2) {
@@ -54,26 +70,16 @@ export class LookhousePage {
       return Math.floor(offsetTime / (3600 * 24 * 1e3));
     }
 
-    this.wrap = getOffsetDays(Date.now(), (new Date(navParams.get('item').createdTime)).getTime());
-     if(this.wrap==0){
-        this.showTip = true;
+     this.wrap = getOffsetDays(Date.now(), (new Date(navParams.get('item').createdTime)).getTime());
+      if(this.wrap==0){
+      this.showTip = true;
      } else {
         this.showTip = false;
-     }
-    // this.createdTime=new Date(navParams.get('item').createdTime);
-    // var now = new Date();
-    console.log('创建事件',this.createdTime,'现在',this.wrap);
+    }
 
     this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
-    // propertyPics
-    if(this.data.propertyPics){
-      this.imgJson = JSON.parse(this.data.propertyPics); //默认展示有图片
-      // console.log('有图片',this.imgJson);
-    }else{
-      this.edit = true;
-    }
-    console.log('dir',this.useDir,'详情',this.data.propertyPics);
+
   }
 
 
@@ -86,46 +92,43 @@ export class LookhousePage {
 
   menPaiImg = [];
   menPai(event){
-    console.log('门牌号',event);
-    // this.imgData.push(event.pic);
     this.menPaiImg = event.data;
-    console.log('表单数据',this.menPaiImg);
+    // console.log('表单数据',this.menPaiImg);
   }
   huxinImg = [];
   huXin(event){
-    console.log('户型图',event);
-    // this.imgData.push(event.pic);
+    // console.log('户型图',event);
     this.huxinImg = event.data;
 
   }
   keTinImg = [];
   keTin(event){
-    console.log('客厅图',event);
+    // console.log('客厅图',event);
     // this.imgData.push(event.pic);
     this.keTinImg = event.data;
   }
   woShiImg = [];
   woShi(event){
-    console.log('卧室图',event);
+    // console.log('卧室图',event);
     // this.imgData.push(event.pic);
     this.woShiImg = event.data;
   }
   chuFangImg = [];
   chuFang(event){
-    console.log('厨房图',event);
+    // console.log('厨房图',event);
     // this.imgData.push(event.pic);
     this.chuFangImg = event.data;
   }
   woShenJianImg = [];
   woShenJian(event){
-    console.log('卫生间图',event);
+    // console.log('卫生间图',event);
     // this.imgData.push(event.pic);
     this.woShenJianImg = event.data;
 
   }
   otherImg = [];
   other(event){
-    console.log('其他图',event);
+    // console.log('其他图',event);
     // this.imgData.push(event.pic);
     this.otherImg = event.data;
   }

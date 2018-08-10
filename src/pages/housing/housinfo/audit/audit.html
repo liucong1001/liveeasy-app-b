@@ -17,10 +17,10 @@
         <span class="defaults">所属楼盘：{{data.estateName}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">区县：{{distrsPipe(data.adminDivisionCode)}}</span>
+        <span class="defaults">区县：{{data.adminDivisionName}}</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">商圈：</span>
+        <span class="defaults">商圈：{{data.tradingAreaName}}</span>
       </ion-col>
     </ion-row>
   </div>
@@ -46,10 +46,10 @@
     </ion-row>
     <ion-row>
       <ion-col col-6 class="p15">
-        <button ion-button class="priAudit" full>提交修改并通过</button>
+        <button ion-button class="priAudit" full  (click)="pass()" >提交修改并通过</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button color="danger" full>审核不通过</button>
+        <button ion-button color="danger" full  (click)="noPass()" >审核不通过</button>
       </ion-col>
     </ion-row>
   </div>

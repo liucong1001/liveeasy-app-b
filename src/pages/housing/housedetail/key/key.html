@@ -2,9 +2,13 @@
   <ion-navbar color="first">
     <ion-title>钥匙</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content>
+  <div class="bgWhite p10" *ngIf="data?.auditStatus==3">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      &nbsp;当前钥匙正在审核，审核期间不允许修改</font>
+  </div>
   <form [formGroup]="form">
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
@@ -17,25 +21,33 @@
         <ion-input type="text"  class="p0" formControlName="keyAddress">
         </ion-input>
       </ion-item>
-      <div class="attorneyPic bgWhite" *ngIf="edit">
-        <span>钥匙委托协议</span> <span class="text-danger">(*只能上传一张照片)</span>
-        <upload [useDir]="useDir" [desc]="''" [position]="''" (successEvent)="yaoChi($event)"></upload>
+      <div class="attorneyPic bgWhite" >
+        <span>钥匙委托协议</span> <span class="text-danger" *ngIf="data?.auditStatus!=3&&imgJson">(*只能上传一张照片)</span>
+        <upload *ngIf="data?.auditStatus!=3&&imgJson" [useDir]="useDir"  [src]="imgJson" [desc]="''" [position]="''"
+                 (successEvent)="yaoChi($event)"></upload>
+        <ng-container *ngIf="data?.auditStatus==3">
+          <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i =index">
+            <div class="m10">
+              <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:imgJson,index:i}"   class="img_upload">
+            </div>
+          </div>
+        </ng-container>
       </div>
     </ion-list>
-    <ion-list *ngIf="!edit" >
-      <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i =index">
-        <div class="m10">
-          <!--[imgGallery]="{data:imgJson,index:i}"-->
-          <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:imgJson,index:i}"   class="img_upload">
-        </div>
-      </div>
-      <!--<img-list [imgJson]="form.value.keyDlgtFilePics"></img-list>-->
-    </ion-list>
+    <!--<ion-list *ngIf="!edit" >-->
+      <!--<div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i =index">-->
+        <!--<div class="m10">-->
+          <!--<img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:imgJson,index:i}"   class="img_upload">-->
+        <!--</div>-->
+      <!--</div>-->
+     <!---->
+    <!--</ion-list>-->
+
     <img-list [imgJson]="form.value.keyDlgtFilePics"></img-list>
-    <ion-grid>
+    <ion-grid [hidden]="data?.auditStatus==3">
       <ion-row class="p15">
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid&&maxImagesCount" (click)="goYc()"  *ngIf="sub">提交</button>
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="updateYc()" *ngIf="update">修改钥匙</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid&&maxImagesCount" (click)="goYc()"  *ngIf="!keyData">提交</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="updateYc()" *ngIf="keyData">修改钥匙</button>
       </ion-row>
     </ion-grid>
   </form>

@@ -7,7 +7,7 @@
     <!-- 实勘审核中不能修改 -->
     <form>
       <div class="bgWhite p10" >
-        <font color="red" *ngIf="showTip">
+        <font color="red" *ngIf="showTip&&!lockhoseDetail?.open">
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           &nbsp;录入房源后24小时内不可上传实勘图!</font>
       </div>
@@ -22,34 +22,34 @@
       </ion-list>
       <!--*ngIf="edit"-->
       <ion-list class="m10" >
-        <div class="attorneyPic bgWhite">
+        <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">门牌号：</span>
           <!--[hidden] ='showTip'-->
-          <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)"></upload>
+          <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson"></upload>
         </div>
-        <div class="attorneyPic bgWhite">
+        <div class="attorneyPic bgWhite"  >
           <span class="lookHeadLine">户型图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">客厅图：</span>
-          <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)"></upload>
+          <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卧室图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">厨房图：</span>
-          <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)"></upload>
+          <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卫生间图：</span>
-          <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"></upload>
+          <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)" *ngIf="imgJson"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">其他图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)" *ngIf="imgJson"></upload>
         </div>
         </ion-list>
       <!--[disabled]="form.invalid"-->

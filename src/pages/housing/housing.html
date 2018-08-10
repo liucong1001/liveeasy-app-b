@@ -23,7 +23,7 @@
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
       <span [ngClass]="{color:starts,esRow:ends}" *ngIf="starts || ends">
-       <span *ngIf="starts ==0">{{ends}}万以下</span>
+        <span *ngIf="starts ==0">{{ends}}万以下</span>
         <span *ngIf="ends !=0 && starts !=0">{{starts}}万-{{ends}}万</span>
         <span *ngIf="ends==0">{{starts}}万以上</span>
       </span>
@@ -126,7 +126,6 @@
                 <!--<span class="font12">{{item.standardAddress}}</span>-->
               <!--</font>-->
             <!--</p>-->
-
             <ion-row>
               <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 3px 0">
                 <span>{{item.bedrooms}}室{{item.halls}}厅</span>

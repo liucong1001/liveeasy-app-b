@@ -79,7 +79,7 @@ export class HousedetailPage {
   //房源标签处理
   tagsSum(data){
     var str =  data.toString();
-    var result = str.split(",");0
+    var result = str.split(",");
     var sum = 0;
     for(var i in result){
       sum+=parseInt(result[i])
@@ -170,15 +170,8 @@ export class HousedetailPage {
         loading.dismiss();
       }
     });
-
     this.propertyid =  this.navParams.data.propertyId;
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
-
-
-     //图片处理
-     this.propertyProvider.getPropertyPicInfo(this.navParams.data.propertyId).then(res=>{
-
-     })
   }
 
 
@@ -354,7 +347,7 @@ export class HousedetailPage {
    */
 
   lookHouse(){
-    this.openWin(LookhousePage,{item:this.data});
+    this.openWin(LookhousePage,{propertyId:this.propertyid,item:this.data});
   }
 
   rolepeople(){

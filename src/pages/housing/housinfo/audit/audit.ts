@@ -20,6 +20,7 @@ export class AuditPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
     this.data = this.navParams.get('houseInfo');
     this.distrs = this.localStorageProvider.get('distrs');
+    console.log('获取到的data',this.data);
   }
 
   ionViewDidLoad() {
@@ -32,6 +33,13 @@ export class AuditPage {
           return this.distrs[i].name
         }
     }
+  }
+
+  pass(){
+
+  }
+  noPass(){
+
   }
 
 }

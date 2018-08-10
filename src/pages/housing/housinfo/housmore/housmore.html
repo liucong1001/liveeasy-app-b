@@ -11,6 +11,16 @@
   <div class="xqCss">
     <h6>基础信息</h6>
     <ion-row>
+      <ion-col col-12>
+        <span class="defaults">区县：</span>{{data.adminDivisionName}}
+      </ion-col>
+      <ion-col col-12>
+        <span class="defaults">商圈：</span>{{data.tradingAreaName}}
+      </ion-col>
+      <ion-col col-12>
+        <span class="defaults">楼盘地址：</span>{{data.standardAddress}}
+      </ion-col>
+
       <ion-col col-12 *ngIf="data.shareShow">
         <span class="defaults">栋号：</span>{{data.buildingNo}}
       </ion-col>
@@ -26,9 +36,8 @@
       <ion-col col-12>
         <span class="defaults">楼户比例：</span>{{data.elevators}}梯  {{data.apartments}}  <span *ngIf="data.apartments">户</span>
       </ion-col>
-      <ion-col col-12>
-        <span class="defaults">配备电梯：</span>{{data.hasElevator==0?'无':'有'}}
-      </ion-col>
+
+
     </ion-row>
   </div>
   <div class="yzCss" *ngIf="data.shareShow">

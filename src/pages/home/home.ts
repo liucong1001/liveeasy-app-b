@@ -61,7 +61,7 @@ export class HomePage {
     });
     this.propertyProvider.getCode().then(res=>{
         if(res.success){
-           this.localStorageProvider.set('codeData', res.data);
+           this.localStorageProvider.set('codeData', res.data.result);
           //添加，修改房源的标签 (不存在学区房)
           var tagsList = new ArryCodeValuePipe().transform(this.localStorageProvider.get('codeData'),'property_tag_desc');
           for(var item of tagsList){
@@ -124,7 +124,8 @@ export class HomePage {
     {name:'关闭房源审核',val:'1',icon:'tixing',code:'3033'},
     {name:'房源调整',val:'2',icon:'notice1',code:'3030'},
     {name:'关闭房源',val:'3',icon:'tixing',code:'3005'},
-  ]
+  ];
+
   gosta(){
     this.openWin(StatisticsPage);
   }

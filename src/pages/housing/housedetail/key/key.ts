@@ -36,33 +36,55 @@ export class KeyPage {
   imgJson :any;
   edit = false;
   maxImagesCount = true;
+  keyData:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera, public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
-    this.data = navParams.get('item');
-    this.propertyProvider.keydetail(this.propertyid).then(res => {
-      if(res.hasOwnProperty('data')){
-        this.keydelegateid= res.data.keyDelegateId;
-        this.data = res.data;
-        this.form.patchValue({
-          keySn: res.data.keySn,
-          keyAddress: res.data.keyAddress,
-          keyDlgtFilePics: res.data.keyDlgtFilePics,
-        });
-        this.update=true;
-        this.sub=false;
-      }
-      //钥匙图片显示
-      if(res.hasOwnProperty('data')){
-        this.imgJson = JSON.parse(this.data.keyDlgtFilePics); //默认展示有图片
-        console.log(this.imgJson)
-      }else{
-        this.edit = true;
-      }
+    // this.data = navParams.get('item');
+    console.log('参数',this.propertyid,this.data);
+    // this.propertyProvider.keydetail(this.propertyid).then(res => {
+    //   if(res.hasOwnProperty('data')){
+    //     this.keydelegateid= res.data.keyDelegateId;
+    //     this.data = res.data;
+    //     this.form.patchValue({
+    //       keySn: res.data.keySn,
+    //       keyAddress: res.data.keyAddress,
+    //       keyDlgtFilePics: res.data.keyDlgtFilePics,
+    //     });
+    //     this.update=true;
+    //     this.sub=false;
+    //   }
+    //   //钥匙图片显示
+    //   if(res.hasOwnProperty('data')){
+    //     this.imgJson = JSON.parse(this.data.keyDlgtFilePics); //默认展示有图片
+    //     console.log(this.imgJson)
+    //   }else{
+    //     this.edit = true;
+    //   }
+    // });
+
+    //钥匙信息
+    this.propertyProvider.keydetail(this.propertyid).then(res=>{
+      if(res.success&&res.data){
+            this.data = res.data;
+            this.keyData = JSON.parse(res.data.content.toString());
+            console.log('药匙详情',this.keyData);
+            this.form.patchValue({
+              keySn: this.keyData.keysn,
+              keyAddress: this.keyData.keyAddress,
+              keyDlgtFilePics: this.keyData.keyDlgtFilePics,
+            });
+            this.imgJson=this.keyData.keyDlgtFilePics;
+            console.log('图片',this.imgJson);
+
+      //   this.keyData = res.data.content;
+      // this.keyData = JSON.parse(this.keyData);
+     }
     });
+
   }
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;

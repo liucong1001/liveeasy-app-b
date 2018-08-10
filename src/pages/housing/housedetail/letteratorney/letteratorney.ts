@@ -12,10 +12,7 @@ import {ToastComponent} from "../../../../components/toast/toast";
  import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
- * Generated class for the LetteratorneyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  房源 -  业主委托书
  */
 
 @IonicPage()
@@ -41,6 +38,7 @@ export class LetteratorneyPage {
   agentname:any;
   maxImagesCount = true;
   @ViewChild(Navbar) navBar: Navbar;
+  content:any;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent,
@@ -48,46 +46,57 @@ export class LetteratorneyPage {
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
     this.propertyid = navParams.get('propertyid');
     this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
-    // this.useDir = this.propertyid+'/'+navParams.get('estateId')+'/';
-    // console.log('propertyid的值',this.propertyid);
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
-      console.log('委托书详情',res);
-      if(res.hasOwnProperty('data')){
-        if (res.msg == undefined){
-          this.sub=true;
-          this.upd=false;
-        }else if (res.msg == 1){
-          this.data = res.data;
-          this.delegateDocId= res.data.delegateDocId;
-          this.form.patchValue({
-            delegateDocSn:res.data.delegateDocSn,
-            delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
-            delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
-            delegateDocPics:res.data.delegateDocPics,
-            delegateStyle:res.data.delegateStyle
-          });
-          this.sub=false;
-          this.upd=true;
-          this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
-        }else if (res.msg == 2){
-          console.log(res)
-          this.agentname=res.data.agentName;
-          this.noPermission=true;
-          this.permission=false;
-          this.sub=false;
-          this.upd=false;
-        }
-      }else {
-        this.edit = true;
+
+      this.data= res.data;
+      this.content = JSON.parse(res.data.content) ;
+      if(res.success){
+        this.data = res.data;
+        this.delegateDocId= res.data.delegateDocId;
+        this.form.patchValue({
+          delegateDocSn:this.content.delegateDocSn,
+          delegateBeginTm:new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
+          delegateEndTm:new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
+          delegateDocPics:this.content.delegateDocPics,
+          delegateStyle:this.content.delegateStyle
+        });
+        this.sub=false;
+        this.upd=true;
+        this.imgJson = this.content.delegateDocPics; //默认展示有图片
+        console.log('委托书详情',this.content.delegateDocPics);
       }
-      //委托书图片显示
+
+
       // if(res.hasOwnProperty('data')){
-      //   this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
-      //   console.log(this.imgJson)
-      // }else{
+      //   if (res.msg == undefined){
+      //     this.sub=true;
+      //     this.upd=false;
+      //   }else if (res.msg == 1){
+      //     this.data = res.data;
+      //     this.delegateDocId= res.data.delegateDocId;
+      //     this.form.patchValue({
+      //       delegateDocSn:res.data.delegateDocSn,
+      //       delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
+      //       delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
+      //       delegateDocPics:res.data.delegateDocPics,
+      //       delegateStyle:res.data.delegateStyle
+      //     });
+      //     this.sub=false;
+      //     this.upd=true;
+      //     this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
+      //   }else if (res.msg == 2){
+      //     console.log(res)
+      //     this.agentname=res.data.agentName;
+      //     this.noPermission=true;
+      //     this.permission=false;
+      //     this.sub=false;
+      //     this.upd=false;
+      //   }
+      // }else {
       //   this.edit = true;
       // }
+
       console.log('dir',this.useDir,'详情',this.data);
     });
 

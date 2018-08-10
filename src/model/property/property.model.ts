@@ -157,5 +157,13 @@ export  class PropertyModel {
   adminDivisionCode?:any;
 
   realtorId?:any;
+  /**
+   * 钥匙信息
+   */
+  keyPics?:any;
+  /**
+   * 业主委托书
+   */
+  attorneyPics?:any;
 
 }

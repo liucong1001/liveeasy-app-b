@@ -51,8 +51,9 @@ export class UploadComponent {
 
         this.successEvent.emit({item:this.src[i],data:this.imgData});
       }
+
     }
-    // console.log('组件init'+this.desc,this.imgData,'SRc',this.src);
+    console.log('内部组件',this.src,this.imgData);
   }
 
 
