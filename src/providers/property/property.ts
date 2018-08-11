@@ -89,6 +89,7 @@ export class PropertyProvider {
     var qType;
     if(qId == 'propQuery'){
       qType ='dynamic';
+      params.qCate=1;
       params.update =1;
     }else if (qId == 'properties') {
       qType= 'fixed';

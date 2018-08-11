@@ -132,11 +132,8 @@ export class HousingPage {
         this.params.estateId = navParams.get('item').id;
       }
 
-
-
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-    console.log('房源标签',this.tagsListPage);
 
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
@@ -146,12 +143,9 @@ export class HousingPage {
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
     this.params.division = loginUserDistrict;
 
-
-    console.log('area',this.localStorageProvider.get('area'));
     if(this.localStorageProvider.get('area')==null){
       //行政区划
       this.propertyProvider.getDivision().then(res=>{
-        console.log('行政区划',res);
         this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
         this.area.unshift({name:'不限',id:'99',code:'99'});
@@ -473,14 +467,12 @@ export class HousingPage {
   newCount:any;
   //下拉刷新
   doRefresh(refresher) {
-    console.log('上拉刷新Begin async operation', refresher);
-    console.log(refresher.deltaY)
+
     if(refresher.pullingIcon !='arrow-dropdown'){
       // alert(2);
       refresher.pullingText='松开推荐'
     }
     this.propertyProvider.pageSearch(1,this.params,'properties').then(res=>{
-      console.log('结束时间内容',res.data.totalRecords);
       this.totalRecords = res.data.totalRecords;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);

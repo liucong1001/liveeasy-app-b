@@ -113,7 +113,6 @@ export class KeyPage {
       keySn:this.form.value.keySn,
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
-      // keyDlgtFilePics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
       if(res.success){
@@ -121,7 +120,6 @@ export class KeyPage {
         setTimeout(()=>{
            this.navCtrl.pop();
         },500)
-
       }else{
         this.toast.error('上传失败！');
       }
@@ -145,15 +143,11 @@ export class KeyPage {
   //修改钥匙信息
   updateYc(){
     this.propertyProvider.keyupdate({
-      // loginFlag:1,
-      keyDelegateId:this.keydelegateid,
-      // propertyId:this.propertyid,
-      // createTime:this.attorneys,
+      // keyDelegateId:this.keydelegateid,
+      propertyId:this.propertyid,
       keySn:this.form.value.keySn,
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
-      // keyDlgtFilePics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
-      propertyKeyInfoEntity:this.data,
     }).then(res => {
       console.log(res);
       if(res.success){
@@ -164,7 +158,6 @@ export class KeyPage {
       }else{
         this.toast.error('修改失败！');
       }
-      // alert('修改成功');
     });
   }
 
