@@ -34,12 +34,25 @@ export class HomePage {
   res=[];
   data:any;
   tests=[];
+  noticeList:any;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
              ) {
     this.localStorageProvider.del('searchMoreData');
+    this.homeProvider.getAllNotice().then(res=>{
+      console.log('获取所有消息',res.data);
+      // operationCode
+      for(var item of res.data ){
+       var  c= item.operationCode;
+        // if(c=='4025'||c=='3030'||c=='3029'||c=='3028'||c=='3027'||c=='3026'||c=='3025'||c=='3011'||c=='3012'||c=='3024'||c=='3031'
+        //   ||c=='3032'||c=='4026'){
+        //
+        // }
+      }
+
+    });
     //获取待办消息接口-
     this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
       this.res=res;
@@ -73,9 +86,6 @@ export class HomePage {
 
         }
     });
-
-
-
   }
 
 

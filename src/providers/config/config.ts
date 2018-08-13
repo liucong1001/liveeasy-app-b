@@ -11,7 +11,7 @@ export class ConfigProvider {
     url:'',
     oss:'',
     http:'',
-    cHttp:'https://c.liveeasy.tech',
+    cHttp:'https://beta-c.zdfc.com/',
     img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
     errorImg:'assets/imgs/http502.png',
   };
@@ -22,8 +22,8 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://erp.liveeasy.tech/api/v1',
-        cHttp:'https://c.liveeasy.tech',
+        http:'http://beta-erp.zdfc.com/',
+        cHttp:'https://beta-c.zdfc.com/',
         img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',
       }

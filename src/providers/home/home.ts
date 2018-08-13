@@ -16,13 +16,14 @@ export class HomeProvider {
     private  declDetailPath =this.configProvider.set().http+ '/order/submitOrderInfo/orderDetailApp';
     //数据统计
     private statisPath=this.configProvider.set().http+'/statistics/statisticsInfo/getList';
-
     //待办消息
     private  msgPath = this.configProvider.set().http+ '/workbench/messageInfo/pageList.do';
+   //首页公告消息
+    private  noticePath = this.configProvider.set().http+ '/workbench/messageInfo/getAllMessage';
+
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
-
 
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
               public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
@@ -96,4 +97,10 @@ export class HomeProvider {
       };
     return this.httpProvider.httpPost(this.msgPath,data);
   }
+
+  //获取首页所有公告消息
+  getAllNotice(){
+    return this.httpProvider.httpGet(this.noticePath);
+  }
+
 }
