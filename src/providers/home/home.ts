@@ -20,7 +20,8 @@ export class HomeProvider {
     private  msgPath = this.configProvider.set().http+ '/workbench/messageInfo/pageList.do';
    //首页公告消息
     private  noticePath = this.configProvider.set().http+ '/workbench/messageInfo/getAllMessage';
-
+    //更新消息已读，未读状态
+    private  updateStatus = this.configProvider.set().http+ '/messageStatusInfo/update';
 
     public headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('token',this.localStorageProvider.get('ticket')) ;
@@ -101,6 +102,14 @@ export class HomeProvider {
   //获取首页所有公告消息
   getAllNotice(){
     return this.httpProvider.httpGet(this.noticePath);
+  }
+  //更新消息阅读状态
+  updateMsg(messageId,status){
+    var data = {
+      messageId:messageId,
+      status:status,
+    };
+    return this.httpProvider.httpPost(this.updateStatus,data);
   }
 
 }
