@@ -216,9 +216,12 @@ export class CheckhousePage {
 
   detail(item){
     console.log( item.operationCode);
+
+    this.homeProvider.updateMsg(item.messageId,item.messageStatusInfoEntity.status);
     if(item.operationCode<5000){
       let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
       profileModal.present();
+      console.log('点击',item);
     }else {
       this.openWin(DeclardetailPage,{
         id:item.objectId,

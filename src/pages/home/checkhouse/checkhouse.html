@@ -11,10 +11,9 @@
         <font size="1">{{ msgPipe(item.operationCode)}}</font>
       </ion-col>
        <ion-col col-12 class="bgWhite p10">
-             <p>{{item.messageContent}}</p>
-             <span (click)="detail(item)"  >查看详情</span>
+             <p>{{item.messageContent}}  <span (click)="detail(item)" >查看</span></p>
              <span>{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-             <span>已读</span>
+             <span>{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</span>
        </ion-col>
   </ion-row>
   <ion-refresher

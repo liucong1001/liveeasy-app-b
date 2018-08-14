@@ -118,7 +118,7 @@
               </font>
             </div>
             <div class="tips" [ngClass]="{uDis:item.tagsStr}" style="margin-top: 2px ">
-              <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5">{{tagName(x)}}</a>
+              <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5"> <span *ngIf="tagName(x)">{{tagName(x)}}</span></a>
             </div>
             <!--<p class="m5 ellipsis" >-->
               <!--<font size="2" color="#aaa">-->

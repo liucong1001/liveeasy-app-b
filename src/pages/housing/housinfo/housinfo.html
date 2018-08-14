@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content  [hidden]="!houseData" id="contents" (ionScroll)="scrollHandler($event)">
+<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
 
