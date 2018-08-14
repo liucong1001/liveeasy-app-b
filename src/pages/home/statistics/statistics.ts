@@ -83,7 +83,12 @@ export class StatisticsPage {
     this.lastDay = (((new Date(date.getFullYear(), date.getMonth() + 1, 0)).toLocaleDateString()).replace('/','0'))
 
     var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
-    this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
+    if((result.replace('/','0')).length >= 9){
+      this.yesterday=(result.replace('/','0')).replace(/\//g,'');
+    }else {
+      this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
+    }
+
     console.log(this.yesterday)
     //前天
     this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
