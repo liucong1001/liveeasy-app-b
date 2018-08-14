@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
+<ion-content  [hidden]="!houseData" id="contents" (ionScroll)="scrollHandler($event)">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
 
@@ -41,27 +41,27 @@
     </h4>
     <ion-grid>
       <ion-row>
-        <ion-col col-4 class="p0" *ngIf="houseData.propertyPrice==0">
+        <ion-col col-4 class="p0" *ngIf="houseData?.propertyPrice==0">
           <p class="abnormal">异常价格</p>
           <div class="houseInfo ellipsis">
-            {{houseData.propertyAuditContentVo.abnormalPrice}}
+            {{houseData?.propertyAuditContentVo.abnormalPrice}}
           </div>
           <div class="middleHouseType"></div>
         </ion-col>
-        <ion-col col-4 class="p0" *ngIf="houseData.propertyPrice!=0">
+        <ion-col col-4 class="p0" *ngIf="houseData?.propertyPrice!=0">
           <p class="tieDefault">总价</p>
           <div class="houseInfo ellipsis">
-            {{houseData.propertyPrice}}
-            {{houseData.propertyPriceUnit==1?'万':'元'}}
+            {{houseData?.propertyPrice}}
+            {{houseData?.propertyPriceUnit==1?'万':'元'}}
            </div>
           <div class="middleHouseType"></div>
         </ion-col>
         <ion-col col-4  class="infoPadding p0">
           <p class="tieDefault">户型</p>
           <div class="houseInfo">
-            {{houseData.bedrooms}}室
-            {{houseData.halls}}厅
-            {{houseData.bathrooms}}卫
+            {{houseData?.bedrooms}}室
+            {{houseData?.halls}}厅
+            {{houseData?.bathrooms}}卫
             <!--{{houseData.kitchens}}厨-->
             <!--{{houseData.balconies}}阳-->
           </div>
@@ -69,7 +69,7 @@
         </ion-col>
         <ion-col col-4 class="infoPadding p0">
           <p class="tieDefault">建筑面积</p>
-          <div class="houseInfo ellipsis">{{houseData.spaceSize}}m²</div>
+          <div class="houseInfo ellipsis">{{houseData?.spaceSize}}m²</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -78,7 +78,7 @@
       <div class="tips">
         <!--[ngClass]="{uDis:item.tagsStr}"-->
         <div class="tips"  >
-          <a *ngFor=" let x of tagPipe(houseData.tagsStr)" class="m5">{{tagName(x)}}</a>
+          <a *ngFor=" let x of tagPipe(houseData?.tagsStr)" class="m5">{{tagName(x)}}</a>
         </div>
       </div>
 
@@ -95,60 +95,60 @@
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            <div *ngIf="houseData.propertyPrice!=0">
+            <div *ngIf="houseData?.propertyPrice!=0">
               <span class="defaults"> 单价：</span>
               <span> {{unitPrice(houseData)}} 元/m²</span>
             </div>
-            <div *ngIf="houseData.propertyPrice==0" class="priceAbnormal">
+            <div *ngIf="houseData?.propertyPrice==0" class="priceAbnormal">
               <span> 异常单价：</span>
-              {{houseData.propertyAuditContentVo.abnormalUnitPrice}}
-              <span *ngIf="houseData.propertyAuditContentVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
+              {{houseData?.propertyAuditContentVo.abnormalUnitPrice}}
+              <span *ngIf="houseData?.propertyAuditContentVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
             </div>
           </ion-col>
           <ion-col col-5>
-           <span class="defaults">  装修：</span>{{ houseInfoPipe(houseData.decoration,decorationJson)}}
+           <span class="defaults">  装修：</span>{{ houseInfoPipe(houseData?.decoration,decorationJson)}}
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            <span class="defaults"> 房屋用途：</span>{{ houseInfoPipe(houseData.buzzType,buzzTypeJson) }}
+            <span class="defaults"> 房屋用途：</span>{{ houseInfoPipe(houseData?.buzzType,buzzTypeJson) }}
           </ion-col>
           <ion-col col-5>
-            <span class="defaults"> 建筑类型：</span> {{ houseInfoPipe(houseData.buildingType,buildingTypeJson) }}
+            <span class="defaults"> 建筑类型：</span> {{ houseInfoPipe(houseData?.buildingType,buildingTypeJson) }}
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7 >
-            <span class="defaults"> 建筑面积：</span>{{houseData.spaceSize}}m²
+            <span class="defaults"> 建筑面积：</span>{{houseData?.spaceSize}}m²
           </ion-col>
           <ion-col col-5>
-            <span class="defaults"> 朝向：</span>{{ orentationPipe(houseData.orientation) }}
+            <span class="defaults"> 朝向：</span>{{ orentationPipe(houseData?.orientation) }}
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            <span class="defaults"> 套内面积：</span>{{houseData.innerSpaceSize}}m²
+            <span class="defaults"> 套内面积：</span>{{houseData?.innerSpaceSize}}m²
           </ion-col>
           <ion-col col-5>
-            <span class="defaults"> 配备电梯：</span>{{houseData.hasElevator==0?'无':'有'}}
+            <span class="defaults"> 配备电梯：</span>{{houseData?.hasElevator==0?'无':'有'}}
           </ion-col>
         </ion-row>
         <ion-row>
         <ion-col col-7>
-          <span class="defaults"> 录入时间：</span>{{houseData.createdTime | date:'yyyy/MM/dd'}}
+          <span class="defaults"> 录入时间：</span>{{houseData?.createdTime | date:'yyyy/MM/dd'}}
         </ion-col>
         <ion-col col-5>
           <span class="defaults"> 归属人：</span>
           <!--{{ floorPipe(houseData.positionInBuilding)}}-->
-          {{houseData.realtorId}}
+          {{houseData?.realtorId}}
         </ion-col>
       </ion-row>
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
-      <div class="p10" *ngIf="houseData.propertyPrice!=0">
+      <div class="p10" *ngIf="houseData?.propertyPrice!=0">
         <button  ion-button color="danger" full (click)="goMore()" disabled>更多信息</button>
       </div>
-      <ion-row  *ngIf="houseData.propertyPrice==0">
+      <ion-row  *ngIf="houseData?.propertyPrice==0">
         <ion-col col-6>
           <button ion-button class="priAudit" full (click)="goAudit()">价格审核</button>
         </ion-col>
@@ -158,14 +158,14 @@
       </ion-row>
     </div>
   </div>
-  <div class="m10 bgWhite describe" *ngIf="houseData.propertyDesc">
-    <button ion-item class="clear" tappable (click)="describes()" *ngIf="houseData.propertyDesc.length>70">房源描述</button>
-    <div style="padding: 10px 0;font-size: 1.5rem;" *ngIf="houseData.propertyDesc.length<70">房源描述</div>
-    <div *ngIf="houseData.propertyDesc.length<70" class="descCSS">
+  <div class="m10 bgWhite describe" *ngIf="houseData?.propertyDesc">
+    <button ion-item class="clear" tappable (click)="describes()" *ngIf="houseData?.propertyDesc.length>70">房源描述</button>
+    <div style="padding: 10px 0;font-size: 1.5rem;" *ngIf="houseData?.propertyDesc.length<70">房源描述</div>
+    <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS">
       {{houseData.propertyDesc}}
     </div>
-    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70">
-      {{houseData.propertyDesc}}
+    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70">
+      {{houseData?.propertyDesc}}
     </div>
   </div>
 

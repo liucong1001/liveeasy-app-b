@@ -9,6 +9,9 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {HomeProvider} from "../../../providers/home/home";
 import {HousinfoPage} from "../../housing/housinfo/housinfo";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {DeclardetailPage} from "../declaration/declardetail/declardetail";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -33,14 +36,17 @@ export class CheckhousePage {
   code: any;
   res: any;
   @ViewChild('navbar') navBar: Navbar;
-
+  localCode:any;
+  msgJson:any;
+  pageResult:any;
   constructor(public navCtrl: NavController,
               public statusBar: StatusBar, public homeProvider: HomeProvider, public modalCtrl: ModalController,
-              public nativePageTransitions: NativePageTransitions, public navParams: NavParams, private customerProvider: CustomerProvider,
-              public propertyProvider: PropertyProvider, public toast: ToastComponent,) {
-    this.val = navParams.get('val')
-    this.code = navParams.get('item').code;
-    this.res = navParams.get('res');
+              public nativePageTransitions: NativePageTransitions, public navParams: NavParams,
+              private customerProvider: CustomerProvider,
+              public propertyProvider: PropertyProvider, public toast: ToastComponent,
+              public localStorageProvider: LocalStorageProvider) {
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.msgJson = new ArryCodeValuePipe().transform(this.localCode,'operate_code');
   }
 
   ionViewDidLoad() {
@@ -56,6 +62,22 @@ export class CheckhousePage {
     this.statusBar.styleLightContent();
   }
 
+  /**
+   *  消息公告-类型转换
+   * @param data
+   * @returns {any}
+   */
+  msgPipe(data){
+      if(data){
+        for(var item of this.msgJson){
+          if(data==item.val){
+            return item.name;
+          }
+        }
+      }
+  }
+
+
   navbar = true;
 
   ionViewWillUnload() {
@@ -67,43 +89,11 @@ export class CheckhousePage {
   close = [];
 
   search() {
-    this.pageData = null;
-    this.hasData = true;
-    // this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
-    this.pageData = this.res.data.result;
-    this.totalPages = this.res.data.totalPages;
-    if (this.res.data.hasOwnProperty('result')) {
-      for (var i in this.res.data.result) {
-        if (this.res.data.result[i].operationCode == '3033') {
-          //关闭房源审核
-          this.check.push(this.res.data.result[i]);
-        }
-        if (this.res.data.result[i].operationCode == '3030') {
-          //房源调整
-          this.adjust.push(this.res.data.result[i])
-        }
-        if (this.res.data.result[i].operationCode == '3005') {
-          this.close.push(this.res.data.result[i])
-        }
-      }
-      // console.log(this.check,this.close,this.adjust)
-      if (this.check.length == 0) {
-        if (this.val == 1) {
-          this.hasData = false;
-        }
-      } else if (this.adjust.length == 0) {
-        if (this.val == 2) {
-          this.hasData = false;
-        }
-      } else if (this.close.length == 0) {
-        if (this.val == 3) {
-          this.hasData = false;
-        }
-      }
-    } else {
-      this.hasData = false;
-    }
-    // });
+    this.homeProvider.msgs(1).then(res =>{
+      this.res=res;
+      this.pageData = res.data.result;
+      console.log(res);
+    });
   }
 
   //条数
@@ -115,18 +105,24 @@ export class CheckhousePage {
     setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
-      if (this.currentPage >= this.totalPages) {
+      if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
         infiniteScroll.enable(false);
         //toast提示
         this.all = true;
       } else {
         this.all = false;
-        // this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
-        for (let i = 0; i < this.res.data.result.length; i++) {
-          this.pageData.push(this.res.data.result[i]);
-        }
-        // });
+        this.homeProvider.msgs(this.currentPage).then(res=>{
+          this.pageResult =res.data&&res.data.result;
+          if(res.data&&res.data.result){
+            for (let i = 0; i < res.data.result.length; i++) {
+              this.pageData.push(res.data.result[i]);
+            }
+          }else {
+            infiniteScroll.enable(false);
+            this.all = true;
+          }
+        });
 
       }
 
@@ -150,7 +146,6 @@ export class CheckhousePage {
 
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
-
     // this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
     console.log('结束时间内容', this.res.data.totalRecords);
 
@@ -218,10 +213,18 @@ export class CheckhousePage {
     return count;
   }
 
-  go(item) {
-    let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
-    profileModal.present();
-}
+
+  detail(item){
+    console.log( item.operationCode);
+    if(item.operationCode<5000){
+      let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
+      profileModal.present();
+    }else {
+      this.openWin(DeclardetailPage,{
+        id:item.objectId,
+      });
+    }
+  }
 
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
@@ -236,7 +239,7 @@ export class CheckhousePage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
-  }
+  };
 
 //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

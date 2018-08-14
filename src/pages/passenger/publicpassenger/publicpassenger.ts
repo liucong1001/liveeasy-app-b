@@ -53,32 +53,25 @@ export class PublicpassengerPage {
               public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
               public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,
               public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,) {
-    // this.customerProvider.area().then(res=>{
-    //   this.area = res.data.distrs;
-    //   if(this.area){
-    //     this.area.unshift({name:'不限',id:'99'});
-    //   }
-    // });
+
     this.customerProvider.tradingArea().then(res=>{
       this.tradingArea = res;
     });
     if(!this.localStorageProvider.get('area')){
       //行政区划
       this.propertyProvider.getDivision().then(res=>{
-        console.log('行政区划',res);
         this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
-        this.area.unshift({name:'不限',id:'99',code:'99'});
+        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
       });
     }else {
       this.area = this.localStorageProvider.get('area');
-      this.area.unshift({name:'不限',id:'99',code:'99'});
+      this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChoosehousePage');
     this.search();
     this.navBar.backButtonClick = this.backButtonClick;
   }
@@ -107,8 +100,6 @@ export class PublicpassengerPage {
       this.search();
     }
 
-
-    console.log('查询商圈',item);
     this.searchDict = item.name;
     this.selected = item;//激活css选中状态
     //用code值匹配相应商圈

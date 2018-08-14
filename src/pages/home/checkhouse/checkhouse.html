@@ -1,11 +1,22 @@
 <ion-header >
   <ion-navbar #navbar color="first" >
-    <ion-title *ngIf="val==1">关闭房源审核</ion-title>
-    <ion-title *ngIf="val==2">房源调整</ion-title>
-    <ion-title *ngIf="val==3">房源下架</ion-title>
+    <ion-title >消息公告</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
+
+
+  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
+      <ion-col col-12 >
+        <font size="1">{{ msgPipe(item.operationCode)}}</font>
+      </ion-col>
+       <ion-col col-12 class="bgWhite p10">
+             <p>{{item.messageContent}}</p>
+             <span (click)="detail(item)"  >查看详情</span>
+             <span>{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
+             <span>已读</span>
+       </ion-col>
+  </ion-row>
   <ion-refresher
     [pullMax]="480"
     [pullMin]="180"

@@ -20,7 +20,7 @@ import {StatisticsPageModule} from "./statistics/statistics.module";
     DeclarationPageModule,
     CheckhousePageModule,
     HomesearchPageModule,
-    StatisticsPageModule
+    StatisticsPageModule,
   ],
 })
 export class HomePageModule {}

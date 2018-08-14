@@ -6,9 +6,11 @@ import {PropertyProvider} from "../../../providers/property/property";
 import {DeclardetailPage} from "./declardetail/declardetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 
 /**
- * Generated class for the MypassengerPage page.
+ * 报单列表
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -37,12 +39,16 @@ export class DeclarationPage {
   params:CustomerPageParams = {
     // orderStatus:'5' //居室
   };
+  localCode:any;
   @ViewChild(Navbar) navBar: Navbar;
+  stateJSON:any;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,public statusBar: StatusBar,
               private customerProvider:CustomerProvider,private homeProvider:HomeProvider,
-              public propertyProvider: PropertyProvider) {
+              public propertyProvider: PropertyProvider,public localStorageProvider: LocalStorageProvider) {
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.stateJSON = new ArryCodeValuePipe().transform(this.localCode,'order_status');
   }
 
   ionViewDidLoad() {
@@ -125,24 +131,13 @@ export class DeclarationPage {
   //   this.search();
   // }
 
-  stateJSON = [
-    {name:'权证待审核',val:1},
-    {name:'权证审核不通过',val:2},
-    {name:'权证审核通过',val:3},
-    {name:'风控审核不通过',val:4},
-    {name:'报单完成',val:5},
-    {name:'报单作废',val:6},
-    {name:'报单取消',val:7},
-  ];
-
 
   timerJson = [
     {name:'今日未跟进',val:1},
     {name:'超过三日未跟进',val:2},
     {name:'今日有约看',val:3},
     {name:'三日内有约看',val:4},
-
-  ]
+  ];
 
   //报单状态
   housePipe(data){
@@ -249,7 +244,6 @@ export class DeclarationPage {
   declarationDetail(item){
     this.openWin(DeclardetailPage,{
       item:item,
-      json:this.stateJSON,
     })
   }
 

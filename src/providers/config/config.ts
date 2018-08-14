@@ -22,7 +22,7 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'http://beta-erp.zdfc.com/',
+        http:'https://beta-erp.zdfc.com/api/v1/',
         cHttp:'https://beta-c.zdfc.com/',
         img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',

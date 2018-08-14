@@ -49,26 +49,17 @@
          <span class="defaults">暂无数据</span>
       </div>
     </ion-item>
-    <ion-item tappable  *ngFor="let i of houseJSON" (click)="checkhouse(i)">
-      <ion-thumbnail item-start>
-        <div class="leftImg">
-          <ion-icon name="{{i.icon}}" class="uFont"></ion-icon>
-        </div>
-      </ion-thumbnail>
-      <ion-row>
-        <ion-col col-6 class="plr">
-          <h2>{{i.name}}</h2>
-        </ion-col>
-      </ion-row>
-      <p class="ellipsis">
-        <span *ngIf="i.code==3033 &&this.check.length!=0">您有消息待处理</span>
-        <span *ngIf="i.code==3030 &&this.adjust.length!=0">您有消息待处理</span>
-        <span *ngIf="i.code==3005 &&this.close.length!=0">您有消息待处理</span>
-        <span *ngIf="i.code==3033 &&this.check.length==0">暂无数据</span>
-        <span *ngIf="i.code==3030 &&this.adjust.length==0">暂无数据</span>
-        <span *ngIf="i.code==3005 &&this.close.length==0">暂无数据</span>
-      </p>
+    <ion-item tappable (click)="goNotice()">
+       <ion-thumbnail item-start>
+         <div class="leftImg">
+           <ion-icon name="notice1" class="uFont"></ion-icon>
+         </div>
+        </ion-thumbnail>
+         <ion-row>
+            <ion-col col-6 class="plr">
+              <h2>消息公告</h2>
+             </ion-col>
+          </ion-row>
     </ion-item>
-
   </ion-list>
 </ion-content>

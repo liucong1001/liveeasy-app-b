@@ -123,11 +123,11 @@ export class HousinfoPage {
     this.propertyProvider.getPropertyDetail(this.navParams.get('propertyId')).then(res=>{
       this.houseData=res.data.result[0];
       //实勘图
-       this.imgJson = this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
+       this.imgJson = this.houseData&&this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
       //钥匙信息
-      this.keyData = this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
+      this.keyData = this.houseData&&this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
       // 业主委托书
-      this.letteratorneyData =this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
+      this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
     });
 
 

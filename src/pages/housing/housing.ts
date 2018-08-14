@@ -148,11 +148,11 @@ export class HousingPage {
       this.propertyProvider.getDivision().then(res=>{
         this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
-        this.area.unshift({name:'不限',id:'99',code:'99'});
+        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
       });
     }else {
       this.area = this.localStorageProvider.get('area');
-      this.area.unshift({name:'不限',id:'99',code:'99'});
+      this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
   }
 
@@ -594,7 +594,6 @@ export class HousingPage {
 
   }
 
-//todo 不用thumbnail  用imgpath拼接出来
   pic(data) {
     if (data) {
       return JSON.parse(data)[0].imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110'
