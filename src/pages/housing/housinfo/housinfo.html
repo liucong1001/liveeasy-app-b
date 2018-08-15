@@ -13,15 +13,14 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 
 <ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
-
   <ion-slides #mySlider  style="" autoplay="3000" pager="true" loop="true" paginationType="fraction">
-
     <ion-slide *ngIf="!imgJson">
       <img src="assets/imgs/banner.png" width="100%">
     </ion-slide>
@@ -32,7 +31,7 @@
       </ion-slide>
     </ng-container>
   </ion-slides>
-
+  <!--<div class="bannerPop"></div>-->
   <div class="wrap bgWhite">
     <h4 >
       {{houseData.estateName}}
@@ -180,12 +179,16 @@
         <p >起始时间：{{letteratorneyData.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
       </ion-col>
 
-      <div class=" bgWhite" *ngFor="let item of letteratorneyData.delegateDocPics">
-        <p>{{item.desc}}</p>
-        <div class="m10">
-          <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:letteratorneyData.delegateDocPics,index:i}"  class="img_upload">
-        </div>
-      </div>
+      <!--<div class=" bgWhite" *ngFor="let item of letteratorneyData.delegateDocPics">-->
+        <!--<p>{{item.desc}}</p>-->
+        <!--<div class="m10">-->
+          <!--<img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:letteratorneyData.delegateDocPics,index:i}"  class="img_upload">-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <ion-col class="mt5" col-4 *ngFor="let item of letteratorneyData.delegateDocPics">
+        <img [src]="imgHeader+item.thumbnail" alt="" width="100%" height="80"  [imgGallery]="{data:letteratorneyData.delegateDocPics,index:i}">
+      </ion-col>
 
     </ion-row>
   </div>
@@ -196,12 +199,8 @@
         <p>钥匙编号：{{keyData.keysn}}</p>
         <p class="m5">钥匙存储地址：{{keyData.keyAddress}}</p>
       </ion-col>
-      <ion-col col-4>
-        <div class=" bgWhite" *ngFor="let item of keyData.keyDlgtFilePics;let i =index">
-          <div class="m10">
-            <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:keyData.keyDlgtFilePics,index:i}"   class="img_upload">
-          </div>
-        </div>
+      <ion-col class="mt5" col-4 *ngFor="let item of keyData.keyDlgtFilePics;let i =index">
+        <img [src]="imgHeader+item.thumbnail" alt="" width="100%" height="80"  [imgGallery]="{data:keyData.keyDlgtFilePics,index:i}"   class="">
       </ion-col>
     </ion-row>
   </div>
