@@ -1,20 +1,19 @@
-<ion-header >
-  <ion-navbar #navbar color="first" >
-    <ion-title >消息公告</ion-title>
+<ion-header>
+  <ion-navbar #navbar color="first">
+    <ion-title>房源消息</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
 
-
+<ion-content padding>
   <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
-      <ion-col col-12 >
-        <font size="1">{{ msgPipe(item.operationCode)}}</font>
-      </ion-col>
-       <ion-col col-12 class="bgWhite p10">
-             <p>{{item.messageContent}}  <span (click)="detail(item)" >查看</span></p>
-             <span>{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-             <span>{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</span>
-       </ion-col>
+    <ion-col col-12 >
+      <font size="1">{{ msgPipe(item.operationCode)}}</font>
+    </ion-col>
+    <ion-col col-12 class="bgWhite p10">
+      <p>{{item.messageContent}}  <span (click)="detail(item)" >查看</span></p>
+      <span>{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
+      <span>{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</span>
+    </ion-col>
   </ion-row>
   <ion-refresher
     [pullMax]="480"
@@ -30,26 +29,26 @@
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
   <div>
-      <ion-list  *ngIf="val==1">
-        <button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">
-         {{item.messageContent}}
-          <!--<span class="readTips">未读</span>-->
-        </button>
-      </ion-list>
+    <ion-list  *ngIf="val==1">
+      <button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">
+        {{item.messageContent}}
+        <!--<span class="readTips">未读</span>-->
+      </button>
+    </ion-list>
 
-      <ion-list *ngIf="val==2">
-        <button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >
-          {{item.messageContent}}
-          <!--<span class="readTips">未读</span>-->
-        </button>
-      </ion-list>
+    <ion-list *ngIf="val==2">
+      <button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >
+        {{item.messageContent}}
+        <!--<span class="readTips">未读</span>-->
+      </button>
+    </ion-list>
 
-      <ion-list *ngIf="val==3">
-        <button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">
-          {{item.messageContent}}
-          <!--<span class="readTips">未读</span>-->
-        </button>
-      </ion-list>
+    <ion-list *ngIf="val==3">
+      <button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">
+        {{item.messageContent}}
+        <!--<span class="readTips">未读</span>-->
+      </button>
+    </ion-list>
 
 
     <div class="content_page" style="margin-top: 20px">
@@ -73,5 +72,7 @@
     </div>
   </div>
 </ion-content>
+
+
 
 

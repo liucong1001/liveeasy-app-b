@@ -1,14 +1,16 @@
-page-msgdetail ion-row ion-col:first-child font{
-
-background:#DEDEDE;
-padding:5px 10px;
-color: #fff;
-border-radius: 3px;
-}
-page-msgdetail ion-row ion-col:last-child{
+page-msgdetail {
+  ion-row ion-col:last-child{
     margin: 10px 0;
-}
-page-msgdetail ion-row ion-col:last-child h3{
+  }
+  ion-row ion-col:first-child font{
+    background:#DEDEDE;
+    padding:5px 10px;
+    color: #fff;
+    border-radius: 3px;
+  }
+  ion-row ion-col:last-child h3{
     border-bottom: 1px solid #eee;
     padding:6px 0 10px;
+  }
+
 }

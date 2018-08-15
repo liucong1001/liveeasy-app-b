@@ -154,10 +154,8 @@ export class HousingPage {
       this.area = this.localStorageProvider.get('area');
       this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
+
   }
-
-
-
 
   isActive(item) {
     return this.selected === item;
@@ -454,7 +452,7 @@ export class HousingPage {
     // this.openWin(HousinfoPage, {
     //   propertyId:item.propertyId,
     // });
-    this.openWin(HousinfoPage,{item:item,propertyId:item.propertyId,notReloadPage:true})
+    this.navCtrl.push(HousinfoPage,{item:item,propertyId:item.propertyId,notReloadPage:true})
   }
 
   addHouse() {
@@ -605,6 +603,7 @@ export class HousingPage {
     if (data) {
       return data.split(",");
     }
+    console.log(data);
   }
 
   //房源标签code转换为name
@@ -819,6 +818,8 @@ export class HousingPage {
     }
     this.search('propQuery');
   }
+
+
 
 }
 

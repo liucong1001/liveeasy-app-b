@@ -1,5 +1,15 @@
 //------------
 page-housing {
+
+.housList{
+  .item-ios.item-block .item-inner{
+    padding-bottom: 10px;
+  }
+ .item-block:last-child, .item-wrapper:last-child .item-block{
+    border: 0;
+  }
+}
+
 .showTips a{
   margin: 10px 3px 10px 10px;
 }

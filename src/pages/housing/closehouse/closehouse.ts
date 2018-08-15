@@ -167,16 +167,16 @@ export class ClosehousePage {
     })
   }
   //禁用调出键盘
-  ionViewDidEnter(){
-    let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-    this.renderer.setElementAttribute(input, 'disabled', 'true');
-
-    this.navBar.backButtonClick = () => {
-      // this.navCtrl.push(HomesearchPage);
-      this.navCtrl.popToRoot();
-    };
-
-  }
+  // ionViewDidEnter(){
+  //   let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
+  //   this.renderer.setElementAttribute(input, 'disabled', 'true');
+  //
+  //   this.navBar.backButtonClick = () => {
+  //     // this.navCtrl.push(HomesearchPage);
+  //     this.navCtrl.popToRoot();
+  //   };
+  //
+  // }
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

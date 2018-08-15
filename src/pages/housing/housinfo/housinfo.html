@@ -78,7 +78,9 @@
       <div class="tips">
         <!--[ngClass]="{uDis:item.tagsStr}"-->
         <div class="tips"  >
-          <a *ngFor=" let x of tagPipe(houseData?.tagsStr)" class="m5">{{tagName(x)}}</a>
+          <a *ngFor=" let x of tagPipe(houseData?.tagsStr)" class="m5"
+
+             [ngClass]="{shen:tagName(x)=='审',shen:tagName(x)=='审',kzks:tagName(x)=='可租可售',bxg:tagName(x)=='不限购',yzjs:tagName(x)=='业主急售',myys:tagName(x)=='免营业税',mwwy:tagName(x)=='满五唯一',dhy:tagName(x)=='带花园',yao:tagName(x)=='钥',wei:tagName(x)=='委',kan:tagName(x)=='勘',tie:tagName(x)=='铁'}">{{tagName(x)}}</a>
         </div>
       </div>
 
@@ -178,7 +180,7 @@
         <p >起始时间：{{letteratorneyData.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
       </ion-col>
 
-      <div class="attorneyPic bgWhite" *ngFor="let item of letteratorneyData.delegateDocPics">
+      <div class=" bgWhite" *ngFor="let item of letteratorneyData.delegateDocPics">
         <p>{{item.desc}}</p>
         <div class="m10">
           <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:letteratorneyData.delegateDocPics,index:i}"  class="img_upload">
@@ -194,11 +196,13 @@
         <p>钥匙编号：{{keyData.keysn}}</p>
         <p class="m5">钥匙存储地址：{{keyData.keyAddress}}</p>
       </ion-col>
-      <div class="attorneyPic bgWhite" *ngFor="let item of keyData.keyDlgtFilePics;let i =index">
-        <div class="m10">
-          <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:keyData.keyDlgtFilePics,index:i}"   class="img_upload">
+      <ion-col col-4>
+        <div class=" bgWhite" *ngFor="let item of keyData.keyDlgtFilePics;let i =index">
+          <div class="m10">
+            <img [src]="imgHeader+item.thumbnail" alt=""  [imgGallery]="{data:keyData.keyDlgtFilePics,index:i}"   class="img_upload">
+          </div>
         </div>
-      </div>
+      </ion-col>
     </ion-row>
   </div>
   <ion-list class="m10">

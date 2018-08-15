@@ -194,49 +194,49 @@
     //font-weight: bolder;
     font-size: 1.3rem;
     padding: 0 3px;
-    margin-right: 6px
-  }
-  a:first-child {
-    background-color: #66ccff;
+    margin-right: 6px;
     color: #fff;
-  }
-  a:nth-child(2) {
-    background-color: #f6b37f;
-    color: #fff;
-  }
-  a:nth-child(3) {
-    background-color: #f19ec2;
-    color: #fff;
-  }
-  a:nth-child(4) {
-    background-color: #6699cc;
-    color: #fff;
-  }
-  a:nth-child(5) {
-    background-color: #9999cc;
-    color: #fff;
-  }
-  a:nth-child(6) {
-    background-color: #FF8888;
-    color: #fff;
-  }
-  a:nth-child(7) {
-    background-color: #a6937c;
-    color: #fff;
-  }
-  a:nth-child(8) {
-    background: #feffcc;
-    color: #fec500;
-  }
-  a:nth-child(9) {
-    background: #ffe1e1;
-    color: #e08989;
-  }
-  a:nth-child(10) {
-    background: #f0f0da;
-    color: #d3ba64;
   }
 
+
+  .shen{
+    background-color: #ed5565;
+  }
+  .tie{
+    background-color: #f8ac59;
+  }
+  .kzks{
+    background-color: #66ccff;
+  }
+  .bxg{
+    background-color: #f6b37f;
+
+  }
+  .yzjs{
+    background-color: #f19ec2;
+
+  }
+  .myys{
+    background-color: #9999cc;
+
+  }
+  .mwwy{
+    background-color: #FF8888;
+
+  }
+  .dhy{
+    background-color: #c490bf;
+  }
+  .yao{
+    background-color: #cfa972;
+
+  }
+  .wei{
+    background-color: #1ab394;
+  }
+  .kan{
+    background-color: #1c84c6;
+  }
 }
 //筛选选中样式
 .color{
@@ -297,3 +297,4 @@ textarea{
 .update.activated{
   background: #1ab394 !important;
 }
+
