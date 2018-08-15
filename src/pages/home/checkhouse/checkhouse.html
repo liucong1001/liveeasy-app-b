@@ -1,18 +1,16 @@
 <ion-header>
   <ion-navbar #navbar color="first">
-    <ion-title>房源消息</ion-title>
+    <ion-title>消息通知</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">
-    <ion-col col-12 >
-      <font size="1">{{ msgPipe(item.operationCode)}}</font>
-    </ion-col>
+  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;" (click)="detail(item)">
     <ion-col col-12 class="bgWhite p10">
-      <p>{{item.messageContent}}  <span (click)="detail(item)" >查看</span></p>
-      <span>{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-      <span>{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</span>
+      <h6 style="margin-top: 8px">{{ msgPipe(item.operationCode)}}</h6>
+      <p class="m10 ellipsis" style="padding-right: 46px">{{item.messageContent}}</p>
+      <div class="defaults ">{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</div>
+      <div  class="read">{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</div>
     </ion-col>
   </ion-row>
   <ion-refresher
