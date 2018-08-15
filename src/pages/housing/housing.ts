@@ -709,7 +709,8 @@ export class HousingPage {
       console.log('接收数据为: ', params);
         if(!params){
           this.floorName = '';
-          this.params.estate = '';
+          // this.params.estate = '';
+          delete   this.params.estate
         }else {
           this.floorName = params.keyword;
           this.params.estate = params.id;
