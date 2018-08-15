@@ -22,7 +22,7 @@
         </ion-input>
       </ion-item>
       <div class="attorneyPic bgWhite" >
-        <span>钥匙委托协议</span> <span class="text-danger" *ngIf="data?.auditStatus!=3&&imgJson">(*只能上传一张照片)</span>
+        <span>钥匙委托协议</span> <span class="text-danger" *ngIf="data?.auditStatus!=3">(*只能上传一张照片)</span>
         <upload *ngIf="data?.auditStatus!=3&&imgJson" [useDir]="useDir"  [src]="imgJson" [desc]="''" [position]="''"
                  (successEvent)="yaoChi($event)"></upload>
         <ng-container *ngIf="data?.auditStatus==3">
@@ -46,7 +46,7 @@
     <img-list [imgJson]="form.value.keyDlgtFilePics"></img-list>
     <ion-grid [hidden]="data?.auditStatus==3">
       <ion-row class="p15">
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid&&maxImagesCount" (click)="goYc()"  *ngIf="!keyData">提交</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount" (click)="goYc()"  *ngIf="!keyData">提交</button>
         <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="updateYc()" *ngIf="keyData">修改钥匙</button>
       </ion-row>
     </ion-grid>

@@ -79,10 +79,9 @@ export class KeyPage {
             });
             this.imgJson=this.keyData.keyDlgtFilePics;
             console.log('图片',this.imgJson);
-
-      //   this.keyData = res.data.content;
-      // this.keyData = JSON.parse(this.keyData);
-     }
+     }else {
+        this.imgJson= [];
+      }
     });
 
   }

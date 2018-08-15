@@ -207,7 +207,7 @@
     <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
         <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
+        <ion-select okText="确定"  [disabled]="true" formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type' | reversePipe:'val'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>

@@ -43,7 +43,7 @@ export class PropertyProvider {
    * https://c.liveeasy.tech 接口
    * @type {string}
    */
-  public   propertyApi='/property/api/v1/query';
+  public   propertyApi='property/api/v1/query';
   private  basePath = this.configProvider.set().cHttp+this.propertyApi;
   private  tagsListPath = this.basePath+'?qId=dict&dictType=property_tag_desc';
   private  getDictCodePath=this.basePath+'?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type,loan_type,mny_deliver_type,customer_grade,cms_src,operate_code,order_status';
