@@ -155,7 +155,7 @@ export class MorePage {
   }
 
   initTags(item,attr,arryAttr){
-    // console.log('赋值赋值！！',this.searchMoreData[arryAttr]);
+   // console.log('赋值赋值！！',this.searchMoreData[arryAttr]);
     if(this.searchMoreData[arryAttr].length>1){
       //初始化选中状态
       this.searchMoreData[arryAttr] = this.searchMoreData[arryAttr];
@@ -172,11 +172,12 @@ export class MorePage {
     }
 
     if(this.searchMoreData[arryAttr].length==1){
+       // console.log('赋值赋值！！',this.searchMoreData[arryAttr]);
       if(item[attr] == this.searchMoreData[arryAttr][0] ){
-        return true
+        item.active = true;
+        return item.active;
       }
     }
-
   }
 
   isActiveBase(item,val,sumAttr,selected){
@@ -253,7 +254,7 @@ export class MorePage {
     for(var i in this.searchMoreData[attrNameArry]){
       this.searchMoreData[attrName]+= parseInt(this.searchMoreData[attrNameArry][i]) ;
     }
-    //  console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
+     console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
   }
 
 

@@ -9,7 +9,7 @@
     <h4>房源标签</h4>
     <!-- initTags(item,'tagCode','tagsArry')  ||isActiveBase(item,'val','tags',selected)-->
     <a *ngFor="let item of tagsList | reversePipe:'val' ;let index = index  ;"
-       [ngClass]="{'active': item.active||initTags(item,'val','tagsArry') }"
+       [ngClass]="{'active': item.active||initTags(item,'val','tagsArry')}"
        tappable (click)="choseMultIple(item,'tags','tagsArry','tagsList')" >{{item.name}}</a>
   </div>
   <div class="outer">
