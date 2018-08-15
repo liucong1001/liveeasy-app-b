@@ -48,10 +48,10 @@ export class LetteratorneyPage {
     this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
-
-      this.data= res.data;
-      this.content = JSON.parse(res.data.content) ;
       if(res.success){
+        this.data= res.data;
+        this.content = JSON.parse(res.data.content) ;
+
         this.data = res.data;
         this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({

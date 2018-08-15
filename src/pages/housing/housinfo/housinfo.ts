@@ -113,13 +113,18 @@ export class HousinfoPage {
 
   }
   ionViewDidLoad() {
+
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+    loading.present();
+
     this.imgHeader = this.configProvider.set().img;
     setInterval(()=>{
       this.slider.slideNext(300,true);
     },2000);
-
-    console.log('ionViewDidLoad HousinfoPage');
     this.propertyId = this.navParams.get('propertyId');
+
     this.propertyProvider.getPropertyDetail(this.navParams.get('propertyId')).then(res=>{
       this.houseData=res.data.result[0];
       //实勘图
@@ -128,6 +133,7 @@ export class HousinfoPage {
       this.keyData = this.houseData&&this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
       // 业主委托书
       this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
+      loading.dismiss();
     });
 
 
@@ -188,10 +194,6 @@ export class HousinfoPage {
       }
     };
 
-    // this.offlineOpts = {
-    //   retryInterval: 5000,
-    //   txt: '没有网络'
-    // };
   }
 
 

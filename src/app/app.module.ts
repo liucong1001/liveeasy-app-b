@@ -70,7 +70,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { PermissionProvider } from '../providers/permission/permission';
 import {BaiduMapModule } from "angular2-baidu-map";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
-
+import { JPush } from 'ionic3-jpush';
 
 @NgModule({
   declarations: [
@@ -148,6 +148,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
       },
       PermissionProvider,
       AndroidPermissions,
+      JPush,
     ]
 })
 export class AppModule {}

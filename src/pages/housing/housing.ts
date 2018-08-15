@@ -259,7 +259,7 @@ export class HousingPage {
            for (let i = 0; i < res.data.result.length; i ++) {
              setTimeout(()=> this.pageData.push(res.data.result[i]),150 * i);
            }
-         }else  {
+         }else {
            console.log('没有数据!');
            this.hasData = false;
          }
@@ -472,7 +472,7 @@ export class HousingPage {
       // alert(2);
       refresher.pullingText='松开推荐'
     }
-    this.propertyProvider.pageSearch(1,this.params,'properties').then(res=>{
+    this.propertyProvider.pageSearch(1,this.params,'propQuery').then(res=>{
       this.totalRecords = res.data.totalRecords;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
@@ -596,7 +596,7 @@ export class HousingPage {
 
   pic(data) {
     if (data) {
-      return JSON.parse(data)[0].imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110'
+    return JSON.parse(data).imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110'
     }
   }
 

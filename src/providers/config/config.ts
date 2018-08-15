@@ -12,7 +12,7 @@ export class ConfigProvider {
     oss:'',
     http:'',
     cHttp:'https://beta-c.zdfc.com/',
-    img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
+    img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
     errorImg:'assets/imgs/http502.png',
   };
   constructor(public http: HttpClient) {
@@ -24,7 +24,7 @@ export class ConfigProvider {
         oss:'',
         http:'https://beta-erp.zdfc.com/api/v1/',
         cHttp:'https://beta-c.zdfc.com/',
-        img:'https://liveeasydev.oss-cn-shenzhen.aliyuncs.com/',
+        img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',
       }
     }

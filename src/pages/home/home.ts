@@ -15,6 +15,8 @@ import {TabsPage}from "./../tabs/tabs";
 import {StatisticsPage} from "./statistics/statistics";
 import {PropertyProvider} from "../../providers/property/property";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
+import { JPush } from 'ionic3-jpush';
+import { Device } from '@ionic-native/device';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -34,44 +36,32 @@ export class HomePage {
   res=[];
   data:any;
   tests=[];
-  noticeList:any;
+  noticeList = [];
+
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
+              public jPush: JPush, device: Device
              ) {
     this.localStorageProvider.del('searchMoreData');
-    this.homeProvider.getAllNotice().then(res=>{
-      console.log('获取所有消息',res.data);
-      // operationCode
-      for(var item of res.data ){
-       var  c= item.operationCode;
-        // if(c=='4025'||c=='3030'||c=='3029'||c=='3028'||c=='3027'||c=='3026'||c=='3025'||c=='3011'||c=='3012'||c=='3024'||c=='3031'
-        //   ||c=='3032'||c=='4026'){
-        //
-        // }
-      }
-
-    });
+    // this.homeProvider.getAllNotice().then(res=>{
+    //   console.log('获取所有消息',res.data);
+    //   // operationCode
+    //   // for(var item of res.data ){
+    //   //  var  c= item.operationCode;
+    //   //   if(c=='4025'||c=='3030'||c=='3029'||c=='3028'||c=='3027'||c=='3026'||c=='3025'||c=='3011'||c=='3012'||c=='3024'||c=='3031'
+    //   //     ||c=='3032'||c=='4026'){
+    //   //     this.noticeList[0].name='房源调整';
+    //   //     this.noticeList[0].data.push(c);
+    //   //   }else if(c=='2001'||c=='2002'||c=='2003'||c=='2004'||c=='2005'){
+    //   //     this.noticeList[1].name='管理员通知';
+    //   //     this.noticeList[1].data.push(c);
+    //   //   }
+    //   // }
+    //   // console.log('重构后',this.noticeList);
+    // });
     //获取待办消息接口-
-    this.homeProvider.msgs(1,{operationCode:''}).then(res =>{
-      this.res=res;
-      this.data=res.data.result;
-      console.log(res);
-      for(var i in res.data.result){
-        if(res.data.result[i].operationCode == '3033'){
-          //关闭房源审核
-          this.check.push(res.data.result[i]);
-        }
-        if(res.data.result[i].operationCode == '3030'){
-          //房源调整
-          this.adjust.push(res.data.result[i])
-        }
-        if(res.data.result[i].operationCode == '3005'){
-          this.close.push(res.data.result[i])
-        }
-      }
-    });
     this.propertyProvider.getCode().then(res=>{
         if(res.success){
            this.localStorageProvider.set('codeData', res.data.result);
@@ -86,7 +76,14 @@ export class HomePage {
 
         }
     });
+
   }
+
+
+
+
+
+
 
 
 
@@ -149,6 +146,10 @@ export class HomePage {
 
   gohomeSource(){
     this.navCtrl.parent.select(1);
+  }
+
+  goNotice(){
+    this.openWin(CheckhousePage,);
   }
 
 //------跳转页面过渡--------//

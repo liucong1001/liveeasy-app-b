@@ -13,6 +13,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import { Keyboard } from '@ionic-native/keyboard';
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {LoginPage} from "../pages/login/login";
+import { JPush } from 'ionic3-jpush';
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,7 +35,7 @@ export class MyApp {
               public keybord: Keyboard,
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
-              private androidPermissions: AndroidPermissions
+              private androidPermissions: AndroidPermissions,public jPush: JPush,
               ) {
       if(!this.localStorageProvider.get('ticket')){
           this.rootPage = LoginPage;
@@ -68,6 +69,7 @@ export class MyApp {
       this.registerBackButtonAction();
     });
   }
+
 
   go(item){
     this.selected = item;

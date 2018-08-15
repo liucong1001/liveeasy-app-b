@@ -166,4 +166,9 @@ export  class PropertyModel {
    */
   attorneyPics?:any;
 
+  /**
+   * 列表首图
+   */
+  propAvatar?:any;
+
 }
