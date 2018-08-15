@@ -214,7 +214,6 @@ export class UploadComponent {
       });
 
     });
-
   }
 
 

@@ -105,8 +105,6 @@ export class KeyPage {
 //上传钥匙信息
   goYc(){
     this.propertyProvider.key({
-      loginFlag:1,
-      status:1,
       propertyId:this.propertyid,
       createTime:this.attorneys,
       keySn:this.form.value.keySn,
@@ -137,12 +135,12 @@ export class KeyPage {
     }else {
       this.maxImagesCount = true;
     }
+    console.log('图片回调事件',this.imgData,this.imgData.length,event);
   }
 
   //修改钥匙信息
   updateYc(){
     this.propertyProvider.keyupdate({
-      // keyDelegateId:this.keydelegateid,
       propertyId:this.propertyid,
       keySn:this.form.value.keySn,
       keyAddress:this.form.value.keyAddress,

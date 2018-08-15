@@ -111,6 +111,7 @@ export class HousedetailPage {
         var jsonData = JSON.parse(this.data.contacts);
         console.log('房源buzzType',this.data.buzzType);
         this.form.patchValue({
+          adminDivisionCode:this.data.adminDivisionCode,
           buzzType:this.data.buzzType,
           buildingNo: this.data.buildingNo,
           estateName:this.data.estateName,
@@ -164,7 +165,8 @@ export class HousedetailPage {
         if(this.data.notShow){
           this.sensitiveInfo = false;
         }
-
+        // adminDivisionCode
+        console.log('adminDivisionCode');
       }else {
         this.toast.msg('获取详情失败!');
         loading.dismiss();
@@ -210,7 +212,7 @@ export class HousedetailPage {
     sex:['male',Validators.required],
     tags:['0'],//房源标签
     tagsStr:[],//列表
-    infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
+    infoOwnerId:[this.localStorageProvider.get('loginInfo')['company']['id']],//加盟商id 根据登录人判断他的加盟商id
     buildingType:['0',Validators.required],//建筑类型
     buzzOwnerType:['0'],//交易权属
     buzzType:['1',Validators.required], //房屋用途
@@ -387,7 +389,6 @@ export class HousedetailPage {
      };
      this.addContactBolean = false;
    }
-
     this.propertyProvider.updates(formData).then(res=>{
       if(res.success){
         this.toast.msg('修改成功!');

@@ -65,38 +65,9 @@ export class LetteratorneyPage {
         this.upd=true;
         this.imgJson = this.content.delegateDocPics; //默认展示有图片
         console.log('委托书详情',this.content.delegateDocPics);
+      }else {
+        this.imgJson = [];
       }
-
-
-      // if(res.hasOwnProperty('data')){
-      //   if (res.msg == undefined){
-      //     this.sub=true;
-      //     this.upd=false;
-      //   }else if (res.msg == 1){
-      //     this.data = res.data;
-      //     this.delegateDocId= res.data.delegateDocId;
-      //     this.form.patchValue({
-      //       delegateDocSn:res.data.delegateDocSn,
-      //       delegateBeginTm:new Date(res.data.delegateBeginTm).toISOString(),
-      //       delegateEndTm:new Date(res.data.delegateEndTm).toISOString(),
-      //       delegateDocPics:res.data.delegateDocPics,
-      //       delegateStyle:res.data.delegateStyle
-      //     });
-      //     this.sub=false;
-      //     this.upd=true;
-      //     this.imgJson = JSON.parse(this.data.delegateDocPics); //默认展示有图片
-      //   }else if (res.msg == 2){
-      //     console.log(res)
-      //     this.agentname=res.data.agentName;
-      //     this.noPermission=true;
-      //     this.permission=false;
-      //     this.sub=false;
-      //     this.upd=false;
-      //   }
-      // }else {
-      //   this.edit = true;
-      // }
-
       console.log('dir',this.useDir,'详情',this.data);
     });
 
@@ -188,13 +159,12 @@ export class LetteratorneyPage {
   //委托书
   weiTuo(event){
     this.imgData = event.data;
-    // this.imgData.push(event.pic);
-    console.log('图片数据',this.imgData);
     if(this.imgData.length==1){
       this.maxImagesCount = false;
     }else {
       this.maxImagesCount = true;
     }
+    console.log('图片数据',this.imgData,this.imgData.length,this.maxImagesCount);
   }
 
   //修改业主委托书

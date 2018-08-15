@@ -27,29 +27,33 @@ export class SearchhousePage {
 
   }
 
-  getData(data){
-
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
-    var city = loginUserDistrict.substring(0,4);
-
-
-    var path = 'http://47.75.151.57:7077/live/search?keyword='+data+'&site='+city;
-    return  this.http.get(path).toPromise().then(res=>{
-      return res as any;
-    });
-  }
   edit = false;
   floor = [];
+  // getFloorKey(event){
+  //   console.log('mode',event);
+  //   this.propertyProvider.searchFloor(event).then(res=>{
+  //     if(res.success){
+  //       this.floor = res.data.result;
+  //       this.edit = true;
+  //       if(this.search==''){
+  //         this.edit =false;
+  //       }
+  //     }
+  //   })
+  // }
+
   getFloorKey(event){
-    console.log('mode',event);
-    this.getData(event).then(res=>{
-      this.floor = res.result;
-      this.edit = true;
-      if(this.search==''){
-        this.edit =false;
+    this.propertyProvider.searchFloor(this.search).then(res=>{
+      if(res.success){
+        this.floor = res.data.result;
+        this.edit = true;
+        if(this.search==''){
+          this.edit =false;
+        }
       }
     })
   }
+
 
   ionViewWillEnter() {
     this.statusBar.styleDefault();

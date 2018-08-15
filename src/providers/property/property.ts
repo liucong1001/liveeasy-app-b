@@ -199,10 +199,14 @@ export class PropertyProvider {
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
     var city = loginUserDistrict.substring(0,4);
     var data = {
+      qId:'search',
+      qCate:'3',
+      qType:'search',
       site:city,
       keyword:keyword,
+      score:'1',
     };
-    return this.http.get(this.floorSearchPath,{params:data}).toPromise().then(res=>{
+    return this.http.get(this.basePath,{params:data}).toPromise().then(res=>{
       return res as any ;
     })
   }

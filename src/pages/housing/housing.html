@@ -100,7 +100,7 @@
     </div>
     <ion-list class="housList">
 
-      <ion-item-sliding  [@flyInOut]="'in'" *ngFor=" let item of pageData; index as i;">
+      <ion-item-sliding  *ngFor=" let item of pageData; index as i;">
 
         <ion-item style="padding: 8px 15px 0;">
             <ion-row tappable (click)="goHouseDetail(item)">
