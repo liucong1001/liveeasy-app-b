@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, Navbar, NavController, NavParams,Content} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger";
@@ -70,6 +70,14 @@ export class AddpassengerPage {
    //客户等级
    this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
    this.area = this.localStorageProvider.get('area');
+   this.scrollTo();
+  }
+  @ViewChild(Content) content: Content;
+
+  scrollTo() {
+    window.addEventListener('native.keyboardshow', (e: any) => {
+      this.content.scrollTo(0, e.keyboardHeight);
+    });
   }
 
 

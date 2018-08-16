@@ -15,7 +15,7 @@
               <span>{{this.orderDetail.orderNo}}</span>
             </div>
             <div class="m5">报单时间：
-              <span>{{this.orderDetail.createTime}}</span>
+              <span>{{this.orderDetail.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
             </div>
             <div class="m5">当前环节：
               <span><font color="red">{{stapipe(orderStatus)}}</font></span>

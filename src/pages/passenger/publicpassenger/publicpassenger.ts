@@ -155,6 +155,7 @@ export class PublicpassengerPage {
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
+    this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
@@ -188,9 +189,11 @@ export class PublicpassengerPage {
 
     this.values=val;
     console.log('值' +val);
+
     this.params.customerSrc = '0';
     this.params.orderBy= 'DESC';
     this.params.customerType = '1';
+
     if(val == 1){
       this.params.customerType='1';
     }else if(val == 2){

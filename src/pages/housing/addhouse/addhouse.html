@@ -205,7 +205,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number"  pattern="/[^/d]/g" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
@@ -219,7 +219,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number"  pattern="/[^/d]/g" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">元/月</span>

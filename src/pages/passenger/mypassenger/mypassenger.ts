@@ -234,6 +234,7 @@ export class MypassengerPage {
   updateCucumber(val,index) {
     this.values=val;
     this.info=this.sausage[index];
+    this.params.intentionDiviCode='0';
      if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
      if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
      if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
