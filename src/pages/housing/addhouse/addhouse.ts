@@ -194,7 +194,7 @@ export class AddhousePage {
   sizeCheck=false;
   sizes(){
     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
-      if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
+      if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)){
         console.log('室内面积不能大于建筑面积');
         this.sizeCheck = true;
       }else {
