@@ -22,36 +22,36 @@
       </ion-col>
 
       <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">栋号：</span>{{data.buildingNo}}
+        <span class="defaults">栋号：</span>{{sensitiveData?.buildingNo}}
       </ion-col>
       <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">单元：</span>{{data.unitNo}}
+        <span class="defaults">单元：</span>{{sensitiveData?.unitNo}}
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">楼层：</span>{{data.floorNo}}
+        <span class="defaults">楼层：</span>{{data?.floorNo}}
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">房间号：</span>{{data.houseNo}}
+        <span class="defaults">房间号：</span>{{sensitiveData?.houseNo}}
       </ion-col>
       <ion-col col-12>
         <span class="defaults">楼户比例：</span>{{data.elevators}}梯  {{data.apartments}}  <span *ngIf="data.apartments">户</span>
       </ion-col>
     </ion-row>
   </div>
-  <div class="yzCss" *ngIf="data?.shareShow">
+  <div class="yzCss" *ngIf="data?.shareShow&&sensitiveData">
     <h6>业主信息</h6>
     <ion-row>
       <ion-col col-12 *ngIf="data?.shareShow">
-        <span class="defaults">业主姓名：</span>{{contactPipe(data?.contacts)[0]?.contact}}
+        <span class="defaults">业主姓名：</span>{{contactPipe(sensitiveData?.contacts)[0]?.contact}}
       </ion-col>
       <ion-col col-12 *ngIf="data.contacts?.sex">
-        <span class="defaults">业主性别：</span>{{contactPipe(data?.contacts)[0].sex=='male'?'男':'女'}}
+        <span class="defaults">业主性别：</span>{{contactPipe(sensitiveData?.contacts)[0].sex=='male'?'男':'女'}}
       </ion-col>
       <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">业主电话1：</span>{{contactPipe(data?.contacts)[0].contactInfo}}
+        <span class="defaults">业主电话1：</span>{{contactPipe(sensitiveData?.contacts)[0].contactInfo}}
       </ion-col>
       <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">业主电话2：</span>{{contactPipe(data?.contacts)[1].contactInfo}}
+        <span class="defaults">业主电话2：</span>{{contactPipe(sensitiveData?.contacts)[1].contactInfo}}
       </ion-col>
     </ion-row>
 

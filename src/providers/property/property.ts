@@ -36,7 +36,7 @@ export class PropertyProvider {
   private  getAuditInfo = this.configProvider.set().http + '/property/propertyAuditInfo/getAuditInfo.do';
   //房源详情图片（钥匙，业主委托书，实勘图）
   private  propertyPics = this.configProvider.set().http+ '/property/propertyAuditInfo';
-  //价格审核通过
+  //价格审核
   private  priceAuditPass = this.configProvider.set().http+'/property/propertyAuditInfo/claimAudit.do';
 
   /**
@@ -235,4 +235,14 @@ export class PropertyProvider {
      return  this.httpProvider.httpPost(this.priceAuditPass,params)
   }
 
+  //房源敏感信息
+  sensitiveInfo(propId){
+      var data = {
+        qId:'sensitive',
+        propId:propId,
+      };
+     return  this.http.get(this.basePath,{params:data}).toPromise().then(res=>{
+       return  res  as any;
+     })
+  }
 }

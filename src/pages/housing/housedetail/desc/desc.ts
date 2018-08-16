@@ -17,6 +17,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 export class DescPage {
   @ViewChild(Navbar) navBar: Navbar;
   content:any;
+  descApp:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions, public navParams: NavParams,public events: Events) {
     this.content = navParams.get('content');
   }
@@ -25,6 +26,19 @@ export class DescPage {
     this.navBar.backButtonClick = this.backButtonClick;
     console.log('ionViewDidLoad DescPage');
   }
+
+  watchText(event){
+    // console.log('event+++',event);
+    // console.log(this.content);
+    //  this.descApp = this.content;
+    // if (event.keyCode == "13"){
+    //   this.descApp+=' \\r\\n';
+    // }
+    //
+    //
+    //  console.log('',this.descApp);
+  }
+
 
   confirm(){
     console.log('描述内容',this.content);

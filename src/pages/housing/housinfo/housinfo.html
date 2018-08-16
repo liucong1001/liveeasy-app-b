@@ -76,10 +76,8 @@
     <div class="m10 ">
       <!--房源标签-->
       <div class="tips">
-        <!--[ngClass]="{uDis:item.tagsStr}"-->
         <div class="tips"  >
           <a *ngFor=" let x of tagPipe(houseData?.tagsStr)" class="m5"
-
              [ngClass]="{shen:tagName(x)=='审',shen:tagName(x)=='审',kzks:tagName(x)=='可租可售',bxg:tagName(x)=='不限购',yzjs:tagName(x)=='业主急售',myys:tagName(x)=='免营业税',mwwy:tagName(x)=='满五唯一',dhy:tagName(x)=='带花园',yao:tagName(x)=='钥',wei:tagName(x)=='委',kan:tagName(x)=='勘',tie:tagName(x)=='铁'}">{{tagName(x)}}</a>
         </div>
       </div>
@@ -146,11 +144,11 @@
       </ion-row>
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
-      <div class="p10" *ngIf="houseData?.propertyPrice!=0">
-        <button  ion-button color="danger" full (click)="goMore()" disabled>更多信息</button>
+      <div class="p10" *ngIf="!houseData?.unitPriceAudit">
+        <button  ion-button color="danger" full (click)="goMore()" >更多信息</button>
       </div>
-      <ion-row  *ngIf="houseData?.propertyPrice==0">
-        <ion-col col-6>
+      <ion-row  *ngIf="houseData?.unitPriceAudit">
+        <ion-col col-6 [hidden]=true>
           <button ion-button class="priAudit" full (click)="goAudit()">价格审核</button>
         </ion-col>
         <ion-col col-6>
@@ -162,10 +160,10 @@
   <div class="m10 bgWhite describe" *ngIf="houseData?.propertyDesc">
     <button ion-item class="clear" tappable (click)="describes()" *ngIf="houseData?.propertyDesc.length>70">房源描述</button>
     <div style="padding: 10px 0;font-size: 1.5rem;" *ngIf="houseData?.propertyDesc.length<70">房源描述</div>
-    <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS"  [innerHtml]="houseData?.propertyDescApp">
+    <!--[innerHtml]="houseData?.propertyDescApp"-->
+    <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS" [innerHtml]="descForAPP(houseData?.propertyDescApp)" >
     </div>
-    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70">
-      {{houseData?.propertyDesc}}
+    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70"  [innerHtml]="descForAPP(houseData?.propertyDescApp)">
     </div>
   </div>
 

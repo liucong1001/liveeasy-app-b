@@ -359,7 +359,7 @@ export class HousedetailPage {
   }
 
   addContactBolean = true;
-  //表单提交
+  //表单提交  str.replace(/\n/ig, '');
   save(){
 
     if(this.form.value.tagsStr){
@@ -389,6 +389,8 @@ export class HousedetailPage {
      };
      this.addContactBolean = false;
    }
+    // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
+   console.log('提交',formData);
     this.propertyProvider.updates(formData).then(res=>{
       if(res.success){
         this.toast.msg('修改成功!');
@@ -403,14 +405,7 @@ export class HousedetailPage {
 
     })
   }
-  //根据楼盘名返回楼盘地址
-  // searchStandardAddress(name){
-  //   for(var i in  this.estateList){
-  //     if(name == this.estateList[i].estateName){
-  //       return this.estateList[i].standardAddress
-  //     }
-  //   }
-  // }
+
 
   //跟进
   goFollow(){

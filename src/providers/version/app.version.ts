@@ -50,7 +50,7 @@ export class VersionProvider {
     this.headers = new HttpHeaders().set('Content-Type', 'application/json')
       .set('token',this.localStorageProvider.get('ticket'))
       .set('Access-Control-Allow-Origin','*');
-    const  path = this.configProvider.set().cmsHttp+'/api/v1/app/appInfo/findMaxAppVersion';
+    const  path = this.configProvider.set().cmsHttp+'/interface/appinfo/findMaxAppVersion';
     console.log('app版本更新',path);
     this.http.get(path, {},{token:this.localStorageProvider.get('ticket')}).then(
         res=>{

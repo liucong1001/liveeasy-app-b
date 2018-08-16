@@ -40,6 +40,7 @@ export class LookhousePage {
   @ViewChild(Navbar) navBar: Navbar;
   propertyId:any;
   lockhoseDetail:any;
+  isCreater:boolean;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams
               ,public actionSheetCtrl: ActionSheetController,
@@ -47,6 +48,7 @@ export class LookhousePage {
               private photoViewer: PhotoViewer,public localStorageProvider:LocalStorageProvider) {
     this.data = navParams.get('item');
     this.propertyId = navParams.get('propertyId');
+
 
     this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
@@ -57,10 +59,21 @@ export class LookhousePage {
       }else if(this.lockhoseDetail.pics) {
         this.imgJson = this.lockhoseDetail.pics&&JSON.parse(this.lockhoseDetail.pics);
       }
+      /**
+       * 判断是不是自己录入的房源  （24小时之内可以上传实勘图）
+       */
+      if(res.data&&res.data.creater ==this.localStorageProvider.get('loginInfo').id){
+         this.isCreater = true;
+      }else {
+         this.isCreater = false;
+      }
 
       if(!this.lockhoseDetail.content){
         this.imgJson =[];
       }
+
+
+
     });
 
 

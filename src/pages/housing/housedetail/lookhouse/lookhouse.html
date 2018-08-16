@@ -7,9 +7,9 @@
     <!-- 实勘审核中不能修改 -->
     <form>
       <div class="bgWhite p10" >
-        <font color="red" *ngIf="!lockhoseDetail?.open">
+        <font color="red" *ngIf="!lockhoseDetail?.open&&!isCreater">
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
-          &nbsp;录入房源后24小时内不可上传实勘图!</font>
+          24小时内仅允许房源录入人上传图片!</font>
       </div>
       <ion-list class="m10" *ngIf="!edit"  [hidden]="true">
         <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i = index" >
@@ -25,36 +25,37 @@
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">门牌号：</span>
           <!--[hidden] ='showTip'-->
-          <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite"  >
           <span class="lookHeadLine">户型图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">客厅图：</span>
-          <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卧室图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">厨房图：</span>
-          <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">卫生间图：</span>
-          <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
           <span class="lookHeadLine">其他图：</span>
-          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)" *ngIf="imgJson&&lockhoseDetail?.open"></upload>
+          <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         </ion-list>
       <!--[disabled]="form.invalid"-->
       <!--[hidden]="showTip"-->
-      <div class="p15"    [hidden]="!lockhoseDetail?.open">
+      <!--[hidden]="!lockhoseDetail?.open"  lockhoseDetail?.open   {{lockhoseDetail?.open}}-->
+      <div class="p15"    *ngIf="lockhoseDetail?.open || isCreater "  >
         <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">确认修改</button>
         <button ion-button full color="danger" class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
       </div>
