@@ -6,24 +6,39 @@
   <ion-content>
     <!-- 实勘审核中不能修改 -->
     <form>
-      <div class="bgWhite p10" >
+      <div class="bgWhite p10"  *ngIf="lockhoseDetail?.auditStatus!=3">
         <font color="red" *ngIf="!lockhoseDetail?.open&&!isCreater">
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           24小时内仅允许房源录入人上传图片!</font>
+
+        <font color="red" *ngIf="imgJson&&lockhoseDetail?.open || isCreater">
+          <!--<ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>-->
+          提示:达成实勘标准为：
+          <span *ngIf="lockhoseDetail?.bedrooms>=1">卧室、</span>
+          <span *ngIf="lockhoseDetail?.halls>=1">客厅、</span>
+          <span *ngIf="lockhoseDetail?.bathrooms>=1">卫生间、</span>
+          <span *ngIf="lockhoseDetail?.kitchens>=1">厨房、</span>
+          图片各上传至少一张。
+        </font>
       </div>
-      <ion-list class="m10" *ngIf="!edit"  [hidden]="true">
+      <div class="bgWhite p10" *ngIf="lockhoseDetail?.auditStatus==3">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          你提交的实勘图正在审核，审核期间不允许上传或修改</font>
+      </div>
+      <ion-list class="m10" *ngIf="lockhoseDetail?.auditStatus==3">
         <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i = index" >
             <span>{{item.desc}}</span>
             <div>
-              <img [src]="imgHeader+item.thumbnail" alt="" title="{{item.desc}}"  [imgGallery]="{data:imgJson,index:i}"
+              <img [src]="imgHeader+item.imagePath" alt="" title="{{item.desc}}"  [imgGallery]="{data:imgJson,index:i}"
                    class="img_upload">
             </div>
         </div>
       </ion-list>
       <!--*ngIf="edit"-->
-      <ion-list class="m10" >
+      <ion-list class="m10" *ngIf="lockhoseDetail?.auditStatus!=3">
         <div class="attorneyPic bgWhite" >
-          <span class="lookHeadLine">门牌号：</span>
+          <span class="lookHeadLine">门牌图：</span>
           <!--[hidden] ='showTip'-->
           <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
@@ -31,19 +46,19 @@
           <span class="lookHeadLine">户型图：</span>
           <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
-        <div class="attorneyPic bgWhite" >
+        <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.halls>=1" >
           <span class="lookHeadLine">客厅图：</span>
           <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
-        <div class="attorneyPic bgWhite" >
+        <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.bedrooms>=1" >
           <span class="lookHeadLine">卧室图：</span>
           <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
-        <div class="attorneyPic bgWhite" >
-          <span class="lookHeadLine">厨房图：</span>
+        <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.kitchens>=1">
+          <span class="lookHeadLine" >厨房图：</span>
           <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
-        <div class="attorneyPic bgWhite" >
+        <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.bathrooms>=1">
           <span class="lookHeadLine">卫生间图：</span>
           <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
@@ -55,9 +70,11 @@
       <!--[disabled]="form.invalid"-->
       <!--[hidden]="showTip"-->
       <!--[hidden]="!lockhoseDetail?.open"  lockhoseDetail?.open   {{lockhoseDetail?.open}}-->
-      <div class="p15"    *ngIf="lockhoseDetail?.open || isCreater "  >
-        <button ion-button full color="danger" class="radius" (click)="update()" *ngIf="!edit">确认修改</button>
-        <button ion-button full color="danger" class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
+      <div *ngIf="lockhoseDetail?.auditStatus!=3">
+        <div class="p15"    *ngIf="lockhoseDetail?.open || isCreater "  >
+          <button ion-button full color="danger"  class="radius" (click)="update()" *ngIf="!edit">确认修改</button>
+          <button ion-button full color="danger"  [disabled]="true"  class="radius" (click)="save()" *ngIf="edit" >上传图片</button>
+        </div>
       </div>
     </form>
   </ion-content>

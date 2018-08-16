@@ -8,6 +8,7 @@ import {PropertyModel} from "../../model/property/property.model";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {ConfigProvider} from "../../providers/config/config";
+import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 /**
   多图片上传组件
  */
@@ -37,7 +38,8 @@ export class UploadComponent {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
-              private imagePicker:ImagePicker,private base64: Base64,public configProvider: ConfigProvider
+              private imagePicker:ImagePicker,private base64: Base64,public configProvider: ConfigProvider,
+              public localStorageProvider:LocalStorageProvider
   ) {
     this.imgHeader = this.configProvider.set().img;
 
@@ -201,6 +203,16 @@ export class UploadComponent {
           position:this.position,
           desc:this.desc,
         };
+        /**
+         * 实勘图添加 uploader ，uploadName
+         */
+        if(pic.position=='add1'||pic.position=='add2'||pic.position=='add3'||pic.position=='add4'||pic.position=='add5'
+          ||pic.position=='add6'||pic.position=='add7'){
+          pic['uploader'] = this.localStorageProvider.get('loginInfo').id;
+          pic['uploadName'] = this.localStorageProvider.get('loginInfo').name;
+        }
+
+
         this.imgSrc = this.imgHeader+ this.imagePath;
         //页面显示多个拍照
         // var pathHtml =  "<img src=" +this.imgSrc +  " class='img_upload'  \">  ";

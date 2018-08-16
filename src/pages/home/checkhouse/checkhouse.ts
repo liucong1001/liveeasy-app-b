@@ -55,6 +55,7 @@ export class CheckhousePage {
   }
 
   ionViewDidEnter() {
+    // alert('刷新！！');
   }
 
   //状态栏文字颜色修改-白色
@@ -217,16 +218,21 @@ export class CheckhousePage {
   detail(item){
     console.log( item.operationCode);
 
-    this.homeProvider.updateMsg(item.messageId,item.messageStatusInfoEntity.status);
-    if(item.operationCode<5000){
-      let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
-      profileModal.present();
-      console.log('点击',item);
-    }else {
-      this.openWin(DeclardetailPage,{
-        id:item.objectId,
-      });
-    }
+    this.homeProvider.updateMsg(item.messageId,1).then(res=>{
+      if(res.success){
+        this.search();
+        if(item.operationCode<5000){
+          let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
+          profileModal.present();
+          console.log('点击',item);
+        }else {
+          this.openWin(DeclardetailPage,{
+            id:item.objectId,
+          });
+        }
+      }
+    });
+
   }
 
 //------返回处理--------//

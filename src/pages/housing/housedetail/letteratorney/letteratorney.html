@@ -62,8 +62,8 @@
     </ion-list>
     <ion-grid [hidden]="data?.auditStatus==3">
       <ion-row class="p15">
-          <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount" (click)="go()" *ngIf="sub">上传业主委托书</button>
-        <button ion-button full color="danger" class="radius"  (click)="upYz()"  [disabled]="form.invalid||imgData.length!=1"  *ngIf="upd">修改业主委托书</button>
+          <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount||timeCheck" (click)="go()" *ngIf="sub">上传业主委托书</button>
+        <button ion-button full color="danger" class="radius"  (click)="upYz()"  [disabled]="form.invalid||imgData.length!=1||timeCheck"  *ngIf="upd">修改业主委托书</button>
       </ion-row>
     </ion-grid>
   </form>
