@@ -45,26 +45,11 @@ export class HomePage {
               public jPush: JPush, device: Device
              ) {
     this.localStorageProvider.del('searchMoreData');
-    // this.homeProvider.getAllNotice().then(res=>{
-    //   console.log('获取所有消息',res.data);
-    //   // operationCode
-    //   // for(var item of res.data ){
-    //   //  var  c= item.operationCode;
-    //   //   if(c=='4025'||c=='3030'||c=='3029'||c=='3028'||c=='3027'||c=='3026'||c=='3025'||c=='3011'||c=='3012'||c=='3024'||c=='3031'
-    //   //     ||c=='3032'||c=='4026'){
-    //   //     this.noticeList[0].name='房源调整';
-    //   //     this.noticeList[0].data.push(c);
-    //   //   }else if(c=='2001'||c=='2002'||c=='2003'||c=='2004'||c=='2005'){
-    //   //     this.noticeList[1].name='管理员通知';
-    //   //     this.noticeList[1].data.push(c);
-    //   //   }
-    //   // }
-    //   // console.log('重构后',this.noticeList);
-    // });
     //获取待办消息接口-
     this.propertyProvider.getCode().then(res=>{
         if(res.success){
            this.localStorageProvider.set('codeData', res.data.result);
+
           //添加，修改房源的标签 (不存在学区房)
           var tagsList = new ArryCodeValuePipe().transform(this.localStorageProvider.get('codeData'),'property_tag_desc');
           for(var item of tagsList){
@@ -80,21 +65,21 @@ export class HomePage {
   }
 
 
-
-
-
-
-
-
-
   //状态栏文字颜色修改-黑色
   ionViewWillEnter() {
     this.statusBar.styleDefault();
 
   }
+  msgResult=[];
   ionViewDidLoad(){
     this.homeProvider.getNotification().then(res=>{
       if(res){this.notificationNews = res.data.result;}
+    });
+    this.homeProvider.msgs(1).then(res=>{
+      if(res.data.result){
+        this.msgResult=res.data.result;
+        // console.log(this.msgResult)
+      }
     });
   }
 
@@ -118,20 +103,14 @@ export class HomePage {
   msgDetail(){
     this.notificationNews&&this.openWin(MsgdetailPage);
   }
-  checkhouse(i){
-    this.openWin(CheckhousePage,{
-      item:i,
-      val:i.val,
-      res:this.res,
-    });
-
-  }
+  //  (i){
+  //   this.openWin(CheckhousePage,{
+  //     item:i,
+  //     val:i.val,
+  //     res:this.res,
+  //   });
   //
-  houseJSON=[
-    {name:'关闭房源审核',val:'1',icon:'tixing',code:'3033'},
-    {name:'房源调整',val:'2',icon:'notice1',code:'3030'},
-    {name:'关闭房源',val:'3',icon:'tixing',code:'3005'},
-  ];
+  // }
 
   gosta(){
     this.openWin(StatisticsPage);

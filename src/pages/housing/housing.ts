@@ -603,7 +603,6 @@ export class HousingPage {
     if (data) {
       return data.split(",");
     }
-    console.log(data);
   }
 
   //房源标签code转换为name
