@@ -12,18 +12,18 @@ export class ConfigProvider {
     oss:'',
     http:'',
     cHttp:'https://beta-c.zdfc.com/',
+    cmsHttp:'https://beta-cms.zdfc.com/',
     img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
     errorImg:'assets/imgs/http502.png',
   };
   constructor(public http: HttpClient) {
-    console.log('Hello ConfigProvider Provider');
-
     if(this.onLine){
       this.globalConfig = {
         url:'',
         oss:'',
         http:'https://beta-erp.zdfc.com/api/v1/',
         cHttp:'https://beta-c.zdfc.com/',
+        cmsHttp:'https://beta-cms.zdfc.com/',
         img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',
       }
