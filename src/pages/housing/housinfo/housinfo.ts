@@ -295,8 +295,9 @@ export class HousinfoPage {
   tip(){
     this.toast.msg('此功能暂未开发');
   }
-  //房源标签code转换为name
+  //房源标签code转换为name 32768
   tagName(code) {
+
     for (var i in this.tagsListPage) {
       if (code == parseFloat(this.tagsListPage[i].val) ) {
         return this.tagsListPage[i].name
@@ -356,8 +357,7 @@ export class HousinfoPage {
   }
 
   descForAPP(data){
-    // console.log('描述', data.replace('</br>','<div></div>'));
-   return   data.replace('</br>', '<br />');
+   return   data.replace(/\n/ig, '<br/>');
   }
 
 
