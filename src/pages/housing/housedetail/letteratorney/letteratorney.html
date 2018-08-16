@@ -47,7 +47,7 @@
             <ion-datetime displayFormat="YYYY/MM/DD" formControlName="delegateEndTm" (ionChange)="timeCompare()" doneText="确定"  cancelText="取消"></ion-datetime>
           </ion-item>
       <valid-error [errors]="errors.delegateEndTm"  [control]="form.get('delegateEndTm')"  ></valid-error>
-      <p *ngIf="timeCheck" class="errorTip">*起始时间不能大于结束时间</p>
+      <p *ngIf="timeCheck" class="errorTip pl12 m10">*起始时间不能大于结束时间</p>
       <div class="attorneyPic bgWhite">
         <span>委托书图片</span><span class="text-danger"  *ngIf="data?.auditStatus!=3">(*只能上传一张照片)</span>
         <upload [useDir]="useDir" [desc]="''" [position]="''" [src]="imgJson"  *ngIf="data?.auditStatus!=3&&imgJson" (successEvent)="weiTuo($event)"></upload>
