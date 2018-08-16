@@ -60,7 +60,7 @@ export class AddhousePage {
      return title;
   }
 
-
+  // tradingAreaId
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
@@ -109,7 +109,8 @@ export class AddhousePage {
     propertyDesc:[''],//房源描述
     //楼号比例
     elevators:[''],//梯
-    apartments:[''],//户
+    apartments:[''],//户,
+    tradingAreaId:[''],//商圈id
   });
 
     tip(){

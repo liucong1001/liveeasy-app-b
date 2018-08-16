@@ -176,7 +176,7 @@ export class HousedetailPage {
     var propertyId= this.localStorageProvider.get('propertyIdDetail)');
   }
 
-
+  // tradingAreaId
   form:FormGroup =this.fb.group({
     adminDivisionCode:[''],//楼盘相对应区域
     estate:['',Validators.required],//楼盘

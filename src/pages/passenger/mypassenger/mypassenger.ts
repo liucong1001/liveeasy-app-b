@@ -175,6 +175,7 @@ export class MypassengerPage {
 
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
+        this.firstPageData = res.data.result;
       }else{
         this.hasData = false;
       }
@@ -237,7 +238,6 @@ export class MypassengerPage {
   updateCucumber(val,index) {
     this.values=val;
     this.info=this.sausage[index];
-
      if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
      if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
      if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
@@ -330,11 +330,10 @@ export class MypassengerPage {
   haveData=false;
   newCount:any;
   doRefresh(refresher) {
-    console.log(this.params)
+    console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
-
     this.customerProvider.pageSearch(1,this.params).then(res=>{
-      console.log('结束时间内容',res.data.totalRecords);
+    console.log('结束时间内容',res.data.totalRecords);
 
       this.totalRecords = res.data.totalRecords;
       this.pageData = res.data.result;
@@ -378,7 +377,7 @@ export class MypassengerPage {
     result = result || [];
     this.firstPageData = this.firstPageData || [];
     for (let item in result) {
-      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      var rs = this.firstPageData.find(firstData => firstData.customerId == result[item].customerId ) || [];
       if (rs.length == 0) {
         count ++;
       }

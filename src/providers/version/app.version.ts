@@ -50,9 +50,9 @@ export class VersionProvider {
     this.headers = new HttpHeaders().set('Content-Type', 'application/json')
       .set('token',this.localStorageProvider.get('ticket'))
       .set('Access-Control-Allow-Origin','*');
-
-    this.http.get("https://b.liveeasy.tech/api/v1/app/appInfo/findMaxAppVersion",
-      {},{token:this.localStorageProvider.get('ticket')}).then(
+    const  path = this.configProvider.set().cmsHttp+'/api/v1/app/appInfo/findMaxAppVersion';
+    console.log('app版本更新',path);
+    this.http.get(path, {},{token:this.localStorageProvider.get('ticket')}).then(
         res=>{
           console.log("下载内容：" , res,"数据层",res.data);
             var  result = JSON.parse(res.data);

@@ -131,7 +131,7 @@
             <span class="defaults"> 套内面积：</span>{{houseData?.innerSpaceSize}}m²
           </ion-col>
           <ion-col col-5>
-            <span class="defaults"> 配备电梯：</span>{{houseData?.hasElevator==0?'无':'有'}}
+            <span class="defaults"> 配备电梯：</span>{{houseData?.hasElevator==1?'无':'有'}}
           </ion-col>
         </ion-row>
         <ion-row>
@@ -140,7 +140,6 @@
         </ion-col>
         <ion-col col-5>
           <span class="defaults"> 归属人：</span>
-          <!--{{ floorPipe(houseData.positionInBuilding)}}-->
           {{houseData?.realtorId}}
         </ion-col>
       </ion-row>
@@ -162,8 +161,7 @@
   <div class="m10 bgWhite describe" *ngIf="houseData?.propertyDesc">
     <button ion-item class="clear" tappable (click)="describes()" *ngIf="houseData?.propertyDesc.length>70">房源描述</button>
     <div style="padding: 10px 0;font-size: 1.5rem;" *ngIf="houseData?.propertyDesc.length<70">房源描述</div>
-    <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS">
-      {{houseData.propertyDesc}}
+    <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS"  [innerHtml]="houseData?.propertyDescApp">
     </div>
     <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70">
       {{houseData?.propertyDesc}}

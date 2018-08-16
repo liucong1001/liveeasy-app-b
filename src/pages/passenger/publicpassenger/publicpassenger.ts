@@ -161,6 +161,7 @@ export class PublicpassengerPage {
 
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
+        this.firstPageData = res.data.result;
         console.log(this.hasData)
       }else{
         this.hasData = false;
@@ -344,7 +345,7 @@ export class PublicpassengerPage {
     result = result || [];
     this.firstPageData = this.firstPageData || [];
     for (let item in result) {
-      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      var rs = this.firstPageData.find(firstData => firstData.customerId == result[item].customerId ) || [];
       if (rs.length == 0) {
         count ++;
       }

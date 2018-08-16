@@ -134,6 +134,8 @@ export class HousinfoPage {
       // 业主委托书
       this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
       loading.dismiss();
+
+      console.log('房源标签', this.tagPipe(this.houseData.tagsStr));
     });
 
 
@@ -354,6 +356,12 @@ export class HousinfoPage {
       }
     }
   }
+
+  descForAPP(data){
+    // console.log('描述', data.replace('</br>','<div></div>'));
+   return   data.replace('</br>', '<br />');
+  }
+
 
   dismiss() {
     this.viewCtrl.dismiss();

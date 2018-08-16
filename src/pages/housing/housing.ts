@@ -134,7 +134,7 @@ export class HousingPage {
 
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-
+    console.log('tagsListPage',this.tagsListPage);
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
     this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
@@ -498,7 +498,7 @@ export class HousingPage {
         },1000);
         // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
       } else {
-        // this.toast.defaultMsg('middle','暂无更新');
+         // this.toast.defaultMsg('middle','暂无更新111');
         this.not=true;
         this.num=3;
         this.timer=setInterval(()=>{
@@ -601,6 +601,7 @@ export class HousingPage {
   //房源标签转换（字符串转为数组）
   tagPipe(data) {
     if (data) {
+      // console.log(data.split(","));
       return data.split(",");
     }
   }
@@ -710,6 +711,7 @@ export class HousingPage {
           this.floorName = '';
           // this.params.estate = '';
           delete   this.params.estate
+          console.log('不存在数据',this.params);
         }else {
           this.floorName = params.keyword;
           this.params.estate = params.id;
@@ -784,7 +786,7 @@ export class HousingPage {
         if(params.buildType!=0){this.params.buildType = params.buildType}else {delete this.params.buildType}
         if(params.position!=0){this.params.position = params.position}else {delete this.params.position}
 
-        console.log('接收到11',this.moreSearchData);
+        console.log('接收到11',this.moreSearchData,this.params);
       }
        this.search('propQuery');
       // 取消订阅
