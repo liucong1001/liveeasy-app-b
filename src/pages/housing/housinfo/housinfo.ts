@@ -105,8 +105,6 @@ export class HousinfoPage {
   imgJson :any; //实勘图
   letteratorneyImgJson:any;
   keyImgJson:any;
-
-
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
