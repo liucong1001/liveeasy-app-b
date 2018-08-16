@@ -187,12 +187,7 @@ export class MypassengerPage {
       this.pop = false;
       // this.housingEstate = false;
       //户型搜索条件字显示
-      if(this.searchFloorNum ==1){
-        this.searchFloorNum = 2;
-      }
-      if(this.searchFloorNum ==2 && this.params.intentionRoom=='0'){
-        this.searchFloorNum=1;
-      }
+
     });
   }
   searchArea='';
@@ -216,20 +211,21 @@ export class MypassengerPage {
         }else{
           this.hasData = false;
         }
-        //关闭搜索框子
-        this.show = false;
-        this.houseType = false;
-        this.more = false;
-        this.pop = false;
-        // this.housingEstate = false;
-        //户型搜索条件字显示
-        if(this.sx ==1){
-          this.sx = 2;
-        }
-        if(this.info == false){
-          this.sx=1
-        }
+
       });
+    //关闭搜索框子
+    this.show = false;
+    this.houseType = false;
+    this.more = false;
+    this.pop = false;
+    // this.housingEstate = false;
+    //户型搜索条件字显示
+    if(this.sx ==1){
+      this.sx = 2;
+    }
+    if(this.info == false){
+      this.sx=1
+    }
 
   }
   // checks:boolean;
@@ -399,11 +395,6 @@ export class MypassengerPage {
     }
   }
   showMenu2(){
-    if(this.searchFloorNum ==0 || this.searchFloorNum ==1){
-      this.searchFloorNum = 1;
-    }else {
-      this.searchFloorNum =2;
-    }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
       this.show=false;

@@ -174,12 +174,7 @@ export class PublicpassengerPage {
       this.pop = false;
       // this.housingEstate = false;
       //户型搜索条件字显示
-      if(this.searchFloorNum ==1){
-        this.searchFloorNum = 2;
-      }
-      if(this.searchFloorNum ==2 && this.params.intentionRoom=='0'){
-        this.searchFloorNum=1;
-      }
+
     });
   }
   searchArea='';
@@ -407,11 +402,6 @@ export class PublicpassengerPage {
 
   }
   showMenu2(){
-    if(this.searchFloorNum ==0 || this.searchFloorNum ==1){
-      this.searchFloorNum = 1;
-    }else {
-      this.searchFloorNum =2;
-    }
     if(this.houseType==false || this.show == true || this.more == true ){
       this.houseType=true;
       this.show=false;

@@ -77,6 +77,11 @@ export class FollowPage {
       });
   console.log(this.form.value)
 }
+
+  selectTitle(data){
+    var title = {title:data};
+    return title;
+  }
 //禁用调出键盘
 //   ionViewDidEnter(){
 //     // let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
