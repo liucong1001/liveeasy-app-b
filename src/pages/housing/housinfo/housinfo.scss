@@ -85,13 +85,10 @@ page-housinfo {
     width:100%;
     height: 300px;
     background: #000;
-    justify-content: center;
-    //border: 1px solid;
     img{
       width: inherit !important;
-      height: 100% !important;
-      margin: auto;
-      -webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.1));
+      height: 305px !important;
+      -webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.6));
     }
   }
   .swiper-pagination-fraction{

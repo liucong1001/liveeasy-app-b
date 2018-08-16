@@ -155,9 +155,9 @@
         </ion-item>
 
         <ion-item-options>
-          <button ion-button color="primary" style="background: #ff9c00" tappable  (click)="goFollow(item)" *ngIf="item.shareShow && (!ishasTag('128',item.tagsStr,item))">跟进</button>
-          <button ion-button color="danger"  style="background: #488aff" tappable (click)="goAddLook(item)" *ngIf="item.shareShow&& (!ishasTag('128',item.tagsStr,item))">带看</button>
-          <button ion-button color="default" style="background: #ff3a31" tappable (click)="goCloseHouse(item)" *ngIf="item.applyStatus&&item.closePropertyShow&& (!ishasTag('128',item.tagsStr,item))">关闭</button>
+          <button ion-button color="primary" style="background: #ffba4d" tappable  (click)="goFollow(item)" *ngIf="item.shareShow && (!ishasTag('128',item.tagsStr,item))">跟进</button>
+          <button ion-button color="danger"  style="background: #80adff" tappable (click)="goAddLook(item)" *ngIf="item.shareShow&& (!ishasTag('128',item.tagsStr,item))">带看</button>
+          <button ion-button color="default" style="background: #ff756f" tappable (click)="goCloseHouse(item)" *ngIf="item.applyStatus&&item.closePropertyShow&& (!ishasTag('128',item.tagsStr,item))">关闭</button>
 
         </ion-item-options>
 
