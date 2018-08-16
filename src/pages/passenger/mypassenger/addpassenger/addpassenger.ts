@@ -70,7 +70,7 @@ export class AddpassengerPage {
    //客户等级
    this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
    this.area = this.localStorageProvider.get('area');
-   this.scrollTo();
+   this.scrollTo()
   }
   @ViewChild(Content) content: Content;
 

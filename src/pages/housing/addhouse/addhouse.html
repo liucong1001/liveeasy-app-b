@@ -80,12 +80,12 @@
       </div>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
       <!--<div class="hdRightInfo">-->
-        <!--<ion-item class="pl12">-->
-          <!--<ion-label>价格<i class="text-danger">*</i></ion-label>-->
-          <!--<ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">-->
-          <!--</ion-input>-->
-        <!--</ion-item>-->
-        <!--<span class="hdRightInfo">万</span>-->
+      <!--<ion-item class="pl12">-->
+      <!--<ion-label>价格<i class="text-danger">*</i></ion-label>-->
+      <!--<ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">-->
+      <!--</ion-input>-->
+      <!--</ion-item>-->
+      <!--<span class="hdRightInfo">万</span>-->
       <!--</div>-->
       <ion-list (click)="clickHx()">
         <button ion-item class="pl12" *ngIf="HxRight">
@@ -205,7 +205,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="/[^/d]/g" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number"  pattern="[0-9]*" oninput="if(value.length > 11)value=value.slice(0,11)" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" "formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
@@ -219,7 +219,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="/[^/d]/g" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">元/月</span>
@@ -329,12 +329,12 @@
         <ion-label>挂牌时间</ion-label>
         <ion-datetime placeholder="请选择时间" (ionChange)="gethangFreeTm2($event)"  displayFormat="YYYY-MM-DD" cancelText="关闭" doneText="确定"></ion-datetime>
       </ion-item>
-        <ion-item class="pl12" *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
-          <ion-label>出售标签</ion-label>
-          <ion-select okText="确定" cancelText="关闭"  formControlName="tags"   multiple="true" [placeholder]="'请选择'">
-            <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
-          </ion-select>
-        </ion-item>
+      <ion-item class="pl12" *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+        <ion-label>出售标签</ion-label>
+        <ion-select okText="确定" cancelText="关闭"  formControlName="tags"   multiple="true" [placeholder]="'请选择'">
+          <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
 
       <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
         <ion-item class="pl12">

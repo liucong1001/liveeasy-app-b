@@ -21,14 +21,14 @@
           </ion-select>
         </ion-item>
         <ion-item class="pl12 hdRightInfo1">
-          <ion-label>客户手机</ion-label>
+          <ion-label>客户手机<i class="text-danger">*</i></ion-label>
           <ion-input type="number" placeholder="请输入手机号" formControlName="customerPhone">
           </ion-input>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>客户来源<i class="text-danger">*</i></ion-label>
           <ion-select okText="确定" disabled  [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc" [selectOptions]="selectTitle('客户来源')">
-            <ion-option [value]="item.val"  *ngFor="let item of customerSrcList  "> {{item.name}}</ion-option>
+            <ion-option [value]="item.val"  *ngFor="let item of customerSrcList"> {{item.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">

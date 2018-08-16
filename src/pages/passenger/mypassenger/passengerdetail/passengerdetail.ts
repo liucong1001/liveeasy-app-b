@@ -13,6 +13,7 @@ import {DescsPage} from "../descs/descs";
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -122,7 +123,7 @@ export class PassengerdetailPage {
     customerId:['',Validators.required],
     customerName:['',Validators.required],//客户名称
     customerGender :['',Validators.required],//客户性别
-    customerPhone:['',Validators.required],//客户电话
+    customerPhone:['',[Validators.required, Validators.pattern(/^[1][3,4,5,7,8][0-9]{9}$/)]],//客户电话
     customerSrc:['',Validators.required], //客户来源
     agentId:['',Validators.required],//归属人id
     customerGrade:['',],//客户等级
@@ -147,6 +148,16 @@ export class PassengerdetailPage {
     contactFreeTm2:[''],//免打扰时间结束
     comments:[''],//备注
   });
+
+
+  //表单验证消息
+  errors={
+    customerPhone:[
+      new ErrorMessage('required','电话必须要填写！'),
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
+
+  };
 
   clickIntention(){
     if(this.showIntention==false ){
@@ -274,7 +285,7 @@ export class PassengerdetailPage {
   hallCheck=false;
   areas(){
     if(this.form.value.minSpaceSize&&this.form.value.maxSpaceSize){
-      if(parseInt(this.form.value.maxSpaceSize) < parseInt(this.form.value.minSpaceSize)){
+      if(parseFloat(this.form.value.maxSpaceSize) < parseFloat(this.form.value.minSpaceSize)){
         console.log('结束面积不能小于开始面积');
         this.areaCheck = true;
       }else {
@@ -286,7 +297,7 @@ export class PassengerdetailPage {
   //价格
   prices(){
     if(this.form.value.minPrice&&this.form.value.maxPrice){
-      if(parseInt(this.form.value.maxPrice) < parseInt(this.form.value.minPrice)){
+      if(parseFloat(this.form.value.maxPrice) < parseFloat(this.form.value.minPrice)){
         console.log('最高价格不能小于最低价格');
         this.priceCheck = true;
       }else {
