@@ -25,7 +25,7 @@
         <ion-row tappable (click)="declarationDetail(item)" >
           <ion-col col-12 class="tip">
             {{item.orderNo}}
-            <a [ngClass]="{dshCss:item.orderStatus==1,shbtgCss:item.orderStatus==2,shtgCss:item.orderStatus==3,fkshCss:item.orderStatus==4,bdFinish:item.orderStatus==5,bdzfCss:item.orderStatus==6,bdCancel:item.orderStatus==7}">{{housePipe(item.orderStatus)}}</a>
+            <a [ngClass]="{dqrCss:item.orderStatus==0,dshCss:item.orderStatus==1,shbtgCss:item.orderStatus==2,shtgCss:item.orderStatus==3,fkshCss:item.orderStatus==4,bdFinish:item.orderStatus==5,bdzfCss:item.orderStatus==6,bdCancel:item.orderStatus==7}">{{housePipe(item.orderStatus)}}</a>
           </ion-col>
           <ion-col col-12>
             <div><font size="2">客户：<span>{{item.customerName}}</span></font></div>
