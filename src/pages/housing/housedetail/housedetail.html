@@ -194,17 +194,74 @@
       </ion-item>
       <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
     </ion-list>
-
-    <ion-list (click)="clickIntention()">
-      <button ion-item class="pl12" *ngIf="right">
-        <font>更多<i class="text-danger">*</i></font>
-      </button>
-      <ion-item class="pl12" *ngIf="down" >
-        <font>更多<i class="text-danger">*</i></font>
-        <i class="iconfont icon-xia"></i>
+    <ion-list>
+      <ion-item class="pl12">
+        <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
+        <ion-select okText="确定" [disabled]="true" formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type'">{{x.name}}</ion-option>
+        </ion-select>
       </ion-item>
-    </ion-list>
-    <ion-list *ngIf="showIntention">
+
+
+      <!--默认出售-->
+      <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+        <div class="hdRightInfo">
+          <ion-item class="pl12">
+            <ion-label>出售价格<i class="text-danger">*</i></ion-label>
+            <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+            </ion-input>
+          </ion-item>
+          <span class="hdRightInfo">万</span>
+        </div>
+        <ion-item class="pl12">
+          <ion-label>交易权属</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭">
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_owner_type'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="pl12">
+          <ion-label>抵押类型</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_mortgage'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <!--END-->
+
+
+      <!--出租-->
+      <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
+        <div class="hdRightInfo">
+          <ion-item class="pl12">
+            <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
+            <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+            </ion-input>
+          </ion-item>
+          <span class="hdRightInfo">元/月</span>
+        </div>
+        <ion-item class="pl12">
+          <ion-label>出租类型</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'rent_type'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="pl12">
+          <ion-label>居住现状</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'curr_live_state'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="pl12">
+          <ion-label>付款方式</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'rent_pay_type'">{{x.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <!--END-->
+      <!--租售-->
+      <!--END-->
+
       <ion-item class="pl12">
         <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
         <ion-select okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectTitle('建筑类型')">
@@ -219,10 +276,33 @@
         </ion-select>
       </ion-item>
 
+    </ion-list>
+
+
+
+
+
+
+    <ion-list (click)="clickIntention()">
+      <button ion-item class="pl12" *ngIf="right">
+        <font>更多<i class="text-danger">*</i></font>
+      </button>
+      <ion-item class="pl12" *ngIf="down" >
+        <font>更多<i class="text-danger">*</i></font>
+        <i class="iconfont icon-xia"></i>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
-        <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
-          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type'">{{x.name}}</ion-option>
+        <ion-label>房源类型</ion-label>
+        <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_type' | reversePipe:'val'">{{x.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>房屋年限</ion-label>
+        <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_life' | reversePipe:'val' ">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -241,15 +321,33 @@
           </ion-col>
         </ion-row>
       </div>
+      <ion-item class="pl12">
+        <ion-label>挂牌时间</ion-label>
+        <ion-datetime placeholder="请选择时间" (ionChange)="gethangFreeTm2($event)"  displayFormat="YYYY-MM-DD" cancelText="关闭" doneText="确定"></ion-datetime>
+      </ion-item>
+      <ion-item class="pl12 m10" *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+        <ion-label>出售标签</ion-label>
+        <ion-select okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
+          <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
+        <ion-item class="pl12">
+          <ion-label>租赁标签</ion-label>
+          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+            <ion-option value="0">拎包入住</ion-option>
+            <ion-option value="1">紧邻地铁</ion-option>
+            <ion-option value="2">钥匙房</ion-option>
+            <ion-option value="3">独卫</ion-option>
+            <ion-option value="4">家电齐全</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
 
     </ion-list>
 
-    <ion-item class="pl12 m10">
-      <ion-label>房源标签</ion-label>
-      <ion-select okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
-        <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+
     <ion-list (click)="godesc()" class="m10">
       <button ion-item class="pl12">
         房源描述
