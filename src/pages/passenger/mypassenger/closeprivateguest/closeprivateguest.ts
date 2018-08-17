@@ -49,8 +49,8 @@ export class CloseprivateguestPage {
     this.statusBar.styleLightContent();
   }
   form:FormGroup =this.fb.group({
-    customerStatus:['2',Validators.required],
-    content:['',[Validators.required]], //委托书编号
+    customerStatus:['3',Validators.required],
+    content:['',[Validators.required]],
   });
   // errors={
   //   content:[
@@ -62,7 +62,8 @@ export class CloseprivateguestPage {
     this.customerProvider.prclose({
       customerStatus:this.form.value.customerStatus,
       content:this.form.value.content,
-      customerId:this.customerid
+      customerId:this.customerid,
+      customerPhone:this.clientPhone
     }).then(res => {
       console.log(res);
       if(res.success){
@@ -75,17 +76,6 @@ export class CloseprivateguestPage {
     console.log(this.form.value)
   }
 
-//禁用调出键盘
-  ionViewDidEnter(){
-    // let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-    // this.renderer.setElementAttribute(input, 'disabled', 'true');
-
-    this.navBar.backButtonClick = () => {
-      // this.navCtrl.push(HomesearchPage);
-      this.navCtrl.popToRoot();
-    };
-
-  }
 
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
