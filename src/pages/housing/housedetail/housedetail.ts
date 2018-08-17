@@ -374,13 +374,22 @@ export class HousedetailPage {
   addContactBolean = true;
   //表单提交
   save(){
-
+    console.log('formvalue',this.form.value);
     if(this.form.value.tagsStr){
       this.form.patchValue({
         tags:this.tagsSum(this.form.value.tagsStr)
       });
       delete this.form.value.tagsStr;
     }
+
+    if(isNaN(this.form.value.tags)){
+      this.form.patchValue({
+        tags:0
+      });
+      delete this.form.value.tagsStr;
+    }
+    console.log('修改之后',this.form.value);
+
 
    if(this.addContactBolean){
      // 联系人

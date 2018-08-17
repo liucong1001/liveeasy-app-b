@@ -40,12 +40,10 @@ export class PublicpassengerPage {
    */
   params:PublicCustomerPageParams = {
     customerSrc:'0',
-    intentionDiviCode:'0',//区县
-    intentionRoom:'0', //居室
-    intentionTradeCode:'0',//商圈
+    // intentionDiviCode:'0',//区县
+    // intentionRoom:'0', //居室
+    // intentionTradeCode:'0',//商圈
     priceUnit:'1',
-    // sort:'1',
-    // customerType:'1',
   };
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController,
@@ -155,7 +153,7 @@ export class PublicpassengerPage {
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
-    this.params.intentionDiviCode='0';
+    // this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;

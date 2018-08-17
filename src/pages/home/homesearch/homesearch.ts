@@ -75,7 +75,7 @@ export class HomesearchPage {
       this.floorList.push(item.keyword);
       this.localStorageProvider.set('floorList',this.floorList);
     }
-    this.navCtrl.push(HousingPage,{item:item});
+    this.navCtrl.push(HousingPage,{item:item,pageName:'HomesearchPage'});
   }
 
   onClear(event){

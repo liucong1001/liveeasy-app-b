@@ -122,15 +122,15 @@ export class HousingPage {
        this.floorName = '';
     }else {
       this.floorName = this.navParams.get('item').keyword;
-      this.params.estateId = this.navParams.get('item').id;
+      this.params.estate = this.navParams.get('item').id;
     }
 
-      if(!navParams.get('item')){
-        this.floorName = '';
-      }else {
-        this.floorName = navParams.get('item').keyword;
-        this.params.estateId = navParams.get('item').id;
-      }
+      // if(!navParams.get('item')){
+      //   this.floorName = '';
+      // }else {
+      //   this.floorName = navParams.get('item').keyword;
+      //   this.params.estateId = navParams.get('item').id;
+      // }
 
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
@@ -298,11 +298,15 @@ export class HousingPage {
 
   ionViewWillEnter() {
     this.statusBar.styleDefault();
-
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HousingPage');
-    this.search('properties');
+
+    if(this.navParams.data.pageName=='HomesearchPage'){
+        this.search('propQuery');
+    }else {
+        this.search('properties');
+    }
+
     this.imgHeader = this.configProvider.set().img;
   }
     //禁用调出键盘
@@ -583,7 +587,6 @@ export class HousingPage {
           }
         });
       }
-
       console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
@@ -834,7 +837,7 @@ class  PropertyPageParams {
   bedrooms?:string;//户室
   city?:string;
   division?:string;
-  estateId?:string;//小区
+  // estateId?:string;//小区
   param?:string;
   tags?:any;
   elevators?:any;//是否有电梯

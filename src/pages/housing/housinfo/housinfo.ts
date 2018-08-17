@@ -110,6 +110,8 @@ export class HousinfoPage {
     this.statusBar.styleLightContent();
 
   }
+  imgSign:any;
+  smImgSign:any;
   ionViewDidLoad() {
 
     let loading = this.loadingCtrl.create({
@@ -118,6 +120,9 @@ export class HousinfoPage {
     loading.present();
 
     this.imgHeader = this.configProvider.set().img;
+    this.imgSign = this.configProvider.set().imgSign;
+    this.smImgSign = this.configProvider.set().smSign;
+
     setInterval(()=>{
       this.slider.slideNext(300,true);
     },2000);
