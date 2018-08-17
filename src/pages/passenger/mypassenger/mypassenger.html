@@ -55,9 +55,9 @@
 
     <ion-list class="housList" style="margin-top: 2px">
 
-      <ion-item-sliding  *ngFor=" let item of pageData; index as i;">
+      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" >
 
-        <ion-item style="padding: 12px 15px 0;">
+        <ion-item style="padding: 12px 15px 0;" (ionChange)="share(item)">
 
               <ion-row (click)="gopassengerDetail(item)">
                 <ion-col col-9 tappable >

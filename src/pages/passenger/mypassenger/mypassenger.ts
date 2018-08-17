@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams,Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Navbar,ItemSliding  } from 'ionic-angular';
 import { AddpassengerPage } from './addpassenger/addpassenger';
 import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
@@ -85,6 +85,9 @@ export class MypassengerPage {
     }
   }
 
+  share(slidingItem: ItemSliding) {
+    slidingItem.close();
+  }
   ionViewDidLoad() {
     this.search();
     this.navBar.backButtonClick = this.backButtonClick;
@@ -106,6 +109,9 @@ export class MypassengerPage {
     // window.history.back();
     this.navbar =false;
     // ;alert('4545')
+  }
+  ionViewWillLeave(){
+    // this.share(item);
   }
 
   selected :any;
