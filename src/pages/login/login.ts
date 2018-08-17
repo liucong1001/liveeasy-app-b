@@ -42,11 +42,11 @@ export class LoginPage {
   ionViewDidLoad() {
     // 存储系统中存在登录ticket记录直接跳转到主界面
     if(this.localStorageProvider.get('ticket')){
-      this.navCtrl.push(TabsPage);
+      this.app.getRootNavs()[0].setRoot(TabsPage);
     }
   }
   goLogin(){
-    this.navCtrl.setRoot(LoginPage);
+    this.app.getRootNavs()[0].setRoot(LoginPage);
   }
 
   login(){
@@ -67,9 +67,8 @@ export class LoginPage {
         this.localStorageProvider.set('permissionArry',this.permissionArry);
         console.log('结果',this.permissionArry);
 
-
-        this.navCtrl.push(TabsPage);
-        // this.app.getRootNav().setRoot(TabsPage);
+        // this.navCtrl.push(TabsPage);
+        this.app.getRootNavs()[0].setRoot(TabsPage);
 
       }else{
         this.loginBtn = false;
@@ -92,10 +91,6 @@ export class LoginPage {
       }
       this.findPermission(data[i].childrens);
     }
-  }
-
-  registerBackButtonAction() {
-    return null;
   }
 
 

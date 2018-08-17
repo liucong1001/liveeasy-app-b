@@ -139,8 +139,9 @@ export class CenterPage {
     // window.location.reload();
     // this.navCtrl.push(AccountPage);
     // this.app.getActiveNavs()[0].setRoot("AccountPage");
-    let myModal = this.modalCtrl.create(LoginPage);
-    myModal.present();
+    // let myModal = this.modalCtrl.create(LoginPage);
+    // myModal.present();
+    this.app.getRootNavs()[0].setRoot(LoginPage);
     // this.navCtrl.push(AccountPage);
     this.navCtrl.swipeBackEnabled = false; //ios禁用右滑返回
   }

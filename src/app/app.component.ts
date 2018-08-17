@@ -18,7 +18,7 @@ import { JPush } from 'ionic3-jpush';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
   // rootPage:any = TabsPage; AccountPage
   tagsList:any;
   selected:any;
@@ -37,13 +37,12 @@ export class MyApp {
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jPush: JPush,
               ) {
-      if(!this.localStorageProvider.get('ticket')){
-          this.rootPage = LoginPage;
-      }
-    //标签
-    this.tagsList=this.localStorageProvider.get('tagsList');
-
+    if(this.localStorageProvider.get('ticket')){
+      this.rootPage = TabsPage;
+    }
     platform.ready().then(() => {
+      //标签
+      this.tagsList=this.localStorageProvider.get('tagsList');
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleLightContent();//头部信号字体颜色
@@ -110,7 +109,6 @@ export class MyApp {
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
-
       if(!this.localStorageProvider.get('ticket')){
         this.showExit();
         return;
@@ -136,9 +134,7 @@ export class MyApp {
       let activeNav = tabs && tabs.getSelected();
 
       if (activeNav) {
-        if (activeNav === LoginPage) {
-          return this.showExit();
-        }
+
         if (activeNav.canGoBack()) {
           this.nativePageTransitions.cancelPendingTransition();
           let options: NativeTransitionOptions = {
