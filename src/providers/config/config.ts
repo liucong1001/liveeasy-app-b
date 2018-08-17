@@ -15,6 +15,8 @@ export class ConfigProvider {
     cmsHttp:'https://beta-cms.zdfc.com/',
     img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
     errorImg:'assets/imgs/http502.png',
+    imgSign:'?x-oss-process=style/b-detail',
+    smSign:'?x-oss-process=style/b-list',
   };
   constructor(public http: HttpClient) {
     if(this.onLine){
@@ -26,6 +28,8 @@ export class ConfigProvider {
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:'https://zdfc-beta.oss-cn-shanghai.aliyuncs.com/',
         errorImg:'assets/imgs/http502.png',
+        imgSign:'?x-oss-process=style/b-detail',
+        smSign:'?x-oss-process=style/b-list',
       }
     }
   }
