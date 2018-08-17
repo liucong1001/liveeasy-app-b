@@ -139,8 +139,8 @@ export class CustomerProvider {
     return this.httpProvider.httpGet(this.publicDetailPath+'?id='+id);
   }
 
-  public mfinish(id,status,content){
-    return this.httpProvider.httpPostForm(this.finishPath,"id=" +id + "&status="+status + '&content=' + content);
+  public mfinish(id,status,content,customerId){
+    return this.httpProvider.httpPostForm(this.finishPath,"id=" +id + "&status="+status + '&content=' + content + '&customerId='+customerId);
   }
 
 

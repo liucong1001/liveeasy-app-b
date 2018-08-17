@@ -27,15 +27,28 @@ export class PlookrecordPage {
   lRecord:any;
   customerid:any;
   params:any;
+  statusOne=[];
+  statusTwo=[];
+  statusThree=[];
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
     this.customerid=navParams.get('id').customerId;
-    console.log(this.customerid)
+    console.log(this.customerid);
     this.params = {customerId:this.customerid}
       this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
         console.log(res.data.result);
-        this.lRecord=res.data.result
+        this.lRecord=res.data.result;
+        for(var i in this.lRecord){
+          if(this.lRecord[i].followStatus==1){
+            this.statusOne.push(this.lRecord[i])
+          }else if(this.lRecord[i].followStatus==2){
+            this.statusTwo.push(this.lRecord[i])
+          }if(this.lRecord[i].followStatus==3){
+            this.statusThree.push(this.lRecord[i])
+          }
+        }
+        console.log(this.statusOne,this.statusTwo)
       });
   }
 //状态栏文字颜色修改-白色
@@ -70,11 +83,11 @@ export class PlookrecordPage {
     confirm(item) {
       let alert = this.alertCtrl.create({
         title: '提示',
-        message: '关闭吗？',
+        message: '完成吗？',
         buttons: [
           {
-            text: '关闭',
-            role: '关闭',
+            text: '完成',
+            role: '完成',
             handler: () => {
               console.log('Cancel clicked');
             }
@@ -84,7 +97,7 @@ export class PlookrecordPage {
             handler: () => {
               console.log('Buy clicked');
               //完成约看——状态
-              this.customerProvider.mfinish(item.followupId,2,'').then(res => {
+              this.customerProvider.mfinish(item.followupId,2,'',this.customerid).then(res => {
                 console.log(res);
                 if(res.success){
                   this.toast.msg('完成成功');
@@ -104,7 +117,8 @@ export class PlookrecordPage {
 
   close(item){
     this.openWin(ClosePage,{
-item:item,
+      item:item,
+      customerId:this.customerid
     })
   }
   addHouse(){

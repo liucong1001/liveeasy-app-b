@@ -27,10 +27,9 @@ export class ClosePage {
   constructor(public navCtrl: NavController,private renderer:Renderer,
               public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar,
               private fb:FormBuilder, public navParams: NavParams,public customerProvider:CustomerProvider,) {
-    this.customerid=navParams.get('item');
-    console.log(this.customerid)
+    this.customerid=navParams.get('customerId');
+    console.log(this.customerid);
     this.followupId=navParams.get('item').followupId;
-
   }
 
   ionViewDidLoad() {
@@ -45,12 +44,14 @@ export class ClosePage {
     this.statusBar.styleLightContent();
   }
   sub(){
-    this.customerProvider.mfinish(this.followupId,3,this.form.value.content).then(res => {
+    this.customerProvider.mfinish(
+      this.followupId,3,this.form.value.content,this.customerid
+    ).then(res => {
       console.log(res);
       if(res.success){
         this.toast.msg('关闭成功');
         setTimeout(()=>{
-          this.openWin(PlookrecordPage);
+          this.openWin(PlookrecordPage,{id:this.customerid});
         },200);
       }else {
         this.toast.error('关闭失败')

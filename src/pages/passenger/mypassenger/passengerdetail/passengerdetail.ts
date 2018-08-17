@@ -157,8 +157,8 @@ export class PassengerdetailPage {
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
     customerName:[
-      new ErrorMessage('required','电话必须要填写！'),
-      new ErrorMessage('pattern', '手机号码格式不正确！'),
+      // new ErrorMessage('required','业主姓名必须要填写！'),
+      new ErrorMessage('pattern','请填写中文或英文'),
     ],
   };
 
