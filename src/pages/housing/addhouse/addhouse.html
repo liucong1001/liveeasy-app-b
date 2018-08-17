@@ -27,13 +27,13 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" pattern="/[^/d]/g" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
+        <ion-input type="text" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label >楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="number" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
+          <ion-input type="text" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">层</span>
@@ -50,7 +50,7 @@
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房间号<i class="text-danger">*</i></ion-label>
-        <ion-input type="number"  pattern="[0-9]*" placeholder="请输入数字" formControlName="houseNo" class="p0">
+        <ion-input type="text"  pattern="[0-9]*" placeholder="请输入数字" formControlName="houseNo" class="p0">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.houseNo"  [control]="form.get('houseNo')"  ></valid-error>
@@ -59,25 +59,28 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
       <div *ngIf="form.value.spaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
       </div>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="number"  formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" pattern="[0-9]*" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
+
         <span class="hdRightInfo">平</span>
         <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
           <p>*超出长度!</p>
         </div>
       </div>
+      <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
       <!--<div class="hdRightInfo">-->
       <!--<ion-item class="pl12">-->
@@ -184,13 +187,13 @@
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话1<i class="text-danger">*</i></ion-label>
-        <ion-input type="number" placeholder="请填写业主电话"  formControlName="contactInfo">
+        <ion-input type="text" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="number" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
+        <ion-input type="text" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
@@ -206,12 +209,13 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="[0-9]*"  formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="text"  pattern="[0-9]*"  formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
       </div>
     </div>
+    <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
     <!--END-->
 
 
@@ -220,12 +224,13 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+          <ion-input type="text"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">元/月</span>
       </div>
     </div>
+    <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
     <!--END-->
     <!--租售-->
     <!--END-->
@@ -273,11 +278,11 @@
             <span class="upHe">楼户比例</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number"  formControlName="elevators"  class="upI" />
+            <input type="text" formControlName="elevators"  class="upI" />
             <span class="upPostion">梯</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number"  formControlName="apartments" class="upI"/>
+            <input type="text"  formControlName="apartments" class="upI"/>
             <span class="upPostion">户</span>
           </ion-col>
         </ion-row>
@@ -360,7 +365,7 @@
     </ion-list>
     <ion-grid>
       <ion-row>
-        <button ion-button full color="danger"  [disabled]="form.invalid" type="button" (click)="save()" class="radius update">提交</button>
+        <button ion-button full color="danger" [disabled]="form.invalid" type="button" (click)="save()" class="radius update">提交</button>
       </ion-row>
     </ion-grid>
   </form>

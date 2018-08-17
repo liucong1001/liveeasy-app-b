@@ -139,7 +139,7 @@ export class AddhousePage {
             new ErrorMessage('pattern','请填写数字'),
         ],
       houseNo:[
-        new ErrorMessage('pattern','请填写英文或数字'),
+        new ErrorMessage('pattern','请填写数字'),
       ],
       contact:[
            new ErrorMessage('required','业主姓名必须要填写！'),
@@ -163,6 +163,15 @@ export class AddhousePage {
       ],
       hasElevator:[
         new ErrorMessage('required','是否配备电梯必须要填写！'),
+      ],
+      spaceSize:[
+        new ErrorMessage('pattern','请填写数字'),
+      ],
+      innerSpaceSize:[
+        new ErrorMessage('pattern','请填写数字'),
+      ],
+      propertyPrice:[
+        new ErrorMessage('pattern','请填写数字'),
       ],
     };
 

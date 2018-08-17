@@ -259,6 +259,15 @@ export class HousedetailPage {
     contactInfo2:[
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
+    spaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    innerSpaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    propertyPrice:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
   };
 
   /**
