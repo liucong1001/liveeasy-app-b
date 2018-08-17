@@ -52,7 +52,6 @@ export class LetteratorneyPage {
         this.data= res.data;
         this.content = JSON.parse(res.data.content) ;
 
-        this.data = res.data;
         this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({
           delegateDocSn:this.content.delegateDocSn,
