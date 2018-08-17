@@ -12,17 +12,16 @@
   <!-- 没有委托书 -->
   <form [formGroup]="form">
     <ion-list *ngIf="permission">
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="data?.submitterName">
         <ion-label>
           上传人:{{data?.submitterName }}
         </ion-label>
       </ion-item>
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="data?.submitTime">
         <ion-label>
           上传时间:{{data?.submitTime |  date:'yyyy-MM-dd HH:mm:ss'}}
         </ion-label>
       </ion-item>
-
     </ion-list>
     <ion-list *ngIf="permission">
       <ion-item class="pl12 hdRightInfo1" >

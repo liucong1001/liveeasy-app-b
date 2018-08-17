@@ -8,6 +8,7 @@ import {SearchhousePage} from "../../../housing/housedetail/searchhouse/searchho
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {MypassengerPage} from "../mypassenger";
 import {StatusBar} from "@ionic-native/status-bar";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 @IonicPage()
 @Component({
   selector: 'page-passengerlook',
@@ -50,29 +51,34 @@ export class PassengerlookPage {
       this.events.unsubscribe('bevents');
       this.coveId=params.convIdReq;
       this.estateName=params.estateName;
-      console.log(this.coveId)
+      // console.log(this.coveId)
     });
     this.openWin(SearchPage);
   }
 
   looks(){
-    this.customerProvider.prlook({
-      property:{convId:this.coveId},
-      appointmentTm:new Date(this.form.value.appointmentTm).getTime(),
-      customer:{customerId:this.customerid}
-    }).then(res => {
-      console.log(res);
-      if(res.success){
-        this.toast.msg('约看成功!');
-        setTimeout(()=>{
-          this.openWin(MypassengerPage)
-        },500)
-      }else if (res.msg.indexOf('您已约看') !=-1){
-        this.toast.showLongToast('您已约看该客户，请先关闭约看');
-      }else {
-        this.toast.error('约看失败');
-      }
-    });
+    if(this.estateName){
+      this.customerProvider.prlook({
+        property:{convId:this.coveId},
+        appointmentTm:new Date(this.form.value.appointmentTm).getTime(),
+        customer:{customerId:this.customerid}
+      }).then(res => {
+        console.log(res);
+        if(res.success){
+          this.toast.msg('约看成功!');
+          setTimeout(()=>{
+            this.openWin(MypassengerPage)
+          },500)
+        }else if (res.msg.indexOf('您已约看') !=-1){
+          this.toast.showLongToast('您已约看该客户，请先关闭约看');
+        }else {
+          this.toast.error('约看失败');
+        }
+      });
+    }else {
+      this.toast.error('请选择房源');
+    }
+
     // console.log(this.form.value)
   }
 

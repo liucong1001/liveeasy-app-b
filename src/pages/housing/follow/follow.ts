@@ -9,6 +9,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
+import {PropertyProvider} from "../../../providers/property/property";
 /**
    房源带看页面
  */
@@ -24,21 +25,26 @@ export class FollowPage {
   followuptime:any;
   convid:any;
   standardAddress:any;
+  result=[];
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,private renderer:Renderer,
-              public toast:ToastComponent,
+              public toast:ToastComponent,public propertyProvider: PropertyProvider,
               public  followProvider: FollowProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
 
     this.propertyid = navParams.get('item').propertyId;
-    this.estatename = navParams.get('item').estateName;
+    // this.estatename = navParams.get('item').estateName;
     this.convid = navParams.get('item').convId;
     this.standardAddress = navParams.get('item').standardAddress;
     this.followuptime=new Date().getTime();
     console.log('跟进',navParams);
-    console.log(this.propertyid)
+    console.log(this.propertyid);
+    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
+      this.result=res.data.result[0];
+    });
+
 
   }
 
@@ -56,6 +62,7 @@ export class FollowPage {
     var title = {title:data};
     return title;
   }
+
 
 
   subFollow(){

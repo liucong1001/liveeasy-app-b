@@ -37,6 +37,7 @@ export class ClosehousePage {
   realtorSourceId:any;
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
+  result:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,public toast:ToastComponent,private renderer:Renderer,
               public  closehouseProvider: ClosehouseProvider,public nativePageTransitions: NativePageTransitions,
@@ -48,12 +49,7 @@ export class ClosehousePage {
     //     this.data = res.data;
       console.log('获取关闭',this.data);
 
-      this.estatename = this.data.estateName;
-      this.convid = this.data.convId;
-      this.standardAddress = this.data.standardAddress;
-      this.closetime=new Date().getTime();
-      this.realtorId = this.data.realtorId;
-      this.realtorSourceId=this.data.realtorSourceId;
+
 
       console.log(this.loginId,this.realtorSourceId);
       //判断归属人和操作人是否一致
@@ -73,6 +69,23 @@ export class ClosehousePage {
       }
 
     // });
+
+
+
+    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
+      if(res.data.result){
+        this.result=res.data.result[0];
+        console.log(this.result);
+        this.estatename = this.result.estateName;
+        this.convid = this.result.convId;
+        this.standardAddress = this.result.standardAddress;
+        this.closetime=new Date().getTime();
+        this.realtorId = this.data.realtorId;
+        this.realtorSourceId=this.data.realtorSourceId;
+
+      }
+
+    });
 
 
   }

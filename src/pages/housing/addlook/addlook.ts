@@ -37,17 +37,33 @@ export class AddlookPage {
   @ViewChild('searchBar') searchBar:Searchbar;
   fileTransfer: FileTransferObject = this.transfer.create();
   @ViewChild(Navbar) navBar: Navbar;
+  result:any;
+  propertyid:any;
+  convId:any;
+  estateName:any;
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,private renderer:Renderer,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
-    this.data = navParams.get('item');
-    this.standardAddress = navParams.get('standardAddress');
+    this.propertyid = navParams.get('item').propertyId;
+    // this.standardAddress = navParams.get('standardAddress');
+    console.log(this.propertyid);
+
+    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
+      if(res.data.result){
+        this.result=res.data.result[0];
+        console.log(this.result);
+        this.convId=this.result.convId;
+        this.estateName=this.result.estateName;
+        this.standardAddress=this.result.standardAddress;
+      }
+
+    });
   }
 
   ionViewDidLoad() {
-    console.log('带看',this.data,this.data.convId);
+    console.log('带看',this.convId);
     this.imgHeader = this.configProvider.set().img;
     this.navBar.backButtonClick = this.backButtonClick;
   }

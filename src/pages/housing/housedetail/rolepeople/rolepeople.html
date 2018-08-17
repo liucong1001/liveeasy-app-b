@@ -13,13 +13,13 @@
 <ion-content>
 
   <ion-list *ngIf="data">
-    <ion-item class="updateHegiht"  *ngIf="data.initRealtorName != undefined">
+    <ion-item class="updateHegiht">
       <ion-row>
         <ion-col col-5>
           首次录入人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.initRealtorName}}
+          {{data?.realtorId}}
         </ion-col>
       </ion-row>
     </ion-item>
@@ -33,17 +33,17 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht"  *ngIf="data.initRealtorName != undefined">
+    <ion-item class="updateHegiht">
       <ion-row>
         <ion-col col-5>
           录入人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.initRealtorName}}
+          {{data?.initRealtorId}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht"  *ngIf="data.activiateTime != undefined">
+    <ion-item class="updateHegiht" >
       <ion-row class="m5">
         <ion-col col-5>
           激活时间
@@ -53,63 +53,63 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.realtorName != undefined">
+    <ion-item class="updateHegiht">
       <ion-row class="m5">
         <ion-col col-5>
           归属人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.realtorName}}
+          {{data?.realtorId}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.picstor != undefined">
+    <ion-item class="updateHegiht" >
       <ion-row>
         <ion-col col-5>
           实勘人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.picstor}}
+          {{data?.consolidatePsn}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.picstorTime != undefined">
+    <ion-item class="updateHegiht" >
       <ion-row class="m5">
         <ion-col col-5>
           实勘达成时间
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.picstorTime | date:'yyyy年MM月dd日'}}
+          {{data?.onsiteVisitTime | date:'yyyy年MM月dd日'}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.keyAgentName != undefined">
+    <ion-item class="updateHegiht">
       <ion-row>
         <ion-col col-5>
           钥匙人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.keyAgentName}}
+          {{data?.keyAgentId}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.updator != undefined">
+    <ion-item class="updateHegiht">
       <ion-row>
         <ion-col col-5>
           最后修改人
         </ion-col>
         <ion-col col-7 class="tr">
-          {{data.updator}}
+          {{data?.lastUpdatePsn}}
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item class="updateHegiht" *ngIf="data.updatorTime != undefined">
+    <ion-item class="updateHegiht">
       <ion-row class="m5" >
         <ion-col col-5>
           最后修改时间
         </ion-col>
         <ion-col col-7 class="tr">
-          {{ data.updatorTime| date:'yyyy年MM月dd日'}}
+          {{ data?.updatedTime| date:'yyyy年MM月dd日'}}
         </ion-col>
       </ion-row>
     </ion-item>

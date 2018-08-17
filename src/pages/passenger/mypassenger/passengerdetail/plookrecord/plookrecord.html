@@ -24,7 +24,9 @@
   </ion-grid>
   <div>
     <ion-slides (ionSlideDidChange)="slideChanged()">
+
       <ion-slide>
+        <div *ngIf="statusOne==''" class="p15">暂无记录</div>
         <!--约看中-->
         <div *ngFor="let item of lRecord">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 1">
@@ -61,10 +63,10 @@
 
           </ion-row>
         </div>
-
       </ion-slide>
       <ion-slide>
         <!--已完成-->
+        <div *ngIf="statusTwo==''" class="p15">暂无记录</div>
         <div *ngFor="let item of lRecord">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 2">
             <ion-col col-12>
@@ -94,6 +96,7 @@
       </ion-slide>
       <ion-slide>
         <!--已关闭-->
+        <div *ngIf="statusThree==''" class="p15">暂无记录</div>
         <div *ngFor="let item of lRecord">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 3">
             <ion-col col-12>
