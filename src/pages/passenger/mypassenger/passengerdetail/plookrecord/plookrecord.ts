@@ -83,17 +83,17 @@ export class PlookrecordPage {
     confirm(item) {
       let alert = this.alertCtrl.create({
         title: '提示',
-        message: '完成吗？',
+        message: '确定完成吗？',
         buttons: [
           {
-            text: '完成',
+            text: '确定',
             role: '完成',
             handler: () => {
               console.log('Cancel clicked');
             }
           },
           {
-            text: '确定',
+            text: '取消',
             handler: () => {
               console.log('Buy clicked');
               //完成约看——状态

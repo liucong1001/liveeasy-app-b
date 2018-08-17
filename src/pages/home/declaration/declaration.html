@@ -5,6 +5,19 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher
+    [pullMax]="480"
+    [pullMin]="180"
+    (ionRefresh)="doRefresh($event)" class="refresh" >
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉推荐"
+      refreshingSpinner="circles"
+      refreshingText="加载数据中">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="tc refreshTip" *ngIf="not">暂无更新</div>
+  <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条信息</div>
   <ion-grid class="p0">
     <!--筛选-->
     <!--<ion-row class="houseMenu">-->

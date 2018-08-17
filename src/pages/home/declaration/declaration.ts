@@ -198,6 +198,91 @@ export class DeclarationPage {
 
   }
   searchFloorNum = 0; //初始化搜索次数
+
+
+  pageResult :any;
+  totalRecords:any;
+  newCount:any;
+  firstPageData = [];
+  badHttp = false;
+  num :any;
+  haveData=false;
+  timer:any;
+  not=false;
+  doRefresh(refresher) {
+
+    if(refresher.pullingIcon !='arrow-dropdown'){
+      // alert(2);
+      refresher.pullingText='松开推荐'
+    }
+    this.homeProvider.successOrder(this.currentPage,this.params).then(res=>{
+      this.totalRecords = res.data.totalRecords;
+      this.totalPages = res.data.totalPages;
+      let newCount = this.checkUpdateCount(res.data.result);
+      this.newCount=newCount;
+      this.firstPageData = res.data.result;
+      refresher.complete();
+      if (res.data.result && res.data.result.length > 0) {
+        this.pageData = [];
+        for (let i = 0; i < res.data.result.length; i ++) {
+
+          this.pageData.push(res.data.result[i])
+        }
+        this.badHttp = false;
+      }
+
+      if (newCount > 0 ) {
+        this.num=3;
+        this.haveData=true;
+        this.timer=setInterval(()=>{
+          this.num--;
+          if(this.num===0){
+            this.haveData=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
+        // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
+      } else {
+        // this.toast.defaultMsg('middle','暂无更新111');
+        this.not=true;
+        this.num=3;
+        this.timer=setInterval(()=>{
+          this.num--;
+          // console.log(this.num)
+          if(this.num===0){
+            this.not=false;
+            window.clearInterval(this.timer);
+          }
+        },1000);
+      }
+
+
+    }).catch(err=>{
+      if(err){
+        this.badHttp = true;
+        refresher.complete();
+      }
+    });
+  }
+
+
+  checkUpdateCount(result) {
+    let count = 0;
+    result = result || [];
+    this.firstPageData = this.firstPageData || [];
+    for (let item in result) {
+      var rs = this.firstPageData.find(firstData => firstData.propertyId == result[item].propertyId ) || [];
+      if (rs.length == 0) {
+        count ++;
+      }
+    }
+    return count;
+  }
+
+
+
+
+
   //menu
   showMenu2(){
     // this.searchFloorNum =1;
