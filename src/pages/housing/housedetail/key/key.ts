@@ -104,6 +104,14 @@ export class KeyPage {
   });
 //上传钥匙信息
   goYc(){
+    var data = {
+      propertyId:this.propertyid,
+      createTime:this.attorneys,
+      keySn:this.form.value.keySn,
+      keyAddress:this.form.value.keyAddress,
+      keyDlgtFilePics:JSON.stringify(this.imgData),
+    };
+    console.log('参数',data);
     this.propertyProvider.key({
       propertyId:this.propertyid,
       createTime:this.attorneys,

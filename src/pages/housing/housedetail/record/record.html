@@ -51,7 +51,7 @@
                       <div>{{items.agentName}}</div>
                       <!--<a class="emptyTips">空看</a>-->
                       <div class="m10"> {{items.content}}</div>
-                      <div><img [src]="imgHeader+pic(items.followupPics)" width="200" height="100"></div>
+                      <div><img [src]="imgHeader+pic(items?.followupPics)" width="200" height="100"></div>
                       <div><font color="#aaa" size="1">{{items.followupTimeVO}}</font></div>
                 </ion-item>
 

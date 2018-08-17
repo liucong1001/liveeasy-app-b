@@ -598,7 +598,7 @@ export class HousingPage {
 
   pic(data) {
     if (data) {
-    return JSON.parse(data).imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110'
+    return JSON.parse(data).imagePath+this.configProvider.set().smSign
     }
   }
 

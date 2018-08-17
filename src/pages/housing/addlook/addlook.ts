@@ -173,7 +173,7 @@ export class AddlookPage {
     save(){
       var followupPics = [{
         imageId:this.nowDateFile,
-        bucketId:'liveeasydev',
+        bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
         imagePath:this.imagePath,
         thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
         position:'',
@@ -181,7 +181,7 @@ export class AddlookPage {
       }];
 
       this.formData = {
-        bucketId:'liveeasydev',
+        bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
         content:this.content,
         followupCode:'3', //  区别空看和跟近
         followupPics:JSON.stringify(followupPics),

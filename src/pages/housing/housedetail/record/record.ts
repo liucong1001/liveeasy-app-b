@@ -34,7 +34,7 @@ export class RecordPage {
               public  configProvider:ConfigProvider) {
     this.propertyid = navParams.get('item').propertyId;
     this.recordprovider.getRecord(this.propertyid).then(res => {
-      console.log(res);
+      console.log('记录',res);
         this.followUp = res.data.propFollowupInfos;
         this.lookEmpty=res.data.propEmptyLookInfos;
     });
@@ -66,7 +66,13 @@ export class RecordPage {
   }
 
   pic(data){
-    return JSON.parse(data)[0].thumbnail
+    console.log('data',typeof (JSON.parse(data)) );
+   if(JSON.parse(data).length>=1){
+     return JSON.parse(data)[0].imagePath+this.configProvider.set().smSign
+   }else {
+     return
+   }
+
   }
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

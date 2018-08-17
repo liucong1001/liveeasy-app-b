@@ -35,6 +35,7 @@ export class UploadComponent {
   data: string = "";
   camerData :string = "";
   imageBase64 : Array<string>=[];
+  smSign:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
@@ -42,8 +43,7 @@ export class UploadComponent {
               public localStorageProvider:LocalStorageProvider
   ) {
     this.imgHeader = this.configProvider.set().img;
-
-
+    this.smSign = this.configProvider.set().smSign;
   }
 
   ngOnInit(){
@@ -197,9 +197,9 @@ export class UploadComponent {
         var pic = {
           // imageId:this.nowDateFile,
           imageId:options.fileName.split(".")[0],
-          bucketId:'liveeasydev',
-          imagePath:this.imagePath,
-          thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
+          bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
+          imagePath:this.imagePath+'?x-oss-process=style/b-detail',
+          thumbnail:this.imagePath+'?x-oss-process=style/b-list',
           position:this.position,
           desc:this.desc,
         };
