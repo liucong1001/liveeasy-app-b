@@ -42,7 +42,7 @@ export class ClosehousePage {
               public  closehouseProvider: ClosehouseProvider,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
     this.propertyid = navParams.get('propertyid');
-    this.loginId=this.localStorageProvider.get('loginInfo').id;
+    this.loginId=this.localStorageProvider.get('loginInfo').user.id;
     this.data = navParams.get('item');
     // this.propertyProvider.getRecord(this.propertyid).then(res=>{
     //     this.data = res.data;

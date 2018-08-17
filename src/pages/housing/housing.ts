@@ -140,7 +140,8 @@ export class HousingPage {
     this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
     this.cxJSON.unshift({name:'全部',val:''});
     //查询列表，行政区参数
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+    // console.log('查询参数登录',this.localStorageProvider.get('loginInfo')['user']);
     this.params.division = loginUserDistrict;
 
     if(this.localStorageProvider.get('area')==null){
@@ -186,7 +187,7 @@ export class HousingPage {
   go(item) {
     this.choseDivision = false;
     if(item.id=='99'){
-      this.params.division = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+      this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
       this.params.area = '';
       this.searchArea = '不限';
       this.district = [];

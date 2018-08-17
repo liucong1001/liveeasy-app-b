@@ -208,8 +208,8 @@ export class UploadComponent {
          */
         if(pic.position=='add1'||pic.position=='add2'||pic.position=='add3'||pic.position=='add4'||pic.position=='add5'
           ||pic.position=='add6'||pic.position=='add7'){
-          pic['uploader'] = this.localStorageProvider.get('loginInfo').id;
-          pic['uploadName'] = this.localStorageProvider.get('loginInfo').name;
+          pic['uploader'] = this.localStorageProvider.get('loginInfo').user.id;
+          pic['uploadName'] = this.localStorageProvider.get('loginInfo').user.name;
         }
 
 

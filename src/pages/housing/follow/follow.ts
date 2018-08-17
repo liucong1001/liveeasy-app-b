@@ -61,7 +61,7 @@ export class FollowPage {
   subFollow(){
       // alert('222');
       this.followProvider.getfollow({
-        agentId:this.localStorageProvider.get('loginInfo').id,
+        agentId:this.localStorageProvider.get('loginInfo').user.id,
         followupCode:this.form.value.followupCode,
         content:this.form.value.content,
         propertyId:this.propertyid,

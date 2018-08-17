@@ -83,7 +83,9 @@ export class PropertyProvider {
    * @returns {Promise<any>}
    */
   pageSearch(currentPage,params,qId){
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+    console.log('code',this.localStorageProvider.get('loginInfo')['user']['office']['area']['code']);
+     // var loginUserDistrict='213';
     var loginUserProvince = loginUserDistrict.substring(0,4);
     var qType;
     if(qId == 'propQuery'){
@@ -99,7 +101,7 @@ export class PropertyProvider {
       qId:qId,
       qType:qType,
       city:loginUserProvince,
-      owner:this.localStorageProvider.get('loginInfo')['company']['id'],
+      owner:this.localStorageProvider.get('loginInfo')['user']['company']['id'],
       ...params,
     };
 
@@ -135,7 +137,7 @@ export class PropertyProvider {
   }
   //行政区划
   getDivision(){
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
     var loginUserProvince = loginUserDistrict.substring(0,4);
     var data = {
       qId:'division',
@@ -196,7 +198,7 @@ export class PropertyProvider {
   //专用版楼盘搜索
   searchFloor(keyword){
 
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
     var city = loginUserDistrict.substring(0,4);
     var data = {
       qId:'search',

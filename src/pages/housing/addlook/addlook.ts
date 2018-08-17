@@ -176,7 +176,7 @@ export class AddlookPage {
         recordTime:new Date().getTime(),
         size:'',
         thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
-        agentId:this.localStorageProvider.get('loginInfo').id,
+        agentId:this.localStorageProvider.get('loginInfo').user.id,
       };
 
       console.log('表单内容',this.formData);

@@ -59,7 +59,7 @@ export class AddpassengerPage {
        this.agentList = res;
        console.log(this.agentList)
       for(var i in this.agentList){
-        if(this.agentList[i].id == this.localStorageProvider.get('loginInfo').id){
+        if(this.agentList[i].id == this.localStorageProvider.get('loginInfo').user.id){
           console.log(this.agentList[i].id)
           this.form.patchValue({
             agentId:this.agentList[i].id

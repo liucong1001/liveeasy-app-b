@@ -49,9 +49,9 @@ export class CenterPage {
 
   ) {
 
-    this.name = this.localStorageProvider.get('loginInfo').name;
-    this.gh=this.localStorageProvider.get('loginInfo').no;
-    this.positionCateName =this.localStorageProvider.get('loginInfo').positionCateName;
+    this.name = this.localStorageProvider.get('loginInfo').user.name;
+    this.gh=this.localStorageProvider.get('loginInfo').user.no;
+    this.positionCateName =this.localStorageProvider.get('loginInfo').user.positionCateName;
     this.photo = 'assets/imgs/center.jpg';
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";

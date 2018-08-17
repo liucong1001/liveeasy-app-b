@@ -58,10 +58,10 @@ export class HomePage {
             }
           }
           this.localStorageProvider.set('tagsList',this.addHomeTag);
-
         }
     });
-
+    // this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'
+    console.log('上一个页面',this.navCtrl.last()&&this.navCtrl.last().name);
   }
 
 

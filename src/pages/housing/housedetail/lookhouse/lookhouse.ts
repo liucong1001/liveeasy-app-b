@@ -53,7 +53,7 @@ export class LookhousePage {
     this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
       console.log('房源详情',this.lockhoseDetail);
-      if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').id&&this.lockhoseDetail.auditStatus==3){
+      if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id&&this.lockhoseDetail.auditStatus==3){
         this.imgJson = JSON.parse(this.lockhoseDetail.content).propertyPics;
         console.log('房源图片', JSON.parse(this.lockhoseDetail.content).propertyPics);
       }else if(this.lockhoseDetail.pics) {
@@ -62,7 +62,7 @@ export class LookhousePage {
       /**
        * 判断是不是自己录入的房源  （24小时之内可以上传实勘图）
        */
-      if(res.data&&res.data.creater ==this.localStorageProvider.get('loginInfo').id){
+      if(res.data&&res.data.creater ==this.localStorageProvider.get('loginInfo').user.id){
          this.isCreater = true;
       }else {
          this.isCreater = false;

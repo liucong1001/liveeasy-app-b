@@ -64,7 +64,7 @@ export class AddhousePage {
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
-      cityCode:[this.localStorageProvider.get('loginInfo')['office']['area']['code'].substring(0,4)],
+      cityCode:[this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'].substring(0,4)],
       estate:[''],//楼盘
       estateName:['',[Validators.required]],
       estateId:[''],

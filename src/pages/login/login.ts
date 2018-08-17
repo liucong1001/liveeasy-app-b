@@ -58,7 +58,7 @@ export class LoginPage {
         this.localStorageProvider.set('loginInfo',res.data);
         //存相关信息
         this.localStorageProvider.set('loginName',res.data.loginName);
-        this.localStorageProvider.set('ticket',res.ticket);
+        this.localStorageProvider.set('ticket',res.data.ticket);
 
 
 

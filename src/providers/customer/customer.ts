@@ -46,7 +46,7 @@ export class CustomerProvider {
   }
   //区域
   area(){
-    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['office']['area']['code'];
+    var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
     var city = loginUserDistrict.substring(0,4);
     var data = {
       type:'4',
