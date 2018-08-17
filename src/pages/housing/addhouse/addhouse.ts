@@ -131,7 +131,7 @@ export class AddhousePage {
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
-            new ErrorMessage('pattern','请填写中文或英文'),
+            new ErrorMessage('pattern','请填写数字'),
         ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
