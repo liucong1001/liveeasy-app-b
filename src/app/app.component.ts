@@ -112,7 +112,6 @@ export class MyApp {
     this.platform.registerBackButtonAction(() => {
 
       if(!this.localStorageProvider.get('ticket')){
-        alert(this.localStorageProvider.get('ticket'))
         this.showExit();
         return;
       }
