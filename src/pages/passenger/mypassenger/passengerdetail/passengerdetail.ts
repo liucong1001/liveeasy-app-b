@@ -156,7 +156,10 @@ export class PassengerdetailPage {
       new ErrorMessage('required','电话必须要填写！'),
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
-
+    customerName:[
+      new ErrorMessage('required','电话必须要填写！'),
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
   };
 
   clickIntention(){

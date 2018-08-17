@@ -70,7 +70,8 @@ export class AddpassengerPage {
    //客户等级
    this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
    this.area = this.localStorageProvider.get('area');
-   this.scrollTo()
+   this.scrollTo();
+    this.area.unshift({name:'无',val:0});
   }
   @ViewChild(Content) content: Content;
 
@@ -116,7 +117,7 @@ export class AddpassengerPage {
      maxBedroom:[''],//最多居室
     minHall:[''],//最少厅
     maxHall:[''],//最多厅
-    decorations:[],//装修要求
+    decorationArray:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
     contactFreeTmArray:[[]],//免打扰时间

@@ -59,7 +59,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text"  formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -71,16 +71,15 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text"  formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
-
+        <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
         <span class="hdRightInfo">平</span>
         <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
           <p>*超出长度!</p>
         </div>
       </div>
-      <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
       <!--<div class="hdRightInfo">-->
       <!--<ion-item class="pl12">-->
@@ -215,7 +214,7 @@
         <span class="hdRightInfo">万</span>
       </div>
     </div>
-    <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
+
     <!--END-->
 
 
@@ -230,7 +229,6 @@
         <span class="hdRightInfo">元/月</span>
       </div>
     </div>
-    <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
     <!--END-->
     <!--租售-->
     <!--END-->
