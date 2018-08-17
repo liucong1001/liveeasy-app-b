@@ -110,6 +110,12 @@ export class MyApp {
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
+
+      if(!this.localStorageProvider.get('ticket')){
+        alert(this.localStorageProvider.get('ticket'))
+        this.showExit();
+        return;
+      }
       if (this.kb.isOpen()) {
         this.kb.close();
         return;
@@ -127,8 +133,6 @@ export class MyApp {
 
 
       let activeVC = this.nav.getActive();
-
-
       let tabs = activeVC.instance.tabs;
       let activeNav = tabs && tabs.getSelected();
 
