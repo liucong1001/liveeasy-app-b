@@ -28,6 +28,7 @@ export class FollowPage {
   result=[];
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
+  @ViewChild('select') select;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,private renderer:Renderer,
               public toast:ToastComponent,public propertyProvider: PropertyProvider,
@@ -53,6 +54,11 @@ export class FollowPage {
     this.navBar.backButtonClick = this.backButtonClick;
 
   }
+
+  ionViewWillLeave(){
+    this.select.close();
+  }
+
   form:FormGroup =this.fb.group({
     followupCode:['1',Validators.required],//内容
     content:['',[Validators.required]], //委托书编号

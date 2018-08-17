@@ -44,7 +44,7 @@
           <ion-list >
             <ion-item>
               <ion-label class="pl12">跟进类型</ion-label>
-              <ion-select okText="确定"  cancelText="关闭"  formControlName="followupCode" [selectOptions]="selectTitle('跟进类型')">
+              <ion-select  #select  okText="确定"  cancelText="关闭"  formControlName="followupCode" [selectOptions]="selectTitle('跟进类型')">
                 <ion-option value="1">日常跟进</ion-option>
                 <ion-option value="2">签约</ion-option>
               </ion-select>

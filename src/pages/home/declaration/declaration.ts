@@ -80,6 +80,7 @@ export class DeclarationPage {
 
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
+        this.firstPageData = res.data.result;
       }else{
         this.hasData = false;
       }
