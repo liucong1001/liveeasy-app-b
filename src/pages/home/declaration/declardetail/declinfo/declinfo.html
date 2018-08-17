@@ -606,7 +606,8 @@
             <ion-item>
               <div class="pl12">
                 <span>预计收款时间：</span>
-                <span>{{i.expectSrvcTime | date:'yyyy-MM-dd'}}</span>
+                <span *ngIf="i.expectSrvcTime!=0">{{i.expectSrvcTime | date:'yyyy-MM-dd'}}</span>
+                <span *ngIf="i.expectSrvcTime==0"></span>
               </div>
             </ion-item>
           </ion-list>
@@ -616,7 +617,8 @@
             <ion-item>
               <div class="pl12">
                 <span>预计收款节点：</span>
-                <span>{{i.expectSrvcNode | date:'yyyy-MM-dd'}}</span>
+                <span *ngIf="i.expectSrvcNode!=0">{{i.expectSrvcNode | date:'yyyy-MM-dd'}}</span>
+                <span *ngIf="i.expectSrvcNode==0"></span>
               </div>
             </ion-item>
           </ion-list>
@@ -646,7 +648,7 @@
             <ion-item>
               <div class="pl12">
                 <span>分成角色：</span>
-                <span>{{item.roleInOrder}}</span>
+                <span>{{rolePipe(item.roleInOrder)}}</span>
               </div>
             </ion-item>
           </ion-list>

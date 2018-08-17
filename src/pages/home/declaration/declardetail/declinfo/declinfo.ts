@@ -27,6 +27,7 @@ export class DeclinfoPage {
   asslist:any;
   localCode:any;
   uers:any;
+  roleOrder=[];
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public localStorageProvider: LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
@@ -44,13 +45,26 @@ export class DeclinfoPage {
     this.propertyinfo=navParams.get('order').order.propertyInfo;
     this.ownerinfo=JSON.parse(navParams.get('order').order.ownerInfo);
     console.log(this.ownerinfo);
-    console.log(this.customer)
+    console.log(this.customer);
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.roleOrder = new ArryCodeValuePipe().transform(this.localCode,'role_in_order');
+    console.log(this.roleOrder)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DeclinfoPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
+  //业绩类型——分成角色
+  rolePipe(val){
+    for(var i in this.roleOrder){
+      if(val == this.roleOrder[i].val){
+        return this.roleOrder[i].name;
+      }
+    }
+  }
+
+
 //报单客户
   censusJSON=[
     {name:'本地',val:1},
