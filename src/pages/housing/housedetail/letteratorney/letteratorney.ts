@@ -55,8 +55,8 @@ export class LetteratorneyPage {
         this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({
           delegateDocSn:this.content.delegateDocSn,
-          delegateBeginTm:new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
-          delegateEndTm:new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
+          delegateBeginTm:this.content.delegateBeginTm &&new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
+          delegateEndTm: this.content.delegateEndTm&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
           delegateDocPics:this.content.delegateDocPics,
           delegateStyle:this.content.delegateStyle
         });

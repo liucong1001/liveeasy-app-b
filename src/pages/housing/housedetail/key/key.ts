@@ -71,7 +71,7 @@ export class KeyPage {
       if(res.success&&res.data){
             this.data = res.data;
             this.keyData = JSON.parse(res.data.content.toString());
-            console.log('药匙详情',this.keyData);
+            console.log('药匙详情',this.keyData,this.data);
             this.form.patchValue({
               keySn: this.keyData.keysn,
               keyAddress: this.keyData.keyAddress,

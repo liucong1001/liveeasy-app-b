@@ -94,11 +94,11 @@
         </ion-row>
         <ion-row>
           <ion-col col-7>
-            <div *ngIf="houseData?.propertyPrice!=0">
+            <div *ngIf="!houseData?.unitPriceAudit">
               <span class="defaults"> 单价：</span>
               <span> {{unitPrice(houseData)}} 元/m²</span>
             </div>
-            <div *ngIf="houseData?.propertyPrice==0" class="priceAbnormal">
+            <div *ngIf="houseData?.unitPriceAudit" class="priceAbnormal">
               <span> 异常单价：</span>
               {{houseData?.propertyAuditContentVo.abnormalUnitPrice}}
               <span *ngIf="houseData?.propertyAuditContentVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
@@ -171,8 +171,9 @@
       <ion-col col-8>
         <div class="m5">业主委托书</div>
         <p>编号：{{letteratorneyData.delegateDocSn}}</p>
-        <p class="m5">类型：{{letteratorneyData.delegateStyle}}</p>
-        <p >起始时间：{{letteratorneyData.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
+        <!--<p class="m5">类型：{{letteratorneyData.delegateStyle}}</p>-->
+        <p *ngIf="letteratorneyData.delegateBeginTm">起始时间：{{letteratorneyData.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
+        <p *ngIf="letteratorneyData?.delegateEndTm!='null'">截止时间：{{letteratorneyData?.delegateEndTm | date:'yyyy/MM/dd'}}</p>
       </ion-col>
 
       <!--<div class=" bgWhite" *ngFor="let item of letteratorneyData.delegateDocPics">-->
