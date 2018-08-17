@@ -41,11 +41,14 @@ export class LookhousePage {
   propertyId:any;
   lockhoseDetail:any;
   isCreater:boolean;
+  positionList:any;
+  picSuccessAll:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams
               ,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,public localStorageProvider:LocalStorageProvider) {
+    this.picSuccessAll = false;
     this.data = navParams.get('item');
     this.propertyId = navParams.get('propertyId');
 
@@ -71,9 +74,14 @@ export class LookhousePage {
       if(!this.lockhoseDetail.content){
         this.imgJson =[];
       }
-
-
-
+      /**
+      * */
+      this.positionList =[];
+     if(this.lockhoseDetail.halls>=1){this.positionList.push('add3')}
+     if(this.lockhoseDetail.bedrooms>=1){this.positionList.push('add4')}
+     if(this.lockhoseDetail.kitchens>=1){this.positionList.push('add5')}
+     if(this.lockhoseDetail.bathrooms>=1){this.positionList.push('add6')}
+     console.log('存在',this.positionList);
     });
 
 
@@ -170,21 +178,51 @@ export class LookhousePage {
     // this.addArry(this.otherImg,this.imgData);
     this.formData.arrPic =  JSON.stringify(this.imgData);
      console.log('提交',this.imgData,this.formData);
-     this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
-        if(res.success){
-          console.log('成功返回的数据',res);
-          this.toast.msg('上传成功!');
-          setTimeout(()=>{
-            this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
-          },100);
-
-        }else {
-          this.toast.error('上传失败!');
-        }
-     },err=>{
-       this.toast.error('上传失败!');
-     })
+     // this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
+     //    if(res.success){
+     //      console.log('成功返回的数据',res);
+     //      this.toast.msg('上传成功!');
+     //      setTimeout(()=>{
+     //        this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
+     //      },100);
+     //
+     //    }else {
+     //      this.toast.error('上传失败!');
+     //    }
+     // },err=>{
+     //   this.toast.error('上传失败!');
+     // })
   }
+
+  getDiffarr(A,B){
+
+    var C = new Array();
+    var D = new Array();
+    var E = new Array();
+    var Astr = ","+ A.toString() +",";
+    var Bstr = ","+ B.toString() +",";
+    for(var i in A ){
+      if(Bstr.indexOf(","+A[i]+",") >=0){
+
+      }else{
+        C.push(A[i]);
+      }
+    }
+    for(var p in B){
+      if(Astr.indexOf(","+B[p]+",") >=0){
+
+      }else{
+        D.push(B[p]);
+      }
+    }
+    E.push(C);
+    E.push(D);
+    return E;
+  }
+
+
+
+
 
   update(){
       // this.edit = true;
@@ -198,6 +236,21 @@ export class LookhousePage {
     this.addArry(this.otherImg,this.imgData);
     this.formData.arrPic =  JSON.stringify(this.imgData);
     console.log('提交',this.imgData,this.formData);
+    /**
+     * 校验 图片是否上传完整
+     * */
+      var arry = [];
+     for(var list of this.imgData){
+         if(list.position=='add1'||list.position=='add2'||list.position=='add7'){}
+         else {
+                arry.push(list.position);
+              }
+        }
+    if(this.getDiffarr(this.positionList,arry)[0].length!=0){
+      this.toast.msg('未达成实勘标准!');
+      return  false
+    }
+
     this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
       if(res.success){
         console.log('成功返回的数据',res);

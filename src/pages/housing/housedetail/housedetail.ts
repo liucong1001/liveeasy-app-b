@@ -372,7 +372,7 @@ export class HousedetailPage {
   }
 
   addContactBolean = true;
-  //表单提交  str.replace(/\n/ig, '');
+  //表单提交
   save(){
 
     if(this.form.value.tagsStr){
@@ -404,17 +404,17 @@ export class HousedetailPage {
    }
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
    console.log('提交',formData);
-    // this.propertyProvider.updates(formData).then(res=>{
-    //   if(res.success){
-    //     this.toast.msg('修改成功!');
-    //     setTimeout(()=>{
-    //       // this.navCtrl.setRoot(HousingPage);
-    //       this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-    //     },500);
-    //   }else{
-    //     this.toast.error('修改失败！');
-    //   }
-    // })
+    this.propertyProvider.updates(formData).then(res=>{
+      if(res.success){
+        this.toast.msg('修改成功!');
+        setTimeout(()=>{
+          // this.navCtrl.setRoot(HousingPage);
+          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+        },500);
+      }else{
+        this.toast.error('修改失败！');
+      }
+    })
   }
 
 
