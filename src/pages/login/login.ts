@@ -61,7 +61,6 @@ export class LoginPage {
         this.localStorageProvider.set('ticket',res.data.ticket);
 
 
-
         //权限
         console.log('权限',res.data.menus);
         this.findPermission(res.data.menus);

@@ -96,7 +96,7 @@ export class AddhousePage {
      contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
      sex:['male',Validators.required],
       tags:['0'],//房源标签
-     infoOwnerId:[1],//加盟商id 根据登录人判断他的加盟商id
+     infoOwnerId:[this.localStorageProvider.get('loginInfo')['user']['company']['id']],//加盟商id 根据登录人判断他的加盟商id
      buildingType:['1',Validators.required],//建筑类型
      buzzOwnerType:['0'],//交易权属
      buzzType:['1',Validators.required],//房屋用途

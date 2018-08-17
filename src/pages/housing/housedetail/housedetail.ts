@@ -179,7 +179,7 @@ export class HousedetailPage {
   // tradingAreaId
   form:FormGroup =this.fb.group({
     adminDivisionCode:[''],//楼盘相对应区域
-    estate:['',Validators.required],//楼盘
+    estate:[''],//楼盘
     estateName:[''],
     estateId:[''],
     buildingNo:['',Validators.required], //楼栋号
@@ -358,6 +358,10 @@ export class HousedetailPage {
     })
   }
 
+  turn(){
+    console.log('表单',this.form);
+  }
+
   addContactBolean = true;
   //表单提交  str.replace(/\n/ig, '');
   save(){
@@ -391,19 +395,17 @@ export class HousedetailPage {
    }
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
    console.log('提交',formData);
-    this.propertyProvider.updates(formData).then(res=>{
-      if(res.success){
-        this.toast.msg('修改成功!');
-        setTimeout(()=>{
-          // this.navCtrl.setRoot(HousingPage);
-          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-        },500);
-      }else{
-        this.toast.error('修改失败！');
-      }
-       // alert('修改成功');
-
-    })
+    // this.propertyProvider.updates(formData).then(res=>{
+    //   if(res.success){
+    //     this.toast.msg('修改成功!');
+    //     setTimeout(()=>{
+    //       // this.navCtrl.setRoot(HousingPage);
+    //       this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+    //     },500);
+    //   }else{
+    //     this.toast.error('修改失败！');
+    //   }
+    // })
   }
 
 
