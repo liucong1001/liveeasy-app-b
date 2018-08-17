@@ -47,19 +47,19 @@
           <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.halls>=1" >
-          <span class="lookHeadLine">客厅图：</span>
+          <span class="lookHeadLine"><i class="text-danger">*</i>客厅图：</span>
           <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.bedrooms>=1" >
-          <span class="lookHeadLine">卧室图：</span>
+          <span class="lookHeadLine"><i class="text-danger">*</i>卧室图：</span>
           <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.kitchens>=1">
-          <span class="lookHeadLine" >厨房图：</span>
+          <span class="lookHeadLine" ><i class="text-danger">*</i>厨房图：</span>
           <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.bathrooms>=1">
-          <span class="lookHeadLine">卫生间图：</span>
+          <span class="lookHeadLine"><i class="text-danger">*</i>卫生间图：</span>
           <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)" *ngIf="imgJson&&lockhoseDetail?.open || isCreater"></upload>
         </div>
         <div class="attorneyPic bgWhite" >
