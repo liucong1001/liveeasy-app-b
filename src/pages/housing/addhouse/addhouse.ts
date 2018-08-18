@@ -120,7 +120,7 @@ export class AddhousePage {
     }
 
   test(){
-      console.log('测试',this.form.value);
+      // console.log('测试',this.form.value);
    }
 
  //表单验证消息
@@ -204,7 +204,7 @@ export class AddhousePage {
   sizes(){
     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
       if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)){
-        console.log('室内面积不能大于建筑面积');
+        // console.log('室内面积不能大于建筑面积');
         this.sizeCheck = true;
       }else {
         this.sizeCheck = false;
@@ -221,18 +221,18 @@ export class AddhousePage {
           text: '内容',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            // console.log('Destructive clicked');
           }
         },{
           text: '内容',
           handler: () => {
-            console.log('Archive clicked');
+            // console.log('Archive clicked');
           }
         },{
           text: '关闭',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]
@@ -243,7 +243,7 @@ export class AddhousePage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       // this.form.value.estateName = params.estateName;
       // this.form.value.estateId =  params.estateId;
       this.estateChange(params);
@@ -254,12 +254,12 @@ export class AddhousePage {
   }
 
   estateChange(Value){
-    console.log('value',Value);
+    // console.log('value',Value);
     //哥
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);
     this.form.controls['estateId'].setValue(Value.id);
-    console.log('表单',this.form.value);
+    // console.log('表单',this.form.value);
   }
 
   //房源标签处理
@@ -274,7 +274,7 @@ export class AddhousePage {
    }
   tagsSelect(value){
     this.form.value.tags = this.tagsSum(value);
-    console.log('标签',this.form.value.tags,this.form.value);
+    // console.log('标签',this.form.value.tags,this.form.value);
   }
 
   addContactBolean = true;
@@ -301,7 +301,7 @@ export class AddhousePage {
     if(this.form.invalid){
       return false;
     }
-    console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
+    // console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
@@ -336,9 +336,9 @@ export class AddhousePage {
   godesc(){
     this.events.subscribe('content', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       this.form.patchValue({propertyDesc:params});
-      console.log('表单的描述',this.form.value.propertyDesc);
+      // console.log('表单的描述',this.form.value.propertyDesc);
       // 取消订阅
       this.events.unsubscribe('content');
     });
@@ -346,7 +346,7 @@ export class AddhousePage {
   }
 
   menPai(event){
-    console.log('门牌号',event);
+    // console.log('门牌号',event);
   }
   //户型
   clickHx(){

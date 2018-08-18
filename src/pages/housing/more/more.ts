@@ -207,7 +207,7 @@ export class MorePage {
       // this.searchMoreData.tags+=this.searchMoreData.tagsArry[i];
       this.searchMoreData.tags+=this.searchMoreData.tagsArry[i];
     }
-    console.log('tags参数',item,this.searchMoreData['tagsArry']);
+    // console.log('tags参数',item,this.searchMoreData['tagsArry']);
   }
 
    flag=false;
@@ -226,7 +226,7 @@ export class MorePage {
        // this.searchMoreData.tags+=this.searchMoreData.tagsArry[i];
        this.searchMoreData.orientation+=this.searchMoreData.orientationArry[i];
      }
-     console.log('orientation参数',item,this.searchMoreData['orientationArry']);
+     // console.log('orientation参数',item,this.searchMoreData['orientationArry']);
    }
 
 
@@ -254,7 +254,7 @@ export class MorePage {
     for(var i in this.searchMoreData[attrNameArry]){
       this.searchMoreData[attrName]+= parseInt(this.searchMoreData[attrNameArry][i]) ;
     }
-     console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
+     // console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
   }
 
 
@@ -274,7 +274,7 @@ export class MorePage {
            // this.choseMultIple(arryActive[i],attrName,attrNameArry,attrNameList)
          }
        this.searchMoreData [attrNameList] = [];
-       console.log('清楚之后', this.searchMoreData [attrNameList]);
+       // console.log('清楚之后', this.searchMoreData [attrNameList]);
      }
     this.searchMoreData[attrNameArry] = [];
     this.searchMoreData[attrName] = 0;
@@ -296,13 +296,13 @@ export class MorePage {
     this.multiplyReset('decoration','decorationArry','decorationList');
     this.multiplyReset('buildType','buildTypeArry','buildTypeList');
     this.multiplyReset('position','positionArry','positionList');
-    console.log('清除',this.searchMoreData);
+    // console.log('清除',this.searchMoreData);
     this.initData();
     this.localStorageProvider.del('searchMoreData');
   }
 
   confirm(){
-    console.log('确定',this.searchMoreData);
+    // console.log('确定',this.searchMoreData);
     this.localStorageProvider.set('searchMoreData',this.searchMoreData);
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
@@ -330,7 +330,7 @@ export class MorePage {
   }
 
   onChange($event){
-    console.log('价格',this.spaceSize);
+    // console.log('价格',this.spaceSize);
   }
 
 }

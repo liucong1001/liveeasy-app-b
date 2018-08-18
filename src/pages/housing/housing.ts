@@ -138,7 +138,7 @@ export class HousingPage {
 
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
-    console.log('tagsListPage',this.tagsListPage);
+    // console.log('tagsListPage',this.tagsListPage);
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
     this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
@@ -266,7 +266,7 @@ export class HousingPage {
              setTimeout(()=> this.pageData.push(res.data.result[i]),150 * i);
            }
          }else {
-           console.log('没有数据!');
+           // console.log('没有数据!');
            this.hasData = false;
          }
          this.totalPages = res.data.totalPages;
@@ -297,7 +297,7 @@ export class HousingPage {
         if(err){
           this.badHttp = true;
         }
-       console.log('错误返回',err);
+       // console.log('错误返回',err);
      });
   }
 
@@ -584,7 +584,7 @@ export class HousingPage {
         this.all = false;
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult =res.data&&res.data.result;
-          console.log('pageResult--',this.pageResult);
+          // console.log('pageResult--',this.pageResult);
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
@@ -597,9 +597,9 @@ export class HousingPage {
           }
         });
       }
-      console.log('Async operation has ended');
+      // console.log('Async operation has ended');
       infiniteScroll.complete(function () {
-        console.log('数据请求完成');
+        // console.log('数据请求完成');
       });
 
     },1000);
@@ -692,7 +692,7 @@ export class HousingPage {
   ends:any;
   structure:any = {lower: 0, upper:500};
   onChange(ev:any) {
-    console.log(this.structure.lower,this.structure.upper)
+    // console.log(this.structure.lower,this.structure.upper)
       this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
@@ -703,7 +703,7 @@ export class HousingPage {
     this.name=this.time.name;
     this.starts=this.time.start;
     this.ends=this.time.end;
-    console.log(this.ends);
+    // console.log(this.ends);
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
     }else{
@@ -712,7 +712,7 @@ export class HousingPage {
     this.search('propQuery');
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
-      console.log(this.structure)
+      // console.log(this.structure)
     }
 
   }
@@ -720,16 +720,16 @@ export class HousingPage {
   allSearch(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
         if(!params){
           this.floorName = '';
           // this.params.estate = '';
           delete   this.params.estate
-          console.log('不存在数据',this.params);
+          // console.log('不存在数据',this.params);
         }else {
           this.floorName = params.keyword;
           this.params.estate = params.id;
-          console.log('搜索',this.floorName,this.params.estate);
+          // console.log('搜索',this.floorName,this.params.estate);
         }
         this.search('propQuery');
       // 取消订阅
@@ -761,7 +761,7 @@ export class HousingPage {
   mores(){
     this.events.subscribe('moreSearchBevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收更多条件为: ', params );
+      // console.log('接收更多条件为: ', params );
       if(!params){
         this.params.tags = 0;
       }else {
@@ -783,7 +783,7 @@ export class HousingPage {
           for(var i in arry){
              for(var y in this.duplicates(arry) ){
                 if(arry[i]== this.duplicates(arry)[y]){
-                  console.log('item重复',arry[i],i);
+                  // console.log('item重复',arry[i],i);
                   var index = arry.indexOf(arry[i]);
                   if(index>-1){arry.splice(index,1)}
                 }
@@ -800,7 +800,7 @@ export class HousingPage {
         if(params.buildType!=0){this.params.buildType = params.buildType}else {delete this.params.buildType}
         if(params.position!=0){this.params.position = params.position}else {delete this.params.position}
 
-        console.log('接收到11',this.moreSearchData,this.params);
+        // console.log('接收到11',this.moreSearchData,this.params);
       }
        this.search('propQuery');
       // 取消订阅
@@ -822,7 +822,7 @@ export class HousingPage {
   selectArea(item){
      this.searchArea= item.name;
      this.search('propQuery');
-     console.log('选择到area',item,this.selected);
+     // console.log('选择到area',item,this.selected);
      if(item.name=='不限'){this.searchArea=this.selected.name};
   }
 

@@ -24,7 +24,7 @@ export class DescPage {
 
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;
-    console.log('ionViewDidLoad DescPage');
+    // console.log('ionViewDidLoad DescPage');
   }
 
   watchText(event){
@@ -41,7 +41,7 @@ export class DescPage {
 
 
   confirm(){
-    console.log('描述内容',this.content);
+    // console.log('描述内容',this.content);
     this.navCtrl.pop().then(() => {
       this.events.publish('content',this.content);
     });

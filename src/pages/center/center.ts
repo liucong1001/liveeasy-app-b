@@ -55,17 +55,17 @@ export class CenterPage {
     this.photo = 'assets/imgs/center.jpg';
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
-    console.log('检测新版本');
+    // console.log('检测新版本');
     this.appVersion.getVersionNumber().then(res=>{
       this.versionNumber =res; //当前版本
-      console.log('getVersionNumber',res);
+      // console.log('getVersionNumber',res);
     });
     if (this.platform.is('ios')) {
-         console.log('ios','ios平台');
+         // console.log('ios','ios平台');
          this.ios = true;
     } else if (this.platform.is('android')) {
         this.android = true;
-        console.log('android平台');
+        // console.log('android平台');
     }
 
     /**
@@ -81,10 +81,10 @@ export class CenterPage {
     }).then(data  => {
       var res;
       res = JSON.parse(data.data);
-      console.log('检测',res);
+      // console.log('检测',res);
       let versionInfo = res.data.list[0];
       this.versionInfo = res.data.list[0];
-      console.log('最新版本',versionInfo);
+      // console.log('最新版本',versionInfo);
       if (data && data.status && data.status == 200 && data.data) {
         // let result = data.data || {};
          versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey=9db9597481973c878648387bf30eaca0&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
@@ -92,17 +92,17 @@ export class CenterPage {
         //   result = eval("("+ result +")");
         // } buildVersion
         // let versionInfo = data.data.list[0].buildVersionNo;
-        console.log('最新版本',versionInfo);
+        // console.log('最新版本',versionInfo);
         // versionInfo.url = 'https://www.pgyer.com/apiv2/app/install?appKey='+versionInfo.appKey+'&_api_key='+params._api_key;
 
         this.aLinKDownload = versionInfo.url;
         this.aLinKDownloadVersion = versionInfo.buildVersion;   //从网上获取最新版本号
         if(this.aLinKDownloadVersion>this.versionNumber){
-           console.log('存在新版本!',this.aLinKDownloadVersion,this.versionNumber);
+           // console.log('存在新版本!',this.aLinKDownloadVersion,this.versionNumber);
            this.showNewVersion = true;
-           console.log('是否存在版本',this.showNewVersion);
+           // console.log('是否存在版本',this.showNewVersion);
         }
-        console.log('版本对比',this.aLinKDownloadVersion,this.versionNumber);
+        // console.log('版本对比',this.aLinKDownloadVersion,this.versionNumber);
 
       }
     }).catch((e)=> {
@@ -156,7 +156,7 @@ export class CenterPage {
   }
 
   updateVersion(){
-    console.log('开始检测版本更新1');
+    // console.log('开始检测版本更新1');
     this.appUpdate.checkVersion();
   }
 

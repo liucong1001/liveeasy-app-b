@@ -27,7 +27,7 @@ export class HelpPage {
               public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions) {
 
       this.updprovider.version({}).then(res=>{
-        console.log(res)
+        // console.log(res)
         this.appVersion=res.data.appVersion;
         this.appId=res.data.applicationId;
       })
@@ -38,11 +38,11 @@ export class HelpPage {
       appVersion:this.appVersion,
       appId:this.appId,
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if(res.success){
         this.toast.msg('提交成功')
         setTimeout(()=>{
-          this.openWin(CenterPage)
+          this.navCtrl.setRoot(CenterPage);
         },500)
       }else {
         this.toast.error('提交失败');
@@ -54,7 +54,7 @@ export class HelpPage {
     content:['',Validators.required],
   });
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HelpPage');
+    // console.log('ionViewDidLoad HelpPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
 

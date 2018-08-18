@@ -53,7 +53,7 @@ export class ClosePage {
       if(res.success){
         this.toast.msg('关闭成功');
         setTimeout(()=>{
-          this.openWin(PlookrecordPage,{id:this.customerid});
+          this.openWin(PassengerdetailPage,{customerId:this.customerid});
         },200);
       }else {
         this.toast.error('关闭失败')

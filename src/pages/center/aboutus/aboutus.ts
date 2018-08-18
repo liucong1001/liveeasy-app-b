@@ -24,15 +24,15 @@ export class AboutusPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutusPage');
+    // console.log('ionViewDidLoad AboutusPage');
     // this.nativePageTransitions.cancelPendingTransition();
     this.navBar.backButtonClick = this.backButtonClick;
     this.appVersion.getVersionCode().then(res=>{
-      console.log('获取版本',res);
+      // console.log('获取版本',res);
     });
     this.appVersion.getVersionNumber().then(res=>{
         this.versionNumber =res;
-      console.log('getVersionNumber',res);
+      // console.log('getVersionNumber',res);
     })
   }
 

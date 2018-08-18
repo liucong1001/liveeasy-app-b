@@ -8,6 +8,8 @@ import {ClosePage} from "./close/close";
 import {PassengerdetailPage} from "../passengerdetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {PublicpassengerPage} from "../../../publicpassenger/publicpassenger";
+import {PublicpdetailPage} from "../../../publicpassenger/publicpdetail/publicpdetail";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -30,6 +32,7 @@ export class PlookrecordPage {
   statusOne=[];
   statusTwo=[];
   statusThree=[];
+  ss=false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
@@ -51,15 +54,20 @@ export class PlookrecordPage {
         console.log(this.statusOne,this.statusTwo)
       });
   }
+
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlookrecordPage');
+    // this.navBar.backButtonClick =this.navBar.backButtonClick ;
     this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
+      this.navCtrl.pop();
+
     };
+
   }
   //添加active
   goToSlide(index) {
@@ -98,7 +106,7 @@ export class PlookrecordPage {
                 if(res.success){
                   this.toast.msg('完成成功');
                   setTimeout(()=>{
-                    this.navCtrl.pop();
+                    this.openWin(PassengerdetailPage,{customerId:this.customerid})
                   },200);
                 }else {
                   this.toast.error('完成失败')

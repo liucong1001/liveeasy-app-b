@@ -64,8 +64,8 @@ export class ClosehousePage {
 
     });
 
-      console.log('获取关闭',this.data);
-      console.log(this.loginId,this.realtorSourceId);
+      // console.log('获取关闭',this.data);
+      // console.log(this.loginId,this.realtorSourceId);
       //判断归属人和操作人是否一致
       // if(this.realtorSourceId != this.loginId){
       //   this.toast.msg('你不是此房源归属人，请填写后申请！');
@@ -101,7 +101,7 @@ export class ClosehousePage {
   //   ],
   // };
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClosehousePage');
+    // console.log('ionViewDidLoad ClosehousePage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
 
@@ -115,7 +115,7 @@ export class ClosehousePage {
         closeDesc:this.form.value.closeDesc,
         realtorId:this.realtorSourceId,
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if(res.success){
           this.toast.msg('关闭成功!');
           this.navCtrl.setRoot(HousingPage)
@@ -135,7 +135,7 @@ export class ClosehousePage {
           closeDesc:this.form.value.closeDesc,
           realtorId:this.realtorSourceId
         }).then(res => {
-          console.log(res);
+          // console.log(res);
           if(res.success){
             this.toast.msg('关闭成功!');
             setTimeout(()=>{
@@ -151,11 +151,11 @@ export class ClosehousePage {
         this.toast.error('请选择无效原因');
       }
     }
-    console.log(this.form.value)
+    // console.log(this.form.value)
   }
 
   subApplic(){
-    console.log(this.propertyid)
+    // console.log(this.propertyid)
     this.closehouseProvider.getClose({
       propertyId:this.propertyid,
       //当前操作人id
@@ -166,7 +166,7 @@ export class ClosehousePage {
       applyTime:new Date().getTime(),
       realtorId:this.realtorSourceId
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       if(res.success){
         this.localStorageProvider.set('propertyid',this.propertyid);
         this.localStorageProvider.set('data',this.form.value);

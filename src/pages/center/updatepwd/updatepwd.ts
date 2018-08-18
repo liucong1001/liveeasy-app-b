@@ -30,7 +30,7 @@ export class UpdatepwdPage {
     verifyPassword:[''],//确认新密码
   });
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UpdatepwdPage');
+    // console.log('ionViewDidLoad UpdatepwdPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
 
@@ -38,12 +38,12 @@ export class UpdatepwdPage {
     if (this.form.value.plainPassword != '') {
       this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
               if(res.success){
-                console.log(this.form.value)
-                console.log(res);
+                // console.log(this.form.value)
+                // console.log(res);
                 this.localStorageProvider.del('ticket');
                 this.navCtrl.push(LoginPage)
               }else {
-                console.log(res.msg)
+                // console.log(res.msg)
                 var reg=/^[\u4E00-\u9FA5]+$/;
                 // if(!reg.test(res.msg)){
                 //   this.toast.error('旧密码错误，请重新填写')

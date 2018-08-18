@@ -8,6 +8,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import {PassengerPage} from "../passenger";
 /**
  公客列表
  */
@@ -71,7 +72,10 @@ export class PublicpassengerPage {
 
   ionViewDidLoad() {
     this.search();
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      this.navCtrl.setRoot(PassengerPage);
+    };
   }
 
   ionViewDidEnter() {

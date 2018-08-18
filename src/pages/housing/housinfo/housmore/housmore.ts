@@ -25,10 +25,10 @@ export class HousmorePage {
     public propertyProvider: PropertyProvider
   ) {
      this.data = navParams.get('item');
-     console.log('房源信息',this.data);
+     // console.log('房源信息',this.data);
      this.propertyProvider.sensitiveInfo(this.data.propertyId).then(res=>{
        this.sensitiveData = res.success&&res.data.result[0];
-       console.log('敏感信息',this.sensitiveData);
+       // console.log('敏感信息',this.sensitiveData);
      })
   }
 
@@ -37,7 +37,7 @@ export class HousmorePage {
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HousmorePage');
+    // console.log('ionViewDidLoad HousmorePage');
   }
   // 联系人
   contactPipe(data){

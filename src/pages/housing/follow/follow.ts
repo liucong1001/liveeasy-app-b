@@ -40,8 +40,8 @@ export class FollowPage {
     this.convid = navParams.get('item').convId;
     this.standardAddress = navParams.get('item').standardAddress;
     this.followuptime=new Date().getTime();
-    console.log('跟进',navParams);
-    console.log(this.propertyid);
+    // console.log('跟进',navParams);
+    // console.log(this.propertyid);
     this.propertyProvider.getRecord(this.propertyid).then(res=>{
       this.result=res.data;
       console.log('跟进',this.result);
@@ -52,7 +52,7 @@ export class FollowPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FollowPage');
+    // console.log('ionViewDidLoad FollowPage');
     this.navBar.backButtonClick = this.backButtonClick;
 
   }
@@ -82,7 +82,7 @@ export class FollowPage {
         propertyId:this.propertyid,
         followupTime:this.followuptime
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if(res.success){
           this.toast.msg('跟进成功!');
           // this.navCtrl.pop()
@@ -95,7 +95,7 @@ export class FollowPage {
         // alert('跟进成功！')
         // this.navCtrl.pop()
       });
-  console.log(this.form.value)
+  // console.log(this.form.value)
 }
 //禁用调出键盘
 //   ionViewDidEnter(){

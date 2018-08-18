@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams,Navbar,ItemSliding  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Navbar,ItemSliding,Tabs  } from 'ionic-angular';
 import { AddpassengerPage } from './addpassenger/addpassenger';
 import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
@@ -83,11 +83,12 @@ export class MypassengerPage {
       this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
   }
+  @ViewChild('myTabs') tabRef: Tabs;
 
   ionViewDidLoad() {
     this.search();
     this.navBar.backButtonClick = () => {
-      this.navCtrl.setRoot(PassengerPage)
+      this.navCtrl.setRoot(PassengerPage);
     };
   }
   ionViewDidEnter() {
@@ -475,6 +476,19 @@ export class MypassengerPage {
 
 //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
+
+
+  setRoot(goPage, param = {}) {
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 400,

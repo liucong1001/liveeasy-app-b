@@ -28,7 +28,7 @@ export class DescribePage {
     this.navBar.backButtonClick = () => {
       this.navCtrl.pop()
     };
-    console.log('ionViewDidLoad DescribePage');
+    // console.log('ionViewDidLoad DescribePage');
   }
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {

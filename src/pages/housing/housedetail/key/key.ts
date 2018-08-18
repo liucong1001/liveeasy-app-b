@@ -44,7 +44,7 @@ export class KeyPage {
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
     // this.data = navParams.get('item');
-    console.log('参数',this.propertyid,this.data);
+    // console.log('参数',this.propertyid,this.data);
     // this.propertyProvider.keydetail(this.propertyid).then(res => {
     //   if(res.hasOwnProperty('data')){
     //     this.keydelegateid= res.data.keyDelegateId;
@@ -71,14 +71,14 @@ export class KeyPage {
       if(res.success&&res.data){
             this.data = res.data;
             this.keyData = JSON.parse(res.data.content.toString());
-            console.log('药匙详情',this.keyData,this.data);
+            // console.log('药匙详情',this.keyData,this.data);
             this.form.patchValue({
               keySn: this.keyData.keysn,
               keyAddress: this.keyData.keyAddress,
               keyDlgtFilePics: this.keyData.keyDlgtFilePics,
             });
             this.imgJson=this.keyData.keyDlgtFilePics;
-            console.log('图片',this.imgJson);
+            // console.log('图片',this.imgJson);
      }else {
         this.imgJson= [];
       }
@@ -111,7 +111,7 @@ export class KeyPage {
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
     };
-    console.log('参数',data);
+    // console.log('参数',data);
     this.propertyProvider.key({
       propertyId:this.propertyid,
       createTime:this.attorneys,
@@ -119,7 +119,7 @@ export class KeyPage {
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       if(res.success){
         this.toast.msg('上传成功!');
         setTimeout(()=>{
@@ -131,7 +131,7 @@ export class KeyPage {
       // alert('上传成功');
       // this.navCtrl.pop()
     });
-    console.log(this.form.value);
+    // console.log(this.form.value);
   }
   // JSON.stringify(this.imgData)
   imgData = [];
@@ -143,7 +143,7 @@ export class KeyPage {
     }else {
       this.maxImagesCount = true;
     }
-    console.log('图片回调事件',this.imgData,this.imgData.length,event);
+    // console.log('图片回调事件',this.imgData,this.imgData.length,event);
   }
 
   //修改钥匙信息
@@ -154,7 +154,7 @@ export class KeyPage {
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       if(res.success){
          this.toast.msg('修改成功!');
          setTimeout(()=>{

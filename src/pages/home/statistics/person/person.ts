@@ -24,7 +24,7 @@ export class PersonPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
     this.data=navParams.get('data');
     this.id=navParams.get('id')
-    console.log('员工',this.data,'id',this.id);
+    // console.log('员工',this.data,'id',this.id);
     for (var i in this.data){
       for(var h=0;h<this.data[i].length;h++){
         // console.log(this.data[i][h])
@@ -34,18 +34,18 @@ export class PersonPage {
         }
       }
     }
-    console.log('员工', this.allPersonal)
+    // console.log('员工', this.allPersonal)
     let person = this.groupBy(this.allPersonal, function(item){
       return [item.personId];
     });
     for(var p in person){
       this.person.push(person[p][0])
     }
-    console.log(person)
+    // console.log(person)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonPage');
+    // console.log('ionViewDidLoad PersonPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
 // 分组
@@ -72,7 +72,7 @@ export class PersonPage {
     let perInfo = this.groupBy(this.allPersonal, function(item){
       return [item.personId == i.personId];
     });
-    console.log(i.personId)
+    // console.log(i.personId)
     //循环前置空所属对象
     this.xzNum=0;
     this.skNum=0;
@@ -83,7 +83,7 @@ export class PersonPage {
     for (var j in perInfo){
       for(var h=0;h<perInfo[j].length;h++){
         if (perInfo[j][h].personId==i.personId){
-          console.log(perInfo[j][h]);
+          // console.log(perInfo[j][h]);
           if(perInfo[j][h].statItem == 3001){
             this.xzNum+=perInfo[j][h].stateValue;
           }
@@ -106,12 +106,12 @@ export class PersonPage {
         }
       }
     }
-    console.log('3001',this.xzNum +'/' + '3025',this.skNum +'/' + '3011',this.kkNum +'/'+
-      '3012',this.flNum +'/' +'3007',this.jhNum)
+    // console.log('3001',this.xzNum +'/' + '3025',this.skNum +'/' + '3011',this.kkNum +'/'+
+    //   '3012',this.flNum +'/' +'3007',this.jhNum)
   }
 
   isActive(i) {
-    console.log(i)
+    // console.log(i)
     return this.selected === i;
 
   };

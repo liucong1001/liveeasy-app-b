@@ -43,19 +43,19 @@ export class DeclardetailPage {
 
     this.localCode = this.localStorageProvider.get('codeData');
     this.JSON = new ArryCodeValuePipe().transform(this.localCode,'order_status');
-    console.log('参数',this.orderStatus, this.JSON);
-    console.log(this.orderid);
+    // console.log('参数',this.orderStatus, this.JSON);
+    // console.log(this.orderid);
     this.homeProvider.decldetail(this.orderid).then(res=>{
       this.allOrder=res.data;
       this.orderDetail=res.data.order;
       this.feelist=res.data.feeList;
       this.users=res.data.user;
-      console.log(this.allOrder);
+      // console.log(this.allOrder);
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeclardetailPage');
+    // console.log('ionViewDidLoad DeclardetailPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   numJOSN=[

@@ -137,7 +137,7 @@ export class HousinfoPage {
       // 业主委托书
       this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
       loading.dismiss();
-      console.log('房源标签', this.tagPipe(this.houseData.tagsStr));
+      // console.log('房源标签', this.tagPipe(this.houseData.tagsStr));
     });
 
 
@@ -162,7 +162,7 @@ export class HousinfoPage {
  //     });
  // }
 
-    console.log('上一个页面是：ModalCmp',this.navCtrl.last().name);
+    // console.log('上一个页面是：ModalCmp',this.navCtrl.last().name);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'){
       this.ModalCmp = true;
     }
@@ -203,12 +203,12 @@ export class HousinfoPage {
 
   // 刚加载加载地图信息
   loadMap(e:any) {
-    console.log(e);
+    // console.log(e);
   }
 
   // 单机地图坐标, 打印信息
   clickMarker(marker:any) {
-    console.log(marker);
+    // console.log(marker);
   }
 
 
@@ -216,7 +216,7 @@ export class HousinfoPage {
   //进入页面后执行
   ionViewDidEnter(){
     this.navBar.backButtonClick = () => {
-      console.log('刷新reloadpage',this.navParams.get('notReloadPage'),this.app.getActiveNavs()[0]['index']);
+      // console.log('刷新reloadpage',this.navParams.get('notReloadPage'),this.app.getActiveNavs()[0]['index']);
       if(this.app.getActiveNavs()[0]['index']==1){
         if(this.navParams.get('notReloadPage')){
           // this.navCtrl.pop();

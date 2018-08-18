@@ -49,10 +49,10 @@ export class HomesearchPage {
 
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;
-    console.log('ionViewDidLoad AllsearchPage');
+    // console.log('ionViewDidLoad AllsearchPage');
     this.floorList = this.localStorageProvider.get('floorList');
     if(this.floorList ==null){this.floorList = []}
-    console.log('历史',this.floorList);
+    // console.log('历史',this.floorList);
   }
   //进入页面后执行
   ionViewDidEnter(){
@@ -87,7 +87,7 @@ export class HomesearchPage {
   }
 
   chose(item){
-    console.log('历史选择的',item);
+    // console.log('历史选择的',item);
     this.search = item;
     this.getFloorKey(item)
   }

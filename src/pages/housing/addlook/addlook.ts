@@ -69,7 +69,7 @@ export class AddlookPage {
   }
 
   ionViewDidLoad() {
-    console.log('带看',this.convId);
+    // console.log('带看',this.convId);
     this.imgHeader = this.configProvider.set().img;
     this.navBar.backButtonClick = this.backButtonClick;
   }
@@ -82,7 +82,7 @@ export class AddlookPage {
     }else {
       this.maxImagesCount = true;
     }
-    console.log('图片回调事件',this.imgData,this.imgData.length,event);
+    // console.log('图片回调事件',this.imgData,this.imgData.length,event);
   }
 
 /*
@@ -226,7 +226,7 @@ export class AddlookPage {
           },200);
         }else {
           this.toast.error('添加失败!');
-          console.log('失败',res);
+          // console.log('失败',res);
         }
       }).catch(err=>{
          alert('添加失败'+err);

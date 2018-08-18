@@ -109,7 +109,7 @@ export class HousedetailPage {
       if( this.data&&res.success){
         loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
-        console.log('房源buzzType',this.data.buzzType);
+        // console.log('房源buzzType',this.data.buzzType);
         this.form.patchValue({
           adminDivisionCode:this.data.adminDivisionCode,
           buzzType:this.data.buzzType,
@@ -156,7 +156,7 @@ export class HousedetailPage {
           this.form.patchValue({
             tagsStr:arry
           });
-          console.log('标签赋值',arry,this.houLabel);
+          // console.log('标签赋值',arry,this.houLabel);
         }
         this.propertyid=this.data.propertyId;
         this.localStorageProvider.set('propertyid',this.data.propertyId);
@@ -166,7 +166,7 @@ export class HousedetailPage {
           this.sensitiveInfo = false;
         }
         // adminDivisionCode
-        console.log('adminDivisionCode');
+        // console.log('adminDivisionCode');
       }else {
         this.toast.msg('获取详情失败!');
         loading.dismiss();
@@ -278,12 +278,12 @@ export class HousedetailPage {
     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
 
       if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
-        console.log('室内面积不能大于建筑面积');
+        // console.log('室内面积不能大于建筑面积');
         this.sizeCheck = true;
       }else {
         this.sizeCheck = false;
       }
-      console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
+      // console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
     }
   }
 
@@ -295,18 +295,18 @@ export class HousedetailPage {
           text: '内容',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            // console.log('Destructive clicked');
           }
         },{
           text: '内容',
           handler: () => {
-            console.log('Archive clicked');
+            // console.log('Archive clicked');
           }
         },{
           text: '关闭',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]
@@ -325,7 +325,7 @@ export class HousedetailPage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       this.estateChange(params);
       // 取消订阅
       this.events.unsubscribe('bevents');
@@ -340,7 +340,7 @@ export class HousedetailPage {
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);
     this.form.controls['estateId'].setValue(Value.id);
-    console.log('表单',this.form.value);
+    // console.log('表单',this.form.value);
   }
 
 
@@ -368,13 +368,13 @@ export class HousedetailPage {
   }
 
   turn(){
-    console.log('表单',this.form);
+    // console.log('表单',this.form);
   }
 
   addContactBolean = true;
   //表单提交
   save(){
-    console.log('formvalue',this.form.value);
+    // console.log('formvalue',this.form.value);
     if(this.form.value.tagsStr){
       this.form.patchValue({
         tags:this.tagsSum(this.form.value.tagsStr)
@@ -388,7 +388,7 @@ export class HousedetailPage {
       });
       delete this.form.value.tagsStr;
     }
-    console.log('修改之后',this.form.value);
+    // console.log('修改之后',this.form.value);
 
 
    if(this.addContactBolean){
@@ -412,7 +412,7 @@ export class HousedetailPage {
      this.addContactBolean = false;
    }
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
-   console.log('提交',formData);
+   // console.log('提交',formData);
     this.propertyProvider.updates(formData).then(res=>{
       if(res.success){
         this.toast.msg('修改成功!');
@@ -462,9 +462,9 @@ export class HousedetailPage {
     // this.navCtrl.push(DescPage)
     this.events.subscribe('content', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       this.form.patchValue({propertyDesc:params});
-      console.log('表单的描述',this.form.value.propertyDesc);
+      // console.log('表单的描述',this.form.value.propertyDesc);
       // 取消订阅
       this.events.unsubscribe('content');
     });

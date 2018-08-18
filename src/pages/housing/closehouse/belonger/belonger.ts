@@ -20,11 +20,11 @@ export class BelongerPage {
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams) {
     this.data=navParams.get('data');
-    console.log(this.data)
+    // console.log(this.data)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BelongerPage');
+    // console.log('ionViewDidLoad BelongerPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   //------返回处理--------//

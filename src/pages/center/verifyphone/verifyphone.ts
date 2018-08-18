@@ -22,7 +22,7 @@ export class VerifyphonePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VerifyphonePage');
+    // console.log('ionViewDidLoad VerifyphonePage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   sendMsg() {

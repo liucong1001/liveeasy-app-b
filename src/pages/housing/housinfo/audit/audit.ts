@@ -23,11 +23,11 @@ export class AuditPage {
               public propertyProvider: PropertyProvider) {
     this.data = this.navParams.get('houseInfo');
     this.distrs = this.localStorageProvider.get('distrs');
-    console.log('获取到的data',this.data);
+    // console.log('获取到的data',this.data);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AuditPage');
+    // console.log('ionViewDidLoad AuditPage');
   }
 
   distrsPipe(data){

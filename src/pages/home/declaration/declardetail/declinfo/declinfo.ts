@@ -34,8 +34,8 @@ export class DeclinfoPage {
               public navParams: NavParams) {
     this.nums=navParams.get('val');
     this.localCode = this.localStorageProvider.get('codeData');
-    console.log(this.localCode)
-    console.log(this.nums)
+    // console.log(this.localCode)
+    // console.log(this.nums)
     this.order=navParams.get('order');
     this.orders=navParams.get('order').order;
     this.feelist=navParams.get('order').feeList;
@@ -44,15 +44,15 @@ export class DeclinfoPage {
     this.uers=navParams.get('order').user;
     this.propertyinfo=navParams.get('order').order.propertyInfo;
     this.ownerinfo=JSON.parse(navParams.get('order').order.ownerInfo);
-    console.log(this.ownerinfo);
-    console.log(this.customer);
+    // console.log(this.ownerinfo);
+    // console.log(this.customer);
     this.localCode = this.localStorageProvider.get('codeData');
     this.roleOrder = new ArryCodeValuePipe().transform(this.localCode,'role_in_order');
-    console.log(this.roleOrder)
+    // console.log(this.roleOrder)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DeclinfoPage');
+    // console.log('ionViewDidLoad DeclinfoPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   //业绩类型——分成角色

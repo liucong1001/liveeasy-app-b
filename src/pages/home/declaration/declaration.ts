@@ -72,10 +72,10 @@ export class DeclarationPage {
   search(){
     this.pageData = null;
     this.hasData  = true;
-    console.log(this.params);
+    // console.log(this.params);
     this.homeProvider.successOrder(1,this.params).then(res=>{
       this.pageData = res.data.result;
-      console.log(res)
+      // console.log(res)
       this.totalPages = res.data.totalPages;
 
       if(res.data.hasOwnProperty('result')){
@@ -183,7 +183,7 @@ export class DeclarationPage {
       }else {
         this.all = false;
         this.homeProvider.successOrder(this.currentPage,this.params).then(res=>{
-          console.log(res)
+          // console.log(res)
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
           }
@@ -191,9 +191,9 @@ export class DeclarationPage {
 
       }
 
-      console.log('Async operation has ended');
+      // console.log('Async operation has ended');
       infiniteScroll.complete(function () {
-        console.log('数据请求完成');
+        // console.log('数据请求完成');
       });
     }, 1000);
 

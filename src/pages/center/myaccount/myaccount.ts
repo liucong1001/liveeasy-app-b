@@ -27,12 +27,12 @@ export class MyaccountPage {
     this.phone = this.localStorageProvider.get('loginInfo').user.phone;
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
-    console.log(this.phone)
+    // console.log(this.phone)
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MyaccountPage');
+    // console.log('ionViewDidLoad MyaccountPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   updatepwd() {

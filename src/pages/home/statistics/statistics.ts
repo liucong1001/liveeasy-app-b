@@ -89,7 +89,7 @@ export class StatisticsPage {
       this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
     }
 
-    console.log(this.yesterday)
+    // console.log(this.yesterday)
     //前天
     this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
     //判断时间格式
@@ -100,7 +100,7 @@ export class StatisticsPage {
     }).then(res=>{
       if(res.success){
         if(res.hasOwnProperty('data')){
-          console.log(res.data)
+          // console.log(res.data)
           this.data=res.data
           let sorted = this.groupBy(res.data, function(item){
             if(item.storeCode){
@@ -109,7 +109,7 @@ export class StatisticsPage {
               return [item.deptId];
             }
           });
-          console.log('部门',sorted);
+          // console.log('部门',sorted);
           for (var i in sorted) {
             this.department.push(sorted[i][0]);
           }
@@ -179,7 +179,7 @@ export class StatisticsPage {
                 this.tableJSON[15].result+=sorted[all][aa].stateValue;
               }
             }
-            console.log(this.tableJSON);
+            // console.log(this.tableJSON);
             this.errStatus = false;
           }
           }else {
@@ -217,7 +217,7 @@ export class StatisticsPage {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StatisticsPage');
+    // console.log('ionViewDidLoad StatisticsPage');
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -240,7 +240,7 @@ export class StatisticsPage {
   //时间弹窗刷新
   goTime(){
     this.getClear();
-    console.log(this.startTime,this.endTime)
+    // console.log(this.startTime,this.endTime)
     this.homeProvider.statis({
       startTime:this.startTime,
       endTime:this.endTime,
@@ -248,7 +248,7 @@ export class StatisticsPage {
     }).then(res=>{
       if(res.success){
         if(res.hasOwnProperty('data')){
-          console.log(res);
+          // console.log(res);
           this.data=res.data;
           let sorted = this.groupBy(res.data, function(item){
             if(item.storeCode){
@@ -257,7 +257,7 @@ export class StatisticsPage {
               return [item.deptId];
             }
           });
-          console.log('部门',sorted);
+          // console.log('部门',sorted);
           for (var i in sorted) {
             this.department.push(sorted[i][0]);
           }
@@ -328,14 +328,14 @@ export class StatisticsPage {
               }
             }
           }
-          console.log(this.tableJSON)
+          // console.log(this.tableJSON)
         }
       }else {
         this.toast.error('暂无数据');
         this.errStatus = true;
       }
     });
-    console.log('表单',event);
+    // console.log('表单',event);
 
     this.clear();
     if(this.times ==2 || this.times ==1){
@@ -380,11 +380,11 @@ export class StatisticsPage {
     if(item.start.length<9 || item.start.length <9){
       item.start=item.start.replace('/','0');
       item.end=item.end.replace('/','');
-      console.log(item.start,item.end)
+      // console.log(item.start,item.end)
     }else if(item.start.length==9 || item.end.length == 9){
       item.start=item.start.replace('/','');
       item.end=item.end.replace('/','');
-      console.log(item.start,item.end)
+      // console.log(item.start,item.end)
     }
     // console.log(item.start,item.end)
     this.homeProvider.statis({
@@ -395,7 +395,7 @@ export class StatisticsPage {
 
       if(res.success){
         if(res.hasOwnProperty('data')) {
-          console.log(res);
+          // console.log(res);
           this.data=res.data;
           let sorted = this.groupBy(res.data, function(item){
             if(item.storeCode){
@@ -404,7 +404,7 @@ export class StatisticsPage {
               return [item.deptId];
             }
           });
-          console.log('部门',sorted);
+          // console.log('部门',sorted);
           for (var i in sorted) {
             this.department.push(sorted[i][0]);
           }
@@ -475,14 +475,14 @@ export class StatisticsPage {
               }
             }
           }
-          console.log(this.tableJSON)
+          // console.log(this.tableJSON)
         }
       }else {
         this.toast.error('暂无数据');
         this.errStatus = true;
       }
     });
-    console.log('表单',event);
+    // console.log('表单',event);
 
     this.clear();
     if(this.times ==1 || this.times ==3){
@@ -499,7 +499,7 @@ export class StatisticsPage {
   //重置
   sausage=[];
   reset(){
-    console.log('清除',this.sausage);
+    // console.log('清除',this.sausage);
     for(var i in this.sausage){
       this.sausage[i]=false;
     }
@@ -534,7 +534,7 @@ export class StatisticsPage {
        this.endTime =parseInt(this.yesterday)
      }
    }
-   console.log(this.startTime,this.endTime)
+   // console.log(this.startTime,this.endTime)
     this.homeProvider.statis({
       startTime:this.startTime,
       endTime:this.endTime,
@@ -542,7 +542,7 @@ export class StatisticsPage {
     }).then(res=>{
         if(res.success){
           if(res.hasOwnProperty('data')){
-            console.log(res)
+            // console.log(res)
             this.data=res.data;
             let sorted = this.groupBy(res.data, function(item){
               if(item.storeCode){
@@ -551,7 +551,7 @@ export class StatisticsPage {
                 return [item.deptId];
               }
             });
-            console.log('部门',sorted);
+            // console.log('部门',sorted);
             for (var i in sorted) {
               this.department.push(sorted[i][0]);
             }
