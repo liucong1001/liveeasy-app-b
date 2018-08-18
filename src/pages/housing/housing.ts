@@ -192,6 +192,8 @@ export class HousingPage {
     this.choseDivision = false;
     if(item.id=='99'){
       this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+      delete this.params.division1;
+      // this.params.division1 = this.params.division;
       this.params.area = '';
       this.searchArea = '不限';
       this.district = [];
@@ -202,6 +204,7 @@ export class HousingPage {
     this.aeraShow=false;
     this.tradArea=true;
     this.params.division = item.code;
+    this.params.division1 = this.params.division;
     this.district =[];
     for(var i of this.area){
        if(item.code==i['code']){
@@ -844,6 +847,7 @@ class  PropertyPageParams {
   bedrooms?:string;//户室
   city?:string;
   division?:string;
+  division1?:string;
   // estateId?:string;//小区
   param?:string;
   tags?:any;

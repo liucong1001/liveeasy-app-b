@@ -48,12 +48,10 @@ export class AddlookPage {
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
     this.propertyid = navParams.get('item').propertyId;
-    // this.standardAddress = navParams.get('standardAddress');
     console.log(this.propertyid);
-
-    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
-      if(res.data.result){
-        this.result=res.data.result[0];
+    this.propertyProvider.getRecord(this.propertyid).then(res=>{
+      if(res.success){
+        this.result=res.data;
         console.log(this.result);
         this.convId=this.result.convId;
         this.estateName=this.result.estateName;
@@ -61,6 +59,9 @@ export class AddlookPage {
 
         this.useDir = this.result.estateId+'/'+this.result.propertyId+'/';
         console.log('带看',this.result);
+        if(!this.result['shareShow']){
+          this.toast.delayToast('暂时不支持带看');
+        }
       }
 
     });

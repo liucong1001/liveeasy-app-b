@@ -47,9 +47,9 @@ export class ClosehousePage {
     this.data = navParams.get('item');
 
 
-    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
-      if(res.data.result){
-        this.result=res.data.result[0];
+    this.propertyProvider.getRecord(this.propertyid).then(res=>{
+      if(res.success){
+        this.result=res.data;
         console.log(this.result);
         this.estatename = this.result.estateName;
         this.convid = this.result.convId;
@@ -57,7 +57,9 @@ export class ClosehousePage {
         this.closetime=new Date().getTime();
         this.realtorId = this.data.realtorId;
         this.realtorSourceId=this.data.realtorSourceId;
-
+        if(!(this.result.applyStatus&&this.result.closePropertyShow)){
+           this.toast.delayToast('暂时不支持关闭');
+        }
       }
 
     });
@@ -75,7 +77,7 @@ export class ClosehousePage {
         // this.subs=false;
         // this.applic=true
       }else {
-        this.toast.msg('你不是此房源归属人，请填写后申请！');
+        // this.toast.delayToast('你不是此房源归属人，请填写后申请！');
         this.subs=false;
         this.applic=true
       }

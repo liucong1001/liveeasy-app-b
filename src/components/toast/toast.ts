@@ -102,4 +102,17 @@ export class ToastComponent {
     });
     toast.present();
   }
+  delayToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 4000,
+      cssClass:'toast-error ',
+      dismissOnPageChange:true,
+      position: 'top',
+    });
+    // toast.onDidDismiss(() => {
+    //   console.log('Dismissed toast');
+    // });
+    toast.present();
+  }
 }

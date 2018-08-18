@@ -4,7 +4,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="form">
+
+  <div class="bgWhite p10"  *ngIf="!(result?.applyStatus&&result?.closePropertyShow)">
+    <font color="red" >
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      暂时不支持关闭</font>
+  </div>
+
+  <form [formGroup]="form" *ngIf="result?.applyStatus&&result?.closePropertyShow" [hidden]="applic&&!subs">
     <ion-grid class="p0">
       <ion-row>
         <ion-col col-12 class="p0">
@@ -76,5 +83,8 @@
       </ion-row>
     </ion-grid>
   </form>
+
+
+
 </ion-content>
 

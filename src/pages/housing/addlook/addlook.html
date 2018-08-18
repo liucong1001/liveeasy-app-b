@@ -5,7 +5,7 @@
 
 </ion-header>
 <ion-content>
-  <form>
+  <form *ngIf="result?.shareShow">
     <ion-grid class="p0" *ngIf="result">
       <ion-row>
         <ion-col col-12 class="p0">
@@ -65,5 +65,9 @@
       </ion-row>
     </ion-grid>
   </form>
-
+  <div class="bgWhite p10"  *ngIf="!result?.shareShow">
+    <font color="red" >
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      暂时不支持带看</font>
+  </div>
 </ion-content>

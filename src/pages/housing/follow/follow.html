@@ -2,10 +2,9 @@
   <ion-navbar color="first">
     <ion-title>添加跟进</ion-title>
   </ion-navbar>
-
 </ion-header>
 <ion-content>
-  <form [formGroup]="form">
+  <form [formGroup]="form" *ngIf="result?.shareShow">
     <ion-grid class="p0">
       <ion-row>
         <ion-col col-12 class="p0">
@@ -65,6 +64,12 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </form>
+  </form >
+
+  <div class="bgWhite p10"  *ngIf="!result?.shareShow">
+    <font color="red" >
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      暂时不支持跟进</font>
+  </div>
 </ion-content>
 

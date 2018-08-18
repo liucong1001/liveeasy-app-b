@@ -42,11 +42,13 @@ export class FollowPage {
     this.followuptime=new Date().getTime();
     console.log('跟进',navParams);
     console.log(this.propertyid);
-    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
-      this.result=res.data.result[0];
+    this.propertyProvider.getRecord(this.propertyid).then(res=>{
+      this.result=res.data;
+      console.log('跟进',this.result);
+      if(!this.result['shareShow']){
+        this.toast.delayToast('暂时不支持跟进');
+      }
     });
-
-
   }
 
   ionViewDidLoad() {
