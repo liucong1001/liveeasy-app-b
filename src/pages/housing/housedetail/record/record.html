@@ -33,8 +33,8 @@
           </ion-list>
           <ion-list>
             <ion-item class="updateHegiht p10" *ngFor="let item of followUp">
-                  <div>{{item.agentName}}</div>
-                  <!--<a class="followTips">日常跟进</a>-->
+                  <div style="display: inline-block">{{item.agentName}}</div>
+                  <a class="followTips" *ngIf="item.followupCode">{{item.followupCode==1?'日常跟进':'签约'}}</a>
                   <div class="m10">{{item.content}}</div>
                   <font color="#aaa" size="1">{{item.followupTimeVO}}</font>
             </ion-item>
