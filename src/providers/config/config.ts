@@ -12,8 +12,11 @@ export class ConfigProvider {
   globalConfig:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
 
+  if(this.localStorageProvider.get('loginInfo')){
     var imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
       this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
+  }
+
     if(this.onLine){
       /*线上*/
       this.globalConfig = {
