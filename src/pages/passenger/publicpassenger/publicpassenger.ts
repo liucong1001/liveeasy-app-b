@@ -197,7 +197,7 @@ export class PublicpassengerPage {
     this.params.customerType = '1';
 
     if(val == 1){
-      this.params.customerType='1';
+      this.params.customerType='0';
     }else if(val == 2){
       this.params.customerType='2';
     }else if(val == 3){

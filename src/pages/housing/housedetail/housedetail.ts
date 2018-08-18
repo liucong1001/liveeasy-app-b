@@ -372,16 +372,16 @@ export class HousedetailPage {
   }
 
   addContactBolean = true;
+  isClick:boolean = false ;
   //表单提交
   save(){
-    // console.log('formvalue',this.form.value);
+    this.isClick = true;
     if(this.form.value.tagsStr){
       this.form.patchValue({
         tags:this.tagsSum(this.form.value.tagsStr)
       });
       delete this.form.value.tagsStr;
     }
-
     if(isNaN(this.form.value.tags)){
       this.form.patchValue({
         tags:0
@@ -390,8 +390,7 @@ export class HousedetailPage {
     }
     // console.log('修改之后',this.form.value);
 
-
-   if(this.addContactBolean){
+      if(this.addContactBolean){
      // 联系人
      this.form.value.contacts[0].contact = this.form.value.contact;
      this.form.value.contacts[0].contactInfo = this.form.value.contactInfo;
@@ -413,17 +412,21 @@ export class HousedetailPage {
    }
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
    // console.log('提交',formData);
+
     this.propertyProvider.updates(formData).then(res=>{
-      if(res.success){
+        if(res.success){
+          this.isClick = false;
         this.toast.msg('修改成功!');
         setTimeout(()=>{
           // this.navCtrl.setRoot(HousingPage);
           this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-        },500);
+        },100);
       }else{
+          this.isClick = true;
         this.toast.error('修改失败！');
       }
     })
+
   }
 
 
