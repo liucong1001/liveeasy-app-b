@@ -29,26 +29,16 @@ page-mypassenger {
     border-color: #1ab394;
     background-color: #1ab394;
   }
-  .tips{
-    a {
-      display: inline-block;
-      font-size: 12px;
-      padding:1px 3px;
-      margin-left: 8px;
-      border-radius: 3px;
-    }
-    a:nth-child(2) {
-      background: #E7F7F7;
-      color: #7DD4D0;
-    }
-    a:nth-child(3) {
-      background: #E9F6FC;
-      color: #69C2EC;
-    }
-    a:nth-child(4) {
-      background: #FEEDE9;
-      color: #F98369;
-    }
+.followLabel{
+  background-color: #ed5565;
+  color: #FFFFFF;
+}
+.lock{
+  background-color: #f8ac59;
+  color: #FFFFFF;
+}
+  .lookLable{
+    background: #aaa;
   }
 }
 

@@ -57,6 +57,7 @@ export class MypassengerPage {
     sort:'1',
   };
   @ViewChild('navbar') navBar: Navbar;
+  date:any;
   constructor(public navCtrl: NavController,
               public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,
@@ -82,6 +83,14 @@ export class MypassengerPage {
       this.area = this.localStorageProvider.get('area');
       this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
+
+
+
+    //获取客源标签
+    this.date=(new Date()).getTime();
+
+
+
   }
   @ViewChild('myTabs') tabRef: Tabs;
 
@@ -167,6 +176,22 @@ export class MypassengerPage {
     return result;
   }
 
+  aa()
+  {
+    for(var i in this.pageData){
+      if(this.pageData[i].createTime && this.pageData[i].lastFollowTm &&
+        this.pageData[i].lastFollowTm<=this.date-1000-(1000*60*60*24*3) &&
+        this.pageData[i].createTime<=this.date-1000-(1000*60*60*24*3)){
+        this.pageData[i].followLabel=1;
+      }
+      if(this.pageData[i].lastLookTime && this.pageData[i].lastLookTime>=this.date && this.pageData[i].lastLookTime<=this.date-1000+(1000*60*60*24*3)) {
+        if (this.pageData[i].followStatus == 1) {
+          this.pageData[i].lookLable = 1;
+        }
+      }
+
+    }
+  }
   /**
    * 列表搜索
    */
@@ -178,7 +203,6 @@ export class MypassengerPage {
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
-
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
         this.firstPageData = res.data.result;
@@ -193,7 +217,9 @@ export class MypassengerPage {
       this.pop = false;
       // this.housingEstate = false;
       //户型搜索条件字显示
+      this.aa();
     });
+
   }
   searchArea='';
   selectArea(items){
@@ -223,6 +249,7 @@ export class MypassengerPage {
     this.houseType = false;
     this.more = false;
     this.pop = false;
+    this.aa();
     // this.housingEstate = false;
     //户型搜索条件字显示
     if(this.sx ==1){
@@ -296,6 +323,7 @@ export class MypassengerPage {
   all = false;
   //上拉加载
   doInfinite(infiniteScroll) {
+
     setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
@@ -309,6 +337,7 @@ export class MypassengerPage {
         this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
+            this.aa();
           }
         });
 
@@ -319,7 +348,6 @@ export class MypassengerPage {
         console.log('数据请求完成');
       });
     }, 1000);
-
   }
   searchFloorNum = 0; //初始化搜索次数
   totalRecords :any;//查询到的总条数；
@@ -331,6 +359,7 @@ export class MypassengerPage {
   haveData=false;
   newCount:any;
   doRefresh(refresher) {
+    this.aa();
     console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
@@ -342,7 +371,6 @@ export class MypassengerPage {
       let newCount = this.checkUpdateCount(res.data.result);
       this.newCount=newCount;
       this.firstPageData = res.data.result;
-
       console.log('Async operation has ended');
       refresher.complete();
       if (newCount > 0 ) {

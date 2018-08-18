@@ -64,16 +64,23 @@
                   <div class="ellipsis tips">
                     <font size="3">{{item.customerName}}</font>
                     <!--急-->
-                    <a *ngIf="item.followLabel">{{item.followLabel==1?'急':''}}</a>
+                    <span >
+
+                      </span>
+                    <a *ngIf="item.followLabel" [ngClass]="{followLabel:item.followLabel==1}">
+                      {{item.followLabel==1?'急':''}}
+                    </a>
                     <!--约-->
-                    <a *ngIf="item.lookLable">{{item.lookLable==1?'约':''}}</a>
+                    <a *ngIf="item.lookLable" [ngClass]="{lookLable:item.lookLable==1}">{{item.lookLable==1?'约':''}}</a>
                     <!--<a>锁 isLock</a>-->
-                    <a *ngIf="item['isLock']">{{item['isLock']==1?'锁':''}}</a>
+                    <a *ngIf="item['isLock']" [ngClass]="{lock:item['isLock']==1}">{{item['isLock']==1?'锁':''}}</a>
                   </div>
                   <p class="m5">
                     <font size="2" color="#aaa">ID:
                       <span>{{item.customerSn}}</span>
-                      <span>{{item.intentionDiviCode | cityPipe}}</span>
+                      <span [ngClass]="{shen:item.intentionDiviCode=='审',xiang:item.intentionDiviCode=='享',kzks:item.intentionDiviCode=='可租可售',bxg:item.intentionDiviCode=='不限购',yzjs:item.intentionDiviCode=='业主急售',myys:item.intentionDiviCode=='免营业税',mwwy:item.intentionDiviCode=='满五唯一',dhy:item.intentionDiviCode=='带花园',yao:item.intentionDiviCode=='钥',wei:item.intentionDiviCode=='委',kan:item.intentionDiviCode=='勘',tie:item.intentionDiviCode=='铁',guan:item.intentionDiviCode=='关',fa:item.intentionDiviCode=='发',suo:item.intentionDiviCode=='锁'}">
+                        {{item.intentionDiviCode}}
+                      </span>
                     </font>
                   </p>
                   <p class="m5">
