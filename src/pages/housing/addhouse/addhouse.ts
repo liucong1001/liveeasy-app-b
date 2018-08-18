@@ -94,7 +94,8 @@ export class AddhousePage {
      contact:['',Validators.required],
      contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
      contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
-     sex:['male',Validators.required],
+    contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
+    sex:['male',Validators.required],
       tags:['0'],//房源标签
      infoOwnerId:[this.localStorageProvider.get('loginInfo')['user']['company']['id']],//加盟商id 根据登录人判断他的加盟商id
      buildingType:['1',Validators.required],//建筑类型
@@ -153,6 +154,9 @@ export class AddhousePage {
         new ErrorMessage('pattern', '手机号码格式不正确！'),
       ],
       contactInfo2:[
+        new ErrorMessage('pattern', '手机号码格式不正确！'),
+      ],
+      contactInfo3:[
         new ErrorMessage('pattern', '手机号码格式不正确！'),
       ],
       buildingType:[
@@ -292,7 +296,15 @@ export class AddhousePage {
        contactType:'mobile',
        desc:'',
      };
+     var man3 ={
+       contact:this.form.value.contact,
+       contactInfo:this.form.value.contactInfo3,
+       sex:this.form.value.sex,
+       contactType:'mobile',
+       desc:'',
+     };
      this.form.value.contacts.push(man2);
+     this.form.value.contacts.push(man3);
      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
      this.addContactBolean = false;
    }

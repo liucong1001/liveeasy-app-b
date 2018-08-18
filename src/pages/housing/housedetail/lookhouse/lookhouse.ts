@@ -43,6 +43,8 @@ export class LookhousePage {
   isCreater:boolean;
   positionList:any;
   picSuccessAll:any;
+  isContent:any;
+  showBtn:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams
               ,public actionSheetCtrl: ActionSheetController,
@@ -58,8 +60,12 @@ export class LookhousePage {
       if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id&&this.lockhoseDetail.auditStatus==3){
         this.imgJson = JSON.parse(this.lockhoseDetail.content).propertyPics;
         console.log('房源图片', JSON.parse(this.lockhoseDetail.content).propertyPics);
+        this.isContent = true;
       }else if(this.lockhoseDetail.pics) {
+        this.isContent = false;
         this.imgJson = this.lockhoseDetail.pics&&JSON.parse(this.lockhoseDetail.pics);
+      }else {
+        this.isContent = false;
       }
       /**
        * 判断是不是自己录入的房源  （24小时之内可以上传实勘图）
@@ -69,6 +75,14 @@ export class LookhousePage {
       }else {
          this.isCreater = false;
       }
+      this.showBtn =true;
+      if(this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock && this.lockhoseDetail.auditStatus!=3)  {
+        this.showBtn =true;
+      }else {
+        this.showBtn =false;
+      }
+
+
 
       if(!this.lockhoseDetail.content){
         this.imgJson =[];

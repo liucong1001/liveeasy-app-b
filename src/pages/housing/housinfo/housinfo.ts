@@ -128,8 +128,8 @@ export class HousinfoPage {
     },2000);
     this.propertyId = this.navParams.get('propertyId');
 
-    this.propertyProvider.getPropertyDetail(this.navParams.get('propertyId')).then(res=>{
-      this.houseData=res.data.result[0];
+    this.propertyProvider.getRecord(this.navParams.get('propertyId')).then(res=>{
+      this.houseData=res.data;
       //实勘图
        this.imgJson = this.houseData&&this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
       //钥匙信息
@@ -200,16 +200,6 @@ export class HousinfoPage {
 
   }
 
-
-  // 刚加载加载地图信息
-  loadMap(e:any) {
-    // console.log(e);
-  }
-
-  // 单机地图坐标, 打印信息
-  clickMarker(marker:any) {
-    // console.log(marker);
-  }
 
 
 
@@ -301,7 +291,6 @@ export class HousinfoPage {
   }
   //房源标签code转换为name 32768
   tagName(code) {
-
     for (var i in this.tagsListPage) {
       if (code == parseFloat(this.tagsListPage[i].val) ) {
         return this.tagsListPage[i].name
@@ -367,6 +356,21 @@ export class HousinfoPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  /**
+   * 去掉 门牌图
+   * @param data
+   * @returns {any[]}
+   */
+  imgList(data){
+    var arry = [];
+     for(let item of data){
+        if(item.position!='add1'){
+          arry.push(item)
+        }
+     }
+     return arry
   }
 
   //------跳转页面过渡--------//

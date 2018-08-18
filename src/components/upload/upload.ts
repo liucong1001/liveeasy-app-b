@@ -24,6 +24,7 @@ export class UploadComponent {
   @Input() desc: string; //描述（例如：“门牌图”）
   @Input() max:number;
   @Input() src:Array<any>;
+  @Input() isBtn:any;
   @Output() successEvent = new EventEmitter<any>();
   showTip = true;//是否展示引导上产框框
 
@@ -37,6 +38,7 @@ export class UploadComponent {
   imageBase64 : Array<string>=[];
   smSign:any;
   imgSign:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
@@ -46,6 +48,7 @@ export class UploadComponent {
     this.imgHeader = this.configProvider.set().img;
     this.imgSign = this.configProvider.set().imgSign;
     this.smSign = this.configProvider.set().smSign;
+    this.isBtn = true;
   }
 
   ngOnInit(){
@@ -101,6 +104,8 @@ export class UploadComponent {
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
       sourceType:sourceType,
+      targetWidth:1000,
+      targetHeight:1000,
     };
 
    //选择相册图片

@@ -200,6 +200,12 @@
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
+      <ion-item class="pl12 hdRightInfo1" [hidden]="!sensitiveInfo">
+        <ion-label>业主电话3</ion-label>
+        <ion-input type="number" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo3" >
+        </ion-input>
+      </ion-item>
+      <valid-error [errors]="errors.contactInfo3"  [control]="form.get('contactInfo3')"  ></valid-error>
     </ion-list>
     <ion-list>
       <ion-item class="pl12">
@@ -375,21 +381,17 @@
           </ion-select>
         </ion-item>
       </div>
-
     </ion-list>
-
-
     <ion-list (click)="godesc()" class="m10">
       <button ion-item class="pl12">
         房源描述
       </button>
     </ion-list>
-
     <ion-grid>
       <ion-row>
         <ion-col col-12>
           <button ion-button class="status" tappable full color="danger" class="radius" (click)="save()"
-                  [disabled]="form.invalid|| lockStatus || isClick">确认修改</button>
+                  [disabled]="form.invalid|| lockStatus || isClick || errBtnHttp">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>

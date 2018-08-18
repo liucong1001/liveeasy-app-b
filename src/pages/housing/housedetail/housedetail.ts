@@ -109,7 +109,7 @@ export class HousedetailPage {
       if( this.data&&res.success){
         loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
-        // console.log('房源buzzType',this.data.buzzType);
+         console.log('联系人',jsonData,jsonData[0].contactInfo,jsonData[1].contactInfo,jsonData[2].contactInfo);
         this.form.patchValue({
           adminDivisionCode:this.data.adminDivisionCode,
           buzzType:this.data.buzzType,
@@ -131,8 +131,10 @@ export class HousedetailPage {
           decoration: this.data.decoration,
           contact:jsonData[0].contact,
           sex:jsonData[0].sex,
-          contactInfo:jsonData[0].contactInfo,
-          contactInfo2:jsonData.length>1?jsonData[1].contactInfo:'',
+          // contactInfo:jsonData[0].contactInfo,
+          contactInfo:jsonData.length>1?jsonData[0].contactInfo:'',
+          contactInfo2:jsonData.length>=1?jsonData[1].contactInfo:'',
+          contactInfo3:jsonData.length>=2?jsonData[2].contactInfo:'',
           //更多
           buildingType:this.data.buildingType,
           hasElevator:this.data.hasElevator,
@@ -209,6 +211,7 @@ export class HousedetailPage {
     contact:['',Validators.required],
     contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
     contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
+    contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
     sex:['male',Validators.required],
     tags:['0'],//房源标签
     tagsStr:[],//列表
@@ -257,6 +260,9 @@ export class HousedetailPage {
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
     contactInfo2:[
+      new ErrorMessage('pattern', '手机号码格式不正确！'),
+    ],
+    contactInfo3:[
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
     spaceSize:[
@@ -373,9 +379,11 @@ export class HousedetailPage {
 
   addContactBolean = true;
   isClick:boolean = false ;
+  errBtnHttp:boolean;
   //表单提交
   save(){
     this.isClick = true;
+    this.errBtnHttp = true;
     if(this.form.value.tagsStr){
       this.form.patchValue({
         tags:this.tagsSum(this.form.value.tagsStr)
@@ -402,7 +410,15 @@ export class HousedetailPage {
        contactType:'mobile',
        desc:'',
      };
+    var man3 ={
+         contact:this.form.value.contact,
+         contactInfo:this.form.value.contactInfo3,
+        sex:this.form.value.sex,
+       contactType:'mobile',
+       desc:'',
+     };
      this.form.value.contacts.push(man2);
+     this.form.value.contacts.push(man3);
      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
      var formData = {
        propertyId:this.propertyid,
@@ -417,6 +433,7 @@ export class HousedetailPage {
         if(res.success){
           this.isClick = false;
         this.toast.msg('修改成功!');
+         this.errBtnHttp =true;
         setTimeout(()=>{
           // this.navCtrl.setRoot(HousingPage);
           this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
@@ -424,6 +441,8 @@ export class HousedetailPage {
       }else{
           this.isClick = true;
         this.toast.error('修改失败！');
+          this.errBtnHttp =false;
+
       }
     })
 

@@ -26,8 +26,8 @@
     </ion-slide>
     <!--assets/imgs/default.jpg-->
     <ng-container *ngIf="imgJson">
-      <ion-slide  *ngFor="let item of imgJson;let i = index"  pager="true">
-        <img [src]="imgHeader+item.imagePath+imgSign"  [imgGallery]="{data:imgJson,index:i}" width="100%">
+      <ion-slide  *ngFor="let item of  imgList(imgJson) ;let i = index"  pager="true">
+        <img [src]="imgHeader+item.imagePath+imgSign" [imgGallery]="{data:imgJson,index:i}" width="100%" >
       </ion-slide>
     </ng-container>
 
@@ -201,12 +201,13 @@
       </ion-col>
     </ion-row>
   </div>
-  <ion-list class="m10">
+  <ion-list class="m10" *ngIf="houseData?.shareShow">
     <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
       角色人
       <font color="#aaa" class="changes"></font>
     </button>
   </ion-list>
+</ion-content>
   <!--[offline]="offlineOpts"-->
   <!--<baidu-map-->
     <!--ak="8azVgQbZR9irKHBOsqMzi8CAT7l1gtjt"-->
@@ -214,7 +215,7 @@
     <!--(onMapLoaded)="loadMap($event)"-->
     <!--(onMarkerClicked)="clickMarker($event)"-->
   <!--&gt;</baidu-map>-->
-</ion-content>
+
 <ion-footer>
   <ion-row class="footers">
     <ion-col col-2 class="tc"  (click)="record()">
@@ -223,10 +224,10 @@
     margin-top: 5px;"></ion-icon>
       <span style="font-size: 1.2rem">记录</span>
     </ion-col>
-    <ion-col col-5 *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr)) || !ModalCmp" >
+    <ion-col col-5 *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr)) " >
       <button ion-button class="follows" tappable (click)="goFollow()">跟进</button>
     </ion-col>
-    <ion-col col-5  *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr)) || !ModalCmp" >
+    <ion-col col-5  *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr))" >
       <button ion-button tappable class="compile" (click)="edit()">编辑</button>
     </ion-col>
   </ion-row>

@@ -21,37 +21,72 @@
         <span class="defaults">楼盘地址：</span>{{data.standardAddress}}
       </ion-col>
 
-      <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">栋号：</span>{{sensitiveData?.buildingNo}}
+      <ion-col col-12 >
+        <span class="defaults">栋号：</span>
+        <span *ngIf="data.shareShow">{{sensitiveData?.buildingNo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
-      <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">单元：</span>{{sensitiveData?.unitNo}}
+      <ion-col col-12>
+        <span class="defaults">单元：</span>
+        <span *ngIf="data.shareShow">{{sensitiveData?.unitNo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
       <ion-col col-12>
         <span class="defaults">楼层：</span>{{data?.floorNo}}
       </ion-col>
-      <ion-col col-12>
-        <span class="defaults">房间号：</span>{{sensitiveData?.houseNo}}
+      <ion-col col-12 >
+        <span class="defaults">房间号：</span>
+        <span *ngIf="data.shareShow">  {{sensitiveData?.houseNo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
       <ion-col col-12>
         <span class="defaults">楼户比例：</span>{{data.elevators}}梯  {{data.apartments}}  <span *ngIf="data.apartments">户</span>
       </ion-col>
+      <ion-row *ngIf="data?.realtorInfoShow">
+        <ion-col col-12 >
+          <span class="defaults">归属人姓名：</span>
+          <span>  {{data?.realtorId}}</span>
+        </ion-col>
+        <ion-col col-12 >
+          <span class="defaults">归属人电话：</span>
+          <span>  {{data?.infoOwnerTel}}</span>
+        </ion-col>
+        <ion-col col-12 >
+          <span class="defaults">门店名称：</span>
+          <span>  {{data?.branchName}}</span>
+        </ion-col>
+      </ion-row>
+
     </ion-row>
   </div>
-  <div class="yzCss" *ngIf="data?.shareShow&&sensitiveData">
+  <div class="yzCss" *ngIf="sensitiveData">
     <h6>业主信息</h6>
     <ion-row>
-      <ion-col col-12 *ngIf="data?.shareShow">
-        <span class="defaults">业主姓名：</span>{{contactPipe(sensitiveData?.contacts)[0]?.contact}}
+      <ion-col col-12 >
+        <span class="defaults">业主姓名：</span>
+        <span *ngIf="data.shareShow"> {{contactPipe(sensitiveData?.contacts)[0]?.contact}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
-      <ion-col col-12 *ngIf="data.contacts?.sex">
-        <span class="defaults">业主性别：</span>{{contactPipe(sensitiveData?.contacts)[0].sex=='male'?'男':'女'}}
+
+      <ion-col col-12>
+        <span class="defaults">业主性别：</span>
+        <span *ngIf="data.shareShow">{{contactPipe(sensitiveData?.contacts)[0].sex=='male'?'男':'女'}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
-      <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">业主电话1：</span>{{contactPipe(sensitiveData?.contacts)[0].contactInfo}}
+      <ion-col col-12>
+        <span class="defaults">业主电话1：</span>
+        <span *ngIf="data.shareShow">{{contactPipe(sensitiveData?.contacts)[0].contactInfo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
-      <ion-col col-12 *ngIf="data.shareShow">
-        <span class="defaults">业主电话2：</span>{{contactPipe(sensitiveData?.contacts)[1].contactInfo}}
+      <ion-col col-12>
+        <span class="defaults">业主电话2：</span>
+        <span *ngIf="data.shareShow">{{contactPipe(sensitiveData?.contacts)[1].contactInfo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
+      </ion-col>
+      <ion-col col-12>
+        <span class="defaults">业主电话3：</span>
+        <span *ngIf="data.shareShow">{{contactPipe(sensitiveData?.contacts)[2].contactInfo}}</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
     </ion-row>
 
