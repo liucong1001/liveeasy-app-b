@@ -45,12 +45,24 @@ export class ClosehousePage {
     this.propertyid = navParams.get('propertyid');
     this.loginId=this.localStorageProvider.get('loginInfo').user.id;
     this.data = navParams.get('item');
-    // this.propertyProvider.getRecord(this.propertyid).then(res=>{
-    //     this.data = res.data;
+
+
+    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
+      if(res.data.result){
+        this.result=res.data.result[0];
+        console.log(this.result);
+        this.estatename = this.result.estateName;
+        this.convid = this.result.convId;
+        this.standardAddress = this.result.standardAddress;
+        this.closetime=new Date().getTime();
+        this.realtorId = this.data.realtorId;
+        this.realtorSourceId=this.data.realtorSourceId;
+
+      }
+
+    });
+
       console.log('获取关闭',this.data);
-
-
-
       console.log(this.loginId,this.realtorSourceId);
       //判断归属人和操作人是否一致
       // if(this.realtorSourceId != this.loginId){
@@ -72,20 +84,7 @@ export class ClosehousePage {
 
 
 
-    this.propertyProvider.getPropertyDetail(this.propertyid).then(res=>{
-      if(res.data.result){
-        this.result=res.data.result[0];
-        console.log(this.result);
-        this.estatename = this.result.estateName;
-        this.convid = this.result.convId;
-        this.standardAddress = this.result.standardAddress;
-        this.closetime=new Date().getTime();
-        this.realtorId = this.data.realtorId;
-        this.realtorSourceId=this.data.realtorSourceId;
 
-      }
-
-    });
 
 
   }
