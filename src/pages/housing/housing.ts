@@ -98,7 +98,9 @@ export class HousingPage {
 
   badHttp = false;
   comFromHomeSearch = false;
+  addIcon=true;
   localCode:any;
+  updateInput=false;
   cxJSON:Array<{name:string;val:string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
@@ -116,6 +118,8 @@ export class HousingPage {
 
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
+       this.addIcon=false;
+       this.updateInput=true;
     }
 
     if(!this.navParams.get('item')){

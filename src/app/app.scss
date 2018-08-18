@@ -198,60 +198,98 @@
     color: #fff;
     background: #1ab394;
   }
-
-
   .shen{
     background-color: #ed5565;
+    &.activated{
+      background-color: #ed5565 !important;
+    }
   }
   .tie{
     background-color: #f8ac59;
+    &.activated{
+      background-color: #f8ac59 !important;
+    }
   }
   .kzks{
     background-color: #66ccff;
+    &.activated{
+      background-color: #66ccff !important;
+    }
   }
   .bxg{
     background-color: #f6b37f;
-
+    &.activated{
+      background-color: #f6b37f !important;
+    }
   }
   .yzjs{
     background-color: #f19ec2;
-
+    &.activated{
+      background-color: #f19ec2 !important;
+    }
   }
   .myys{
     background-color: #9999cc;
+    &.activated{
+      background-color: #9999cc !important;
+    }
 
   }
   .mwwy{
     background-color: #FF8888;
+    &.activated{
+      background-color: #FF8888 !important;
+    }
 
   }
   .dhy{
     background-color: #c490bf;
+    &.activated{
+      background-color: #c490bf !important;
+    }
   }
   .yao{
     background-color: #cfa972;
+    &.activated{
+      background-color: #cfa972 !important;
+    }
 
   }
   .wei{
     background-color: #1ab394;
+    &.activated{
+      background-color: #1ab394 !important;
+    }
   }
   .kan{
     background-color: #1c84c6;
+    &.activated{
+      background-color: #1c84c6 !important;
+    }
   }
   .guan{
     background-color: #b2c326;
+    &.activated{
+      background-color: #b2c326 !important;
+    }
     color: #fff;
   }
   .fa{
-
+    //&.activated{
+    //  background-color: #ed5565;
+    //}
   }
   .xiang{
     background-color: #f29b76;
-    color: #fff;
+    &.activated{
+      background-color: #f29b76;
+    }
   }
   .suo{
     background-color: #a6937c;
-    color: #fff;
+    &.activated{
+      background-color: #a6937c;
+    }
   }
 }
 //筛选选中样式
