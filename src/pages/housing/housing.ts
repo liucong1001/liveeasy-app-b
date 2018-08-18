@@ -434,21 +434,24 @@ export class HousingPage {
     }
   }
  //
-  goFollow(item) {
+  goFollow(item,slidingItem) {
     this.openWin(FollowPage, {
       item:item
     });
+    slidingItem.close();
   }
 
-  goAddLook(item) {
+  goAddLook(item,slidingItem) {
     this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
+    slidingItem.close();
   }
 
-  goCloseHouse(item) {
+  goCloseHouse(item,slidingItem) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
       item:item,
     })
+    slidingItem.close();
 
   }
 

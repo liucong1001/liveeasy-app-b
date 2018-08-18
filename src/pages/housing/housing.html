@@ -100,7 +100,7 @@
     </div>
     <ion-list class="housList">
 
-      <ion-item-sliding  *ngFor=" let item of pageData; index as i;">
+      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
 
         <ion-item style="padding: 8px 15px 0;">
             <ion-row tappable (click)="goHouseDetail(item)">
@@ -156,11 +156,11 @@
         </ion-item>
         <!--*ngIf="item.shareShow && (!ishasTag('128',item.tagsStr,item))"-->
         <ion-item-options>
-          <button ion-button color="primary" style="background: #ffba4d" tappable  (click)="goFollow(item)"
+          <button ion-button color="primary" style="background: #ffba4d" tappable  (click)="goFollow(item,slidingItem)"
                   >跟进</button>
-          <button ion-button color="danger"  style="background: #80adff" tappable (click)="goAddLook(item)"
+          <button ion-button color="danger"  style="background: #80adff" tappable (click)="goAddLook(item,slidingItem)"
                   >带看</button>
-          <button ion-button color="default" style="background: #ff756f" tappable (click)="goCloseHouse(item)"
+          <button ion-button color="default" style="background: #ff756f" tappable (click)="goCloseHouse(item,slidingItem)"
                   >关闭</button>
 
         </ion-item-options>

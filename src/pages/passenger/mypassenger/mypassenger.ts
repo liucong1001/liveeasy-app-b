@@ -57,7 +57,6 @@ export class MypassengerPage {
     sort:'1',
   };
   @ViewChild('navbar') navBar: Navbar;
-
   constructor(public navCtrl: NavController,
               public statusBar: StatusBar,
               public nativePageTransitions: NativePageTransitions,
@@ -85,7 +84,7 @@ export class MypassengerPage {
     }
   }
 
-  share(slidingItem: ItemSliding) {
+  share(slidingItem) {
     slidingItem.close();
   }
   ionViewDidLoad() {
@@ -111,7 +110,7 @@ export class MypassengerPage {
     // ;alert('4545')
   }
   ionViewWillLeave(){
-    // this.share(item);
+
   }
 
   selected :any;
@@ -438,23 +437,27 @@ export class MypassengerPage {
   addpassenger(){
     this.openWin(AddpassengerPage)
   }
+
   gopassengerDetail(item){
     this.openWin(PassengerdetailPage,{customerId:item.customerId});
   }
-  goFollow(item){
+  goFollow(item,slidingItem){
     this.openWin(PassengerfollowPage,{
       item:item,
-    })
+    });
+    slidingItem.close();
   }
-  golook(item){
+  golook(item,slidingItem){
     this.openWin(PassengerlookPage,{
       item:item,
-    })
+    });
+    slidingItem.close();
   }
-  closePrivateGuest(item){
+  closePrivateGuest(item,slidingItem){
     this.openWin(CloseprivateguestPage,{
       item:item,
-    })
+    });
+    slidingItem.close();
   };
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

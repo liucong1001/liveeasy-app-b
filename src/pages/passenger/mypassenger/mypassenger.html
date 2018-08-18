@@ -55,9 +55,9 @@
 
     <ion-list class="housList" style="margin-top: 2px">
 
-      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" >
+      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
 
-        <ion-item style="padding: 12px 15px 0;" (ionChange)="share(item)">
+        <ion-item style="padding: 12px 15px 0;" >
 
               <ion-row (click)="gopassengerDetail(item)">
                 <ion-col col-9 tappable >
@@ -93,9 +93,9 @@
         </ion-item>
 
         <ion-item-options>
-          <button ion-button color="primary" style="background: #ffba4d" tappable (click)="goFollow(item)" [hidden]="item['isLock']==1">跟进</button>
-          <button ion-button color="danger"  style="background: #80adff" tappable (click)="golook(item)"  [hidden]="item['isLock']==1">约看</button>
-          <button ion-button color="default" style="background: #ff756f" tappable (click)="closePrivateGuest(item)" [hidden]="item['isLock']==1">关闭</button>
+          <button ion-button color="primary" style="background: #ffba4d" tappable (click)="goFollow(item,slidingItem)" [hidden]="item['isLock']==1">跟进</button>
+          <button ion-button color="danger"  style="background: #80adff" tappable (click)="golook(item,slidingItem)"  [hidden]="item['isLock']==1">约看</button>
+          <button ion-button color="default" style="background: #ff756f" tappable (click)="closePrivateGuest(item,slidingItem)" [hidden]="item['isLock']==1">关闭</button>
 
         </ion-item-options>
 
