@@ -11,10 +11,12 @@
       <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
       <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
     </ion-col>
+
+
     <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
       <span *ngIf="housePipe(params.intentionRoom)&&housePipe(params.intentionRoom)!='不限'" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
-      <span *ngIf="!housePipe(params.intentionRoom) || housePipe(params.intentionRoom)=='不限'">户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:housePipe(params.intentionRoom)!='不限'}"></ion-icon>
+      <span  *ngIf="!housePipe(params.intentionRoom) || housePipe(params.intentionRoom)=='不限'">户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:housePipe(params.intentionRoom) && housePipe(params.intentionRoom)!='' && housePipe(params.intentionRoom)!='不限' }"></ion-icon>
     </ion-col>
 
     <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
