@@ -34,7 +34,9 @@ export class ClosePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClosePage');
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = () => {
+      this.openWin(PlookrecordPage,{id:this.customerid})
+    };
   }
   form:FormGroup =this.fb.group({
     content:['',Validators.required],//内容

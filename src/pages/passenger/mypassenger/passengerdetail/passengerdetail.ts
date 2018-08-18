@@ -113,7 +113,9 @@ export class PassengerdetailPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerdetailPage');
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = () => {
+      this.openWin(MypassengerPage)
+    };
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {

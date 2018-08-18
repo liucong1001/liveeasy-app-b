@@ -57,7 +57,9 @@ export class PlookrecordPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlookrecordPage');
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = () => {
+      this.openWin(PassengerdetailPage,{customerId:this.customerid})
+    };
   }
   //添加active
   goToSlide(index) {
@@ -86,16 +88,10 @@ export class PlookrecordPage {
         message: '确定完成吗？',
         buttons: [
           {
-            text: '确定',
+            text: '完成',
             role: '完成',
             handler: () => {
               console.log('Cancel clicked');
-            }
-          },
-          {
-            text: '取消',
-            handler: () => {
-              console.log('Buy clicked');
               //完成约看——状态
               this.customerProvider.mfinish(item.followupId,2,'',this.customerid).then(res => {
                 console.log(res);
@@ -108,6 +104,13 @@ export class PlookrecordPage {
                   this.toast.error('完成失败')
                 }
               });
+            }
+          },
+          {
+            text: '取消',
+            handler: () => {
+              console.log('Buy clicked');
+
             }
           }
         ]

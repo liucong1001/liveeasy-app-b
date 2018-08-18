@@ -84,12 +84,11 @@ export class MypassengerPage {
     }
   }
 
-  share(slidingItem) {
-    slidingItem.close();
-  }
   ionViewDidLoad() {
     this.search();
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = () => {
+      this.navCtrl.setRoot(PassengerPage)
+    };
   }
   ionViewDidEnter() {
     // this.navBar.backButtonClick = () => {
