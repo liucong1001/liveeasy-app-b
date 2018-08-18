@@ -176,7 +176,7 @@ export class MypassengerPage {
     return result;
   }
 
-  aa()
+  tagList()
   {
     for(var i in this.pageData){
       if(this.pageData[i].createTime && this.pageData[i].lastFollowTm &&
@@ -217,7 +217,7 @@ export class MypassengerPage {
       this.pop = false;
       // this.housingEstate = false;
       //户型搜索条件字显示
-      this.aa();
+      this.tagList();
     });
 
   }
@@ -249,7 +249,7 @@ export class MypassengerPage {
     this.houseType = false;
     this.more = false;
     this.pop = false;
-    this.aa();
+    this.tagList();
     // this.housingEstate = false;
     //户型搜索条件字显示
     if(this.sx ==1){
@@ -337,7 +337,7 @@ export class MypassengerPage {
         this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
-            this.aa();
+            this.tagList();
           }
         });
 
@@ -359,7 +359,7 @@ export class MypassengerPage {
   haveData=false;
   newCount:any;
   doRefresh(refresher) {
-    this.aa();
+    this.tagList();
     console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
