@@ -36,6 +36,7 @@ export class UploadComponent {
   camerData :string = "";
   imageBase64 : Array<string>=[];
   smSign:any;
+  imgSign:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private camera: Camera,public actionSheetCtrl: ActionSheetController,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
@@ -43,6 +44,7 @@ export class UploadComponent {
               public localStorageProvider:LocalStorageProvider
   ) {
     this.imgHeader = this.configProvider.set().img;
+    this.imgSign = this.configProvider.set().imgSign;
     this.smSign = this.configProvider.set().smSign;
   }
 
@@ -198,8 +200,8 @@ export class UploadComponent {
           // imageId:this.nowDateFile,
           imageId:options.fileName.split(".")[0],
           bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
-          imagePath:this.imagePath+'?x-oss-process=style/b-detail',
-          thumbnail:this.imagePath+'?x-oss-process=style/b-list',
+          imagePath:this.imagePath,
+          thumbnail:this.imagePath,
           position:this.position,
           desc:this.desc,
         };

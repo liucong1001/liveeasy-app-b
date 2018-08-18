@@ -52,7 +52,6 @@ export class LookhousePage {
     this.data = navParams.get('item');
     this.propertyId = navParams.get('propertyId');
 
-
     this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
       console.log('房源详情',this.lockhoseDetail);
@@ -97,10 +96,8 @@ export class LookhousePage {
      } else {
         this.showTip = false;
     }
-
     this.formData.propertyId = this.data.propertyId;
     this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
-
   }
 
 

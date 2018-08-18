@@ -41,6 +41,7 @@ export class AddlookPage {
   propertyid:any;
   convId:any;
   estateName:any;
+  useDir :string;
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,private renderer:Renderer,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
@@ -57,9 +58,13 @@ export class AddlookPage {
         this.convId=this.result.convId;
         this.estateName=this.result.estateName;
         this.standardAddress=this.result.standardAddress;
+
+        this.useDir = this.result.estateId+'/'+this.result.propertyId+'/';
+        console.log('带看',this.result);
       }
 
     });
+
   }
 
   ionViewDidLoad() {
@@ -67,7 +72,19 @@ export class AddlookPage {
     this.imgHeader = this.configProvider.set().img;
     this.navBar.backButtonClick = this.backButtonClick;
   }
+  imgData = [];
+  maxImagesCount = true;
+  addPic(event){
+    this.imgData = event.data;
+    if(this.imgData.length==1){
+      this.maxImagesCount = false;
+    }else {
+      this.maxImagesCount = true;
+    }
+    console.log('图片回调事件',this.imgData,this.imgData.length,event);
+  }
 
+/*
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       // title: '更多',
@@ -131,10 +148,12 @@ export class AddlookPage {
             // Handle error
         });
     }
+*/
 
   imgHeader='';
   imgSrc = '';
     //文件上传
+/*
     upload(useDir){
         console.log('上传的useDir',useDir);
         this.fileProvider.getTicker(useDir).then(res=>{
@@ -166,36 +185,36 @@ export class AddlookPage {
 
         });
     }
+*/
 
-    //   最终图片地址：
-    // "imagePath":"liveeasy-erp/oss/712574180d7d4dfe98c027b5d41f6bcc/002fc81cd07040b7bf766ee8a4df79c6/1527244583739.jpg"
+
 
     save(){
-      var followupPics = [{
-        imageId:this.nowDateFile,
-        bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
-        imagePath:this.imagePath,
-        thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
-        position:'',
-        desc:'',
-      }];
+      // var followupPics = [{
+      //   imageId:this.nowDateFile,
+      //   bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
+      //   imagePath:this.imagePath,
+      //   thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
+      //   position:'',
+      //   desc:'',
+      // }];
+      // var followupPics = this.imgData;
 
       this.formData = {
         bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
         content:this.content,
         followupCode:'3', //  区别空看和跟近
-        followupPics:JSON.stringify(followupPics),
+        followupPics:JSON.stringify(this.imgData),
         followupTime: Date.parse(this.followup_time) ,
         imageId:this.nowDateFile,
         imagePath:this.imagePath,
-        propertyId:this.data.propertyId,
+        propertyId:this.propertyid,
         recordTime:new Date().getTime(),
         size:'',
-        thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
+        thumbnail:this.imagePath,
         agentId:this.localStorageProvider.get('loginInfo').user.id,
       };
 
-      console.log('表单内容',this.formData);
 
 
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
@@ -212,17 +231,7 @@ export class AddlookPage {
          alert('添加失败'+err);
       })
     }
-// //禁用调出键盘
-//   ionViewDidEnter(){
-//     let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-//     this.renderer.setElementAttribute(input, 'disabled', 'true');
-//
-//     this.navBar.backButtonClick = () => {
-//       // this.navCtrl.push(HomesearchPage);
-//       this.navCtrl.popToRoot();
-//     };
-//
-//   }
+
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {

@@ -48,15 +48,19 @@
             <ion-textarea rows="5" [(ngModel)]="content"  name="content"  placeholder="你跟进的内容..."></ion-textarea>
           </div>
         </ion-col>
-        <div class="attorneyPic bgWhite" (click)="presentActionSheet()">
-          <div class="bgWrapper m10"  *ngIf="!path"></div>
-          <div *ngIf="path" class="m10" >
-            <img [src]="imgSrc"  class="img_upload"/>
-          </div>
+
+        <div class="attorneyPic bgWhite">
+          <span class="text-danger" *ngIf="data?.auditStatus!=3">(*只能上传一张照片)</span>
+          <upload  [useDir]="useDir"  [src]="imgJson" [desc]="''" [position]="''"
+                  (successEvent)="addPic($event)"></upload>
+          <!--<div class="bgWrapper m10"  *ngIf="!path"></div>-->
+          <!--<div *ngIf="path" class="m10" >-->
+            <!--<img [src]="imgSrc"  class="img_upload"/>-->
+          <!--</div>-->
         </div>
 
         <ion-col col-12 class="bgWhite p10">
-          <button ion-button full color="danger"  [disabled]="!followup_time||!content"  class="radius" (click)="save()">确定</button>
+          <button ion-button full color="danger"  [disabled]="!followup_time||!content||imgData.length!=1"  class="radius" (click)="save()">确定</button>
         </ion-col>
       </ion-row>
     </ion-grid>
