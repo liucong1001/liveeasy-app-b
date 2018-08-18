@@ -9,6 +9,11 @@
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       &nbsp;当前委托书正在审核，审核期间不允许修改</font>
   </div>
+  <div class="bgWhite p10" *ngIf="data?.auditStatus==2">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      审核{{data.auditStatusStr}}</font>
+  </div>
   <!-- 没有委托书 -->
   <form [formGroup]="form">
     <ion-list *ngIf="permission">
@@ -32,7 +37,7 @@
       <valid-error [errors]="errors.delegateDocSn"  [control]="form.get('delegateDocSn')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>类型</ion-label>
-        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="delegateStyle">
+        <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="delegateStyle" (ionChange)="change($event)">
           <ion-option value="1">截止时间</ion-option>
           <ion-option value="2">售出为止</ion-option>
         </ion-select>

@@ -199,6 +199,7 @@ export class HousingPage {
       this.district = [];
       this.search('propQuery');
       this.choseDivision = true;
+      console.log('gggggg不限',);
     }
     this.selected = item;
     this.aeraShow=false;
@@ -250,6 +251,7 @@ export class HousingPage {
        if(this.params.area ==this.district[i].estateId){
        }
     }
+
     this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
@@ -821,9 +823,12 @@ export class HousingPage {
 
   selectArea(item){
      this.searchArea= item.name;
-     this.search('propQuery');
-     // console.log('选择到area',item,this.selected);
-     if(item.name=='不限'){this.searchArea=this.selected.name};
+     this.params.area1 = item.id;
+     if(item.name=='不限'){
+      this.searchArea=this.selected.name;
+      delete this.params.area1 ;
+     }
+    this.search('propQuery');
   }
 
   paramsBedrooms:any;
@@ -844,6 +849,7 @@ export class HousingPage {
  */
 class  PropertyPageParams {
   area?:string; //商圈
+  area1?:string;
   bedrooms?:string;//户室
   city?:string;
   division?:string;

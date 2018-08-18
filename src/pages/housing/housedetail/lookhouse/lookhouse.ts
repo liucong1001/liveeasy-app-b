@@ -81,12 +81,21 @@ export class LookhousePage {
       }else {
         this.showBtn =false;
       }
-
+      /**
+       * 实勘图 审核拒绝
+       */
+      // console.log('实勘图 审核拒绝',this.lockhoseDetail.pics);
 
 
       if(!this.lockhoseDetail.content){
         this.imgJson =[];
       }
+      if(!this.lockhoseDetail.hasOwnProperty('pics')&&this.lockhoseDetail.auditStatus ==2){
+        this.imgJson =[];
+      }
+
+
+
       /**
       * */
       this.positionList =[];

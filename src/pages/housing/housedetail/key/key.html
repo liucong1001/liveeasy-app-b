@@ -9,6 +9,12 @@
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       &nbsp;当前钥匙正在审核，审核期间不允许修改</font>
   </div>
+  <div class="bgWhite p10" *ngIf="data?.auditStatus==2">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      审核{{data.auditStatusStr}}</font>
+  </div>
+
   <form [formGroup]="form">
     <ion-list>
       <ion-item class="pl12 hdRightInfo1" *ngIf="data?.submitterName">

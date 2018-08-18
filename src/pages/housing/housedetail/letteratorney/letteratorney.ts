@@ -51,12 +51,13 @@ export class LetteratorneyPage {
       if(res.success){
         this.data= res.data;
         this.content = JSON.parse(res.data.content) ;
-
+        console.log('解释时间',  typeof (this.content.delegateEndTm));
         this.delegateDocId= res.data.delegateDocId;
         this.form.patchValue({
           delegateDocSn:this.content.delegateDocSn,
           delegateBeginTm:this.content.delegateBeginTm &&new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
-          delegateEndTm: this.content.delegateEndTm&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
+
+          .0: this.content.delegateEndTm&&this.content.delegateEndTm!='null'&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
           delegateDocPics:this.content.delegateDocPics,
           delegateStyle:this.content.delegateStyle
         });
@@ -164,6 +165,13 @@ export class LetteratorneyPage {
       this.maxImagesCount = true;
     }
     console.log('图片数据',this.imgData,this.imgData.length,this.maxImagesCount);
+  }
+
+  change(event){
+    console.log('改变',event);
+    if(event==2){
+      this.form.value.delegateEndTm= -1;
+    }
   }
 
   //修改业主委托书

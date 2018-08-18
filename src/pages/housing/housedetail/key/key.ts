@@ -148,6 +148,14 @@ export class KeyPage {
 
   //修改钥匙信息
   updateYc(){
+
+    var  data = {
+      propertyId:this.propertyid,
+      keySn:this.form.value.keySn,
+      keyAddress:this.form.value.keyAddress,
+      keyDlgtFilePics:JSON.stringify(this.imgData),
+    };
+    console.log('修改',data);
     this.propertyProvider.keyupdate({
       propertyId:this.propertyid,
       keySn:this.form.value.keySn,
