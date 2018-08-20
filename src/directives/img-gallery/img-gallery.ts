@@ -31,7 +31,7 @@ export class ImgGalleryDirective {
     var photos = [];
     for(var i in data){
       var item = Number(i)+1;
-      photos.push({url:this.imgHeader+data[i].imagePath+this.configProvider.set().smSign,
+      photos.push({url:this.imgHeader+data[i].imagePath+this.configProvider.set().imgSign,
         title: data[i].desc+' '+item+' - '+data.length,type:'asd'})
     }
 

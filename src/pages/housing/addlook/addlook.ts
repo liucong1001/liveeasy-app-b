@@ -65,7 +65,7 @@ export class AddlookPage {
           this.hasPermisson = true;
         }else {
           this.hasPermisson = false;
-          this.toast.delayToast('暂时不支持空看');
+          this.toast.delayToast('暂无权限操作!');
         }
       }
 

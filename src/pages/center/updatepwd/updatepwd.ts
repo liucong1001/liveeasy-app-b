@@ -9,6 +9,7 @@ import {tick} from "@angular/core/testing";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {LoginPage} from "../../login/login";
+import {HousingPage} from "../../housing/housing";
 @IonicPage()
 @Component({
   selector: 'page-updatepwd',
@@ -38,10 +39,12 @@ export class UpdatepwdPage {
     if (this.form.value.plainPassword != '') {
       this.updprovider.postPassword(this.form.value.plainPassword,this.form.value.newPassword).then(res => {
               if(res.success){
-                // console.log(this.form.value)
-                // console.log(res);
                 this.localStorageProvider.del('ticket');
-                this.navCtrl.push(LoginPage)
+                this.toast.msg('修改密码成功');
+                setTimeout(()=>{
+                  this.navCtrl.push(LoginPage)
+                },1000);
+
               }else {
                 // console.log(res.msg)
                 var reg=/^[\u4E00-\u9FA5]+$/;
