@@ -5,6 +5,7 @@ import { Events } from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {LocalStorageProvider} from "../../../../../providers/local-storage/local-storage";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
  首页楼盘搜索
  */
@@ -23,7 +24,9 @@ export class SearchPage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController,
               public navParams: NavParams, public customerProvider:CustomerProvider,public localStorageProvider:LocalStorageProvider,
-              public events: Events,private http:HttpClient, public nativePageTransitions: NativePageTransitions,public modalCtrl: ModalController) {
+              public events: Events,private http:HttpClient, public nativePageTransitions: NativePageTransitions,
+              public modalCtrl: ModalController,public statusBar: StatusBar
+  ) {
     this.search = navParams.get('floorName');
   }
 
@@ -116,6 +119,10 @@ export class SearchPage {
 
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
+  }
+  //状态栏黑色字体
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
   }
 
 }
