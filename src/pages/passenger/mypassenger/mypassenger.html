@@ -79,7 +79,7 @@
                     <font size="2" color="#aaa">ID:
                       <span>{{item.customerSn}}</span>
                       <span [ngClass]="{shen:item.intentionDiviCode=='审',xiang:item.intentionDiviCode=='享',kzks:item.intentionDiviCode=='可租可售',bxg:item.intentionDiviCode=='不限购',yzjs:item.intentionDiviCode=='业主急售',myys:item.intentionDiviCode=='免营业税',mwwy:item.intentionDiviCode=='满五唯一',dhy:item.intentionDiviCode=='带花园',yao:item.intentionDiviCode=='钥',wei:item.intentionDiviCode=='委',kan:item.intentionDiviCode=='勘',tie:item.intentionDiviCode=='铁',guan:item.intentionDiviCode=='关',fa:item.intentionDiviCode=='发',suo:item.intentionDiviCode=='锁'}">
-                        {{item.intentionDiviCode}}
+                        {{item.intentionDiviCode | cityPipe}}
                       </span>
                     </font>
                   </p>
