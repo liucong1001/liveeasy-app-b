@@ -24,7 +24,7 @@ export class ConfigProvider {
         oss:'',
         http:'https://erp.zdfc.com/api/v1/',//erp客源
         cHttp:'https://q.zdfc.com/', //祥哥专属查询接口
-        cmsHttp:'https://ginkgo.zdfc.com/',
+        cmsHttp:'https://cms.zdfc.com/',
         img:imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
         imgSign:'?x-oss-process=style/b-detail',
