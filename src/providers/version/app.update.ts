@@ -29,9 +29,7 @@ export class VersionUpdateProvider {
       this.alertCtrl.create({
         title: '升级提示',
         subTitle: '发现新版本,是否立即升级？',
-        buttons: [{
-          text: '取消'
-        }, {
+        buttons: [ {
           text: '确定',
           handler: () => {
             this.downloadApp(apkUrl);
