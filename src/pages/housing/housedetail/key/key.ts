@@ -4,18 +4,14 @@ import {PropertyProvider} from "../../../../providers/property/property";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {HousedetailPage} from "../housedetail";
-import {LetteratorneyPage} from "../letteratorney/letteratorney";
-import {HousingPage} from "../../housing";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {ConfigProvider} from "../../../../providers/config/config";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
- * Generated class for the KeyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  钥匙页面
+ auditStatus ：1 通过    2.不通过    3.审核中
  */
 
 @IonicPage()
@@ -43,45 +39,21 @@ export class KeyPage {
               private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
-    // this.data = navParams.get('item');
-    // console.log('参数',this.propertyid,this.data);
-    // this.propertyProvider.keydetail(this.propertyid).then(res => {
-    //   if(res.hasOwnProperty('data')){
-    //     this.keydelegateid= res.data.keyDelegateId;
-    //     this.data = res.data;
-    //     this.form.patchValue({
-    //       keySn: res.data.keySn,
-    //       keyAddress: res.data.keyAddress,
-    //       keyDlgtFilePics: res.data.keyDlgtFilePics,
-    //     });
-    //     this.update=true;
-    //     this.sub=false;
-    //   }
-    //   //钥匙图片显示
-    //   if(res.hasOwnProperty('data')){
-    //     this.imgJson = JSON.parse(this.data.keyDlgtFilePics); //默认展示有图片
-    //     console.log(this.imgJson)
-    //   }else{
-    //     this.edit = true;
-    //   }
-    // });
-
     //钥匙信息
     this.propertyProvider.keydetail(this.propertyid).then(res=>{
       if(res.success&&res.data){
             this.data = res.data;
             this.keyData = JSON.parse(res.data.content.toString());
-            // console.log('药匙详情',this.keyData,this.data);
             this.form.patchValue({
               keySn: this.keyData.keysn,
               keyAddress: this.keyData.keyAddress,
               keyDlgtFilePics: this.keyData.keyDlgtFilePics,
             });
             this.imgJson=this.keyData.keyDlgtFilePics;
-            // console.log('图片',this.imgJson);
      }else {
         this.imgJson= [];
       }
+      console.log('图片信息',this.imgJson);
     });
 
   }

@@ -55,7 +55,7 @@
       <p *ngIf="timeCheck" class="errorTip pl12 m10">*起始时间不能大于结束时间</p>
       <div class="attorneyPic bgWhite">
         <span>委托书图片</span><span class="text-danger"  *ngIf="data?.auditStatus!=3">(*只能上传一张照片)</span>
-        <upload [useDir]="useDir" [desc]="''" [position]="''" [src]="imgJson"  *ngIf="data?.auditStatus!=3&&imgJson" (successEvent)="weiTuo($event)"></upload>
+        <upload [useDir]="useDir" [desc]="'委托书图片'" [position]="''" [src]="imgJson"  *ngIf="data?.auditStatus!=3&&imgJson" (successEvent)="weiTuo($event)"></upload>
         <ng-container *ngIf="data?.auditStatus==3">
           <div class="attorneyPic bgWhite" *ngFor="let item of imgJson;let i =index">
             <div class="m10">

@@ -292,6 +292,8 @@ export class AddpassengerPage {
       if (res.success){
         this.toast.msg('录入成功!');
         this.navCtrl.push(MypassengerPage);
+      }else {
+        this.toast.error(res.msg);
       }
     },err=>{
        alert('录入失败！');

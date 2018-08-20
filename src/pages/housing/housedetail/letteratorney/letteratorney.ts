@@ -68,7 +68,7 @@ export class LetteratorneyPage {
       }else {
         this.imgJson = [];
       }
-      console.log('dir',this.useDir,'详情',this.data);
+      console.log('图片',this.imgJson);
     });
 
   }
