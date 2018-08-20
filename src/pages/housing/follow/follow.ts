@@ -45,16 +45,14 @@ export class FollowPage {
     this.propertyProvider.getRecord(this.propertyid).then(res=>{
       this.result=res.data;
       console.log('跟进',this.result);
-      if(!this.result['shareShow']){
+      if(!this.result['closePropertyShow']){
         this.toast.delayToast('暂时不支持跟进');
       }
     });
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad FollowPage');
     this.navBar.backButtonClick = this.backButtonClick;
-
   }
 
   ionViewWillLeave(){

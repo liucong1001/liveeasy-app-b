@@ -247,7 +247,7 @@ export class AddhousePage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      // console.log('接收数据为: ', params);
+       console.log('接收数据为: ', params, params['meta']);
       // this.form.value.estateName = params.estateName;
       // this.form.value.estateId =  params.estateId;
       this.estateChange(params);
@@ -348,7 +348,6 @@ export class AddhousePage {
   godesc(){
     this.events.subscribe('content', (params) => {
       // 接收B页面发布的数据
-      // console.log('接收数据为: ', params);
       this.form.patchValue({propertyDesc:params});
       // console.log('表单的描述',this.form.value.propertyDesc);
       // 取消订阅

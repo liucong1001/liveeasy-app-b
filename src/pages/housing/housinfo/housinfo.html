@@ -223,10 +223,10 @@
     margin-top: 5px;"></ion-icon>
       <span style="font-size: 1.2rem">记录</span>
     </ion-col>
-    <ion-col col-5 *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr)) " >
+    <ion-col col-5 *ngIf="houseData&&houseData.closePropertyShow " >
       <button ion-button class="follows" tappable (click)="goFollow()">跟进</button>
     </ion-col>
-    <ion-col col-5  *ngIf="houseData&&houseData.shareShow&&(!ishasTag('128',houseData.tagsStr))" >
+    <ion-col col-5  *ngIf="houseData">
       <button ion-button tappable class="compile" (click)="edit()">编辑</button>
     </ion-col>
   </ion-row>

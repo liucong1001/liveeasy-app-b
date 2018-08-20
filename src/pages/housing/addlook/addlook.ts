@@ -42,6 +42,7 @@ export class AddlookPage {
   convId:any;
   estateName:any;
   useDir :string;
+  hasPermisson:any;
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,private renderer:Renderer,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
@@ -49,6 +50,7 @@ export class AddlookPage {
               public configProvider: ConfigProvider) {
     this.propertyid = navParams.get('item').propertyId;
     console.log(this.propertyid);
+    this.hasPermisson = true;
     this.propertyProvider.getRecord(this.propertyid).then(res=>{
       if(res.success){
         this.result=res.data;
@@ -59,7 +61,10 @@ export class AddlookPage {
 
         this.useDir = this.result.estateId+'/'+this.result.propertyId+'/';
         console.log('带看',this.result);
-        if(!this.result['shareShow']){
+        if(this.result['closePropertyShow']&&this.result['propertyStatus']!=512&&this.result['propertyStatus']!=32){
+          this.hasPermisson = true;
+        }else {
+          this.hasPermisson = false;
           this.toast.delayToast('暂时不支持空看');
         }
       }
