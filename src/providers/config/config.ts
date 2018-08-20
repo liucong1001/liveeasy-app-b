@@ -8,7 +8,7 @@ import {LocalStorageProvider} from "../local-storage/local-storage";
 @Injectable()
 export class ConfigProvider {
 
-  onLine = true; //打包线上开关
+  onLine = false; //打包线上开关
   globalConfig:any;
   imgHeaderServer:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {

@@ -21,8 +21,8 @@ import {ConfigProvider} from "../../providers/config/config";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  username:string = 'liveeasy@test01';
-  password:string = 'liveeasy123456';
+  username:string = '';
+  password:string = '';
   url:string = "/login";
   loginBtn:boolean = false ;
   permissionList = []; //权限存储

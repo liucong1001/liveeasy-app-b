@@ -45,7 +45,7 @@ export class MyApp {
       this.tagsList=this.localStorageProvider.get('tagsList');
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleLightContent();//头部信号字体颜色
+      statusBar.styleDefault();//头部信号字体颜色
       // let status bar overlay webview 头部信号
       statusBar.overlaysWebView(true);
       // set status bar to white
