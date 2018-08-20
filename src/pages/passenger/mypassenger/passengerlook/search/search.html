@@ -16,7 +16,7 @@
   <!--<h3>首页楼盘搜索</h3>-->
   <ion-list>
     <ion-item *ngFor="let item of floor"  class="pl12">
-      <ion-label>{{item.estateName}}</ion-label>
+      <ion-label>{{item.estateName}}(房源ID:{{item.convIdReq}}) </ion-label>
       <ion-radio value="{{item.convId}}" (ionSelect)="select(item)"></ion-radio>
     </ion-item>
     <ion-item *ngIf="floor.length==0&&edit">

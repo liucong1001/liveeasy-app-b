@@ -148,7 +148,9 @@ export class PublicpassengerPage {
   //       // this.params.intentionTradeCode = this.tradingArea[i].code;
   //     }
   //   }
-  //
+  //    if(this.params.intentionDiviCode=='99'){
+  //       this.params.intentionDiviCode='0';
+  //     }
   // }
   /**
    * 列表搜索
@@ -207,8 +209,13 @@ export class PublicpassengerPage {
       this.params.customerType='3';
     }
 
-
     console.log('搜索',this.params);
+
+    if(this.params.intentionDiviCode=='99'){
+      this.params.intentionDiviCode='0';
+    }
+
+
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;

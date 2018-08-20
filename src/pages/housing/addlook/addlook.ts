@@ -92,18 +92,8 @@ export class AddlookPage {
 
   imgHeader='';
   imgSrc = '';
-
+  isDisabled:any;
     save(){
-      // var followupPics = [{
-      //   imageId:this.nowDateFile,
-      //   bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
-      //   imagePath:this.imagePath,
-      //   thumbnail:this.imagePath+'?x-oss-process=image/resize,m_lfit,h_110,w_110',
-      //   position:'',
-      //   desc:'',
-      // }];
-      // var followupPics = this.imgData;
-
       this.formData = {
         bucketId:this.localStorageProvider.get('loginInfo')['props']['oss-bucket'],
         content:this.content,
@@ -118,9 +108,7 @@ export class AddlookPage {
         thumbnail:this.imagePath,
         agentId:this.localStorageProvider.get('loginInfo').user.id,
       };
-
-
-
+      this.isDisabled = true;
       this.propertyProvider.insertEmptyLook(this.formData).then(res=>{
         if(res.success){
           this.toast.msg('添加成功!');
@@ -129,9 +117,11 @@ export class AddlookPage {
           },200);
         }else {
           this.toast.error('添加失败!');
+          this.isDisabled = false;
           // console.log('失败',res);
         }
       }).catch(err=>{
+         this.isDisabled = false;
          alert('添加失败'+err);
       })
     }

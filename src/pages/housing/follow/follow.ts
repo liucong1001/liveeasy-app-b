@@ -70,9 +70,10 @@ export class FollowPage {
   }
 
 
-
+   isDisabled:any;
   subFollow(){
       // alert('222');
+      this.isDisabled = true;
       this.followProvider.getfollow({
         agentId:this.localStorageProvider.get('loginInfo').user.id,
         followupCode:this.form.value.followupCode,
@@ -89,6 +90,7 @@ export class FollowPage {
           },200);
         }else{
           this.toast.error('跟进失败！');
+          this.isDisabled = false;
         }
         // alert('跟进成功！')
         // this.navCtrl.pop()

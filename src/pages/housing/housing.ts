@@ -256,8 +256,9 @@ export class HousingPage {
       this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
       delete this.params.division1
     }
-    this.params.area1 = this.params.area;
-
+    if(this.params.area==null){
+      delete this.params.area1;
+    }
 
     this.pageData = [];
     this.hasData  = true;

@@ -57,7 +57,7 @@
         </div>
 
         <ion-col col-12 class="bgWhite p10">
-          <button ion-button full color="danger"  [disabled]="!followup_time||!content"  class="radius" (click)="save()">确定</button>
+          <button ion-button full color="danger"  [disabled]="!followup_time||!content ||isDisabled"  class="radius" (click)="save()">确定</button>
         </ion-col>
       </ion-row>
     </ion-grid>
