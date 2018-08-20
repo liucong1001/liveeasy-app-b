@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="first">
-    <ion-title>添加带看</ion-title>
+    <ion-title>添加空看</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -50,17 +50,14 @@
         </ion-col>
 
         <div class="attorneyPic bgWhite">
-          <span class="text-danger" *ngIf="data?.auditStatus!=3">(*只能上传一张照片)</span>
+          <span>上传图片：</span>
+          <span class="text-danger" *ngIf="data?.auditStatus!=3">(只能上传一张照片)</span>
           <upload  [useDir]="useDir"  [src]="imgJson" [desc]="''" [position]="''"
                   (successEvent)="addPic($event)"></upload>
-          <!--<div class="bgWrapper m10"  *ngIf="!path"></div>-->
-          <!--<div *ngIf="path" class="m10" >-->
-            <!--<img [src]="imgSrc"  class="img_upload"/>-->
-          <!--</div>-->
         </div>
 
         <ion-col col-12 class="bgWhite p10">
-          <button ion-button full color="danger"  [disabled]="!followup_time||!content||imgData.length!=1"  class="radius" (click)="save()">确定</button>
+          <button ion-button full color="danger"  [disabled]="!followup_time||!content"  class="radius" (click)="save()">确定</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -68,6 +65,6 @@
   <div class="bgWhite p10"  *ngIf="!result?.shareShow">
     <font color="red" >
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
-      暂时不支持带看</font>
+      暂时不支持空看</font>
   </div>
 </ion-content>

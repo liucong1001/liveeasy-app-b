@@ -314,6 +314,16 @@ export class PublicpassengerPage {
 
       console.log('Async operation has ended');
       refresher.complete();
+
+      if (res.data.result && res.data.result.length > 0) {
+        this.pageData = [];
+        for (let i = 0; i < res.data.result.length; i ++) {
+
+          this.pageData.push(res.data.result[i])
+        }
+        this.currentPage =1;
+      }
+
       if (newCount > 0 ) {
         // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
         this.num=3;

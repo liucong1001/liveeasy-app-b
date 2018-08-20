@@ -27,10 +27,9 @@
     <!--assets/imgs/default.jpg-->
     <ng-container *ngIf="imgJson">
       <ion-slide  *ngFor="let item of  imgList(imgJson) ;let i = index"  pager="true">
-        <img [src]="imgHeader+item.imagePath+imgSign" [imgGallery]="{data:imgJson,index:i}" width="100%" >
+        <img [src]="imgHeader+item.imagePath+smImgSign" [imgGallery]="{data:imgJson,index:i}" width="100%" >
       </ion-slide>
     </ng-container>
-
   </ion-slides>
   <!--<div class="bannerPop"></div>-->
   <div class="wrap bgWhite">

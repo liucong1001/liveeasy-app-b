@@ -14,7 +14,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
 /**
-  添加带看页面
+  添加空看页面
  */
 
 @IonicPage()
@@ -60,7 +60,7 @@ export class AddlookPage {
         this.useDir = this.result.estateId+'/'+this.result.propertyId+'/';
         console.log('带看',this.result);
         if(!this.result['shareShow']){
-          this.toast.delayToast('暂时不支持带看');
+          this.toast.delayToast('暂时不支持空看');
         }
       }
 
@@ -85,110 +85,8 @@ export class AddlookPage {
     // console.log('图片回调事件',this.imgData,this.imgData.length,event);
   }
 
-/*
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      // title: '更多',
-      buttons: [
-        {
-          text: '选择图片',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-            this.takePhoto(0);
-          }
-        },{
-          text: '拍照',
-          handler: () => {
-            console.log('Archive clicked');
-            this.takePhoto(1);
-          }
-        },{
-          text: '关闭',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
-   convertBase64UrlToBlob(urlData) {
-    const bytes = window.atob(urlData.split(',')[1]);        // 去掉url的头，并转换为byte
-    // 处理异常,将ascii码小于0的转换为大于0
-    const ab = new ArrayBuffer(bytes.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < bytes.length; i++) {
-      ia[i] = bytes.charCodeAt(i);
-    }
-    return new Blob([ab], { type: 'image/png' });
-  }
-
-    //打开摄像头
-    takePhoto(sourceType:number) {
-      // console.log('手机调试',sourceType);
-        const options: CameraOptions = {
-            quality: 50,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            correctOrientation: true,
-            sourceType:sourceType,
-        };
-
-        this.camera.getPicture(options).then((imageData,) => {
-          console.log('图片data',options);
-            // let base64Image = 'data:image/jpeg;base64,' + imageData;
-            this.path = imageData ;
-            console.log('图片信息imageData位',this.path,'图片信息',imageData);
-            // this.upload(this.data.+'/'+this.data.propertyId+'/');
-          this.upload(this.data.propertyId+'/'+this.data.estateId+'/');
-        }, (err) => {
-            // Handle error
-        });
-    }
-*/
-
   imgHeader='';
   imgSrc = '';
-    //文件上传
-/*
-    upload(useDir){
-        console.log('上传的useDir',useDir);
-        this.fileProvider.getTicker(useDir).then(res=>{
-          var apiPath = res.data.host ;
-          var data = res.data;
-          console.log('获取签证成功',res,apiPath);
-          let newFileName = this.nowDateFile = new Date().getTime();   //这里没有共用部分
-          let options:FileUploadOptions = {
-            fileKey:'file',
-            fileName: newFileName +'.jpg',
-            headers:{},
-            params:{
-              'key' : data.dir + newFileName +'.jpg',
-              'policy': data.policy,
-              'OSSAccessKeyId': data.accessid,
-              'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
-              'signature': data.signature
-            }
-          };
-          console.log('上传参数',this.path,apiPath,options);
-          this.fileTransfer.upload(this.path,apiPath,options).then((data) => {
-             this.imagePath = this.imagePathHead +useDir +options.fileName;
-             this.imgSrc = this.imgHeader+ this.imagePath;
-            console.log('upload成功',data,'图片地址',this.imagePath,'全地址',this.imgSrc);
-
-          }, (err) => {
-            console.log('upload失败',err);
-          });
-
-        });
-    }
-*/
-
-
 
     save(){
       // var followupPics = [{

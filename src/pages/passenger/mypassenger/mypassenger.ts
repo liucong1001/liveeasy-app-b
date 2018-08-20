@@ -373,6 +373,18 @@ export class MypassengerPage {
       this.firstPageData = res.data.result;
       console.log('Async operation has ended');
       refresher.complete();
+      if (res.data.result && res.data.result.length > 0) {
+        this.pageData = [];
+        for (let i = 0; i < res.data.result.length; i ++) {
+
+          this.pageData.push(res.data.result[i])
+        }
+        // this.badHttp = false;
+        this.currentPage =1;
+      }
+
+
+
       if (newCount > 0 ) {
         console.log(newCount)
         // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');

@@ -22,7 +22,7 @@ export class PublicCustomerProvider {
       totalPages:0,
       offset:0,
       order:'asc',
-      orderBy: 'ASC',
+      orderBy: 'DESC',
       hasCount:true,
       ... params,
     };

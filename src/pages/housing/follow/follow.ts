@@ -11,7 +11,7 @@ import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
 import {PropertyProvider} from "../../../providers/property/property";
 /**
-   房源带看页面
+   房源空看页面
  */
 
 @IonicPage()

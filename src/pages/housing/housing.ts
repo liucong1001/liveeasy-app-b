@@ -501,6 +501,7 @@ export class HousingPage {
           this.pageData.push(res.data.result[i])
         }
         this.badHttp = false;
+        this.currentPage =1;
       }
 
       if (newCount > 0 ) {
@@ -839,8 +840,6 @@ export class HousingPage {
     }
     this.search('propQuery');
   }
-
-
 
 }
 
