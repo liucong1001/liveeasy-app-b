@@ -324,7 +324,7 @@ export class AddhousePage {
         },1000);
 
       }else {
-        this.toast.error('录入失败！');
+        this.toast.error('录入失败！'+res.msg);
       }
     },err=>{
       this.toast.error('录入失败！');

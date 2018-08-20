@@ -91,7 +91,7 @@ export class LetteratorneyPage {
     delegateBeginTm:['',Validators.required],//起始时间
     delegateEndTm:[''],//结束时间
     delegateDocPics:[''],//委托书图片
-    delegateStyle:[''] //状态
+    delegateStyle:[] //状态
   });
 
   //表单验证消息
@@ -110,17 +110,22 @@ export class LetteratorneyPage {
 
   //上传业主委托书
   go(){
-    this.propertyProvider.attorney({
-      // loginFlag:1,
-      delegateStyle:1,
-      // status:1,
+
+    if(parseFloat(this.form.value.delegateStyle)==2){
+       var endTime  = -1;
+    }else {
+       var endTime= new Date(this.form.value.delegateEndTm).getTime();
+    }
+
+
+   this.propertyProvider.attorney({
+      delegateStyle:this.form.value.delegateStyle,
       propertyId:this.propertyid,
       createTime:this.attorneys,
       delegateDocSn:this.form.value.delegateDocSn,
       delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
-      delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
+      delegateEndTm:endTime,
       delegateDocPics: JSON.stringify(this.imgData),
-       // delegateDocPics:"[{\"imageId\":\"1527840041338\",\"bucketId\":\"liveeasydev\",\"imagePath\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg\",\"thumbnail\":\"liveeasy-erp/oss/a7d09309ee4542dba8601458c0c1604b/001f8754849f44b4bffee7799e4e21a7/1527840041338.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\",\"size\":\"476884\",\"position\":\"\",\"desc\":\"\"}]"
     }).then(res => {
       console.log(res);
       if(res.success){
@@ -134,9 +139,9 @@ export class LetteratorneyPage {
       // alert('上传成功！')
       // this.navCtrl.pop()
     });
-    console.log(this.form.value);
-    console.log(new Date(this.form.value.delegateBeginTm).getTime());
-    console.log(new Date(this.form.value.delegateEndTm).getTime())
+
+    // console.log(new Date(this.form.value.delegateBeginTm).getTime());
+    // console.log(new Date(this.form.value.delegateEndTm).getTime())
   }
 
   /**
@@ -177,16 +182,22 @@ export class LetteratorneyPage {
   //修改业主委托书
   upYz(){
     console.log('提交数据',JSON.stringify(this.imgData));
+
+    if(parseFloat(this.form.value.delegateStyle)==2){
+      var endTime  = -1;
+    }else {
+      var endTime= new Date(this.form.value.delegateEndTm).getTime();
+    }
+
     this.propertyProvider.aupdate({
       delegateDocId:this.delegateDocId,
-      delegateStyle:this.form.value.delegateStyle,
+      delegateStyle:parseFloat(this.form.value.delegateStyle) ,
       propertyId:this.propertyid,
       createTime:this.attorneys,
       delegateDocSn:this.form.value.delegateDocSn,
       delegateBeginTm:new Date(this.form.value.delegateBeginTm).getTime(),
-      delegateEndTm:new Date(this.form.value.delegateEndTm).getTime(),
+      delegateEndTm:endTime,
       delegateDocPics: JSON.stringify(this.imgData),
-      // delegateDocPics:"[{\"desc\":\"\",\"size\":\"476884\",\"imageId\":\"1527845042587\",\"bucketId\":\"liveeasydev\",\"position\":\"\",\"imagePath\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg\",\"thumbnail\":\"liveeasy-erp/oss/ee2d0683ed3a4e9e8762c4ed1f0bf516/00a7bd4bc2084070a8ccd8da0d3aa4df/1527845042587.jpg?x-oss-process=image/resize,m_lfit,h_110,w_110\"}]",
       delegateDocInfoEntity:this.data,
     }).then(res => {
       console.log(res);
