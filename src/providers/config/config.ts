@@ -10,10 +10,11 @@ export class ConfigProvider {
 
   onLine = true; //打包线上开关
   globalConfig:any;
+  imgHeaderServer:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
 
   if(this.localStorageProvider.get('loginInfo')){
-    var imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
+    this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
       this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
   }
 
@@ -25,7 +26,7 @@ export class ConfigProvider {
         http:'https://erp.zdfc.com/api/v1/',//erp客源
         cHttp:'https://q.zdfc.com/', //祥哥专属查询接口
         cmsHttp:'https://cms.zdfc.com/',
-        img:imgHeaderServer,
+        img:this.imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
@@ -38,7 +39,7 @@ export class ConfigProvider {
         http:'',
         cHttp:'https://beta-c.zdfc.com/',
         cmsHttp:'https://beta-cms.zdfc.com/',
-        img:imgHeaderServer,
+        img:this.imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
