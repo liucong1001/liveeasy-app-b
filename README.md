@@ -2,6 +2,7 @@
 
 #### 项目介绍
 经纪人erp-app
+别名：cactus
 
 #### 软件架构
 angular4+ionic3
