@@ -247,9 +247,7 @@ export class AddhousePage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-       console.log('接收数据为: ', params, params['meta']);
-      // this.form.value.estateName = params.estateName;
-      // this.form.value.estateId =  params.estateId;
+      //  console.log('接收数据为: ', params, params['meta'], JSON.parse(params['meta'])['trading_id'] );
       this.estateChange(params);
       // 取消订阅
       this.events.unsubscribe('bevents');
@@ -258,12 +256,12 @@ export class AddhousePage {
   }
 
   estateChange(Value){
-    // console.log('value',Value);
     //哥
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);
     this.form.controls['estateId'].setValue(Value.id);
-    // console.log('表单',this.form.value);
+    this.form.controls['tradingAreaId'].setValue(JSON.parse(Value['meta'])['trading_id'] );
+
   }
 
   //房源标签处理
