@@ -8,6 +8,7 @@ import {PropertyProvider} from "../../../providers/property/property";
 import {HousingPage} from "../../housing/housing";
 import {HomePage} from "../../home/home";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {StatusBar} from "@ionic-native/status-bar";
 /**
   首页楼盘搜索
  */
@@ -26,7 +27,9 @@ export class HomesearchPage {
   @ViewChild('navbar') navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,public addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider, public events: Events,public propertyProvider:PropertyProvider,
-              private http:HttpClient, public nativePageTransitions: NativePageTransitions,public modalCtrl: ModalController) {
+              private http:HttpClient, public nativePageTransitions: NativePageTransitions,public modalCtrl: ModalController,
+              public statusBar: StatusBar
+) {
     this.search = navParams.get('floorName');
   }
 
@@ -117,6 +120,10 @@ export class HomesearchPage {
 
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
+  }
+  //状态栏黑色字体
+  ionViewWillEnter() {
+    this.statusBar.styleDefault();
   }
 
 }

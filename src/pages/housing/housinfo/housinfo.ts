@@ -96,7 +96,7 @@ export class HousinfoPage {
 
   @ViewChild('mySlider') slider:Slides;
     mySlideOptions={
-      autoplay:3000,
+      autoplay:5000,
       initialSlide:0,
       pager:true,
       loop:true,
