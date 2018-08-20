@@ -198,7 +198,6 @@ export class MypassengerPage {
   search(){
     this.pageData = null;
     this.hasData  = true;
-    this.params.intentionDiviCode='0';
     console.log('搜索',this.params);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
