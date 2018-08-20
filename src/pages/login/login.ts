@@ -68,7 +68,7 @@ export class LoginPage {
         console.log('结果',this.permissionArry);
 
         // this.navCtrl.push(TabsPage);
-        this.toast.defaultMsg('top','修改密码成功！');
+
         this.app.getRootNavs()[0].setRoot(TabsPage);
 
 

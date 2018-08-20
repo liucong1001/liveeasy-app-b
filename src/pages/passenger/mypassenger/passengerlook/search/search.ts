@@ -28,7 +28,7 @@ export class SearchPage {
   }
 
   getData(data){
-    return  this.customerProvider.lookSearch({}).then(res=>{
+    return  this.customerProvider.lookSearch(data).then(res=>{
       return res as any;
     });
   }
@@ -37,17 +37,25 @@ export class SearchPage {
   getFloorKey(event){
     console.log('值',this.search);
     this.getData(this.search).then(res=>{
-      for (var i=0;i<res.data.length;i++){
-        this.floor.push(res.data[i]);
-      }
-      this.edit = true;
 
-      if(this.search==''){
-        this.edit =false;
+      if(res.data){
+        for (var i=0;i<res.data.length;i++){
+          this.floor.push(res.data[i]);
+        }
+        this.edit = true;
+
+        if(this.search==''){
+          this.edit =false;
+          this.floor=[];
+        }
+      }else {
         this.floor=[];
       }
 
+
     })
+
+
   }
 
 

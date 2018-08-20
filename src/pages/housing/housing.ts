@@ -192,6 +192,7 @@ export class HousingPage {
     this.choseDivision = false;
     if(item.id=='99'){
       this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+      // delete this.params.division;
       delete this.params.division1;
       // this.params.division1 = this.params.division;
       this.params.area = '';
@@ -199,7 +200,7 @@ export class HousingPage {
       this.district = [];
       this.search('propQuery');
       this.choseDivision = true;
-      console.log('gggggg不限',);
+      console.log('gggggg不限');
     }
     this.selected = item;
     this.aeraShow=false;
@@ -251,6 +252,11 @@ export class HousingPage {
        if(this.params.area ==this.district[i].estateId){
        }
     }
+
+    // if(this.params.division=='99'){
+    //   this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+    //   this.params.division1 =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+    // }
 
     this.pageData = [];
     this.hasData  = true;
@@ -482,9 +488,7 @@ export class HousingPage {
   newCount:any;
   //下拉刷新
   doRefresh(refresher) {
-
     if(refresher.pullingIcon !='arrow-dropdown'){
-      // alert(2);
       refresher.pullingText='松开推荐'
     }
     this.propertyProvider.pageSearch(1,this.params,'propQuery').then(res=>{
@@ -837,7 +841,12 @@ export class HousingPage {
     this.params.bedrooms = this.paramsBedrooms;
     if(item.val==0) {
       delete this.params.bedrooms
+    };
+    if(this.params.division=='99'){
+       this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+       delete  this.params.division1;
     }
+    console.log('选择bed',item,'参数');
     this.search('propQuery');
   }
 

@@ -46,7 +46,7 @@ export class FollowPage {
       this.result=res.data;
       console.log('跟进',this.result);
       if(!this.result['closePropertyShow']){
-        this.toast.delayToast('暂时不支持跟进');
+        this.toast.delayToast('暂无权限操作!');
       }
     });
   }

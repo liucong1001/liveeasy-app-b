@@ -107,8 +107,8 @@ export class ToastComponent {
       message: msg,
       duration: 4000,
       cssClass:'toast-error ',
+      position: 'middle',
       dismissOnPageChange:true,
-      position: 'top',
     });
     // toast.onDidDismiss(() => {
     //   console.log('Dismissed toast');
