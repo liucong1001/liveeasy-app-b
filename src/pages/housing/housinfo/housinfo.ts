@@ -85,7 +85,7 @@ export class HousinfoPage {
     if(opacity>0){
       this.testHeader=true;
       opacity = opacity > 1 ? 1 : opacity;
-      this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
+      // this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
     }else {
       this.testHeader=false;
     }
