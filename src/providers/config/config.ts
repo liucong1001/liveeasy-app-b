@@ -8,7 +8,7 @@ import {LocalStorageProvider} from "../local-storage/local-storage";
 @Injectable()
 export class ConfigProvider {
 
-  onLine = false; //打包线上开关
+  onLine = true; //打包线上开关
   globalConfig:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
 
@@ -22,8 +22,8 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://beta-erp.zdfc.com/api/v1/',
-        cHttp:'https://beta-c.zdfc.com/',
+        http:'https://erp.zdfc.com/api/v1/',//erp客源
+        cHttp:'https://q.zdfc.com/', //祥哥专属查询接口
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
