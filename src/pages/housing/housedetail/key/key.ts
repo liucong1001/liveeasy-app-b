@@ -33,6 +33,7 @@ export class KeyPage {
   edit = false;
   maxImagesCount = true;
   keyData:any;
+  res:any;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera, public nativePageTransitions: NativePageTransitions,
@@ -41,6 +42,7 @@ export class KeyPage {
     this.propertyid= navParams.get('propertyid');
     //钥匙信息
     this.propertyProvider.keydetail(this.propertyid).then(res=>{
+      this.res=res;
       if(res.success&&res.data){
             this.data = res.data;
             this.keyData = JSON.parse(res.data.content.toString());
