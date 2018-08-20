@@ -40,13 +40,9 @@ export class SearchPage {
   getFloorKey(event){
     console.log('值',this.search);
     this.getData(this.search).then(res=>{
-
       if(res.data){
-        for (var i=0;i<res.data.length;i++){
-          this.floor.push(res.data[i]);
-        }
+        this.floor = res.data;
         this.edit = true;
-
         if(this.search==''){
           this.edit =false;
           this.floor=[];
