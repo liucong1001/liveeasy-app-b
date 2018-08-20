@@ -17,6 +17,9 @@ import {PropertyProvider} from "../../providers/property/property";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 import { JPush } from 'ionic3-jpush';
 import { Device } from '@ionic-native/device';
+import {AppVersion} from "@ionic-native/app-version";
+import {HTTP} from "@ionic-native/http";
+import {VersionProvider} from "../../providers/version/app.version";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -37,12 +40,17 @@ export class HomePage {
   data:any;
   tests=[];
   noticeList = [];
-
+  //app 更新
+  private versionJsonUrl : any;
+  versionNumber :string;
+  versionInfo:any;
+  aLinKDownload:string;
+  aLinKDownloadVersion:string;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
-              public jPush: JPush, device: Device
+              public jPush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
              ) {
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
@@ -61,7 +69,14 @@ export class HomePage {
         }
     });
     // this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'
-    console.log('上一个页面',this.navCtrl.last()&&this.navCtrl.last().name);
+    console.log('上一个页面11',this.navCtrl.last()&&this.navCtrl.last().name);
+
+    this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
+
+    this.appVersion.getVersionNumber().then(res=>{
+      this.versionNumber =res; //当前版本
+      console.log('getVersionNumber',res);
+    });
   }
 
 
@@ -91,6 +106,45 @@ export class HomePage {
     // this.navBar.backButtonClick = () => {
     //   this.navCtrl.push(HomesearchPage);
     // };
+
+  /*
+   获取最新版本*/
+
+    var params={
+      _api_key:'14eca046de7309cd5125d4e3bdb1afd1',
+      page:'1',
+      // APPKEY:'42d16b350c365b3dd38f471fd5c102bb',
+    };
+    this.http.post(this.versionJsonUrl,params,{
+      "content-type":"application/json"
+    }).then(data  => {
+      var res;
+      res = JSON.parse(data.data);
+      // console.log('检测',res);
+      let versionInfo = res.data.list[0];
+      this.versionInfo = res.data.list[0];
+      // console.log('最新版本',versionInfo);
+      if (data && data.status && data.status == 200 && data.data) {
+        // let result = data.data || {};
+        versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey=9db9597481973c878648387bf30eaca0&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
+
+        this.aLinKDownload = versionInfo.url;
+        this.aLinKDownloadVersion = versionInfo.buildVersion;   //从网上获取最新版本号
+        console.log('网上最新版本',this.aLinKDownloadVersion);
+        if(this.aLinKDownloadVersion>this.versionNumber){
+          // console.log('存在新版本!',this.aLinKDownloadVersion,this.versionNumber);
+          // this.showNewVersion = true;
+          // console.log('是否存在版本',this.showNewVersion);
+          this.appUpdate.checkVersion();
+        }
+        // console.log('版本对比',this.aLinKDownloadVersion,this.versionNumber);
+
+      }
+    }).catch((e)=> {
+      console.error(JSON.stringify(e));
+    })
+
+
 
   }
 
