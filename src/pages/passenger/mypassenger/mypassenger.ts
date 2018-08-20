@@ -196,6 +196,11 @@ export class MypassengerPage {
    * 列表搜索
    */
   search(){
+
+    if(this.params.intentionDiviCode=='99'){
+      this.params.intentionDiviCode='0';
+    }
+
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);

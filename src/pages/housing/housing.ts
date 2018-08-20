@@ -252,11 +252,12 @@ export class HousingPage {
        if(this.params.area ==this.district[i].estateId){
        }
     }
+    if(this.params.division=='99'){
+      this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+      delete this.params.division1
+    }
+    this.params.area1 = this.params.area;
 
-    // if(this.params.division=='99'){
-    //   this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
-    //   this.params.division1 =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
-    // }
 
     this.pageData = [];
     this.hasData  = true;

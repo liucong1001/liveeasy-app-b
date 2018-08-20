@@ -156,6 +156,9 @@ export class PublicpassengerPage {
   search(){
     this.pageData = null;
     this.hasData  = true;
+    if(this.params.intentionDiviCode=='99'){
+      this.params.intentionDiviCode='0';
+    }
     console.log('搜索',this.params);
     // this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
