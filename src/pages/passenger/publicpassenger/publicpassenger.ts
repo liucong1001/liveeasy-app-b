@@ -161,6 +161,11 @@ export class PublicpassengerPage {
     if(this.params.intentionDiviCode=='99'){
       this.params.intentionDiviCode='0';
     }
+
+    if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
+    if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
+    if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
+
     console.log('搜索',this.params);
     // this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
@@ -214,6 +219,9 @@ export class PublicpassengerPage {
     if(this.params.intentionDiviCode=='99'){
       this.params.intentionDiviCode='0';
     }
+    if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
+    if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
+    if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
 
 
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
