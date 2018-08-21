@@ -67,12 +67,22 @@ export class VersionProvider {
 
           this.appVersion.getVersionNumber().then(ressult=>{
             this.versionNumber =ressult;
-            console.log('获取当前版本',this.versionNumber,'下载地址',androidData.downlodAddr);
-            if(androidData['appVersion']>this.versionNumber){
-              this.appUpdate.detectionUpgrade(androidData.downlodAddr,  noFouce);
+            if(noFouce==false){
+              /*首页强制更新*/
+              if(androidData['appVersion']>this.versionNumber){
+                this.appUpdate.detectionUpgrade(androidData.downlodAddr,  noFouce);
+              }
             }else {
-               this.toast.defaultMsg('middle','暂无更新!');
+              /* center个人中心更新*/
+              if(androidData['appVersion']>this.versionNumber){
+                this.appUpdate.detectionUpgrade(androidData.downlodAddr,  noFouce);
+              }else {
+                this.toast.defaultMsg('middle','暂无更新!');
+              }
             }
+
+
+
           })
         }
     );
