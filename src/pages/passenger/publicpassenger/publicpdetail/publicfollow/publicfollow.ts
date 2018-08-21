@@ -5,7 +5,7 @@ import {ToastComponent} from "../../../../../components/toast/toast";
 import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
-import {PassengerdetailPage} from "../passengerdetail";
+import {PublicpdetailPage} from "../publicpdetail";
 /**
  * Generated class for the PfollowrecordPage page.
  *
@@ -15,10 +15,10 @@ import {PassengerdetailPage} from "../passengerdetail";
 
 @IonicPage()
 @Component({
-  selector: 'page-pfollowrecord',
-  templateUrl: 'pfollowrecord.html',
+  selector: 'page-publicfollow',
+  templateUrl: 'publicfollow.html',
 })
-export class PfollowrecordPage {
+export class PublicfollowPage {
   fRecord:any;
   params:any;
   customerid:any;
@@ -26,7 +26,7 @@ export class PfollowrecordPage {
   constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public customerProvider:CustomerProvider,
               public toast:ToastComponent,) {
-    this.customerid=navParams.get('id').customerId;
+    this.customerid=navParams.get('customerId');
     console.log(this.customerid)
     this.params = {customerId:this.customerid}
     this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
@@ -37,10 +37,11 @@ export class PfollowrecordPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PfollowrecordPage');
-    this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
-
-    };
+    // this.navBar.backButtonClick = () => {
+    //   this.openWin(PublicpdetailPage,{customerId:this.customerid});
+    //
+    // };
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   addHouse(){
     this.navCtrl.push(AddpassengerPage)

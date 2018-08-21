@@ -1,29 +1,24 @@
 import { Component ,ViewChild} from '@angular/core';
 import {AlertController, IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
-import { CloseprivateguestPage } from '../../../mypassenger/closeprivateguest/closeprivateguest';
 import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger';
 import {ToastComponent} from "../../../../../components/toast/toast";
 import {CustomerProvider} from "../../../../../providers/customer/customer";
-import {ClosePage} from "./close/close";
-import {PassengerdetailPage} from "../passengerdetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
-import {PublicpassengerPage} from "../../../publicpassenger/publicpassenger";
 import {PublicpdetailPage} from "../../../publicpassenger/publicpdetail/publicpdetail";
-
+import {PubliclosePage} from './publiclose/publiclose';
 /**
  * Generated class for the PlookrecordPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
-  selector: 'page-plookrecord',
-  templateUrl: 'plookrecord.html',
+  selector: 'page-publiclook',
+  templateUrl: 'publiclook.html',
 })
-export class PlookrecordPage {
+export class PubliclookPage {
   @ViewChild(Slides) slides: Slides;
   index: number = 0;
   lRecord:any;
@@ -36,23 +31,23 @@ export class PlookrecordPage {
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
-    this.customerid=navParams.get('id').customerId;
-    console.log(this.customerid);
+    this.customerid=navParams.get('customerId');
+    // console.log(this.customerid);
     this.params = {customerId:this.customerid}
-      this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
-        console.log(res.data.result);
-        this.lRecord=res.data.result;
-        for(var i in this.lRecord){
-          if(this.lRecord[i].followStatus==1){
-            this.statusOne.push(this.lRecord[i])
-          }else if(this.lRecord[i].followStatus==2){
-            this.statusTwo.push(this.lRecord[i])
-          }if(this.lRecord[i].followStatus==3){
-            this.statusThree.push(this.lRecord[i])
-          }
+    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
+      // console.log(res.data.result);
+      this.lRecord=res.data.result;
+      for(var i in this.lRecord){
+        if(this.lRecord[i].followStatus==1){
+          this.statusOne.push(this.lRecord[i])
+        }else if(this.lRecord[i].followStatus==2){
+          this.statusTwo.push(this.lRecord[i])
+        }if(this.lRecord[i].followStatus==3){
+          this.statusThree.push(this.lRecord[i])
         }
-        console.log(this.statusOne,this.statusTwo)
-      });
+      }
+      // console.log(this.statusOne,this.statusTwo)
+    });
   }
 
 //状态栏文字颜色修改-白色
@@ -61,12 +56,12 @@ export class PlookrecordPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlookrecordPage');
+    console.log('ionViewDidLoad PubliclookPage');
     // this.navBar.backButtonClick =this.navBar.backButtonClick ;
-    this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
-    };
-
+    // this.navBar.backButtonClick = () => {
+    //   this.openWin(PublicpdetailPage,{customerId:this.customerid});
+    // };
+    this.navBar.backButtonClick = this.backButtonClick;
   }
   //添加active
   goToSlide(index) {
@@ -89,44 +84,44 @@ export class PlookrecordPage {
   //   this.navCtrl.push(AccomplishPage)
   // }
   data:any;
-    confirm(item) {
-      let alert = this.alertCtrl.create({
-        title: '提示',
-        message: '确定完成吗？',
-        buttons: [
-          {
-            text: '取消',
-            role: '取消',
-            handler: () => {
-              console.log('Cancel clicked');
-
-            }
-          },
-          {
-            text: '完成',
-            handler: () => {
-              console.log('Buy clicked');
-              //完成约看——状态
-              this.customerProvider.mfinish(item.followupId,2,'',this.customerid).then(res => {
-                console.log(res);
-                if(res.success){
-                  this.toast.msg('完成成功');
-                  setTimeout(()=>{
-                    this.openWin(PassengerdetailPage,{customerId:this.customerid})
-                  },200);
-                }else {
-                  this.toast.error('完成失败')
-                }
-              });
-            }
+  confirm(item) {
+    let alert = this.alertCtrl.create({
+      title: '提示',
+      message: '确定完成吗？',
+      buttons: [
+        {
+          text: '完成',
+          role: '完成',
+          handler: () => {
+            // console.log('Cancel clicked');
+            //完成约看——状态
+            this.customerProvider.mfinish(item.followupId,2,'',this.customerid).then(res => {
+              console.log(res);
+              if(res.success){
+                this.toast.msg('完成成功');
+                setTimeout(()=>{
+                  this.openWin(PublicpdetailPage,{customerId:this.customerid})
+                },200);
+              }else {
+                this.toast.error('完成失败')
+              }
+            });
           }
-        ]
-      });
-      alert.present();
-    }
+        },
+        {
+          text: '取消',
+          handler: () => {
+            // console.log('Buy clicked');
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
   close(item){
-    this.openWin(ClosePage,{
+    this.openWin(PubliclosePage,{
       item:item,
       customerId:this.customerid
     })

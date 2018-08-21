@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;" (click)="detail(item)">
+  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;" tappable (click)="detail(item)">
     <ion-col col-12 class="bgWhite p10">
       <h6 style="margin-top: 8px">{{ msgPipe(item.operationCode)}}</h6>
       <p class="m10 ellipsis" style="padding-right: 46px">{{item.messageContent}}</p>

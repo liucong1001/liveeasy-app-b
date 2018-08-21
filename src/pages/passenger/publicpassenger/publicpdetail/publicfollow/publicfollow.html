@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="first">
+    <ion-title>跟进记录</ion-title>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="!fRecord" class="tc p15">暂无记录！</div>
+  <div class="location">
+    <ion-list>
+      <ion-item class="updateHegiht p10" *ngFor="let item of fRecord">
+        <ion-row>
+          <ion-col col-12>
+            {{item.followAgentName}}
+            <a class="followTips">{{item.followupCode=='2'?'带看客户':'日常跟进'}}</a>
+          </ion-col>
+          <ion-col col-12>
+            {{item.content}}
+          </ion-col>
+          <ion-col col-12>
+            <font color="#aaa" size="1">{{item.followupTime | date:'yyyy年MM月dd日'}}</font>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

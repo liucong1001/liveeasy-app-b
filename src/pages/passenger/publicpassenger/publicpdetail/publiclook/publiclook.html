@@ -1,0 +1,117 @@
+<ion-header>
+
+  <ion-navbar color="first">
+    <ion-title>约看记录</ion-title>
+    <ion-icon ios="ios-add" md="md-add" class="adds" (click)="addHouse()"></ion-icon>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class="bgWhite" >
+    <ion-row style="border-bottom: 1px solid #f6f6f6">
+      <ion-col class="tc menuPad" [ngClass]="{'active-tab':index==0}" (click)="goToSlide(0)">
+        约看中
+      </ion-col>
+      <ion-col class="tc menuPad" [ngClass]="{'active-tab':index==1}" (click)="goToSlide(1)">
+        已完成
+      </ion-col>
+      <ion-col class="tc menuPad" [ngClass]="{'active-tab':index==2}" (click)="goToSlide(2)">
+        已关闭
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+
+      <ion-slide>
+        <div *ngIf="statusOne==''" class="p15">暂无记录</div>
+        <!--约看中-->
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 1">
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
+                </ion-col>
+                <ion-col col-5 class="tc m15">
+                  <font size="2" color="#aaa">
+                    客户ID：
+                    <span>{{item.customer.customerSn}}</span>
+                  </font>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <!--已完成-->
+        <div *ngIf="statusTwo==''" class="p15">暂无记录</div>
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 2">
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
+                </ion-col>
+                <ion-col col-5 class="tc m15">
+                  <font size="2" color="#aaa">
+                    房源ID：
+                    <span>{{item.customer.customerSn}}</span>
+                  </font>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+        </div>
+
+      </ion-slide>
+      <ion-slide>
+        <!--已关闭-->
+        <div *ngIf="statusThree==''" class="p15">暂无记录</div>
+        <div *ngFor="let item of lRecord">
+          <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 3">
+            <ion-col col-12>
+              <ion-row>
+                <ion-col col-7 class="tl">
+                  <div class="ellipsis">
+                    <font size="3">{{item.content}}</font>
+                  </div>
+                  <p class="m5">
+                    <font size="2" color="#aaa">
+                      <span>{{item.followupTime | date:'yyyy年MM月dd日'}}</span>
+                    </font>
+                  </p>
+                </ion-col>
+                <ion-col col-5 class="tc m15">
+                  <font size="2" color="#aaa">
+                    房源ID：
+                    <span>{{item.customer.customerSn}}</span>
+                  </font>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+          </ion-row>
+        </div>
+
+      </ion-slide>
+    </ion-slides>
+  </div>

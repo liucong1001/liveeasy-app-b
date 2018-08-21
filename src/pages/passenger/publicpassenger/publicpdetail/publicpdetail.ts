@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
-import { PlookrecordPage } from '../../mypassenger/passengerdetail/plookrecord/plookrecord';
-import { PfollowrecordPage } from '../../mypassenger/passengerdetail/pfollowrecord/pfollowrecord';
 import { AddpublicguestPage } from './addpublicguest/addpublicguest';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {StatusBar} from "@ionic-native/status-bar";
+import {PubliclookPage} from "./publiclook/publiclook";
+import {PublicfollowPage} from "./publicfollow/publicfollow";
 
 /**
  * Generated class for the PublicpdetailPage page.
@@ -53,7 +53,7 @@ export class PublicpdetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublicpdetailPage');
+    console.log('ionViewDidLoad PublicpdetailPage1');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   //状态栏文字颜色修改-白色
@@ -75,13 +75,15 @@ export class PublicpdetailPage {
     this.navCtrl.push(AddpublicguestPage)
   }
   passengerLook(){
-    this.navCtrl.push(PlookrecordPage,{
+    this.navCtrl.push(PubliclookPage,{
       id:this.datas,
+      customerId:this.customerId
     })
   }
   passengerFollow(){
-    this.navCtrl.push(PfollowrecordPage,{
+    this.navCtrl.push(PublicfollowPage,{
       id:this.datas,
+      customerId:this.customerId
     })
   }
   //客户等级转换

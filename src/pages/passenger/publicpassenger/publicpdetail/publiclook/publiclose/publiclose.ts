@@ -3,10 +3,9 @@ import {IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angul
 import {CustomerProvider} from "../../../../../../providers/customer/customer";
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ToastComponent} from "../../../../../../components/toast/toast";
-import {PlookrecordPage} from "../plookrecord";
-import {PassengerdetailPage} from "../../passengerdetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
+import {PublicpdetailPage} from "../../publicpdetail";
 /**
  * Generated class for the ClosePage page.
  *
@@ -16,10 +15,10 @@ import {StatusBar} from "@ionic-native/status-bar";
 
 @IonicPage()
 @Component({
-  selector: 'page-close',
-  templateUrl: 'close.html',
+  selector: 'page-publiclose',
+  templateUrl: 'publiclose.html',
 })
-export class ClosePage {
+export class PubliclosePage {
   followupId:any;
   customerid:any;
   @ViewChild(Navbar) navBar: Navbar;
@@ -34,9 +33,9 @@ export class ClosePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClosePage');
-    this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
-    };
+    // this.navBar.backButtonClick = () => {
+    //   this.openWin(PublicpdetailPage,{customerId:this.customerid})
+    // };
   }
   form:FormGroup =this.fb.group({
     content:['',Validators.required],//内容
@@ -53,7 +52,7 @@ export class ClosePage {
       if(res.success){
         this.toast.msg('关闭成功');
         setTimeout(()=>{
-          this.openWin(PassengerdetailPage,{customerId:this.customerid});
+          this.openWin(PublicpdetailPage,{customerId:this.customerid});
         },200);
       }else {
         this.toast.error('关闭失败')
