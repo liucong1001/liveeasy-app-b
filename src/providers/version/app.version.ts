@@ -32,7 +32,6 @@ export class VersionProvider {
              public httpProvider:HttpProvider,private configProvider:ConfigProvider,public toast:ToastComponent,){
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
 
-    // https://www.pgyer.com/liveeasyApp
   }
   public headers = new HttpHeaders().set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin','*');
@@ -66,12 +65,9 @@ export class VersionProvider {
                }
             }
 
-          // this.appUpdate.detectionUpgrade(androidData.downlodAddr,  true);
-          // console.log('最新版本',androidData);
-
           this.appVersion.getVersionNumber().then(ressult=>{
             this.versionNumber =ressult;
-            console.log('获取当前版本',this.versionNumber);
+            console.log('获取当前版本',this.versionNumber,'下载地址',androidData.downlodAddr);
             if(androidData['appVersion']>this.versionNumber){
               this.appUpdate.detectionUpgrade(androidData.downlodAddr,  true);
             }else {

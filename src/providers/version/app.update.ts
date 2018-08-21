@@ -53,9 +53,8 @@ export class VersionUpdateProvider {
 
     const apk = this.file.externalRootDirectory + 'app.apk'; //apk保存的目录
     fileTransfer.download(apkUrl, apk).then((res) => {
-      console.log('download',apkUrl,'res.toUrl()',res,'APK---------',apk);
-
-        this.fileOpener.open(apk, 'application/vnd.android.package-archive').then(() =>{
+        console.log('download',apkUrl,'res.toUrl()',res,'APK---------',apk);
+        this.fileOpener.open(res.toURL(), 'application/vnd.android.package-archive').then(() =>{
           console.log('File is opened')
         }).catch(e => {
           console.log('Error openening file', e)

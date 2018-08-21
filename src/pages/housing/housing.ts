@@ -273,7 +273,7 @@ export class HousingPage {
            this.hasData  = true;
            this.pageData = [];
            for (let i = 0; i < res.data.result.length; i ++) {
-             setTimeout(()=> this.pageData.push(res.data.result[i]),150 * i);
+             this.pageData.push(res.data.result[i]);
            }
          }else {
            // console.log('没有数据!');
@@ -576,7 +576,7 @@ export class HousingPage {
   //上拉加载
   doInfinite(infiniteScroll) {
 
-    setTimeout(()=>{
+
       infiniteScroll.complete();
       if(this.currentPage==1){
         this.currentPage=2
@@ -597,7 +597,6 @@ export class HousingPage {
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
-              // setTimeout(()=> this.pageData.push(res.data.result[i]),100 * i);
             }
           }else {
           //  this.pageResult ==undefined  为空 没有数据  （加载全部）
@@ -610,8 +609,6 @@ export class HousingPage {
       infiniteScroll.complete(function () {
         // console.log('数据请求完成');
       });
-
-    },1000);
 
   }
 

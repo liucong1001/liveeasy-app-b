@@ -14,6 +14,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {LoginPage} from "../pages/login/login";
 import { JPush } from 'ionic3-jpush';
+import {AppVersion} from "@ionic-native/app-version";
+import {HTTP} from "@ionic-native/http";
 @Component({
   templateUrl: 'app.html'
 })
@@ -26,7 +28,12 @@ export class MyApp {
   @ViewChild('navRoot') nav: Nav;
   toast: any = ToastController;
   backButtonPressed: boolean = false;  //用于判断返回键是否触发
-
+  //app 更新
+  private versionJsonUrl : any;
+  versionNumber :string;
+  versionInfo:any;
+  aLinKDownload:string;
+  aLinKDownloadVersion:string;
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
               private device: Device,
@@ -35,7 +42,7 @@ export class MyApp {
               public keybord: Keyboard,
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
-              private androidPermissions: AndroidPermissions,public jPush: JPush,
+              private androidPermissions: AndroidPermissions,public jPush: JPush,private appVersion: AppVersion,private http: HTTP,
               ) {
     if(this.localStorageProvider.get('ticket')){
       this.rootPage = TabsPage;
@@ -63,7 +70,7 @@ export class MyApp {
           this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
         ]);
       }
-      //检测版本更新
+      this.appUpdate.checkVersion();
       // 返回按键事件
       this.registerBackButtonAction();
     });
