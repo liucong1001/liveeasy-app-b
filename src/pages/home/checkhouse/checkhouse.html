@@ -4,15 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-row  class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;" tappable (click)="detail(item)">
-    <ion-col col-12 class="bgWhite p10">
-      <h6 style="margin-top: 8px">{{ msgPipe(item.operationCode)}}</h6>
-      <p class="m10 ellipsis" style="padding-right: 46px">{{item.messageContent}}</p>
-      <div class="defaults ">{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</div>
-      <div  class="read">{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</div>
-    </ion-col>
-  </ion-row>
+<ion-content >
   <ion-refresher
     [pullMax]="480"
     [pullMin]="180"
@@ -26,48 +18,59 @@
   </ion-refresher>
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条房源</div>
-  <div>
-    <ion-list  *ngIf="val==1">
-      <button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">
-        {{item.messageContent}}
-        <!--<span class="readTips">未读</span>-->
-      </button>
-    </ion-list>
-
-    <ion-list *ngIf="val==2">
-      <button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >
-        {{item.messageContent}}
-        <!--<span class="readTips">未读</span>-->
-      </button>
-    </ion-list>
-
-    <ion-list *ngIf="val==3">
-      <button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">
-        {{item.messageContent}}
-        <!--<span class="readTips">未读</span>-->
-      </button>
-    </ion-list>
 
 
-    <div class="content_page" style="margin-top: 20px">
-      <div *ngIf="hasData&&pageData ==null" class="tc">
-        <ion-spinner item-start name="ios"></ion-spinner>
-        <div>加载数据中...</div>
-      </div>
-      <div *ngIf="!hasData"  class="tc p10">
-        抱歉！没有找到数据
-      </div>
-    </div>
+  <ion-row class="bgWhite houseMain" style="margin: 10px 15px" *ngFor=" let item of pageData; index as i;" tappable (click)="detail(item)">
+    <ion-col col-12 class="bgWhite p10">
+      <h6 style="margin-top: 8px">{{ msgPipe(item.operationCode)}}</h6>
+      <p class="m10 ellipsis" style="padding-right: 46px">{{item.messageContent}}</p>
+      <div class="defaults ">{{item.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</div>
+      <div  class="read">{{item.messageStatusInfoEntity.status==1?'已读':'未读'}}</div>
+    </ion-col>
+  </ion-row>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="加载中">
+  <!--<div>-->
+    <!--<ion-list  *ngIf="val==1">-->
+      <!--<button ion-item class="pl12" *ngFor="let item of check;" (click)="go(item)">-->
+        <!--{{item.messageContent}}-->
+        <!--&lt;!&ndash;<span class="readTips">未读</span>&ndash;&gt;-->
+      <!--</button>-->
+    <!--</ion-list>-->
 
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-    <div *ngIf="all&&hasData" class="sTips">已加载全部
-    </div>
+    <!--<ion-list *ngIf="val==2">-->
+      <!--<button ion-item class="pl12"  *ngFor="let item of adjust;" (click)="go(item)" >-->
+        <!--{{item.messageContent}}-->
+        <!--&lt;!&ndash;<span class="readTips">未读</span>&ndash;&gt;-->
+      <!--</button>-->
+    <!--</ion-list>-->
+
+    <!--<ion-list *ngIf="val==3">-->
+      <!--<button ion-item class="pl12" *ngFor="let item of close;" (click)="go(item)">-->
+        <!--{{item.messageContent}}-->
+        <!--&lt;!&ndash;<span class="readTips">未读</span>&ndash;&gt;-->
+      <!--</button>-->
+    <!--</ion-list>-->
+    <!---->
+    <!--<div class="content_page" style="margin-top: 20px">-->
+      <!--<div *ngIf="hasData&&pageData ==null" class="tc">-->
+        <!--<ion-spinner item-start name="ios"></ion-spinner>-->
+        <!--<div>加载数据中...</div>-->
+      <!--</div>-->
+      <!--<div *ngIf="!hasData"  class="tc p10">-->
+        <!--抱歉！没有找到数据-->
+      <!--</div>-->
+    <!--</div>-->
+    <!---->
+  <!--</div>-->
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中">
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div *ngIf="all&&hasData" class="sTips">已加载全部
   </div>
 </ion-content>
 
