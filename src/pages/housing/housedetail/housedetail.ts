@@ -413,19 +413,21 @@ export class HousedetailPage {
     var man3 ={
          contact:this.form.value.contact,
          contactInfo:this.form.value.contactInfo3,
-        sex:this.form.value.sex,
-       contactType:'mobile',
-       desc:'',
+         sex:this.form.value.sex,
+         contactType:'mobile',
+         desc:'',
      };
      this.form.value.contacts.push(man2);
      this.form.value.contacts.push(man3);
-     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-     var formData = {
-       propertyId:this.propertyid,
-       ...this.form.value
-     };
      this.addContactBolean = false;
    }
+
+    this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+    var formData = {
+      propertyId:this.propertyid,
+      ...this.form.value
+    };
+
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
    // console.log('提交',formData);
 

@@ -303,9 +303,9 @@ export class AddhousePage {
      };
      this.form.value.contacts.push(man2);
      this.form.value.contacts.push(man3);
-     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
      this.addContactBolean = false;
    }
+    this.form.value.contacts = JSON.stringify(this.form.value.contacts);
 
 
     if(this.form.invalid){
@@ -326,6 +326,7 @@ export class AddhousePage {
       }
     },err=>{
       this.toast.error('录入失败！');
+      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
     })
 
   }
