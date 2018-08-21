@@ -8,15 +8,19 @@ import {LocalStorageProvider} from "../local-storage/local-storage";
 @Injectable()
 export class ConfigProvider {
 
-  onLine = false; //打包线上开关
+  onLine = true; //打包线上开关
   globalConfig:any;
   imgHeaderServer:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
 
-  if(this.localStorageProvider.get('loginInfo')){
-    this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
-      this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
+
   }
+
+  set(){
+    if(this.localStorageProvider.get('loginInfo')){
+      this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
+        this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
+    }
 
     if(this.onLine){
       /*线上*/
@@ -45,9 +49,6 @@ export class ConfigProvider {
         smSign:'?x-oss-process=style/b-list',
       }
     }
-  }
-
-  set(){
      return this.globalConfig;
   }
 

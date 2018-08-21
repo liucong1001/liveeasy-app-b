@@ -52,6 +52,7 @@ export class HomePage {
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
               public jPush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
              ) {
+
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
     this.propertyProvider.getCode().then(res=>{

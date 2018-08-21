@@ -21,10 +21,13 @@ import {LocalStorageProvider} from "../../providers/local-storage/local-storage"
 })
 export class PassengerPage {
   @ViewChild(Navbar) navBar: Navbar;
-  constructor(public navCtrl: NavController,
-              public nativePageTransitions: NativePageTransitions,
-              public navParams: NavParams, public statusBar: StatusBar,
-              public localStorageProvider: LocalStorageProvider,) {
+  constructor(
+    public navCtrl: NavController,
+    public nativePageTransitions: NativePageTransitions,
+    public navParams: NavParams, public statusBar: StatusBar,
+    public localStorageProvider: LocalStorageProvider,
+
+    ) {
     this.localStorageProvider.del('searchMoreData');
   }
   ionViewWillEnter() {

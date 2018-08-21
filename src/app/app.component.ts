@@ -34,7 +34,8 @@ export class MyApp {
   versionInfo:any;
   aLinKDownload:string;
   aLinKDownloadVersion:string;
-  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(
+    public platform: Platform, splashScreen: SplashScreen,public statusBar: StatusBar,
               private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
               private device: Device,
               private headerColor: HeaderColor,
@@ -43,10 +44,17 @@ export class MyApp {
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jPush: JPush,private appVersion: AppVersion,private http: HTTP,
-              ) {
+
+  ) {
+
     if(this.localStorageProvider.get('ticket')){
       this.rootPage = TabsPage;
     }
+    this.statusBar.styleDefault();
+    this.statusBar.overlaysWebView(true);
+    this.headerColor.tint('#1ab394');
+
+
     platform.ready().then(() => {
       //标签
       this.tagsList=this.localStorageProvider.get('tagsList');
@@ -74,7 +82,9 @@ export class MyApp {
       // 返回按键事件
       this.registerBackButtonAction();
     });
+
   }
+
 
 
   go(item){
