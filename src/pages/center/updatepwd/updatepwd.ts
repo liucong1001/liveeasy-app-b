@@ -27,9 +27,10 @@ export class UpdatepwdPage {
   }
   form:FormGroup =this.fb.group({
     plainPassword:['',Validators.required], //旧密码
-    newPassword:['',Validators.required,Validators.maxLength['21']],//新密码
-    verifyPassword:[''],//确认新密码
+    newPassword:['',Validators.required],//新密码
+    // verifyPassword:[''],//确认新密码
   });
+  //表单验证消息
   ionViewDidLoad() {
     // console.log('ionViewDidLoad UpdatepwdPage');
     this.navBar.backButtonClick = this.backButtonClick;
@@ -58,6 +59,7 @@ export class UpdatepwdPage {
     }
 
   }
+  lengthTips=false;
   checkes(){
     if(this.form.value.newPassword != ''){
       var reg = /^[A-Za-z0-9]+$/;
@@ -66,6 +68,14 @@ export class UpdatepwdPage {
       }else {
         this.tips=false;
       }
+
+      if(this.form.value.newPassword.length >=21){
+        this.lengthTips=true
+      }else {
+        this.lengthTips=false;
+      }
+
+
     }
   }
   backButtonClick = (e: UIEvent) => {

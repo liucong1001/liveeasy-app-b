@@ -18,12 +18,13 @@
         <!--<ion-label>确认新密码</ion-label>-->
         <!--<ion-input type="password" placeholder="请确认新密码" formControlName="verifyPassword"></ion-input>-->
       <!--</ion-item>-->
+      <ion-item *ngIf="lengthTips" class="pl12"> <font color="red">* 密码长度不能大于21位</font></ion-item>
       <ion-item *ngIf="tips" class="pl12"> <font color="red">* 请填写6-21位字母或数字填写</font></ion-item>
 
     </ion-list>
 
     <div padding>
-      <button ion-button block color="danger" [disabled]="form.invalid">确认提交</button>
+      <button ion-button block color="danger" [disabled]="form.invalid || lengthTips || tips">确认提交</button>
     </div>
   </form>
 

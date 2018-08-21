@@ -96,6 +96,7 @@ export class PassengerdetailPage {
               this.areaChange(item);
            }
         }
+        this.estateName=this.data.estateName;
     });
     //客户来源
     this.customerSrcList = new ArryCodeValuePipe().transform(this.localCode,'cms_src');
@@ -112,7 +113,7 @@ export class PassengerdetailPage {
     return title;
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PassengerdetailPage');
+    // console.log('ionViewDidLoad PassengerdetailPage');
     this.navBar.backButtonClick = () => {
       this.navCtrl.push(MypassengerPage)
     };
@@ -203,7 +204,7 @@ export class PassengerdetailPage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       // this.form.value.estateName = params.estateName;
       // this.form.value.estateId =  params.estateId;
       this.estateName = params.keyword;
@@ -215,7 +216,7 @@ export class PassengerdetailPage {
     this.openWin(SearchhousePage);
   }
   save(){
-    console.log('编辑客户',this.form.value);
+    // console.log('编辑客户',this.form.value);
 
     // var body = null;
     // for(var key in this.form.value){
@@ -239,7 +240,7 @@ export class PassengerdetailPage {
 
     this.events.subscribe('content', (params) => {
       // 接收B页面发布的数据
-      console.log('接收数据为: ', params);
+      // console.log('接收数据为: ', params);
       if(params){
         if(params.num==1){
           this.form.controls['requiredDemands'].setValue(params.val);
@@ -291,19 +292,19 @@ export class PassengerdetailPage {
   areas(){
     if(this.form.value.minSpaceSize&&this.form.value.maxSpaceSize){
       if(parseFloat(this.form.value.maxSpaceSize) < parseFloat(this.form.value.minSpaceSize)){
-        console.log('结束面积不能小于开始面积');
+        // console.log('结束面积不能小于开始面积');
         this.areaCheck = true;
       }else {
         this.areaCheck = false;
       }
     }
-    console.log(this.form.value.minSpaceSize,)
+    // console.log(this.form.value.minSpaceSize,)
   }
   //价格
   prices(){
     if(this.form.value.minPrice&&this.form.value.maxPrice){
       if(parseFloat(this.form.value.maxPrice) < parseFloat(this.form.value.minPrice)){
-        console.log('最高价格不能小于最低价格');
+        // console.log('最高价格不能小于最低价格');
         this.priceCheck = true;
       }else {
         this.priceCheck = false;
@@ -314,7 +315,7 @@ export class PassengerdetailPage {
   floors(){
     if(this.form.value.minFloor&&this.form.value.maxFloor){
       if(parseInt(this.form.value.maxFloor) < parseInt(this.form.value.minFloor)){
-        console.log('最高楼不能小于最低楼层');
+        // console.log('最高楼不能小于最低楼层');
         this.floorCheck = true;
       }else {
         this.floorCheck = false;
@@ -325,7 +326,7 @@ export class PassengerdetailPage {
   rooms(){
     if(this.form.value.minBedroom&&this.form.value.maxBedroom){
       if(parseInt(this.form.value.maxBedroom) < parseInt(this.form.value.minBedroom)){
-        console.log('最多居室不能小于最少居室');
+        // console.log('最多居室不能小于最少居室');
         this.roomCheck = true;
       }else {
         this.roomCheck = false;
@@ -336,7 +337,7 @@ export class PassengerdetailPage {
   halls(){
     if(this.form.value.minHall&&this.form.value.maxHall){
       if(parseInt(this.form.value.maxHall) < parseInt(this.form.value.minHall)){
-        console.log('最多厅不能小于最少厅');
+        // console.log('最多厅不能小于最少厅');
         this.hallCheck = true;
       }else {
         this.hallCheck = false;
@@ -348,17 +349,17 @@ export class PassengerdetailPage {
     // this.form.value.contactFreeTmArray
     var startTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[0] = startTime;
-    console.log('时间',event,startTime);
+    // console.log('时间',event,startTime);
   }
 
   getcontactFreeTm2(event){
     var endTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[1] = endTime;
-    console.log('表单',this.form.value);
+    // console.log('表单',this.form.value);
   }
 
   areaChange(data){
-    console.log('区域',data);
+    // console.log('区域',data);
     this.tradingArea = data.area;
   }
 
