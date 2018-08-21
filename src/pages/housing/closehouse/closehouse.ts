@@ -46,7 +46,6 @@ export class ClosehousePage {
     this.loginId=this.localStorageProvider.get('loginInfo').user.id;
     this.data = navParams.get('item');
 
-
     this.propertyProvider.getRecord(this.propertyid).then(res=>{
       if(res.success){
         this.result=res.data;
@@ -63,29 +62,6 @@ export class ClosehousePage {
       }
 
     });
-
-      // console.log('获取关闭',this.data);
-      // console.log(this.loginId,this.realtorSourceId);
-      //判断归属人和操作人是否一致
-      // if(this.realtorSourceId != this.loginId){
-      //   this.toast.msg('你不是此房源归属人，请填写后申请！');
-      //   this.subs=false;
-      //   this.applic=true
-      // }
-      if(this.data.closePropertyShow==true&&this.data.applyStatus==true){
-        // this.toast.msg('你不是此房源归属人，请填写后申请！');
-        // this.subs=false;
-        // this.applic=true
-      }else {
-        // this.toast.delayToast('你不是此房源归属人，请填写后申请！');
-        this.subs=false;
-        this.applic=true
-      }
-
-    // });
-
-
-
 
 
 
