@@ -114,7 +114,7 @@ export class PassengerdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PassengerdetailPage');
     this.navBar.backButtonClick = () => {
-      this.openWin(MypassengerPage)
+      this.navCtrl.push(MypassengerPage)
     };
   }
   //状态栏文字颜色修改-白色
