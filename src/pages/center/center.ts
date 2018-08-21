@@ -157,7 +157,7 @@ export class CenterPage {
 
   updateVersion(){
     // console.log('开始检测版本更新1');
-    this.appUpdate.checkVersion();
+    this.appUpdate.checkVersion(true);
   }
 
   openWin(goPage) {

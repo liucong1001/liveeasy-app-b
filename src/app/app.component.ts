@@ -70,7 +70,7 @@ export class MyApp {
           this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
         ]);
       }
-      this.appUpdate.checkVersion();
+      this.appUpdate.checkVersion(false);
       // 返回按键事件
       this.registerBackButtonAction();
     });

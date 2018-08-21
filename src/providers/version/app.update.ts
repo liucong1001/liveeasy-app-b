@@ -43,7 +43,7 @@ export class VersionUpdateProvider {
 
   downloadApp(apkUrl) {
     let alert = this.alertCtrl.create({
-      title: '下载进度：0%',
+      title: '更新新版本，下载进度：0%',
       enableBackdropDismiss: false,
       buttons: ['后台下载']
     });

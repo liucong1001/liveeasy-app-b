@@ -40,7 +40,7 @@ export class VersionProvider {
    * 版本检测更新
    * appType :1pc  2android    3ios
    */
-  checkVersion() {
+  checkVersion(noFouce) {
     var params={
       _api_key:'14eca046de7309cd5125d4e3bdb1afd1',
       page:'1',
@@ -69,7 +69,7 @@ export class VersionProvider {
             this.versionNumber =ressult;
             console.log('获取当前版本',this.versionNumber,'下载地址',androidData.downlodAddr);
             if(androidData['appVersion']>this.versionNumber){
-              this.appUpdate.detectionUpgrade(androidData.downlodAddr,  true);
+              this.appUpdate.detectionUpgrade(androidData.downlodAddr,  noFouce);
             }else {
                this.toast.defaultMsg('middle','暂无更新!');
             }
