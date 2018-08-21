@@ -72,12 +72,13 @@ export class PublicpassengerPage {
 
   ionViewDidLoad() {
     this.search();
-    // this.navBar.backButtonClick = () => {
-    //   // this.navCtrl.push(HomesearchPage);
-    //   this.navCtrl.setRoot(PassengerPage);
-    // };
+    this.navBar.backButtonClick = () => {
+      // this.navCtrl.push(HomesearchPage);
+      // this.navCtrl.setRoot(PassengerPage);
+      this.navCtrl.setRoot(PassengerPage)
+    };
     // this.navBar.backButtonClick = this.backButtonClick;
-    this.navCtrl.setRoot(PassengerPage)
+
   }
 
   ionViewDidEnter() {
