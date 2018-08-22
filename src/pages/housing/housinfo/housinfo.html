@@ -193,7 +193,7 @@
     </ion-row>
   </div>
   <!--*ngIf="houseData&&houseData.closePropertyShow"-->
-  <ion-list class="m10" >
+  <ion-list class="m10" [ngClass]="{'addMargin':houseData&&!houseData.closePropertyShow}">
     <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
       角色人
       <font color="#aaa" class="changes"></font>

@@ -185,6 +185,36 @@ export class PassengerdetailPage {
       // new ErrorMessage('required','业主姓名必须要填写！'),
       new ErrorMessage('pattern','请填写中文或英文'),
     ],
+    minSpaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxSpaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minPrice:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxPrice:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minFloor:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxFloor:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minBedroom:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxBedroom:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minHall:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxHall:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
   };
 
   clickIntention(){
