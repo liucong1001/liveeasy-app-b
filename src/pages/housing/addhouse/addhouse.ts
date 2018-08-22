@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar, Select} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
@@ -42,22 +42,22 @@ export class AddhousePage {
   // decorationJson:Array<object>;//装修
   // buildingTypeJson:Array<object>;//建筑类型
   @ViewChild(Navbar) navBar: Navbar;
-  @ViewChild('selectOne') selectOne;
-  @ViewChild('selectTwo') selectTwo;
-  @ViewChild('selectThree') selectThree;
-  @ViewChild('selectFour') selectFour;
-  @ViewChild('selectFive') selectFive;
-  @ViewChild('selectSix') selectSix;
-  @ViewChild('selectSev') selectSev;
-  @ViewChild('selectEng') selectEng;
-  @ViewChild('selectNine') selectNine;
-  @ViewChild('selectTen') selectTen;
-  @ViewChild('selectEle') selectEle;
-  @ViewChild('selectTwith') selectTwith;
-  @ViewChild('selectThirty') selectThirty;
-  @ViewChild('selectFourty') selectFourty;
-  @ViewChild('selectSixty') selectSixty;
-  @ViewChild('selectFivety') selectFivety;
+  @ViewChild('selectOne') selectOne: Select;
+  @ViewChild('selectTwo') selectTwo: Select;
+  @ViewChild('selectThree') selectThree: Select;
+  @ViewChild('selectFour') selectFour: Select;
+  @ViewChild('selectFive') selectFive: Select;
+  @ViewChild('selectSix') selectSix: Select;
+  @ViewChild('selectSev') selectSev: Select;
+  @ViewChild('selectEng') selectEng: Select;
+  @ViewChild('selectNine') selectNine: Select;
+  @ViewChild('selectTen') selectTen: Select;
+  @ViewChild('selectEle') selectEle: Select;
+  @ViewChild('selectTwith') selectTwith: Select;
+  @ViewChild('selectThirty') selectThirty: Select;
+  @ViewChild('selectFourty') selectFourty: Select;
+  @ViewChild('selectSixty') selectSixty: Select;
+  @ViewChild('selectFivety') selectFivety: Select;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
