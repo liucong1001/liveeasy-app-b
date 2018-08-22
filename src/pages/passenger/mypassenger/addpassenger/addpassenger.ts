@@ -45,8 +45,13 @@ export class AddpassengerPage {
   aa:any;
   localCode:any;
   @ViewChild(Navbar) navBar: Navbar;
-  @ViewChild('select') select: Select;
-
+  @ViewChild('selectOne') selectOne: Select;
+  @ViewChild('selectTwo') selectTwo: Select;
+  @ViewChild('selectThree') selectThree: Select;
+  @ViewChild('selectFour') selectFour: Select;
+  @ViewChild('selectFive') selectFive: Select;
+  @ViewChild('selectSix') selectSix: Select;
+  @ViewChild('selectSev') selectSev: Select;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
@@ -83,7 +88,13 @@ export class AddpassengerPage {
     });
   }
   closeSelect(){
-    this.select.close();
+    this.selectOne.close();
+    this.selectTwo.close();
+    this.selectThree.close();
+    this.selectFour.close();
+    this.selectFive.close();
+    this.selectSix.close();
+    this.selectSev.close();
   }
 
   ionViewWillLeave(){
@@ -138,6 +149,7 @@ export class AddpassengerPage {
   errors={
     customerName:[
       new ErrorMessage('required','客户名称必须要填写！'),
+      new ErrorMessage('pattern','请填写中文或英文'),
     ],
     customerPhone:[
       new ErrorMessage('required','电话必须要填写！'),

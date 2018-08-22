@@ -14,7 +14,13 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
+//修改public——CSS
+.alert-ios .alert-head{
+  color: #222;
+  .alert-radio-label{
+    color: #666;
+  }
+}
 
 .enable-hover a:hover{
   opacity: 1;
