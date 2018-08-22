@@ -7,7 +7,7 @@
     <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{'color':show}">
       <span *ngIf="staff==2" [ngClass]="{'color':personName}">{{personName}}</span>
       <span *ngIf="staff==1">部门员工</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName,cleas:falsees==false}"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{'color':time}">
       <span *ngIf="tm1 && tm2 && times == 3" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
@@ -15,7 +15,7 @@
       <span *ngIf="times == 1">时间查询</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':  times == 3,'color':times!=1}"></ion-icon>
     </ion-col>
-    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu3()" >
+    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{'color':fastSearch}">
       <span *ngIf="fast==2" [ngClass]="{'color':fastName}">{{fastName}}</span>
       <span *ngIf="fast==1">快速查询</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':fastName}"></ion-icon>
@@ -35,6 +35,8 @@
 <div class="popLocation">
   <!-- 员工 -->
   <ion-grid class="lists p0" [hidden]="!show">
+
+    <div *ngIf="department==''" style="text-align: center;padding: 15px 0 0">暂无数据</div>
     <ion-row *ngIf="all">
       <ion-col col-12>
         <div class="leftChange">
@@ -45,6 +47,7 @@
         </div>
       </ion-col>
     </ion-row>
+
     <ion-row *ngIf="full">
       <ion-col col-7 class="p0" [ngClass]="{'col-12': person}">
         <div class="leftChange">
@@ -55,7 +58,7 @@
         </div>
       </ion-col>
       <ion-col col-5 class="p0">
-        <div class="leftChange updateBg">
+        <div class="leftChange updateBg" *ngIf="falsees!=false">
           <ion-list radio-group>
             <!--<ion-item class="tc">-->
             <!--<ion-label>不限</ion-label>-->

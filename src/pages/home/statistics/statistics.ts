@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Item, Navbar, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Item, LoadingController, Navbar, NavController, NavParams} from 'ionic-angular';
 import {StatusBar} from "@ionic-native/status-bar";
 import {HomeProvider} from "../../../providers/home/home";
 import {FormBuilder,FormsModule , FormGroup, Validators} from "@angular/forms";
@@ -43,7 +43,8 @@ export class StatisticsPage {
   statItem:any;
   @ViewChild(Navbar) navBar: Navbar;
   errStatus :boolean;
-  constructor(public navCtrl: NavController,public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
+  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController,
+              public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
 
     //本周
@@ -201,6 +202,9 @@ export class StatisticsPage {
       {name:'上周',start:this.lastMonday,end:this.lastweekend,val:3},
       {name:'本月',start:this.firstDay,end:this.lastDay,val:4},
     ];
+
+
+    console.log(this.falsees)
   }
   // 分组
   groupBy( array , f ) {
@@ -239,113 +243,134 @@ export class StatisticsPage {
   }
   //时间弹窗刷新
   goTime(){
-    this.getClear();
-    // console.log(this.startTime,this.endTime)
-    this.homeProvider.statis({
-      startTime:this.startTime,
-      endTime:this.endTime,
-      statItem:this.statItem,
-    }).then(res=>{
-      if(res.success){
-        if(res.hasOwnProperty('data')){
-          // console.log(res);
-          this.data=res.data;
-          let sorted = this.groupBy(res.data, function(item){
-            if(item.storeCode){
-              return [item.storeCode];
-            }else {
-              return [item.deptId];
-            }
-          });
-          // console.log('部门',sorted);
-          for (var i in sorted) {
-            this.department.push(sorted[i][0]);
-          }
-          for (var all in sorted){
-            for (var aa=0;aa<sorted[all].length;aa++){
-              if(sorted[all][aa].statItem == 3001){
-                this.tableJSON[0].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3025){
-                // console.log('3025',sorted[j][h]);
-                this.tableJSON[1].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3011){
-                // console.log('3011',sorted[j][h]);
-                this.tableJSON[2].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3012){
-                // console.log('3012',sorted[j][h]);
-                this.tableJSON[3].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3007){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[4].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4018){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[5].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4019){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[6].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4020){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[7].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4021){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[8].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4022){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[9].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4023){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[10].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5018){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[11].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5019){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[12].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5020){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[13].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5021){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[14].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5022){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[15].result+=sorted[all][aa].stateValue;
-              }
-            }
-          }
-          // console.log(this.tableJSON)
-        }
-      }else {
-        this.toast.error('暂无数据');
-        this.errStatus = true;
-      }
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
     });
-    // console.log('表单',event);
-
-    this.clear();
-    if(this.times ==2 || this.times ==1){
-      if(this.times==2){
-        for(var i in this.sausage){
-          this.sausage[i]=false;
+    loading.present();
+    this.getClear();
+    if(this.form.value.startTime=='' || this.form.value.endTime=='' || this.startTime=='' || this.endTime==''){
+      this.toast.error('必须填写结束时间，');
+      loading.dismiss();
+    }else if(this.form.value.startTime!=''&&this.form.value.endTime!=''){
+      if(this.form.value.startTime > this.form.value.endTime){
+        this.toast.error('开始日期不得小于结束日期');
+      }else {
+        if(this.times ==2 || this.times ==1){
+          if(this.times==2){
+            for(var i in this.sausage){
+              this.sausage[i]=false;
+            }
+          }
+          this.times=3;
         }
+        // console.log(this.startTime,this.endTime)
+        this.homeProvider.statis({
+          startTime:this.startTime,
+          endTime:this.endTime,
+          statItem:this.statItem,
+        }).then(res=>{
+          if(res.success){
+            if(res.hasOwnProperty('data')){
+              // console.log(res);
+              this.data=res.data;
+              let sorted = this.groupBy(res.data, function(item){
+                if(item.storeCode){
+                  return [item.storeCode];
+                }else {
+                  return [item.deptId];
+                }
+              });
+              // console.log('部门',sorted);
+              for (var i in sorted) {
+                this.department.push(sorted[i][0]);
+              }
+              for (var all in sorted){
+                for (var aa=0;aa<sorted[all].length;aa++){
+                  if(sorted[all][aa].statItem == 3001){
+                    this.tableJSON[0].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 3025){
+                    // console.log('3025',sorted[j][h]);
+                    this.tableJSON[1].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 3011){
+                    // console.log('3011',sorted[j][h]);
+                    this.tableJSON[2].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 3012){
+                    // console.log('3012',sorted[j][h]);
+                    this.tableJSON[3].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 3007){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[4].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4018){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[5].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4019){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[6].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4020){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[7].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4021){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[8].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4022){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[9].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 4023){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[10].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 5018){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[11].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 5019){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[12].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 5020){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[13].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 5021){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[14].result+=sorted[all][aa].stateValue;
+                  }
+                  if(sorted[all][aa].statItem == 5022){
+                    // console.log('3007',sorted[j][h]);
+                    this.tableJSON[15].result+=sorted[all][aa].stateValue;
+                  }
+                }
+              }
+              // console.log(this.tableJSON)
+            }else {
+              this.falsees=false;
+            }
+          }else {
+
+            this.toast.error('暂无数据');
+            this.errStatus = true;
+          }
+        });
+        // console.log('表单',event);
+        this.clear();
+
       }
-      this.times=3;
+      loading.dismiss();
+    }else if(this.form.value.startTime==''&&this.form.value.endTime==''){
+      this.times =1;
     }
+
+
 
   }
   startTime:any;
@@ -371,7 +396,12 @@ export class StatisticsPage {
   //时间查询
   times=1;
   timeName:any;
+  falsees=false;
   timer(item,index){
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+    loading.present();
     this.getClear();
     this.department=[];
     this.timeName=item.name;
@@ -388,11 +418,10 @@ export class StatisticsPage {
     }
     // console.log(item.start,item.end)
     this.homeProvider.statis({
-      startTime:item.start,
-      endTime:item.end,
+      startTime:parseInt(item.start),
+      endTime:parseInt(item.end),
       statItem:this.statItem,
     }).then(res=>{
-
       if(res.success){
         if(res.hasOwnProperty('data')) {
           // console.log(res);
@@ -408,6 +437,7 @@ export class StatisticsPage {
           for (var i in sorted) {
             this.department.push(sorted[i][0]);
           }
+          console.log(this.department)
           for (var all in sorted){
             for (var aa=0;aa<sorted[all].length;aa++){
               if(sorted[all][aa].statItem == 3001){
@@ -476,7 +506,13 @@ export class StatisticsPage {
             }
           }
           // console.log(this.tableJSON)
+          this.falsees=true;
+        }else {
+          this.person=[];
+          this.staff=1;
+          this.falsees=false;
         }
+        loading.dismiss();
       }else {
         this.toast.error('暂无数据');
         this.errStatus = true;
@@ -516,6 +552,10 @@ export class StatisticsPage {
   fast=1;
   fastName:any;
   fasttips(item){
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+    loading.present();
     this.getClear();
     this.department=[];
     this.statItem=item.statItem;
@@ -536,8 +576,8 @@ export class StatisticsPage {
    }
    // console.log(this.startTime,this.endTime)
     this.homeProvider.statis({
-      startTime:this.startTime,
-      endTime:this.endTime,
+      startTime:parseInt(this.startTime),
+      endTime:parseInt(this.endTime),
       statItem:item.statItem,
     }).then(res=>{
         if(res.success){
@@ -624,6 +664,7 @@ export class StatisticsPage {
             }
             console.log(this.tableJSON)
           }
+          loading.dismiss();
         }else {
           this.toast.error('暂无数据');
           this.errStatus = true;
@@ -639,6 +680,10 @@ export class StatisticsPage {
   allPersonal=[];
   person=[];
   go(item){
+
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
     this.all=false;
     this.full=true;
     this.selected = item;
@@ -658,6 +703,7 @@ export class StatisticsPage {
     });
     this.allPersonal=[];
     //通过部门ID分组
+    this.falsees=true;
     for (var j in sorted){
       // this.personal.push(sorted[j]);
       //员工分组
@@ -678,12 +724,18 @@ export class StatisticsPage {
     }
     // console.log('所有员工', this.allPersonal,'单个员工',person)
     this.person.unshift({personName:'不限',personId:''});
+    loading.dismiss();
+    console.log(this.person)
   }
   id:any;
   rigthPerson=[];
   personName:any;
   staff=1;
   searchs(item){
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+    loading.present();
     this.getClear();
     this.personName=item.personName;
     if(item.personName == '不限'){
@@ -757,7 +809,7 @@ export class StatisticsPage {
       let perInfo = this.groupBy(this.allPersonal, function(item){
         return [item.personId == item.personId];
       });
-      console.log(item.personId)
+      // console.log(item.personId)
       //通过员工ID分组，循环数据
       for (var j in perInfo){
         for(var h=0;h<perInfo[j].length;h++){
@@ -837,6 +889,7 @@ export class StatisticsPage {
     if(this.staff ==1){
       this.staff=2;
     }
+    loading.dismiss();
   }
 
 
@@ -879,7 +932,13 @@ export class StatisticsPage {
   time=false;
   fastSearch=false;
   pop=false;
+  aa=false;
   showMenu1() {
+    if(this.falsees==true){
+      this.falsees=true;
+    }else {
+      this.falsees=false;
+    }
     if (this.show == false || this.time == true || this.fastSearch == true ) {
       this.show = true;
       this.pop = true;
