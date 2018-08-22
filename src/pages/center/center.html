@@ -31,13 +31,13 @@
       帮助反馈
     </button>
     <!--(click)="updateVersion()"-->
-    <button   ion-item class="pl12" (click)="updateVersion()" tappable  *ngIf="android">
-      <span *ngIf="showNewVersion">检测版本</span>
-      <span *ngIf="!showNewVersion" (tap)="tip()">检测版本</span>
-      <ion-badge item-end color="danger" *ngIf="showNewVersion">
-        新版本
-      </ion-badge>
-    </button>
+    <!--<button   ion-item class="pl12" (click)="updateVersion()" tappable  *ngIf="android">-->
+      <!--<span *ngIf="showNewVersion">检测版本</span>-->
+      <!--<span *ngIf="!showNewVersion" (tap)="tip()">检测版本</span>-->
+      <!--<ion-badge item-end color="danger" *ngIf="showNewVersion">-->
+        <!--新版本-->
+      <!--</ion-badge>-->
+    <!--</button>-->
 
     <button ion-item class="pl12" *ngIf="ios" >
       <a *ngIf="!showNewVersion" (tap)="tip()">检测版本</a>

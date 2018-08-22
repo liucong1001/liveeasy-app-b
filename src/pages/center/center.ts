@@ -155,10 +155,10 @@ export class CenterPage {
     this.toast.defaultMsg('top','当前已经是最新版本！');
   }
 
-  updateVersion(){
-    // console.log('开始检测版本更新1');
-    this.appUpdate.checkVersion(true);
-  }
+  // updateVersion(){
+  //   // console.log('开始检测版本更新1');
+  //   this.appUpdate.checkVersion(true);
+  // }
 
   openWin(goPage) {
     let options: NativeTransitionOptions = {
