@@ -56,8 +56,7 @@ export class LetteratorneyPage {
         this.form.patchValue({
           delegateDocSn:this.content.delegateDocSn,
           delegateBeginTm:this.content.delegateBeginTm &&new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
-
-          .0: this.content.delegateEndTm&&this.content.delegateEndTm!='null'&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
+          delegateEndTm: this.content.delegateEndTm&&this.content.delegateEndTm!='null'&&this.content.delegateEndTm!='-1'&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
           delegateDocPics:this.content.delegateDocPics,
           delegateStyle:this.content.delegateStyle
         });
@@ -157,8 +156,10 @@ export class LetteratorneyPage {
        }else {
          this.timeCheck = false;
        }
-       console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
+       // console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
      }
+
+
   }
   imgData = [];
   //委托书
@@ -177,6 +178,10 @@ export class LetteratorneyPage {
     if(event==2){
       this.form.value.delegateEndTm= -1;
     }
+    if(event==1){
+      console.log( this.form.value.delegateEndTm);
+    }
+
   }
 
   //修改业主委托书
@@ -188,8 +193,11 @@ export class LetteratorneyPage {
     }else {
       var endTime= new Date(this.form.value.delegateEndTm).getTime();
     }
-
-    this.propertyProvider.aupdate({
+    if(parseFloat(this.form.value.delegateStyle)==1&&!this.form.value.delegateEndTm){
+      this.toast.msg('请检查是否填写完整!');
+      return  false;
+    }
+   this.propertyProvider.aupdate({
       delegateDocId:this.delegateDocId,
       delegateStyle:parseFloat(this.form.value.delegateStyle) ,
       propertyId:this.propertyid,
@@ -209,10 +217,6 @@ export class LetteratorneyPage {
       }else{
         this.toast.error('修改失败！');
       }
-      // alert('修改成功！');
-      // this.navCtrl.pop()
-      // propertyId   showIntention=false;
-
     });
   }
 

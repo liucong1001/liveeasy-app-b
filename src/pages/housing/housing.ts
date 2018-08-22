@@ -576,6 +576,13 @@ export class HousingPage {
   //上拉加载
   doInfinite(infiniteScroll) {
 
+    if(this.params.division=='99'){
+      this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+      delete this.params.division1
+    }
+    if(!this.params.area){
+      delete this.params.area1;
+    }
 
       infiniteScroll.complete();
       if(this.currentPage==1){

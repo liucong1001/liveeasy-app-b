@@ -12,6 +12,12 @@
         &nbsp;房源已经锁定，无法下架、修改发布房源信息、上传或删除图片，修改或删除业主委托书，修改或删除钥匙
       </font>
     </div>
+    <div class="bgWhite p10 " *ngIf="data?.unitPriceAudit">
+      <font color="red">
+        <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+        &nbsp;该房源目前处于价格审核阶段，不允许修改价格、面积、套内面积
+      </font>
+    </div>
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>房源ID：{{data.convIdReq}}</ion-label>
@@ -61,7 +67,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -73,7 +79,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="innerSpaceSize" (ionChange)="sizes()">
+          <ion-input type="text" pattern="[0-9]*" formControlName="innerSpaceSize" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -221,7 +227,7 @@
         <div class="hdRightInfo">
           <ion-item class="pl12">
             <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-            <ion-input type="text"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+            <ion-input type="text"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
             </ion-input>
           </ion-item>
           <span class="hdRightInfo">万</span>
