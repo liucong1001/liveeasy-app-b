@@ -24,6 +24,7 @@ export class CloseprivateguestPage {
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
+  @ViewChild('select') select;
   constructor(public navCtrl: NavController, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public customerProvider:CustomerProvider,private renderer:Renderer,
               public toast:ToastComponent,
@@ -38,6 +39,10 @@ export class CloseprivateguestPage {
   selectTitle(data){
     var title = {title:data};
     return title;
+  }
+
+  ionViewWillLeave(){
+    this.select.close();
   }
 
   ionViewDidLoad() {
