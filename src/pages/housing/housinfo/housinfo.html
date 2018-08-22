@@ -165,7 +165,7 @@
     </div>
   </div>
 
-  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow">
+  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow&&letteratorneyData.auditStatus==1">
     <ion-row>
       <ion-col col-8>
         <div class="m5">业主委托书</div>
@@ -179,7 +179,7 @@
       </ion-col>
     </ion-row>
   </div>
-  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow">
+  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow&&keyData.auditStatus==1">
     <ion-row>
       <ion-col col-8>
         <div class="m5">钥匙</div>

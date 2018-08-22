@@ -138,9 +138,14 @@ export class HousedetailPage {
           //更多
           buildingType:this.data.buildingType,
           hasElevator:this.data.hasElevator,
+          propertyDesc:this.data.propertyDesc,//描述
+          propertyType:this.data.propertyType,
+          propertyLife:this.data.propertyLife,
           elevators:this.data.elevators,
           apartments:this.data.apartments,
-          propertyDesc:this.data.propertyDesc,//描述
+          buzzOwnerType:this.data.buzzOwnerType,
+          propertyMortgage:this.data.propertyMortgage,
+          businessTime:this.data.businessTime&&new Date(parseFloat(this.data.businessTime)).toISOString(),
         });
         //判断存在tagsStr
         if(this.data.tagsStr){
@@ -220,15 +225,17 @@ export class HousedetailPage {
     buzzOwnerType:['0'],//交易权属
     buzzType:['1',Validators.required], //房屋用途
     hasElevator:['0',Validators.required],//配备电梯
-    positionInBuilding:['2'],
+    positionInBuilding:['1'],//楼层等级
     propertyLife:['1'], //房屋年限
-    propertyMortgage:['0'],
+    propertyMortgage:['0'],//抵押类型
     propertyPriceUnit:['1'],
-    propertyType:['1'],
+    propertyType:['1'],//房源类型
     propertyDesc:[''],//房源描述
     //楼号比例
     elevators:[''],//梯
     apartments:[''],//户
+    // tradingAreaId:[''],//商圈id
+    businessTime:[],//挂牌时间
   });
   //表单验证消息
   errors={
@@ -429,6 +436,8 @@ export class HousedetailPage {
    }
 
     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+    this.form.value.businessTime = new Date(this.form.value.businessTime).getTime();
+
     var formData = {
       propertyId:this.propertyid,
       ...this.form.value

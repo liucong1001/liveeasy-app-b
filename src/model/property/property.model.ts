@@ -171,4 +171,15 @@ export  class PropertyModel {
    */
   propAvatar?:any;
 
+  propertyType?:any;
+
+  propertyLife?:any;
+
+  buzzOwnerType?:any;
+
+  propertyMortgage?:any;
+
+  businessTime?:any;
+
+
 }

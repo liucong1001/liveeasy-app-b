@@ -104,14 +104,15 @@ export class AddhousePage {
     hasElevator:['1',Validators.required],//配备电梯
     positionInBuilding:['1'],//楼层等级
     propertyLife:['1'], //房屋年限
-    propertyMortgage:['0'],
+    propertyMortgage:['0'],//抵押类型
     propertyPriceUnit:['1'],
-    propertyType:['1'],
+    propertyType:['1'],//房源类型
     propertyDesc:[''],//房源描述
     //楼号比例
     elevators:[''],//梯
     apartments:[''],//户,
     tradingAreaId:[''],//商圈id
+    businessTime:[],//挂牌时间
   });
 
     tip(){
@@ -285,6 +286,12 @@ export class AddhousePage {
     // console.log('标签',this.form.value.tags,this.form.value);
   }
 
+  gethangFreeTm2(event){
+/*    this.form.value.businessTime = new Date(this.form.value.businessTime).getTime();
+    console.log('时间',event, this.form.value.businessTime );*/
+  }
+
+
   addContactBolean = true;
   isClick:boolean = false ;
   errBtnHttp:boolean;
@@ -316,14 +323,14 @@ export class AddhousePage {
      this.addContactBolean = false;
    }
     this.form.value.contacts = JSON.stringify(this.form.value.contacts);
-
+    this.form.value.businessTime = new Date(this.form.value.businessTime).getTime();
 
     if(this.form.invalid){
       return false;
     }
-    // console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
+    console.log('房源录入表单',this.form.value,'联系人',this.form.value.contacts);
 
-    this.addhouseProvider.save(this.form.value).then(res=>{
+   this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
         this.isClick = false;
        this.toast.msg('录入成功');
