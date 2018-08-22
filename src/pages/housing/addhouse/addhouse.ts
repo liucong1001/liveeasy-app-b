@@ -77,7 +77,9 @@ export class AddhousePage {
      var title = {title:data};
      return title;
   }
-  ionViewWillLeave(){
+
+
+  closeSelect(){
     this.selectOne.close();
     this.selectTwo.close();
     this.selectThree.close();
@@ -94,6 +96,10 @@ export class AddhousePage {
     this.selectFourty.close();
     this.selectSixty.close();
     this.selectFivety.close();
+  }
+
+  ionViewWillLeave(){
+    this.closeSelect();
 
   }
 

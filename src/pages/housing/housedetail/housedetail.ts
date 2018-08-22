@@ -95,8 +95,7 @@ export class HousedetailPage {
     var title = {title:data};
     return title;
   }
-
-  ionViewWillLeave(){
+  closeSelect(){
     this.selectOne.close();
     this.selectTwo.close();
     this.selectThree.close();
@@ -113,7 +112,10 @@ export class HousedetailPage {
     this.selectFourty.close();
     this.selectSixty.close();
     this.selectFivety.close();
-this.selectSevty.close();
+    this.selectSevty.close();
+  }
+  ionViewWillLeave(){
+this.closeSelect();
   }
 
   //房源标签处理
