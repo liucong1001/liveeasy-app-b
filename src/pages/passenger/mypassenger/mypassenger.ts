@@ -332,8 +332,6 @@ export class MypassengerPage {
   all = false;
   //上拉加载
   doInfinite(infiniteScroll) {
-
-    setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
       if(this.currentPage >=this.totalPages){
@@ -356,7 +354,7 @@ export class MypassengerPage {
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
-    }, 1000);
+
   }
   searchFloorNum = 0; //初始化搜索次数
   totalRecords :any;//查询到的总条数；

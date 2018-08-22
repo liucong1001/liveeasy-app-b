@@ -285,7 +285,7 @@ export class PublicpassengerPage {
   all = false;
   //下拉加载
   doInfinite(infiniteScroll) {
-    setTimeout(() => {
+
       infiniteScroll.complete();
       this.currentPage++;
       if(this.currentPage >=this.totalPages){
@@ -307,7 +307,7 @@ export class PublicpassengerPage {
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
-    }, 1000);
+
 
   }
 
