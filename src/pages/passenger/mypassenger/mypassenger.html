@@ -59,8 +59,8 @@
 
         <ion-item style="padding: 12px 15px 0;" >
 
-              <ion-row (click)="gopassengerDetail(item)">
-                <ion-col col-9 tappable >
+              <ion-row >
+                <ion-col col-9 tappable (click)="gopassengerDetail(item)">
                   <div class="ellipsis tips">
                     <font size="3">{{item.customerName}}</font>
                     <!--急-->

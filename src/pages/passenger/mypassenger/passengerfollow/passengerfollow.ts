@@ -1,5 +1,5 @@
 import {Component, ViewChild, Renderer} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Searchbar, Select} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {ToastComponent} from "../../../../components/toast/toast";
@@ -25,6 +25,7 @@ export class PassengerfollowPage {
   clientName:any;
   clientPhone:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('select') select: Select;
   @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController,private renderer:Renderer,
               public statusBar: StatusBar, public navParams: NavParams,
@@ -44,6 +45,9 @@ export class PassengerfollowPage {
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
+  }
+  ionViewWillLeave(){
+    this.select.close();
   }
   form:FormGroup =this.fb.group({
     followupCode:['1',Validators.required],

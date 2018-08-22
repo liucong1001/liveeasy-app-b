@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, Navbar, NavController, NavParams, Select} from 'ionic-angular';
 import { PfollowrecordPage } from './pfollowrecord/pfollowrecord';
 import { PlookrecordPage } from './plookrecord/plookrecord';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -47,6 +47,13 @@ export class PassengerdetailPage {
   estateName:'';
   selectOptionGs:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('selectOne') selectOne: Select;
+  @ViewChild('selectTwo') selectTwo: Select;
+  @ViewChild('selectThree') selectThree: Select;
+  @ViewChild('selectFour') selectFour: Select;
+  @ViewChild('selectFive') selectFive: Select;
+  @ViewChild('selectSix') selectSix: Select;
+  @ViewChild('selectSev') selectSev: Select;
   localCode:any;
   constructor(public navCtrl: NavController,public statusBar: StatusBar,
               public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,
@@ -108,6 +115,21 @@ export class PassengerdetailPage {
     this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
 
   }
+
+  closeSelect(){
+    this.selectOne.close();
+    this.selectTwo.close();
+    this.selectThree.close();
+    this.selectFour.close();
+    this.selectFive.close();
+    this.selectSix.close();
+    this.selectSev.close();
+  }
+
+  ionViewWillLeave(){
+    this.closeSelect();
+  }
+
   selectTitle(data){
     var title = {title:data};
     return title;

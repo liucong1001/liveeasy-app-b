@@ -1,5 +1,5 @@
 import {Component,Renderer, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, Navbar,Searchbar} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ActionSheetController, Navbar, Searchbar, Select} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ClosehouseProvider} from '../../../providers/closehouse/closehouse'
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
@@ -37,6 +37,7 @@ export class ClosehousePage {
   realtorSourceId:any;
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
+  @ViewChild('select') select: Select;
   result:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,public toast:ToastComponent,private renderer:Renderer,
@@ -79,6 +80,9 @@ export class ClosehousePage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ClosehousePage');
     this.navBar.backButtonClick = this.backButtonClick;
+  }
+  ionViewWillLeave(){
+    this.select.close();
   }
 
   subClose(){
