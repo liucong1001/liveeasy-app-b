@@ -286,7 +286,11 @@ export class AddhousePage {
   }
 
   addContactBolean = true;
+  isClick:boolean = false ;
+  errBtnHttp:boolean;
   save(){
+    this.isClick = true;
+    this.errBtnHttp = true;
    if(this.addContactBolean){
      this.tagsSelect(this.form.value.tags);
      // 联系人
@@ -321,18 +325,23 @@ export class AddhousePage {
 
     this.addhouseProvider.save(this.form.value).then(res=>{
       if(res.success){
+        this.isClick = false;
        this.toast.msg('录入成功');
+        this.errBtnHttp =true;
         setTimeout(()=>{
           this.navCtrl.parent.select(1);
           this.navCtrl.setRoot(HousingPage);
         },1000);
 
       }else {
+        this.isClick = true;
         this.toast.error('录入失败！'+res.msg);
+        this.errBtnHttp =false;
       }
     },err=>{
       this.toast.error('录入失败！');
       this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+      this.errBtnHttp =false;
     })
 
   }
