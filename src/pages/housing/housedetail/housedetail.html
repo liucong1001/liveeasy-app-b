@@ -314,15 +314,17 @@
             <span class="upHe">楼户比例</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number"  formControlName="elevators"  class="upI" />
+            <input type="text"  formControlName="elevators"  pattern="[0-9]*" class="upI" />
             <span class="upPostion">梯</span>
           </ion-col>
           <ion-col col-4>
-            <input type="number"  formControlName="apartments" class="upI"/>
+            <input type="text"  formControlName="apartments" pattern="[0-9]*" class="upI"/>
             <span class="upPostion">户</span>
           </ion-col>
         </ion-row>
       </div>
+      <valid-error [errors]="errors.elevators"  [control]="form.get('elevators')"></valid-error>
+      <valid-error [errors]="errors.apartments"  [control]="form.get('apartments')"></valid-error>
       <ion-item class="pl12">
         <ion-label>挂牌时间</ion-label>
         <ion-datetime placeholder="请选择时间" (ionChange)="gethangFreeTm2($event)"  displayFormat="YYYY-MM-DD" cancelText="关闭" doneText="确定"></ion-datetime>

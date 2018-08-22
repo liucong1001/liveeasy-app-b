@@ -274,6 +274,12 @@ export class HousedetailPage {
     propertyPrice:[
       new ErrorMessage('pattern','请填写数字'),
     ],
+    elevators:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    apartments:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
   };
 
   /**
