@@ -78,7 +78,7 @@ export class PassengerdetailPage {
           //更多
           intentionDiviCode:this.data.intentionDiviCode,
           intentionTradeCode:this.data.intentionTradeCode,
-          // intentionEstate:this.data.intentionEstate,
+          intentionEstate:this.data.intentionEstate,
            minSpaceSize:this.data.minSpaceSize,
           maxSpaceSize:this.data.maxSpaceSize,
           minPrice:this.data.minPrice,
@@ -256,7 +256,7 @@ export class PassengerdetailPage {
   goserach(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
-      // console.log('接收数据为: ', params);
+       console.log('接收数据为: ', params);
       // this.form.value.estateName = params.estateName;
       // this.form.value.estateId =  params.estateId;
       this.estateName = params.keyword;

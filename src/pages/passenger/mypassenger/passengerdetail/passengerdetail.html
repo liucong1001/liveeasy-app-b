@@ -54,7 +54,7 @@
             <i class="iconfont icon-xia"></i>
           </ion-item>
       </ion-list>
-      <ion-list *ngIf="showIntention">
+      <ion-list  [hidden]="!showIntention">
           <ion-item class="pl12">
             <ion-label>意向区域</ion-label>
             <ion-select #selectFive okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode" >

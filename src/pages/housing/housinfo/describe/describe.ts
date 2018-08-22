@@ -33,7 +33,6 @@ export class DescribePage {
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
-
   }
 
   descForAPP(data){
