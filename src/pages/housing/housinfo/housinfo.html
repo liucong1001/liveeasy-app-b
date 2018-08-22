@@ -17,7 +17,7 @@
 </ion-header>
 
 
-<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)">
+<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'contents':'houseData&&houseData.closePropertyShow'}">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
   <ion-slides #mySlider  style=""  autoplay="3000" pager="true" loop="true" paginationType="fraction">
@@ -215,8 +215,8 @@
     <!--(onMarkerClicked)="clickMarker($event)"-->
   <!--&gt;</baidu-map>-->
 
-<ion-footer >
-  <ion-row class="footers" *ngIf="houseData&&houseData.closePropertyShow " >
+<ion-footer *ngIf="houseData&&houseData.closePropertyShow" >
+  <ion-row class="footers">
     <ion-col col-2 class="tc"  (click)="record()" *ngIf="houseData&&houseData.closePropertyShow ">
       <ion-icon name="time-outline" style="    display: block;
     font-size: 2.5rem;
