@@ -161,6 +161,36 @@ export class AddpassengerPage {
     agentId:[
       new ErrorMessage('required','客户归属必须要填写！'),
     ],
+    minSpaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxSpaceSize:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minPrice:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxPrice:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minFloor:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxFloor:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minBedroom:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxBedroom:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    minHall:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
+    maxHall:[
+      new ErrorMessage('pattern','请填写数字'),
+    ],
 
   };
 
