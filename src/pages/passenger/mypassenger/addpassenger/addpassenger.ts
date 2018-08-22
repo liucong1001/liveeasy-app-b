@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, IonicPage, Navbar, NavController, NavParams,Content} from 'ionic-angular';
+import {Events, IonicPage, Navbar, NavController, NavParams,Content,Select} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomerProvider} from "../../../../providers/customer/customer";
 import {MypassengerPage} from "../mypassenger";
@@ -45,6 +45,8 @@ export class AddpassengerPage {
   aa:any;
   localCode:any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('select') select: Select;
+
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
@@ -80,7 +82,13 @@ export class AddpassengerPage {
       this.content.scrollTo(0, e.keyboardHeight);
     });
   }
+  closeSelect(){
+    this.select.close();
+  }
 
+  ionViewWillLeave(){
+    this.closeSelect();
+  }
 
   selectTitle(data){
     var title = {title:data};

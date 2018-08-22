@@ -16,7 +16,7 @@
       <valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"  ></valid-error>
       <ion-item class="pl12">
         <ion-label>客户性别<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender" [selectOptions]="selectTitle('客户性别')">
+        <ion-select #select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender" [selectOptions]="selectTitle('客户性别')">
           <ion-option value="1">男</ion-option>
           <ion-option value="2">女</ion-option>
         </ion-select>
@@ -30,7 +30,7 @@
 
       <ion-item class="pl12">
         <ion-label>客户来源<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc" [selectOptions]="selectTitle('客户来源')">
+          <ion-select #select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerSrc" [selectOptions]="selectTitle('客户来源')">
             <ion-option [value]="item.val"  *ngFor="let item of customerSrcList | reversePipe:'val' "> {{item.name}}</ion-option>
           </ion-select>
       </ion-item>
@@ -38,7 +38,7 @@
 
       <ion-item class="pl12">
         <ion-label>客户归属<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId" [selectOptions]="selectTitle('客户归属')">
+        <ion-select #select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="agentId" [selectOptions]="selectTitle('客户归属')">
           <ion-option [value]="item.id" *ngFor="let item of agentList  ">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -46,7 +46,7 @@
 
       <ion-item class="pl12">
         <ion-label>客户等级</ion-label>
-        <ion-select  okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerGrade">
+        <ion-select #select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="customerGrade">
           <ion-option [value]="item.val" *ngFor="let item of customeroGrageInfoList | reversePipe:'val' ">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -63,14 +63,14 @@
     <ion-list  *ngIf="showIntention">
         <ion-item class="pl12">
             <ion-label>意向区域</ion-label>
-            <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode" >
+            <ion-select #select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionDiviCode" >
               <ion-option [value]="item.code" *ngFor="let item of area  " (ionSelect)="areaChange(item)">{{item.name}}</ion-option>
             </ion-select>
           </ion-item>
 
         <ion-item class="pl12" >
           <ion-label>意向商圈</ion-label>
-          <ion-select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionTradeCode">
+          <ion-select #select okText="确定"   [placeholder]="'请选择'" cancelText="关闭" formControlName="intentionTradeCode">
             <ion-option [value]="item.code" *ngFor="let item of tradingArea  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
@@ -165,7 +165,7 @@
           <div *ngIf="hallCheck" class="p15">*最多厅不能小于最少厅</div>
           <ion-item class="pl12">
             <ion-label>装修要求</ion-label>
-            <ion-select okText="确定"   [placeholder]="'请选择'"  multiple="true" cancelText="关闭" formControlName="decorationArray">
+            <ion-select #select okText="确定"   [placeholder]="'请选择'"  multiple="true" cancelText="关闭" formControlName="decorationArray">
               <ion-option value="1">毛坯</ion-option>
               <ion-option value="2">简装</ion-option>
               <ion-option value="4">中等装修</ion-option>
