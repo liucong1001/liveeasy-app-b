@@ -111,7 +111,7 @@
       <ion-list *ngIf="showHx">
         <ion-item class="pl12">
           <ion-label>室<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('室')">
+          <ion-select #selectOne okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('室')">
             <ion-option value="1">一室</ion-option>
             <ion-option value="2">二室</ion-option>
             <ion-option value="3">三室</ion-option>
@@ -121,7 +121,7 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>厅<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厅')">
+          <ion-select #selectTwo okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厅')">
             <ion-option value="0">无</ion-option>
             <ion-option value="1">1厅</ion-option>
             <ion-option value="2">2厅</ion-option>
@@ -132,7 +132,7 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>卫<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('卫')">
+          <ion-select #selectThree okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('卫')">
             <ion-option value="0">无</ion-option>
             <ion-option value="1">1卫</ion-option>
             <ion-option value="2">2卫</ion-option>
@@ -143,7 +143,7 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>厨<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"  cancelText="关闭"   formControlName="kitchens"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厨')">
+          <ion-select #selectFour okText="确定"  cancelText="关闭"   formControlName="kitchens"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厨')">
             <ion-option value="0">无</ion-option>
             <ion-option value="1">一厨</ion-option>
             <ion-option value="2">二厨</ion-option>
@@ -154,7 +154,7 @@
         </ion-item>
         <ion-item class="pl12">
           <ion-label>阳<i class="text-danger">*</i></ion-label>
-          <ion-select okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'" [selectOptions]="selectTitle('阳')">
+          <ion-select #selectFive okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'" [selectOptions]="selectTitle('阳')">
             <ion-option value="0">无</ion-option>
             <ion-option value="1">一阳</ion-option>
             <ion-option value="2">二阳</ion-option>
@@ -167,13 +167,13 @@
 
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectTitle('朝向')">
+        <ion-select #selectSix okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectTitle('朝向')">
           <ion-option *ngFor="let item of localCode | arryCodeValue : 'orientation'"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>装修<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectTitle('装修')">
+        <ion-select #selectSev okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectTitle('装修')">
           <ion-option *ngFor="let item of localCode | arryCodeValue : 'decoration'"  value="{{item.val}}">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -188,7 +188,7 @@
 
       <ion-item class="pl12" *ngIf="data.shareShow">
         <ion-label>业主性别<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  cancelText="关闭" formControlName="sex" [selectOptions]="selectTitle('业主性别')">
+        <ion-select #selectEng okText="确定"  cancelText="关闭" formControlName="sex" [selectOptions]="selectTitle('业主性别')">
           <ion-option value="male">男</ion-option>
           <ion-option value="female">女</ion-option>
         </ion-select>
@@ -216,7 +216,7 @@
     <ion-list>
       <ion-item class="pl12">
         <ion-label>房屋用途<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定" [disabled]="true" formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
+        <ion-select #selectNine okText="确定" [disabled]="true" formControlName="buzzType"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('房屋用途')">
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -256,14 +256,14 @@
 
       <ion-item class="pl12">
         <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectTitle('建筑类型')">
+        <ion-select #selectTen okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectTitle('建筑类型')">
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'building_type'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="pl12">
         <ion-label>配备电梯<i class="text-danger">*</i></ion-label>
-        <ion-select okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('配备电梯')">
+        <ion-select #selectEle okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('配备电梯')">
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue:'has_elevator' ">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -297,13 +297,13 @@
     <ion-list *ngIf="showIntention">
       <ion-item class="pl12">
         <ion-label>房源类型</ion-label>
-        <ion-select okText="确定"   formControlName="propertyType"  [placeholder]="'请选择'" cancelText="关闭" >
+        <ion-select #selectTwith okText="确定"   formControlName="propertyType"  [placeholder]="'请选择'" cancelText="关闭" >
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_type' | reversePipe:'val'">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item class="pl12">
         <ion-label>房屋年限</ion-label>
-        <ion-select okText="确定"   formControlName="propertyLife"  [placeholder]="'请选择'" cancelText="关闭" >
+        <ion-select #selectThirty okText="确定"   formControlName="propertyLife"  [placeholder]="'请选择'" cancelText="关闭" >
           <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_life' | reversePipe:'val' ">{{x.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -331,7 +331,7 @@
       </ion-item>
       <ion-item class="pl12" *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
         <ion-label>出售标签</ion-label>
-        <ion-select okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
+        <ion-select #selectFourty okText="确定" cancelText="关闭"  formControlName="tagsStr"   multiple="true" [placeholder]="'请选择'">
           <ion-option value="{{item.val}}" *ngFor="let item of houLabel | reversePipe:'val';let i = index">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -339,7 +339,7 @@
       <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
         <ion-item class="pl12">
           <ion-label>租赁标签</ion-label>
-          <ion-select okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
+          <ion-select #selectSixty okText="确定"  [placeholder]="'请选择'" cancelText="关闭" >
             <ion-option value="0">拎包入住</ion-option>
             <ion-option value="1">紧邻地铁</ion-option>
             <ion-option value="2">钥匙房</ion-option>
@@ -350,17 +350,17 @@
       </div>
 
 
-      <!--默认出售-->
-      <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+      <!--默认出售*ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3"-->
+      <div [hidden]="this.form.value.buzzType == 2">
         <ion-item class="pl12">
           <ion-label>交易权属</ion-label>
-          <ion-select okText="确定"  formControlName="buzzOwnerType"   [placeholder]="'请选择'" cancelText="关闭">
+          <ion-select #selectFivety okText="确定"  formControlName="buzzOwnerType"   [placeholder]="'请选择'" cancelText="关闭">
             <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_owner_type'">{{x.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item class="pl12">
           <ion-label>抵押类型</ion-label>
-          <ion-select okText="确定"  formControlName="propertyMortgage"  [placeholder]="'请选择'" cancelText="关闭" >
+          <ion-select #selectSevty okText="确定"  formControlName="propertyMortgage"  [placeholder]="'请选择'" cancelText="关闭" >
             <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'property_mortgage'">{{x.name}}</ion-option>
           </ion-select>
         </ion-item>

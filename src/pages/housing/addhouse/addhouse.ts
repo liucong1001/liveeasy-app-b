@@ -42,6 +42,24 @@ export class AddhousePage {
   // decorationJson:Array<object>;//装修
   // buildingTypeJson:Array<object>;//建筑类型
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('selectOne') selectOne;
+  @ViewChild('selectTwo') selectTwo;
+  @ViewChild('selectThree') selectThree;
+  @ViewChild('selectFour') selectFour;
+  @ViewChild('selectFive') selectFive;
+  @ViewChild('selectSix') selectSix;
+  @ViewChild('selectSev') selectSev;
+  @ViewChild('selectEng') selectEng;
+  @ViewChild('selectNine') selectNine;
+  @ViewChild('selectTen') selectTen;
+  @ViewChild('selectEle') selectEle;
+  @ViewChild('selectTwith') selectTwith;
+  @ViewChild('selectThirty') selectThirty;
+  @ViewChild('selectFourty') selectFourty;
+  @ViewChild('selectSixty') selectSixty;
+  @ViewChild('selectFivety') selectFivety;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
               public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
@@ -58,6 +76,25 @@ export class AddhousePage {
   selectTitle(data){
      var title = {title:data};
      return title;
+  }
+  ionViewWillLeave(){
+    this.selectOne.close();
+    this.selectTwo.close();
+    this.selectThree.close();
+    this.selectFour.close();
+    this.selectFive.close();
+    this.selectSix.close();
+    this.selectSev.close();
+    this.selectEng.close();
+    this.selectNine.close();
+    this.selectTen.close();
+    this.selectEle.close();
+    this.selectTwith.close();
+    this.selectThirty.close();
+    this.selectFourty.close();
+    this.selectSixty.close();
+    this.selectFivety.close();
+
   }
 
   // tradingAreaId
@@ -120,10 +157,6 @@ export class AddhousePage {
       this.toast.msg('成功操作');
       this.toast.error('失败操作');
     }
-
-  test(){
-      // console.log('测试',this.form.value);
-   }
 
  //表单验证消息
     errors={

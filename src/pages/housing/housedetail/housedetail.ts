@@ -61,6 +61,25 @@ export class HousedetailPage {
   estateList:any;
   lockStatus:any;
   @ViewChild('navbar') navBar: Navbar;
+  @ViewChild('selectOne') selectOne;
+  @ViewChild('selectTwo') selectTwo;
+  @ViewChild('selectThree') selectThree;
+  @ViewChild('selectFour') selectFour;
+  @ViewChild('selectFive') selectFive;
+  @ViewChild('selectSix') selectSix;
+  @ViewChild('selectSev') selectSev;
+  @ViewChild('selectEng') selectEng;
+  @ViewChild('selectNine') selectNine;
+  @ViewChild('selectTen') selectTen;
+  @ViewChild('selectEle') selectEle;
+  @ViewChild('selectTwith') selectTwith;
+  @ViewChild('selectThirty') selectThirty;
+  @ViewChild('selectFourty') selectFourty;
+  @ViewChild('selectSixty') selectSixty;
+  @ViewChild('selectFivety') selectFivety;
+  @ViewChild('selectSevty') selectSevty;
+
+
   localCode:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
@@ -76,6 +95,27 @@ export class HousedetailPage {
     var title = {title:data};
     return title;
   }
+
+  ionViewWillLeave(){
+    this.selectOne.close();
+    this.selectTwo.close();
+    this.selectThree.close();
+    this.selectFour.close();
+    this.selectFive.close();
+    this.selectSix.close();
+    this.selectSev.close();
+    this.selectEng.close();
+    this.selectNine.close();
+    this.selectTen.close();
+    this.selectEle.close();
+    this.selectTwith.close();
+    this.selectThirty.close();
+    this.selectFourty.close();
+    this.selectSixty.close();
+    this.selectFivety.close();
+this.selectSevty.close();
+  }
+
   //房源标签处理
   tagsSum(data){
     var str =  data.toString();
