@@ -17,7 +17,7 @@
 </ion-header>
 
 
-<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'contents':'houseData&&houseData.closePropertyShow'}">
+<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'updateScroll':houseData&&!houseData.closePropertyShow}">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
   <ion-slides #mySlider  style=""  autoplay="3000" pager="true" loop="true" paginationType="fraction">
