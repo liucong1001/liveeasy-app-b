@@ -215,30 +215,19 @@
     <!--(onMarkerClicked)="clickMarker($event)"-->
   <!--&gt;</baidu-map>-->
 
-<ion-footer>
-  <ion-row class="footers">
-    <ion-col col-2 class="tc"  (click)="record()">
+<ion-footer >
+  <ion-row class="footers" *ngIf="houseData&&houseData.closePropertyShow " >
+    <ion-col col-2 class="tc"  (click)="record()" *ngIf="houseData&&houseData.closePropertyShow ">
       <ion-icon name="time-outline" style="    display: block;
     font-size: 2.5rem;
     margin-top: 5px;"></ion-icon>
       <span style="font-size: 1.2rem">记录</span>
     </ion-col>
-    <ion-col col-5 *ngIf="houseData&&houseData.closePropertyShow " >
+    <ion-col col-5 *ngIf="houseData&&houseData.closePropertyShow">
       <button ion-button class="follows" tappable (click)="goFollow()">跟进</button>
     </ion-col>
-    <ion-col col-5  *ngIf="houseData">
+    <ion-col col-5  *ngIf="houseData&&houseData.closePropertyShow">
       <button ion-button tappable class="compile" (click)="edit()">编辑</button>
     </ion-col>
   </ion-row>
-  <!--<ion-row>-->
-    <!--<ion-col col-4 class="p10">-->
-      <!--<button ion-button (click)="goFollow()">跟进</button>-->
-    <!--</ion-col>-->
-    <!--<ion-col col-4 class="p10">-->
-      <!--<button ion-button (click)="goFollow()">记录</button>-->
-    <!--</ion-col>-->
-    <!--<ion-col col-4 class="p10">-->
-      <!--<button ion-button (click)="edit()" class="edit">编辑</button>-->
-    <!--</ion-col>-->
-  <!--</ion-row>-->
 </ion-footer>
