@@ -146,6 +146,12 @@ export class AddhousePage {
            new ErrorMessage('required','业主姓名必须要填写！'),
         new ErrorMessage('pattern','请填写中文或英文'),
       ],
+      elevators:[
+        new ErrorMessage('pattern','请填写数字'),
+      ],
+      apartments:[
+        new ErrorMessage('pattern','请填写数字'),
+      ],
       sex:[
           new ErrorMessage('required','业主性别必须要填写！'),
       ],

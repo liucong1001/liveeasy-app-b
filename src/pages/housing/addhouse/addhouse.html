@@ -280,15 +280,17 @@
             <span class="upHe">楼户比例</span>
           </ion-col>
           <ion-col col-4>
-            <input type="text" formControlName="elevators"  class="upI" />
+            <input type="text" formControlName="elevators" pattern="[0-9]*"  class="upI" />
             <span class="upPostion">梯</span>
           </ion-col>
           <ion-col col-4>
-            <input type="text"  formControlName="apartments" class="upI"/>
+            <input type="text"  formControlName="apartments" pattern="[0-9]*" class="upI"/>
             <span class="upPostion">户</span>
           </ion-col>
         </ion-row>
       </div>
+      <valid-error [errors]="errors.elevators"  [control]="form.get('elevators')"></valid-error>
+      <valid-error [errors]="errors.apartments"  [control]="form.get('apartments')"></valid-error>
 
       <!--默认出售-->
       <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
