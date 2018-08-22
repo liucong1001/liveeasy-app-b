@@ -84,13 +84,6 @@ export class MypassengerPage {
       this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
 
-
-
-    //获取客源标签
-    this.date=(new Date()).getTime();
-
-
-
   }
   @ViewChild('myTabs') tabRef: Tabs;
 
@@ -179,21 +172,27 @@ export class MypassengerPage {
     return result;
   }
 
-  tagList()
-  {
+  tagList() {
+    //获取客源标签
+    // this.date=(new Date()).getTime();
+    var start=new Date();
+    var todayzero=start.getTime();
     for(var i in this.pageData){
       if(this.pageData[i].createTime && this.pageData[i].lastFollowTm &&
-        this.pageData[i].lastFollowTm<=this.date-1000-(1000*60*60*24*3) &&
-        this.pageData[i].createTime<=this.date-1000-(1000*60*60*24*3)){
+        this.pageData[i].lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
+        this.pageData[i].createTime<=todayzero-1000-(1000*60*60*24*3)){
         this.pageData[i].followLabel=1;
       }
-      if(this.pageData[i].lastLookTime && this.pageData[i].lastLookTime>=this.date && this.pageData[i].lastLookTime<=this.date-1000+(1000*60*60*24*3)) {
-        if (this.pageData[i].followStatus == 1) {
-          this.pageData[i].lookLable = 1;
+
+      if(this.pageData[i].custFollowupInfoEntity&&this.pageData[i].custFollowupInfoEntity.appointmentTm){
+        if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
+          if (this.pageData[i].custFollowupInfoEntity.followStatus == 1) {
+            this.pageData[i].lookLable = 1;
+          }
         }
       }
-
     }
+
   }
   /**
    * 列表搜索
@@ -213,6 +212,7 @@ export class MypassengerPage {
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
         this.firstPageData = res.data.result;
+
       }else{
         this.hasData = false;
       }
@@ -222,10 +222,12 @@ export class MypassengerPage {
       this.houseType = false;
       this.more = false;
       this.pop = false;
+      this.tagList();
       // this.housingEstate = false;
       //户型搜索条件字显示
-      this.tagList();
+      // this.tagList();
     });
+
 
   }
   searchArea='';
