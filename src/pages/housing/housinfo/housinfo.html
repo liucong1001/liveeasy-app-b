@@ -164,8 +164,8 @@
     <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70"  [innerHtml]="descForAPP(houseData?.propertyDescApp)">
     </div>
   </div>
-
-  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow&&letteratorneyData.auditStatus==1">
+  <!--&&letteratorneyData?.delegateDocPics[0].auditStatus==1-->
+  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow">
     <ion-row>
       <ion-col col-8>
         <div class="m5">业主委托书</div>
@@ -179,7 +179,8 @@
       </ion-col>
     </ion-row>
   </div>
-  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow&&keyData.auditStatus==1">
+  <!--&&keyData.keyDlgtFilePics[0].auditStatus==1-->
+  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow">
     <ion-row>
       <ion-col col-8>
         <div class="m5">钥匙</div>
@@ -191,7 +192,8 @@
       </ion-col>
     </ion-row>
   </div>
-  <ion-list class="m10" *ngIf="houseData?.shareShow">
+  <!--*ngIf="houseData&&houseData.closePropertyShow"-->
+  <ion-list class="m10" >
     <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
       角色人
       <font color="#aaa" class="changes"></font>
