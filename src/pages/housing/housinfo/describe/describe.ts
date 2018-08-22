@@ -35,6 +35,13 @@ export class DescribePage {
     this.statusBar.styleLightContent();
 
   }
+
+  descForAPP(data){
+    return   data.replace(/\n/ig, '<br/>');
+  }
+
+
+
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
