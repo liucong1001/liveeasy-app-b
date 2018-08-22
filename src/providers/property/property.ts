@@ -39,21 +39,35 @@ export class PropertyProvider {
   //价格审核
   private  priceAuditPass = this.configProvider.set().http+'/property/propertyAuditInfo/claimAudit.do';
 
+  //接口开关
+  public isOnline = false;
   /**
    * https://c.liveeasy.tech 接口
    * @type {string}
    */
-  public   propertyApi='property/api/query';
-  private  basePath = this.configProvider.set().cHttp+this.propertyApi;
-  private  tagsListPath = this.basePath+'?qId=dict&dictType=property_tag_desc';
-  private  getDictCodePath=this.basePath+'?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type,loan_type,mny_deliver_type,customer_grade,cms_src,operate_code,order_status,role_in_order';
 
+  public   propertyApi;
+  private  basePath ;
+  private  tagsListPath ;
+  private  getDictCodePath;
   bedRType:any;
   districtId:any;
   propertyid:any;
   constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider, public localStorageProvider: LocalStorageProvider,
-             ) {
-    console.log('Hello PropertyProvider Provider');
+              ) {
+    //线上
+ if(this.isOnline){
+   this.propertyApi='property/api/query';
+ }
+ else {
+   //beta 线下
+   this.propertyApi='property/api/v1/query';
+ }
+
+ this.basePath = this.configProvider.set().cHttp+this.propertyApi;
+ this.tagsListPath = this.basePath+'?qId=dict&dictType=property_tag_desc';
+ this. getDictCodePath=this.basePath+'?qId=dict&qCate=3&dictType=orientation,rent_pay_type,property_life,curr_live_state,sex,property_source,rent_type,school_type,property_mortgage,buzz_owner_type,property_tag_desc,info_owner_type,property_type,buzz_type,has_elevator,decoration,building_type,loan_type,mny_deliver_type,customer_grade,cms_src,operate_code,order_status,role_in_order';
+
   }
 
 
