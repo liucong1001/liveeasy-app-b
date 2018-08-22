@@ -91,31 +91,33 @@ export class HousedetailPage {
     //获取房源标签
     this.houLabel=this.localStorageProvider.get('tagsList');
   }
+
+
+
+  ionViewWillLeave(){
+    this.selectOne&&this.selectOne.close();
+    this.selectTwo&&this.selectTwo.close();
+    this.selectThree&&this.selectThree.close();
+    this.selectFour&&this.selectFour.close();
+    this.selectFive&&this.selectFive.close();
+    this.selectSix&&this.selectSix.close();
+    this.selectSev&&this.selectSev.close();
+    this.selectEng&&this.selectEng.close();
+    this.selectNine&&this.selectNine.close();
+    this.selectTen&&this.selectTen.close();
+    this.selectEle&&this.selectEle.close();
+    this.selectTwith&&this.selectTwith.close();
+    this.selectThirty&& this.selectThirty.close();
+    this.selectFourty&&this.selectFourty.close();
+    this.selectSixty&&this.selectSixty.close();
+    this.selectFivety&&this.selectFivety.close();
+    this.selectSevty&&this.selectSevty.close();
+  }
+
+
   selectTitle(data){
     var title = {title:data};
     return title;
-  }
-  closeSelect(){
-    this.selectOne.close();
-    this.selectTwo.close();
-    this.selectThree.close();
-    this.selectFour.close();
-    this.selectFive.close();
-    this.selectSix.close();
-    this.selectSev.close();
-    this.selectEng.close();
-    this.selectNine.close();
-    this.selectTen.close();
-    this.selectEle.close();
-    this.selectTwith.close();
-    this.selectThirty.close();
-    this.selectFourty.close();
-    this.selectSixty.close();
-    this.selectFivety.close();
-    this.selectSevty.close();
-  }
-  ionViewWillLeave(){
-this.closeSelect();
   }
 
   //房源标签处理
