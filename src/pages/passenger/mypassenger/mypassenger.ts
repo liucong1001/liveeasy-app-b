@@ -185,14 +185,14 @@ export class MypassengerPage {
         this.pageData[i].followLabel=1;
       }
 
-      if(this.pageData[i].custFollowupInfoEntity&&this.pageData[i].custFollowupInfoEntity.appointmentTm){
-        // console.log('--customerName', i,this.pageData[i]['customerName'], new Date(this.pageData[i].appointmentTm),  new Date(todayzero-1000-(1000*60*60*24*3)).toLocaleDateString() );
-        if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero-1000-(1000*60*60*24*3) && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
-          if (this.pageData[i].custFollowupInfoEntity.followStatus == 1) {
-            this.pageData[i].lookLable = 1;
-          }
-        }
-      }
+      // if(this.pageData[i].custFollowupInfoEntity&&this.pageData[i].custFollowupInfoEntity.appointmentTm){
+      //   // console.log('--customerName', i,this.pageData[i]['customerName'], new Date(this.pageData[i].appointmentTm),  new Date(todayzero-1000-(1000*60*60*24*3)).toLocaleDateString() );
+      //   if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero-1000-(1000*60*60*24*3) && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
+      //     if (this.pageData[i].custFollowupInfoEntity.followStatus == 1) {
+      //       this.pageData[i].lookLable = 1;
+      //     }
+      //   }
+      // }
     }
     // console.log('转换',this.pageData);
   }
