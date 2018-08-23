@@ -89,7 +89,8 @@ export class PassengerdetailPage {
           maxBedroom:this.data.maxBedroom,
           minHall:this.data.minHall,
           maxHall:this.data.maxHall,
-          decorationArray:this.data.decorationArray,
+          // decorationArray:this.data.decorationArray,
+          decorationArrs:this.data.decorationArrs,
           //其他
           requiredDemands:this.data.requiredDemands,
           againstDemands:this.data.againstDemands,
@@ -166,14 +167,26 @@ export class PassengerdetailPage {
     minHall:[''],//最少厅
     maxHall:[''],//最多厅
     decorationArray:[],//装修要求
+    decorationArrs:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
-    contactFreeTmArray:['',''],//免打扰时间
+    contactFreeTmArray:this.fb.array([
+      this.fb.group({
+      })
+    ]),//免打扰时间
     contactFreeTm1:[''],//免打扰时间开始
     contactFreeTm2:[''],//免打扰时间结束
     comments:[''],//备注
   });
-
+/*[this.fb.array([
+  this.fb.group({
+    // contact:[''],
+    // contactType:['mobile'],
+    // contactInfo:[''],
+    // sex:[''],
+    // desc:[''],
+  })
+])*/
 
   //表单验证消息
   errors={
@@ -267,22 +280,23 @@ export class PassengerdetailPage {
     });
     this.openWin(SearchhousePage);
   }
+  isDisabled = false;
   save(){
-    // console.log('编辑客户',this.form.value);
-
-    // var body = null;
-    // for(var key in this.form.value){
-    //   body = body+'&'+key+'='+this.form.value[key]+'';
-    // }
-    // body = body.slice(5);
-    // console.log('body:',body);
+    this.isDisabled = true;
+    this.form.value.contactFreeTmArray = [];
+    this.form.value.contactFreeTmArray[0]= this.form.value.contactFreeTm1;
+    this.form.value.contactFreeTmArray[1]= this.form.value.contactFreeTm2;
+    this.form.value.decorationArray=this.form.value.decorationArrs;
+     console.log('提交',this.form.value);
     this.customerProvider.update(this.form.value).then(res=>{
       if (res.success){
         this.toast.msg('修改客户成功!');
         this.openWin(MypassengerPage);
+        this.isDisabled = false;
       }
     },err=>{
-      alert('修改失败！');
+      this.isDisabled = false;
+      this.toast.error('修改失败！');
     })
 
   }
@@ -450,16 +464,16 @@ export class PassengerdetailPage {
     if( event.hour<10 ){event.hour='0'+event.hour}
     if( event.minute<10 ){event.minute='0'+event.minute}
     var startTime = event.hour +':'+event.minute ;
-    this.form.value.contactFreeTmArray[0] = startTime;
-    console.log('时间',event,startTime);
+    this.form.value.contactFreeTm1 = startTime;
+    console.log('表单',this.form.value.contactFreeTm1);
   }
 
   getcontactFreeTm2(event){
     if( event.hour<10 ){event.hour='0'+event.hour}
     if( event.minute<10 ){event.minute='0'+event.minute}
     var endTime = event.hour +':'+event.minute ;
-    this.form.value.contactFreeTmArray[1] = endTime;
-     console.log('表单',this.form.value);
+    this.form.value.contactFreeTm2 = endTime;
+     console.log('表单',this.form.value.contactFreeTm2);
   }
 
   areaChange(data){

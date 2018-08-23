@@ -162,7 +162,7 @@
         <div *ngIf="hallCheck" class="p15">*最多厅不能小于最少厅</div>
             <ion-item class="pl12">
               <ion-label>装修要求</ion-label>
-              <ion-select #selectSev okText="确定"   [placeholder]="'请选择'" cancelText="关闭"  multiple="true" formControlName="decorationArray">
+              <ion-select #selectSev okText="确定"   [placeholder]="'请选择'" cancelText="关闭"  multiple="true" formControlName="decorationArrs">
                 <ion-option value="1">毛坯</ion-option>
                 <ion-option value="2">简装</ion-option>
                 <ion-option value="4">中等装修</ion-option>
@@ -201,7 +201,7 @@
       </ion-list><ion-grid>
         <ion-row class="p10" [hidden]="data?.isLock==1">
           <ion-col col-4>
-          <button ion-button color="danger" full type="button" (click)="save()" class="radius update" [disabled]="form.invalid">确认修改</button>
+          <button ion-button color="danger" full type="button" (click)="save()" class="radius update" [disabled]="form.invalid || isDisabled">确认修改</button>
           </ion-col>
           <ion-col col-4>
               <button class="radius updateBtn" tappable (click)="passengerLook()">约看记录</button>
