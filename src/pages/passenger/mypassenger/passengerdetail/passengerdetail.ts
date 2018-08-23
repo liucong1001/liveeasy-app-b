@@ -55,6 +55,7 @@ export class PassengerdetailPage {
   @ViewChild('selectSix') selectSix: Select;
   @ViewChild('selectSev') selectSev: Select;
   localCode:any;
+  isReload:any;
   constructor(public navCtrl: NavController,public statusBar: StatusBar,
               public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,
@@ -68,34 +69,34 @@ export class PassengerdetailPage {
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
         this.data = res;
         this.form.patchValue({
-          customerId:this.data.customerId,
-          customerName:this.data.customerName,
-          customerGender:this.data.customerGender,
-          customerPhone:this.data.customerPhone,
-          customerSrc:this.data.customerSrc,
-          agentId:this.data.agentId,
-          customerGrade:this.data.customerGrade,
+          customerId:this.data.customerId&&this.data.customerId,
+          customerName:this.data.customerName&&this.data.customerName,
+          customerGender:this.data.customerGender&&this.data.customerGender,
+          customerPhone:this.data.customerPhone&&this.data.customerPhone,
+          customerSrc:this.data.customerSrc&&this.data.customerSrc,
+          agentId:this.data.agentId&&this.data.agentId,
+          customerGrade:this.data.customerGrade&&this.data.customerGrade,
           //更多
-          intentionDiviCode:this.data.intentionDiviCode,
-          intentionTradeCode:this.data.intentionTradeCode,
-          intentionEstate:this.data.intentionEstate,
-           minSpaceSize:this.data.minSpaceSize,
-          maxSpaceSize:this.data.maxSpaceSize,
-          minPrice:this.data.minPrice,
-          maxPrice:this.data.maxPrice,
-          minFloor:this.data.minFloor,
-          maxFloor:this.data.maxFloor,
-          minBedroom:this.data.minBedroom,
-          maxBedroom:this.data.maxBedroom,
-          minHall:this.data.minHall,
-          maxHall:this.data.maxHall,
+          intentionDiviCode:this.data.intentionDiviCode&&this.data.intentionDiviCode,
+          intentionTradeCode:this.data.intentionTradeCode&&this.data.intentionTradeCode,
+          intentionEstate:this.data.intentionEstate&&this.data.intentionEstate,
+           minSpaceSize:this.data.minSpaceSize&&this.data.minSpaceSize,
+          maxSpaceSize:this.data.maxSpaceSize&&this.data.maxSpaceSize,
+          minPrice:this.data.minPrice&&this.data.minPrice,
+          maxPrice:this.data.maxPrice&&this.data.maxPrice,
+          minFloor:this.data.minFloor&&this.data.minFloor,
+          maxFloor:this.data.maxFloor&&this.data.maxFloor,
+          minBedroom:this.data.minBedroom&&this.data.minBedroom,
+          maxBedroom:this.data.maxBedroom&&this.data.maxBedroom,
+          minHall:this.data.minHall&&this.data.minHall,
+          maxHall:this.data.maxHall&&this.data.maxHall,
           // decorationArray:this.data.decorationArray,
-          decorationArrs:this.data.decorationArrs,
+          decorationArrs:this.data.decorationArrs&&this.data.decorationArrs,
           //其他
-          requiredDemands:this.data.requiredDemands,
-          againstDemands:this.data.againstDemands,
-          comments:this.data.comments,
-          contactFreeTmArray:this.data.contactFreeTm&&this.data.contactFreeTm.split("-"),
+          requiredDemands:this.data.requiredDemands&&this.data.requiredDemands,
+          againstDemands:this.data.againstDemands&&this.data.againstDemands,
+          comments:this.data.comments&&this.data.comments,
+          // contactFreeTmArray:this.data.contactFreeTm&&this.data.contactFreeTm.split("-"),
           contactFreeTm1:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0],
           contactFreeTm2:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1],
         });
@@ -114,6 +115,15 @@ export class PassengerdetailPage {
     });
     //客户等级
     this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
+
+    //
+    if(this.navCtrl.last().name&&this.navCtrl.last().name=='MypassengerPage'){
+       this.isReload= false;
+       // console.log('上一个页面',this.navCtrl.last().name);
+    }else {
+      this.isReload= true;
+    }
+
 
   }
 
@@ -135,12 +145,15 @@ export class PassengerdetailPage {
     var title = {title:data};
     return title;
   }
+
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad PassengerdetailPage');
-    this.navBar.backButtonClick = () => {
-      this.navCtrl.push(MypassengerPage)
-    };
+    if(this.isReload){
+      this.navBar.backButtonClick = () => {
+        this.navCtrl.push(MypassengerPage)
+      };
+    }
   }
+
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();

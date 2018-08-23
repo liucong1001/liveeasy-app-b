@@ -14,6 +14,12 @@
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       审核{{data.auditStatusStr}}</font>
   </div>
+  <div class="bgWhite p10" *ngIf="data?.auditStatus==1">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      审核{{data.auditStatusStr}}</font>
+  </div>
+
   <!-- 没有委托书 -->
   <form [formGroup]="form">
     <ion-list *ngIf="permission">
