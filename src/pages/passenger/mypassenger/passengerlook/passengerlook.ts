@@ -21,7 +21,7 @@ export class PassengerlookPage {
   clientPhone:any;
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild(Navbar) navBar: Navbar;
-  startDate: String = new Date().toISOString();
+  startDate: String = new Date(new Date().getTime()+8*60*60*1000).toISOString();
   constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public customerProvider:CustomerProvider,private renderer:Renderer,
               public toast:ToastComponent,  public events: Events) {
@@ -29,7 +29,6 @@ export class PassengerlookPage {
     this.clientName=navParams.get('item').customerName;
     this.clientPhone=navParams.get('item').customerPhone;
     this.customerid=navParams.get('item').customerId;
-    console.log(this.customerid)
   }
 
   ionViewDidLoad() {
