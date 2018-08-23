@@ -31,7 +31,9 @@ export class DeclardetailPage {
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private homeProvider:HomeProvider,public localStorageProvider: LocalStorageProvider) {
-
+    if(navParams.get('id')){
+      this.orderid=navParams.get('id');
+    }
    if(navParams.get('item')){
      this.orderid=navParams.get('item').orderId;
      this.orderStatus=navParams.get('item').orderStatus;

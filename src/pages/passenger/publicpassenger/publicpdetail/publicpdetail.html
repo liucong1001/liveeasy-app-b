@@ -64,6 +64,10 @@
         <ion-label>意向商圈：{{data.entity.intentionTradeName}}</ion-label>
         <!--<ion-label>{{data.entity.intentionTradeCode}}</ion-label>-->
       </ion-item>
+      <ion-item class="pl12">
+        <ion-label>意向楼盘：{{data.entity.estateName}}</ion-label>
+        <!--<ion-label>{{data.entity.intentionTradeCode}}</ion-label>-->
+      </ion-item>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>面积要求：{{data.entity.minSpaceSize}}~{{data.entity.maxSpaceSize}}平</ion-label>
@@ -95,6 +99,49 @@
         <!--<ion-label>{{data.entity.decorations}}</ion-label>-->
       </ion-item>
     </ion-list>
+
+
+
+
+    <ion-list style="margin-top: 10px" (click)="rests()">
+      <button ion-item class="pl12" *ngIf="restRight">
+        <span>其他</span>
+      </button>
+      <ion-item class="pl12" *ngIf="restDown" >
+        <span>其他</span>
+        <i class="iconfont icon-xia"></i>
+      </ion-item>
+    </ion-list>
+    <ion-list [hidden]="!rest">
+      <button ion-item class="pl12" (click)="desc(1,data)">
+        <span>核心需求点</span>
+      </button>
+      <button ion-item class="pl12" (click)="desc(2,data)">
+        <span>核心抵触点</span>
+      </button>
+      <ion-item class="pl12">
+        <ion-label>免打扰时段开始时间：<span *ngIf="data.entity.contactFreeTm">{{data.entity.contactFreeTm.split("-")[0]}}</span></ion-label>
+        <!--<ion-label>{{data.entity.minHall}}~{{data.entity.maxHall}}厅</ion-label>-->
+      </ion-item>
+      <ion-item class="pl12" >
+        <ion-label>免打扰时段结束时间：<span *ngIf="data.entity.contactFreeTm">{{data.entity.contactFreeTm.split("-")[1]}}</span></ion-label>
+        <!--<ion-label>{{data.entity.decorations}}</ion-label>-->
+      </ion-item>
+      <!--<ion-item class="pl12">-->
+        <!--<ion-label>免打扰时段开始时间</ion-label>-->
+        <!--<ion-datetime placeholder="请选择开始时间" (ionChange)="getcontactFreeTm1($event)" displayFormat="HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>-->
+      <!--</ion-item>-->
+      <!--<ion-item class="pl12">-->
+        <!--<ion-label>免打扰时段结束时间</ion-label>-->
+        <!--<ion-datetime placeholder="请选择结束时间" (ionChange)="getcontactFreeTm2($event)" displayFormat="HH:mm" doneText="确定"  cancelText="取消"></ion-datetime>-->
+      <!--</ion-item>-->
+      <button ion-item class="pl12" (click)="desc(3,data)">
+        <span>备注</span>
+      </button>
+    </ion-list>
+
+
+
     <ion-grid>
       <ion-row class="p10">
         <!--<ion-col col-4>-->

@@ -7,6 +7,7 @@ import {ToastComponent} from "../../../../components/toast/toast";
 import {StatusBar} from "@ionic-native/status-bar";
 import {PubliclookPage} from "./publiclook/publiclook";
 import {PublicfollowPage} from "./publicfollow/publicfollow";
+import {PublicdescPage} from "./publicdesc/publicdesc";
 
 /**
  * Generated class for the PublicpdetailPage page.
@@ -35,12 +36,13 @@ export class PublicpdetailPage {
               public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent) {
     this.customerId=navParams.get('customerId');
-    console.log(navParams.data);
+    // console.log(navParams.data);
 
     this.customerProvider.getPublicDetail(this.customerId).then(res=>{
       if(res.success){
         this.data = res.data;
         this.datas=res.data.entity;
+        console.log(this.data)
       }else {
         this.toast.defaultMsg('middle',res.msg)
       }
@@ -119,6 +121,43 @@ export class PublicpdetailPage {
 
   }
 
+  rest=false;
+  restRight=true;
+  restDown=false;
+  rests(){
+    if(this.rest==false ){
+      this.rest=true;
+      this.restRight=false;
+      this.restDown=true;
+    }else{
+      this.rest=false;
+      this.restRight=true;
+      this.restDown=false;
+    }
+  }
+
+  desc(val,data){
+    if(val==1){
+      this.openWin(PublicdescPage,{
+        val:1,
+        content:data.entity.requiredDemands,
+      });
+    }
+    if(val==2){
+      this.openWin(PublicdescPage,{
+        val:2,
+        content:data.entity.againstDemands,
+      });
+    }
+    if(val==3){
+      this.openWin(PublicdescPage,{
+        val:3,
+        content:data.entity.comments
+      });
+    }
+  }
+
+
 //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
     let options: NativeTransitionOptions = {
@@ -133,6 +172,17 @@ export class PublicpdetailPage {
       .catch();
     this.navCtrl.pop({animate:false});
   }
+//------跳转页面过渡--------//
+  openWin(goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
 
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.push(goPage, param, {animate:false});
+  }
 
 }

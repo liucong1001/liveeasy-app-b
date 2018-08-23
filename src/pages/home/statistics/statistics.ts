@@ -77,12 +77,14 @@ export class StatisticsPage {
     this.lastMonday=((getLastWeekStartDate().toLocaleDateString()).replace('/','0'))
     this.lastweekend=((getLastWeekEndDate().toLocaleDateString()).replace('/','0'))
 
-
     //本月
     var date = new Date();
     this.firstDay = (((new Date(date.getFullYear(), date.getMonth(), 1)).toLocaleDateString()).replace('/','0'))
     this.lastDay = (((new Date(date.getFullYear(), date.getMonth() + 1, 0)).toLocaleDateString()).replace('/','0'))
 
+    //前天
+    this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
+    //昨天
     var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
     if((result.replace('/','0')).length >= 9){
       this.yesterday=(result.replace('/','0')).replace(/\//g,'');
@@ -90,10 +92,6 @@ export class StatisticsPage {
       this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
     }
 
-    // console.log(this.yesterday)
-    //前天
-    this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
-    //判断时间格式
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });
@@ -102,7 +100,6 @@ export class StatisticsPage {
       endTime:parseInt(this.yesterday),
       // statItem:"",
     }).then(res=>{
-
       if(res.success){
         if(res.hasOwnProperty('data')){
           // console.log(res.data)
@@ -208,6 +205,9 @@ export class StatisticsPage {
       {name:'本月',start:this.firstDay,end:this.lastDay,val:4},
     ];
 
+  }
+  prefixInteger(num, length) {
+    return (Array(length).join('0') + num).slice(-length);
   }
   // 分组
   groupBy( array , f ) {
@@ -478,6 +478,10 @@ export class StatisticsPage {
     this.department=[];
     this.person=[];
     this.personName='';
+    // this.tableJSON
+    for(var i in this.tableJSON){
+      this.tableJSON[i].result=0;
+    }
   }
 
   //快速查询

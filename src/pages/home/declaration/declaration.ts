@@ -49,6 +49,7 @@ export class DeclarationPage {
               public propertyProvider: PropertyProvider,public localStorageProvider: LocalStorageProvider) {
     this.localCode = this.localStorageProvider.get('codeData');
     this.stateJSON = new ArryCodeValuePipe().transform(this.localCode,'order_status');
+    console.log(this.stateJSON)
   }
 
   ionViewDidLoad() {

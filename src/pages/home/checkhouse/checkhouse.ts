@@ -224,7 +224,7 @@ export class CheckhousePage {
         if(item.operationCode<5000){
           let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
           profileModal.present();
-          console.log('点击',item);
+          // console.log('点击',item);
         }else {
           this.openWin(DeclardetailPage,{
             id:item.objectId,
