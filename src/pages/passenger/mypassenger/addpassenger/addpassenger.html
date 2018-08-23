@@ -101,7 +101,7 @@
       <valid-error [errors]="errors.minSpaceSize"  [control]="form.get('minSpaceSize')"></valid-error>
       <valid-error [errors]="errors.maxSpaceSize"  [control]="form.get('maxSpaceSize')"  ></valid-error>
             <!--<div *ngIf="areaCheck" class="p15">*结束面积不能小于开始面积</div>-->
-      <div *ngIf="form.value.maxSpaceSize &&form.value.minSpaceSize &&form.value.maxSpaceSize < form.value.minSpaceSize" class="p15">*结束面积不能小于开始面积</div>
+      <div *ngIf="compare(form.value.minSpaceSize,form.value.maxSpaceSize)"  class="p15">*结束面积不能小于开始面积</div>
             <ion-item class="pl12">
               <ion-label>价格要求</ion-label>
               <ion-label class="centers">
@@ -120,7 +120,7 @@
       <valid-error [errors]="errors.minPrice"  [control]="form.get('minPrice')"  ></valid-error>
       <valid-error [errors]="errors.maxPrice"  [control]="form.get('maxPrice')"  ></valid-error>
         <!--<div *ngIf="priceCheck" class="p15">*最高价格不能小于最低价格</div>-->
-      <div *ngIf="form.value.maxPrice &&form.value.minPrice &&form.value.maxPrice < form.value.minPrice" class="p15">*最高价格不能小于最低价格</div>
+      <div *ngIf="compare(form.value.minPrice,form.value.maxPrice)" class="p15">*最高价格不能小于最低价格</div>
 
           <ion-item class="pl12">
             <ion-label>楼层要求</ion-label>
@@ -140,7 +140,7 @@
       <valid-error [errors]="errors.minFloor"  [control]="form.get('minFloor')"  ></valid-error>
       <valid-error [errors]="errors.maxFloor"  [control]="form.get('maxFloor')"  ></valid-error>
         <!--<div *ngIf="floorCheck" class="p15">*最高楼不能小于最低楼层</div>-->
-      <div *ngIf="form.value.maxFloor &&form.value.minFloor &&form.value.maxFloor < form.value.minFloor" class="p15">*最高楼不能小于最低楼层</div>
+      <div *ngIf="compare(form.value.minFloor,form.value.maxFloor)" class="p15">*最高楼不能小于最低楼层</div>
           <ion-item class="pl12">
             <ion-label>居室要求</ion-label>
             <ion-label class="centers">
@@ -159,7 +159,7 @@
           <div class="p15" *ngIf="(form.value.minBedroom == 0 && form.value.minBedroom!='') || (form.value.maxBedroom == 0 && form.value.maxBedroom!='')">* 不能为0</div>
           <valid-error [errors]="errors.minBedroom"  [control]="form.get('minBedroom')"  ></valid-error>
           <valid-error [errors]="errors.maxBedroom"  [control]="form.get('maxBedroom')"  ></valid-error>
-          <div *ngIf="form.value.maxBedroom &&form.value.minBedroom &&form.value.maxBedroom < form.value.minBedroom" class="p15">*最多居室不能小于最少居室</div>
+          <div *ngIf="compare(form.value.minBedroom,form.value.maxBedroom)" class="p15">*最多居室不能小于最少居室</div>
           <ion-item class="pl12">
             <ion-label>客厅要求</ion-label>
             <ion-label class="centers">
@@ -178,7 +178,7 @@
       <valid-error [errors]="errors.minHall"  [control]="form.get('minHall')"  ></valid-error>
       <valid-error [errors]="errors.maxHall"  [control]="form.get('maxHall')"  ></valid-error>
           <!--<div *ngIf="hallCheck" class="p15">*最多厅不能小于最少厅</div>-->
-      <div *ngIf="form.value.maxHall &&form.value.minHall &&form.value.maxHall < form.value.minHall" class="p15">*最多厅不能小于最少厅</div>
+      <div *ngIf="compare(form.value.minHall,form.value.maxHall)" class="p15">*最多厅不能小于最少厅</div>
           <ion-item class="pl12">
             <ion-label>装修要求</ion-label>
             <ion-select #selectSev okText="确定"   [placeholder]="'请选择'"  multiple="true" cancelText="关闭" formControlName="decorationArray">
@@ -221,7 +221,13 @@
 
     <ion-grid>
       <ion-row class="p10">
-        <button ion-button full color="danger" [disabled]="form.invalid" type="button" (click)="save()" class="radius update">提交</button>
+        <button ion-button full color="danger"
+                [disabled]="form.invalid ||
+                 compare(form.value.minSpaceSize,form.value.maxSpaceSize) ||
+                 compare(form.value.minPrice,form.value.maxPrice) ||
+                 compare(form.value.minFloor,form.value.maxFloor) ||
+                 compare(form.value.minBedroom,form.value.maxBedroom)||
+                 compare(form.value.minHall,form.value.maxHall)" type="button" (click)="save()" class="radius update">提交</button>
       </ion-row>
     </ion-grid>
   </form>

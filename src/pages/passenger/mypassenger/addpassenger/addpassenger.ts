@@ -255,6 +255,13 @@ export class AddpassengerPage {
     }
   }
 
+  compare(min,max){
+     if(min&&max&&( parseFloat(max) < parseFloat(min) )){
+       return true
+     }else {
+       return false
+     }
+  }
 
 
   clickIntention(){
