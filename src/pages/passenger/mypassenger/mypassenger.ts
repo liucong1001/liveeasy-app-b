@@ -181,7 +181,7 @@ export class MypassengerPage {
     // for(var i in this.pageData){
     //   if(this.pageData[i].createTime && this.pageData[i].lastFollowTm &&
     //     this.pageData[i].lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
-    //     this.pageData[i].createTime<=todayzero-1000-(1000*60*60*24*3)){
+    //     this.pageDat a[i].createTime<=todayzero-1000-(1000*60*60*24*3)){
     //     this.pageData[i].followLabel=1;
     //   }
     //
