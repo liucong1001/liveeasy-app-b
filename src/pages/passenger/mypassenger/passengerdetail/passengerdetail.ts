@@ -169,16 +169,18 @@ export class PassengerdetailPage {
     intentionDiviCode :[''],//意向区域
     intentionTradeCode :[''],//意向商圈
     intentionEstate :[''],//意向楼盘
-    minSpaceSize:[''],//最小面积
-    maxSpaceSize:[''],//最大面积
-    minPrice :[''],//最低价格
-    maxPrice:[''],//最高价格
-    minFloor:[''],//最低楼层
-    maxFloor:[''],//最高楼层
-    minBedroom:[''],//最少居室
-    maxBedroom:[''],//最多居室
-    minHall:[''],//最少厅
-    maxHall:[''],//最多厅
+
+
+    minSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最小面积
+    maxSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最大面积
+    minPrice :['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最低价格
+    maxPrice:['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最高价格
+    minFloor:['',Validators.pattern(/^[0-9]*$/)],//最低楼层
+    maxFloor:['',Validators.pattern(/^[0-9]*$/)],//最高楼层
+    minBedroom:['',Validators.pattern(/^[0-9]*$/)],//最少居室
+    maxBedroom:['',Validators.pattern(/^[0-9]*$/)],//最多居室
+    minHall:['',Validators.pattern(/^[0-9]*$/)],//最少厅
+    maxHall:['',Validators.pattern(/^[0-9]*$/)],//最多厅
     decorationArray:[],//装修要求
     decorationArrs:[],//装修要求
     requiredDemands:[''],//核心要求
@@ -362,6 +364,15 @@ export class PassengerdetailPage {
   /**
    验证
    */
+
+  compare(min,max){
+    if(min&&max&&( parseFloat(max) < parseFloat(min) )){
+      return true
+    }else {
+      return false
+    }
+  }
+
   //验证面积
   areaCheck=false;
   priceCheck=false;
@@ -377,17 +388,9 @@ export class PassengerdetailPage {
       }else {
         this.areaCheck = false;
       }
-      var reg = /^[0-9]*$/;
-      if (!reg.test(this.form.value.maxSpaceSize || this.form.value.minSpaceSize)){
-        this.areaTips=true;
-      }else {
-        this.areaTips=false;
-      }
     }
-    // console.log(this.form.value.minSpaceSize,)
   }
   //价格
-  priceTips=false;
   prices(){
     if(this.form.value.minPrice||this.form.value.maxPrice){
       if(parseFloat(this.form.value.maxPrice) < parseFloat(this.form.value.minPrice)){
@@ -396,16 +399,9 @@ export class PassengerdetailPage {
       }else {
         this.priceCheck = false;
       }
-      var reg = /^[1-9]\d*\,\d*|[1-9]\d*$/;
-      if (!reg.test(this.form.value.maxPrice || this.form.value.minPrice)){
-        this.priceTips=true;
-      }else {
-        this.priceTips=false;
-      }
     }
   }
   //楼层
-  floorTips=false;
   floors(){
     if(this.form.value.minFloor||this.form.value.maxFloor){
       if(parseInt(this.form.value.maxFloor) < parseInt(this.form.value.minFloor)){
@@ -414,17 +410,9 @@ export class PassengerdetailPage {
       }else {
         this.floorCheck = false;
       }
-      var reg = /^[0-9]*$/;
-      if (!reg.test(this.form.value.minFloor || this.form.value.maxFloor)){
-        this.floorTips=true;
-      }else {
-        this.floorTips=false;
-      }
     }
   }
   //居室
-  roomTipOne=false;
-  roomTipTwo=false;
   rooms(){
     if(this.form.value.minBedroom&&this.form.value.maxBedroom){
       if(parseInt(this.form.value.maxBedroom) < parseInt(this.form.value.minBedroom)){
@@ -434,28 +422,8 @@ export class PassengerdetailPage {
         this.roomCheck = false;
       }
     }
-    var reg = /^[0-9]*$/;
-    if (!reg.test(this.form.value.minBedroom || this.form.value.maxBedroom)){
-      this.roomTipOne=true;
-      if(this.roomTipTwo){
-        this.roomTipTwo=false;
-      }
-    }else{
-      this.roomTipOne=false;
-
-    }
-    if(this.form.value.minBedroom==0 || this.form.value.maxBedroom==0){
-      if(this.roomTipOne){
-        this.roomTipOne=false;
-      }
-      this.roomTipTwo=true
-    }else {
-      this.roomTipTwo=false;
-
-    }
   }
   //客厅
-  hallTips=false;
   halls(){
     if(this.form.value.minHall||this.form.value.maxHall){
       if(parseInt(this.form.value.maxHall) < parseInt(this.form.value.minHall)){
@@ -464,12 +432,7 @@ export class PassengerdetailPage {
       }else {
         this.hallCheck = false;
       }
-      var reg = /^[0-9]*$/;
-      if (!reg.test(this.form.value.minHall  || this.form.value.maxHall)){
-        this.hallTips=true;
-      }else {
-        this.hallTips=false;
-      }
+
     }
   }
 

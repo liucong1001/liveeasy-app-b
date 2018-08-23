@@ -128,8 +128,8 @@ export class AddpassengerPage {
     intentionEstate :[''],//意向楼盘
      minSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最小面积
      maxSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最大面积
-     minPrice :['',Validators.pattern(/^[0-9]*$/)],//最低价格
-     maxPrice:['',Validators.pattern(/^[0-9]*$/)],//最高价格
+     minPrice :['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最低价格
+     maxPrice:['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最高价格
      minFloor:['',Validators.pattern(/^[0-9]*$/)],//最低楼层
      maxFloor:['',Validators.pattern(/^[0-9]*$/)],//最高楼层
      minBedroom:['',Validators.pattern(/^[0-9]*$/)],//最少居室
