@@ -85,12 +85,19 @@ export class StatisticsPage {
     //前天
     this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
     //昨天
-    var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
-    if((result.replace('/','0')).length >= 9){
-      this.yesterday=(result.replace('/','0')).replace(/\//g,'');
-    }else {
-      this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
-    }
+    var month=(new Date(date.getTime() - 24*60*60*1000)).getMonth()+1;
+    var dd=(new Date(date.getTime() - 24*60*60*1000)).getDate();
+    var year=(new Date(date.getTime() - 24*60*60*1000)).getFullYear();
+    var yesterday=this.Appendzero(month) + this.Appendzero(dd);
+    console.log(year)
+    // var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
+    // if((result.replace('/','0')).length >= 9){
+    //   this.yesterday=(result.replace('/','0')).replace(/\//g,'');
+    // }else {
+    //   this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
+    // }
+    this.yesterday=year + ""+yesterday;
+
 
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
@@ -206,8 +213,10 @@ export class StatisticsPage {
     ];
 
   }
-  prefixInteger(num, length) {
-    return (Array(length).join('0') + num).slice(-length);
+
+  Appendzero(obj) {
+    if (obj < 10) return "0" + "" + obj;
+    else return obj;
   }
   // 分组
   groupBy( array , f ) {
@@ -478,9 +487,9 @@ export class StatisticsPage {
     this.department=[];
     this.person=[];
     this.personName='';
-    // this.tableJSON
+    this.tableJSON
     for(var i in this.tableJSON){
-      this.tableJSON[i].result=0;
+      this
     }
   }
 
