@@ -168,7 +168,7 @@ export class PassengerdetailPage {
     decorationArray:[],//装修要求
     requiredDemands:[''],//核心要求
     againstDemands:[''],//核心抵触点
-    contactFreeTmArray:[],//免打扰时间
+    contactFreeTmArray:['',''],//免打扰时间
     contactFreeTm1:[''],//免打扰时间开始
     contactFreeTm2:[''],//免打扰时间结束
     comments:[''],//备注
@@ -398,16 +398,19 @@ export class PassengerdetailPage {
   }
 
   getcontactFreeTm1(event){
-    // this.form.value.contactFreeTmArray
+    if( event.hour<10 ){event.hour='0'+event.hour}
+    if( event.minute<10 ){event.minute='0'+event.minute}
     var startTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[0] = startTime;
-    // console.log('时间',event,startTime);
+    console.log('时间',event,startTime);
   }
 
   getcontactFreeTm2(event){
+    if( event.hour<10 ){event.hour='0'+event.hour}
+    if( event.minute<10 ){event.minute='0'+event.minute}
     var endTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[1] = endTime;
-    // console.log('表单',this.form.value);
+     console.log('表单',this.form.value);
   }
 
   areaChange(data){
