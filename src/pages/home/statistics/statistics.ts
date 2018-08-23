@@ -94,11 +94,15 @@ export class StatisticsPage {
     //前天
     this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
     //判断时间格式
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
     this.homeProvider.statis({
       startTime:parseInt(this.yesterday),
       endTime:parseInt(this.yesterday),
-      statItem:"",
+      // statItem:"",
     }).then(res=>{
+
       if(res.success){
         if(res.hasOwnProperty('data')){
           // console.log(res.data)
@@ -187,6 +191,7 @@ export class StatisticsPage {
           // this.toast.error('暂无数据');
           // this.errStatus = true;
         }
+        loading.dismiss();
       }else {
         this.toast.error('暂无数据');
         this.errStatus = true;
@@ -203,8 +208,6 @@ export class StatisticsPage {
       {name:'本月',start:this.firstDay,end:this.lastDay,val:4},
     ];
 
-
-    console.log(this.falsees)
   }
   // 分组
   groupBy( array , f ) {
@@ -241,6 +244,92 @@ export class StatisticsPage {
       this.tableJSON[t].result=0;
     }
   }
+
+  //publiv Menthod
+  metheod(){
+    let sorted = this.groupBy(this.data, function(item){
+      if(item.storeCode){
+        return [item.storeCode];
+      }else {
+        return [item.deptId];
+      }
+    });
+    // console.log('部门',sorted);
+    for (var i in sorted) {
+      this.department.push(sorted[i][0]);
+    }
+    for (var all in sorted){
+      for (var aa=0;aa<sorted[all].length;aa++){
+        if(sorted[all][aa].statItem == 3001){
+          this.tableJSON[0].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 3025){
+          // console.log('3025',sorted[j][h]);
+          this.tableJSON[1].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 3011){
+          // console.log('3011',sorted[j][h]);
+          this.tableJSON[2].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 3012){
+          // console.log('3012',sorted[j][h]);
+          this.tableJSON[3].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 3007){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[4].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4018){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[5].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4019){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[6].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4020){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[7].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4021){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[8].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4022){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[9].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 4023){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[10].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5018){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[11].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5019){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[12].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5020){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[13].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5021){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[14].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5022){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[15].result+=sorted[all][aa].stateValue;
+        }
+      }
+    }
+    // console.log(this.tableJSON)
+  }
+
+
+
   //时间弹窗刷新
   goTime(){
     let loading = this.loadingCtrl.create({
@@ -248,8 +337,8 @@ export class StatisticsPage {
     });
     loading.present();
     this.getClear();
-    if(this.form.value.startTime=='' || this.form.value.endTime=='' || this.startTime=='' || this.endTime==''){
-      this.toast.error('必须填写结束时间，');
+    if(this.form.value.startTime=='' || this.form.value.endTime==''){
+      this.toast.error('请选择时间，');
       loading.dismiss();
     }else if(this.form.value.startTime!=''&&this.form.value.endTime!=''){
       if(this.form.value.startTime > this.form.value.endTime){
@@ -271,92 +360,15 @@ export class StatisticsPage {
         }).then(res=>{
           if(res.success){
             if(res.hasOwnProperty('data')){
-              // console.log(res);
               this.data=res.data;
-              let sorted = this.groupBy(res.data, function(item){
-                if(item.storeCode){
-                  return [item.storeCode];
-                }else {
-                  return [item.deptId];
-                }
-              });
-              // console.log('部门',sorted);
-              for (var i in sorted) {
-                this.department.push(sorted[i][0]);
-              }
-              for (var all in sorted){
-                for (var aa=0;aa<sorted[all].length;aa++){
-                  if(sorted[all][aa].statItem == 3001){
-                    this.tableJSON[0].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 3025){
-                    // console.log('3025',sorted[j][h]);
-                    this.tableJSON[1].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 3011){
-                    // console.log('3011',sorted[j][h]);
-                    this.tableJSON[2].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 3012){
-                    // console.log('3012',sorted[j][h]);
-                    this.tableJSON[3].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 3007){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[4].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4018){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[5].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4019){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[6].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4020){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[7].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4021){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[8].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4022){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[9].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 4023){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[10].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 5018){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[11].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 5019){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[12].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 5020){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[13].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 5021){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[14].result+=sorted[all][aa].stateValue;
-                  }
-                  if(sorted[all][aa].statItem == 5022){
-                    // console.log('3007',sorted[j][h]);
-                    this.tableJSON[15].result+=sorted[all][aa].stateValue;
-                  }
-                }
-              }
-              // console.log(this.tableJSON)
+              this.metheod();
             }else {
-              this.falsees=false;
+              this.department=[];
+              this.person=[];
+              this.staff=1;
+              this.personName='';
             }
           }else {
-
             this.toast.error('暂无数据');
             this.errStatus = true;
           }
@@ -410,13 +422,10 @@ export class StatisticsPage {
     if(item.start.length<9 || item.start.length <9){
       item.start=item.start.replace('/','0');
       item.end=item.end.replace('/','');
-      // console.log(item.start,item.end)
     }else if(item.start.length==9 || item.end.length == 9){
       item.start=item.start.replace('/','');
       item.end=item.end.replace('/','');
-      // console.log(item.start,item.end)
     }
-    // console.log(item.start,item.end)
     this.homeProvider.statis({
       startTime:parseInt(item.start),
       endTime:parseInt(item.end),
@@ -424,93 +433,13 @@ export class StatisticsPage {
     }).then(res=>{
       if(res.success){
         if(res.hasOwnProperty('data')) {
-          // console.log(res);
           this.data=res.data;
-          let sorted = this.groupBy(res.data, function(item){
-            if(item.storeCode){
-              return [item.storeCode];
-            }else {
-              return [item.deptId];
-            }
-          });
-          // console.log('部门',sorted);
-          for (var i in sorted) {
-            this.department.push(sorted[i][0]);
-          }
-          console.log(this.department)
-          for (var all in sorted){
-            for (var aa=0;aa<sorted[all].length;aa++){
-              if(sorted[all][aa].statItem == 3001){
-                this.tableJSON[0].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3025){
-                // console.log('3025',sorted[j][h]);
-                this.tableJSON[1].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3011){
-                // console.log('3011',sorted[j][h]);
-                this.tableJSON[2].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3012){
-                // console.log('3012',sorted[j][h]);
-                this.tableJSON[3].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 3007){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[4].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4018){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[5].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4019){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[6].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4020){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[7].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4021){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[8].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4022){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[9].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 4023){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[10].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5018){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[11].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5019){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[12].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5020){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[13].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5021){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[14].result+=sorted[all][aa].stateValue;
-              }
-              if(sorted[all][aa].statItem == 5022){
-                // console.log('3007',sorted[j][h]);
-                this.tableJSON[15].result+=sorted[all][aa].stateValue;
-              }
-            }
-          }
-          // console.log(this.tableJSON)
-          this.falsees=true;
+          this.metheod();
+          // this.falsees=true;
         }else {
           this.person=[];
           this.staff=1;
-          this.falsees=false;
+          this.personName='';
         }
         loading.dismiss();
       }else {
@@ -518,7 +447,6 @@ export class StatisticsPage {
         this.errStatus = true;
       }
     });
-    // console.log('表单',event);
 
     this.clear();
     if(this.times ==1 || this.times ==3){
@@ -542,10 +470,14 @@ export class StatisticsPage {
     this.form.setValue({
       startTime:'',
       endTime:''
-    })
+    });
     this.pop=false;
     this.time=false;
     this.times=1;
+    this.staff=1;
+    this.department=[];
+    this.person=[];
+    this.personName='';
   }
 
   //快速查询
@@ -584,92 +516,14 @@ export class StatisticsPage {
           if(res.hasOwnProperty('data')){
             // console.log(res)
             this.data=res.data;
-            let sorted = this.groupBy(res.data, function(item){
-              if(item.storeCode){
-                return [item.storeCode];
-              }else {
-                return [item.deptId];
-              }
-            });
-            // console.log('部门',sorted);
-            for (var i in sorted) {
-              this.department.push(sorted[i][0]);
-            }
-            for (var all in sorted){
-              for (var aa=0;aa<sorted[all].length;aa++){
-                if(sorted[all][aa].statItem == 3001){
-                  this.tableJSON[0].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 3025){
-                  // console.log('3025',sorted[j][h]);
-                  this.tableJSON[1].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 3011){
-                  // console.log('3011',sorted[j][h]);
-                  this.tableJSON[2].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 3012){
-                  // console.log('3012',sorted[j][h]);
-                  this.tableJSON[3].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 3007){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[4].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4018){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[5].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4019){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[6].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4020){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[7].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4021){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[8].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4022){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[9].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 4023){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[10].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 5018){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[11].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 5019){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[12].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 5020){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[13].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 5021){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[14].result+=sorted[all][aa].stateValue;
-                }
-                if(sorted[all][aa].statItem == 5022){
-                  // console.log('3007',sorted[j][h]);
-                  this.tableJSON[15].result+=sorted[all][aa].stateValue;
-                }
-              }
-            }
-            console.log(this.tableJSON)
+            this.metheod();
           }
           loading.dismiss();
         }else {
           this.toast.error('暂无数据');
           this.errStatus = true;
         }
-    })
+    });
     this.clear();
     if(this.fast ==1){
       this.fast=2;
@@ -692,7 +546,7 @@ export class StatisticsPage {
     }else {
       this.name=this.selected.deptName;
     }
-    console.log(item.deptId);
+    // console.log(item.deptId);
     this.id=item.deptId;
     let sorted = this.groupBy(this.data, function(item){
       if(item.storeCode){
@@ -703,7 +557,6 @@ export class StatisticsPage {
     });
     this.allPersonal=[];
     //通过部门ID分组
-    this.falsees=true;
     for (var j in sorted){
       // this.personal.push(sorted[j]);
       //员工分组
@@ -714,6 +567,7 @@ export class StatisticsPage {
         }
       }
     }
+    // console.log(this.allPersonal)
     this.person=[];
     //所有员工分组，获取每组第一条数据
     let person = this.groupBy(this.allPersonal, function(item){
@@ -725,7 +579,6 @@ export class StatisticsPage {
     // console.log('所有员工', this.allPersonal,'单个员工',person)
     this.person.unshift({personName:'不限',personId:''});
     loading.dismiss();
-    console.log(this.person)
   }
   id:any;
   rigthPerson=[];
@@ -816,7 +669,7 @@ export class StatisticsPage {
           if (perInfo[j][h].personId==item.personId){
             // console.log(perInfo[j][h]);
             if(perInfo[j][h].statItem == 3001){
-              console.log(perInfo[j][h])
+              // console.log(perInfo[j][h])
               this.tableJSON[0].result+=perInfo[j][h].stateValue;
             }
             if(perInfo[j][h].statItem == 3025){
@@ -884,7 +737,7 @@ export class StatisticsPage {
       }
 
     }
-    console.log(this.tableJSON);
+    // console.log(this.tableJSON);
     this.clear();
     if(this.staff ==1){
       this.staff=2;
@@ -932,13 +785,12 @@ export class StatisticsPage {
   time=false;
   fastSearch=false;
   pop=false;
-  aa=false;
   showMenu1() {
-    if(this.falsees==true){
-      this.falsees=true;
-    }else {
-      this.falsees=false;
-    }
+    // if(this.falsees==true){
+    //   this.falsees=true;
+    // }else {
+    //   this.falsees=false;
+    // }
     if (this.show == false || this.time == true || this.fastSearch == true ) {
       this.show = true;
       this.pop = true;

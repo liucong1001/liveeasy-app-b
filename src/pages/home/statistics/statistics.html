@@ -5,9 +5,9 @@
   </ion-navbar>
   <ion-row class="houseMenu bgWhite">
     <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{'color':show}">
-      <span *ngIf="staff==2" [ngClass]="{'color':personName}">{{personName}}</span>
+      <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>6}">{{personName}}</span>
       <span *ngIf="staff==1">部门员工</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName,cleas:falsees==false}"></ion-icon>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
     </ion-col>
     <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{'color':time}">
       <span *ngIf="tm1 && tm2 && times == 3" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
@@ -58,7 +58,7 @@
         </div>
       </ion-col>
       <ion-col col-5 class="p0">
-        <div class="leftChange updateBg" *ngIf="falsees!=false">
+        <div class="leftChange updateBg" [ngClass]="{'bgWhite':person==''}">
           <ion-list radio-group>
             <!--<ion-item class="tc">-->
             <!--<ion-label>不限</ion-label>-->

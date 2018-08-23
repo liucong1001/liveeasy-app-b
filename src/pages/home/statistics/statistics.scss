@@ -1,9 +1,17 @@
 page-statistics {
-  .cleas{
-    color: #555 !important;
-  }
   .active{
     color: #1ab394;
+  }
+  .upWid{
+    width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+  .upIcon{
+    position: relative;
+    top: -10px;
   }
   table{
     tr td{
