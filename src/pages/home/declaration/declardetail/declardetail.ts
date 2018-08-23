@@ -31,33 +31,27 @@ export class DeclardetailPage {
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private homeProvider:HomeProvider,public localStorageProvider: LocalStorageProvider) {
-    if(navParams.get('id')){
-      this.orderid=navParams.get('id');
-    }
-   if(navParams.get('item')){
+
+/*   if(navParams.get('item')){
      this.orderid=navParams.get('item').orderId;
      this.orderStatus=navParams.get('item').orderStatus;
    }
-
     if(this.navCtrl.last()&&this.navCtrl.last().name=='CheckhousePage'){
        this.orderid = navParams.get('id');
-    }
-
+       console.log('参数',navParams.get('id'));
+    }*/
+    this.orderid = navParams.get('id');
     this.localCode = this.localStorageProvider.get('codeData');
     this.JSON = new ArryCodeValuePipe().transform(this.localCode,'order_status');
-    // console.log('参数',this.orderStatus, this.JSON);
-    // console.log(this.orderid);
     this.homeProvider.decldetail(this.orderid).then(res=>{
       this.allOrder=res.data;
       this.orderDetail=res.data.order;
       this.feelist=res.data.feeList;
       this.users=res.data.user;
-      // console.log(this.allOrder);
     });
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad DeclardetailPage');
     this.navBar.backButtonClick = this.backButtonClick;
   }
   numJOSN=[

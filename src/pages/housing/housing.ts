@@ -500,15 +500,17 @@ export class HousingPage {
       this.newCount=newCount;
       this.firstPageData = res.data.result;
       refresher.complete();
+      this.pageResult =res.data&&res.data.result;
+
       if (res.data.result && res.data.result.length > 0) {
         this.pageData = [];
         for (let i = 0; i < res.data.result.length; i ++) {
-
           this.pageData.push(res.data.result[i])
         }
         this.badHttp = false;
         this.currentPage =1;
       }
+      console.log('下拉pageResult',this.pageResult);
 
       if (newCount > 0 ) {
         this.num=3;
@@ -551,7 +553,6 @@ export class HousingPage {
       slowdownfactor: 3,
       iosdelay: 50
     };
-
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
@@ -583,36 +584,34 @@ export class HousingPage {
     if(!this.params.area){
       delete this.params.area1;
     }
-
       infiniteScroll.complete();
-      if(this.currentPage==1){
+/*      if(this.currentPage==1){
         this.currentPage=2
       }else {
         this.currentPage++;
-      }
+      }*/
+      this.currentPage++;
+      console.log('pageResult',this.pageResult);
 
       if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
-         infiniteScroll.enable(false);
+        //infiniteScroll.enable(false);
         //toast提示
         this.all = true;
       }else {
         this.all = false;
+        if(this.pageResult ==''){return};
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult =res.data&&res.data.result;
-          // console.log('pageResult--',this.pageResult);
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
             }
           }else {
-          //  this.pageResult ==undefined  为空 没有数据  （加载全部）
-            infiniteScroll.enable(false);
             this.all = true;
           }
         });
       }
-      // console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         // console.log('数据请求完成');
       });

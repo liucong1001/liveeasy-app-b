@@ -283,19 +283,20 @@ export class PublicpassengerPage {
   //条数
   currentPage: number = 1;
   all = false;
-  //下拉加载
+  pageResult:any;
+  //上拉加载
   doInfinite(infiniteScroll) {
 
       infiniteScroll.complete();
       this.currentPage++;
-      if(this.currentPage >=this.totalPages){
-        //如果都加载完成的情况，就直接 disable ，移除下拉加载
-        infiniteScroll.enable(false);
+      if(this.pageResult&&this.pageResult.length<10){
         //toast提示
         this.all = true;
       }else {
         this.all = false;
+        if(this.currentPage>this.totalPages){return};
         this.publicCustomerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+          this.pageResult =res.data&&res.data.result;
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
           }
@@ -335,7 +336,7 @@ export class PublicpassengerPage {
 
       console.log('Async operation has ended');
       refresher.complete();
-
+      this.pageResult =res.data&&res.data.result;
       if (res.data.result && res.data.result.length > 0) {
         this.pageData = [];
         for (let i = 0; i < res.data.result.length; i ++) {

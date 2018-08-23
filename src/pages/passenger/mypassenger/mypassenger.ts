@@ -330,26 +330,28 @@ export class MypassengerPage {
   //条数
   currentPage:number =1;
   all = false;
+  pageResult:any;
   //上拉加载
   doInfinite(infiniteScroll) {
+
       infiniteScroll.complete();
       this.currentPage++;
-      if(this.currentPage >=this.totalPages){
-        //如果都加载完成的情况，就直接 disable ，移除下拉加载
-        infiniteScroll.enable(false);
+      console.log('当前页数',this.currentPage);
+      if(this.pageResult&&this.pageResult.length<10){
         //toast提示
         this.all = true;
+        return
       }else {
         this.all = false;
+        if(this.currentPage>this.totalPages){return};
         this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+          this.pageResult =res.data&&res.data.result;
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
             this.tagList();
           }
         });
-
       }
-
       console.log('Async operation has ended');
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
@@ -380,13 +382,13 @@ export class MypassengerPage {
       this.firstPageData = res.data.result;
       console.log('Async operation has ended');
       refresher.complete();
+      this.pageResult =res.data&&res.data.result;
       if (res.data.result && res.data.result.length > 0) {
         this.pageData = [];
         for (let i = 0; i < res.data.result.length; i ++) {
 
           this.pageData.push(res.data.result[i])
         }
-        // this.badHttp = false;
         this.currentPage =1;
       }
 
@@ -417,6 +419,10 @@ export class MypassengerPage {
           }
         },1000);
       }
+    }).catch(err=>{
+       if(err){
+         refresher.complete();
+       }
     });
   }
 

@@ -176,9 +176,8 @@ export class DeclarationPage {
     setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
-      if(this.currentPage >=this.totalPages){
-        //如果都加载完成的情况，就直接 disable ，移除下拉加载
-        infiniteScroll.enable(false);
+      console.log('当前页数',this.currentPage);
+      if(this.currentPage >=this.totalPages+1){
         //toast提示
         this.all = true;
       }else {
@@ -217,7 +216,7 @@ export class DeclarationPage {
       // alert(2);
       refresher.pullingText='松开推荐'
     }
-    this.homeProvider.successOrder(this.currentPage,this.params).then(res=>{
+    this.homeProvider.successOrder(1,this.params).then(res=>{
       this.totalRecords = res.data.totalRecords;
       this.totalPages = res.data.totalPages;
       let newCount = this.checkUpdateCount(res.data.result);
@@ -230,6 +229,7 @@ export class DeclarationPage {
 
           this.pageData.push(res.data.result[i])
         }
+        this.currentPage =1;
         this.badHttp = false;
       }
 

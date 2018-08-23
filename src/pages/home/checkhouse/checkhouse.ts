@@ -103,12 +103,12 @@ export class CheckhousePage {
 
   //上拉加载
   doInfinite(infiniteScroll) {
-    setTimeout(() => {
+    // setTimeout(() => {
       infiniteScroll.complete();
       this.currentPage++;
       if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载
-        infiniteScroll.enable(false);
+        // infiniteScroll.enable(false);
         //toast提示
         this.all = true;
       } else {
@@ -120,7 +120,6 @@ export class CheckhousePage {
               this.pageData.push(res.data.result[i]);
             }
           }else {
-            infiniteScroll.enable(false);
             this.all = true;
           }
         });
@@ -131,7 +130,7 @@ export class CheckhousePage {
       infiniteScroll.complete(function () {
         console.log('数据请求完成');
       });
-    }, 1000);
+    // }, 1000);
 
   }
 
@@ -147,7 +146,7 @@ export class CheckhousePage {
 
   doRefresh(refresher) {
     console.log('上拉刷新Begin async operation', refresher);
-    // this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
+    this.homeProvider.msgs(1,{operationCode:parseInt(this.code)}).then(res=>{
     console.log('结束时间内容', this.res.data.totalRecords);
 
     this.totalRecords = this.res.data.totalRecords;
@@ -156,9 +155,19 @@ export class CheckhousePage {
     let newCount = this.checkUpdateCount(this.res.data.result);
     this.newCount = newCount;
     this.firstPageData = this.res.data.result;
-
     console.log('Async operation has ended', newCount);
     refresher.complete();
+      this.pageResult =res.data&&res.data.result;
+      if (res.data.result && res.data.result.length > 0) {
+        this.pageData = [];
+        for (let i = 0; i < res.data.result.length; i ++) {
+
+          this.pageData.push(res.data.result[i])
+        }
+        this.currentPage =1;
+      }
+
+
     if (newCount > 0) {
       console.log(newCount)
       // this.toast.defaultMsg('middle','已更新'+ newCount +'条记录');
@@ -184,7 +193,7 @@ export class CheckhousePage {
         }
       }, 1000);
     }
-    // });
+    });
   }
 
   checkUpdateCount(result) {

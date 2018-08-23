@@ -19,19 +19,6 @@
   <div class="tc refreshTip" *ngIf="not">暂无更新</div>
   <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}条信息</div>
   <ion-grid class="p0">
-    <!--筛选-->
-    <!--<ion-row class="houseMenu">-->
-      <!--<ion-col col-12 class="tc" (click)="showMenu2()">-->
-        <!--<span *ngIf="searchFloorNum==2">{{housePipe(params.orderStatus)}}</span>-->
-        <!--<span [hidden]="searchFloorNum==2"> 报单状态</span>-->
-        <!--<ion-icon name="md-arrow-dropdown"></ion-icon>-->
-      <!--</ion-col>-->
-      <!--&lt;!&ndash;<ion-col col-6 class="tc" (click)="showMenu3()">&ndash;&gt;-->
-        <!--&lt;!&ndash;<span *ngIf="sx==2">{{filtrate(params.sxShow)}}</span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span [hidden]="sx==2"> 筛选</span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<ion-icon name="md-arrow-dropdown"></ion-icon>&ndash;&gt;-->
-      <!--&lt;!&ndash;</ion-col>&ndash;&gt;-->
-    <!--</ion-row>-->
 
     <ion-list>
       <ion-item class="updateHegiht p10" *ngFor="let item of pageData">

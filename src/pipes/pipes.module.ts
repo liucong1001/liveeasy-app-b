@@ -7,6 +7,7 @@ import { CodeValuePipe } from './code-value/code-value';
 import { ArryCodeValuePipe } from './arry-code-value/arry-code-value';
 import { ReversePipe } from './reverse/reverse';
 import { CityPipe } from './city/city';
+import { CodeShowPipe } from './code-show/code-show';
 @NgModule({
 	declarations: [StringJsonPipe,
     ToParseIntPipe,
@@ -15,7 +16,8 @@ import { CityPipe } from './city/city';
     CodeValuePipe,
     ArryCodeValuePipe,
     ReversePipe,
-    CityPipe],
+    CityPipe,
+    CodeShowPipe],
 	imports: [],
 	exports: [StringJsonPipe,
     ToParseIntPipe,
@@ -24,6 +26,7 @@ import { CityPipe } from './city/city';
     CodeValuePipe,
     ArryCodeValuePipe,
     ReversePipe,
-    CityPipe]
+    CityPipe,
+    CodeShowPipe]
 })
 export class PipesModule {}

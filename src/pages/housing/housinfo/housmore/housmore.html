@@ -21,21 +21,20 @@
         <span class="defaults">楼盘地址：</span>{{data.standardAddress}}
       </ion-col>
 
-
       <ion-col col-12>
-        <span class="defaults">交易权属：</span>{{ houseAttrPipe(data.buzzOwnerType,'buzz_owner_type')}}
+        <span class="defaults">交易权属：</span>{{data.buzzOwnerType | codeShow:'buzzOwnerType'}}
       </ion-col>
       <ion-col col-12>
         <span class="defaults">挂牌时间：</span>{{data.businessTime | date:'yyyy/MM/dd'}}
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">抵押类型：</span>{{houseAttrPipe(data.propertyMortgage,'property_mortgage')}}
+        <span class="defaults">抵押类型：</span>{{data.propertyMortgage | codeShow:'propertyMortgage'}}
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">房源类型：</span>{{houseAttrPipe(data.propertyType,'property_type')  }}
+        <span class="defaults">房源类型：</span>{{data.propertyType | codeShow:'propertyType'  }}
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">房屋年限：</span>{{houseAttrPipe(data.propertyLife,'property_life')}}
+        <span class="defaults">房屋年限：</span>{{data.propertyLife| codeShow:'propertyLife'}}
       </ion-col>
 
 

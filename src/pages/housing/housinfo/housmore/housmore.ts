@@ -51,13 +51,4 @@ export class HousmorePage {
     return    data&&JSON.parse(data);
   }
 
-  houseAttrPipe(data,attr){
-      var json = new ArryCodeValuePipe().transform(this.localCode,attr);
-      for(var item of  json){
-        if(data==item.val){
-          return item.name
-        }
-      }
-  }
-
 }

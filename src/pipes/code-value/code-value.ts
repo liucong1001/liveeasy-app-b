@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 /**
  * Generated class for the CodeValuePipe pipe.
  *
- * radis码值转换
+ * radis码值转换  获取json数组
  */
 @Pipe({
   name: 'codeValue',
