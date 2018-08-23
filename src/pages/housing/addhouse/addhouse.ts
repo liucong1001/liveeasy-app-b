@@ -196,7 +196,7 @@ export class AddhousePage {
           new ErrorMessage('required','业主性别必须要填写！'),
       ],
       contactInfo:[
-        new ErrorMessage('required','业主电话必须要填写！'),
+        new ErrorMessage('required','业主电话必须要填写，请填写数字！'),
         new ErrorMessage('pattern', '手机号码格式不正确！'),
       ],
       contactInfo2:[
