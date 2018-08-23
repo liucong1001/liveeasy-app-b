@@ -172,6 +172,7 @@ export class MypassengerPage {
     return result;
   }
 
+
   tagList() {
     //获取客源标签
     // this.date=(new Date()).getTime();
@@ -185,14 +186,15 @@ export class MypassengerPage {
       }
 
       if(this.pageData[i].custFollowupInfoEntity&&this.pageData[i].custFollowupInfoEntity.appointmentTm){
-        if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
+        // console.log('--customerName', i,this.pageData[i]['customerName'], new Date(this.pageData[i].appointmentTm),  new Date(todayzero-1000-(1000*60*60*24*3)).toLocaleDateString() );
+        if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero-1000-(1000*60*60*24*3) && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
           if (this.pageData[i].custFollowupInfoEntity.followStatus == 1) {
             this.pageData[i].lookLable = 1;
           }
         }
       }
     }
-
+    // console.log('转换',this.pageData);
   }
   /**
    * 列表搜索
@@ -208,6 +210,7 @@ export class MypassengerPage {
     console.log('搜索',this.params);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
+      this.tagList();
       this.totalPages = res.data.totalPages;
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
@@ -222,7 +225,6 @@ export class MypassengerPage {
       this.houseType = false;
       this.more = false;
       this.pop = false;
-      this.tagList();
       // this.housingEstate = false;
       //户型搜索条件字显示
       // this.tagList();
