@@ -67,7 +67,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
+          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -79,7 +79,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="innerSpaceSize" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
+          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="innerSpaceSize" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>

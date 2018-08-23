@@ -161,36 +161,36 @@ export class AddpassengerPage {
     agentId:[
       new ErrorMessage('required','客户归属必须要填写！'),
     ],
-    minSpaceSize:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    maxSpaceSize:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    minPrice:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    maxPrice:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    minFloor:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    maxFloor:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    minBedroom:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    maxBedroom:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    minHall:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
-    maxHall:[
-      new ErrorMessage('pattern','请填写数字'),
-    ],
+    // minSpaceSize:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // maxSpaceSize:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // minPrice:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // maxPrice:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // minFloor:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // maxFloor:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // minBedroom:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // maxBedroom:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // minHall:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
+    // maxHall:[
+    //   new ErrorMessage('pattern','请填写数字'),
+    // ],
 
   };
 
@@ -200,40 +200,62 @@ export class AddpassengerPage {
   floorCheck=false;
   roomCheck=false;
   hallCheck=false;
+  areaTips=false;
   areas(){
-    if(this.form.value.minSpaceSize&&this.form.value.maxSpaceSize){
+    if(this.form.value.minSpaceSize||this.form.value.maxSpaceSize){
       if(parseInt(this.form.value.maxSpaceSize) < parseInt(this.form.value.minSpaceSize)){
         console.log('结束面积不能小于开始面积');
         this.areaCheck = true;
       }else {
         this.areaCheck = false;
       }
+      var reg = /^[0-9]*$/;
+      if (!reg.test(this.form.value.maxSpaceSize || this.form.value.minSpaceSize)){
+        this.areaTips=true;
+      }else {
+        this.areaTips=false;
+      }
     }
-    console.log(this.form.value.minSpaceSize,)
   }
   //价格
+  priceTips=false;
   prices(){
-    if(this.form.value.minPrice&&this.form.value.maxPrice){
+    if(this.form.value.minPrice||this.form.value.maxPrice){
       if(parseInt(this.form.value.maxPrice) < parseInt(this.form.value.minPrice)){
         console.log('最高价格不能小于最低价格');
         this.priceCheck = true;
       }else {
         this.priceCheck = false;
       }
+      var reg = /^[1-9]\d*\,\d*|[1-9]\d*$/;
+      if (!reg.test(this.form.value.maxPrice || this.form.value.minPrice)){
+        this.priceTips=true;
+      }else {
+        this.priceTips=false;
+      }
     }
   }
   //楼层
+  floorTips=false;
   floors(){
-    if(this.form.value.minFloor&&this.form.value.maxFloor){
+    if(this.form.value.minFloor||this.form.value.maxFloor){
       if(parseInt(this.form.value.maxFloor) < parseInt(this.form.value.minFloor)){
         console.log('最高楼不能小于最低楼层');
         this.floorCheck = true;
       }else {
         this.floorCheck = false;
       }
+      var reg = /^[0-9]*$/;
+      if (!reg.test(this.form.value.minFloor || this.form.value.maxFloor)){
+        this.floorTips=true;
+      }else {
+        this.floorTips=false;
+      }
     }
   }
   //居室
+  roomTipOne=false;
+  roomTipTwo=false;
   rooms(){
     if(this.form.value.minBedroom&&this.form.value.maxBedroom){
       if(parseInt(this.form.value.maxBedroom) < parseInt(this.form.value.minBedroom)){
@@ -243,15 +265,41 @@ export class AddpassengerPage {
         this.roomCheck = false;
       }
     }
+    var reg = /^[0-9]*$/;
+    if (!reg.test(this.form.value.minBedroom || this.form.value.maxBedroom)){
+     this.roomTipOne=true;
+      if(this.roomTipTwo){
+        this.roomTipTwo=false;
+      }
+    }else{
+      this.roomTipOne=false;
+
+    }
+    if(this.form.value.minBedroom==0 || this.form.value.maxBedroom==0){
+      if(this.roomTipOne){
+        this.roomTipOne=false;
+      }
+      this.roomTipTwo=true
+    }else {
+      this.roomTipTwo=false;
+
+    }
   }
   //客厅
+  hallTips=false;
   halls(){
-    if(this.form.value.minHall&&this.form.value.maxHall){
+    if(this.form.value.minHall||this.form.value.maxHall){
       if(parseInt(this.form.value.maxHall) < parseInt(this.form.value.minHall)){
         console.log('最多厅不能小于最少厅');
         this.hallCheck = true;
       }else {
         this.hallCheck = false;
+      }
+      var reg = /^[0-9]*$/;
+      if (!reg.test(this.form.value.minHall  || this.form.value.maxHall)){
+        this.hallTips=true;
+      }else {
+        this.hallTips=false;
       }
     }
   }

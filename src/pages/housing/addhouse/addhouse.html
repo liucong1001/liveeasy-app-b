@@ -59,7 +59,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -71,16 +71,18 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text"  formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
-        <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
+
         <span class="hdRightInfo">平</span>
-        <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
-          <p>*超出长度!</p>
-        </div>
+
       </div>
+      <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
+      <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
+        <p>*超出长度!</p>
+      </div>
       <!--<div class="hdRightInfo">-->
       <!--<ion-item class="pl12">-->
       <!--<ion-label>价格<i class="text-danger">*</i></ion-label>-->
@@ -98,63 +100,7 @@
           <i class="iconfont icon-xia"></i>
         </ion-item>
       </ion-list>
-      <ion-list  [hidden]="!showHx">
-        <ion-item class="pl12">
-          <ion-label>室<i class="text-danger">*</i></ion-label>
-          <ion-select #selectTwo okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('室')">
-            <ion-option value="0">无</ion-option>
-            <ion-option value="1">一室</ion-option>
-            <ion-option value="2">二室</ion-option>
-            <ion-option value="3">三室</ion-option>
-            <ion-option value="4">四室</ion-option>
-            <ion-option value="5">五室</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item class="pl12">
-          <ion-label>厅<i class="text-danger">*</i></ion-label>
-          <ion-select #selectThree okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厅')">
-            <ion-option value="0">无</ion-option>
-            <ion-option value="1">1厅</ion-option>
-            <ion-option value="2">2厅</ion-option>
-            <ion-option value="3">3厅</ion-option>
-            <ion-option value="4">4厅</ion-option>
-            <ion-option value="5">5厅</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item class="pl12">
-          <ion-label>卫<i class="text-danger">*</i></ion-label>
-          <ion-select #selectFour okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('卫')">
-            <ion-option value="0">无</ion-option>
-            <ion-option value="1">1卫</ion-option>
-            <ion-option value="2">2卫</ion-option>
-            <ion-option value="3">3卫</ion-option>
-            <ion-option value="4">4卫</ion-option>
-            <ion-option value="5">5卫</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item class="pl12">
-          <ion-label>厨<i class="text-danger">*</i></ion-label>
-          <ion-select #selectFive okText="确定"  cancelText="关闭"  formControlName="kitchens"   [placeholder]="'请选择'" [selectOptions]="selectTitle('厨')">
-            <ion-option value="0">无</ion-option>
-            <ion-option value="1">一厨</ion-option>
-            <ion-option value="2">二厨</ion-option>
-            <ion-option value="3">三厨</ion-option>
-            <ion-option value="4">四厨</ion-option>
-            <ion-option value="5">五厨</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item class="pl12">
-          <ion-label>阳<i class="text-danger">*</i></ion-label>
-          <ion-select #selectSix okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'" [selectOptions]="selectTitle('阳')">
-            <ion-option value="0">无</ion-option>
-            <ion-option value="1">一阳</ion-option>
-            <ion-option value="2">二阳</ion-option>
-            <ion-option value="3">三阳</ion-option>
-            <ion-option value="4">四阳</ion-option>
-            <ion-option value="5">五阳</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+
       <ion-item class="pl12">
         <ion-label>朝向<i class="text-danger">*</i></ion-label>
         <ion-select #selectSev  okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="orientation" [selectOptions]="selectTitle('朝向')">
@@ -165,6 +111,63 @@
         <ion-label>装修<i class="text-danger">*</i></ion-label>
         <ion-select #selectEng okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="decoration" [selectOptions]="selectTitle('装修')">
           <ion-option  *ngFor="let item of localCode | arryCodeValue : 'decoration' | reversePipe:'val'"  value="{{item.val}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list  [hidden]="!showHx">
+      <ion-item class="pl12">
+        <ion-label>室<i class="text-danger">*</i></ion-label>
+        <ion-select #selectTwo okText="确定"  cancelText="关闭"   formControlName="bedrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('室')">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">一室</ion-option>
+          <ion-option value="2">二室</ion-option>
+          <ion-option value="3">三室</ion-option>
+          <ion-option value="4">四室</ion-option>
+          <ion-option value="5">五室</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>厅<i class="text-danger">*</i></ion-label>
+        <ion-select #selectThree okText="确定"  cancelText="关闭"  formControlName="halls"  [placeholder]="'请选择'" [selectOptions]="selectTitle('厅')">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">1厅</ion-option>
+          <ion-option value="2">2厅</ion-option>
+          <ion-option value="3">3厅</ion-option>
+          <ion-option value="4">4厅</ion-option>
+          <ion-option value="5">5厅</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>卫<i class="text-danger">*</i></ion-label>
+        <ion-select #selectFour okText="确定"  cancelText="关闭"  formControlName="bathrooms" [placeholder]="'请选择'" [selectOptions]="selectTitle('卫')">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">1卫</ion-option>
+          <ion-option value="2">2卫</ion-option>
+          <ion-option value="3">3卫</ion-option>
+          <ion-option value="4">4卫</ion-option>
+          <ion-option value="5">5卫</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>厨<i class="text-danger">*</i></ion-label>
+        <ion-select #selectFive okText="确定"  cancelText="关闭"  formControlName="kitchens"   [placeholder]="'请选择'" [selectOptions]="selectTitle('厨')">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">一厨</ion-option>
+          <ion-option value="2">二厨</ion-option>
+          <ion-option value="3">三厨</ion-option>
+          <ion-option value="4">四厨</ion-option>
+          <ion-option value="5">五厨</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="pl12">
+        <ion-label>阳<i class="text-danger">*</i></ion-label>
+        <ion-select #selectSix okText="确定"  cancelText="关闭"  formControlName="balconies"  [placeholder]="'请选择'" [selectOptions]="selectTitle('阳')">
+          <ion-option value="0">无</ion-option>
+          <ion-option value="1">一阳</ion-option>
+          <ion-option value="2">二阳</ion-option>
+          <ion-option value="3">三阳</ion-option>
+          <ion-option value="4">四阳</ion-option>
+          <ion-option value="5">五阳</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>

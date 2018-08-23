@@ -98,26 +98,24 @@
                 </ion-row>
               </ion-label>
             </ion-item>
-            <valid-error [errors]="errors.minSpaceSize"  [control]="form.get('minSpaceSize')"></valid-error>
-            <valid-error [errors]="errors.maxSpaceSize"  [control]="form.get('maxSpaceSize')"></valid-error>
+      <div *ngIf="areaTips" class="p15">*请填写数字</div>
             <div *ngIf="areaCheck" class="p15">*结束面积不能小于开始面积</div>
             <ion-item class="pl12">
               <ion-label>价格要求</ion-label>
               <ion-label class="centers">
                 <ion-row>
                   <ion-col col-6>
-                    <input type="text" class="separateIon" formControlName="minPrice" pattern="[0-9]*" placeholder="请填写数字" (change)="prices()">
+                    <input type="text" class="separateIon" formControlName="minPrice" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" placeholder="请填写数字" (change)="prices()">
                     <span>至</span>
                   </ion-col>
                   <ion-col col-6>
-                    <input type="text" class="separateIon" formControlName="maxPrice" pattern="[0-9]*" placeholder="请填写数字" (change)="prices()">
+                    <input type="text" class="separateIon" formControlName="maxPrice" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" placeholder="请填写数字" (change)="prices()">
                     <span class="suffixs">万元</span>
                   </ion-col>
                 </ion-row>
               </ion-label>
             </ion-item>
-        <valid-error [errors]="errors.minPrice"  [control]="form.get('minPrice')"></valid-error>
-        <valid-error [errors]="errors.maxPrice"  [control]="form.get('maxPrice')"></valid-error>
+      <div *ngIf="priceTips" class="p15">*请填写数字</div>
         <div *ngIf="priceCheck" class="p15">*最高价格不能小于最低价格</div>
           <ion-item class="pl12">
             <ion-label>楼层要求</ion-label>
@@ -134,8 +132,7 @@
               </ion-row>
             </ion-label>
           </ion-item>
-          <valid-error [errors]="errors.minFloor"  [control]="form.get('minFloor')"></valid-error>
-          <valid-error [errors]="errors.maxFloor"  [control]="form.get('maxFloor')"></valid-error>
+      <div *ngIf="floorTips" class="p15">*请填写数字</div>
         <div *ngIf="floorCheck" class="p15">*最高楼不能小于最低楼层</div>
           <ion-item class="pl12">
             <ion-label>居室要求</ion-label>
@@ -152,26 +149,25 @@
               </ion-row>
             </ion-label>
           </ion-item>
-      <valid-error [errors]="errors.minBedroom"  [control]="form.get('minBedroom')"></valid-error>
-      <valid-error [errors]="errors.maxBedroom"  [control]="form.get('maxBedroom')"></valid-error>
+          <div *ngIf="roomTipOne" class="p15">*请填写数字</div>
+          <div *ngIf="roomTipTwo" class="p15">*居室必须填写大于0的数字或不填</div>
           <div *ngIf="roomCheck" class="p15">*最多居室不能小于最少居室</div>
           <ion-item class="pl12">
             <ion-label>客厅要求</ion-label>
             <ion-label class="centers">
               <ion-row>
                 <ion-col col-6>
-                  <input type="text" class="separateIon" pattern="[0-9]*" formControlName="minHall" placeholder="请填写" (change)="halls()">
+                  <input type="text" class="separateIon" pattern="[1-9]*" formControlName="minHall" placeholder="请填写" (change)="halls()">
                   <span>至</span>
                 </ion-col>
                 <ion-col col-6>
-                  <input type="text" class="separateIon" pattern="[0-9]*" formControlName="maxHall" placeholder="请填写" (change)="halls()">
+                  <input type="text" class="separateIon" pattern="[1-9]*" formControlName="maxHall" placeholder="请填写" (change)="halls()">
                   <span>厅</span>
                 </ion-col>
               </ion-row>
             </ion-label>
           </ion-item>
-      <valid-error [errors]="errors.minHall"  [control]="form.get('minHall')"></valid-error>
-      <valid-error [errors]="errors.maxHall"  [control]="form.get('maxHall')"></valid-error>
+          <div *ngIf="hallTips" class="p15">*请填写数字</div>
           <div *ngIf="hallCheck" class="p15">*最多厅不能小于最少厅</div>
           <ion-item class="pl12">
             <ion-label>装修要求</ion-label>
