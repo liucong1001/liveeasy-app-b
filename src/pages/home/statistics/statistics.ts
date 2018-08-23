@@ -47,22 +47,38 @@ export class StatisticsPage {
               public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
 
+
+
+
+    var date = new Date();
+    var year=(new Date(date.getTime() - 24*60*60*1000)).getFullYear();
+    //昨天
+    var yesMonth=(new Date(date.getTime() - 24*60*60*1000).getMonth())+1;
+    var yesDd=(new Date(date.getTime() - 24*60*60*1000)).getDate();
+    this.yesterday=year + ""+this.Appendzero(yesMonth) + this.Appendzero(yesDd);
+    //前天
+    var beforeMonth=(new Date(date.getTime() - 48*60*60*1000).getMonth())+1;
+    var beforeDd=(new Date(date.getTime() - 48*60*60*1000)).getDate();
+    this.beforeDay=year + ""+this.Appendzero(beforeMonth) + this.Appendzero(beforeDd);
+
     //本周
-    var now = new Date();
-    var nowTime = now.getTime() ;
-    var day = now.getDay();
+    var nowTime = date.getTime() ;
+    var day = date.getDay();
     var oneDayTime = 24*60*60*1000 ;
     //显示周一
-    this.firstWeek = (((new Date(nowTime - (day-1)*oneDayTime)).toLocaleDateString()).replace('/','0')) ;
+    var firstMonth=(new Date(nowTime - (day-1)*oneDayTime)).getMonth()+1;
+    var firstDd=(new Date(nowTime - (day-1)*oneDayTime)).getDate();
     //显示周日
-    this.lastWeek =  (((new Date(nowTime + (7-day)*oneDayTime)).toLocaleDateString()).replace('/','0'))
+    var lastMonth=(new Date(nowTime + (7-day)*oneDayTime)).getMonth()+1;
+    var lastDd=(new Date(nowTime + (7-day)*oneDayTime)).getDate();
+    this.firstWeek=year + ""+this.Appendzero(firstMonth) + this.Appendzero(firstDd);
+    this.lastWeek=year + ""+this.Appendzero(lastMonth) + this.Appendzero(lastDd);
 
     //上周
-    var nows = new Date(); //当前日期
-    var nowDayOfWeek = nows.getDay(); //今天本周的第几天
-    var nowDay = now.getDate(); //当前日
-    var nowMonth = now.getMonth(); //当前月
-    var nowYear = now.getFullYear(); //当前年
+    var nowDayOfWeek = date.getDay(); //今天本周的第几天
+    var nowDay = date.getDate(); //当前日
+    var nowMonth = date.getMonth(); //当前月
+    var nowYear = date.getFullYear(); //当前年
     nowYear += (nowYear < 2000) ? 1900 : 0; //
     //获得上周的开始日期
     function getLastWeekStartDate() {
@@ -74,30 +90,28 @@ export class StatisticsPage {
       var weekEndDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek - 0);
       return weekEndDate;
     }
-    this.lastMonday=((getLastWeekStartDate().toLocaleDateString()).replace('/','0'))
-    this.lastweekend=((getLastWeekEndDate().toLocaleDateString()).replace('/','0'))
+    //显示周一
+    var lastMon=(getLastWeekStartDate()).getMonth()+1;
+    var lastMDd=(getLastWeekStartDate()).getDate();
+    //显示周日
+    var lastWm=(getLastWeekEndDate()).getMonth()+1;
+    var lastWd=(getLastWeekEndDate()).getDate();
+    this.lastMonday=year + ""+this.Appendzero(lastMon) + this.Appendzero(lastMDd);
+    this.lastweekend=year + ""+this.Appendzero(lastWm) + this.Appendzero(lastWd);
 
     //本月
-    var date = new Date();
-    this.firstDay = (((new Date(date.getFullYear(), date.getMonth(), 1)).toLocaleDateString()).replace('/','0'))
-    this.lastDay = (((new Date(date.getFullYear(), date.getMonth() + 1, 0)).toLocaleDateString()).replace('/','0'))
+    //显示月初
+    //显示月初
+    var firstMon=((new Date(date.getFullYear(), date.getMonth(), 1))).getMonth()+1;
+    var firstMDd=((new Date(date.getFullYear(), date.getMonth(), 1))).getDate();
+    //显示月末
+    var lastMonEnd=((new Date(date.getFullYear(), date.getMonth()+1, 0))).getMonth()+1;
+    var lastDdEnd=((new Date(date.getFullYear(), date.getMonth()+1, 0))).getDate();
+    this.firstDay=year + ""+this.Appendzero(firstMon) + this.Appendzero(firstMDd);
+    this.lastDay=year + ""+this.Appendzero(lastMonEnd) + this.Appendzero(lastDdEnd);
 
-    //前天
-    this.beforeDay=(((new Date(date.getTime() - 48*60*60*1000)).toLocaleDateString()).replace('/','0'));
-    //昨天
-    var month=(new Date(date.getTime() - 24*60*60*1000)).getMonth()+1;
-    var dd=(new Date(date.getTime() - 24*60*60*1000)).getDate();
-    var year=(new Date(date.getTime() - 24*60*60*1000)).getFullYear();
-    var yesterday=this.Appendzero(month) + this.Appendzero(dd);
-    console.log(year)
-    // var result = (new Date(date.getTime() - 24*60*60*1000)).toLocaleDateString();  //昨天
-    // if((result.replace('/','0')).length >= 9){
-    //   this.yesterday=(result.replace('/','0')).replace(/\//g,'');
-    // }else {
-    //   this.yesterday=(result.replace('/','0')).replace(/\//g,'0');
-    // }
-    this.yesterday=year + ""+yesterday;
-
+    // console.log(this.firstDay,this.lastDay)
+    // console.log(this.yesterday,this.beforeDay,this.firstWeek,this.lastWeek)
 
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'

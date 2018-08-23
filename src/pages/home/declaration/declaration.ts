@@ -330,7 +330,7 @@ export class DeclarationPage {
 
   declarationDetail(item){
     this.openWin(DeclardetailPage,{
-      item:item,
+      id:item.orderId,
     })
   }
 
