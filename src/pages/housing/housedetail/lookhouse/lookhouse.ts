@@ -15,7 +15,6 @@ import {LocalStorageProvider} from "../../../../providers/local-storage/local-st
 /**
   房源 - 实勘图
  */
-
 @IonicPage()
 @Component({
   selector: 'page-lookhouse',
@@ -243,7 +242,7 @@ export class LookhousePage {
 
 
 
-
+  isDisabled = false;
   update(){
       // this.edit = true;
     this.imgData = [];
@@ -270,9 +269,10 @@ export class LookhousePage {
       this.toast.msg('未达成实勘标准!');
       return  false
     }
-
+   this.isDisabled = true;
     this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
       if(res.success){
+        this.isDisabled = false;
         console.log('成功返回的数据',res);
         this.toast.msg('上传成功!');
         setTimeout(()=>{
@@ -280,9 +280,11 @@ export class LookhousePage {
         });
 
       }else {
+        this.isDisabled = false;
         this.toast.error('上传失败!');
       }
     },err=>{
+      this.isDisabled = false;
       this.toast.error('上传失败!');
     })
 

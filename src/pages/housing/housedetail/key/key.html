@@ -60,8 +60,8 @@
     <img-list [imgJson]="form.value.keyDlgtFilePics"></img-list>
     <ion-grid [hidden]="data?.auditStatus==3">
       <ion-row class="p15">
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount" (click)="goYc()"  *ngIf="!res?.success|| data?.auditStatus==2">上传钥匙信息</button>
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||imgData.length!=1" (click)="updateYc()"  [hidden]="data?.auditStatus==2||!res?.success">修改钥匙</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount" (click)="goYc()"  *ngIf="!res?.success|| data?.auditStatus==2 || isDisabled">上传钥匙信息</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||imgData.length!=1" (click)="updateYc()"  [hidden]="data?.auditStatus==2||!res?.success || isDisabled">修改钥匙</button>
       </ion-row>
     </ion-grid>
   </form>

@@ -76,6 +76,7 @@ export class KeyPage {
     keyAddress:['',Validators.required],
     keyDlgtFilePics:[''],
   });
+  isDisabled = false;
 //上传钥匙信息
   goYc(){
     var data = {
@@ -86,6 +87,7 @@ export class KeyPage {
       keyDlgtFilePics:JSON.stringify(this.imgData),
     };
     // console.log('参数',data);
+    this.isDisabled = true;
     this.propertyProvider.key({
       propertyId:this.propertyid,
       createTime:this.attorneys,
@@ -99,11 +101,11 @@ export class KeyPage {
         setTimeout(()=>{
            this.navCtrl.pop();
         },500)
+        this.isDisabled = false;
       }else{
         this.toast.error('上传失败！');
+        this.isDisabled = false;
       }
-      // alert('上传成功');
-      // this.navCtrl.pop()
     });
     // console.log(this.form.value);
   }
@@ -130,6 +132,7 @@ export class KeyPage {
       keyDlgtFilePics:JSON.stringify(this.imgData),
     };
     console.log('修改',data);
+    this.isDisabled = true;
     this.propertyProvider.keyupdate({
       propertyId:this.propertyid,
       keySn:this.form.value.keySn,
@@ -141,9 +144,11 @@ export class KeyPage {
          this.toast.msg('修改成功!');
          setTimeout(()=>{
            this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
-         },500)
+         },500);
+        this.isDisabled = false;
       }else{
         this.toast.error('修改失败！');
+        this.isDisabled = false;
       }
     });
   }

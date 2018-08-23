@@ -306,7 +306,7 @@ export class AddhousePage {
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);
     this.form.controls['estateId'].setValue(Value.id);
-    this.form.controls['tradingAreaId'].setValue(JSON.parse(Value['meta'])['trading_id'] );
+    this.form.controls['tradingAreaId'].setValue(Value['meta']['trading_id']);
 
   }
 

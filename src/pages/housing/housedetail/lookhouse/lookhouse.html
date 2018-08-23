@@ -75,7 +75,7 @@
       <div>
         <div class="p15"    *ngIf="showBtn "  >
           <!--<button ion-button full color="danger"  class="radius" (click)="update()" *ngIf="!edit">确认修改</button>-->
-          <button ion-button full color="danger"      class="radius" (click)="update()"  >上传图片</button>
+          <button ion-button full color="danger"     [disabled]="isDisabled"   class="radius" (click)="update()"  >上传图片</button>
         </div>
       </div>
     </form>

@@ -107,6 +107,8 @@ export class LetteratorneyPage {
     ],
   };
 
+  isDisabled = false;
+
   //上传业主委托书
   go(){
 
@@ -115,8 +117,7 @@ export class LetteratorneyPage {
     }else {
        var endTime= new Date(this.form.value.delegateEndTm).getTime();
     }
-
-
+   this.isDisabled = true;
    this.propertyProvider.attorney({
       delegateStyle:this.form.value.delegateStyle,
       propertyId:this.propertyid,
@@ -131,9 +132,11 @@ export class LetteratorneyPage {
         this.toast.msg('上传成功!');
         setTimeout(()=>{
           this.navCtrl.pop();
-        },500)
+        },500);
+        this.isDisabled = false;
       }else{
         this.toast.error('上传失败！');
+        this.isDisabled = false;
       }
       // alert('上传成功！')
       // this.navCtrl.pop()
@@ -197,6 +200,7 @@ export class LetteratorneyPage {
       this.toast.msg('请检查是否填写完整!');
       return  false;
     }
+    this.isDisabled = true;
    this.propertyProvider.aupdate({
       delegateDocId:this.delegateDocId,
       delegateStyle:parseFloat(this.form.value.delegateStyle) ,
@@ -214,8 +218,10 @@ export class LetteratorneyPage {
         setTimeout(()=>{
           this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
         });
+        this.isDisabled = false;
       }else{
         this.toast.error('修改失败！');
+        this.isDisabled = false;
       }
     });
   }
