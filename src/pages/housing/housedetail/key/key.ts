@@ -101,7 +101,6 @@ export class KeyPage {
         setTimeout(()=>{
            this.navCtrl.pop();
         },500)
-        this.isDisabled = false;
       }else{
         this.toast.error('上传失败！');
         this.isDisabled = false;
@@ -145,7 +144,6 @@ export class KeyPage {
          setTimeout(()=>{
            this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
          },500);
-        this.isDisabled = false;
       }else{
         this.toast.error('修改失败！');
         this.isDisabled = false;

@@ -17,7 +17,7 @@
 </ion-header>
 
 
-<ion-content  *ngIf="houseData" id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'updateScroll':houseData&&!houseData.closePropertyShow}">
+<ion-content   id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'updateScroll':houseData&&!houseData.closePropertyShow}">
   <!--<div class="pops"></div>-->
   <!--propertyPics-->
   <ion-slides #mySlider  style=""  autoplay="3000" pager="true" loop="true" paginationType="fraction">
@@ -25,7 +25,7 @@
       <img src="assets/imgs/banner.png" width="100%" height="400">
     </ion-slide>
     <!--assets/imgs/default.jpg-->
-    <ng-container *ngIf="imgJson">
+    <ng-container *ngIf="imgJson&&houseData&&houseData?.picsAuditStatus==1">
       <ion-slide  *ngFor="let item of  imgList(imgJson) ;let i = index"  pager="true">
         <img [src]="imgHeader+item.imagePath+smImgSign" [imgGallery]="{data:imgJson,index:i}" width="100%" >
       </ion-slide>
@@ -34,9 +34,9 @@
   <!--<div class="bannerPop"></div>-->
   <div class="wrap bgWhite">
     <h4 >
-      {{houseData.estateName}}
-      {{houseData.bedrooms}}室
-      {{houseData.halls}}厅
+      {{houseData?.estateName}}
+      {{houseData?.bedrooms}}室
+      {{houseData?.halls}}厅
     </h4>
     <ion-grid>
       <ion-row>
@@ -85,10 +85,10 @@
       <ion-grid class="p0">
         <ion-row>
           <ion-col col-7>
-            <span class="defaults">房源编号:</span> <span>{{houseData.convIdReq}}</span>
+            <span class="defaults">房源编号:</span> <span>{{houseData?.convIdReq}}</span>
           </ion-col>
           <ion-col col-5>
-            <span class="defaults"> 楼层：</span>{{houseData.floorNo}}
+            <span class="defaults"> 楼层：</span>{{houseData?.floorNo}}
           </ion-col>
         </ion-row>
         <ion-row>
@@ -143,14 +143,14 @@
       </ion-grid>
       <!--更多(业主信息,小区信息)-->
       <div class="p10" *ngIf="!houseData?.unitPriceAudit">
-        <button  ion-button color="danger" full (click)="goMore()" class="clearMore">更多信息</button>
+        <button  ion-button color="danger" full [disabled]="!houseData"   (click)="goMore()" class="clearMore">更多信息</button>
       </div>
       <ion-row  *ngIf="houseData?.unitPriceAudit">
         <ion-col col-6 [hidden]=true>
           <button ion-button class="priAudit" full (click)="goAudit()">价格审核</button>
         </ion-col>
         <ion-col col-12>
-          <button ion-button color="danger" full (click)="goMore()" class="clearMore">更多信息</button>
+          <button ion-button color="danger" full  [disabled]="!houseData" (click)="goMore()" class="clearMore">更多信息</button>
         </ion-col>
       </ion-row>
     </div>
@@ -161,11 +161,11 @@
     <!--[innerHtml]="houseData?.propertyDescApp"-->
     <div *ngIf="houseData?.propertyDesc.length<70" class="descCSS" [innerHtml]="descForAPP(houseData?.propertyDescApp)" >
     </div>
-    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData.propertyDesc.length>70"  [innerHtml]="descForAPP(houseData?.propertyDescApp)">
+    <div (click)="describes()" tappable class="descCSS" [ngClass]="{clamp:houseData?.propertyDesc.length>70}" *ngIf="houseData?.propertyDesc.length>70"  [innerHtml]="descForAPP(houseData?.propertyDescApp)">
     </div>
   </div>
   <!--&&letteratorneyData?.delegateDocPics[0].auditStatus==1-->
-  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow">
+  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow&&houseData.delegateAuditStatus==1">
     <ion-row>
       <ion-col col-8>
         <div class="m5">业主委托书</div>
@@ -180,7 +180,7 @@
     </ion-row>
   </div>
   <!--&&keyData.keyDlgtFilePics[0].auditStatus==1-->
-  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow">
+  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow&&houseData.keyAuditStatus==1">
     <ion-row>
       <ion-col col-8>
         <div class="m5">钥匙</div>

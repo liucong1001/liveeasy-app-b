@@ -19,6 +19,7 @@ import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
 import {AuditPage} from "./audit/audit";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {NativeProvider} from "../../../providers/native/native";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -62,8 +63,11 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                              public app: App
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                public app: App,private  nativeProvider:NativeProvider,
               ) {
+    console.log('info页面');
+    console.log('网络状态',this.nativeProvider.isConnecting());
+
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
     this.localCode = this.localStorageProvider.get('codeData');
     this.modals=navParams.get('modals');
@@ -108,11 +112,12 @@ export class HousinfoPage {
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
-
   }
   imgSign:any;
   smImgSign:any;
   ionViewDidLoad() {
+
+
 
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
@@ -138,6 +143,9 @@ export class HousinfoPage {
       this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
       loading.dismiss();
       // console.log('房源标签', this.tagPipe(this.houseData.tagsStr));
+    }).catch(err=>{
+      loading.dismiss();
+      this.toast.error('查询失败');
     });
 
 
@@ -308,13 +316,13 @@ export class HousinfoPage {
 
   //均价处理
   unitPrice(data){
-    var perPrice;
-    if(data.propertyPriceUnit==1){
+    var perPrice ;
+    if(data&&data.propertyPriceUnit&&data.propertyPriceUnit==1){
       perPrice = data.propertyPrice*10000/data.spaceSize;
-    }else if(data.propertyPriceUnit==2){
+    }else if(data&&data.propertyPriceUnit&&data.propertyPriceUnit==2){
       perPrice = data.propertyPrice/data.spaceSize;
     }
-    return perPrice.toFixed(2);
+    return perPrice&&perPrice.toFixed(2);
   }
 
   //楼层等级处理

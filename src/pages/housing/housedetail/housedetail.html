@@ -94,7 +94,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="propertyPrice">
+          <ion-input type="text" pattern="[0-9]*"  [disabled]="data?.unitPriceAudit" formControlName="propertyPrice">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
