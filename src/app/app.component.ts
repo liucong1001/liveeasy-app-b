@@ -16,6 +16,8 @@ import {LoginPage} from "../pages/login/login";
 import { JPush } from 'ionic3-jpush';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
+import {NativeProvider} from "../providers/native/native";
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -44,6 +46,7 @@ export class MyApp {
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jPush: JPush,private appVersion: AppVersion,private http: HTTP,
+              private  nativeProvider:NativeProvider,
 
   ) {
 
@@ -56,6 +59,7 @@ export class MyApp {
 
 
     platform.ready().then(() => {
+      this.assertNetwork(); // 检测网络
       //标签
       this.tagsList=this.localStorageProvider.get('tagsList');
       // Okay, so the platform is ready and our plugins are available.
@@ -90,32 +94,6 @@ export class MyApp {
   go(item){
     this.selected = item;
   }
-  isActive(item) {
-    // return this.selected == item;
-  };
-  //更多
-  //其他
-  qtJSON = [
-    {name:'只看我的房源',val:0},
-    {name:'待处理关闭申请房源',val:1},
-    {name:'待审核实勘房源',val:2},
-    {name:'待确认钥匙房源',val:3},
-  ];
-  //朝向
-  cxJSON = [
-    {name:'全部',val:0},
-    {name:'东',val:1},
-    {name:'南',val:2},
-    {name:'西',val:3},
-    {name:'北',val:4},
-    {name:'南北',val:5},
-    {name:'双南',val:6},
-    {name:'东西',val:7},
-    {name:'东南',val:8},
-    {name:'西南',val:9},
-    {name:'东北',val:10},
-    {name:'西北',val:11},
-  ];
 
   setKeyBorder() {
     this.keybord.hideKeyboardAccessoryBar(false);
@@ -190,6 +168,17 @@ export class MyApp {
       }).present();
       this.backButtonPressed = true;
       setTimeout(() => this.backButtonPressed = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
+    }
+  }
+
+  // 检测网络
+  assertNetwork() {
+    if (!this.nativeProvider.isConnecting()) {
+      this.toastCtrl.create({
+        message: '未检测到网络,请连接网络',
+        showCloseButton: true,
+        closeButtonText: '确定'
+      }).present();
     }
   }
 

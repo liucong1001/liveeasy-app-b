@@ -49,6 +49,8 @@ import {ToastComponent} from "../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { Network } from '@ionic-native/network';
+
 //启动加速
 
 import { StartupPageModule } from './../pages/startup/startup.module';
@@ -71,6 +73,7 @@ import { PermissionProvider } from '../providers/permission/permission';
 import {BaiduMapModule } from "angular2-baidu-map";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import { JPush } from 'ionic3-jpush';
+import { NativeProvider } from '../providers/native/native';
 
 @NgModule({
   declarations: [
@@ -148,7 +151,8 @@ import { JPush } from 'ionic3-jpush';
       },
       PermissionProvider,
       AndroidPermissions,
-      JPush,
+      JPush,Network,
+    NativeProvider
     ]
 })
 export class AppModule {}

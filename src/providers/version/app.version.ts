@@ -81,8 +81,6 @@ export class VersionProvider {
               }
             }
 
-
-
           })
         }
     );
