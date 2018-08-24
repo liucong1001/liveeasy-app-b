@@ -48,8 +48,11 @@ export class PassengerlookPage {
     this.events.subscribe('bevents', (params) => {
       console.log('接收数据为: ', params);
       this.events.unsubscribe('bevents');
-      this.coveId=params.convIdReq;
-      this.estateName=params.estateName;
+      if(params){
+        this.coveId=params.convIdReq;
+        this.estateName=params.estateName;
+      }
+
       // console.log(this.coveId)
     });
     this.openWin(SearchPage);

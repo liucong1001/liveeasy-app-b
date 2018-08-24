@@ -83,7 +83,6 @@ export class MypassengerPage {
       this.area = this.localStorageProvider.get('area');
       this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
     }
-
   }
   @ViewChild('myTabs') tabRef: Tabs;
 
@@ -173,29 +172,30 @@ export class MypassengerPage {
   }
 
 
-  tagList() {
-    //获取客源标签
-    // this.date=(new Date()).getTime();
+  tagList(item){
+    //列表标签
     var start=new Date();
+    start.setHours(0);
+    start.setMinutes(0);
+    start.setSeconds(0);
+    start.setMilliseconds(0);
     var todayzero=start.getTime();
-    // for(var i in this.pageData){
-    //   if(this.pageData[i].createTime && this.pageData[i].lastFollowTm &&
-    //     this.pageData[i].lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
-    //     this.pageDat a[i].createTime<=todayzero-1000-(1000*60*60*24*3)){
-    //     this.pageData[i].followLabel=1;
-    //   }
-    //
-    //   // if(this.pageData[i].custFollowupInfoEntity&&this.pageData[i].custFollowupInfoEntity.appointmentTm){
-    //   //   // console.log('--customerName', i,this.pageData[i]['customerName'], new Date(this.pageData[i].appointmentTm),  new Date(todayzero-1000-(1000*60*60*24*3)).toLocaleDateString() );
-    //   //   if(this.pageData[i].custFollowupInfoEntity.appointmentTm && this.pageData[i].custFollowupInfoEntity.appointmentTm>=todayzero-1000-(1000*60*60*24*3) && this.pageData[i].custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
-    //   //     if (this.pageData[i].custFollowupInfoEntity.followStatus == 1) {
-    //   //       this.pageData[i].lookLable = 1;
-    //   //     }
-    //   //   }
-    //   // }
-    // }
-    // console.log('转换',this.pageData);
+      if(item.createTime && item.lastFollowTm && item.lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
+        item.createTime<=todayzero-1000-(1000*60*60*24*3)){
+        item.followLabel=1;
+        return 'followLabel';
+      }
+      if(item.custFollowupInfoEntity&&item.custFollowupInfoEntity.appointmentTm){
+        // console.log('-customerName', i,new Date(this.pageData[i].appointmentTm),  new Date(this.todayzero).toLocaleDateString() );
+        if(item.custFollowupInfoEntity.appointmentTm && item.custFollowupInfoEntity.appointmentTm>=todayzero && item.custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
+          if (item.custFollowupInfoEntity.followStatus == 1) {
+            item.lookLable = 1;
+            return 'lookLable';
+          }
+        }
+      }
   }
+
   /**
    * 列表搜索
    */
@@ -210,7 +210,6 @@ export class MypassengerPage {
     console.log('搜索',this.params);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
-      this.tagList();
       this.totalPages = res.data.totalPages;
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
@@ -227,7 +226,6 @@ export class MypassengerPage {
       this.pop = false;
       // this.housingEstate = false;
       //户型搜索条件字显示
-      // this.tagList();
     });
 
 
@@ -260,7 +258,6 @@ export class MypassengerPage {
     this.houseType = false;
     this.more = false;
     this.pop = false;
-    this.tagList();
     // this.housingEstate = false;
     //户型搜索条件字显示
     if(this.sx ==1){
@@ -338,7 +335,7 @@ export class MypassengerPage {
 
       infiniteScroll.complete();
       this.currentPage++;
-      console.log('当前页数',this.currentPage);
+      // console.log('当前页数',this.currentPage);
       if(this.pageResult&&this.pageResult.length<10){
         //toast提示
         this.all = true;
@@ -350,13 +347,12 @@ export class MypassengerPage {
           this.pageResult =res.data&&res.data.result;
           for(let i=0;i<res.data.result.length;i++){
             this.pageData.push(res.data.result[i]);
-            this.tagList();
           }
         });
       }
-      console.log('Async operation has ended');
+      // console.log('Async operation has ended');
       infiniteScroll.complete(function () {
-        console.log('数据请求完成');
+        // console.log('数据请求完成');
       });
 
   }
@@ -370,7 +366,6 @@ export class MypassengerPage {
   haveData=false;
   newCount:any;
   doRefresh(refresher) {
-    this.tagList();
     console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
