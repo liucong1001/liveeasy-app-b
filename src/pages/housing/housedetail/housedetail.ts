@@ -164,7 +164,7 @@ export class HousedetailPage {
           floorNo: this.data.floorNo,
           houseNo: this.data.houseNo,
           spaceSize: this.data.spaceSize,
-          innerSpaceSize: this.data.innerSpaceSize,
+          innerSpaceSize: parseFloat(this.data.innerSpaceSize)==0?'':this.data.innerSpaceSize,
           propertyPrice: this.data.propertyPrice,
           bedrooms: this.data.bedrooms,
           halls: this.data.halls,
@@ -238,8 +238,8 @@ export class HousedetailPage {
     // floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
     floorNo:['',[Validators.required]],//楼层
     houseNo:['',Validators.required],//房间号
-    spaceSize:['',Validators.required],//建筑面积
-    innerSpaceSize:['',Validators.required],//套内面积
+    spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^[0-9]\d*\,\d*|[0-9]\d*$/)]],//建筑面积
+    innerSpaceSize:['',Validators.pattern(/^[0-9]\d*\,\d*|[0-9]\d*$/)],//套内面积
     propertyPrice:['',Validators.required],//价格
     bedrooms:['1'],//室
     halls:['1'],
@@ -317,10 +317,10 @@ export class HousedetailPage {
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
     spaceSize:[
-      new ErrorMessage('pattern','请填写数字'),
+      new ErrorMessage('pattern','请填写大于0整数'),
     ],
     innerSpaceSize:[
-      new ErrorMessage('pattern','请填写数字'),
+      new ErrorMessage('pattern','请填写大于0整数'),
     ],
     propertyPrice:[
       new ErrorMessage('pattern','请填写数字'),
@@ -339,14 +339,15 @@ export class HousedetailPage {
   sizeCheck=false;
   sizes(){
     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
-
-      if(parseInt(this.form.value.spaceSize) < parseInt(this.form.value.innerSpaceSize)){
+      if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)){
         // console.log('室内面积不能大于建筑面积');
         this.sizeCheck = true;
       }else {
         this.sizeCheck = false;
       }
       // console.log('建筑面积',this.form.value.spaceSize,'室内面积',this.form.value.innerSpaceSize,);
+    }else {
+      this.sizeCheck = false;
     }
   }
 

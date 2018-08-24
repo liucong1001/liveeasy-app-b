@@ -67,11 +67,12 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
+          <ion-input type="text" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <div class="valid-error" *ngIf="form.value.spaceSize==0&&form.value.spaceSize!=''">*不能为0</div>
       <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
       <div *ngIf="form.value.spaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
@@ -79,16 +80,17 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="innerSpaceSize" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
+          <ion-input type="text" formControlName="innerSpaceSize" (ionChange)="sizes()" [disabled]="data?.unitPriceAudit">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <div class="valid-error" *ngIf="form.value.innerSpaceSize==0&&form.value.innerSpaceSize!=''">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
       </div>
-      <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
+      <div *ngIf="sizeCheck" style="color: red;padding: 5px">*套内面积不能大于建筑面积!</div>
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格<i class="text-danger">*</i></ion-label>

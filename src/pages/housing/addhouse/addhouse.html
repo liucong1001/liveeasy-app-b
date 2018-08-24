@@ -59,7 +59,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text"  formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
@@ -71,12 +71,10 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>套内面积</ion-label>
-          <ion-input type="text" pattern="^[1-9]\d*\,\d*|[1-9]\d*$" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
-
         <span class="hdRightInfo">平</span>
-
       </div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>

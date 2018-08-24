@@ -84,7 +84,7 @@ export class DeclinfoPage {
   typeJSON=[
     {name:'居间服务费',val:1},
     {name:'按揭服务费',val:2},
-    {name:'代办服务费',val:2},
+    {name:'代办服务费',val:3},
   ]
   statpipe(val){
     for(var i in this.typeJSON){

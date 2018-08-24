@@ -115,8 +115,8 @@ export class AddhousePage {
       unitNo:['',Validators.required],//单元号
       floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
-      spaceSize:['',[Validators.required,Validators.maxLength(10)]],//建筑面积
-      innerSpaceSize:['',],//套内面积
+      spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)]],//建筑面积
+      innerSpaceSize:['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//套内面积
       propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
@@ -215,10 +215,10 @@ export class AddhousePage {
         new ErrorMessage('required','是否配备电梯必须要填写！'),
       ],
       spaceSize:[
-        new ErrorMessage('pattern','请填写数字'),
+        new ErrorMessage('pattern','请填写大于0整数,'),
       ],
       innerSpaceSize:[
-        new ErrorMessage('pattern','请填写数字'),
+        new ErrorMessage('pattern','请填写大于0整数'),
       ],
       propertyPrice:[
         new ErrorMessage('pattern','请填写数字'),
