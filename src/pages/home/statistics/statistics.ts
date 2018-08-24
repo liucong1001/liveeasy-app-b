@@ -169,7 +169,7 @@ export class StatisticsPage {
                 // console.log('3007',sorted[j][h]);
                 this.tableJSON[7].result+=sorted[all][aa].stateValue;
               }
-              if(sorted[all][aa].statItem == 4021){
+              if(sorted[all][aa].statItem == 4026){
                 // console.log('3007',sorted[j][h]);
                 this.tableJSON[8].result+=sorted[all][aa].stateValue;
               }
@@ -314,8 +314,8 @@ export class StatisticsPage {
           // console.log('3007',sorted[j][h]);
           this.tableJSON[7].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 4021){
-          // console.log('3007',sorted[j][h]);
+        if(sorted[all][aa].statItem == 4026){
+          console.log('4026',sorted[all][aa]);
           this.tableJSON[8].result+=sorted[all][aa].stateValue;
         }
         if(sorted[all][aa].statItem == 4022){
@@ -651,7 +651,7 @@ export class StatisticsPage {
           // console.log('3007',sorted[j][h]);
           this.tableJSON[7].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 4021){
+        if(this.allPersonal[i].statItem == 4026){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[8].result+=this.allPersonal[i].stateValue;
         }
@@ -727,8 +727,7 @@ export class StatisticsPage {
               // console.log('3007',sorted[j][h]);
               this.tableJSON[7].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 4021){
-              // console.log('3007',sorted[j][h]);
+            if(perInfo[j][h].statItem == 4026){
               this.tableJSON[8].result+=perInfo[j][h].stateValue;
             }
             if(perInfo[j][h].statItem == 4022){
