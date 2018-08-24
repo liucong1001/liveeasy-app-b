@@ -19,7 +19,7 @@ import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
 import {AuditPage} from "./audit/audit";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
-import {NativeProvider} from "../../../providers/native/native";
+// import {NativeProvider} from "../../../providers/native/native";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -63,10 +63,8 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                public app: App,private  nativeProvider:NativeProvider,
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                public app: App,
               ) {
-    console.log('info页面');
-    console.log('网络状态',this.nativeProvider.isConnecting());
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
     this.localCode = this.localStorageProvider.get('codeData');
