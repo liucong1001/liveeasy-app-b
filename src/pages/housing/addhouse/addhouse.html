@@ -16,14 +16,23 @@
       </button>
     </ion-list>
     <ion-list>
-      <div class="hdRightInfo">
-        <ion-item class="pl12">
-          <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" formControlName="buildingNo" onkeydown="if(event.keyCode==32) return false"  placeholder="请填写英文或数字">
-          </ion-input>
-        </ion-item>
-        <span class="">栋</span>
+      <div class="bgWhite">
+        <div class="hdRightInfo">
+          <label>栋号<i class="text-danger">*</i></label>
+          <input type="text" formControlName="buildingNo" onkeydown="if(event.keyCode==32) return false"  placeholder="请填写英文或数字" class="upinput"/>
+          <button ion-button outline item-end>栋</button>
+        </div>
       </div>
+
+
+      <!--<div class="hdRightInfo">-->
+        <!--<ion-item class="pl12">-->
+          <!--<ion-label>栋号<i class="text-danger">*</i></ion-label>-->
+          <!--<ion-input type="text" formControlName="buildingNo" onkeydown="if(event.keyCode==32) return false"  placeholder="请填写英文或数字">-->
+          <!--</ion-input>-->
+        <!--</ion-item>-->
+        <!--<span class="">栋</span>-->
+      <!--</div>-->
       <div *ngIf="form.value.buildingNo&&form.value.buildingNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
