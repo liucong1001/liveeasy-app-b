@@ -58,8 +58,6 @@ export class AddhousePage {
   @ViewChild('selectFourty') selectFourty: Select;
   @ViewChild('selectSixty') selectSixty: Select;
   @ViewChild('selectFivety') selectFivety: Select;
-
-
   constructor(public navCtrl: NavController, public navParams: NavParams,private keyboard: Keyboard,
               public actionSheetCtrl: ActionSheetController,
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
@@ -77,8 +75,6 @@ export class AddhousePage {
      var title = {title:data};
      return title;
   }
-
-
   closeSelect(){
     this.selectOne.close();
     this.selectTwo.close();
@@ -111,12 +107,12 @@ export class AddhousePage {
       estate:[''],//楼盘
       estateName:['',[Validators.required]],
       estateId:[''],
-      buildingNo:['',[Validators.required]], //楼栋号
-      unitNo:['',Validators.required],//单元号
+      buildingNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]], //楼栋号
+      unitNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]],//单元号
       floorNo:['',[Validators.required]],//楼层
       houseNo:['',Validators.required],//房间号
-      spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)]],//建筑面积
-      innerSpaceSize:['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//套内面积
+      spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
+      innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
       propertyPrice:['',Validators.required],//价格
       bedrooms:['1'],//室
       halls:['1'],
@@ -172,7 +168,7 @@ export class AddhousePage {
         ],
         unitNo:[
             new ErrorMessage('required','单元号必须要填写！'),
-            new ErrorMessage('pattern','请填写数字'),
+            new ErrorMessage('pattern','请填写英文或数字'),
         ],
         floorNo:[
             new ErrorMessage('required','楼层必须要填写！'),
@@ -215,10 +211,10 @@ export class AddhousePage {
         new ErrorMessage('required','是否配备电梯必须要填写！'),
       ],
       spaceSize:[
-        new ErrorMessage('pattern','请填写大于0整数,'),
+        new ErrorMessage('pattern','请填写大于0整数,不能输入空格等特殊符号'),
       ],
       innerSpaceSize:[
-        new ErrorMessage('pattern','请填写大于0整数'),
+        new ErrorMessage('pattern','请填写大于0整数,不能输入空格等特殊符号'),
       ],
       propertyPrice:[
         new ErrorMessage('pattern','请填写数字'),
@@ -251,6 +247,8 @@ export class AddhousePage {
    * 验证面积
    */
   sizeCheck=false;
+  // reg=false;
+  // innerReg=false;
   sizes(){
       if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
       if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)){
@@ -260,7 +258,6 @@ export class AddhousePage {
         this.sizeCheck = false;
       }
     }
-
   }
 
 

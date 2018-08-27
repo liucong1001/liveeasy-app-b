@@ -234,13 +234,13 @@ export class HousedetailPage {
     estate:[''],//楼盘
     estateName:[''],
     estateId:[''],
-    buildingNo:['',Validators.required], //楼栋号
-    unitNo:['',Validators.required],//单元号
+    buildingNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]], //楼栋号
+    unitNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]],//单元号
     // floorNo:['',[Validators.required,Validators.maxLength(5)]],//楼层
-    floorNo:['',[Validators.required]],//楼层
-    houseNo:['',Validators.required],//房间号
-    spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^[0-9]\d*\,\d*|[0-9]\d*$/)]],//建筑面积
-    innerSpaceSize:['',Validators.pattern(/^[0-9]\d*\,\d*|[0-9]\d*$/)],//套内面积
+    floorNo:['',[Validators.required,Validators.pattern(/^[1-9]+$/)]],//楼层
+    houseNo:['',[Validators.required,Validators.pattern(/^[1-9]+$/)]],//房间号
+    spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
+    innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
     propertyPrice:['',Validators.required],//价格
     bedrooms:['1'],//室
     halls:['1'],
@@ -291,7 +291,7 @@ export class HousedetailPage {
     ],
     unitNo:[
       new ErrorMessage('required','单元号必须要填写！'),
-      new ErrorMessage('pattern', '请填写数字'),
+      new ErrorMessage('pattern', '请填写英文或数字'),
     ],
     floorNo:[
       new ErrorMessage('required','楼层必须要填写！'),

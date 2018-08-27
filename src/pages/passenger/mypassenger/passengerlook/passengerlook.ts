@@ -69,7 +69,7 @@ export class PassengerlookPage {
         if(res.success){
           this.toast.msg('约看成功!');
           setTimeout(()=>{
-            this.openWin(MypassengerPage)
+            this.navCtrl.pop();
           },500)
         }else if (res.msg.indexOf('您已约看') !=-1){
           this.toast.showLongToast('您已约看该客户，请先关闭约看');

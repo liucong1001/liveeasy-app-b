@@ -19,7 +19,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[A-Za-z0-9]+$" formControlName="buildingNo"  placeholder="请填写英文或数字">
+          <ion-input type="text" formControlName="buildingNo"  placeholder="请填写英文或数字">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">栋</span>
@@ -27,7 +27,7 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" pattern="[0-9]*" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
+        <ion-input type="text" formControlName="unitNo" placeholder="请填写您的单元(请填写数字)"></ion-input>
       </ion-item>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo">
@@ -59,11 +59,12 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text"  formControlName="spaceSize" placeholder="请填写数字" (ionChange)="sizes()">
+          <ion-input type="text"  formControlName="spaceSize"  placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <div *ngIf="form.value.spaceSize&&form.value.spaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
       <div *ngIf="form.value.spaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
@@ -76,8 +77,9 @@
         </ion-item>
         <span class="hdRightInfo">平</span>
       </div>
+      <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
-      <div *ngIf="sizeCheck" style="color: red;padding: 5px">*室内面积不能大于建筑面积!</div>
+      <div *ngIf="sizeCheck" class="valid-error">*室内面积不能大于建筑面积!</div>
       <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
       </div>
@@ -371,7 +373,7 @@
     </ion-list>
     <ion-grid>
       <ion-row>
-        <button ion-button full color="danger" [disabled]="form.invalid || errBtnHttp" type="button" (click)="save()" class="radius update">提交</button>
+        <button ion-button full color="danger" [disabled]="form.invalid || errBtnHttp || sizeCheck" type="button" (click)="save()" class="radius update">提交</button>
       </ion-row>
     </ion-grid>
   </form>

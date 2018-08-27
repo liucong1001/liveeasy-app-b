@@ -347,7 +347,7 @@ export class AddpassengerPage {
     this.customerProvider.add(this.form.value).then(res=>{
       if (res.success){
         this.toast.msg('录入成功!');
-        this.navCtrl.push(MypassengerPage);
+        this.navCtrl.pop();
       }else {
         this.toast.error(res.msg);
       }

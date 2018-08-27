@@ -35,21 +35,21 @@
       <div class="hdRightInfo1" [hidden]="!data?.shareShow">
         <ion-item class="pl12">
           <ion-label>栋号<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[A-Za-z0-9]+$" placeholder="请填写英文或数字" class="tr" formControlName="buildingNo"></ion-input>
+          <ion-input type="text" placeholder="请填写英文或数字" class="tr" formControlName="buildingNo"></ion-input>
         </ion-item>
       </div>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"  ></valid-error>
       <div class="hdRightInfo1" [hidden]="!data?.shareShow">
         <ion-item class="pl12">
           <ion-label>单元<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" class="tr" formControlName="unitNo"></ion-input>
+          <ion-input type="text" class="tr" formControlName="unitNo"></ion-input>
         </ion-item>
       </div>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
       <div class="hdRightInfo" [hidden]="!data?.shareShow">
         <ion-item class="pl12">
           <ion-label>楼层<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*" formControlName="floorNo" placeholder="请填写数字"
+          <ion-input type="text" formControlName="floorNo" placeholder="请填写数字"
                      [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>

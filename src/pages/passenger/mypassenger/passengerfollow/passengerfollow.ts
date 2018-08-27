@@ -68,7 +68,7 @@ export class PassengerfollowPage {
       console.log(res);
       if(res.success){
         this.toast.msg('跟进成功!');
-        this.openWin(MypassengerPage)
+        this.navCtrl.pop();
       }else{
         this.toast.error('跟进失败！');
       }
