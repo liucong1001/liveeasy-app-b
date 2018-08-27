@@ -164,7 +164,9 @@ export class HousedetailPage {
           floorNo: this.data.floorNo,
           houseNo: this.data.houseNo,
           spaceSize: this.data.spaceSize,
-          innerSpaceSize: parseFloat(this.data.innerSpaceSize)==0?'':this.data.innerSpaceSize,
+          innerSpaceSize: this.data.innerSpaceSize,
+          // innerSpaceSize: parseFloat(this.data.innerSpaceSize)==0?'':this.data.innerSpaceSize,
+
           propertyPrice: this.data.propertyPrice,
           bedrooms: this.data.bedrooms,
           halls: this.data.halls,
@@ -224,7 +226,6 @@ export class HousedetailPage {
       }
     });
     this.propertyid =  this.navParams.data.propertyId;
-    var propertyId= this.localStorageProvider.get('propertyIdDetail)');
   }
 
   // tradingAreaId

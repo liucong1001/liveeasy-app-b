@@ -46,8 +46,7 @@ export class NativeProvider {
    * 判断是否有网络
    */
   isConnecting(): any {
-    // return this.getNetworkType() != 'none';
-    return this.getNetworkType() ;
+    return this.getNetworkType() != 'none';
   }
 
 

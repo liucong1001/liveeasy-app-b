@@ -17,6 +17,12 @@ import { JPush } from 'ionic3-jpush';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
 import {NativeProvider} from "../providers/native/native";
+import {Network} from "@ionic-native/network";
+
+import { HomePage } from '../pages/home/home';
+import { CenterPage } from '../pages/center/center';
+import { PassengerPage } from '../pages/passenger/passenger';
+import { HousingPage } from '../pages/housing/housing';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,6 +42,8 @@ export class MyApp {
   versionInfo:any;
   aLinKDownload:string;
   aLinKDownloadVersion:string;
+  // 全局变量
+  checkPage;
   constructor(
     public platform: Platform, splashScreen: SplashScreen,public statusBar: StatusBar,
               private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
@@ -46,7 +54,7 @@ export class MyApp {
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jPush: JPush,private appVersion: AppVersion,private http: HTTP,
-              private  nativeProvider:NativeProvider,
+              private  nativeProvider:NativeProvider,private network: Network
 
   ) {
 
@@ -57,9 +65,8 @@ export class MyApp {
     this.statusBar.overlaysWebView(true);
     this.headerColor.tint('#1ab394');
 
-
     platform.ready().then(() => {
-      this.assertNetwork(); // 检测网络
+      this.listenConnection();// 检测网络
       //标签
       this.tagsList=this.localStorageProvider.get('tagsList');
       // Okay, so the platform is ready and our plugins are available.
@@ -104,6 +111,17 @@ export class MyApp {
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
+      this.goBackLogic();
+      console.log('监听右键Boolean值：' + this.checkPage)
+      if (this.checkPage) {
+        //如果是根目则按照需求1处理
+        // this.exitApp()
+      } else {
+        //非根目录返回上一级页面
+        this.app.goBack()
+      }
+
+
       if(!this.localStorageProvider.get('ticket')){
         this.showExit();
         return;
@@ -172,16 +190,31 @@ export class MyApp {
   }
 
   // 检测网络
-  assertNetwork() {
-    if (!this.nativeProvider.isConnecting()) {
-      this.toastCtrl.create({
-        message: '未检测到网络,请连接网络',
-        showCloseButton: true,
-        closeButtonText: '确定'
-      }).present();
-    }
+  private listenConnection(): void {
+    this.network.onDisconnect()
+      .subscribe(() => {
+        this.toastCtrl.create({
+          message: '未检测到网络,请连接网络',
+          showCloseButton: true,
+          closeButtonText: '确定',
+        }).present();
+      });
   }
 
 
+// 判断当前页面
+  goBackLogic() {
+    var currentCmp = this.app.getActiveNav().getActive().component
+    var isPage1= currentCmp === HomePage;
+    var isPage2= currentCmp === HousingPage;
+    var isPage3= currentCmp === PassengerPage;
+    var isPage4= currentCmp === CenterPage;
+
+    if (isPage1 || isPage2||isPage3||isPage4) {
+      this.checkPage = true
+    } else {
+      this.checkPage = false
+    }
+  }
 
 }

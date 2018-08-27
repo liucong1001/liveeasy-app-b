@@ -40,7 +40,7 @@ export class PropertyProvider {
   private  priceAuditPass = this.configProvider.set().http+'/property/propertyAuditInfo/claimAudit.do';
 
   //接口开关
-  public isOnline = false;
+  public isOnline = true;
   /**
    * https://c.liveeasy.tech 接口
    * @type {string}

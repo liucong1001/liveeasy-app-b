@@ -115,7 +115,7 @@ export class HousingPage {
               private renderer:Renderer
   ) {
     this.localCode = this.localStorageProvider.get('codeData');
-
+    console.log('初始化上一个',this.navCtrl.last()&&this.navCtrl.last().name);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
        this.comFromHomeSearch = true;
        this.addIcon=false;
@@ -467,17 +467,17 @@ export class HousingPage {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
       item:item,
-    })
+    });
     slidingItem.close();
 
   }
 
+  //从首页楼盘搜索 - 禁止进入房源详情页
   goHouseDetail(item) {
-    this.localStorageProvider.set('propertyIdDetail',item.propertyId);
-    // this.openWin(HousinfoPage, {
-    //   propertyId:item.propertyId,
-    // });
-    this.navCtrl.push(HousinfoPage,{item:item,propertyId:item.propertyId,notReloadPage:true})
+  if(!this.addIcon){
+      return
+    }
+    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
   }
 
   addHouse() {
