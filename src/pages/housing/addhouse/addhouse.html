@@ -215,48 +215,47 @@
         <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'buzz_type' | reversePipe:'val'">{{x.name}}</ion-option>
       </ion-select>
     </ion-item>
-    <!--默认出售-->
-    <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
-      <div class="hdRightInfo">
-        <ion-item class="pl12">
-          <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字">
-          </ion-input>
-        </ion-item>
-        <span>万</span>
+    <ion-list>
+      <!--默认出售-->
+      <div class="bgWhite" *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
+        <div class="hdRightInfo ">
+            <label>出售价格<i class="text-danger">*</i></label>
+            <input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字"/>
+            <button ion-button outline item-end>万</button>
+        </div>
       </div>
-    </div>
-    <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
-    <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
-    <!--END-->
-    <!--出租-->
-    <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
-      <div class="hdRightInfo">
-        <ion-item class="pl12">
-          <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="text"  onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字">
-          </ion-input>
-        </ion-item>
-        <span class="">元/月</span>
+      <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
+      <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
+      <!--END-->
+      <!--出租-->
+      <div *ngIf="this.form.value.buzzType == 2 || this.form.value.buzzType == 3">
+        <div class="hdRightInfo">
+          <ion-item class="pl12">
+            <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
+            <ion-input type="text"  onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字">
+            </ion-input>
+          </ion-item>
+          <span class="">元/月</span>
+        </div>
       </div>
-    </div>
-    <!--END-->
-    <!--租售-->
-    <!--END-->
-    <ion-item class="pl12">
-      <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
-      <ion-select #selectEle okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectTitle('建筑类型')">
-        <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'building_type'">{{x.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <valid-error [errors]="errors.buildingType"  [control]="form.get('buildingType')"  ></valid-error>
-    <ion-item class="pl12">
-      <ion-label>配备电梯<i class="text-danger">*</i></ion-label>
-      <ion-select #selectTwith okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('配备电梯')">
-        <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue:'has_elevator' ">{{x.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+      <!--END-->
+      <!--租售-->
+      <!--END-->
+      <ion-item class="pl12">
+        <ion-label>建筑类型<i class="text-danger">*</i></ion-label>
+        <ion-select #selectEle okText="确定"   [placeholder]="'请选择'"  formControlName="buildingType" cancelText="关闭" [selectOptions]="selectTitle('建筑类型')">
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue : 'building_type'">{{x.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <valid-error [errors]="errors.buildingType"  [control]="form.get('buildingType')"  ></valid-error>
+      <ion-item class="pl12">
+        <ion-label>配备电梯<i class="text-danger">*</i></ion-label>
+        <ion-select #selectTwith okText="确定"  formControlName="hasElevator"  [placeholder]="'请选择'" cancelText="关闭" [selectOptions]="selectTitle('配备电梯')">
+          <ion-option value="{{x.val}}" *ngFor="let x of localCode | arryCodeValue:'has_elevator' ">{{x.name}}</ion-option>
+        </ion-select>
+      </ion-item>
 
+    </ion-list>
     <ion-list (click)="clickIntention()" style="margin-top: 10px">
       <button ion-item class="pl12" *ngIf="right">
         <font>更多</font>
