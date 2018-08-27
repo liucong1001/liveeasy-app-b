@@ -241,7 +241,7 @@ export class HousedetailPage {
     houseNo:['',[Validators.required,Validators.pattern(/^[1-9]+$/)]],//房间号
     spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
     innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
-    propertyPrice:['',Validators.required],//价格
+    propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^[1-9]+$/)]],//价格
     bedrooms:['1'],//室
     halls:['1'],
     bathrooms:['1'],
@@ -258,7 +258,7 @@ export class HousedetailPage {
         desc:[''],
       })
     ]),//业主信息
-    contact:['',Validators.required],
+    contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],
     contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
     contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
     contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
@@ -296,13 +296,14 @@ export class HousedetailPage {
     floorNo:[
       new ErrorMessage('required','楼层必须要填写！'),
       // new ErrorMessage('maxLength','楼层名称太长了'),
-      new ErrorMessage('pattern', '请填写数字'),
+      new ErrorMessage('pattern', '请填写大于0整数'),
     ],
     houseNo:[
-      new ErrorMessage('pattern', '请填写数字'),
+      new ErrorMessage('pattern', '请填写大于0整数'),
     ],
     contact:[
       new ErrorMessage('required','业主姓名必须要填写！'),
+      new ErrorMessage('pattern','请填写中文或英文'),
     ],
     sex:[
       new ErrorMessage('required','业主性别必须要填写！'),

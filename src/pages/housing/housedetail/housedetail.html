@@ -94,7 +94,7 @@
       <div class="hdRightInfo">
         <ion-item class="pl12">
           <ion-label>价格<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="[0-9]*"  [disabled]="data?.unitPriceAudit" formControlName="propertyPrice">
+          <ion-input type="text" [disabled]="data?.unitPriceAudit" formControlName="propertyPrice">
           </ion-input>
         </ion-item>
         <span class="hdRightInfo">万</span>
@@ -198,19 +198,19 @@
       <valid-error [errors]="errors.sex"  [control]="form.get('sex')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1" [hidden]="!data?.shareShow">
         <ion-label>业主电话1<i class="text-danger">*</i></ion-label>
-        <ion-input type="tel" pattern="[0-9]*"  placeholder="请填写业主电话"  formControlName="contactInfo">
+        <ion-input type="tel" placeholder="请填写业主电话"  formControlName="contactInfo">
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo"  [control]="form.get('contactInfo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1" [hidden]="!data?.shareShow">
         <ion-label>业主电话2</ion-label>
-        <ion-input type="tel" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo2" >
+        <ion-input type="tel" placeholder="可选填" formControlName="contactInfo2" >
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo2"  [control]="form.get('contactInfo2')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1" [hidden]="!data?.shareShow">
         <ion-label>业主电话3</ion-label>
-        <ion-input type="tel" pattern="[0-9]*" placeholder="可选填" formControlName="contactInfo3" >
+        <ion-input type="tel" placeholder="可选填" formControlName="contactInfo3" >
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.contactInfo3"  [control]="form.get('contactInfo3')"  ></valid-error>
@@ -229,7 +229,7 @@
         <div class="hdRightInfo">
           <ion-item class="pl12">
             <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-            <ion-input type="text"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
+            <ion-input type="text"  formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
             </ion-input>
           </ion-item>
           <span class="hdRightInfo">万</span>
@@ -243,7 +243,7 @@
         <div class="hdRightInfo">
           <ion-item class="pl12">
             <ion-label>租赁价格<i class="text-danger">*</i></ion-label>
-            <ion-input type="text"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">
+            <ion-input type="text" formControlName="propertyPrice" placeholder="请填写数字">
             </ion-input>
           </ion-item>
           <span class="hdRightInfo">元/月</span>

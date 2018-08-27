@@ -107,13 +107,13 @@ export class AddhousePage {
       estate:[''],//楼盘
       estateName:['',[Validators.required]],
       estateId:[''],
-      buildingNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]], //楼栋号
-      unitNo:['',[Validators.required,Validators.pattern(/^[A-Za-z1-9]+$/)]],//单元号
-      floorNo:['',[Validators.required]],//楼层
-      houseNo:['',Validators.required],//房间号
+      buildingNo:['',[Validators.required,Validators.pattern(/^[A-Za-z0-9]+$/)]], //楼栋号
+      unitNo:['',[Validators.required,Validators.pattern(/^[A-Za-z0-9]+$/)]],//单元号
+      floorNo:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//楼层
+      houseNo:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//房间号
       spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
       innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
-      propertyPrice:['',Validators.required],//价格
+      propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//价格
       bedrooms:['1'],//室
       halls:['1'],
       bathrooms:['1'],
@@ -130,7 +130,7 @@ export class AddhousePage {
           desc:[''],
         })
       ]),//业主信息
-     contact:['',Validators.required],
+     contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],
      contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
      contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
     contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
@@ -148,8 +148,8 @@ export class AddhousePage {
     propertyType:['1'],//房源类型
     propertyDesc:[''],//房源描述
     //楼号比例
-    elevators:[''],//梯
-    apartments:[''],//户,
+    elevators:['',[Validators.pattern(/^[0-9]+$/)]],//梯
+    apartments:['',[Validators.pattern(/^[0-9]+$/)]],//户,
     tradingAreaId:[''],//商圈id
     businessTime:[],//挂牌时间
   });
@@ -217,7 +217,7 @@ export class AddhousePage {
         new ErrorMessage('pattern','请填写大于0整数,不能输入空格等特殊符号'),
       ],
       propertyPrice:[
-        new ErrorMessage('pattern','请填写数字'),
+        new ErrorMessage('pattern','请填写大于0整数'),
       ],
     };
 

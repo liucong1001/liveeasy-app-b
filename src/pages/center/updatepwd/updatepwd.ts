@@ -43,7 +43,7 @@ export class UpdatepwdPage {
                 this.localStorageProvider.del('ticket');
                 this.toast.msg('修改密码成功');
                 setTimeout(()=>{
-                  this.navCtrl.push(LoginPage)
+                  this.navCtrl.pop();
                 },1000);
 
               }else {
