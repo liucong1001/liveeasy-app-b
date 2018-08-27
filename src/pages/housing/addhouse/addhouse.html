@@ -22,7 +22,7 @@
           <ion-input type="text" formControlName="buildingNo" onkeydown="if(event.keyCode==32) return false"  placeholder="请填写英文或数字">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">栋</span>
+        <span class="">栋</span>
       </div>
       <div *ngIf="form.value.buildingNo&&form.value.buildingNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
@@ -38,7 +38,7 @@
           <ion-input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">层</span>
+        <span class="">层</span>
       </div>
       <div *ngIf="form.value.floorNo&&form.value.floorNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
@@ -66,7 +66,7 @@
           <ion-input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="spaceSize"  placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">平</span>
+        <span class="">平</span>
       </div>
       <div *ngIf="form.value.spaceSize&&form.value.spaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
@@ -79,7 +79,7 @@
           <ion-input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">平</span>
+        <span class="">平</span>
       </div>
       <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
@@ -93,7 +93,7 @@
       <!--<ion-input type="number"  pattern="[0-9]*" formControlName="propertyPrice" placeholder="请填写数字">-->
       <!--</ion-input>-->
       <!--</ion-item>-->
-      <!--<span class="hdRightInfo">万</span>-->
+      <!--<span class="">万</span>-->
       <!--</div>-->
       <ion-list (click)="clickHx()">
         <button ion-item class="pl12" *ngIf="HxRight">
@@ -223,7 +223,7 @@
           <ion-input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">万</span>
+        <span>万</span>
       </div>
     </div>
     <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
@@ -237,7 +237,7 @@
           <ion-input type="text"  onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" placeholder="请填写数字">
           </ion-input>
         </ion-item>
-        <span class="hdRightInfo">元/月</span>
+        <span class="">元/月</span>
       </div>
     </div>
     <!--END-->
