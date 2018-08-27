@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar, Select} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar, Select, Content} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
@@ -69,8 +69,15 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
     this.localCode = this.localStorageProvider.get('codeData');
+    this.scrollTo();
   }
 
+  @ViewChild(Content) content: Content;
+  scrollTo() {
+    window.addEventListener('native.keyboardshow', (e: any) => {
+      this.content.scrollTo(0, e.keyboardHeight);
+    });
+  }
   selectTitle(data){
      var title = {title:data};
      return title;

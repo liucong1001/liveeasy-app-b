@@ -90,8 +90,14 @@ export class HousedetailPage {
     this.localCode = this.localStorageProvider.get('codeData');
     //获取房源标签
     this.houLabel=this.localStorageProvider.get('tagsList');
+    this.scrollTo();
   }
-
+  @ViewChild(Content) content: Content;
+  scrollTo() {
+    window.addEventListener('native.keyboardshow', (e: any) => {
+      this.content.scrollTo(0, e.keyboardHeight);
+    });
+  }
 
 
   ionViewWillLeave(){
