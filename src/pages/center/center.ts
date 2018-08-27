@@ -87,7 +87,7 @@ export class CenterPage {
       // console.log('最新版本',versionInfo);
       if (data && data.status && data.status == 200 && data.data) {
         // let result = data.data || {};
-         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey=9db9597481973c878648387bf30eaca0&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
+         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.configProvider.setKey().appKeyData.appKey+"&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
         // if (typeof result == "string") {
         //   result = eval("("+ result +")");
         // } buildVersion

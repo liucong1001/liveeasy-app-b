@@ -181,9 +181,7 @@ export class LookhousePage {
 
   //进入页面后执行
   ionViewDidEnter(){
-    this.navBar.backButtonClick = () => {
-      this.openWin(HousedetailPage,{propertyId:this.data.propertyId});
-    };
+
   }
 
   save(){
@@ -276,7 +274,7 @@ export class LookhousePage {
         console.log('成功返回的数据',res);
         this.toast.msg('上传成功!');
         setTimeout(()=>{
-          this.navCtrl.push('HousedetailPage',{propertyId:this.data.propertyId});
+          this.navCtrl.pop();
         });
 
       }else {
@@ -329,16 +327,5 @@ export class LookhousePage {
       .catch();
     this.navCtrl.pop({animate:false});
   }
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 }

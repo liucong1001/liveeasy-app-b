@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import {AlertController, IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
+import {AlertController, Events, IonicPage, Navbar, NavController, NavParams, Slides} from 'ionic-angular';
 import { CloseprivateguestPage } from '../../../mypassenger/closeprivateguest/closeprivateguest';
 import { AddpassengerPage } from '../../../mypassenger/addpassenger/addpassenger';
 import {ToastComponent} from "../../../../../components/toast/toast";
@@ -10,6 +10,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {PublicpassengerPage} from "../../../publicpassenger/publicpassenger";
 import {PublicpdetailPage} from "../../../publicpassenger/publicpdetail/publicpdetail";
+import {SearchhousePage} from "../../../../housing/housedetail/searchhouse/searchhouse";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -35,25 +36,29 @@ export class PlookrecordPage {
   ss=false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
-              public toast:ToastComponent,private alertCtrl: AlertController) {
+              public toast:ToastComponent,private alertCtrl: AlertController, public events: Events) {
     this.customerid=navParams.get('id').customerId;
-    console.log(this.customerid);
-    this.params = {customerId:this.customerid}
-      this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
-        console.log(res.data.result);
-        this.lRecord=res.data.result;
-        for(var i in this.lRecord){
-          if(this.lRecord[i].followStatus==1){
-            this.statusOne.push(this.lRecord[i])
-          }else if(this.lRecord[i].followStatus==2){
-            this.statusTwo.push(this.lRecord[i])
-          }if(this.lRecord[i].followStatus==3){
-            this.statusThree.push(this.lRecord[i])
-          }
-        }
-        console.log(this.statusOne,this.statusTwo)
-      });
+    this.getRecords(this.customerid);
   }
+
+  getRecords(customerid){
+    this.params = {customerId:customerid};
+    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
+      console.log(res.data.result);
+      this.lRecord=res.data.result;
+      for(var i in this.lRecord){
+        if(this.lRecord[i].followStatus==1){
+          this.statusOne.push(this.lRecord[i])
+        }else if(this.lRecord[i].followStatus==2){
+          this.statusTwo.push(this.lRecord[i])
+        }if(this.lRecord[i].followStatus==3){
+          this.statusThree.push(this.lRecord[i])
+        }
+      }
+    });
+  }
+
+
 
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -61,11 +66,6 @@ export class PlookrecordPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlookrecordPage');
-    // this.navBar.backButtonClick =this.navBar.backButtonClick ;
-    this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
-    };
 
   }
   //添加active
@@ -112,7 +112,7 @@ export class PlookrecordPage {
                 if(res.success){
                   this.toast.msg('完成成功');
                   setTimeout(()=>{
-                    this.openWin(PassengerdetailPage,{customerId:this.customerid})
+                    this.navCtrl.pop();
                   },200);
                 }else {
                   this.toast.error('完成失败')
@@ -126,10 +126,13 @@ export class PlookrecordPage {
     }
 
   close(item){
-    this.openWin(ClosePage,{
-      item:item,
-      customerId:this.customerid
-    })
+    this.events.subscribe('bevents', (params) => {
+       console.log('接收数据为: ', params);
+       this.getRecords(params);
+      // 取消订阅
+      this.events.unsubscribe('bevents');
+    });
+     this.navCtrl.push(ClosePage,{ item:item,customerId:this.customerid})
   }
   addHouse(){
     this.openWin(AddpassengerPage)

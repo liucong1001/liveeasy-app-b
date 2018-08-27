@@ -66,9 +66,6 @@ export class KeyPage {
   }
 //进入页面后执行
   ionViewDidEnter(){
-    this.navBar.backButtonClick = () => {
-      this.openWin(HousedetailPage,{propertyId:this.propertyid});
-    };
   }
 
   form:FormGroup =this.fb.group({
@@ -142,7 +139,7 @@ export class KeyPage {
       if(res.success){
          this.toast.msg('修改成功!');
          setTimeout(()=>{
-           this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+           this.navCtrl.pop();
          },500);
       }else{
         this.toast.error('修改失败！');

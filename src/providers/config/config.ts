@@ -8,18 +8,19 @@ import {LocalStorageProvider} from "../local-storage/local-storage";
 @Injectable()
 export class ConfigProvider {
 
-  onLine = true; //打包线上开关
+  onLine = false; //打包线上开关
+  isProd = false;//是否是生产环境
   globalConfig:any;
+  appKeyData:any;
   imgHeaderServer:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
-
 
   }
 
   set(){
     if(this.localStorageProvider.get('loginInfo')){
       this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
-        this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
+      this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
     }
 
     if(this.onLine){
@@ -27,9 +28,9 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://erp.zdfc.com/api/v1/',//erp客源
-        cHttp:'https://q.zdfc.com/', //祥哥专属查询接口
-        cmsHttp:'https://cms.zdfc.com/',
+        http:'https://beta-erp.zdfc.com/api/v1/',
+        cHttp:'https://beta-c.zdfc.com/',
+        cmsHttp:'https://beta-cms.zdfc.com/',
         img:this.imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
         imgSign:'?x-oss-process=style/b-detail',
@@ -50,6 +51,20 @@ export class ConfigProvider {
       }
     }
      return this.globalConfig;
+  }
+
+  setKey(){
+      if(this.isProd){
+          this.appKeyData = {
+            appKey:'e862e663383d107fbbec515cd5064ec5'
+          }
+      }else {
+          this.appKeyData = {
+            appKey:'9db9597481973c878648387bf30eaca0'
+          }
+      }
+      return  this.appKeyData;
+
   }
 
 }

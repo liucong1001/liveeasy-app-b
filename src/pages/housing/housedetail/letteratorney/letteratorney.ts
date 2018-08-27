@@ -74,13 +74,9 @@ export class LetteratorneyPage {
 
   //进入页面后执行
   ionViewDidEnter(){
-    this.navBar.backButtonClick = () => {
-      this.openWin(HousedetailPage,{propertyId:this.propertyid});
-    };
+
   }
   ionViewDidLoad() {
-    // this.navBar.backButtonClick = this.backButtonClick;
-    console.log('ionViewDidLoad LetteratorneyPage');
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
   }
@@ -216,7 +212,7 @@ export class LetteratorneyPage {
       if(res.success){
         this.toast.msg('修改成功!');
         setTimeout(()=>{
-          this.navCtrl.push(HousedetailPage,{propertyId:this.propertyid});
+          this.navCtrl.pop();
         });
         this.isDisabled = false;
       }else{

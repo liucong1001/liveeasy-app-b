@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB} from 'ionic-angular';
+import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB, NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {VersionProvider} from "../providers/version/app.version";
@@ -112,16 +112,6 @@ export class MyApp {
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
       this.goBackLogic();
-      console.log('监听右键Boolean值：' + this.checkPage)
-      if (this.checkPage) {
-        //如果是根目则按照需求1处理
-        // this.exitApp()
-      } else {
-        //非根目录返回上一级页面
-        this.app.goBack()
-      }
-
-
       if(!this.localStorageProvider.get('ticket')){
         this.showExit();
         return;
@@ -161,6 +151,8 @@ export class MyApp {
             .then()
             .catch()
           activeNav.pop({animate:false, duration: 0});
+          // activeNav.popToRoot({animate:false, duration: 0});
+
         } else {
           this.showExit()
 

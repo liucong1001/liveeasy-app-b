@@ -1,5 +1,5 @@
 import {Component, ViewChild, Renderer} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams,Searchbar} from 'ionic-angular';
+import {Events, IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
 import {CustomerProvider} from "../../../../../../providers/customer/customer";
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {ToastComponent} from "../../../../../../components/toast/toast";
@@ -26,7 +26,7 @@ export class ClosePage {
   @ViewChild('searchBar') searchBar:Searchbar;
   constructor(public navCtrl: NavController,private renderer:Renderer,
               public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar,
-              private fb:FormBuilder, public navParams: NavParams,public customerProvider:CustomerProvider,) {
+              private fb:FormBuilder, public navParams: NavParams,public customerProvider:CustomerProvider, public events: Events) {
     this.customerid=navParams.get('customerId');
     console.log(this.customerid);
     this.followupId=navParams.get('item').followupId;
@@ -53,7 +53,13 @@ export class ClosePage {
       if(res.success){
         this.toast.msg('关闭成功');
         setTimeout(()=>{
-          this.openWin(PassengerdetailPage,{customerId:this.customerid});
+
+
+          this.navCtrl.pop().then(() => {
+            // 发布 bevents事件
+            this.events.publish('bevents', this.customerid);
+          });
+
         },200);
       }else {
         this.toast.error('关闭失败')
