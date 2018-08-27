@@ -69,7 +69,7 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
     this.localCode = this.localStorageProvider.get('codeData');
-    this.scrollTo();
+    // this.scrollTo();
   }
 
   @ViewChild(Content) content: Content;
@@ -120,7 +120,7 @@ export class AddhousePage {
       houseNo:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//房间号
       spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
       innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
-      propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//价格
+      propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//价格
       bedrooms:['1'],//室
       halls:['1'],
       bathrooms:['1'],

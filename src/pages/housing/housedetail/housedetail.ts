@@ -90,7 +90,7 @@ export class HousedetailPage {
     this.localCode = this.localStorageProvider.get('codeData');
     //获取房源标签
     this.houLabel=this.localStorageProvider.get('tagsList');
-    this.scrollTo();
+    // this.scrollTo();
   }
   @ViewChild(Content) content: Content;
   scrollTo() {
@@ -247,7 +247,7 @@ export class HousedetailPage {
     houseNo:['',[Validators.required,Validators.pattern(/^[0-9]+$/)]],//房间号
     spaceSize:['',[Validators.required,Validators.maxLength(10),Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//建筑面积
     innerSpaceSize:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//套内面积
-    propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^[0-9]+$/)]],//价格
+    propertyPrice:['',[Validators.required,Validators.required,Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)]],//价格
     bedrooms:['1'],//室
     halls:['1'],
     bathrooms:['1'],
@@ -283,8 +283,8 @@ export class HousedetailPage {
     propertyType:['1'],//房源类型
     propertyDesc:[''],//房源描述
     //楼号比例
-    elevators:[''],//梯
-    apartments:[''],//户
+    elevators:['',[Validators.pattern(/^[0-9]+$/)]],//梯
+    apartments:['',[Validators.pattern(/^[0-9]+$/)]],//户
     // tradingAreaId:[''],//商圈id
     businessTime:[],//挂牌时间
   });
