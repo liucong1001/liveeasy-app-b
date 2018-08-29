@@ -87,18 +87,19 @@ export class StatisticsPage {
     }
     //获得上周的结束日期
     function getLastWeekEndDate() {
-      var weekEndDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek - 0);
+      var weekEndDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek - 1);
       return weekEndDate;
     }
     //显示周一
     var lastMon=(getLastWeekStartDate()).getMonth()+1;
-    var lastMDd=(getLastWeekStartDate()).getDate();
+    var lastMDd=(getLastWeekStartDate()).getDate()-1;
     //显示周日
+
     var lastWm=(getLastWeekEndDate()).getMonth()+1;
     var lastWd=(getLastWeekEndDate()).getDate();
     this.lastMonday=year + ""+this.Appendzero(lastMon) + this.Appendzero(lastMDd);
     this.lastweekend=year + ""+this.Appendzero(lastWm) + this.Appendzero(lastWd);
-
+    console.log(this.lastMonday,this.lastweekend,lastMDd,lastWd);
     //本月
     //显示月初
     //显示月初
@@ -108,10 +109,12 @@ export class StatisticsPage {
     var lastMonEnd=((new Date(date.getFullYear(), date.getMonth()+1, 0))).getMonth()+1;
     var lastDdEnd=((new Date(date.getFullYear(), date.getMonth()+1, 0))).getDate();
     this.firstDay=year + ""+this.Appendzero(firstMon) + this.Appendzero(firstMDd);
-    this.lastDay=year + ""+this.Appendzero(lastMonEnd) + this.Appendzero(lastDdEnd);
+    var distance=lastDdEnd-nowDay+1;
+    this.lastDay=year + ""+this.Appendzero(lastMonEnd) + this.Appendzero(lastDdEnd-distance);
 
-    // console.log(this.firstDay,this.lastDay)
-    // console.log(this.yesterday,this.beforeDay,this.firstWeek,this.lastWeek)
+
+
+    // console.log(this.firstDay,this.lastDay,lastMonEnd,lastDdEnd-distance);
 
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
