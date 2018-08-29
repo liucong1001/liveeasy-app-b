@@ -10,10 +10,10 @@
       <ion-list>
         <ion-item class="pl12 hdRightInfo1">
           <ion-label>客户姓名<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" pattern="^[\u4e00-\u9fa5_a-zA-Z]+$" placeholder="请输入" formControlName="customerName">
+          <ion-input type="text" placeholder="请输入" formControlName="customerName">
           </ion-input>
         </ion-item>
-        <!--<valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"></valid-error>-->
+        <valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"></valid-error>
         <ion-item class="pl12">
           <ion-label>客户性别<i class="text-danger">*</i></ion-label>
           <ion-select #selectOne okText="确定" cancelText="关闭" [placeholder]="'请选择'" formControlName="customerGender" [selectOptions]="selectTitle('客户性别')">

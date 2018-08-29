@@ -64,11 +64,11 @@
                   <div class="ellipsis tips">
                     <font size="3">{{item.customerName}}</font>
                     <!--急-->
-                    <a [ngClass]="{followLabel:tagList(item) =='followLabel'}">
+                    <a [ngClass]="{followLabel:tagList(item) =='followLabel'}" *ngIf="tagList(item) =='followLabel'">
                       {{tagList(item) =='followLabel'?'急':''}}
                     </a>
                     <!--约-->
-                    <a [ngClass]="{lookLable:tagList(item) =='lookLable'}">{{tagList(item) =='lookLable'?'约':''}}</a>
+                    <a [ngClass]="{lookLable:tagList(item) =='lookLable'}" *ngIf="tagList(item) =='lookLable'">{{tagList(item) =='lookLable'?'约':''}}</a>
                     <!--<a>锁 isLock</a>-->
                     <a *ngIf="item['isLock']" [ngClass]="{lock:item['isLock']==1}">{{item['isLock']==1?'锁':''}}</a>
                   </div>
