@@ -72,6 +72,7 @@ export class LetteratorneyPage {
 
   }
 
+
   //进入页面后执行
   ionViewDidEnter(){
 
