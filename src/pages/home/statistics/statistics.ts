@@ -361,7 +361,7 @@ export class StatisticsPage {
     loading.present();
     this.getClear();
     if(this.form.value.startTime=='' || this.form.value.endTime==''){
-      this.toast.error('请选择时间，');
+      this.toast.error('请选择时间');
       loading.dismiss();
     }else if(this.form.value.startTime!=''&&this.form.value.endTime!=''){
       if(this.form.value.startTime > this.form.value.endTime){
