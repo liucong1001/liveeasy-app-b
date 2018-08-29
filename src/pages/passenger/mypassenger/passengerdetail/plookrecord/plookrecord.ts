@@ -11,6 +11,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {PublicpassengerPage} from "../../../publicpassenger/publicpassenger";
 import {PublicpdetailPage} from "../../../publicpassenger/publicpdetail/publicpdetail";
 import {SearchhousePage} from "../../../../housing/housedetail/searchhouse/searchhouse";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 /**
  * Generated class for the PlookrecordPage page.
@@ -44,17 +45,7 @@ export class PlookrecordPage {
   getRecords(customerid){
     this.params = {customerId:customerid};
     this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
-      console.log(res.data.result);
       this.lRecord=res.data.result;
-      for(var i in this.lRecord){
-        if(this.lRecord[i].followStatus==1){
-          this.statusOne.push(this.lRecord[i])
-        }else if(this.lRecord[i].followStatus==2){
-          this.statusTwo.push(this.lRecord[i])
-        }if(this.lRecord[i].followStatus==3){
-          this.statusThree.push(this.lRecord[i])
-        }
-      }
     });
   }
 
@@ -114,6 +105,7 @@ export class PlookrecordPage {
                   setTimeout(()=>{
                     this.navCtrl.pop();
                   },200);
+
                 }else {
                   this.toast.error('完成失败')
                 }

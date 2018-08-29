@@ -117,19 +117,19 @@ export class AddpassengerPage {
 
 
   form:FormGroup =this.fb.group({
-    customerName:['',Validators.required],//客户名称
+    customerName:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],//客户名称
     customerGender :['1',Validators.required],//客户性别
-    customerPhone:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],//客户电话
+    customerPhone:['',[Validators.required, Validators.pattern(/^0?(13[0-9-]+|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],//客户电话
     customerSrc:['',Validators.required], //客户来源
     agentId:['',Validators.required],//归属人id
      customerGrade:['',],//客户等级
      intentionDiviCode :[''],//意向区域
     intentionTradeCode :[''],//意向商圈
     intentionEstate :[''],//意向楼盘
-     minSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最小面积
+     minSpaceSize:['',Validators.pattern(/^[0-9]+$/)],//最小面积
      maxSpaceSize:['',Validators.pattern(/^[0-9]*$/)],//最大面积
-     minPrice :['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最低价格
-     maxPrice:['',Validators.pattern(/^[1-9]\d*\,\d*|[1-9]\d*$/)],//最高价格
+     minPrice :['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//最低价格
+     maxPrice:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//最高价格
      minFloor:['',Validators.pattern(/^[0-9]*$/)],//最低楼层
      maxFloor:['',Validators.pattern(/^[0-9]*$/)],//最高楼层
      minBedroom:['',Validators.pattern(/^[0-9]*$/)],//最少居室
@@ -194,6 +194,12 @@ export class AddpassengerPage {
 
   };
 
+
+  tels(){
+    // if(/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.form.value.customerPhone)){
+    //   alert('正确');
+    // }
+  }
   //验证面积
   areaCheck=false;
   priceCheck=false;
