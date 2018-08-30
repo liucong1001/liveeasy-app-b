@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController, Loading, LoadingController, Platform, ToastController } from 'ionic-angular';
+import {AlertController, Loading, LoadingController, NavController, Platform, ToastController} from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /*
    手机原生服务层
 */
 @Injectable()
 export class NativeProvider {
 
-  constructor(public http: HttpClient,private platform: Platform,  private network: Network,) {
-    console.log('Hello NativeProvider Provider');
+  constructor(public http: HttpClient,private platform: Platform,
+              public nativePageTransitions: NativePageTransitions,
+              private network: Network,) {
   }
+
+
 
   /**
    * 是否真机环境

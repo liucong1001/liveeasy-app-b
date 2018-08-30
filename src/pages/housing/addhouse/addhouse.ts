@@ -73,11 +73,11 @@ export class AddhousePage {
   }
 
   @ViewChild(Content) content: Content;
-  scrollTo() {
+/*  scrollTo() {
     window.addEventListener('native.keyboardshow', (e: any) => {
       this.content.scrollTo(0, e.keyboardHeight);
     });
-  }
+  }*/
   selectTitle(data){
      var title = {title:data};
      return title;

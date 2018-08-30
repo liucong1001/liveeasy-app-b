@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {LocalStorageProvider} from "../local-storage/local-storage";
-
+import { ENV } from '@app/env'
 /*
  基本配置服务
 */
@@ -13,31 +13,34 @@ export class ConfigProvider {
   globalConfig:any;
   appKeyData:any;
   imgHeaderServer:any;
+  ENV:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
-
+   this.onLine = ENV.isProd;
   }
 
   set(){
+    this.onLine = ENV.isProd;
+
     if(this.localStorageProvider.get('loginInfo')){
       this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
       this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
     }
 
     if(this.onLine){
-      /*线上*/
+      /*正式包*/
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://beta-erp.zdfc.com/api/v1/',
-        cHttp:'https://beta-c.zdfc.com/',
-        cmsHttp:'https://beta-cms.zdfc.com/',
+        http:'https://erp.zdfc.com/api/v1/',
+        cHttp:'https://q.zdfc.com/',
+        cmsHttp:'https://cms.zdfc.com/',
         img:this.imgHeaderServer,
         errorImg:'assets/imgs/http502.png',
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
       }
     }else {
-      /*线下*/
+      /*线下，测试包*/
       this.globalConfig = {
         url:'',
         oss:'',
@@ -64,7 +67,6 @@ export class ConfigProvider {
           }
       }
       return  this.appKeyData;
-
   }
 
 }

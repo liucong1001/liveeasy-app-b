@@ -15,6 +15,8 @@ import {ConfigProvider} from "../../providers/config/config";
 import {Platform } from 'ionic-angular';
 import {ToastComponent} from "../../components/toast/toast";
 import {LoginPage} from "../login/login";
+import { ENV } from '@app/env'
+import {Environment} from "../../environments/environment.model";
 /**
  * Generated class for the CenterPage page.
  *
@@ -41,6 +43,7 @@ export class CenterPage {
   showNewVersion = false;
   ios = false;
   android = false;
+  ENY:Environment;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar, private appUpdate: VersionProvider,private http: HTTP,
@@ -48,7 +51,7 @@ export class CenterPage {
               public toast:ToastComponent,
 
   ) {
-
+    this.ENY = ENV;
     this.name = this.localStorageProvider.get('loginInfo').user.name;
     this.gh=this.localStorageProvider.get('loginInfo').user.no;
     this.positionCateName =this.localStorageProvider.get('loginInfo').user.positionCateName;
@@ -74,7 +77,6 @@ export class CenterPage {
     var params={
       _api_key:'14eca046de7309cd5125d4e3bdb1afd1',
       page:'1',
-      // APPKEY:'42d16b350c365b3dd38f471fd5c102bb',
     };
     this.http.post(this.versionJsonUrl,params,{
       "content-type":"application/json"
@@ -87,13 +89,8 @@ export class CenterPage {
       // console.log('最新版本',versionInfo);
       if (data && data.status && data.status == 200 && data.data) {
         // let result = data.data || {};
-         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.configProvider.setKey().appKeyData.appKey+"&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
-        // if (typeof result == "string") {
-        //   result = eval("("+ result +")");
-        // } buildVersion
-        // let versionInfo = data.data.list[0].buildVersionNo;
-        // console.log('最新版本',versionInfo);
-        // versionInfo.url = 'https://www.pgyer.com/apiv2/app/install?appKey='+versionInfo.appKey+'&_api_key='+params._api_key;
+         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.ENY.appKey+"&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
+
 
         this.aLinKDownload = versionInfo.url;
         this.aLinKDownloadVersion = versionInfo.buildVersion;   //从网上获取最新版本号

@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {ConfigProvider} from "../config/config";
 import {ToastComponent} from "../../components/toast/toast";
+
+
 /*
  登录相关接口服务
 */
@@ -11,13 +13,8 @@ import {ToastComponent} from "../../components/toast/toast";
 export class LoginProvider {
   private  path = this.configProvider.set().http+'/login';
   constructor(public http: HttpClient,private configProvider:ConfigProvider, public toast:ToastComponent) {
-    console.log('Hello LoginProvider Provider');
+
   }
-  // public  login(username,password):Promise<any>{
-  //    return this.http.post(this.path+'?username='+username+'&password='+password,null).toPromise().then(res=>{
-  //       return  res  as any;
-  //    })
-  // }
 
   public  login(username,password):Promise<any>{
     return this.http.post(this.path+'?username='+username+'&password='+password,null).timeout(8000).toPromise().then(res=>{

@@ -59,7 +59,7 @@ export class PublicpassengerPage {
     if(!this.localStorageProvider.get('area')){
       //行政区划
       this.propertyProvider.getDivision().then(res=>{
-        this.area = res.data.result[0];
+        this.area = res.data.result;
         this.localStorageProvider.set('area',this.area);
         this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
       });

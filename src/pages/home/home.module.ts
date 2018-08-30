@@ -11,11 +11,13 @@ import {HomesearchPage} from "./homesearch/homesearch";
 import {HomesearchPageModule} from "./homesearch/homesearch.module";
 import {StatisticsPageModule} from "./statistics/statistics.module";
 import { JPush } from 'ionic3-jpush';
+import {DirectivesModule} from "../../directives/directives.module";
 @NgModule({
   declarations: [
     HomePage
   ],
   imports: [
+    DirectivesModule,
     IonicPageModule.forChild(HomePage),
     MsgdetailPageModule,
     DeclarationPageModule,

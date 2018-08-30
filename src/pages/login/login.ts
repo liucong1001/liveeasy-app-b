@@ -31,9 +31,6 @@ export class LoginPage {
               public toast:ToastComponent,public backButtonProvider:BackButtonProvider,private statusBar: StatusBar,
               private app: App, private configProvider:ConfigProvider) {
 
-    // this.platform.ready().then(() => {
-    //   this.backButtonProvider.registerBackButtonAction(null);
-    // });
   }
 
   ionViewWillEnter() {

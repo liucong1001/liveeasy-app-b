@@ -20,6 +20,7 @@ import { Device } from '@ionic-native/device';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
 import {VersionProvider} from "../../providers/version/app.version";
+import { ENV } from '@app/env'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -46,13 +47,15 @@ export class HomePage {
   versionInfo:any;
   aLinKDownload:string;
   aLinKDownloadVersion:string;
+  model:any;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
               public jPush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
              ) {
-
+    console.log('环境测试',ENV);
+    this.model = ENV.mode;
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
     this.propertyProvider.getCode().then(res=>{
@@ -96,12 +99,12 @@ export class HomePage {
     this.renderer.setElementAttribute(input, 'disabled', 'true');
   }
 
-  addhouse(){
+/*  addhouse(){
     this.openWin(AddhousePage)
   }
   addpassenger(){
     this.openWin(AddpassengerPage)
-  }
+  }*/
   msgDetail(){
     this.notificationNews&&this.openWin(MsgdetailPage);
   }
@@ -129,8 +132,8 @@ export class HomePage {
   openWin(goPage, param = {}) {
     let options: NativeTransitionOptions = {
       direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
+      // duration: 100,
+      // slowdownfactor: -1,
       iosdelay: 50
     };
 

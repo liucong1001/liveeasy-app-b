@@ -9,7 +9,9 @@
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
-        "ionic:serve": "ionic-app-scripts serve"
+        "ionic:serve": "set IONIC_ENV=dev&&ionic-app-scripts serve",
+        "ionic:build:prod": " set IONIC_ENV=prod && ionic-app-scripts build",
+        "ionic:serve:beta": " set MY_ENV=beta && ionic-app-scripts serve"
     },
     "dependencies": {
         "@angular/animations": "5.2.10",
@@ -86,7 +88,7 @@
         "zone.js": "0.8.26"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "^3.1.11",
+        "@ionic/app-scripts": "3.2.0",
         "typescript": "~2.6.2"
     },
     "description": "An Ionic project",
@@ -122,5 +124,8 @@
             "android",
             "ios"
         ]
+    },
+    "config": {
+        "ionic_webpack": "./config/webpack.config.js"
     }
 }

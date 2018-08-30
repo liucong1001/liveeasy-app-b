@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="tech.liveeasy.apps.agent" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>房贝</name>
-    <content original-src="index.html" src="http://192.168.1.146:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -46,6 +46,7 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
         <preference name="CodePushDeploymentKey" value="CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260" />
         <preference name="loadUrlTimeoutValue" value="60000" />
+        <hook src="config/hooks/before_prepare.js" type="before_prepare" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -117,6 +118,8 @@
     <allow-navigation href="http://192.168.0.125:8101" />
     <allow-navigation href="http://192.168.0.103:8100" />
     <allow-navigation href="http://192.168.56.1:8100" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <allow-navigation href="http://192.168.1.148:8100" />
     <engine name="android" spec="6.4.0" />
     <engine name="ios" spec="4.4.0" />
 </widget>

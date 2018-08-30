@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from '@ionic-native/native-page-transitions';
 import {AppVersion} from "@ionic-native/app-version";
-
+import { ENV } from '@app/env'
 /**
  * Generated class for the AboutusPage page.
  *
@@ -18,10 +18,13 @@ import {AppVersion} from "@ionic-native/app-version";
 export class AboutusPage {
   @ViewChild(Navbar) navBar: Navbar;
   versionNumber :string;
+  ENV:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public nativePageTransitions: NativePageTransitions,  private appVersion: AppVersion,
               ) {
+    this.ENV=ENV;
   }
+
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad AboutusPage');

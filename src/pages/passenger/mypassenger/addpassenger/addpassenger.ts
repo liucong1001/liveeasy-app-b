@@ -12,6 +12,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {DescsPage} from "../descs/descs";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
+import {PropertyProvider} from "../../../../providers/property/property";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -55,7 +56,7 @@ export class AddpassengerPage {
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
-              public events: Events,public statusBar: StatusBar
+              public events: Events,public statusBar: StatusBar,public propertyProvider: PropertyProvider,
   ) {
 
     this.localCode = this.localStorageProvider.get('codeData');
@@ -76,25 +77,34 @@ export class AddpassengerPage {
     });
    //客户等级
    this.customeroGrageInfoList = new ArryCodeValuePipe().transform(this.localCode,'customer_grade');
-   this.area = this.localStorageProvider.get('area');
-   this.scrollTo();
-    this.area.unshift({name:'无',val:0});
+    //行政区划
+    if(!this.localStorageProvider.get('area')){
+      this.propertyProvider.getDivision().then(res=>{
+        this.area = res.data.result;
+        this.localStorageProvider.set('area',this.area);
+        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+      });
+    }else {
+      this.area = this.localStorageProvider.get('area');
+      this.area&&this.area.unshift({name:'无',val:0});
+    }
+
   }
   @ViewChild(Content) content: Content;
 
-  scrollTo() {
+/*  scrollTo() {
     window.addEventListener('native.keyboardshow', (e: any) => {
       this.content.scrollTo(0, e.keyboardHeight);
     });
-  }
+  }*/
   closeSelect(){
-    this.selectOne.close();
-    this.selectTwo.close();
-    this.selectThree.close();
-    this.selectFour.close();
-    this.selectFive.close();
-    this.selectSix.close();
-    this.selectSev.close();
+    this.selectOne&&this.selectOne.close();
+    this.selectTwo&&this.selectTwo.close();
+    this.selectThree&&this.selectThree.close();
+    this.selectThree&&this.selectFour.close();
+    this.selectFive&&this.selectFive.close();
+    this.selectSix&&this.selectSix.close();
+    this.selectSev&&this.selectSev.close();
   }
 
   ionViewWillLeave(){

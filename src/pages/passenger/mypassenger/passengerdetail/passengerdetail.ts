@@ -125,6 +125,9 @@ export class PassengerdetailPage {
     }
 
 
+    console.log('测试', this.compare(this.form.value.minSpaceSize,this.form.value.maxSpaceSize),this.form);
+
+
   }
 
   closeSelect(){
