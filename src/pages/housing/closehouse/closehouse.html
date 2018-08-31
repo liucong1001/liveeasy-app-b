@@ -51,18 +51,18 @@
             <ion-item>
               <ion-label class="pl12">关闭类型<i class="text-danger">*</i></ion-label>
               <ion-select #select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="propertyStatus" [selectOptions]="selectTitle('关闭类型')">
-                <ion-option value="7">暂不出售</ion-option>
-                <ion-option value="8">无效</ion-option>
-                <ion-option value="9">他售</ion-option>
+                <ion-option value="64">暂不出售</ion-option>
+                <ion-option value="128">无效</ion-option>
+                <ion-option value="256">他售</ion-option>
                 <!--<ion-option value="6">本公司成交</ion-option>-->
               </ion-select>
             </ion-item>
-            <ion-item *ngIf="form.value.propertyStatus == 8">
+            <ion-item *ngIf="form.value.propertyStatus == 128">
               <ion-label class="pl12">无效原因<i class="text-danger">*</i></ion-label>
               <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="invalidReason" [selectOptions]="selectTitle('无效原因')">
-                <ion-option value="1">业主不存在</ion-option>
-                <ion-option value="2">信息错误</ion-option>
-                <ion-option value="3">重复房源</ion-option>
+                <ion-option value="业主不存在">业主不存在</ion-option>
+                <ion-option value="信息错误">信息错误</ion-option>
+                <ion-option value="重复房源">重复房源</ion-option>
               </ion-select>
             </ion-item>
           </ion-list>
@@ -73,10 +73,9 @@
           <div>
             <ion-textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></ion-textarea>
           </div>
-          <!--<valid-error [errors]="errors.closeDesc"  [control]="form.get('closeDesc')"></valid-error>-->
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
-          <button ion-button full color="danger" class="radius"  [disabled]="form.invalid" *ngIf="subs" (click)="subClose()">确定</button>
+          <button ion-button full color="danger" class="radius"  [disabled]="form.invalid || (form.value.propertyStatus==128&&form.value.invalidReason=='')" *ngIf="subs" (click)="subClose()">确定</button>
           <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="subApplic()" *ngIf="applic">提交申请</button>
           <!--<button ion-button tappable (click)="pendings()" *ngIf="pending">您有一条待处理申请</button>-->
         </ion-col>

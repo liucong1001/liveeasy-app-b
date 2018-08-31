@@ -76,11 +76,7 @@ export class ClosehousePage {
     invalidReason:[''],
     closeDesc:['',[Validators.required]],
   });
-  // errors={
-  //   closeDesc:[
-  //     new ErrorMessage('pattern','不能输入特殊符号'),
-  //   ],
-  // };
+
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ClosehousePage');
     this.navBar.backButtonClick = this.backButtonClick;
@@ -90,52 +86,25 @@ export class ClosehousePage {
   }
 
   subClose(){
-    if(this.form.value.propertyStatus != 8){
-      this.closehouseProvider.getClose({
+      var data = {
         propertyId:this.propertyid,
         propertyStatus:this.form.value.propertyStatus,
-        applyTime:this.closetime,
-        invalidReason:null,
         closeDesc:this.form.value.closeDesc,
-        realtorId:this.realtorSourceId,
-      }).then(res => {
-        // console.log(res);
+        invalidReason:this.form.value.invalidReason
+      };
+      if(this.form.value.propertyStatus!=128){
+        delete  data.invalidReason;
+      }
+
+    this.closehouseProvider.getClose(data).then(res => {
         if(res.success){
           this.toast.msg('关闭成功!');
-          this.navCtrl.setRoot(HousingPage)
+          this.navCtrl.pop();
         }else{
           this.toast.error('关闭失败！');
         }
-        // alert('关闭成功');
-        // this.navCtrl.push(HousingPage)
       });
-    }else if(this.form.value.propertyStatus == 8){
-      if(this.form.value.invalidReason !=''){
-        this.closehouseProvider.getClose({
-          propertyId:this.propertyid,
-          propertyStatus:this.form.value.propertyStatus,
-          applyTime:this.closetime,
-          invalidReason:this.form.value.invalidReason,
-          closeDesc:this.form.value.closeDesc,
-          realtorId:this.realtorSourceId
-        }).then(res => {
-          // console.log(res);
-          if(res.success){
-            this.toast.msg('关闭成功!');
-            setTimeout(()=>{
-              this.navCtrl.setRoot(HousingPage)
-            },200);
-          }else{
-            this.toast.error('关闭失败！');
-          }
-          // alert('关闭成功');
-          // this.navCtrl.setRoot(HousingPage);
-        });
-      }else {
-        this.toast.error('请选择无效原因');
-      }
-    }
-    // console.log(this.form.value)
+
   }
 
   subApplic(){
@@ -164,17 +133,7 @@ export class ClosehousePage {
       data:this.form.value,
     })
   }
-  //禁用调出键盘
-  // ionViewDidEnter(){
-  //   let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-  //   this.renderer.setElementAttribute(input, 'disabled', 'true');
-  //
-  //   this.navBar.backButtonClick = () => {
-  //     // this.navCtrl.push(HomesearchPage);
-  //     this.navCtrl.popToRoot();
-  //   };
-  //
-  // }
+
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {
