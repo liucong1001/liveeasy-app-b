@@ -11,7 +11,7 @@
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "set MY_ENV=dev&&ionic-app-scripts serve",
         "ionic:build:beta": "set MY_ENV=beta&& ionic cordova build android --pord",
-        "ionic:build:prod": "set MY_ENV=prod&& ionic cordova build android --prod –-release",
+        "ionic:build:prod": "set MY_ENV=prod&& ionic cordova build android --prod --release",
         "ionic:build:staging": "set MY_ENV=staging&& ionic cordova build android",
         "ionic:run:android:beta": "set MY_ENV=beta&& ionic cordova run android",
         "ionic:run:android:beta:lc": "set MY_ENV=beta&& ionic cordova run android --lc",

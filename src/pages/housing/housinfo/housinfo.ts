@@ -378,6 +378,15 @@ export class HousinfoPage {
      }
      return arry
   }
+  // 异常单价
+  errorPrice(data){
+    if(data&&data.abnormalPriceUnit==1){
+       return  (data.abnormalPrice*10000/data.abnormalSpaceSize).toFixed(2)
+    }else if (data.abnormalPriceUnit==2){
+      return  (data.abnormalPrice*1/data.abnormalSpaceSize).toFixed(2)
+    }
+  }
+
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

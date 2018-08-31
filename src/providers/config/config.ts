@@ -68,7 +68,7 @@ export class ConfigProvider {
         smSign:'?x-oss-process=style/b-list',
       }
     }else if(this.envMode=='staging'){
-      /*dev*/
+      /*staging*/
       this.globalConfig = {
         url:'',
         oss:'',

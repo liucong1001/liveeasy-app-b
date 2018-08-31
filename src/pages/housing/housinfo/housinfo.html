@@ -100,8 +100,8 @@
             <!--1 万元  2元-->
             <div *ngIf="houseData?.unitPriceAudit" class="priceAbnormal">
               <span> 异常单价：</span>
-              {{houseData?.propertyAbPriceVo.abnormalUnitPrice}}
-              <span *ngIf="houseData?.propertyAbPriceVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
+              {{  errorPrice(houseData?.propertyAbPriceVo) }}
+              <span *ngIf="houseData?.propertyAbPriceVo.abnormalPriceUnit==1"> 元/m²</span>
             </div>
           </ion-col>
           <ion-col col-5>
