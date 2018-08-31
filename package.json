@@ -9,10 +9,20 @@
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
-        "ionic:serve": "set MY_ENV=dev&&ionic-app-scripts serve",
-        "ionic:serve:beta": "set MY_ENV=beta&&ionic-app-scripts serve",
-        "ionic:build:prod": " set MY_ENV=prod&&ionic-app-scripts build",
-        "ionic:build:beta": " set MY_ENV=beta&&ionic-app-scripts build"
+        "ionic:serve": "MY_ENV=dev ionic-app-scripts serve",
+        "ionic:build:beta": "MY_ENV=beta ionic cordova build android --pord",
+        "ionic:build:prod": "MY_ENV=prod ionic cordova build android --prod –-release",
+        "ionic:build:staging": "MY_ENV=beta ionic cordova build android",
+        "ionic:run:android:beta": "MY_ENV=beta ionic cordova run android",
+        "ionic:run:android:beta:lc": "MY_ENV=beta ionic cordova run android --lc",
+        "ionic:run:android:prod": "MY_ENV=prod ionic cordova run android ",
+        "ionic:run:android:staging": "MY_ENV=staging ionic cordova run android",
+        "ionic:build:ios:beta": "MY_ENV=beta ionic cordova build ios",
+        "ionic:build:ios:staging": "MY_ENV=staging ionic cordova build ios",
+        "ionic:build:ios:prod": "MY_ENV=prod ionic cordova build ios --prod",
+        "ionic:run:ios:beta": "MY_ENV=beta ionic cordova run ios",
+        "ionic:run:ios:staging": "MY_ENV=staging ionic cordova run ios",
+        "ionic:run:ios:prod": "MY_ENV=prod ionic cordova build ios --prod"
     },
     "dependencies": {
         "@angular/animations": "5.2.10",
@@ -55,6 +65,7 @@
         "cordova-ios": "4.4.0",
         "cordova-plugin-add-swift-support": "^1.7.2",
         "cordova-plugin-advanced-http": "^1.11.1",
+        "cordova-plugin-android-permissions": "~1.0.0",
         "cordova-plugin-app-update": "^1.6.0",
         "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-appversion": "^1.0.0",
@@ -90,6 +101,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "^3.2.0",
+        "es6-template-strings": "^2.0.1",
         "typescript": "~2.6.2"
     },
     "description": "An Ionic project",
