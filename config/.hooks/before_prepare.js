@@ -9,19 +9,20 @@ var ROOT_DIR = path.resolve(__dirname, '../../')
 var env = process.env.MY_ENV || 'dev';
 var envFile = 'src/environments/environment.' + env + '.ts';
 
-var FILES = {
-  SRC: "config/config.tpl.xml",
-  DEST: "config.xml"
-};
+var FILES = [
+  {
+    SRC: "config/config.tpl.xml",
+    DEST: "config.xml"
+  },
+  {
+    SRC: "config/ionic.config.tpl.json",
+    DEST: "ionic.config.json"
+  }
+];
 
 console.log('hooks-start: before_prepare','envFile:'+envFile);
 
-var srcFileFull = path.join(ROOT_DIR, FILES.SRC);
-var destFileFull = path.join(ROOT_DIR, FILES.DEST);
 var configFileFull = path.join(ROOT_DIR, envFile);
-console.log(configFileFull);
-
-var templateData = fs.readFileSync(srcFileFull, 'utf8');
 var configData = fs.readFileSync(configFileFull, 'utf8').toString()||"";
 configData = configData.replace(/export[\s]*const[\s]*ENV[\s]*:[\s]*Environment[\s]*=[\s]*(\{[\s\S]+})[\s]*;*/g, "$1");
 //去//注释
@@ -30,11 +31,16 @@ configData = configData.replace(/([,\s])\/\/[\s]*[\S *]*?\n+/g, "$1");
 configData = configData.replace(/\/\*.*?\*\//g, "");
 configData = configData.replace(/import[\s]*{.*?}[\s]*from[\s]*'.*?';*/g, "");
 var config = eval("("+ configData +")") || {};
-config = config['cordova'];
 
-var compiled = compile(templateData);
-var content = resolveToString(compiled, config);
+for (var i = 0; i < FILES.length; i ++) {
+  var srcFileFull = path.join(ROOT_DIR, FILES[i].SRC);
+  var destFileFull = path.join(ROOT_DIR, FILES[i].DEST);
+  var templateData = fs.readFileSync(srcFileFull, 'utf8');
+  var compiled = compile(templateData);
+  var content = resolveToString(compiled, config);
+  fs.writeFileSync(destFileFull, content);
+  console.log("out:" + destFileFull);
+}
 
-fs.writeFileSync(destFileFull, content);
 
 console.log('hooks-end: before_prepare');

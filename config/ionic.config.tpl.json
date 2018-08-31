@@ -1,0 +1,14 @@
+{
+  "name": "liveeasy",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "${http}"
+    }
+  ],
+  "pro_id": "19532114"
+}
