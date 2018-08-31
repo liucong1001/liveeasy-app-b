@@ -1,9 +1,9 @@
 /**
- * 正式包 配置   (页面实际使用 config 中配置 http， isProd开关)
+ * 正式包 配置   (页面实际使用 config 中配置 http)
  */
 import { Environment } from './environment.model';
 export const ENV: Environment = {
-  mode: 'Production',
+  mode: 'prod',
   name:'正式版',
   http:'https://erp.zdfc.com/api/v1/',
   cHttp:'https://q.zdfc.com/',

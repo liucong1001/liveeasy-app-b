@@ -47,9 +47,6 @@ export class StatisticsPage {
               public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
 
-
-
-
     var date = new Date();
     var year=(new Date(date.getTime() - 24*60*60*1000)).getFullYear();
     //昨天

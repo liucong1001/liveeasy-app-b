@@ -3,9 +3,9 @@ var fs = require('fs');
 var path = require('path');
 var useDefaultConfig = require('@ionic/app-scripts/config/webpack.config.js');
 
- var env = process.env.IONIC_ENV;
-// var env = process.env.MY_ENV;
-
+  // var env = process.env.IONIC_ENV;
+var env = process.env.MY_ENV;
+console.log('配置wenpack.fonfig',env);
 useDefaultConfig.prod.resolve.alias = {
   "@app/env": path.resolve(environmentPath('prod'))
 };
@@ -23,7 +23,8 @@ if (env !== 'prod' && env !== 'dev') {
 }
 
 function environmentPath(env) {
-  var filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env) + '.ts';
+  var filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env)+'.ts';
+  console.log('路径',filePath);
   if (!fs.existsSync(filePath)) {
     console.log(chalk.red('\n' + filePath + ' does not exist!'));
   } else {

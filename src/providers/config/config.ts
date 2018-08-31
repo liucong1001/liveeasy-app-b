@@ -13,20 +13,22 @@ export class ConfigProvider {
   globalConfig:any;
   appKeyData:any;
   imgHeaderServer:any;
-  ENV:any;
+   ENV:any;
+   envName:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
-   this.onLine = ENV.isProd;
+    this.ENV = ENV;
+    this.envName = ENV.name;
   }
 
   set(){
-    this.onLine = ENV.isProd;
+    this.onLine = this.ENV.isProd;
 
-    if(this.localStorageProvider.get('loginInfo')){
+    if(this.localStorageProvider&&this.localStorageProvider.get('loginInfo')){
       this.imgHeaderServer ='https://'+ this.localStorageProvider.get('loginInfo')['props']['oss-bucket']+'.'+
       this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
     }
 
-    if(this.onLine){
+    if(this.envName=='prod'){
       /*正式包*/
       this.globalConfig = {
         url:'',
@@ -39,8 +41,21 @@ export class ConfigProvider {
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
       }
-    }else {
-      /*线下，测试包*/
+    }else if(this.envName=='beta') {
+      /*beta*/
+      this.globalConfig = {
+        url:'',
+        oss:'',
+        http:'',
+        cHttp:'https://beta-c.zdfc.com/',
+        cmsHttp:'https://beta-cms.zdfc.com/',
+        img:this.imgHeaderServer,
+        errorImg:'assets/imgs/http502.png',
+        imgSign:'?x-oss-process=style/b-detail',
+        smSign:'?x-oss-process=style/b-list',
+      }
+    }else if(this.envName=='dev'){
+      /*dev*/
       this.globalConfig = {
         url:'',
         oss:'',
@@ -56,17 +71,5 @@ export class ConfigProvider {
      return this.globalConfig;
   }
 
-  setKey(){
-      if(this.isProd){
-          this.appKeyData = {
-            appKey:'e862e663383d107fbbec515cd5064ec5'
-          }
-      }else {
-          this.appKeyData = {
-            appKey:'9db9597481973c878648387bf30eaca0'
-          }
-      }
-      return  this.appKeyData;
-  }
 
 }

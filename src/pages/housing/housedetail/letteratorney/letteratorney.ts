@@ -9,7 +9,7 @@ import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail";
 import {ConfigProvider} from "../../../../providers/config/config";
 import {ToastComponent} from "../../../../components/toast/toast";
- import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
   房源 -  业主委托书
