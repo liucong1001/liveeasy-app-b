@@ -14,10 +14,10 @@ export class ConfigProvider {
   appKeyData:any;
   imgHeaderServer:any;
    ENV:any;
-   envName:any;
+   envMode:any;
   constructor(public http: HttpClient,public localStorageProvider: LocalStorageProvider,) {
     this.ENV = ENV;
-    this.envName = ENV.name;
+    this.envMode = ENV.mode;
   }
 
   set(){
@@ -28,7 +28,7 @@ export class ConfigProvider {
       this.localStorageProvider.get('loginInfo')['props']['oss-endpoint']+'/';
     }
 
-    if(this.envName=='prod'){
+    if(this.envMode=='prod'){
       /*正式包*/
       this.globalConfig = {
         url:'',
@@ -41,7 +41,7 @@ export class ConfigProvider {
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
       }
-    }else if(this.envName=='beta') {
+    }else if(this.envMode=='beta') {
       /*beta*/
       this.globalConfig = {
         url:'',
@@ -54,7 +54,7 @@ export class ConfigProvider {
         imgSign:'?x-oss-process=style/b-detail',
         smSign:'?x-oss-process=style/b-list',
       }
-    }else if(this.envName=='dev'){
+    }else if(this.envMode=='dev'){
       /*dev*/
       this.globalConfig = {
         url:'',
