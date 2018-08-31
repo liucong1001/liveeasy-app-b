@@ -253,19 +253,16 @@ export class AddhousePage {
   /**
    * 验证面积
    */
-  sizeCheck=false;
-  // reg=false;
-  // innerReg=false;
-  sizes(){
-      if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
-      if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)){
-        // console.log('室内面积不能大于建筑面积');
-        this.sizeCheck = true;
-      }else {
-        this.sizeCheck = false;
-      }
-    }
-  }
+  // sizeCheck=false;
+  // // reg=false;
+  // // innerReg=false;
+  // sizes(){
+  //     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
+  //     if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)) {
+  //       alert(2);
+  //     }
+  //   }
+  // }
 
 
   presentActionSheet() {

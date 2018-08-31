@@ -49,8 +49,8 @@
         <ion-col col-12 class="bgWhite p0">
           <ion-list >
             <ion-item>
-              <ion-label class="pl12">关闭类型</ion-label>
-              <ion-select #select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="propertyStatus">
+              <ion-label class="pl12">关闭类型<i class="text-danger">*</i></ion-label>
+              <ion-select #select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="propertyStatus" [selectOptions]="selectTitle('关闭类型')">
                 <ion-option value="7">暂不出售</ion-option>
                 <ion-option value="8">无效</ion-option>
                 <ion-option value="9">他售</ion-option>
@@ -58,8 +58,8 @@
               </ion-select>
             </ion-item>
             <ion-item *ngIf="form.value.propertyStatus == 8">
-              <ion-label class="pl12">无效原因</ion-label>
-              <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="invalidReason">
+              <ion-label class="pl12">无效原因<i class="text-danger">*</i></ion-label>
+              <ion-select okText="确定"  cancelText="关闭" [placeholder]="'请选择'" formControlName="invalidReason" [selectOptions]="selectTitle('无效原因')">
                 <ion-option value="1">业主不存在</ion-option>
                 <ion-option value="2">信息错误</ion-option>
                 <ion-option value="3">重复房源</ion-option>
@@ -69,7 +69,7 @@
 
         </ion-col>
         <ion-col col-12 class="followMain bgWhite">
-          <div>关闭说明：</div>
+          <div>关闭说明：<i class="text-danger">*</i></div>
           <div>
             <ion-textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></ion-textarea>
           </div>

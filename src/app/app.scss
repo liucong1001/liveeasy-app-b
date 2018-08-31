@@ -374,9 +374,20 @@ textarea{
   .upinput{
     width:83% !important;
   }
+
+
 }
 //修改activted
 .update.activated{
   background: #1ab394 !important;
 }
-
+@media screen and(max-width: 320px) {
+  .hdRightInfo{
+    .upinput{
+      width:78% !important;
+    }
+    input{
+      width:70% !important;
+    }
+  }
+}

@@ -309,7 +309,7 @@ export class PassengerdetailPage {
     this.customerProvider.update(this.form.value).then(res=>{
       if (res.success){
         this.toast.msg('修改客户成功!');
-        this.openWin(MypassengerPage);
+        this.navCtrl.pop();
         this.isDisabled = false;
       }
     },err=>{

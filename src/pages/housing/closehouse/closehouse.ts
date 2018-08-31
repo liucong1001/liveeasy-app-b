@@ -67,6 +67,10 @@ export class ClosehousePage {
 
 
   }
+  selectTitle(data){
+    var title = {title:data};
+    return title;
+  }
   form:FormGroup =this.fb.group({
     propertyStatus:['',Validators.required],
     invalidReason:[''],

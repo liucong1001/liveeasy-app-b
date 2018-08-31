@@ -80,7 +80,7 @@
       <div class="bgWhite">
         <div class="hdRightInfo">
           <label>建筑面积<i class="text-danger">*</i></label>
-          <input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="spaceSize"  placeholder="请填写数字" (ionChange)="sizes()" />
+          <input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="spaceSize"  placeholder="请填写数字"/>
           <button ion-button outline item-end>平</button>
         </div>
       </div>
@@ -101,7 +101,7 @@
       <div class="bgWhite">
         <div class="hdRightInfo">
           <label>套内面积</label>
-          <input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="innerSpaceSize" placeholder="请填写数字" (ionChange)="sizes()"/>
+          <input type="text" onkeydown="if(event.keyCode==32) return false" formControlName="innerSpaceSize" placeholder="请填写数字"/>
           <button ion-button outline item-end>平</button>
         </div>
       </div>
@@ -117,7 +117,7 @@
       <!--</div>-->
       <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
-      <div *ngIf="sizeCheck" class="valid-error">*室内面积不能大于建筑面积!</div>
+      <div *ngIf="form.value.spaceSize&&form.value.innerSpaceSize&&form.value.spaceSize<form.value.innerSpaceSize" class="valid-error">*室内面积不能大于建筑面积!</div>
       <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
       </div>
