@@ -1,7 +1,7 @@
 import { Environment } from './environment.model';
 
 
-export const MY_ENV: Environment = {
+export const ENV: Environment = {
   mode: 'beta',
   name:'beta',
   http:'https://beta-erp.zdfc.com/api/v1/', // https://erp.zdfc.com/api/v1/
