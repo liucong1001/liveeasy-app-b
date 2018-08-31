@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="tech.liveeasy.apps.agent" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>房贝</name>
+<widget id="tech.liveeasy.apps.agent" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>beta</name>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="https://*/*" />
@@ -85,8 +85,6 @@
         <preference name="CodePushDeploymentKey" value="CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260" />
     </platform>
     <hook src="config/.hooks/before_prepare.js" type="before_prepare" />
-    <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="4.4.0" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.18" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
@@ -110,6 +108,8 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
     <plugin name="jpush-phonegap-plugin" spec="^3.4.3">
-        <variable name="APP_KEY" value="8ef99aa89f5368b352b16cc3" />
+        <variable name="APP_KEY" value="" />
     </plugin>
+    <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="4.4.0" />
 </widget>

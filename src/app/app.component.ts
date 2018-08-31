@@ -43,7 +43,7 @@ export class MyApp {
   aLinKDownload:string;
   aLinKDownloadVersion:string;
   // 全局变量
-  checkPage;
+  toastCheckNetwork:any;
   constructor(
     public platform: Platform, splashScreen: SplashScreen,public statusBar: StatusBar,
               private appUpdate: VersionProvider,public localStorageProvider: LocalStorageProvider,
@@ -111,7 +111,6 @@ export class MyApp {
 
   registerBackButtonAction() {
     this.platform.registerBackButtonAction(() => {
-      this.goBackLogic();
       if(!this.localStorageProvider.get('ticket')){
         this.showExit();
         return;
@@ -183,30 +182,27 @@ export class MyApp {
 
   // 检测网络
   private listenConnection(): void {
+
+    this.network.onConnect().subscribe(()=>{
+      console.log('已连接到网络');
+      this.toastCheckNetwork&&this.toastCheckNetwork.dismiss();
+    });
+
     this.network.onDisconnect()
       .subscribe(() => {
-        this.toastCtrl.create({
-          message: '未检测到网络,请连接网络',
-          showCloseButton: true,
-          closeButtonText: '确定',
-        }).present();
+        console.log('网络丢失！');
+        this.toastCheckNetwork ? this.toastCheckNetwork.dismiss() : false;
+        this.toastCheckNetwork= this.toastCtrl.create({
+           message: '未检测到网络,请连接网络',
+           showCloseButton: true,
+           closeButtonText: '确定',
+        });
+        this.toastCheckNetwork.present();
       });
+
   }
 
 
-// 判断当前页面
-  goBackLogic() {
-    var currentCmp = this.app.getActiveNav().getActive().component
-    var isPage1= currentCmp === HomePage;
-    var isPage2= currentCmp === HousingPage;
-    var isPage3= currentCmp === PassengerPage;
-    var isPage4= currentCmp === CenterPage;
 
-    if (isPage1 || isPage2||isPage3||isPage4) {
-      this.checkPage = true
-    } else {
-      this.checkPage = false
-    }
-  }
 
 }

@@ -13,6 +13,7 @@ export class PropertyProvider {
   private  insertEmptyLookPath = this.configProvider.set().http+'/property/propertyFollowupInfo/insertEmptyLook.do';
   private  searchHousePath = this.configProvider.set().http+'/property/propertyInfo/findSubDistrict.do';
   private  updatePath = this.configProvider.set().http+'/property/propertyInfo/update.do';
+  private checkUpdatePath = this.configProvider.set().http+'/property/propertyInfo/checkUpdateProperty.do';
 
   //角色人
   private  rolePath = this.configProvider.set().http+ '/property/propertyInfo/propertyDetail';
@@ -57,12 +58,9 @@ export class PropertyProvider {
               ) {
     //线上
  if(this.isOnline){
-   this.propertyApi='property/api/query';
+   this.propertyApi='api/property/query';
  }
- else {
-   //beta 线下
-   this.propertyApi='property/api/v1/query';
- }
+
 
  this.basePath = this.configProvider.set().cHttp+this.propertyApi;
  this.tagsListPath = this.basePath+'?qId=dict&dictType=property_tag_desc';
@@ -167,6 +165,10 @@ export class PropertyProvider {
   updates(params?) {
     // var data = {};
     return this.httpProvider.httpPost(this.updatePath,params)
+  }
+  //房源判重
+  checkUpdates(params?){
+    return this.httpProvider.httpPost(this.checkUpdatePath,params)
   }
   //业主委托书
   attorney(params?) {

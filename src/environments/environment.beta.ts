@@ -4,14 +4,14 @@ import { Environment } from './environment.model';
 export const ENV: Environment = {
   mode: 'beta',
   name:'beta',
-  http:'https://beta-erp.zdfc.com/api/v1/', // https://erp.zdfc.com/api/v1/
-  cHttp:'https://beta-c.zdfc.com/',         // https://q.zdfc.com/
-  cmsHttp:'https://beta-cms.zdfc.com/',     // https://cms.zdfc.com/
+  http:'https://beta-erp.zdfc.com/api/v1/',
+  cHttp:'https://beta-c.zdfc.com/',
+  cmsHttp:'https://beta-cms.zdfc.com/',
   isProd:false,
-  appKey:'',
+  appKey:'9db9597481973c878648387bf30eaca0',
   cordova:{
     "id":"tech.liveeasy.apps.agent",
-    "version":"0.0.4",
+    "version":"0.0.2",
     "name": "房贝",
     "ios":{
       "CodePushDeploymentKey": "CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260"

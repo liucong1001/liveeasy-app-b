@@ -43,7 +43,7 @@
         <ion-col col-4 class="p0" *ngIf="houseData?.propertyPrice==0">
           <p class="abnormal">异常价格</p>
           <div class="houseInfo ellipsis">
-            {{houseData?.propertyAuditContentVo.abnormalPrice}}
+            {{houseData?.propertyAbPriceVo.abnormalPrice}}
           </div>
           <div class="middleHouseType"></div>
         </ion-col>
@@ -97,10 +97,11 @@
               <span class="defaults"> 单价：</span>
               <span> {{unitPrice(houseData)}} 元/m²</span>
             </div>
+            <!--1 万元  2元-->
             <div *ngIf="houseData?.unitPriceAudit" class="priceAbnormal">
               <span> 异常单价：</span>
-              {{houseData?.propertyAuditContentVo.abnormalUnitPrice}}
-              <span *ngIf="houseData?.propertyAuditContentVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
+              {{houseData?.propertyAbPriceVo.abnormalUnitPrice}}
+              <span *ngIf="houseData?.propertyAbPriceVo.abnormalPropertyPriceUnit==1"> 元/m²</span>
             </div>
           </ion-col>
           <ion-col col-5>

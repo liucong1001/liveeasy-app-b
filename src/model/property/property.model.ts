@@ -181,5 +181,5 @@ export  class PropertyModel {
 
   businessTime?:any;
 
-
+  propertyAbPriceVo?:any;
 }

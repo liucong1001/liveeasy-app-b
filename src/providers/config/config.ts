@@ -46,7 +46,7 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'',
+        http:'https://beta-erp.zdfc.com/api/v1/',
         cHttp:'https://beta-c.zdfc.com/',
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:this.imgHeaderServer,
@@ -60,6 +60,19 @@ export class ConfigProvider {
         url:'',
         oss:'',
         http:'',
+        cHttp:'https://beta-c.zdfc.com/',
+        cmsHttp:'https://beta-cms.zdfc.com/',
+        img:this.imgHeaderServer,
+        errorImg:'assets/imgs/http502.png',
+        imgSign:'?x-oss-process=style/b-detail',
+        smSign:'?x-oss-process=style/b-list',
+      }
+    }else if(this.envMode=='staging'){
+      /*dev*/
+      this.globalConfig = {
+        url:'',
+        oss:'',
+        http:'https://beta-erp.zdfc.com/api/v1/',
         cHttp:'https://beta-c.zdfc.com/',
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:this.imgHeaderServer,

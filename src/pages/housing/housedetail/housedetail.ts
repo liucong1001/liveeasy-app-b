@@ -444,11 +444,12 @@ export class HousedetailPage {
   }
 
   addContactBolean = true;
-  isClick:boolean = false ;
+
   errBtnHttp:boolean;
+
   //表单提交
   save(){
-    this.isClick = true;
+
     this.errBtnHttp = true;
     if(this.form.value.tagsStr){
       this.form.patchValue({
@@ -498,23 +499,30 @@ export class HousedetailPage {
 
     // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
    // console.log('提交',formData);
+    this.propertyProvider.checkUpdates(formData).then(res=>{
+        if(!res.success){
+          this.propertyProvider.updates(formData).then(res=>{
+            if(res.success){
+              this.toast.msg('修改成功!');
+              this.errBtnHttp =true;
+              setTimeout(()=>{
+                // this.navCtrl.setRoot(HousingPage);
+                this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
+              },100);
+            }else{
+              this.toast.error('修改失败！');
+              this.errBtnHttp =false;
 
-    this.propertyProvider.updates(formData).then(res=>{
-        if(res.success){
-          this.isClick = false;
-        this.toast.msg('修改成功!');
-         this.errBtnHttp =true;
-        setTimeout(()=>{
-          // this.navCtrl.setRoot(HousingPage);
-          this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-        },100);
-      }else{
-          this.isClick = true;
-        this.toast.error('修改失败！');
-          this.errBtnHttp =false;
+            }
+          })
+        }else {
+           this.errBtnHttp =false;
+           this.toast.error('您修改的房源已存在,房源编号'+res.data.convIdReq);
+           console.log('errBtnHttp',this.errBtnHttp);
+        }
+    });
 
-      }
-    })
+
 
   }
 

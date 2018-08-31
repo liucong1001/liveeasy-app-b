@@ -134,15 +134,6 @@
       <div *ngIf="form.value.spaceSize&&form.value.innerSpaceSize&&form.value.spaceSize<form.value.innerSpaceSize" class="valid-error">*套内面积不能大于建筑面积!</div>
 
 
-      <div class="bgWhite">
-        <div class="hdRightInfo">
-          <label>价格<i class="text-danger">*</i></label>
-          <input type="text" [disabled]="data?.unitPriceAudit" onkeydown="if(event.keyCode==32) return false" formControlName="propertyPrice" class="upinput"/>
-          <button ion-button outline item-end>平</button>
-        </div>
-      </div>
-
-
       <!--<div class="hdRightInfo">-->
         <!--<ion-item class="pl12">-->
           <!--<ion-label>价格<i class="text-danger">*</i></ion-label>-->
@@ -460,7 +451,7 @@
       <ion-row [hidden]="!data?.shareShow">
         <ion-col col-12>
           <button ion-button class="status" tappable full color="danger" class="radius" (click)="save()"
-                  [disabled]="form.invalid|| lockStatus || isClick || errBtnHttp">确认修改</button>
+                  [disabled]="form.invalid|| lockStatus  || errBtnHttp">确认修改</button>
         </ion-col>
       </ion-row>
     </ion-grid>
