@@ -156,8 +156,13 @@ export class LetteratorneyPage {
        }else {
          this.timeCheck = false;
        }
+
+       // if(this.form.value.delegateStyle==1){
+
+       // }
        // console.log('表单',this.form.value,'开始时间',startTime,'结束时间',endTime);
      }
+    console.log('必须选截至时间1');
 
 
   }

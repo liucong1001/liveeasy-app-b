@@ -17,15 +17,10 @@ export class CityPipe implements PipeTransform {
 
   }
   transform(value: string, ...args) {
-    // console.log('区域',value,typeof (value));
     for(var item of this.localStorageProvider.get('area')){
-      console.log(typeof (item.code));
         if (value==item.code){
           return item.name;
         }
-     /*   else {
-          return '';
-        }*/
     }
     }
 }

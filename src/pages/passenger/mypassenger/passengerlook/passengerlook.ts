@@ -74,27 +74,15 @@ export class PassengerlookPage {
         }else if (res.msg.indexOf('您已约看') !=-1){
           this.toast.showLongToast('您已约看该客户，请先关闭约看');
         }else {
-          this.toast.error('约看失败');
+          this.toast.error(res.msg);
         }
       });
     }else {
       this.toast.error('请选择房源');
     }
-
-    // console.log(this.form.value)
   }
 
-  //禁用调出键盘
-  // ionViewDidEnter(){
-  //   // let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
-  //   // this.renderer.setElementAttribute(input, 'disabled', 'true');
-  //
-  //   this.navBar.backButtonClick = () => {
-  //     // this.navCtrl.push(HomesearchPage);
-  //     this.navCtrl.popToRoot();
-  //   };
-  //
-  // }
+
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

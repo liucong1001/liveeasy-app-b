@@ -6,5 +6,6 @@ export interface Environment {
   cmsHttp:string;
   isProd:boolean;
   appKey:string;
+  apiKey:string;
   cordova:object;
 }

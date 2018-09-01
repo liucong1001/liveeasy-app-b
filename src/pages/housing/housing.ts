@@ -151,7 +151,7 @@ export class HousingPage {
     if(this.localStorageProvider.get('area')==null){
       //行政区划
       this.propertyProvider.getDivision().then(res=>{
-        this.area = res.data.result;
+        this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
         this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
       });

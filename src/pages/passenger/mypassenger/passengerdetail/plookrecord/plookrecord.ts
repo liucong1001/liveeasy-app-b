@@ -130,6 +130,23 @@ export class PlookrecordPage {
     this.openWin(AddpassengerPage)
   }
 
+  //是否存在“约看中”的记录
+  isHasLooking(data){
+      if(data){
+        var arry = [];
+        for(var item of data){
+          if(item.followStatus==1){
+             arry.push(item);
+          }
+        }
+        if(arry.length>=1){
+          return false
+        }else {
+          return true
+        }
+      }
+  }
+
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

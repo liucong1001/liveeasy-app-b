@@ -28,10 +28,10 @@
       <ion-slide>
         <!--<div *ngIf="statusOne=='';" class="p15 noRecords">暂无记录</div>-->
         <!--约看中-->
+        <ion-row *ngIf="isHasLooking(lRecord)" class="tc p15">
+          <ion-col col-12  style="font-size: 1.6rem">暂无记录</ion-col>
+        </ion-row>
         <div *ngFor="let item of lRecord;index as i">
-          <ion-row *ngIf="!(item.followStatus == 1)" class="tc p15">
-            <ion-col col-12 *ngIf="i==0" style="font-size: 1.6rem">暂无记录</ion-col>
-          </ion-row>
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 1">
             <ion-col col-12>
               <ion-row>

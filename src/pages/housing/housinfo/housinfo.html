@@ -40,14 +40,15 @@
     </h4>
     <ion-grid>
       <ion-row>
-        <ion-col col-4 class="p0" *ngIf="houseData?.propertyPrice==0">
+        <ion-col col-4 class="p0" *ngIf="houseData?.unitPriceAudit">
           <p class="abnormal">异常价格</p>
           <div class="houseInfo ellipsis">
             {{houseData?.propertyAbPriceVo.abnormalPrice}}
+            {{houseData?.propertyAbPriceVo.abnormalPriceUnit==1?'万元':'元'}}
           </div>
           <div class="middleHouseType"></div>
         </ion-col>
-        <ion-col col-4 class="p0" *ngIf="houseData?.propertyPrice!=0">
+        <ion-col col-4 class="p0" *ngIf="!houseData?.unitPriceAudit">
           <p class="tieDefault">总价</p>
           <div class="houseInfo ellipsis">
             {{houseData?.propertyPrice}}

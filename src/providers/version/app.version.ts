@@ -10,8 +10,8 @@ import {File} from "@ionic-native/file";
 import {HttpProvider} from "../http/http";
 import {ConfigProvider} from "../config/config";
 import {ToastComponent} from "../../components/toast/toast";
-
-
+import { ENV } from '@app/env'
+import {Environment} from "../../environments/environment.model";
 /*
   Generated class for the VersionProvider provider.
 
@@ -23,6 +23,7 @@ import {ToastComponent} from "../../components/toast/toast";
 export class VersionProvider {
   private versionJsonUrl : any;
   versionNumber:any;
+  ENY:Environment;
   constructor(private http: HTTP,
               private http2:HttpClient,
               public localStorageProvider:LocalStorageProvider,
@@ -31,7 +32,7 @@ export class VersionProvider {
               private appUpdate: VersionUpdateProvider,  private file: File,
              public httpProvider:HttpProvider,private configProvider:ConfigProvider,public toast:ToastComponent,){
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
-
+    this.ENY = ENV;
   }
   public headers = new HttpHeaders().set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin','*');
@@ -42,9 +43,8 @@ export class VersionProvider {
    */
   checkVersion(noFouce) {
     var params={
-      _api_key:'14eca046de7309cd5125d4e3bdb1afd1',
+      _api_key:this.ENY.apiKey,
       page:'1',
-      // APPKEY:'42d16b350c365b3dd38f471fd5c102bb',
     };
     this.headers = new HttpHeaders().set('Content-Type', 'application/json')
       .set('token',this.localStorageProvider.get('ticket'))

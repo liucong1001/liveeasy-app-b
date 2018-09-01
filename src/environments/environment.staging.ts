@@ -9,6 +9,7 @@ export const ENV: Environment = {
   cmsHttp:'https://beta-cms.zdfc.com/',     // https://cms.zdfc.com/
   isProd:false,
   appKey:'9db9597481973c878648387bf30eaca0',
+  apiKey:'14eca046de7309cd5125d4e3bdb1afd1',
   cordova:{
     "id":"tech.liveeasy.apps.agent",
     "version":"0.0.4",

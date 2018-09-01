@@ -75,7 +75,7 @@ export class CenterPage {
      * 获取最新版本
      */
     var params={
-      _api_key:'14eca046de7309cd5125d4e3bdb1afd1',
+      _api_key:this.ENY.apiKey,
       page:'1',
     };
     this.http.post(this.versionJsonUrl,params,{
@@ -83,13 +83,12 @@ export class CenterPage {
     }).then(data  => {
       var res;
       res = JSON.parse(data.data);
-      // console.log('检测',res);
       let versionInfo = res.data.list[0];
       this.versionInfo = res.data.list[0];
       // console.log('最新版本',versionInfo);
       if (data && data.status && data.status == 200 && data.data) {
         // let result = data.data || {};
-         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.ENY.appKey+"&_api_key=14eca046de7309cd5125d4e3bdb1afd1";
+         versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.ENY.appKey+"&_api_key="+this.ENY.apiKey;
 
 
         this.aLinKDownload = versionInfo.url;
@@ -99,7 +98,6 @@ export class CenterPage {
            this.showNewVersion = true;
            // console.log('是否存在版本',this.showNewVersion);
         }
-        // console.log('版本对比',this.aLinKDownloadVersion,this.versionNumber);
 
       }
     }).catch((e)=> {
@@ -111,8 +109,6 @@ export class CenterPage {
     this.statusBar.styleDefault();
   }
   ionViewDidLoad() {
-
-
 
 
 
