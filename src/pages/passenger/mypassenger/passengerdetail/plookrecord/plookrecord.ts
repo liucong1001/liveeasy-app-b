@@ -147,6 +147,40 @@ export class PlookrecordPage {
       }
   }
 
+  //已完成
+  isHasFinish(data){
+    if(data){
+      var arry = [];
+      for(var item of data){
+        if(item.followStatus==2){
+          arry.push(item);
+        }
+      }
+      if(arry.length>=1){
+        return false
+      }else {
+        return true
+      }
+    }
+  }
+
+  //已关闭
+  isHasClose(data){
+    if(data){
+      var arry = [];
+      for(var item of data){
+        if(item.followStatus==3){
+          arry.push(item);
+        }
+      }
+      if(arry.length>=1){
+        return false
+      }else {
+        return true
+      }
+    }
+  }
+
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

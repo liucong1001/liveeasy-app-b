@@ -69,10 +69,10 @@
       </ion-slide>
       <ion-slide>
         <!--已完成-->
+        <ion-row *ngIf="isHasFinish(lRecord)" class="tc p15">
+          <ion-col col-12  style="font-size: 1.6rem">暂无记录</ion-col>
+        </ion-row>
         <div *ngFor="let item of lRecord;index as i">
-          <ion-row *ngIf="!(item.followStatus == 2)" class="tc p15">
-            <ion-col col-12 *ngIf="i==0" style="font-size: 1.6rem">暂无记录</ion-col>
-          </ion-row>
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 2">
             <ion-col col-12>
               <ion-row>
@@ -101,10 +101,10 @@
       </ion-slide>
       <ion-slide>
         <!--已关闭-->
+        <ion-row *ngIf="isHasClose(lRecord)"  class="tc p15">
+          <ion-col col-12 class="tc"  style="font-size: 1.6rem">暂无记录</ion-col>
+        </ion-row>
         <div *ngFor="let item of lRecord;index as i">
-          <ion-row *ngIf="!(item.followStatus == 3)"  class="tc p15">
-            <ion-col col-12 class="tc"  style="font-size: 1.6rem" *ngIf="i==0">暂无记录</ion-col>
-          </ion-row>
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 3">
             <ion-col col-12>
               <ion-row>
@@ -129,7 +129,6 @@
 
           </ion-row>
         </div>
-
       </ion-slide>
     </ion-slides>
   </div>
