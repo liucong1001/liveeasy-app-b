@@ -393,6 +393,21 @@ textarea{
   right: 16px;
   top: 16px;
 }
+.updateEnd{
+  .item-ios [item-end]{
+    margin: 0;
+  }
+  .item-ios .item-button{
+    padding: 0;
+  }
+  .button-outline-ios{
+    color: #000;
+    border: 0;
+  }
+  input{
+    text-align: right;
+  }
+}
 @media screen and(max-width: 320px) {
   .hdRightInfo{
     .upinput{
