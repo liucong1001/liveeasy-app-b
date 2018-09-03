@@ -92,7 +92,7 @@
           至
         </ion-col>
         <ion-col col-5>
-          <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)"  displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
+          <ion-datetime placeholder="请选择时间" formControlName="endTime" (ionChange)="getcontactFreeTm2($event)" [max]="endDate"  displayFormat="YYYY/MM/DD" cancelText="关闭" doneText="确定"></ion-datetime>
         </ion-col>
       </ion-row>
     </form>

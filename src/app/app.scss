@@ -381,6 +381,17 @@ textarea{
 .update.activated{
   background: #1ab394 !important;
 }
+.padRight{
+  padding-right: 20px;
+  input{
+    text-align: right;
+  }
+}
+.rights{
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
 @media screen and(max-width: 320px) {
   .hdRightInfo{
     .upinput{

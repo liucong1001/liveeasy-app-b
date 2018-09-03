@@ -43,6 +43,7 @@ export class StatisticsPage {
   statItem:any;
   @ViewChild(Navbar) navBar: Navbar;
   errStatus :boolean;
+  endDate: String = new Date(new Date().getTime()-24 *60*60*1000).toISOString();
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController,
               public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
               public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
