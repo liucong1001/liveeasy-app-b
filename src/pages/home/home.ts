@@ -54,7 +54,6 @@ export class HomePage {
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
               public jPush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
              ) {
-    console.log('环境测试',ENV);
     this.model = ENV.mode;
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-

@@ -159,7 +159,6 @@ export class HousedetailPage {
       if( this.data&&res.success){
         loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
-         console.log('联系人',jsonData,jsonData[0].contactInfo,jsonData[1].contactInfo,jsonData[2].contactInfo);
         this.form.patchValue({
           adminDivisionCode:this.data.adminDivisionCode,
           buzzType:this.data.buzzType,
