@@ -281,9 +281,10 @@
     color: #fff;
   }
   .fa{
-    //&.activated{
-    //  background-color: #ed5565;
-    //}
+    background-color: #dda458;
+    &.activated{
+      background-color: #dda458 !important;
+    }
   }
   .xiang{
     background-color: #f29b76;
