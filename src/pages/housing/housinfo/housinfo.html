@@ -40,7 +40,7 @@
     </h4>
     <ion-grid>
       <ion-row>
-        <ion-col col-4 class="p0" *ngIf="houseData?.unitPriceAudit">
+        <ion-col col-4 class="p0" *ngIf="houseData?.unitPriceAudit&&houseData?.propertyAbPriceVo.abnormalPrice!=0">
           <p class="abnormal">异常价格</p>
           <div class="houseInfo ellipsis">
             {{houseData?.propertyAbPriceVo.abnormalPrice}}
@@ -48,6 +48,16 @@
           </div>
           <div class="middleHouseType"></div>
         </ion-col>
+        <!--修改前价格-->
+        <ion-col col-4 class="p0" *ngIf="houseData?.unitPriceAudit&&houseData?.propertyAbPriceVo.abnormalPrice==0">
+          <p class="abnormal">修改前价格</p>
+          <div class="houseInfo ellipsis">
+            {{houseData?.propertyAbPriceVo.afterPrice}}
+            {{houseData?.propertyAbPriceVo.afterPriceUnit==1?'万元':'元'}}
+          </div>
+          <div class="middleHouseType"></div>
+        </ion-col>
+
         <ion-col col-4 class="p0" *ngIf="!houseData?.unitPriceAudit">
           <p class="tieDefault">总价</p>
           <div class="houseInfo ellipsis">
@@ -98,11 +108,17 @@
               <span class="defaults"> 单价：</span>
               <span> {{unitPrice(houseData)}} 元/m²</span>
             </div>
-            <!--1 万元  2元-->
-            <div *ngIf="houseData?.unitPriceAudit" class="priceAbnormal">
+            <!--1 万元  2元 afterSpaceSize-->
+            <div *ngIf="houseData?.unitPriceAudit&&houseData?.propertyAbPriceVo.abnormalPrice!=0" class="priceAbnormal">
               <span> 异常单价：</span>
-              {{  errorPrice(houseData?.propertyAbPriceVo) }}
+              {{errorPrice(houseData?.propertyAbPriceVo,'abnormalPrice','abnormalSpaceSize','abnormalPriceUnit') }}
               <span *ngIf="houseData?.propertyAbPriceVo.abnormalPriceUnit==1"> 元/m²</span>
+            </div>
+            <!--修改前单价-->
+            <div *ngIf="houseData?.unitPriceAudit&&houseData?.propertyAbPriceVo.abnormalPrice==0" class="priceAbnormal">
+              <span> 修改前单价：</span>
+              {{errorPrice(houseData?.propertyAbPriceVo,'afterPrice','afterSpaceSize','afterPriceUnit') }}
+              <span *ngIf="houseData?.propertyAbPriceVo.afterPriceUnit==1"> 元/m²</span>
             </div>
           </ion-col>
           <ion-col col-5>

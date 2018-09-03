@@ -379,11 +379,11 @@ export class HousinfoPage {
      return arry
   }
   // 异常单价
-  errorPrice(data){
-    if(data&&data.abnormalPriceUnit==1){
-       return  (data.abnormalPrice*10000/data.abnormalSpaceSize).toFixed(2)
-    }else if (data.abnormalPriceUnit==2){
-      return  (data.abnormalPrice*1/data.abnormalSpaceSize).toFixed(2)
+  errorPrice(data,price,size,unit){
+    if(data&&data[unit]==1){
+       return  (data[price]*10000/data[size]).toFixed(2)
+    }else if (data[unit]==2){
+      return  (data[price]*1/data[size]).toFixed(2)
     }
   }
 

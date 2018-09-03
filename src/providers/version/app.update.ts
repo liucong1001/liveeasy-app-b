@@ -52,6 +52,8 @@ export class VersionUpdateProvider {
     const fileTransfer: FileTransferObject = this.transfer.create();
 
     const apk = this.file.externalRootDirectory + 'app.apk'; //apk保存的目录
+    apkUrl = apkUrl || "";
+    apkUrl = apkUrl.replace(/^(http)s/g, '$1');
     fileTransfer.download(apkUrl, apk).then((res) => {
         console.log('download',apkUrl,'res.toUrl()',res,'APK---------',apk);
         this.fileOpener.open(res.toURL(), 'application/vnd.android.package-archive').then(() =>{
