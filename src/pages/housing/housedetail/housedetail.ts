@@ -344,6 +344,13 @@ export class HousedetailPage {
   /**
    * 验证面积
    */
+  compare(min,max){
+    if(min&&max&&( parseFloat(max) < parseFloat(min) )){
+      return true
+    }else {
+      return false
+    }
+  }
   // sizeCheck=false;
   // sizes(){
   //   if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){

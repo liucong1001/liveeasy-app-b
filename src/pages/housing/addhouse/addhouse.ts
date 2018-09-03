@@ -253,6 +253,13 @@ export class AddhousePage {
   /**
    * 验证面积
    */
+  compare(min,max){
+    if(min&&max&&( parseFloat(max) < parseFloat(min) )){
+      return true
+    }else {
+      return false
+    }
+  }
   // sizeCheck=false;
   // // reg=false;
   // // innerReg=false;

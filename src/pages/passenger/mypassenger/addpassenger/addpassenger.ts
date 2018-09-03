@@ -204,12 +204,6 @@ export class AddpassengerPage {
 
   };
 
-
-  tels(){
-    // if(/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.form.value.customerPhone)){
-    //   alert('正确');
-    // }
-  }
   //验证面积
   areaCheck=false;
   priceCheck=false;
