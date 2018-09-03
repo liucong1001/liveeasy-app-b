@@ -8,6 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import {ConfigProvider} from "../../../../providers/config/config";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
+import {ErrorMessage} from "../../../../components/valid-error/valid-error";
 
 /**
   钥匙页面
@@ -68,11 +69,18 @@ export class KeyPage {
   ionViewDidEnter(){
   }
 
+
+
   form:FormGroup =this.fb.group({
-    keySn:['',Validators.required],
+    keySn:['',[Validators.required,Validators.pattern(/^[A-Za-z0-9]+$/)]],
     keyAddress:['',Validators.required],
     keyDlgtFilePics:[''],
   });
+  errors={
+    keySn:[
+      new ErrorMessage('pattern','请填写英文或数字'),
+    ]
+  };
   isDisabled = false;
 //上传钥匙信息
   goYc(){

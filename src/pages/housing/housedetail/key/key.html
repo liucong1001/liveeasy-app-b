@@ -39,6 +39,7 @@
         <ion-input type="text"  class="p0" formControlName="keySn">
         </ion-input>
       </ion-item>
+      <valid-error [errors]="errors.keySn"  [control]="form.get('keySn')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>钥匙存储地址</ion-label>
         <ion-input type="text"  class="p0" formControlName="keyAddress">
