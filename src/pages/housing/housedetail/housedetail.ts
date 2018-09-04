@@ -263,7 +263,7 @@ export class HousedetailPage {
         desc:[''],
       })
     ]),//业主信息
-    contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],
+    contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5a-zA-Z]*$/)]],
     contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
     contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
     contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
