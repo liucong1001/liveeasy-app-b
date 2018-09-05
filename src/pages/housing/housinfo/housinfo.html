@@ -183,13 +183,14 @@
     </div>
   </div>
   <!--&&letteratorneyData?.delegateDocPics[0].auditStatus==1-->
-  <div class="m10 bgWhite wt" *ngIf="letteratorneyData&&houseData&&houseData.closePropertyShow&&houseData.delegateAuditStatus==1">
+  <div class="m10 bgWhite wt" *ngIf="letteratorneyDataContent&&houseData&&houseData.closePropertyShow&&letteratorneyData.auditStatus==1"
+       [hidden]="letteratorneyData.hasPermissions=='0'">
     <ion-row>
       <ion-col col-8>
         <div class="m5">业主委托书</div>
-        <p>编号：{{letteratorneyData.delegateDocSn}}</p>
-        <p *ngIf="letteratorneyData.delegateBeginTm">起始时间：{{letteratorneyData.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
-        <p *ngIf="letteratorneyData?.delegateEndTm!='null'&&letteratorneyData?.delegateEndTm!='-1'">截止时间：{{letteratorneyData?.delegateEndTm | date:'yyyy/MM/dd'}}</p>
+        <p>编号：{{letteratorneyDataContent.delegateDocSn}}</p>
+        <p *ngIf="letteratorneyDataContent.delegateBeginTm">起始时间：{{letteratorneyDataContent.delegateBeginTm | date:'yyyy/MM/dd'}}</p>
+        <p *ngIf="letteratorneyDataContent?.delegateEndTm!='null'&&letteratorneyDataContent?.delegateEndTm!='-1'">截止时间：{{letteratorneyDataContent?.delegateEndTm | date:'yyyy/MM/dd'}}</p>
       </ion-col>
 
       <ion-col class="mt5" col-4 *ngFor="let item of letteratorneyData.delegateDocPics">
@@ -198,15 +199,16 @@
     </ion-row>
   </div>
   <!--&&keyData.keyDlgtFilePics[0].auditStatus==1-->
-  <div class="m10 bgWhite wt" *ngIf="keyData&&houseData&&houseData.closePropertyShow&&houseData.keyAuditStatus==1">
+  <div class="m10 bgWhite wt" *ngIf="keyDataContent&&houseData&&houseData.closePropertyShow&&keyData.auditStatus==1"
+       [hidden]="keyData.hasPermissions=='0'">
     <ion-row>
       <ion-col col-8>
         <div class="m5">钥匙</div>
-        <p>钥匙编号：{{keyData.keysn}}</p>
-        <p class="m5">钥匙存储地址：{{keyData.keyAddress}}</p>
+        <p>钥匙编号：{{keyDataContent.keysn}}</p>
+        <p class="m5">钥匙存储地址：{{keyDataContent.keyAddress}}</p>
       </ion-col>
-      <ion-col class="mt5" col-4 *ngFor="let item of keyData.keyDlgtFilePics;let i =index">
-        <img [src]="imgHeader+item.imagePath+smImgSign" alt="" width="100%" height="80"  [imgGallery]="{data:keyData.keyDlgtFilePics,index:i}"   class="">
+      <ion-col class="mt5" col-4 *ngFor="let item of keyDataContent.keyDlgtFilePics;let i =index">
+        <img [src]="imgHeader+item.imagePath+smImgSign" alt="" width="100%" height="80"  [imgGallery]="{data:keyDataContent.keyDlgtFilePics,index:i}"   class="">
       </ion-col>
     </ion-row>
   </div>

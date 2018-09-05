@@ -479,9 +479,9 @@ export class HousingPage {
 
   //从首页楼盘搜索 - 禁止进入房源详情页
   goHouseDetail(item) {
-  if(!this.addIcon){
+/*  if(!this.addIcon){
       return
-    }
+    }*/
     this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
   }
 

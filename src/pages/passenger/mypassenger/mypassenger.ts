@@ -383,10 +383,12 @@ export class MypassengerPage {
       if (res.data.result && res.data.result.length > 0) {
         this.pageData = [];
         for (let i = 0; i < res.data.result.length; i ++) {
-
           this.pageData.push(res.data.result[i])
         }
         this.currentPage =1;
+        this.hasData = true;
+      }else {
+        this.hasData = false;
       }
 
 

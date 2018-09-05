@@ -142,9 +142,9 @@ export class HousedetailPage {
     this.form.value.tags= this.tagsSum(value);
   };
   ionViewWillEnter() {
-    this.navBar.backButtonClick = () => {
+/*    this.navBar.backButtonClick = () => {
       this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
-    };
+    };*/
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
@@ -511,10 +511,14 @@ export class HousedetailPage {
             if(res.success){
               this.toast.msg('修改成功!');
               this.errBtnHttp =true;
-              setTimeout(()=>{
+              // setTimeout(()=>{
                 // this.navCtrl.setRoot(HousingPage);
-                this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-              },100);
+                // this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
+                this.navCtrl.pop().then(()=>{
+                  this.events.publish('bevents',{propertyId:this.propertyid,notReloadPage:true});
+                })
+
+              // },100);
             }else{
               this.toast.error('修改失败！');
               this.errBtnHttp =false;

@@ -58,7 +58,6 @@ export class KeyPage {
       }
       console.log('图片信息',this.imgJson);
     });
-
   }
   ionViewDidLoad() {
     this.navBar.backButtonClick = this.backButtonClick;
