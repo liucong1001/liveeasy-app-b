@@ -20,6 +20,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
+import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
 
 /**
  * Generated class for the HousingPage page.
@@ -463,7 +464,10 @@ export class HousingPage {
     this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
     slidingItem.close();
   }
-
+  goLookHouse(item,slidingItem) {
+    this.openWin(LookhousePage, {item: item, standardAddress: item.standardAddress});
+    slidingItem.close();
+  }
   goCloseHouse(item,slidingItem) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,

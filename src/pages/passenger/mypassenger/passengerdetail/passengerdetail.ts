@@ -65,6 +65,7 @@ export class PassengerdetailPage {
       title:'客户归属'
     };
     this.area = this.localStorageProvider.get('area');
+    this.area&&this.area.unshift({name:'无',val:0});
     this.localCode = this.localStorageProvider.get('codeData');
     this.customerProvider.getDetail(navParams.data.customerId).then(res=>{
         this.data = res;
@@ -125,7 +126,7 @@ export class PassengerdetailPage {
     }
 
 
-    console.log('测试', this.compare(this.form.value.minSpaceSize,this.form.value.maxSpaceSize),this.form);
+    // console.log('测试', this.compare(this.form.value.minSpaceSize,this.form.value.maxSpaceSize),this.form);
 
 
   }
