@@ -674,7 +674,7 @@ export class HousingPage {
 
 
   hasElevatorJson = [
-    {name:'不限',val:0},
+    {name:'不限',start:'0',end:'5000',val:0},
     {start:'0',end:'100',val:'1'},
     {start:'100',end:'500',val:'2'},
     {start:'500',end:'1000',val:'3'},
@@ -721,6 +721,7 @@ export class HousingPage {
     this.starts=this.time.start;
     this.ends=this.time.end;
     // console.log(this.ends);
+
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
     }else{

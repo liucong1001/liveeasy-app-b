@@ -150,14 +150,14 @@
         </ion-item>
         <!--*ngIf="item.shareShow && (!ishasTag('128',item.tagsStr,item))"-->
         <ion-item-options>
-          <button ion-button color="default" style="background:#1ab394" tappable (click)="goLookHouse(item,slidingItem)"
+          <button ion-button color="default" style="background:#1ab394;padding: 1em;" tappable (click)="goLookHouse(item,slidingItem)"
           >实勘</button>
-          <button ion-button color="primary" style="background: #ffba4d" tappable  (click)="goFollow(item,slidingItem)"
+          <button ion-button color="primary" style="background: #ffba4d;padding: 1em;" tappable  (click)="goFollow(item,slidingItem)"
                   >跟进</button>
-          <button ion-button color="danger"  style="background: #80adff" tappable (click)="goAddLook(item,slidingItem)"
+          <button ion-button color="danger"  style="background: #80adff;padding: 1em;" tappable (click)="goAddLook(item,slidingItem)"
                   >空看</button>
 
-          <button ion-button color="default" style="background: #ff756f" tappable (click)="goCloseHouse(item,slidingItem)"
+          <button ion-button color="default" style="background: #ff756f;padding: 1em;" tappable (click)="goCloseHouse(item,slidingItem)"
                   >关闭</button>
 
         </ion-item-options>

@@ -137,7 +137,7 @@ export class MypassengerPage {
 
     this.searchDict = item.name;
     this.selected = item;//激活css选中状态
-     //用code值匹配相应商圈
+    //用code值匹配相应商圈
     this.district = [];
     for(var i of this.area){
       if(item.code==i['code']){
@@ -180,20 +180,20 @@ export class MypassengerPage {
     start.setSeconds(0);
     start.setMilliseconds(0);
     var todayzero=start.getTime();
-      if(item.createTime && item.lastFollowTm && item.lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
-        item.createTime<=todayzero-1000-(1000*60*60*24*3)){
-        item.followLabel=1;
-        return 'followLabel';
-      }
-      if(item.custFollowupInfoEntity&&item.custFollowupInfoEntity.appointmentTm){
-        // console.log('-customerName', i,new Date(this.pageData[i].appointmentTm),  new Date(this.todayzero).toLocaleDateString() );
-        if(item.custFollowupInfoEntity.appointmentTm && item.custFollowupInfoEntity.appointmentTm>=todayzero && item.custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
-          if (item.custFollowupInfoEntity.followStatus == 1) {
-            item.lookLable = 1;
-            return 'lookLable';
-          }
+    if(item.createTime && item.lastFollowTm && item.lastFollowTm<=todayzero-1000-(1000*60*60*24*3) &&
+      item.createTime<=todayzero-1000-(1000*60*60*24*3)){
+      item.followLabel=1;
+      return 'followLabel';
+    }
+    if(item.custFollowupInfoEntity&&item.custFollowupInfoEntity.appointmentTm){
+      // console.log('-customerName', i,new Date(this.pageData[i].appointmentTm),  new Date(this.todayzero).toLocaleDateString() );
+      if(item.custFollowupInfoEntity.appointmentTm && item.custFollowupInfoEntity.appointmentTm>=todayzero && item.custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
+        if (item.custFollowupInfoEntity.followStatus == 1) {
+          item.lookLable = 1;
+          return 'lookLable';
         }
       }
+    }
   }
 
   /**
@@ -239,20 +239,20 @@ export class MypassengerPage {
     if(!this.values){
       this.values='0'
     }
-      this.pageData = null;
-      this.hasData  = true;
-      console.log('搜索',this.params);
-      this.customerProvider.pageSearch(1,this.params).then(res=>{
-        this.pageData = res.data.result;
-        this.totalPages = res.data.totalPages;
+    this.pageData = null;
+    this.hasData  = true;
+    console.log('搜索',this.params);
+    this.customerProvider.pageSearch(1,this.params).then(res=>{
+      this.pageData = res.data.result;
+      this.totalPages = res.data.totalPages;
 
-        if(res.data.hasOwnProperty('result')){
-          this.hasData  = true;
-        }else{
-          this.hasData = false;
-        }
+      if(res.data.hasOwnProperty('result')){
+        this.hasData  = true;
+      }else{
+        this.hasData = false;
+      }
 
-      });
+    });
     //关闭搜索框子
     this.show = false;
     this.houseType = false;
@@ -274,10 +274,10 @@ export class MypassengerPage {
   updateCucumber(val,index) {
     this.values=val;
     this.info=this.sausage[index];
-     if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
-     if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
-     if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
-     if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
+    if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
+    if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
+    if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
+    if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
   }
   sx=0;
   //重置
@@ -333,27 +333,27 @@ export class MypassengerPage {
   //上拉加载
   doInfinite(infiniteScroll) {
 
-      infiniteScroll.complete();
-      this.currentPage++;
-      // console.log('当前页数',this.currentPage);
-      if(this.pageResult&&this.pageResult.length<10){
-        //toast提示
-        this.all = true;
-        return
-      }else {
-        this.all = false;
-        if(this.currentPage>this.totalPages){return};
-        this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
-          this.pageResult =res.data&&res.data.result;
-          for(let i=0;i<res.data.result.length;i++){
-            this.pageData.push(res.data.result[i]);
-          }
-        });
-      }
-      // console.log('Async operation has ended');
-      infiniteScroll.complete(function () {
-        // console.log('数据请求完成');
+    infiniteScroll.complete();
+    this.currentPage++;
+    // console.log('当前页数',this.currentPage);
+    if(this.pageResult&&this.pageResult.length<10){
+      //toast提示
+      this.all = true;
+      return
+    }else {
+      this.all = false;
+      if(this.currentPage>this.totalPages){return};
+      this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+        this.pageResult =res.data&&res.data.result;
+        for(let i=0;i<res.data.result.length;i++){
+          this.pageData.push(res.data.result[i]);
+        }
       });
+    }
+    // console.log('Async operation has ended');
+    infiniteScroll.complete(function () {
+      // console.log('数据请求完成');
+    });
 
   }
   searchFloorNum = 0; //初始化搜索次数
@@ -369,7 +369,7 @@ export class MypassengerPage {
     console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
     this.customerProvider.pageSearch(1,this.params).then(res=>{
-    console.log('结束时间内容',res.data.totalRecords);
+      console.log('结束时间内容',res.data.totalRecords);
 
       this.totalRecords = res.data.totalRecords;
       this.pageData = res.data.result;
@@ -419,9 +419,9 @@ export class MypassengerPage {
         },1000);
       }
     }).catch(err=>{
-       if(err){
-         refresher.complete();
-       }
+      if(err){
+        refresher.complete();
+      }
     });
   }
 
@@ -556,15 +556,15 @@ export class MypassengerPage {
 /**
  * 定义搜索参数类
  */
- class CustomerPageParams {
-    customerSrc:string;
-    intentionDiviCode:string;
-    intentionRoom:string;
-    intentionTradeCode:string;
-    priceUnit:string;
-    sort:string;
-    threeDayNoFollow?:string;
-    threeDayNoLook?:string;
-    todayNoFollow?:string;
-    todayNoLook?:string;
- }
+class CustomerPageParams {
+  customerSrc:string;
+  intentionDiviCode:string;
+  intentionRoom:string;
+  intentionTradeCode:string;
+  priceUnit:string;
+  sort:string;
+  threeDayNoFollow?:string;
+  threeDayNoLook?:string;
+  todayNoFollow?:string;
+  todayNoLook?:string;
+}
