@@ -40,7 +40,7 @@
       <!--*ngIf="lockhoseDetail?.open || (!lockhoseDetail?.open&&isCreater)&&!lockhoseDetail?.lock && lockhoseDetail?.auditStatus!=3"-->
       <ion-list class="m10" >
           <div class="attorneyPic bgWhite" >
-            <span class="lookHeadLine">门牌图：</span>
+            <span class="lookHeadLine">门牌图:</span>
             <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
           </div>
           <div class="attorneyPic bgWhite"  >
@@ -66,7 +66,7 @@
           </div>
           <div class="attorneyPic bgWhite" >
             <span class="lookHeadLine">其他图：</span>
-            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="''" (successEvent)="other($event)"
+            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="'add7'" (successEvent)="other($event)"
                       *ngIf="imgJson" [isBtn]="showBtn"></upload>
           </div>
         </ion-list>

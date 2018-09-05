@@ -75,7 +75,8 @@ export class LookhousePage {
          this.isCreater = false;
       }
       this.showBtn =true;
-      if(this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock && this.lockhoseDetail.auditStatus!=3)  {
+      if(this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock &&
+        this.lockhoseDetail.auditStatus!=3)  {
         this.showBtn =true;
       }else {
         this.showBtn =false;
@@ -92,8 +93,6 @@ export class LookhousePage {
         this.imgJson =[];
       }
 
-
-
       /**
       * */
       this.positionList =[];
@@ -102,6 +101,7 @@ export class LookhousePage {
      if(this.lockhoseDetail.kitchens>=1){this.positionList.push('add5')}
      if(this.lockhoseDetail.bathrooms>=1){this.positionList.push('add6')}
      console.log('存在',this.positionList);
+     console.log('按钮',this.showBtn);
     });
 
 
@@ -126,6 +126,7 @@ export class LookhousePage {
   ionViewDidLoad() {
 
     this.imgHeader = this.configProvider.set().img;
+
   }
 
 

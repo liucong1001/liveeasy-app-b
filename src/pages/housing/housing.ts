@@ -465,7 +465,7 @@ export class HousingPage {
     slidingItem.close();
   }
   goLookHouse(item,slidingItem) {
-    this.openWin(LookhousePage, {item: item, standardAddress: item.standardAddress});
+    this.openWin(LookhousePage, {item: item, propertyId: item.propertyId});
     slidingItem.close();
   }
   goCloseHouse(item,slidingItem) {
