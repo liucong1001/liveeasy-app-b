@@ -22,6 +22,7 @@ export class CloseprivateguestPage {
   clientID:any;
   clientName:any;
   clientPhone:any;
+  adminDivisionCode:any;
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild('select') select;
@@ -33,7 +34,8 @@ export class CloseprivateguestPage {
     this.clientName=navParams.get('item').customerName;
     this.clientPhone=navParams.get('item').customerPhone;
     this.customerid=navParams.get('item').customerId;
-    console.log(this.customerid);
+    this.adminDivisionCode=navParams.get('item').adminDivisionCode;
+    console.log(this.adminDivisionCode);
 
   }
   selectTitle(data){
@@ -65,6 +67,7 @@ export class CloseprivateguestPage {
 
   closes(){
     this.customerProvider.prclose({
+      adminDivisionCode:this.adminDivisionCode,
       customerStatus:this.form.value.customerStatus,
       content:this.form.value.content,
       customerId:this.customerid,

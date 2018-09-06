@@ -27,7 +27,7 @@
         <span *ngIf="ends !=0 && starts !=0">{{starts}}万-{{ends}}万</span>
         <span *ngIf="ends==0">{{starts}}万以上</span>
       </span>
-      <span [hidden]="starts" >价格 </span>
+      <span [hidden]="starts">价格 </span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
