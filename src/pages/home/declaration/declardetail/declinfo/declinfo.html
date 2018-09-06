@@ -109,7 +109,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="!customer&& nums == 0" class="tc p10">暂无数据</div>
+  <!--<div *ngIf="!customer" class="tc p10">暂无数据</div>-->
   <!--报单房源-->
   <div *ngIf="propertyinfo && nums == 1">
     <ion-grid class="p0 m10">
@@ -320,7 +320,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="!propertyinfo&& nums == 1" class="tc p10">暂无数据</div>
+  <!--<div *ngIf="!propertyinfo" class="tc p10">暂无数据</div>-->
   <!--业主信息-->
   <div *ngIf="ownerinfo && nums == 2">
     <ion-grid class="p0 m10" *ngFor="let item of ownerinfo">
@@ -392,7 +392,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="!ownerinfo&& nums == 2" class="tc p10">暂无数据</div>
+  <div *ngIf="!ownerinfo" class="tc p10">暂无数据</div>
   <!--合同信息-->
   <div *ngIf="asslist && nums == 3">
     <ion-grid class="p0 m10">
@@ -639,7 +639,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="!feelist&& nums == 4" class="tc p10">暂无数据</div>
+  <div *ngIf="!feelist" class="tc p10">暂无数据</div>
   <!--业绩类型-->
   <div *ngIf="asslist && nums == 5">
     <ion-grid class="p0 m10" *ngFor="let item of asslist">

@@ -7,7 +7,7 @@
   "proxies": [
     {
       "path": "/",
-      "proxyUrl": "https://beta-erp.zdfc.com/api/v1/"
+      "proxyUrl": "https://erp.zdfc.com/api/v1/"
     }
   ],
   "pro_id": "19532114"
