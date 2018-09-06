@@ -441,6 +441,9 @@ textarea{
     //width: 85% !important;
   }
 }
+ion-infinite-scroll-content{
+  min-height: 15px;
+}
 @media screen and(max-width: 320px) {
   .hdRightInfo{
     .upinput{

@@ -45,7 +45,12 @@ export class PlookrecordPage {
   getRecords(customerid){
     this.params = {customerId:customerid};
     this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
-      this.lRecord=res.data.result;
+      if(res.data.hasOwnProperty('result')){
+        this.lRecord=res.data.result;
+      }else {
+        this.lRecord=[];
+      }
+
     });
   }
 
@@ -57,6 +62,11 @@ export class PlookrecordPage {
   }
 
   ionViewDidLoad() {
+
+  }
+  navTransition:any;
+  ionViewWillLeave(){
+    this.navTransition();
 
   }
   //添加active
@@ -90,6 +100,7 @@ export class PlookrecordPage {
             role: '取消',
             handler: () => {
               console.log('Cancel clicked');
+              this. navTransition = alert.dismiss();
 
             }
           },

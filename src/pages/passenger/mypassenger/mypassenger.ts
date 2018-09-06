@@ -245,10 +245,12 @@ export class MypassengerPage {
     console.log('商圈',items);
     this.search();
   }
+  sx=1;
   sxClick(){
-    if(!this.values){
-      this.values='0'
+    if(!this.params.todayNoFollow &&!this.params.threeDayNoFollow&&!this.params.todayNoLook&&!this.params.threeDayNoLook ){
+      this.sx=1;
     }
+
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
@@ -270,12 +272,12 @@ export class MypassengerPage {
     this.pop = false;
     // this.housingEstate = false;
     //户型搜索条件字显示
-    if(this.sx ==1){
-      this.sx = 2;
-    }
-    if(this.info == false){
-      this.sx=1
-    }
+    // console.log(this.sx);
+
+    // if(this.info == false){
+    //   this.sx=1
+    // }
+    // this.sx=1;
 
   }
   // checks:boolean;
@@ -283,19 +285,20 @@ export class MypassengerPage {
   info:any;
   updateCucumber(val,index) {
     this.values=val;
-    this.info=this.sausage[index];
+    this.sx=2;
     if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
     if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
     if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
     if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
   }
-  sx=0;
+
   //重置
   reset(){
+    // this.sx=1;
     console.log('清除',this.sausage);
     for(var i in this.sausage){
       this.sausage[i]=false;
-    }
+    };
   }
 
   houseJSON = [
@@ -473,11 +476,6 @@ export class MypassengerPage {
     }
   }
   showMenu3(){
-    if(this.sx == 2){
-      this.sx=2
-    }else {
-      this.sx =1;
-    }
     if(this.more==false || this.show == true || this.houseType == true){
       this.more=true;
       this.show=false;

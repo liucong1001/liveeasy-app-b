@@ -27,10 +27,9 @@
          </ion-col>
 
          <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:more}">
-           <span [ngClass]="{color:filtrate(values)!='筛选'}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(values)}}</span>
-           <span [hidden]="sx==2"> 筛选</span>
-           <ion-icon name="md-arrow-dropdown" [hidden]="sx==2"></ion-icon>
-           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2&&filtrate(values)!='筛选'}" *ngIf="sx==2" style="margin-top: -8px;"></ion-icon>
+           <span [ngClass]="{color:sx==2}"*ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(params.todayNoFollow) || filtrate(params.threeDayNoFollow) ||filtrate(params.todayNoLook) || filtrate(params.threeDayNoLook)}}</span>
+           <span *ngIf="sx==1"> 筛选</span>
+           <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2,esRow:sx==2}"></ion-icon>
          </ion-col>
        </ion-row>
      </ion-header>

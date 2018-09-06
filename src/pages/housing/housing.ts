@@ -714,9 +714,10 @@ export class HousingPage {
       this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
-
+  selctPri=1;
   name:any;
   selectPrice(){
+    this.selctPri=2;
     this.time=this.elevatorPipe(this.price);
     this.name=this.time.name;
     this.starts=this.time.start;
@@ -726,6 +727,9 @@ export class HousingPage {
     if(this.name=='不限'){
       this.starts=0;
       this.ends=5000;
+      this.selctPri=1;
+    }else {
+      this.selctPri=2
     }
 
     if(this.starts==undefined||this.ends==undefined){
