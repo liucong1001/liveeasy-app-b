@@ -11,7 +11,7 @@
        </ion-navbar>
        <ion-row class="houseMenu">
          <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:show}">
-           <span [ngClass]="{color:searchArea,esRow:searchArea}" style="width: 40px;" *ngIf="searchArea&&searchArea!='不限'">
+           <span [ngClass]="{color:searchArea,esRow:searchArea}" style="width: 40px;"  *ngIf="searchArea&&searchArea!='不限'">
             {{ searchArea}}
           </span>
            <span *ngIf="!searchArea||searchArea=='不限'">区域</span>
@@ -34,7 +34,7 @@
          </ion-col>
        </ion-row>
      </ion-header>
-  <ion-content>
+  <ion-content  class="housList" style="margin-top: 2px" >
 
 
   <ion-refresher
@@ -51,11 +51,7 @@
     <div class="tc refreshTip" *ngIf="not">暂无更新</div>
     <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}信息</div>
 
-
-
-    <ion-list class="housList" style="margin-top: 2px">
-
-      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
+      <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem >
 
         <ion-item style="padding: 12px 15px 0;" >
 
@@ -105,62 +101,6 @@
 
       </ion-item-sliding>
 
-    </ion-list>
-
-
-
-
-
-
-
-
-
-  <!--<ion-grid class="p0" style="    margin-top: 3px;">-->
-    <!--<ion-row class="bgWhite houseMain" *ngFor=" let item of pageData; index as i;">-->
-        <!--<ion-col col-12 >-->
-            <!--<ion-row>-->
-              <!--<ion-col col-9 tappable (click)="gopassengerDetail(item)">-->
-                <!--<div class="ellipsis tips">-->
-                  <!--<font size="3">{{item.customerName}}</font>-->
-                    <!--&lt;!&ndash;急&ndash;&gt;-->
-                  <!--<a *ngIf="item.followLabel">{{item.followLabel==1?'急':''}}</a>-->
-                    <!--&lt;!&ndash;约&ndash;&gt;-->
-                  <!--<a *ngIf="item.lookLable">{{item.lookLable==1?'约':''}}</a>-->
-                  <!--&lt;!&ndash;<a>锁 isLock</a>&ndash;&gt;-->
-                  <!--<a *ngIf="item['isLock']">{{item['isLock']==1?'锁':''}}</a>-->
-                <!--</div>-->
-                <!--<p class="m5">-->
-                  <!--<font size="2" color="#aaa">ID:-->
-                    <!--<span>{{item.customerSn}}</span>-->
-                    <!--<span>{{item.intentionDiviCode}}</span>-->
-                  <!--</font>-->
-                <!--</p>-->
-                <!--<p class="m5">-->
-                    <!--<font size="2" color="#aaa">-->
-                      <!--<span>{{item.createTime | date:'yyyy年MM月dd日'}}录入</span>-->
-                      <!--<span>归属人：{{item.agentId}}</span>-->
-                    <!--</font>-->
-                  <!--</p>-->
-              <!--</ion-col>-->
-              <!--<ion-col col-3 class="tc m15">-->
-                <!--<a [attr.href]="'tel:' + item.customerPhone" class="telPhone"></a>-->
-              <!--</ion-col>-->
-            <!--</ion-row>-->
-          <!--</ion-col>-->
-      <!--<ion-col col-12 class="houseStatus">-->
-            <!--<ion-row>-->
-              <!--<ion-col col-4 class="tc" tappable (click)="goFollow(item)" [hidden]="item['isLock']==1">-->
-                <!--<a>跟进</a>-->
-              <!--</ion-col>-->
-              <!--<ion-col col-4 class="tc" tappable (click)="golook(item)"  [hidden]="item['isLock']==1">-->
-                <!--<a>约看</a>-->
-              <!--</ion-col>-->
-              <!--<ion-col col-4 class="tc" tappable (click)="closePrivateGuest(item)" [hidden]="item['isLock']==1">-->
-                <!--<a>关闭</a>-->
-              <!--</ion-col>-->
-            <!--</ion-row>-->
-          <!--</ion-col>-->
-    <!--</ion-row>-->
 
     <div class="content_page" >
       <div *ngIf="hasData&&pageData ==null" class="tc">
@@ -172,7 +112,7 @@
       </div>
     </div>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasData">
+    <ion-infinite-scroll   (ionInfinite)="doInfinite($event)" *ngIf="hasData">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="加载中">
@@ -202,7 +142,7 @@
               <ion-radio value="{{items.code}}"  (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
-          <div *ngIf="district.length==0&&!choseDivision"  >暂无该地区！</div>
+          <div *ngIf="district.length==0&&!choseDivision&&searchArea">暂无该地区！</div>
         </div>
       </ion-col>
     </ion-row>

@@ -304,6 +304,7 @@ export class HousedetailPage {
       new ErrorMessage('pattern', '请填写大于0整数'),
     ],
     houseNo:[
+      new ErrorMessage('required','房间号必须要填写！'),
       new ErrorMessage('pattern', '请填写大于0整数'),
     ],
     contact:[
@@ -324,6 +325,7 @@ export class HousedetailPage {
       new ErrorMessage('pattern', '手机号码格式不正确！'),
     ],
     spaceSize:[
+      new ErrorMessage('required','建筑面积必须要填写！'),
       new ErrorMessage('pattern','请填写大于0整数'),
     ],
     innerSpaceSize:[

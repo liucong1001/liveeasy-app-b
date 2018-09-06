@@ -122,9 +122,8 @@
               <ion-radio value="{{items.code}}"  (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
-          <div *ngIf="district ==false && selected?.id!=99">暂无该地区！</div>
+          <div *ngIf="district ==false && selected?.id!=99&&searchArea">暂无该地区！</div>
         </div>
-
       </ion-col>
     </ion-row>
   </ion-grid>

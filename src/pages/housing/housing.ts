@@ -198,12 +198,11 @@ export class HousingPage {
       delete this.params.division1;
       // this.params.division1 = this.params.division;
       this.params.area = '';
-      this.searchArea = '不限';
       this.district = [];
       this.search('propQuery');
       this.choseDivision = true;
-      console.log('gggggg不限');
     }
+    this.searchArea = item.name;
     this.selected = item;
     this.aeraShow=false;
     this.tradArea=true;
@@ -277,6 +276,8 @@ export class HousingPage {
            for (let i = 0; i < res.data.result.length; i ++) {
              this.pageData.push(res.data.result[i]);
            }
+           this.currentPage=1;
+           this.pageResult =res.data&&res.data.result;
          }else {
            // console.log('没有数据!');
            this.hasData = false;

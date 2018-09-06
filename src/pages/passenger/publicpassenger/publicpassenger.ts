@@ -61,11 +61,11 @@ export class PublicpassengerPage {
       this.propertyProvider.getDivision().then(res=>{
         this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
-        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+        this.area&&this.area.unshift({name:'不限',id:'99',code:'0'});
       });
     }else {
       this.area = this.localStorageProvider.get('area');
-      this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+      this.area&&this.area.unshift({name:'不限',id:'99',code:'0'});
     }
 
   }
@@ -73,11 +73,8 @@ export class PublicpassengerPage {
   ionViewDidLoad() {
     this.search();
     this.navBar.backButtonClick = () => {
-      // this.navCtrl.push(HomesearchPage);
-      // this.navCtrl.setRoot(PassengerPage);
       this.navCtrl.setRoot(PassengerPage)
     };
-    // this.navBar.backButtonClick = this.backButtonClick;
 
   }
 
@@ -85,7 +82,6 @@ export class PublicpassengerPage {
     // this.navBar.backButtonClick = () => {
     //   this.navCtrl.pop({animate:false});
     // };
-
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -101,11 +97,11 @@ export class PublicpassengerPage {
     if(item.id == '99'){
       this.params.intentionDiviCode ='0';
       this.params.intentionTradeCode = '0';
-      this.searchArea = '不限';
+      // this.searchArea = '不限';
       this.search();
     }
 
-    this.searchDict = item.name;
+    this.searchArea = item.name;
     this.selected = item;//激活css选中状态
     //用code值匹配相应商圈
     this.district = [];
@@ -178,6 +174,8 @@ export class PublicpassengerPage {
       if(res.data.hasOwnProperty('result')){
         this.hasData  = true;
         this.firstPageData = res.data.result;
+        this.currentPage=1;
+        this.pageResult =res.data&&res.data.result;
         console.log(this.hasData)
       }else{
         this.hasData = false;
@@ -195,7 +193,8 @@ export class PublicpassengerPage {
   }
   searchArea='';
   selectArea(items){
-    this.searchArea= items.name;
+    console.log('商圈',items);
+    if(items.code!='0'){ this.searchArea= items.name;}
     this.search();
   }
   sxClick(val){
@@ -288,7 +287,7 @@ export class PublicpassengerPage {
   doInfinite(infiniteScroll) {
 
       infiniteScroll.complete();
-      this.currentPage++;
+      this.currentPage<=this.totalPages&&this.currentPage++;
       if(this.pageResult&&this.pageResult.length<10){
         //toast提示
         this.all = true;

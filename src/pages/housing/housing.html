@@ -1,6 +1,7 @@
 <ion-header id="propertyHeader">
 
   <ion-navbar #navbar>
+    <!--<p>{{all}}&#45;&#45;{{hasData}}</p>-->
     <ion-searchbar  #searchBar placeholder="请输入小区或商圈名" [(ngModel)]="floorName" [ngClass]="{updateInput:updateInput}"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" *ngIf="addIcon" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>

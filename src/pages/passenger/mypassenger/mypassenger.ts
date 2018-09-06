@@ -13,6 +13,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
+import { Content,List } from 'ionic-angular';
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -77,15 +78,15 @@ export class MypassengerPage {
         console.log('行政区划',res);
         this.area = res.data.result[0];
         this.localStorageProvider.set('area',this.area);
-        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+        this.area&&this.area.unshift({name:'不限',id:'99',code:'0'});
       });
     }else {
       this.area = this.localStorageProvider.get('area');
-      this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+      this.area&&this.area.unshift({name:'不限',id:'99',code:'0'});
     }
   }
   @ViewChild('myTabs') tabRef: Tabs;
-
+  @ViewChild('Content') content: Content;
   ionViewDidLoad() {
     this.search();
     // this.navBar.backButtonClick = () => {
@@ -102,6 +103,11 @@ export class MypassengerPage {
     //   this.navCtrl.pop({animate:false});
     //
     // };
+  }
+  scrollHandler(event) {
+    // console.log(`ScrollEvent: ${event}`);
+// this.content.scrollToTop();
+//     this.content.scrollTo(0, 500, 200);
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -129,13 +135,13 @@ export class MypassengerPage {
     if(item.id == '99'){
       this.params.intentionDiviCode ='0';
       this.params.intentionTradeCode = '0';
-      this.searchArea = '不限';
+      // this.searchArea = '不限';
       this.district = [];
       this.search();
       this.choseDivision = true;
     }
 
-    this.searchDict = item.name;
+    this.searchArea = item.name;
     this.selected = item;//激活css选中状态
     //用code值匹配相应商圈
     this.district = [];
@@ -200,21 +206,24 @@ export class MypassengerPage {
    * 列表搜索
    */
   search(){
-
+/*
     if(this.params.intentionDiviCode=='99'){
       this.params.intentionDiviCode='0';
-    }
-
+    }*/
+// this.scrollToTop();
     this.pageData = null;
     this.hasData  = true;
     console.log('搜索',this.params);
+     // this.content.scrollToTop();
     this.customerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
-      if(res.data.hasOwnProperty('result')){
+
+      if(res.data.result){
         this.hasData  = true;
         this.firstPageData = res.data.result;
-
+        this.currentPage=1;
+        this.pageResult =res.data&&res.data.result;
       }else{
         this.hasData = false;
       }
@@ -227,12 +236,13 @@ export class MypassengerPage {
       // this.housingEstate = false;
       //户型搜索条件字显示
     });
-
-
   }
+
   searchArea='';
   selectArea(items){
-    this.searchArea= items.name;
+
+    if(items.code!='0'){ this.searchArea= items.name;}
+    console.log('商圈',items);
     this.search();
   }
   sxClick(){
@@ -305,7 +315,7 @@ export class MypassengerPage {
     {name:'今日有约看',val:3},
     {name:'三日内有约看',val:4},
 
-  ]
+  ];
 
   //户型转换
   housePipe(data){
@@ -332,9 +342,9 @@ export class MypassengerPage {
   pageResult:any;
   //上拉加载
   doInfinite(infiniteScroll) {
-
+   console.log('currentPage:',this.currentPage,'totalPages',this.totalPages);
     infiniteScroll.complete();
-    this.currentPage++;
+    this.currentPage<=this.totalPages&&this.currentPage++;
     // console.log('当前页数',this.currentPage);
     if(this.pageResult&&this.pageResult.length<10){
       //toast提示

@@ -183,6 +183,7 @@ export class AddhousePage {
             new ErrorMessage('pattern','请填写数字'),
         ],
       houseNo:[
+        new ErrorMessage('required','房间号必须要填写！'),
         new ErrorMessage('pattern','请填写数字'),
       ],
       contact:[
@@ -218,6 +219,7 @@ export class AddhousePage {
         new ErrorMessage('required','是否配备电梯必须要填写！'),
       ],
       spaceSize:[
+        new ErrorMessage('required','建筑面积必须要填写！'),
         new ErrorMessage('pattern','请填写大于0整数,不能输入空格等特殊符号'),
       ],
       innerSpaceSize:[
