@@ -394,18 +394,51 @@ textarea{
   top: 16px;
 }
 .updateEnd{
-  .item-ios [item-end]{
-    margin: 0;
-  }
-  .item-ios .item-button{
+  border-bottom: 1px solid #F5F5F5;
+  padding: 5px 0;
+  margin-left: 12px;
+  ion-col{
+    //border: 1px solid;
     padding: 0;
   }
-  .button-outline-ios{
-    color: #000;
-    border: 0;
+  ion-col[col-2],
+  ion-col[col-3]{
+    margin-top: 12px;
   }
-  input{
+  ion-col[col-1]{
     text-align: right;
+    margin-top: 12px;
+    padding: 0 8px 0 0;
+
+  }
+
+
+  //.item-ios [item-end]{
+  //  margin: 0;
+  //}
+  //.item-ios .item-button{
+  //  padding: 0;
+  //}
+  //.button-outline-ios{
+  //  color: #000;
+  //  border: 0;
+  //
+  //}
+  //.button-ios{
+  //  background-color:#fff;
+  //  color: #000;
+  //}
+  //.button-outline-ios.activated{
+  //  color: #000 !important;
+  //}
+  input{
+    //border: 1px solid red;
+    width: 100%;
+    text-align: right;
+    margin: 0;
+    height: 42px;
+    //border: 1px solid;
+    //width: 85% !important;
   }
 }
 @media screen and(max-width: 320px) {

@@ -16,13 +16,27 @@
       </button>
     </ion-list>
     <ion-list>
+
       <div class="bgWhite">
-        <div class="hdRightInfo">
-          <label>栋号<i class="text-danger">*</i></label>
-          <input type="text" formControlName="buildingNo"   placeholder="请填写英文或数字" class="upinput"/>
-          <button ion-button outline item-end>栋</button>
-        </div>
+        <ion-row class="updateEnd">
+          <ion-col col-2>栋号<i class="text-danger">*</i></ion-col>
+          <ion-col col-9>
+            <ion-input type="text"  formControlName="floorNo"  placeholder="请填写数字">
+            </ion-input>
+          </ion-col>
+          <ion-col col-1>
+            栋
+          </ion-col>
+        </ion-row>
       </div>
+
+      <!--<div class="bgWhite">-->
+        <!--<div class="hdRightInfo">-->
+          <!--<label>栋号<i class="text-danger">*</i></label>-->
+          <!--<input type="text" formControlName="buildingNo"   placeholder="请填写英文或数字" class="upinput"/>-->
+          <!--<button ion-button outline item-end>栋</button>-->
+        <!--</div>-->
+      <!--</div>-->
       <!--<div class="hdRightInfo">-->
         <!--<ion-item class="pl12">-->
           <!--<ion-label>栋号<i class="text-danger">*</i></ion-label>-->
@@ -41,22 +55,36 @@
       <div *ngIf="form.value.unitNo&&form.value.unitNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.unitNo"  [control]="form.get('unitNo')"  ></valid-error>
 
-      <div class="bgWhite">
-        <div class="hdRightInfo">
-          <label>楼层<i class="text-danger">*</i></label>
-          <input type="text"  formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}" class="upinput"/>
-          <button ion-button outline item-end>层</button>
-        </div>
-      </div>
 
-      <!--<div class="hdRightInfo">-->
+     <div class="bgWhite">
+       <ion-row class="updateEnd">
+         <ion-col col-2>楼层<i class="text-danger">*</i></ion-col>
+         <ion-col col-9>
+           <ion-input type="text"  formControlName="floorNo"  placeholder="请填写数字">
+           </ion-input>
+         </ion-col>
+         <ion-col col-1>
+           层
+         </ion-col>
+       </ion-row>
+     </div>
+      <!--<div class="bgWhite updateEnd">-->
+        <!--<div class="hdRightInfo">-->
+          <!--<label>楼层<i class="text-danger">*</i></label>-->
+          <!--<input type="text"  formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}" class="upinput"/>-->
+          <!--<button ion-button  item-end>层</button>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="relative updateEnd">-->
         <!--<ion-item class="pl12">-->
           <!--<ion-label >楼层<i class="text-danger">*</i></ion-label>-->
           <!--<ion-input type="text"  formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">-->
           <!--</ion-input>-->
         <!--</ion-item>-->
-        <!--<span class="">层</span>-->
+        <!--<span class="updatRight">层</span>-->
       <!--</div>-->
+
       <div *ngIf="form.value.floorNo&&form.value.floorNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
@@ -85,14 +113,17 @@
         <!--</div>-->
       <!--</div>-->
 
-      <div class="relative updateEnd">
-        <ion-item class="pl12">
-          <ion-label style="padding-right:3px;">建筑面积<i class="text-danger">*</i></ion-label>
-          <ion-input type="text"  formControlName="spaceSize"  placeholder="请填写数字">
-          </ion-input>
-          <button ion-button outline item-end>平</button>
-        </ion-item>
-
+      <div class="bgWhite">
+        <ion-row class="updateEnd">
+          <ion-col col-3>建筑面积<i class="text-danger">*</i></ion-col>
+          <ion-col col-8>
+            <ion-input type="text"  formControlName="spaceSize"  placeholder="请填写数字">
+            </ion-input>
+          </ion-col>
+          <ion-col col-1>
+            平
+          </ion-col>
+        </ion-row>
       </div>
       <div *ngIf="form.value.spaceSize&&form.value.spaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.spaceSize"  [control]="form.get('spaceSize')"  ></valid-error>
@@ -106,17 +137,19 @@
           <!--<button ion-button outline item-end>平</button>-->
         <!--</div>-->
       <!--</div>-->
-
-
-      <div class="relative updateEnd">
-        <ion-item class="pl12">
-          <ion-label>套内面积</ion-label>
-          <ion-input type="text"  formControlName="innerSpaceSize" placeholder="请填写数字">
-          </ion-input>
-          <button ion-button outline item-end>平</button>
-        </ion-item>
-        <!--<span class="rights">平</span>-->
+      <div class="bgWhite">
+        <ion-row class="updateEnd">
+          <ion-col col-3>套内面积</ion-col>
+          <ion-col col-8>
+            <ion-input type="text"  formControlName="innerSpaceSize"  placeholder="请填写数字">
+            </ion-input>
+          </ion-col>
+          <ion-col col-1>
+            平
+          </ion-col>
+        </ion-row>
       </div>
+
       <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
       <div *ngIf="compare(form.value.innerSpaceSize,form.value.spaceSize)" class="valid-error">*套内面积不能大于建筑面积!</div>
@@ -255,15 +288,28 @@
       <!--默认出售-->
 
       <div *ngIf="this.form.value.buzzType == 1 || this.form.value.buzzType == 3">
-      <div class="relative updateEnd">
-      <ion-item class="pl12">
-      <ion-label>出售价格<i class="text-danger">*</i></ion-label>
-      <ion-input type="text" formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
-      </ion-input>
-        <button ion-button outline item-end>万</button>
-      </ion-item>
-      <!--<span class="rights">万</span>-->
-      </div>
+        <!--<div class="relative updateEnd">-->
+        <!--<ion-item class="pl12">-->
+        <!--<ion-label>出售价格<i class="text-danger">*</i></ion-label>-->
+        <!--<ion-input type="text" formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">-->
+        <!--</ion-input>-->
+          <!--&lt;!&ndash;<button ion-button item-end>万</button>&ndash;&gt;-->
+        <!--</ion-item>-->
+          <!--<span class="updatRight">平</span>-->
+        <!--</div>-->
+
+        <div class="bgWhite">
+          <ion-row class="updateEnd">
+            <ion-col col-3>出售价格<i class="text-danger">*</i></ion-col>
+            <ion-col col-8>
+              <ion-input type="text" formControlName="propertyPrice" placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
+              </ion-input>
+            </ion-col>
+            <ion-col col-1>
+              万
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
 
 

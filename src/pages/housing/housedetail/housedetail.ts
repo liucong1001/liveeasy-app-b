@@ -142,9 +142,9 @@ export class HousedetailPage {
     this.form.value.tags= this.tagsSum(value);
   };
   ionViewWillEnter() {
-    this.navBar.backButtonClick = () => {
+/*    this.navBar.backButtonClick = () => {
       this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
-    };
+    };*/
     this.statusBar.styleLightContent();
   }
   ionViewDidLoad() {
@@ -263,7 +263,7 @@ export class HousedetailPage {
         desc:[''],
       })
     ]),//业主信息
-    contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],
+    contact:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5a-zA-Z]*$/)]],
     contactInfo:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],
     contactInfo2:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
     contactInfo3:['',Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)],
@@ -511,10 +511,14 @@ export class HousedetailPage {
             if(res.success){
               this.toast.msg('修改成功!');
               this.errBtnHttp =true;
-              setTimeout(()=>{
+              // setTimeout(()=>{
                 // this.navCtrl.setRoot(HousingPage);
-                this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid});
-              },100);
+                // this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
+                this.navCtrl.pop().then(()=>{
+                  this.events.publish('bevents',{propertyId:this.propertyid,notReloadPage:true});
+                })
+
+              // },100);
             }else{
               this.toast.error('修改失败！');
               this.errBtnHttp =false;

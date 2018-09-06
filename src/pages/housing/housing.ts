@@ -20,6 +20,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
+import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
 
 /**
  * Generated class for the HousingPage page.
@@ -463,7 +464,10 @@ export class HousingPage {
     this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
     slidingItem.close();
   }
-
+  goLookHouse(item,slidingItem) {
+    this.openWin(LookhousePage, {item: item, propertyId: item.propertyId});
+    slidingItem.close();
+  }
   goCloseHouse(item,slidingItem) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
@@ -475,9 +479,9 @@ export class HousingPage {
 
   //从首页楼盘搜索 - 禁止进入房源详情页
   goHouseDetail(item) {
-  if(!this.addIcon){
+/*  if(!this.addIcon){
       return
-    }
+    }*/
     this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
   }
 
@@ -670,7 +674,7 @@ export class HousingPage {
 
 
   hasElevatorJson = [
-    {name:'不限',val:0},
+    {name:'不限',start:'0',end:'5000',val:0},
     {start:'0',end:'100',val:'1'},
     {start:'100',end:'500',val:'2'},
     {start:'500',end:'1000',val:'3'},
@@ -717,6 +721,7 @@ export class HousingPage {
     this.starts=this.time.start;
     this.ends=this.time.end;
     // console.log(this.ends);
+
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
     }else{

@@ -19,11 +19,11 @@ export class PropertyProvider {
   private  rolePath = this.configProvider.set().http+ '/property/propertyInfo/propertyDetail';
   //业主委托
   private  attorneyPath = this.configProvider.set().http+'/property/delegateDocInfo/insert.do';
-  private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do'
-  private  adetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditDocInfoDetail.do';
+  private  aupdatePath = this.configProvider.set().http+'/property/delegateDocInfo/update.do';
+  private  adetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getDelegateAuditPics/';
   //钥匙
   private  keyPath = this.configProvider.set().http+'/property/propertyKeyInfo/insertKey.do';
-  private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getAuditKeyInfoDetail.do';
+  private  keydetailPath = this.configProvider.set().http+'/property/propertyAuditInfo/getKeyAuditPics/';
   private  keyupdatePath = this.configProvider.set().http+'/property/propertyKeyInfo/updateKey.do';
   //实勘图
   private  shiKanPath =  this.configProvider.set().http+'/property/propertyPics/uploadPic';
@@ -176,7 +176,7 @@ export class PropertyProvider {
   }
   //业主委托书详情
   adetail(propertyId) {
-    return this.httpProvider.httpPostForm(this.adetailPath,'propertyId='+propertyId)
+    return this.httpProvider.httpGet(this.adetailPath+propertyId);
   }
   //业主委托书修改
   aupdate(params?) {
@@ -189,7 +189,7 @@ export class PropertyProvider {
   }
   //钥匙详情
   keydetail(propertyId) {
-    return this.httpProvider.httpPost(this.keydetailPath+'?propertyId='+propertyId)
+    return this.httpProvider.httpGet(this.keydetailPath+propertyId)
   }
   //钥匙修改
   keyupdate(params?) {

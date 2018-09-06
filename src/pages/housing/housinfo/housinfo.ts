@@ -1,5 +1,5 @@
 import { Component,ViewChild,NgZone} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController, Events} from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -42,7 +42,9 @@ export class HousinfoPage {
   data:any;
   houseData:PropertyModel;
   letteratorneyData:any;
+  letteratorneyDataContent:any;
   keyData:any;
+  keyDataContent:any;
   imgHeader: string;
   tagsListPage =[];
   propertyId:string;
@@ -63,7 +65,7 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                public app: App,
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                             public app: App,public events: Events
               ) {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
@@ -78,9 +80,8 @@ export class HousinfoPage {
     if(this.modals == false){
       this.modals=true;
     }
-
-
   }
+
   @ViewChild("header") header;
   scrollHandler(e) {
     let opacity = +(e.scrollTop / 150).toFixed(2);
@@ -114,95 +115,52 @@ export class HousinfoPage {
   imgSign:any;
   smImgSign:any;
   ionViewDidLoad() {
-
-
-
-    let loading = this.loadingCtrl.create({
-      content: '数据加载中...'
-    });
-    loading.present();
-
     this.imgHeader = this.configProvider.set().img;
     this.imgSign = this.configProvider.set().imgSign;
     this.smImgSign = this.configProvider.set().smSign;
-
     setInterval(()=>{
       this.slider.slideNext(300,true);
     },2000);
     this.propertyId = this.navParams.get('propertyId');
-
-    this.propertyProvider.getRecord(this.navParams.get('propertyId')).then(res=>{
-      this.houseData=res.data;
-      //实勘图
-       this.imgJson = this.houseData&&this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
-      //钥匙信息
-      this.keyData = this.houseData&&this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
-      // 业主委托书
-      this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
-      loading.dismiss();
-      // console.log('房源标签', this.tagPipe(this.houseData.tagsStr));
-    }).catch(err=>{
-      loading.dismiss();
-      this.toast.error('查询失败');
-    });
-
-
- // if(this.navParams.get('item')){
- //   //如果是从列表页过来  直接传递数据 不请求 （一次调用详情接口）
- //     this.houseData = this.navParams.get('item');
- //     console.log(this.houseData);
- //     this.propertyId = this.houseData.propertyId;
- //     if(this.navParams.get('item').propertyPics){
- //       this.imgJson = JSON.parse(this.navParams.get('item').propertyPics);
- //     }
- // }else if(this.navParams.get('propertyId')){
- //     this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
- //         if(res.success){
- //           this.houseData=res.data;
- //           console.log(this.houseData)
- //           this.propertyId = this.houseData.propertyId;
- //           if(res.data.propertyPics){
- //             this.imgJson = JSON.parse(res.data.propertyPics);
- //           }
- //         }
- //     });
- // }
-
-    // console.log('上一个页面是：ModalCmp',this.navCtrl.last().name);
+    this.getHouseData(this.propertyId,true);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'){
       this.ModalCmp = true;
     }
+  }
 
-
-    //baidu map
-    this.opts = {
-      // 地图中心坐标
-      center: {
-        longitude: 116.4177150000,
-        latitude: 40.0612540000
-      },
-      zoom: 17,
-      // 地图上的坐标
-      markers: [{
-        longitude: 116.4177150000,
-        latitude: 40.0612540000,
-        title: '华泰汽车集团',
-        content: '朝阳区立水桥',
-        autoDisplayInfoWindow: true
-      }],
-      geolocationCtrl: {
-        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_RIGHT
-      },
-      scaleCtrl: {
-        anchor: ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT
-      },
-      overviewCtrl: {
-        isOpen: true
-      },
-      navCtrl: {
-        type: NavigationControlType.BMAP_NAVIGATION_CONTROL_LARGE
+  getHouseData(propertyId,isloading){
+    let loading = this.loadingCtrl.create({
+      content: '数据加载中...'
+    });
+   isloading&&loading.present();
+    this.propertyProvider.getRecord(propertyId).then(res=>{
+      this.houseData=res.data;
+      //实勘图
+      this.imgJson = this.houseData&&this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
+      //钥匙信息
+      // this.keyData = this.houseData&&this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
+      // 业主委托书
+      // this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
+      isloading&&loading&&loading.dismiss()
+    }).catch(err=>{
+      isloading&&loading&&loading.dismiss();
+      this.toast.error('查询失败');
+    });
+   //钥匙详情信息
+    this.propertyProvider.keydetail(propertyId).then(res=>{
+      if(res.success&&res.data){
+        this.keyData =res.data ;
+        this.keyDataContent =JSON.parse(res.data.content);
       }
-    };
+    });
+  // 业主委托书详情
+    this.propertyProvider.adetail(propertyId).then(res => {
+      if(res.success){
+        this.letteratorneyData=res.data;
+        this.letteratorneyDataContent =JSON.parse(res.data.content);
+      }
+      console.log('图片',this.imgJson);
+    });
 
   }
 
@@ -214,15 +172,18 @@ export class HousinfoPage {
     this.navBar.backButtonClick = () => {
       // console.log('刷新reloadpage',this.navParams.get('notReloadPage'),this.app.getActiveNavs()[0]['index']);
       if(this.app.getActiveNavs()[0]['index']==1){
-        if(this.navParams.get('notReloadPage')){
-          // this.navCtrl.pop();
-          this.navCtrl.parent.select(1);
+/*      if(!this.navParams.get('notReloadPage')){
+           this.navCtrl.popToRoot()
+          // this.navCtrl.parent.select(1);
         }else {
           this.navCtrl.parent.select(1);
           this.navCtrl.setRoot(HousingPage);
-        }
+          // this.navCtrl.popToRoot()
+        }*/
+       this.navCtrl.popToRoot()
       }else if(this.app.getActiveNavs()[0]['index']==0){    //从首页搜索楼盘进入
-        if(this.navParams.get('notReloadPage')){
+        this.navCtrl.pop()
+/*        if(this.navParams.get('notReloadPage')){
           this.navCtrl.pop();
           // this.navCtrl.parent.select(1);
         }else {
@@ -231,7 +192,7 @@ export class HousinfoPage {
         }
       }else {
         this.navCtrl.parent.select(1);
-        this.navCtrl.setRoot(HousingPage);
+        this.navCtrl.setRoot(HousingPage);*/
       }
 
       // if(this.app.getActiveNavs()[0]['index']==0){
@@ -264,6 +225,11 @@ export class HousinfoPage {
   }
 
   edit(){
+    this.events.subscribe('bevents',(params)=>{
+      console.log('接受数据',params); //propertyId
+      this.getHouseData(params.propertyId,false);
+      this.events.unsubscribe('bevents');
+    });
     this.openWin(HousedetailPage,{propertyId:this.propertyId});
   }
 

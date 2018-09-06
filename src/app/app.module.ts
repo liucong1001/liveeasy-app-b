@@ -44,7 +44,6 @@ import { PublicCustomerProvider } from '../providers/public-customer/public-cust
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 
-import { LazyLoadImageModule } from 'ng2-lazyload-image';
 import {ToastComponent} from "../components/toast/toast";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import * as ionicGalleryModal from 'ionic-gallery-modal';
@@ -91,7 +90,6 @@ import { NativeProvider } from '../providers/native/native';
         FormsModule,
         ComponentsModule,
         CommonModule,
-        LazyLoadImageModule,
       HomePageModule,
         //页面模块，
       LoginPageModule,StartupPageModule,PassengerPageModule,
