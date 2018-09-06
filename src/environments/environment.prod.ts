@@ -5,7 +5,7 @@ import { Environment } from './environment.model';
 export const ENV: Environment = {
   mode: 'prod',
   name:'房贝',
-  http:'https://erp.zdfc.com/api/v1/',
+  http:'https://erp.zdfc.com/api/v1',
   cHttp:'https://q.zdfc.com/',
   cmsHttp:'https://cms.zdfc.com/',
   isProd:true,

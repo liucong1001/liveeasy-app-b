@@ -33,7 +33,7 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://erp.zdfc.com/api/v1/',
+        http:'https://erp.zdfc.com/api/v1',
         cHttp:'https://q.zdfc.com/',
         cmsHttp:'https://cms.zdfc.com/',
         img:this.imgHeaderServer,
@@ -46,7 +46,7 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://beta-erp.zdfc.com/api/v1/',
+        http:'https://beta-erp.zdfc.com/api/v1',
         cHttp:'https://beta-c.zdfc.com/',
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:this.imgHeaderServer,
@@ -72,7 +72,7 @@ export class ConfigProvider {
       this.globalConfig = {
         url:'',
         oss:'',
-        http:'https://beta-erp.zdfc.com/api/v1/',
+        http:'https://beta-erp.zdfc.com/api/v1',
         cHttp:'https://beta-c.zdfc.com/',
         cmsHttp:'https://beta-cms.zdfc.com/',
         img:this.imgHeaderServer,
