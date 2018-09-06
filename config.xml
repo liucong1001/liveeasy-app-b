@@ -118,5 +118,5 @@
         <variable name="APP_KEY" value="" />
     </plugin>
     <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="4.5.5" />
+    <engine name="ios" spec="4.4.0" />
 </widget>
