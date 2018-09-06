@@ -21,7 +21,7 @@
         <ion-row class="updateEnd">
           <ion-col col-2>栋号<i class="text-danger">*</i></ion-col>
           <ion-col col-9>
-            <ion-input type="text"  formControlName="floorNo"  placeholder="请填写数字">
+            <ion-input type="text"  formControlName="buildingNo"  placeholder="请填写数字">
             </ion-input>
           </ion-col>
           <ion-col col-1>
@@ -152,7 +152,7 @@
 
       <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.innerSpaceSize"  [control]="form.get('innerSpaceSize')"  ></valid-error>
-      <div *ngIf="compare(form.value.innerSpaceSize,form.value.spaceSize)" class="valid-error">*套内面积不能大于建筑面积!</div>
+      <div *ngIf="compare(form.value.spaceSize,form.value.innerSpaceSize)" class="valid-error">*套内面积不能大于建筑面积!</div>
       <div *ngIf="form.value.innerSpaceSize>1000000000" class="valid-error">
         <p>*超出长度!</p>
       </div>
@@ -320,7 +320,7 @@
             <!--<button ion-button outline item-end>万</button>-->
         <!--</div>-->
       <!--</div>-->
-      <div *ngIf="form.value.innerSpaceSize&&form.value.innerSpaceSize==0" class="valid-error">*不能为0</div>
+      <div *ngIf="form.value.propertyPrice&&form.value.propertyPrice==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.propertyPrice"  [control]="form.get('propertyPrice')"  ></valid-error>
       <!--END-->
       <!--出租-->

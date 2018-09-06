@@ -105,6 +105,13 @@ page-housing {
   }
 
 }
+
+  @media screen and(max-width: 320px) {
+    .esRow{
+      width: 80%;
+    }
+  }
+
 }
 .uDis{
   height: 25px;
