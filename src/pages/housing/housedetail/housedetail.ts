@@ -498,8 +498,10 @@ export class HousedetailPage {
      this.form.value.contacts.push(man3);
      this.addContactBolean = false;
    }
-
-    this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+    var type=  typeof this.form.value.contacts;
+    if(type=="object"){
+      this.form.value.contacts = JSON.stringify(this.form.value.contacts);
+    }
     this.form.value.businessTime = new Date(this.form.value.businessTime).getTime();
 
     var formData = {
@@ -535,9 +537,6 @@ export class HousedetailPage {
            console.log('errBtnHttp',this.errBtnHttp);
         }
     });
-
-
-
   }
 
 
