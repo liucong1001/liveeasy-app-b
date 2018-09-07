@@ -65,7 +65,7 @@ export class PlookrecordPage {
 
   }
   ionViewWillLeave(){
-
+      this.alert.dismiss();
   }
   //添加active
   goToSlide(index) {
@@ -87,9 +87,10 @@ export class PlookrecordPage {
   // accomplish(){
   //   this.navCtrl.push(AccomplishPage)
   // }
+  alert:any;
   data:any;
     confirm(item) {
-      let alert = this.alertCtrl.create({
+      this.alert = this.alertCtrl.create({
         title: '提示',
         message: '确定完成吗？',
         buttons: [
@@ -121,7 +122,7 @@ export class PlookrecordPage {
           }
         ]
       });
-      alert.present();
+      this.alert.present();
     }
 
   close(item){
