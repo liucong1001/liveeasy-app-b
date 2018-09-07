@@ -37,10 +37,6 @@ export class PfollowrecordPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PfollowrecordPage');
-    this.navBar.backButtonClick = () => {
-      this.openWin(PassengerdetailPage,{customerId:this.customerid})
-
-    };
   }
   addHouse(){
     this.navCtrl.push(AddpassengerPage)
