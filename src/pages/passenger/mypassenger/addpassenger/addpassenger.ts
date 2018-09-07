@@ -277,18 +277,26 @@ export class AddpassengerPage {
     console.log('表单',this.form.value);
   }
 
-
+  errBtnHttp:boolean;
   save(){
+    this.errBtnHttp = true;
     console.log('表单客户',this.form.value);
     this.customerProvider.add(this.form.value).then(res=>{
       if (res.success){
         this.toast.msg('录入成功!');
-        this.navCtrl.pop();
+        this.errBtnHttp = true;
+        // this.navCtrl.pop();
+        this.navCtrl.pop().then(()=>{
+          this.events.publish('bevents',{reload:true});
+        })
+
       }else {
+        this.errBtnHttp = false;
         this.toast.error(res.msg);
       }
     },err=>{
        alert('录入失败！');
+      this.errBtnHttp = false;
     })
 
   }

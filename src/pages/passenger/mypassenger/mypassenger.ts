@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams,Navbar,ItemSliding,Tabs  } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Navbar, ItemSliding, Tabs, Events} from 'ionic-angular';
 import { AddpassengerPage } from './addpassenger/addpassenger';
 import { PassengerdetailPage } from './passengerdetail/passengerdetail';
 import { PassengerlookPage } from './passengerlook/passengerlook';
@@ -64,7 +64,7 @@ export class MypassengerPage {
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,
-              public localStorageProvider: LocalStorageProvider,) {
+              public localStorageProvider: LocalStorageProvider,public events: Events) {
 
     // this.customerProvider.area().then(res=>{
     //   this.area = res.data.distrs;
@@ -495,6 +495,12 @@ export class MypassengerPage {
     }
   }
   addpassenger(){
+    this.events.subscribe('bevents',(params)=>{
+      console.log('接受数据',params); //propertyId
+      if(params.reload){this.search()}
+      // this.getHouseData(params.propertyId,false);
+      this.events.unsubscribe('bevents');
+    });
     this.openWin(AddpassengerPage)
   }
 

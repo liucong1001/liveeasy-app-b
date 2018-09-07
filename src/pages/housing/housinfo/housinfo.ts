@@ -234,7 +234,7 @@ export class HousinfoPage {
       this.getHouseData(params.propertyId,false);
       this.events.unsubscribe('bevents');
     });
-    this.openWin(HousedetailPage,{propertyId:this.propertyId});
+    this.openWin(HousedetailPage,{propertyId:this.propertyId,item:this.houseData});
   }
 
   rolepeople(){

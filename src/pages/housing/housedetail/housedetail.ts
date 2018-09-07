@@ -149,15 +149,17 @@ export class HousedetailPage {
   }
   ionViewDidLoad() {
     // this.navBar.backButtonClick = this.backButtonClick;
-    let loading = this.loadingCtrl.create({
+    console.log('参数',this.navParams.get('item'));
+  /*  let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });
     loading.present();
-
-    this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
-      this.data = res&&res.data;
-      if( this.data&&res.success){
-        loading.dismiss();
+*/
+    this.data = this.navParams.get('item');
+    // this.propertyProvider.getRecord(this.navParams.data.propertyId).then(res=>{
+      this.data = this.navParams.get('item');
+      if( this.data){
+        // loading.dismiss();
         var jsonData = JSON.parse(this.data.contacts);
         this.form.patchValue({
           adminDivisionCode:this.data.adminDivisionCode,
@@ -227,9 +229,9 @@ export class HousedetailPage {
         // console.log('adminDivisionCode');
       }else {
         this.toast.msg('获取详情失败!');
-        loading.dismiss();
+        // loading.dismiss();
       }
-    });
+    // });
     this.propertyid =  this.navParams.data.propertyId;
   }
 
