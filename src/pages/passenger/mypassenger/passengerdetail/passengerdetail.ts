@@ -456,12 +456,21 @@ export class PassengerdetailPage {
      console.log('表单',this.form.value.contactFreeTm2);
   }
 
-  areaList:any;
+  //select 改变事件
   areaChange(data){
-    this.areaList = data.area;
+    this.tradingArea =  data.area;
   }
+  //select 确认事件
   onAreaChange(event){
-    this.tradingArea =  this.areaList;
+    this.form.patchValue({intentionTradeCode:0});
+  }
+  //select 取消事件
+  areaCancel(event){
+    for(var item of this.area){
+       if(item.code==event.value){
+         this.tradingArea=item.area
+       }
+    }
   }
 
   //------返回处理--------//
