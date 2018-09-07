@@ -64,9 +64,7 @@ export class PlookrecordPage {
   ionViewDidLoad() {
 
   }
-  navTransition:any;
   ionViewWillLeave(){
-    this.navTransition();
 
   }
   //添加active
@@ -100,8 +98,6 @@ export class PlookrecordPage {
             role: '取消',
             handler: () => {
               console.log('Cancel clicked');
-              this. navTransition = alert.dismiss();
-
             }
           },
           {
