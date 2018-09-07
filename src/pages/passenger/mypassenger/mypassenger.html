@@ -49,7 +49,7 @@
   </ion-refresher>
     <div class="tc refreshTip" *ngIf="not">暂无更新</div>
     <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}信息</div>
-
+    <ion-list class="housList" style="margin-top: 2px">
       <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem >
 
         <ion-item style="padding: 12px 15px 0;" >
@@ -99,7 +99,7 @@
         </ion-item-options>
 
       </ion-item-sliding>
-
+    </ion-list>
 
     <div class="content_page" >
       <div *ngIf="hasData&&pageData ==null" class="tc">

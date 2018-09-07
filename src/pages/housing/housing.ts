@@ -597,7 +597,6 @@ export class HousingPage {
         this.currentPage++;
       }*/
       this.currentPage++;
-      console.log('pageResult',this.pageResult);
 
       if (this.pageResult&&this.pageResult.length<10) {
         //如果都加载完成的情况，就直接 disable ，移除下拉加载

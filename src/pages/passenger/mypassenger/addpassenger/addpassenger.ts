@@ -334,9 +334,12 @@ export class AddpassengerPage {
       });
     }
   }
-
+  areaList:any;
   areaChange(data){
-    this.tradingArea = data.area;
+    this.areaList = data.area;
+  }
+  onAreaChange(event){
+    this.tradingArea =  this.areaList;
   }
 
   //------返回处理--------//

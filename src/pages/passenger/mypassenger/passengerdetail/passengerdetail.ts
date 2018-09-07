@@ -456,11 +456,13 @@ export class PassengerdetailPage {
      console.log('表单',this.form.value.contactFreeTm2);
   }
 
+  areaList:any;
   areaChange(data){
-    // console.log('区域',data);
-    this.tradingArea = data.area;
+    this.areaList = data.area;
   }
-
+  onAreaChange(event){
+    this.tradingArea =  this.areaList;
+  }
 
   //------返回处理--------//
   backButtonClick = (e: UIEvent) => {

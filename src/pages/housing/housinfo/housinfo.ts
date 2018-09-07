@@ -97,6 +97,7 @@ export class HousinfoPage {
   flag=false;
   fyDescribe=false;
 
+
   @ViewChild('mySlider') slider:Slides;
     mySlideOptions={
       autoplay:5000,
@@ -119,7 +120,7 @@ export class HousinfoPage {
     this.imgSign = this.configProvider.set().imgSign;
     this.smImgSign = this.configProvider.set().smSign;
     setInterval(()=>{
-      this.slider.slideNext(300,true);
+      this.slider&&this.slider.slideNext(300,true);
     },2000);
     this.propertyId = this.navParams.get('propertyId');
     this.getHouseData(this.propertyId,true);
@@ -135,6 +136,7 @@ export class HousinfoPage {
    isloading&&loading.present();
     this.propertyProvider.getRecord(propertyId).then(res=>{
       this.houseData=res.data;
+      this.imgJson =[];
       //实勘图
       this.imgJson = this.houseData&&this.houseData['propertyPics']&&JSON.parse(this.houseData['propertyPics']);
       //钥匙信息

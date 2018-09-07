@@ -155,14 +155,11 @@ export class MorePage {
   }
 
   ionViewDidEnter(){
-    this.navBar.backButtonClick = () => {
-       this.confirm();
-    }
+
   }
 
 
   initTags(item,attr,arryAttr){
-   // console.log('赋值赋值！！',this.searchMoreData[arryAttr]);
     if(this.searchMoreData[arryAttr].length>1){
       //初始化选中状态
       this.searchMoreData[arryAttr] = this.searchMoreData[arryAttr];
