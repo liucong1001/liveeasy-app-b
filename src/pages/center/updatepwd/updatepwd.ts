@@ -27,9 +27,14 @@ export class UpdatepwdPage {
   }
   form:FormGroup =this.fb.group({
     plainPassword:['',Validators.required], //旧密码
-    newPassword:['',Validators.required],//新密码
+    newPassword:['',[Validators.pattern(/^[A-Za-z0-9]+$/)]],//新密码
     // verifyPassword:[''],//确认新密码
   });
+  errors= {
+    newPassword: [
+      new ErrorMessage('pattern', '请填写6-21位字母或数字'),
+    ],
+  };
   //表单验证消息
   ionViewDidLoad() {
     // console.log('ionViewDidLoad UpdatepwdPage');
@@ -43,8 +48,8 @@ export class UpdatepwdPage {
                 this.localStorageProvider.del('ticket');
                 this.toast.msg('修改密码成功');
                 setTimeout(()=>{
-                  this.navCtrl.pop();
-                },1000);
+                  this.navCtrl.push(LoginPage)
+                },500);
 
               }else {
                 // console.log(res.msg)
@@ -62,13 +67,6 @@ export class UpdatepwdPage {
   lengthTips=false;
   checkes(){
     if(this.form.value.newPassword != ''){
-      var reg = /^[A-Za-z0-9]+$/;
-      if (!reg.test(this.form.value.newPassword)) {
-        this.tips=true
-      }else {
-        this.tips=false;
-      }
-
       if(this.form.value.newPassword.length >=21){
         this.lengthTips=true
       }else {
