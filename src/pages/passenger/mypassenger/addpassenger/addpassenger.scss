@@ -9,24 +9,28 @@ page-addpassenger {
 }
 
 .centers{
-  position: absolute;
-  height: 100%;
-  width: 72%;
-  top: 0;
-  right: 0;
-  padding-top:8px;
+border-bottom: 1px solid #f5f5f5;
+  ion-col[col-2]{
+    font-size: 1.5rem;
+    margin-top: 14px;
+    padding: 0;
+  }
   .separateIon{
-    width: 80%;
-    margin-right: 3px;
-    border: 0;
+    input{
+      margin: 0;
+      text-align: right;
+      padding: 10px 0;
+    }
+    width: 100%;
+    margin:0px;
+    //border: 0;
     padding: 0 10px;
   }
-  .suffixs{
-    position: absolute;
-    right: 5px;
-    font-size: 1.3rem;
-    top: 7px;
-  }
+ ion-col[col-1]{
+   //border: 1px solid;
+   margin-top: 10px;
+ }
+
 }
 
 .icon-xia{
