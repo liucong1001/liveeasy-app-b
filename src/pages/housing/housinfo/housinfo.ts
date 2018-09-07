@@ -99,6 +99,7 @@ export class HousinfoPage {
 
 
   @ViewChild('mySlider') slider:Slides;
+  @ViewChild('mySlider1') slider1:Slides;
     mySlideOptions={
       autoplay:5000,
       initialSlide:0,
@@ -121,6 +122,7 @@ export class HousinfoPage {
     this.smImgSign = this.configProvider.set().smSign;
     setInterval(()=>{
       this.slider&&this.slider.slideNext(300,true);
+      this.slider1&&this.slider1.slideNext(300,true);
     },2000);
     this.propertyId = this.navParams.get('propertyId');
     this.getHouseData(this.propertyId,true);

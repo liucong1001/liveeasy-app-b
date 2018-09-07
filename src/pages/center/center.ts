@@ -44,6 +44,8 @@ export class CenterPage {
   ios = false;
   android = false;
   ENY:Environment;
+  imgHeader:string; //线上图片默认头地址
+  imgJson:any;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar, private appUpdate: VersionProvider,private http: HTTP,
@@ -55,7 +57,13 @@ export class CenterPage {
     this.name = this.localStorageProvider.get('loginInfo').user.name;
     this.gh=this.localStorageProvider.get('loginInfo').user.no;
     this.positionCateName =this.localStorageProvider.get('loginInfo').user.positionCateName;
-    this.photo = 'assets/imgs/center.jpg';
+    if(this.localStorageProvider.get('loginInfo').user.photo){
+      this.photo = this.localStorageProvider.get('loginInfo').user.photo;
+    }
+
+    console.log(this.photo);
+    this.imgHeader = this.configProvider.set().img;
+
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
     // console.log('检测新版本');
@@ -109,8 +117,15 @@ export class CenterPage {
     this.statusBar.styleDefault();
   }
   ionViewDidLoad() {
+  }
 
-
+  pic(data){
+    // console.log('data',typeof (JSON.parse(data)) );
+    if(JSON.parse(data)){
+      return JSON.parse(data).imagePath+this.configProvider.set().smSign
+    }else {
+      return
+    }
 
   }
 
