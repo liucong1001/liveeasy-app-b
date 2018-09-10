@@ -15,7 +15,6 @@ import {TabsPage}from "./../tabs/tabs";
 import {StatisticsPage} from "./statistics/statistics";
 import {PropertyProvider} from "../../providers/property/property";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
-import { JPush } from 'ionic3-jpush';
 import { Device } from '@ionic-native/device';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
@@ -52,7 +51,7 @@ export class HomePage {
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
-              public jPush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
+              device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
              ) {
     this.model = ENV.mode;
     this.localStorageProvider.del('searchMoreData');

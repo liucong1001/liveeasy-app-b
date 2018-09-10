@@ -10,7 +10,6 @@ import {CheckhousePageModule} from "./checkhouse/checkhouse.module";
 import {HomesearchPage} from "./homesearch/homesearch";
 import {HomesearchPageModule} from "./homesearch/homesearch.module";
 import {StatisticsPageModule} from "./statistics/statistics.module";
-import { JPush } from 'ionic3-jpush';
 import {DirectivesModule} from "../../directives/directives.module";
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import {DirectivesModule} from "../../directives/directives.module";
     CheckhousePageModule,
     HomesearchPageModule,
     StatisticsPageModule,
-  ],
-  providers: [ JPush ],
+  ]
 })
 export class HomePageModule {}
