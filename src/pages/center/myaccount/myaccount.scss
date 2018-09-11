@@ -5,7 +5,9 @@ page-updatepwd .toolbar-background-md,
 page-help .toolbar-background-ios,
 page-help .toolbar-background-md,
 page-aboutus .toolbar-background-ios,
-page-aboutus .toolbar-background-md{
+page-aboutus .toolbar-background-md,
+page-attention .toolbar-background-ios,
+page-attention .toolbar-background-md{
     background: #fff
 }
 page-myaccount .toolbar-title-ios,
@@ -19,6 +21,9 @@ page-help .bar-button-default-ios,
 page-help .toolbar-title-md, .bar-button-default-md,
 page-aboutus .toolbar-title-ios,
 page-aboutus .bar-button-default-ios,
-page-aboutus .toolbar-title-md, .bar-button-default-md{
-    color: #000
+page-aboutus .toolbar-title-md, .bar-button-default-md,
+page-attention .toolbar-title-ios,
+page-attention .bar-button-default-ios,
+page-attention .toolbar-title-md, .bar-button-default-md{
+    color: #000;
 }

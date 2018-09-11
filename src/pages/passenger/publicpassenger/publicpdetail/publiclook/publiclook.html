@@ -26,11 +26,12 @@
     <ion-slides (ionSlideDidChange)="slideChanged()">
 
       <ion-slide>
+        <!--<div *ngIf="statusOne=='';" class="p15 noRecords">暂无记录</div>-->
+        <!--约看中-->
         <ion-row *ngIf="isHasLooking(lRecord)" class="tc p15">
           <ion-col col-12  style="font-size: 1.6rem">暂无记录</ion-col>
         </ion-row>
-        <!--约看中-->
-        <div *ngFor="let item of lRecord">
+        <div *ngFor="let item of lRecord;index as i">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 1">
             <ion-col col-12>
               <ion-row>
@@ -52,15 +53,26 @@
                 </ion-col>
               </ion-row>
             </ion-col>
+            <ion-col col-12 class="houseStatus">
+              <ion-row>
+                <ion-col col-6 class="tc" style="border-right: 1px solid #F6F6F6" (click)="confirm(item)">
+                  <font size="2">完成</font>
+                </ion-col>
+                <ion-col col-6 class="tc" (click)="close(item)">
+                  <font size="2">关闭</font>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
           </ion-row>
         </div>
       </ion-slide>
       <ion-slide>
         <!--已完成-->
-        <ion-row *ngIf="isHasLooking(lRecord)" class="tc p15">
+        <ion-row *ngIf="isHasFinish(lRecord)" class="tc p15">
           <ion-col col-12  style="font-size: 1.6rem">暂无记录</ion-col>
         </ion-row>
-        <div *ngFor="let item of lRecord">
+        <div *ngFor="let item of lRecord;index as i">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 2">
             <ion-col col-12>
               <ion-row>
@@ -76,7 +88,7 @@
                 </ion-col>
                 <ion-col col-5 class="tc m15">
                   <font size="2" color="#aaa">
-                    房源ID：
+                    客源ID：
                     <span>{{item.customer.customerSn}}</span>
                   </font>
                 </ion-col>
@@ -89,10 +101,10 @@
       </ion-slide>
       <ion-slide>
         <!--已关闭-->
-        <ion-row *ngIf="isHasLooking(lRecord)" class="tc p15">
-          <ion-col col-12  style="font-size: 1.6rem">暂无记录</ion-col>
+        <ion-row *ngIf="isHasClose(lRecord)"  class="tc p15">
+          <ion-col col-12 class="tc"  style="font-size: 1.6rem">暂无记录</ion-col>
         </ion-row>
-        <div *ngFor="let item of lRecord">
+        <div *ngFor="let item of lRecord;index as i">
           <ion-row class="bgWhite houseMain"  *ngIf="item.followStatus == 3">
             <ion-col col-12>
               <ion-row>
@@ -108,7 +120,7 @@
                 </ion-col>
                 <ion-col col-5 class="tc m15">
                   <font size="2" color="#aaa">
-                    房源ID：
+                    客源ID：
                     <span>{{item.customer.customerSn}}</span>
                   </font>
                 </ion-col>
@@ -117,7 +129,6 @@
 
           </ion-row>
         </div>
-
       </ion-slide>
     </ion-slides>
   </div>

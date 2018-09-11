@@ -5,7 +5,6 @@ import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {ToastComponent} from "../../../components/toast/toast";
-import {MypassengerPage} from "../../passenger/mypassenger/mypassenger";
 import {CenterPage} from "../center";
 /**
  * Generated class for the HelpPage page.

@@ -37,3 +37,18 @@ page-addhouse{
 .text-danger{
   color: #ed5565;
 }
+@media screen and(max-width: 320px)  {
+  .allStyle{
+      ion-col[col-2]{
+        flex: 0 0 20%;
+        width: 20%;
+        max-width: 20%;
+    }
+    ion-col[col-5]{
+      flex: 0 0 40%;
+      width: 40%;
+      max-width: 40%;
+    }
+
+  }
+}

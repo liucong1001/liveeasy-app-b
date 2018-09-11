@@ -6,6 +6,7 @@ import {MyaccountPageModule} from "./myaccount/myaccount.module";
 import {HelpPageModule} from "./help/help.module";
 import {UpdatepwdPageModule} from "./updatepwd/updatepwd.module";
 import {VerifyphonePageModule} from "./verifyphone/verifyphone.module";
+import {AttentionPageModule} from "./attention/attention.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {VerifyphonePageModule} from "./verifyphone/verifyphone.module";
     MyaccountPageModule,
     HelpPageModule,
     UpdatepwdPageModule,
-    VerifyphonePageModule
+    VerifyphonePageModule,
+    AttentionPageModule
   ],
 })
 export class CenterPageModule {}

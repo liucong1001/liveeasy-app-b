@@ -192,7 +192,8 @@ export class MypassengerPage {
       return 'followLabel';
     }
     if(item.custFollowupInfoEntity&&item.custFollowupInfoEntity.appointmentTm){
-      // console.log('-customerName', i,new Date(this.pageData[i].appointmentTm),  new Date(this.todayzero).toLocaleDateString() );
+      // debugger;
+      // console.log('1',new Date(1536595200000).toISOString(),'>=',new Date(todayzero).toISOString(),'<=',new Date(todayzero-1000+(1000*60*60*24*3)).toISOString());
       if(item.custFollowupInfoEntity.appointmentTm && item.custFollowupInfoEntity.appointmentTm>=todayzero && item.custFollowupInfoEntity.appointmentTm<=todayzero-1000+(1000*60*60*24*3)) {
         if (item.custFollowupInfoEntity.followStatus == 1) {
           item.lookLable = 1;

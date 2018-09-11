@@ -164,7 +164,7 @@ export class PassengerdetailPage {
   }
   form:FormGroup =this.fb.group({
     customerId:['',Validators.required,],
-    customerName:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5_a-zA-Z]+$/)]],//客户名称
+    customerName:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5a-zA-Z]+$/)]],//客户名称
     customerGender :['',Validators.required],//客户性别
     customerPhone:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],//客户电话
     customerSrc:['',Validators.required], //客户来源

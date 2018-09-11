@@ -206,7 +206,7 @@ export class StatisticsPage {
             // console.log(this.tableJSON);
             this.errStatus = false;
           }
-          }else {
+        }else {
           // this.toast.error('暂无数据');
           // this.errStatus = true;
         }
@@ -356,6 +356,7 @@ export class StatisticsPage {
 
   //时间弹窗刷新
   goTime(){
+    this.department=[];
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });
@@ -366,7 +367,7 @@ export class StatisticsPage {
       loading.dismiss();
     }else if(this.form.value.startTime!=''&&this.form.value.endTime!=''){
       if(this.form.value.startTime > this.form.value.endTime){
-        this.toast.error('开始日期不得小于结束日期');
+        this.toast.error('开始日期不得大于结束日期');
       }else {
         if(this.times ==2 || this.times ==1){
           if(this.times==2){
@@ -520,37 +521,37 @@ export class StatisticsPage {
     this.department=[];
     this.statItem=item.statItem;
     this.fastName=item.name;
-   if(this.startTime || this.endTime){
-     if(this.startTime.length < 8 || this.endTime.length < 8 ){
-       this.startTime=this.startTime.replace('/','0');
-       this.endTime=this.endTime.replace('/','');
-     }else if(this.startTime.length==9 || this.endTime.length == 9){
-       this.startTime=this.startTime.replace('/','');
-       this.endTime=this.endTime.replace('/','');
-     }
-   }else {
-     if(item.name != '全部'){
-       this.startTime =parseInt(this.yesterday);
-       this.endTime =parseInt(this.yesterday)
-     }
-   }
-   // console.log(this.startTime,this.endTime)
+    if(this.startTime || this.endTime){
+      if(this.startTime.length < 8 || this.endTime.length < 8 ){
+        this.startTime=this.startTime.replace('/','0');
+        this.endTime=this.endTime.replace('/','');
+      }else if(this.startTime.length==9 || this.endTime.length == 9){
+        this.startTime=this.startTime.replace('/','');
+        this.endTime=this.endTime.replace('/','');
+      }
+    }else {
+      if(item.name != '全部'){
+        this.startTime =parseInt(this.yesterday);
+        this.endTime =parseInt(this.yesterday)
+      }
+    }
+    // console.log(this.startTime,this.endTime)
     this.homeProvider.statis({
       startTime:parseInt(this.startTime),
       endTime:parseInt(this.endTime),
       statItem:item.statItem,
     }).then(res=>{
-        if(res.success){
-          if(res.hasOwnProperty('data')){
-            // console.log(res)
-            this.data=res.data;
-            this.metheod();
-          }
-          loading.dismiss();
-        }else {
-          this.toast.error('暂无数据');
-          this.errStatus = true;
+      if(res.success){
+        if(res.hasOwnProperty('data')){
+          // console.log(res)
+          this.data=res.data;
+          this.metheod();
         }
+        loading.dismiss();
+      }else {
+        this.toast.error('暂无数据');
+        this.errStatus = true;
+      }
     });
     this.clear();
     if(this.fast ==1){

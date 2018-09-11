@@ -17,6 +17,7 @@ import {ToastComponent} from "../../components/toast/toast";
 import {LoginPage} from "../login/login";
 import { ENV } from '@app/env'
 import {Environment} from "../../environments/environment.model";
+import {AttentionPage} from "./attention/attention";
 /**
  * Generated class for the CenterPage page.
  *
@@ -131,6 +132,9 @@ export class CenterPage {
 
   goaccount(){
     this.openWin(MyaccountPage);
+  }
+  attention(){
+    this.openWin(AttentionPage)
   }
   aboutUs() {
     this.openWin(AboutusPage)
