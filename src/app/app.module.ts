@@ -50,7 +50,6 @@ import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { Network } from '@ionic-native/network';
 import { ENV } from '@app/env';
-console.log('app模块',ENV);
 //启动加速
 
 import { StartupPageModule } from './../pages/startup/startup.module';
@@ -72,9 +71,11 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { PermissionProvider } from '../providers/permission/permission';
 import {BaiduMapModule } from "angular2-baidu-map";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
-import { JPush } from 'ionic3-jpush';
+import { JPush } from '@jiguang-ionic/jpush';
 import { NativeProvider } from '../providers/native/native';
-
+import { CodePush } from '@ionic-native/code-push';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import {jpushUnit} from "../providers/native/jpush-unit";
 @NgModule({
   declarations: [
     MyApp,
@@ -151,7 +152,7 @@ import { NativeProvider } from '../providers/native/native';
       PermissionProvider,
       AndroidPermissions,
       JPush,Network,
-    NativeProvider
+      NativeProvider,CodePush,Diagnostic,jpushUnit
     ]
 })
 export class AppModule {}

@@ -39,6 +39,12 @@ export class PropertyProvider {
   private  propertyPics = this.configProvider.set().http+ '/property/propertyAuditInfo';
   //价格审核
   private  priceAuditPass = this.configProvider.set().http+'/property/propertyAuditInfo/claimAudit.do';
+  //加入收藏
+  private favoriteInsert = this.configProvider.set().http+'/property/favoriteProperties/insert';
+  // 是否收藏
+  private isFavoritePath =  this.configProvider.set().http+'/property/favoriteProperties/isFavorite';
+  //取消收藏
+  private cancelFavoritePath =  this.configProvider.set().http+'/property/favoriteProperties/deleteByParams';
 
   //接口开关
   public isOnline = true;
@@ -263,4 +269,26 @@ export class PropertyProvider {
        return  res  as any;
      })
   }
+
+  //加入收藏
+  addFavorite(data){
+     return this.httpProvider.httpPost(this.favoriteInsert,data);
+  }
+  //是否收藏
+  isFavorite(propertyId,agentId){
+    const  data ={
+      propertyId:propertyId,
+      agentId:agentId
+    };
+    return this.httpProvider.httpGet(this.isFavoritePath,data);
+  }
+  //取消收藏
+  cancelFavorite(propertyId,agentId){
+    const  data ={
+      propertyId:propertyId,
+      agentId:agentId
+    };
+    return this.httpProvider.httpDelete(this.cancelFavoritePath,data);
+  }
+
 }

@@ -15,11 +15,15 @@ import {TabsPage}from "./../tabs/tabs";
 import {StatisticsPage} from "./statistics/statistics";
 import {PropertyProvider} from "../../providers/property/property";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
+// import { JPush } from 'ionic3-jpush';
+import { JPush } from '@jiguang-ionic/jpush';
 import { Device } from '@ionic-native/device';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
 import {VersionProvider} from "../../providers/version/app.version";
-import { ENV } from '@app/env'
+import { ENV } from '@app/env';
+import {ToastComponent} from "../../components/toast/toast";
+import {jpushUnit} from "../../providers/native/jpush-unit";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -47,11 +51,13 @@ export class HomePage {
   aLinKDownload:string;
   aLinKDownloadVersion:string;
   model:any;
+
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
-              device: Device,private appVersion: AppVersion,private http: HTTP,private appUpdate: VersionProvider
+              public jpush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,
+              private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit
              ) {
     this.model = ENV.mode;
     this.localStorageProvider.del('searchMoreData');
@@ -70,7 +76,13 @@ export class HomePage {
           this.localStorageProvider.set('tagsList',this.addHomeTag);
         }
     });
+    /*消息推送配置**/
+    this.jpushUnit.initPush();
+    // this.jpushUnit.setAlias(user.userCode);    //设置别名
   }
+
+
+
 
 
   //状态栏文字颜色修改-黑色
@@ -125,6 +137,10 @@ export class HomePage {
   goNotice(){
     this.openWin(CheckhousePage,);
   }
+  getRegistrationID(){
+    this.jpushUnit.getRegistrationID();
+  }
+
 
 //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

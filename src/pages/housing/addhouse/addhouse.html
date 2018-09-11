@@ -90,7 +90,7 @@
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>楼层等级<i class="text-danger">*</i></ion-label>
         <ion-select #selectOne okText="确定"  cancelText="关闭"   formControlName="positionInBuilding" [placeholder]="'请选择'" [selectOptions]="selectTitle('选择楼层')">
-          <ion-option value="-1">地下</ion-option>
+          <ion-option value="0">地下</ion-option>
           <ion-option value="1">低</ion-option>
           <ion-option value="2">中</ion-option>
           <ion-option value="3">高</ion-option>

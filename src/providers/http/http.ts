@@ -69,6 +69,24 @@ export class HttpProvider {
 
     })
   }
+
+  public httpDelete(url,params?):Promise<any>{
+
+    const  httpOptions = {
+      headers:this.headers,
+      body:params
+    };
+    return this.http.delete(url,httpOptions).timeout(8000)
+      .toPromise().then(res=>{
+        return res as any;
+      }).catch(err=>{
+        err.name=='TimeoutError'&&this.toast.errorBlack('连接超时!');
+        this.errResponse(err);
+
+      })
+  }
+
+
   //测试 没有权限
   public httpPostTest(url,params?):Promise<any>{
     return this.http.post(url,params).toPromise().then(res=>{

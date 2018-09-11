@@ -356,6 +356,33 @@ export class HousinfoPage {
       return  (data[price]*1/data[size]).toFixed(2)
     }
   }
+  //添加关注
+  addFavo(){
+    console.log('房源id',this.localStorageProvider.get('loginInfo')['user']['id']);
+
+    // const agentId= this.localStorageProvider.get('loginInfo')['user']['id'];
+    const  data ={
+      propertyId:this.houseData.propertyId,
+      agentId:this.localStorageProvider.get('loginInfo')['user']['id'],
+      adminDivisionCode:this.houseData.adminDivisionCode,
+      estateId:this.houseData.estateId,
+      createTime: new Date().getTime() ,
+    };
+    console.log('参数',data);
+    this.propertyProvider.addFavorite(data).then(res=>{
+
+    });
+
+  }
+  isFavo(){
+    console.log('是否关注');
+    this.propertyProvider.isFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id'])
+  }
+
+  delFavo(){
+    console.log('取消关注');
+    this.propertyProvider.cancelFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id'])
+  }
 
 
   //------跳转页面过渡--------//

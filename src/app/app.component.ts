@@ -13,16 +13,12 @@ import {TabsPage} from "../pages/tabs/tabs";
 import { Keyboard } from '@ionic-native/keyboard';
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {LoginPage} from "../pages/login/login";
-import { JPush } from 'ionic3-jpush';
+import { JPush } from '@jiguang-ionic/jpush';
 import {AppVersion} from "@ionic-native/app-version";
 import {HTTP} from "@ionic-native/http";
 import {NativeProvider} from "../providers/native/native";
 import {Network} from "@ionic-native/network";
-
-import { HomePage } from '../pages/home/home';
-import { CenterPage } from '../pages/center/center';
-import { PassengerPage } from '../pages/passenger/passenger';
-import { HousingPage } from '../pages/housing/housing';
+import {jpushUnit} from "../providers/native/jpush-unit";
 
 @Component({
   templateUrl: 'app.html'
@@ -53,8 +49,8 @@ export class MyApp {
               public keybord: Keyboard,
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
-              private androidPermissions: AndroidPermissions,public jPush: JPush,private appVersion: AppVersion,private http: HTTP,
-              private  nativeProvider:NativeProvider,private network: Network
+              private androidPermissions: AndroidPermissions,public jpush: JPush,private appVersion: AppVersion,private http: HTTP,
+              private  nativeProvider:NativeProvider,private network: Network,private jpushUnit:jpushUnit
 
   ) {
 
@@ -92,6 +88,10 @@ export class MyApp {
       this.appUpdate.checkVersion(false);
       // 返回按键事件
       this.registerBackButtonAction();
+      /*极光推送开启 **/
+       jpush.init();
+       jpush.setDebugMode(true);
+
     });
 
   }
