@@ -8,7 +8,6 @@
 <ion-content padding>
   <form class="relative">
     <textarea type="text" id="" cols="30" rows="10" name="content" [maxlength]="400" [(ngModel)]="content" placeholder="请填写内容...." class="ustyle"  (keyup)="watchText($event)" ></textarea>
-    <span class="descTips bgWhite" *ngIf="content">{{content.length}}/400</span>
     <button ion-button block color="danger" class="m10" (click)="confirm()">确定</button>
   </form>
 </ion-content>

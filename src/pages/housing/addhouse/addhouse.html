@@ -49,7 +49,7 @@
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>单元<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" formControlName="unitNo"  placeholder="请填写单元(请填写数字)"></ion-input>
+        <ion-input type="text" formControlName="unitNo"  placeholder="请填写数字"></ion-input>
       </ion-item>
 
       <div *ngIf="form.value.unitNo&&form.value.unitNo==0" class="valid-error">*不能为0</div>
