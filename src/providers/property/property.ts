@@ -45,6 +45,8 @@ export class PropertyProvider {
   private isFavoritePath =  this.configProvider.set().http+'/property/favoriteProperties/isFavorite';
   //取消收藏
   private cancelFavoritePath =  this.configProvider.set().http+'/property/favoriteProperties/deleteByParams';
+ //收藏列表
+  private favoriteListPath =  this.configProvider.set().http+'/property/favoriteProperties/favoritePageList.do';
 
   //接口开关
   public isOnline = true;
@@ -289,6 +291,20 @@ export class PropertyProvider {
       agentId:agentId
     };
     return this.httpProvider.httpDelete(this.cancelFavoritePath,data);
+  }
+ //收藏列表
+  favoritePageList(currentPage,params){
+       const data = {
+         hasCount:false,
+         limit:10,
+         offset:0,
+         order:"asc",
+         totalPages:0,
+         totalRecords:0,
+         currentPage:currentPage,
+         params:params
+       };
+      return this.httpProvider.httpPost(this.favoriteListPath,data)
   }
 
 }

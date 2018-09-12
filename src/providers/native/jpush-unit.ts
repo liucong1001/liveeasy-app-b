@@ -5,7 +5,9 @@ import {ConfigProvider} from "../config/config";
 import {ToastComponent} from "../../components/toast/toast";
 import {Device} from "@ionic-native/device";
 import { JPush } from '@jiguang-ionic/jpush';
-
+import {CheckhousePage} from "../../pages/home/checkhouse/checkhouse";
+import {NavController} from "ionic-angular";
+import {App} from 'ionic-angular';
 /*
  jpush消息推送服务
 */
@@ -35,7 +37,8 @@ export class  jpushUnit{
     alert('Error!' + '\nSequence: ' + sequence + '\nCode: ' + code);
   };
 
-  constructor(device: Device,public toast:ToastComponent, public jpush: JPush) {
+  constructor(device: Device,public toast:ToastComponent, public jpush: JPush,
+              public app: App) {
     this.devicePlatform = device.platform;
   }
 
@@ -46,14 +49,12 @@ export class  jpushUnit{
     document.addEventListener('jpush.receiveNotification', (event: any) => {
       var content;
       if (this.devicePlatform == 'Android') {
-        content = event.alert;
+        content = event.alert['messageContent'];
       } else {
         content = event.aps.alert;
       }
-      alert('接受到通知: ' + JSON.stringify(event));
+      // alert('接受到通知: ' + JSON.stringify(event));
       console.log('接受到通知: ' , JSON.stringify(event));
-      // this.toast.showToastWithCloseButton('接受到通知: ' +content);
-      // alert(content);
     }, false);
 
     document.addEventListener('jpush.openNotification', (event: any) => {
@@ -67,9 +68,9 @@ export class  jpushUnit{
           content = event.aps.alert;
         }
       }
-       alert('打开通知: ' + JSON.stringify(event));
-       console.log('打开通知: ' , JSON.stringify(event));
-      // this.toast.showToastWithCloseButton('打开通知: ' + JSON.stringify(event));
+       // alert('打开通知: ' + JSON.stringify(event));
+      this.app.getActiveNav().push(CheckhousePage);
+      console.log('打开通知: ' , JSON.stringify(event));
     }, false);
 
     document.addEventListener('jpush.receiveLocalNotification', (event: any) => {
@@ -128,10 +129,7 @@ export class  jpushUnit{
         alert('Sequence: ' + sequence + '\nTag: ' + tag + '\nIsBind: ' + isBind);
       }).catch(this.errorHandler);
   }
-  /**
-   *
-   * 获取所有标签
-   */
+
   deleteTags() {
     this.jpush.deleteTags({ sequence: this.sequence++, tags: ['Tag4']})
       .then(this.tagResultHandler)
@@ -139,7 +137,7 @@ export class  jpushUnit{
   }
   /**
    *
-   *清空所有标签
+   * 获取所有标签
    */
   getAllTags() {
     this.jpush.getAllTags({ sequence: this.sequence++ })
@@ -159,8 +157,12 @@ export class  jpushUnit{
    */
   setAlias(alias:string) {
     this.jpush.setAlias({ sequence: this.sequence++, alias: alias })
-      .then(this.aliasResultHandler)
-      .catch(this.errorHandler);
+      .then(
+         // this.aliasResultHandler
+      )
+      .catch(
+        // this.errorHandler
+      );
   }
   /**
    *

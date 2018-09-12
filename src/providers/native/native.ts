@@ -7,6 +7,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { CodePush } from '@ionic-native/code-push';
 import { Observable } from 'rxjs/Rx';
 import {ToastComponent} from "../../components/toast/toast";
+import { ENV } from '@app/env'
 declare var LocationPlugin;
 declare var AMapNavigation;
 /*
@@ -14,12 +15,13 @@ declare var AMapNavigation;
 */
 @Injectable()
 export class NativeProvider {
-
+  ENV:any;
   constructor(public http: HttpClient,private platform: Platform,
               public nativePageTransitions: NativePageTransitions,
               private network: Network, private codePush: CodePush,
               private diagnostic: Diagnostic,public toast:ToastComponent,
               private alertCtrl: AlertController,) {
+    this.ENV = ENV;
   }
 
 
@@ -233,6 +235,45 @@ export class NativeProvider {
       });
     };
   })();
+
+
+  /**
+   * 热更新同步方法
+   */
+  sync() {
+    if (this.isMobile()) {
+      let deploymentKey = '';
+      if (this.isAndroid() && !this.ENV.isProd) {
+        deploymentKey = this.ENV.cordova.android.CodePushDeploymentKey;
+      }
+      if (this.isAndroid() && this.ENV.isProd) {
+        deploymentKey = this.ENV.cordova.android.CodePushDeploymentKey;
+      }
+      if (this.isIos() && !this.ENV.isProd) {
+        deploymentKey = this.ENV.cordova.ios.CodePushDeploymentKey;
+      }
+      if (this.isIos() && this.ENV.isProd) {
+        deploymentKey = this.ENV.cordova.ios.CodePushDeploymentKey;
+      }
+      this.codePush.sync({
+        deploymentKey
+      }).subscribe(syncStatus => {
+        if (syncStatus == 0) {
+          console.log('[CodePush]:app已经是最新版本;syncStatus:' + syncStatus);
+        } else if (syncStatus == 3) {
+          console.log('[CodePush]:更新出错;syncStatus:' + syncStatus);
+        } else if (syncStatus == 5) {
+          console.log('[CodePush]:检查是否有更新;syncStatus:' + syncStatus);
+        } else if (syncStatus == 7) {
+          console.log('[CodePush]:准备下载安装包;syncStatus:' + syncStatus);
+        } else if (syncStatus == 8) {
+          console.log('[CodePush]:下载完成准备安装;syncStatus:' + syncStatus);
+        } else {
+          console.log('[CodePush]:syncStatus:' + syncStatus);
+        }
+      });
+    }
+  }
 
 
 

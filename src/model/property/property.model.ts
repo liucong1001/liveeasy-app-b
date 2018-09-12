@@ -182,4 +182,9 @@ export  class PropertyModel {
   businessTime?:any;
 
   propertyAbPriceVo?:any;
+
+  /**
+   * 是否收藏  true：是  false:否
+   */
+  favoriteProperties?:boolean;
 }

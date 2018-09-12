@@ -78,7 +78,9 @@ export class HomePage {
     });
     /*消息推送配置**/
     this.jpushUnit.initPush();
-    // this.jpushUnit.setAlias(user.userCode);    //设置别名
+    console.log('设置别名--------',this.localStorageProvider.get('loginInfo')['user']['id']);
+     this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
+     // this.jpushUnit.getAlias();
   }
 
 

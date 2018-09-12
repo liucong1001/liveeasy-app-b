@@ -61,6 +61,7 @@ export class HousinfoPage {
   modals=false;
   testHeader=false;
   ModalCmp = false;
+  isFavoStatus:boolean = false;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public viewCtrl: ViewController,
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
@@ -145,7 +146,12 @@ export class HousinfoPage {
       // this.keyData = this.houseData&&this.houseData['keyPics']&&JSON.parse(this.houseData['keyPics']);
       // 业主委托书
       // this.letteratorneyData =this.houseData&&this.houseData['attorneyPics']&&JSON.parse(this.houseData['attorneyPics']);
-      isloading&&loading&&loading.dismiss()
+      isloading&&loading&&loading.dismiss();
+      //关注状态
+      this.isFavoStatus = this.houseData.favoriteProperties;
+
+
+
     }).catch(err=>{
       isloading&&loading&&loading.dismiss();
       this.toast.error('查询失败');
@@ -163,7 +169,6 @@ export class HousinfoPage {
         this.letteratorneyData=res.data;
         this.letteratorneyDataContent =JSON.parse(res.data.content);
       }
-      console.log('图片',this.imgJson);
     });
 
   }
@@ -197,6 +202,8 @@ export class HousinfoPage {
       }else {
         this.navCtrl.parent.select(1);
         this.navCtrl.setRoot(HousingPage);*/
+      }else {
+        this.navCtrl.pop()
       }
 
       // if(this.app.getActiveNavs()[0]['index']==0){
@@ -370,18 +377,29 @@ export class HousinfoPage {
     };
     console.log('参数',data);
     this.propertyProvider.addFavorite(data).then(res=>{
-
+        if(res.success){
+          this.isFavoStatus = true;
+          this.toast.msg('收藏成功');
+        }
     });
 
   }
   isFavo(){
     console.log('是否关注');
-    this.propertyProvider.isFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id'])
+    this.propertyProvider.isFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id']).
+    then(res=>{
+           res.success?this.isFavoStatus = true:this.isFavoStatus = false;
+    })
   }
 
   delFavo(){
     console.log('取消关注');
-    this.propertyProvider.cancelFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id'])
+    this.propertyProvider.cancelFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id']).then(res=>{
+      if(res.success){
+         this.toast.msg('取消收藏');
+         this.isFavoStatus = false;
+      }
+    })
   }
 
 

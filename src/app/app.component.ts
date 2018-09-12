@@ -91,9 +91,9 @@ export class MyApp {
       /*极光推送开启 **/
        jpush.init();
        jpush.setDebugMode(true);
-
+       //检查热更新
+      this.nativeProvider.sync();
     });
-
   }
 
 
