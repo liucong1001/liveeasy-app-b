@@ -121,7 +121,7 @@
         <ion-row class="updateEnd">
           <ion-col col-3>建筑面积<i class="text-danger">*</i></ion-col>
           <ion-col col-8>
-            <ion-input type="text"  formControlName="spaceSize"  placeholder="请填写数字">
+            <ion-input type="text"  formControlName="spaceSize"  placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
             </ion-input>
           </ion-col>
           <ion-col col-1>
@@ -157,7 +157,7 @@
         <ion-row class="updateEnd">
           <ion-col col-3>套内面积</ion-col>
           <ion-col col-8>
-            <ion-input type="text"  formControlName="innerSpaceSize"  placeholder="请填写数字">
+            <ion-input type="text"  formControlName="innerSpaceSize"  placeholder="请填写数字" [disabled]="data?.unitPriceAudit">
             </ion-input>
           </ion-col>
           <ion-col col-1>
