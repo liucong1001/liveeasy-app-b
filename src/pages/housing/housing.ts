@@ -249,6 +249,11 @@ export class HousingPage {
    * 列表搜索
    */
   search(qId){
+    if(this.price){
+      this.price=false;
+    }else {
+      this.price=true;
+    }
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
        }
@@ -675,15 +680,15 @@ export class HousingPage {
 
   hasElevatorJson = [
     {name:'不限',val:0},
-    {start:'0',end:'100',val:'1'},
-    {start:'100',end:'500',val:'2'},
-    {start:'500',end:'1000',val:'3'},
-    {start:'1000',end:'1500',val:'4'},
-    {start:'1500',end:'2000',val:'5'},
-    {start:'2000',end:'2500',val:'6'},
-    {start:'2500',end:'3000',val:'7'},
-    {start:'3000',end:'3500',val:'8'},
-    {start:'5000',end:'0',val:'9'},
+    {start:'0',end:'100',val:1},
+    {start:'100',end:'500',val:2},
+    {start:'500',end:'1000',val:3},
+    {start:'1000',end:'1500',val:4},
+    {start:'1500',end:'2000',val:5},
+    {start:'2000',end:'2500',val:6},
+    {start:'2500',end:'3000',val:7},
+    {start:'3000',end:'3500',val:8},
+    {start:'5000',end:'0',val:9},
   ];
 //户型转换
   housePipe(data){
@@ -709,7 +714,11 @@ export class HousingPage {
   ends:any;
   structure:any = {lower: 0, upper:500};
   onChange(ev:any) {
-    // console.log(this.structure.lower,this.structure.upper)
+
+    this.starts=this.structure.lower;
+    this.ends=this.structure.upper;
+    this.selctPri=2;
+    console.log(this.starts,this.ends,this.structure.lower,this.structure.upper)
       this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
@@ -723,25 +732,23 @@ export class HousingPage {
     this.ends=this.time.end;
     // console.log(this.ends);
 
-    if(this.name=='不限'){
-      this.starts=0;
-      this.ends=5000;
-      this.selctPri=1;
-    }else {
-      this.selctPri=2
-    }
-
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
     }else{
       this.params.price = this.starts + ',' + this.ends;
     }
-    this.search('propQuery');
+
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
       // console.log(this.structure)
     }
-
+    if(this.name=='不限'){
+      this.starts=0;
+      this.ends=5000;
+      this.selctPri=1;
+      this.params.price = this.starts + ',' + this.ends;
+    }
+    this.search('propQuery');
   }
 
   allSearch(){

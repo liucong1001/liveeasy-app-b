@@ -23,13 +23,13 @@
     </ion-col>
 
     <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
-      <span [ngClass]="{color:starts,esRow:ends}" *ngIf="selctPri==2">
-        <span *ngIf="starts ==0&&ends==100">{{ends}}万以下</span>
+      <span [ngClass]="{color:starts || starts ==0&&ends,esRow:ends}" *ngIf="selctPri==2">
+        <span *ngIf="starts ==0&&ends!=5000">{{ends}}万以下</span>
         <span *ngIf="ends !=0 && starts !=0">{{starts}}万-{{ends}}万</span>
         <span *ngIf="starts==5000&&ends==0">{{starts}}万以上</span>
       </span>
-      <span *ngIf="selctPri==1">价格 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts,down:ends}"></ion-icon>
+      <span *ngIf="selctPri==1 || ends==5000">价格 </span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts || starts ==0&&ends!=5000,down:ends!=5000}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
@@ -231,14 +231,14 @@
   <!-- 价格 -->
   <div class="lists houseType" [hidden]="!housingEstate" >
     <ion-list radio-group class="scrollC updateLine"  [(ngModel)]="price" style="height: 207px">
-      <ion-item *ngFor="let y of hasElevatorJson"  class="tc" >
+      <ion-item *ngFor="let y of hasElevatorJson;let index =index"  class="tc" >
         <ion-label *ngIf="y.name=='不限'">{{y.name}}</ion-label>
         <ion-label *ngIf="y.name!='不限'">
           <span *ngIf="y.val==1">{{y.end}}万以下</span>
           <span *ngIf="y.start!='' && y.val !=1 && y.val !=9">{{y.start}}{{-y.end}}万</span>
           <span *ngIf="y.val ==9">{{y.start}}万以上</span>
         </ion-label>
-        <ion-radio value={{y.val}} (ionSelect)="selectPrice()"></ion-radio>
+        <ion-radio value={{y.val}} (ionSelect)="selectPrice(index)"></ion-radio>
       </ion-item>
     </ion-list>
     <ion-list style="height: 166px;">
