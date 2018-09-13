@@ -176,6 +176,7 @@ export class PublicpassengerPage {
         this.firstPageData = res.data.result;
         this.currentPage=1;
         this.pageResult =res.data&&res.data.result;
+        if(res.data.result.length<10){ this.all = true;}
         console.log(this.hasData)
       }else{
         this.hasData = false;
@@ -206,16 +207,10 @@ export class PublicpassengerPage {
 
     this.params.customerSrc = '0';
     this.params.orderBy= 'DESC';
-    this.params.customerType = '1';
 
-    if(val == 1){
-      this.params.customerType='0';
-    }else if(val == 2){
-      this.params.customerType='2';
-    }else if(val == 3){
-      this.params.customerType='3';
-    }
 
+    this.params.customerType=val;
+    val== ''&& delete  this.params.customerType;
     console.log('搜索',this.params);
 
     if(this.params.intentionDiviCode=='99'){
@@ -403,11 +398,11 @@ export class PublicpassengerPage {
   ];
 
   filtrateJson = [
-    {name:'全部',val:1},
-    {name:'区公客',val:2},
-    {name:'城市公客',val:3},
-
-  ]
+    {name:'全部',val:''},
+    {name:'店公客',val:'0'},
+    {name:'区公客',val:'2'},
+    {name:'城市公客',val:'3'},
+  ];
   //户型转换
   housePipe(data){
     for(var i in this.houseJSON){

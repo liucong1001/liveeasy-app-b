@@ -283,6 +283,7 @@ export class HousingPage {
            }
            this.currentPage=1;
            this.pageResult =res.data&&res.data.result;
+           if(res.data.result.length<10){ this.all = true;}
          }else {
            // console.log('没有数据!');
            this.hasData = false;
@@ -617,7 +618,7 @@ export class HousingPage {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
             }
-            if(res.data.result<10){ this.all = true;}
+            if(res.data.result.length<10){ this.all = true;}
           }else {
             this.all = true;
           }

@@ -225,6 +225,7 @@ export class MypassengerPage {
         this.firstPageData = res.data.result;
         this.currentPage=1;
         this.pageResult =res.data&&res.data.result;
+        if(res.data.result.length<10){ this.all = true;}
       }else{
         this.hasData = false;
       }
