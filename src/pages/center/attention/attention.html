@@ -6,60 +6,72 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list class="housList">
 
     <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
 
-      <ion-item style="padding: 8px 15px 0;">
+
+      <ion-item style="padding: 5px 10px 0;">
         <ion-row tappable (click)="goHouseDetail(item)">
           <ion-col col-4 style="margin-top: 2px">
-              房源id：{{item.propertyId}} <br>
-              收藏时间：{{item.createTime | date:'yyyy/MM/dd :HH:MM:SS' }}
-            <!--<img [src]=" item?.propAvatar?imgHeader+pic(item?.propAvatar):'assets/imgs/default.jpg'" alt="" width="90%" height="70">-->
+            <img src="assets/imgs/default.jpg" alt="" width="90%" height="70">
           </ion-col>
 
-       <!--   <ion-col col-8>
+          <ion-col col-8>
             <div class="clamp">
               <font size="3">
-                {{item.estateName}}
-                {{item.bedrooms}}室
-                {{item.halls}}厅
+                1室 1厅
               </font>
             </div>
-            <div class="tips" [ngClass]="{uDis:item.tagsStr}" style="margin-top: 2px ">
-              &lt;!&ndash;<p>{{tagPipe(item.tagsStr)}}</p>&ndash;&gt;
-              <a *ngFor=" let x of tagPipe(item.tagsStr)" class="m5"
-                 [ngClass]="{shen:tagName(x)=='审',xiang:tagName(x)=='享',kzks:tagName(x)=='可租可售',bxg:tagName(x)=='不限购',yzjs:tagName(x)=='业主急售',myys:tagName(x)=='免营业税',mwwy:tagName(x)=='满五唯一',dhy:tagName(x)=='带花园',yao:tagName(x)=='钥',wei:tagName(x)=='委',kan:tagName(x)=='勘',tie:tagName(x)=='铁',guan:tagName(x)=='关',fa:tagName(x)=='发',suo:tagName(x)=='锁'}"> <span *ngIf="tagName(x)">{{tagName(x)}}</span></a>
+            <div class="tips">
+              <a class="m5">ss</a>
             </div>
             <ion-row>
               <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 3px 0">
-                <span>{{item.bedrooms}}室{{item.halls}}厅</span>
-                <span *ngIf="item.spaceSize">/&nbsp;{{item.spaceSize}}㎡</span>
-                <span *ngIf="item.orientation">/&nbsp;{{cxPipe(item.orientation)}}</span>
-                <span *ngIf="item.estateName">/&nbsp;{{item.estateName}}</span>
+                <span>1室1厅</span>
+                <span>sss</span>
+                <span>ss</span>
+                <span>人</span>
+              </ion-col>
+              <ion-col col-12 class="p0 ellipsis" style="font-size: 1.2rem;color: #aaa;margin: 3px 0">
+                <span>收藏时间</span>
+                <span>{{item.createTime | date:'yyyy/MM/dd HH:MM:SS' }}</span>
               </ion-col>
 
-              <ion-col col-12 class="p0">
-                <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>
-                <span class="unitPrice" *ngIf="item.propertyPrice!=0"> {{item.propertyPriceUnit==1?'万':'元'}}</span>
-                <span class="errorPrice"   *ngIf="item.propertyPrice==0">价格异常</span>
-                <span style="font-size: 1.2rem;color: #aaa" *ngIf="item.propertyPrice!=0">
-                  <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
-                  <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
-                </span>
-              </ion-col>
+              <!--<ion-col col-12 class="p0">-->
+                <!--收藏时间：-->
+              <!--</ion-col>-->
             </ion-row>
 
-          </ion-col>-->
+          </ion-col>
         </ion-row>
 
       </ion-item>
+
+
+
+
+      <!--<ion-item style="padding: 8px 15px 0;">-->
+        <!--<ion-row tappable (click)="goHouseDetail(item)">-->
+          <!--<ion-col col-4 style="margin-top: 2px">-->
+              <!--房源id：{{item.propertyId}} <br>-->
+
+            <!--&lt;!&ndash;<img [src]=" item?.propAvatar?imgHeader+pic(item?.propAvatar):'assets/imgs/default.jpg'" alt="" width="90%" height="70">&ndash;&gt;-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+
+      <!--</ion-item>-->
       <!--*ngIf="item.shareShow && (!ishasTag('128',item.tagsStr,item))"-->
       <ion-item-options>
         <button ion-button color="default" style="background:#1ab394;padding: 1em;" tappable (click)="cancelFavo(item.propertyId)"
-        >取消关注</button>
+        >
+          <div>取</div>
+          <div class="mt5">消</div>
+          <div class="mt5">关</div>
+          <div class="mt5">注</div>
+        </button>
       </ion-item-options>
 
     </ion-item-sliding>
