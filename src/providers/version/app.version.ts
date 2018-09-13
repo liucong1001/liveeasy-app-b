@@ -50,12 +50,9 @@ export class VersionProvider {
       .set('token',this.localStorageProvider.get('ticket'))
       .set('Access-Control-Allow-Origin','*');
     const  path = this.configProvider.set().cmsHttp+'/interface/appinfo/findMaxAppVersion';
-    console.log('app版本更新',path);
     this.http.get(path, {},{token:this.localStorageProvider.get('ticket')}).then(
         res=>{
-          console.log("下载内容：" , res,"数据层",res.data);
             var  result = JSON.parse(res.data);
-            console.log('检测',result);
             var androidData ,iosData;
             for(var i   in  result['data']){
                if(result['data'][i].appType==2){

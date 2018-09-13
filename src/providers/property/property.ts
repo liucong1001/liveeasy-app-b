@@ -293,18 +293,20 @@ export class PropertyProvider {
     return this.httpProvider.httpDelete(this.cancelFavoritePath,data);
   }
  //收藏列表
-  favoritePageList(currentPage,params){
-       const data = {
-         hasCount:false,
-         limit:10,
-         offset:0,
-         order:"asc",
-         totalPages:0,
-         totalRecords:0,
-         currentPage:currentPage,
-         params:params
+  favoritePageList(currentPage){
+       var data = {
+           qId:'favorites',
+           qCate:'1',
+           qType:'dynamic',
+           agent:this.localStorageProvider.get('loginInfo')['user']['id'],
+           create:'1',//按照时间排序，
+           page:currentPage
        };
-      return this.httpProvider.httpPost(this.favoriteListPath,data)
+    return this.http.get(this.basePath,{params:data}).toPromise().then(
+      res=>{
+        return res as any;
+      }
+    );
   }
 
 }

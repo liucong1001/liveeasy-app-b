@@ -275,6 +275,21 @@ export class NativeProvider {
     }
   }
 
+  /**
+   * 扫描二维码
+   * @returns {any}
+   */
+/*  scan() {
+    return Observable.create(observer => {
+      this.barcodeScanner.scan().then((barcodeData) => {
+        observer.next(barcodeData.text);
+      }).catch(err => {
+        this.logger.log(err, '扫描二维码失败');
+        observer.error(false);
+      });
+    });
+  }*/
+
 
 
 

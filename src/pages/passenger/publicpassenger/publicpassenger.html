@@ -82,7 +82,7 @@
     <!--抱歉，找不到数据-->
     <!--</div>-->
     <div class="content_page" style="margin-top: 20px">
-      <div *ngIf="hasData&&pageData ==null" class="tc">
+      <div *ngIf="hasData&&!all" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
         <div>加载数据中...</div>
       </div>

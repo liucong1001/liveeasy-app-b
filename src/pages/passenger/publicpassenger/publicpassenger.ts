@@ -293,7 +293,7 @@ export class PublicpassengerPage {
         this.all = true;
       }else {
         this.all = false;
-        if(this.currentPage>this.totalPages){return};
+        if(this.currentPage>this.totalPages){this.all = true; return}
         this.publicCustomerProvider.pageSearch(this.currentPage,this.params).then(res=>{
           this.pageResult =res.data&&res.data.result;
           for(let i=0;i<res.data.result.length;i++){

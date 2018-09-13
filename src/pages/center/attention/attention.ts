@@ -4,6 +4,8 @@ import {LocalStorageProvider} from "../../../providers/local-storage/local-stora
 import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
 import {HousinfoPage} from "../../housing/housinfo/housinfo";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {ConfigProvider} from "../../../providers/config/config";
 
 /**
  * Generated class for the AttentionPage page.
@@ -22,9 +24,20 @@ export class AttentionPage {
   agentId:string;
   currentPage:number;
   pageData:Array<any>;
+
+  localCode:any;
+  cxJSON:Array<{name:string;val:string}>;
+  tagsListPage =[];
+  imgHeader: string; //线上图片默认头地址
   constructor(public navCtrl: NavController, public navParams: NavParams, public localStorageProvider: LocalStorageProvider,
-              public propertyProvider: PropertyProvider,public toast:ToastComponent) {
+              public propertyProvider: PropertyProvider,public toast:ToastComponent, public configProvider: ConfigProvider,) {
     this.agentId = this.localStorageProvider.get('loginInfo')['user']['id'];
+    //朝向
+    this.localCode = this.localStorageProvider.get('codeData');
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
+    this.cxJSON.unshift({name:'全部',val:''});
+    this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
+    this.imgHeader = this.configProvider.set().img;
   }
 
   ionViewDidLoad() {
@@ -33,21 +46,24 @@ export class AttentionPage {
 
   search(){
       this.pageData = [];
-      this.propertyProvider.favoritePageList(1,{agentId:this.agentId}).then(res=>{
+      this.propertyProvider.favoritePageList(1,).then(res=>{
          if(res.success){
-           this.currentPage=1;
+           this.currentPage=1;this.hasData = true;
+           this.pageResult =res.data&&res.data.result;
            for (let i = 0; i < res.data.result.length; i ++) {
              this.pageData.push(res.data.result[i]);
            }
-         }
+         }else{  this.hasData = false;}
       })
   }
 
-
+  all = false;
+  pageResult :any;
+  hasData = true;
   //上拉加载
   doInfinite(infiniteScroll) {
 
-/*
+
     infiniteScroll.complete();
 
     this.currentPage++;
@@ -59,13 +75,17 @@ export class AttentionPage {
       this.all = true;
     }else {
       this.all = false;
-      if(this.pageResult ==''){return};
-      this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
+      if(this.pageResult ==''){this.all = true; return}
+      this.propertyProvider.favoritePageList(this.currentPage).then(res => {
         this.pageResult =res.data&&res.data.result;
+        console.log('pageResult',this.pageResult);
         if (res.data&&res.data.result) {
           for (let i = 0; i < res.data.result.length; i ++) {
             this.pageData.push(res.data.result[i]);
           }
+
+          if(res.data.result<10){ this.all = true;}
+
         }else {
           this.all = true;
         }
@@ -73,9 +93,37 @@ export class AttentionPage {
     }
     infiniteScroll.complete(function () {
       // console.log('数据请求完成');
-    });*/
+    });
 
   }
+
+  //房源标签转换（字符串转为数组）
+  tagPipe(data) {
+    if (data) {
+      return data.split(",");
+    }
+  }
+  //房源标签code转换为name
+  tagName(code) {
+    for (var i in this.tagsListPage) {
+      if (code == parseFloat(this.tagsListPage[i].val) ) {
+        return this.tagsListPage[i].name
+      }
+    }
+  }
+  pic(data) {
+    if (data) {
+      return JSON.parse(data).imagePath+this.configProvider.set().smSign
+    }
+  }
+  cxPipe(data){
+    for(var i in this.cxJSON){
+      if(data == this.cxJSON[i].val){
+        return this.cxJSON[i].name;
+      }
+    }
+  }
+
   goHouseDetail(item) {
     /*  if(!this.addIcon){
           return
@@ -84,9 +132,11 @@ export class AttentionPage {
   }
 
 
-  cancelFavo(propertyId){
-    this.propertyProvider.cancelFavorite(propertyId,this.agentId).then(res=>{
+  cancelFavo(item,i){
+
+    this.propertyProvider.cancelFavorite(item.propertyId,this.agentId).then(res=>{
       if(res.success){
+        this.pageData.splice(i,1);
         this.toast.msg('取消收藏成功!');
       }
     })

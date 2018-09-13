@@ -610,13 +610,14 @@ export class HousingPage {
         this.all = true;
       }else {
         this.all = false;
-        if(this.pageResult ==''){return};
+        if(this.pageResult ==''){this.all = true; return};
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult =res.data&&res.data.result;
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
             }
+            if(res.data.result<10){ this.all = true;}
           }else {
             this.all = true;
           }
