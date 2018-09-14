@@ -71,7 +71,9 @@ export class PublicpassengerPage {
   }
 
   ionViewDidLoad() {
+    this.params.customerType='0';//默认展示店公客
     this.search();
+
     this.navBar.backButtonClick = () => {
       this.navCtrl.setRoot(PassengerPage)
     };
@@ -79,9 +81,6 @@ export class PublicpassengerPage {
   }
 
   ionViewDidEnter() {
-    // this.navBar.backButtonClick = () => {
-    //   this.navCtrl.pop({animate:false});
-    // };
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -160,12 +159,11 @@ export class PublicpassengerPage {
     if(this.params.intentionDiviCode=='99'){
       this.params.intentionDiviCode='0';
     }
-
     if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
     if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
     if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
 
-    console.log('搜索',this.params);
+
     // this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
@@ -198,82 +196,22 @@ export class PublicpassengerPage {
     if(items.code!='0'){ this.searchArea= items.name;}
     this.search();
   }
+
   sxClick(val){
-    this.pageData = null;
-    this.hasData  = true;
-
-    this.values=val;
-    console.log('值' +val);
-
     this.params.customerSrc = '0';
     this.params.orderBy= 'DESC';
-
-
     this.params.customerType=val;
     val== ''&& delete  this.params.customerType;
+    this.search();
     console.log('搜索',this.params);
-
-    if(this.params.intentionDiviCode=='99'){
-      this.params.intentionDiviCode='0';
-    }
-    if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
-    if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
-    if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
-
-
-    this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
-      this.pageData = res.data.result;
-      this.totalPages = res.data.totalPages;
-
-      if(res.data.hasOwnProperty('result')){
-        this.hasData  = true;
-      }else{
-        this.hasData = false;
-      }
-
-      //关闭搜索框子
-      this.show = false;
-      this.houseType = false;
-      this.more = false;
-      this.pop = false;
-      // this.housingEstate = false;
-      //户型搜索条件字显示
-      if(this.sx ==1){
-        this.sx = 2;
-      }
-    });
   }
   searchFloorNum = 0; //初始化搜索次数
   sx=0;
   values:any;
   sausage=[];
   info:any;
-  // updateCucumber(val,index) {
-  //
-  // }
-
-  // //重置
-  // reset(){
-  //   console.log('清除',this.sausage);
-  //   for(var i in this.sausage){
-  //     this.sausage[i]=false;
-  //   }
-  // }
 
 
-  //重置
-  // reset(){
-  //   this.params = {
-  //     customerSrc:'0',
-  //     intentionDiviCode:'0',//区县
-  //     intentionRoom:'0', //居室
-  //     intentionTradeCode:'0',//商圈
-  //     priceUnit:'1',
-  //     sort:'1',
-  //     sxShow:'1' //筛选
-  //   };
-  //   this.search();
-  // }
   //条数
   currentPage: number = 1;
   all = false;

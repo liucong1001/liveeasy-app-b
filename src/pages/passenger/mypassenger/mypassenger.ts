@@ -252,36 +252,14 @@ export class MypassengerPage {
     if(!this.params.todayNoFollow &&!this.params.threeDayNoFollow&&!this.params.todayNoLook&&!this.params.threeDayNoLook ){
       this.sx=1;
     }
-
-    this.pageData = null;
-    this.hasData  = true;
-    console.log('搜索',this.params);
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
-      this.pageData = res.data.result;
-      this.totalPages = res.data.totalPages;
-
-      if(res.data.hasOwnProperty('result')){
-        this.hasData  = true;
-      }else{
-        this.hasData = false;
-      }
-
-    });
+    this.search();
     //关闭搜索框子
     this.show = false;
     this.houseType = false;
     this.more = false;
     this.pop = false;
-    // this.housingEstate = false;
-    //户型搜索条件字显示
-    // console.log(this.sx);
-
-    // if(this.info == false){
-    //   this.sx=1
-    // }
-    // this.sx=1;
-
   }
+
   // checks:boolean;
   sausage=[];
   info:any;
@@ -319,7 +297,6 @@ export class MypassengerPage {
     {name:'超过三日未跟进',val:2},
     {name:'今日有约看',val:3},
     {name:'三日内有约看',val:4},
-
   ];
 
   //户型转换

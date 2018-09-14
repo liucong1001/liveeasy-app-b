@@ -154,10 +154,20 @@ export class MorePage {
     }
   }
 
+
   ionViewDidEnter(){
+    //清空条件后返回 房源列表也刷新
+    this.navBar.backButtonClick = () => {
+     if(!this.localStorageProvider.get('searchMoreData')){
+       console.log('条件被清空');
+      this.confirm();
 
+     }else {
+       this.navCtrl.pop();
+     }
+      console.log('条件',this.localStorageProvider.get('searchMoreData'));
+    }
   }
-
 
   initTags(item,attr,arryAttr){
     if(this.searchMoreData[arryAttr].length>1){
@@ -196,7 +206,7 @@ export class MorePage {
 
 
 
-  // 房源标签
+/*  // 房源标签
   choseTag(item){
     item.active = !item.active;
     if(item.active) {
@@ -212,11 +222,11 @@ export class MorePage {
       this.searchMoreData.tags+=this.searchMoreData.tagsArry[i];
     }
     // console.log('tags参数',item,this.searchMoreData['tagsArry']);
-  }
+  }*/
 
    flag=false;
 
-   choseOrientation(item){
+/*   choseOrientation(item){
      item.active = !item.active;
      if(item.active) {
        this.searchMoreData.orientationArry.push(item.val);
@@ -231,11 +241,10 @@ export class MorePage {
        this.searchMoreData.orientation+=this.searchMoreData.orientationArry[i];
      }
      // console.log('orientation参数',item,this.searchMoreData['orientationArry']);
-   }
+   }*/
 
 
 
-  //朝向 orientation
   choseMultIple(item,attrName,attrNameArry,attrNameList){
     item.active = !item.active;
     var value = item.val;
@@ -258,6 +267,7 @@ export class MorePage {
     for(var i in this.searchMoreData[attrNameArry]){
       this.searchMoreData[attrName]+= parseInt(this.searchMoreData[attrNameArry][i]) ;
     }
+    this.localStorageProvider.set('searchMoreData',this.searchMoreData)
      // console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
   }
 
@@ -303,11 +313,11 @@ export class MorePage {
     // console.log('清除',this.searchMoreData);
     this.initData();
     this.localStorageProvider.del('searchMoreData');
+    // this.localStorageProvider.set('searchMoreData',this.searchMoreData);
   }
 
   confirm(){
-    // console.log('确定',this.searchMoreData);
-    this.localStorageProvider.set('searchMoreData',this.searchMoreData);
+    // this.localStorageProvider.set('searchMoreData',this.searchMoreData);
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('moreSearchBevents', this.searchMoreData);

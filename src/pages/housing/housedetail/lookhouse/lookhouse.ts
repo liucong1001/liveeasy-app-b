@@ -84,8 +84,6 @@ export class LookhousePage {
       /**
        * 实勘图 审核拒绝
        */
-      // console.log('实勘图 审核拒绝',this.lockhoseDetail.pics);
-
       if(!this.lockhoseDetail.content){
         this.imgJson =[];
       }

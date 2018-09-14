@@ -76,6 +76,8 @@ import { NativeProvider } from '../providers/native/native';
 import { CodePush } from '@ionic-native/code-push';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import {jpushUnit} from "../providers/native/jpush-unit";
+import { SharePropertyProvider } from '../providers/property/share-property';
+import { Clipboard } from '@ionic-native/clipboard';
 @NgModule({
   declarations: [
     MyApp,
@@ -152,7 +154,8 @@ import {jpushUnit} from "../providers/native/jpush-unit";
       PermissionProvider,
       AndroidPermissions,
       JPush,Network,
-      NativeProvider,CodePush,Diagnostic,jpushUnit
+      NativeProvider,CodePush,Diagnostic,jpushUnit,
+      SharePropertyProvider,Clipboard
     ]
 })
 export class AppModule {}

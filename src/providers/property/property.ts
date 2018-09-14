@@ -47,7 +47,8 @@ export class PropertyProvider {
   private cancelFavoritePath =  this.configProvider.set().http+'/property/favoriteProperties/deleteByParams';
  //收藏列表
   private favoriteListPath =  this.configProvider.set().http+'/property/favoriteProperties/favoritePageList.do';
-
+ //房源分享 不存在‘api/v1’
+  private sharePropertyPath =  this.configProvider.set().http.slice(0,-8)+'/biz-erp/html/shareProperty';
   //接口开关
   public isOnline = true;
   /**
@@ -227,7 +228,7 @@ export class PropertyProvider {
     var data = {
       qId:'search',
       qCate:'3',
-      qType:'search',
+      qType:'dsl',
       site:city,
       keyword:keyword,
       score:'1',
@@ -307,6 +308,14 @@ export class PropertyProvider {
         return res as any;
       }
     );
+  }
+
+  //房源分享
+  shareProperty(convId){
+    // return this.http.get(this.sharePropertyPath,{convId:convId});
+    return  this.http.get(this.sharePropertyPath,{params:{convId:convId}}).toPromise().then(res=>{
+      return  res  as any;
+    })
   }
 
 }

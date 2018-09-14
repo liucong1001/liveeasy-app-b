@@ -14,7 +14,7 @@
         "ionic:build:beta:prod": "MY_ENV=beta ionic cordova build android --prod",
         "ionic:build:prod": "MY_ENV=prod ionic cordova build android --prod --release",
         "ionic:build:staging": "MY_ENV=staging ionic cordova build android",
-        "ionic:run:android:beta": "MY_ENV=beta ionic cordova run android",
+        "ionic:run:android:beta": "set MY_ENV=beta&&ionic cordova run android",
         "ionic:run:android:beta:lc": "MY_ENV=beta ionic cordova run android --lc",
         "ionic:run:android:prod": "MY_ENV=prod ionic cordova run android ",
         "ionic:run:android:staging": "MY_ENV=staging ionic cordova run android",
@@ -41,6 +41,7 @@
         "@ionic-native/app-version": "^4.7.0",
         "@ionic-native/base64": "^4.7.0",
         "@ionic-native/camera": "^4.7.0",
+        "@ionic-native/clipboard": "^4.12.2",
         "@ionic-native/code-push": "^4.12.2",
         "@ionic-native/core": "4.7.0",
         "@ionic-native/device": "^4.7.0",
@@ -67,6 +68,7 @@
         "com-sarriaroman-photoviewer": "^1.1.18",
         "com.telerik.plugins.nativepagetransitions": "^0.6.5",
         "cordova-android": "6.4.0",
+        "cordova-clipboard": "^1.2.1",
         "cordova-ios": "4.4.0",
         "cordova-plugin-add-swift-support": "^1.7.2",
         "cordova-plugin-advanced-http": "^1.11.1",
@@ -139,7 +141,8 @@
             "cordova-plugin-code-push": {},
             "jpush-phonegap-plugin": {
                 "APP_KEY": "5c9844642cc40dde038a0d3d"
-            }
+            },
+            "cordova-clipboard": {}
         },
         "platforms": [
             "android",

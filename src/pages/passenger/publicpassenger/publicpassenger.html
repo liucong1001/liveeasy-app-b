@@ -20,10 +20,10 @@
     </ion-col>
 
     <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
-      <span *ngIf="sx==2 && params.customerType!=0" [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
-      <span [hidden]="sx==2||params.customerType==0" > 筛选</span>
-      <span *ngIf="params.customerType==0">筛选</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2&&params.customerType!=0}"></ion-icon>
+      <span  [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
+      <!--<span [hidden]="sx==2||params.customerType==0" > 筛选</span>-->
+      <span *ngIf="!params.customerType">筛选</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.customerType}"></ion-icon>
     </ion-col>
   </ion-row>
 
@@ -78,9 +78,6 @@
       </ion-col>
     </ion-row>
 
-    <!--<div *ngIf="pageData==null" class="tc">-->
-    <!--抱歉，找不到数据-->
-    <!--</div>-->
     <div class="content_page" style="margin-top: 20px">
       <div *ngIf="hasData&&!all" class="tc">
         <ion-spinner item-start name="ios"></ion-spinner>
@@ -100,8 +97,6 @@
     </ion-infinite-scroll>
     <div *ngIf="all&&hasData" class="sTips">已加载全部
     </div>
-    <!--<div *ngIf="all&&hasData" class="sTips">已加载全部-->
-    <!--</div>-->
   </ion-grid>
 
 </ion-content>
@@ -143,7 +138,7 @@
     <ion-list radio-group class="scrollC">
       <ion-item *ngFor="let i of filtrateJson;let index =index">
         <ion-label>{{i.name}}</ion-label>
-        <ion-radio (click)="sxClick(i.val)"></ion-radio>
+        <ion-radio (ionSelect)="sxClick(i.val)" [checked]="i.val=='0'"></ion-radio>
       </ion-item>
     </ion-list>
 

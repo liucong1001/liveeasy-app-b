@@ -1,5 +1,5 @@
 import { Component,ViewChild,NgZone} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController, Events} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController, Events,ModalController } from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -19,6 +19,8 @@ import {DescribePage} from "./describe/describe";
 import { ControlAnchor, NavigationControlType,BaiduMapModule,} from 'angular2-baidu-map';
 import {AuditPage} from "./audit/audit";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {SharePage} from "./share/share";
+import {SharePropertyProvider} from "../../../providers/property/share-property";
 // import {NativeProvider} from "../../../providers/native/native";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
@@ -66,7 +68,7 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                             public app: App,public events: Events
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                             public app: App,public events: Events,public modalCtrl: ModalController,public shareProvider:SharePropertyProvider,
               ) {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
@@ -205,7 +207,6 @@ export class HousinfoPage {
       }else {
         this.navCtrl.pop()
       }
-
       // if(this.app.getActiveNavs()[0]['index']==0){
       //   if(this.navParams.get('notReloadPage')){
       //     this.navCtrl.pop();
@@ -400,6 +401,13 @@ export class HousinfoPage {
          this.isFavoStatus = false;
       }
     })
+  }
+  shareBolean = false
+
+  share(convId){
+   // this.shareProvider.linkShare();// 分享链接
+   //  let modal = this.modalCtrl.create(SharePage);
+   //  modal.present();
   }
 
 
