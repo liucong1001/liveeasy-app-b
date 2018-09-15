@@ -48,10 +48,16 @@ export class AttentionPage {
       this.pageData = [];
       this.propertyProvider.favoritePageList(1,).then(res=>{
          if(res.success){
-           this.currentPage=1;this.hasData = true;
+           this.currentPage=1;
            this.pageResult =res.data&&res.data.result;
+           if(this.pageResult!=''){
+             this.hasData = true;
+           }else {
+             this.hasData = false;
+           }
            for (let i = 0; i < res.data.result.length; i ++) {
              this.pageData.push(res.data.result[i]);
+             if(res.data.result.length<10){ this.all = true;}
            }
          }else{  this.hasData = false;}
       })

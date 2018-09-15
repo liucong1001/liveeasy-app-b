@@ -225,23 +225,19 @@ export class CheckhousePage {
 
 
   detail(item){
-    console.log( item.operationCode);
-
     this.homeProvider.updateMsg(item.messageId,1).then(res=>{
       if(res.success){
         this.search();
-        if(item.operationCode<5000){
-          let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
-          profileModal.present();
-          // console.log('点击',item);
-        }else {
-          this.openWin(DeclardetailPage,{
-            id:item.objectId,
-          });
-        }
       }
     });
-
+    if(item.operationCode<5000){
+      let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
+      profileModal.present();
+    }else {
+      this.openWin(DeclardetailPage,{
+        id:item.objectId,
+      });
+    }
   }
 
 //------返回处理--------//

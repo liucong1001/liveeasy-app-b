@@ -21,6 +21,8 @@ import {AuditPage} from "./audit/audit";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 import {SharePage} from "./share/share";
 import {SharePropertyProvider} from "../../../providers/property/share-property";
+import {KeyPage} from "../housedetail/key/key";
+import {LetteratorneyPage} from "../housedetail/letteratorney/letteratorney";
 // import {NativeProvider} from "../../../providers/native/native";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
@@ -248,6 +250,21 @@ export class HousinfoPage {
   rolepeople(){
     this.openWin(RolepeoplePage,{propertyid:this.propertyId});
   };
+  //钥匙
+  goKey(){
+    this.openWin(KeyPage,{
+      propertyid:this.propertyId,
+      item:this.houseData,
+    })
+  }
+  //业主委托书
+  letterOfAttorney(){
+    this.openWin(LetteratorneyPage,{
+      propertyid:this.propertyId,
+      estateId:this.houseData.estateId,
+    })
+  }
+
   goAudit(){
     this.openWin(AuditPage,{houseInfo:this.houseData});
   }
@@ -380,7 +397,7 @@ export class HousinfoPage {
     this.propertyProvider.addFavorite(data).then(res=>{
         if(res.success){
           this.isFavoStatus = true;
-          this.toast.msg('收藏成功');
+          this.toast.msg('关注成功');
         }
     });
 
@@ -397,7 +414,7 @@ export class HousinfoPage {
     console.log('取消关注');
     this.propertyProvider.cancelFavorite(this.houseData.propertyId,this.localStorageProvider.get('loginInfo')['user']['id']).then(res=>{
       if(res.success){
-         this.toast.msg('取消收藏');
+         this.toast.msg('取消关注');
          this.isFavoStatus = false;
       }
     })

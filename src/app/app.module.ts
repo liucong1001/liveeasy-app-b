@@ -115,6 +115,7 @@ import { Clipboard } from '@ionic-native/clipboard';
       StatusBar,
       SplashScreen,
       {provide: ErrorHandler, useClass: IonicErrorHandler},
+      { provide: 'ENV', useValue: ENV },
       LoginProvider,
       LocalStorageProvider,
       HomeProvider,
