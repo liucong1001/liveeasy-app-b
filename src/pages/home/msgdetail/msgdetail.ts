@@ -31,7 +31,7 @@ export class MsgdetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MsgdetailPage');
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
   }
   goMdetails(item){
     this.openWin(MdetailsPage,{news:item})

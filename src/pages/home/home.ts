@@ -1,5 +1,5 @@
 import {Component, Renderer, ViewChild} from '@angular/core';
-import {Navbar, NavController, Searchbar} from 'ionic-angular';
+import {Navbar, NavController, Platform, Searchbar, ViewController} from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../housing/addhouse/addhouse";
@@ -52,13 +52,18 @@ export class HomePage {
   aLinKDownloadVersion:string;
   model:any;
 
+  AddhousePage:any;
+
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public homeProvider:HomeProvider,public statusBar: StatusBar,  private renderer:Renderer,
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
               public jpush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,
-              private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit
+              private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit,
+              public viewCtrl: ViewController,public platform: Platform
              ) {
+    this.AddhousePage = AddhousePage;
+
     this.model = ENV.mode;
     this.localStorageProvider.del('searchMoreData');
     //获取待办消息接口-
@@ -79,7 +84,7 @@ export class HomePage {
     /*消息推送配置**/
     this.jpushUnit.initPush();
     console.log('设置别名--------',this.localStorageProvider.get('loginInfo')['user']['id']);
-     this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
+    this.platform.is('cordova')&& this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
      // this.jpushUnit.getAlias();
   }
 
@@ -90,7 +95,6 @@ export class HomePage {
   //状态栏文字颜色修改-黑色
   ionViewWillEnter() {
     this.statusBar.styleDefault();
-
   }
   msgResult=[];
   ionViewDidLoad(){
@@ -120,6 +124,15 @@ export class HomePage {
   msgDetail(){
     this.notificationNews&&this.openWin(MsgdetailPage);
   }
+  goAddHouse(){
+    // this.navCtrl.push('AddhousePage',{})
+    // {animate:true,animation:'transition',duration:500,direction:'forward'}
+    this.openWin(AddhousePage);
+  }
+
+  goAddPassenger(){
+    this.openWin(AddpassengerPage);
+  }
 
   gosta(){
     this.openWin(StatisticsPage);
@@ -148,8 +161,8 @@ export class HomePage {
   openWin(goPage, param = {}) {
     let options: NativeTransitionOptions = {
       direction: 'left',
-      // duration: 100,
-      // slowdownfactor: -1,
+      duration: 400,
+      slowdownfactor: -1,
       iosdelay: 50
     };
 

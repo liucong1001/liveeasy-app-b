@@ -509,34 +509,19 @@ export class HousedetailPage {
       ...this.form.value
     };
 
-    // formData.propertyDesc = formData.propertyDesc.replace(/\n/ig, '\\n');
-   // console.log('提交',formData);
-    this.propertyProvider.checkUpdates(formData).then(res=>{
-        if(!res.success){
-          this.propertyProvider.updates(formData).then(res=>{
-            if(res.success){
-              this.toast.msg('修改成功!');
-              this.errBtnHttp =true;
-              // setTimeout(()=>{
-                // this.navCtrl.setRoot(HousingPage);
-                // this.navCtrl.push(HousinfoPage,{propertyId:this.propertyid,notReloadPage:true});
-                this.navCtrl.pop().then(()=>{
-                  this.events.publish('bevents',{propertyId:this.propertyid,notReloadPage:true});
-                })
+    this.propertyProvider.updates(formData).then(res=>{
+      if(res.success){
+        this.toast.msg('修改成功!');
+        this.errBtnHttp =true;
+        this.navCtrl.pop().then(()=>{
+          this.events.publish('bevents',{propertyId:this.propertyid,notReloadPage:true});
+        })
+      }else{
+        this.toast.error('修改失败！'+res.msg);
+        this.errBtnHttp =false;
+      }
+    })
 
-              // },100);
-            }else{
-              this.toast.error('修改失败！');
-              this.errBtnHttp =false;
-
-            }
-          })
-        }else {
-           this.errBtnHttp =false;
-           this.toast.error('您修改的房源已存在,房源编号'+res.data.convIdReq);
-           console.log('errBtnHttp',this.errBtnHttp);
-        }
-    });
   }
 
 

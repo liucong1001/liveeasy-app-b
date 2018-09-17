@@ -129,7 +129,7 @@ export class AllsearchPage {
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
-  }
+  };
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
@@ -139,7 +139,6 @@ export class AllsearchPage {
       slowdownfactor: -1,
       iosdelay: 50
     };
-
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }

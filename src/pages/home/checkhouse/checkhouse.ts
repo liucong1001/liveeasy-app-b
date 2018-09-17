@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams,Navbar,ModalController } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Navbar, ModalController, Platform} from 'ionic-angular';
 
 import {CustomerProvider} from "../../../providers/customer/customer";
 import {PropertyProvider} from "../../../providers/property/property";
@@ -40,7 +40,8 @@ export class CheckhousePage {
   msgJson:any;
   pageResult:any;
   constructor(public navCtrl: NavController,
-              public statusBar: StatusBar, public homeProvider: HomeProvider, public modalCtrl: ModalController,
+              public statusBar: StatusBar, public homeProvider: HomeProvider,
+              public modalCtrl: ModalController,public platform: Platform,
               public nativePageTransitions: NativePageTransitions, public navParams: NavParams,
               private customerProvider: CustomerProvider,
               public propertyProvider: PropertyProvider, public toast: ToastComponent,
@@ -249,7 +250,7 @@ export class CheckhousePage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});

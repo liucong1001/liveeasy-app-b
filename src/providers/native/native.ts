@@ -20,8 +20,8 @@ export class NativeProvider {
               public nativePageTransitions: NativePageTransitions,
               private network: Network, private codePush: CodePush,
               private diagnostic: Diagnostic,public toast:ToastComponent,
-              private alertCtrl: AlertController,) {
-    this.ENV = ENV;
+              private alertCtrl: AlertController) {
+              this.ENV = ENV;
   }
 
 
@@ -289,7 +289,6 @@ export class NativeProvider {
       });
     });
   }*/
-
 
 
 

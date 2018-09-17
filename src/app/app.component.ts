@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB, NavController} from 'ionic-angular';
+import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB, } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {VersionProvider} from "../providers/version/app.version";
@@ -50,53 +50,54 @@ export class MyApp {
               public kb: KB,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jpush: JPush,private appVersion: AppVersion,private http: HTTP,
-              private  nativeProvider:NativeProvider,private network: Network,private jpushUnit:jpushUnit
+              private  nativeProvider:NativeProvider,private network: Network,private jpushUnit:jpushUnit,
 
   ) {
 
     if(this.localStorageProvider.get('ticket')){
       this.rootPage = TabsPage;
     }
-    this.statusBar.styleDefault();
-    this.statusBar.overlaysWebView(true);
-    this.headerColor.tint('#1ab394');
+   if(this.platform.is('cordova')){
+     this.statusBar.styleDefault();
+     this.statusBar.overlaysWebView(true);
+     this.headerColor.tint('#1ab394');
 
-    platform.ready().then(() => {
-      this.listenConnection();// 检测网络
-      //标签
-      this.tagsList=this.localStorageProvider.get('tagsList');
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();//头部信号字体颜色
-      // let status bar overlay webview 头部信号
-      statusBar.overlaysWebView(true);
-      // set status bar to white
-      //statusBar.backgroundColorByHexString('#ffffff');
-      headerColor.tint('#1ab394');
-      splashScreen.hide();
-      this.setKeyBorder();
-      //android 6 以上动态获取权限
-      if (this.device.platform == "Android") {
-        this.androidPermissions.requestPermissions([
-          this.androidPermissions.PERMISSION.CAMERA,
-          this.androidPermissions.PERMISSION.GET_ACCOUNTS,
-          this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES,
-          this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
-          this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
-        ]);
-      }
-      this.appUpdate.checkVersion(false);
-      // 返回按键事件
-      this.registerBackButtonAction();
-      /*极光推送开启 **/
+     platform.ready().then(() => {
+       this.listenConnection();// 检测网络
+       // Okay, so the platform is ready and our plugins are available.
+       // Here you can do any higher level native things you might need.
+       statusBar.styleDefault();//头部信号字体颜色
+       // let status bar overlay webview 头部信号
+       statusBar.overlaysWebView(true);
+       // set status bar to white
+       //statusBar.backgroundColorByHexString('#ffffff');
+       headerColor.tint('#1ab394');
+       splashScreen.hide();
+       this.setKeyBorder();
+       //android 6 以上动态获取权限
+       if (this.device.platform == "Android") {
+         this.androidPermissions.requestPermissions([
+           this.androidPermissions.PERMISSION.CAMERA,
+           this.androidPermissions.PERMISSION.GET_ACCOUNTS,
+           this.androidPermissions.PERMISSION.REQUEST_INSTALLPACKAGES,
+           this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+           this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+         ]);
+       }
+       this.appUpdate.checkVersion(false);
+       // 返回按键事件
+       this.registerBackButtonAction();
+       /*极光推送开启 **/
        jpush.init();
        jpush.setDebugMode(true);
        //检查热更新
-      this.nativeProvider.sync();
-      console.log('手机定位开始');
-      //手机定位
-      this.nativeProvider.getLocation();
-    });
+       this.nativeProvider.sync();
+       console.log('手机定位开始');
+       //手机定位
+       this.nativeProvider.getLocation();
+     });
+   }
+
   }
 
   go(item){
@@ -202,8 +203,6 @@ export class MyApp {
       });
 
   }
-
-
 
 
 }

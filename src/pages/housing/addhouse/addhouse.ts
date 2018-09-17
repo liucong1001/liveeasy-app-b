@@ -1,5 +1,15 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, App, Navbar, Select, Content} from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ActionSheetController,
+  App,
+  Navbar,
+  Select,
+  Content,
+  Platform
+} from 'ionic-angular';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorMessage} from '../../../components/valid-error/valid-error';
 import {AddhouseProvider} from "../../../providers/addhouse/addhouse";
@@ -63,7 +73,7 @@ export class AddhousePage {
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
               private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
-              public app: App,public statusBar: StatusBar
+              public app: App,public statusBar: StatusBar, public platform: Platform
   ) {
 
     //房源标签
@@ -404,7 +414,6 @@ export class AddhousePage {
       this.form.value.contacts = JSON.stringify(this.form.value.contacts);
       this.errBtnHttp =false;
     })
-
   }
 
   //更多
@@ -456,11 +465,11 @@ export class AddhousePage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});
-  }
+  };
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

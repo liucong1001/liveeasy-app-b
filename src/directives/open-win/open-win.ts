@@ -1,7 +1,7 @@
 import {Directive, HostListener, Input} from '@angular/core';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {NavController} from "ionic-angular";
-
+import { App, ViewController } from 'ionic-angular';
 /**
  * Generated class for the OpenWinDirective directive.
  *
@@ -13,7 +13,7 @@ import {NavController} from "ionic-angular";
 })
 export class OpenWinDirective {
   @Input() openWin:any;  // 注意： 此名字 和 selector名字保持一样
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController,
               public nativePageTransitions: NativePageTransitions,) {
     console.log('Hello OpenWinDirective Directive');
   }
@@ -23,17 +23,17 @@ export class OpenWinDirective {
 
   //------跳转页面过渡--------//
   openWinPage(goPage, param = {}) {
+    this.viewCtrl.dismiss();
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 400,
       slowdownfactor: -1,
       iosdelay: 50,
-       androiddelay  :  100,
+      androiddelay  :  100,
       slidePixels:20,
       fixedPixelsTop:0,
       fixedPixelsBottom:0
     };
-
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
