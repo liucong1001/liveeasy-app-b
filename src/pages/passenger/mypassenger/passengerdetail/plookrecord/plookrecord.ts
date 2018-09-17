@@ -65,18 +65,16 @@ export class PlookrecordPage {
 
   }
   ionViewWillLeave(){
-      this.alert.dismiss();
+    this.alert&&this.alert.dismiss();
   }
   //添加active
   goToSlide(index) {
     this.slides.slideTo(index, 500);
     this.addActive(index);
-
   }
   // 滑动切换
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    // console.log(currentIndex);
     this.addActive(currentIndex);
   }
   // 改变tab 颜色

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {AlertController, Loading, LoadingController, NavController, Platform, ToastController} from 'ionic-angular';
+import {AlertController, Loading, LoadingController,NavController, Platform, ToastController} from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -8,6 +8,8 @@ import { CodePush } from '@ionic-native/code-push';
 import { Observable } from 'rxjs/Rx';
 import {ToastComponent} from "../../components/toast/toast";
 import { ENV } from '@app/env'
+import { App } from "ionic-angular";
+// import { NavController } from "ionic-angular/index";
 declare var LocationPlugin;
 declare var AMapNavigation;
 /*
@@ -16,12 +18,17 @@ declare var AMapNavigation;
 @Injectable()
 export class NativeProvider {
   ENV:any;
+  private navCtrl: NavController;
   constructor(public http: HttpClient,private platform: Platform,
               public nativePageTransitions: NativePageTransitions,
               private network: Network, private codePush: CodePush,
               private diagnostic: Diagnostic,public toast:ToastComponent,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController, private app:App,) {
               this.ENV = ENV;
+              this.navCtrl = this.app.getActiveNav();
+    // get navCtrl(): NavController {
+    //   return this.app.getRootNav();
+    // }
   }
 
 
@@ -290,7 +297,47 @@ export class NativeProvider {
     });
   }*/
 
+  /**
+   * 跳转页面过渡(过渡动画)
+   * @param nav
+   * @param goPage
+   * @param {{}} param
+   */
 
+  openWin(nav,goPage, param = {}) {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+    };
+    this.nativePageTransitions.slide(options);
+    nav.push(goPage, param, {animate:false});
+  }
+
+  /**
+   * 页面返回处理  (过渡动画)
+   * @param nav
+   * @returns {(e: UIEvent) => void}
+   */
+
+  back(nav){
+    var backButtonClick;
+    return   backButtonClick = (e: UIEvent) => {
+      let options: NativeTransitionOptions = {
+        direction: 'right',
+        duration: 400,
+        slowdownfactor: 3,
+        iosdelay: 50
+      };
+
+      this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
+        .then()
+        .catch();
+      console.log(this.navCtrl);
+      nav.pop({animate:false});
+    };
+  }
 
 
 }

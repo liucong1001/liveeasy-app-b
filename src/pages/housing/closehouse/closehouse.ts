@@ -10,6 +10,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {BelongerPage} from "./belonger/belonger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {NativeProvider} from "../../../providers/native/native";
 /**
  * Generated class for the ClosehousePage page.
  *
@@ -42,7 +43,8 @@ export class ClosehousePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
               public http: HttpClient,public toast:ToastComponent,private renderer:Renderer,
               public  closehouseProvider: ClosehouseProvider,public nativePageTransitions: NativePageTransitions,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
+              public  nativeProvider:NativeProvider,) {
     this.propertyid = navParams.get('propertyid');
     this.loginId=this.localStorageProvider.get('loginInfo').user.id;
     this.data = navParams.get('item');
@@ -79,7 +81,8 @@ export class ClosehousePage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ClosehousePage');
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
+
   }
   ionViewWillLeave(){
     this.select.close();
@@ -129,37 +132,10 @@ export class ClosehousePage {
     });
   }
   pendings(){
-    this.openWin(BelongerPage,{
+    this.nativeProvider.openWin(this.navCtrl,BelongerPage,{
       data:this.form.value,
     })
   }
 
-
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 
 }

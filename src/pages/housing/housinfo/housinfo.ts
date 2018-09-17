@@ -23,7 +23,7 @@ import {SharePage} from "./share/share";
 import {SharePropertyProvider} from "../../../providers/property/share-property";
 import {KeyPage} from "../housedetail/key/key";
 import {LetteratorneyPage} from "../housedetail/letteratorney/letteratorney";
-// import {NativeProvider} from "../../../providers/native/native";
+import {NativeProvider} from "../../../providers/native/native";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -70,7 +70,8 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                             public app: App,public events: Events,public modalCtrl: ModalController,public shareProvider:SharePropertyProvider,
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                 public app: App,public events: Events,public modalCtrl: ModalController,
+              public shareProvider:SharePropertyProvider,public  nativeProvider:NativeProvider
               ) {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
@@ -235,7 +236,7 @@ export class HousinfoPage {
   }
 
   goMore(){
-     this.openWin(HousmorePage,{item:this.houseData});
+     this.nativeProvider.openWin(this.navCtrl,HousmorePage,{item:this.houseData});
   }
 
   edit(){
@@ -244,39 +245,39 @@ export class HousinfoPage {
       this.getHouseData(params.propertyId,false);
       this.events.unsubscribe('bevents');
     });
-    this.openWin(HousedetailPage,{propertyId:this.propertyId,item:this.houseData});
+    this.nativeProvider.openWin(this.navCtrl,HousedetailPage,{propertyId:this.propertyId,item:this.houseData});
   }
 
   rolepeople(){
-    this.openWin(RolepeoplePage,{propertyid:this.propertyId});
+    this.nativeProvider.openWin(this.navCtrl,RolepeoplePage,{propertyid:this.propertyId});
   };
   //钥匙
   goKey(){
-    this.openWin(KeyPage,{
+    this.nativeProvider.openWin(this.navCtrl,KeyPage,{
       propertyid:this.propertyId,
       item:this.houseData,
     })
   }
   //业主委托书
   letterOfAttorney(){
-    this.openWin(LetteratorneyPage,{
+    this.nativeProvider.openWin(this.navCtrl,LetteratorneyPage,{
       propertyid:this.propertyId,
       estateId:this.houseData.estateId,
     })
   }
 
   goAudit(){
-    this.openWin(AuditPage,{houseInfo:this.houseData});
+    this.nativeProvider.openWin(this.navCtrl,AuditPage,{houseInfo:this.houseData});
   }
   //跟进
   goFollow(){
-    this.openWin(FollowPage,{
+    this.nativeProvider.openWin(this.navCtrl,FollowPage,{
       item:this.houseData
     })
   }
   //记录
   record(){
-    this.openWin(RecordPage,{
+    this.nativeProvider.openWin(this.navCtrl,RecordPage,{
       item:this.houseData
     });
   }
@@ -329,7 +330,7 @@ export class HousinfoPage {
 
   //房源描述
   describes(){
-    this.openWin(DescribePage,{
+    this.nativeProvider.openWin(this.navCtrl,DescribePage,{
     item:this.houseData,
     })
   }
@@ -427,32 +428,5 @@ export class HousinfoPage {
    //  modal.present();
   }
 
-
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
 
 }

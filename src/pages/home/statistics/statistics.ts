@@ -7,6 +7,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {PersonPage} from "./person/person";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {ToastComponent} from "../../../components/toast/toast";
+import {NativeProvider} from "../../../providers/native/native";
 
 /**
  * Generated class for the StatisticsPage page.
@@ -46,7 +47,8 @@ export class StatisticsPage {
   endDate: String = new Date(new Date().getTime()-24 *60*60*1000).toISOString();
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController,
               public homeProvider:HomeProvider,private fb:FormBuilder,public toast:ToastComponent,
-              public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,) {
+              public statusBar: StatusBar, public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+              public  nativeProvider:NativeProvider,) {
 
     var date = new Date();
     var year=(new Date(date.getTime() - 24*60*60*1000)).getFullYear();
@@ -253,7 +255,9 @@ export class StatisticsPage {
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
+
   }
   form:FormGroup =this.fb.group({
     startTime:[''],
@@ -876,24 +880,10 @@ export class StatisticsPage {
       slowdownfactor: -1,
       iosdelay: 50
     };
-
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(goPage, param, {animate:false});
   }
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
 }
 
 // /**

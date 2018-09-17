@@ -9,6 +9,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {PassengerPage} from "../passenger";
+import {NativeProvider} from "../../../providers/native/native";
 /**
  公客列表
  */
@@ -51,7 +52,8 @@ export class PublicpassengerPage {
               public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar,
               public navParams: NavParams,public publicCustomerProvider:PublicCustomerProvider,
               public propertyProvider: PropertyProvider,private customerProvider:CustomerProvider,
-              public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,) {
+              public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
+              public  nativeProvider:NativeProvider) {
 
     this.customerProvider.tradingArea().then(res=>{
       this.tradingArea = res;
@@ -319,7 +321,7 @@ export class PublicpassengerPage {
 
   //进入详情页
   gopassengerDetail(item){
-    this.openWin(PublicpdetailPage, {
+    this.nativeProvider.openWin(this.navCtrl,PublicpdetailPage, {
       item:item,
       customerId:item.customerId,
     });
@@ -407,34 +409,9 @@ export class PublicpassengerPage {
     }
   }
   gopublicpasger(){
-    this.openWin(PublicpassengerPage)
+    this.nativeProvider.openWin(this.navCtrl,PublicpassengerPage)
   }
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 }
 
 

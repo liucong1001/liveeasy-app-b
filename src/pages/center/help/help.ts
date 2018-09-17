@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Platform} from 'ionic-angular';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -23,7 +23,8 @@ export class HelpPage {
   appVersion:any;
   appId:any;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public navParams: NavParams, private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,
-              public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions) {
+              public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions,
+              public platform: Platform) {
 
       this.updprovider.version({}).then(res=>{
         // console.log(res)
@@ -66,7 +67,7 @@ export class HelpPage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});

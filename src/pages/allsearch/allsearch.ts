@@ -125,7 +125,7 @@ export class AllsearchPage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});

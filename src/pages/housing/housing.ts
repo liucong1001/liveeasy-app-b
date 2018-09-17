@@ -21,6 +21,7 @@ import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
+import {NativeProvider} from "../../providers/native/native";
 
 /**
  * Generated class for the HousingPage page.
@@ -113,7 +114,7 @@ export class HousingPage {
               public customerProvider:CustomerProvider,
               public nativePageTransitions: NativePageTransitions,
               public toast:ToastComponent,
-              private renderer:Renderer
+              private renderer:Renderer,public  nativeProvider:NativeProvider,
   ) {
     this.localCode = this.localStorageProvider.get('codeData');
     console.log('初始化上一个',this.navCtrl.last()&&this.navCtrl.last().name);
@@ -489,11 +490,11 @@ export class HousingPage {
 /*  if(!this.addIcon){
       return
     }*/
-    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
+    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId});
   }
 
   addHouse() {
-    this.openWin(AddhousePage);
+    this.nativeProvider.openWin(this.navCtrl,AddhousePage);
   }
   num :any;
   timer:any;

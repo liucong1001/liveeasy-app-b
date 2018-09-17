@@ -14,6 +14,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
 import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {NativeProvider} from "../../../../providers/native/native";
 /**
  * Generated class for the PassengerdetailPage page.
  *
@@ -60,7 +61,8 @@ export class PassengerdetailPage {
               public toast:ToastComponent,public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private fb:FormBuilder,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
-              public events: Events,  public localStorageProvider: LocalStorageProvider,) {
+              public events: Events,  public localStorageProvider: LocalStorageProvider,
+              public  nativeProvider:NativeProvider,) {
     this.selectOptionGs={
       title:'客户归属'
     };
@@ -124,11 +126,6 @@ export class PassengerdetailPage {
     }else {
       this.isReload= true;
     }
-
-
-    // console.log('测试', this.compare(this.form.value.minSpaceSize,this.form.value.maxSpaceSize),this.form);
-
-
   }
 
   closeSelect(){
@@ -274,12 +271,12 @@ export class PassengerdetailPage {
   }
 
   passengerLook(){
-    this.openWin(PlookrecordPage,{
+    this.nativeProvider.openWin(this.navCtrl,PlookrecordPage,{
       id:this.data,
     })
   }
   passengerFollow(){
-    this.openWin(PfollowrecordPage,{
+    this.nativeProvider.openWin(this.navCtrl,PfollowrecordPage,{
       id:this.data,
     })
   }
@@ -297,7 +294,7 @@ export class PassengerdetailPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.openWin(SearchhousePage);
+    this.nativeProvider.openWin(this.navCtrl,SearchhousePage);
   }
   isDisabled = false;
   save(){
@@ -344,19 +341,19 @@ export class PassengerdetailPage {
 
 
     if(val==1){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:1,
         content:this.form.value.requiredDemands
       });
     }
     if(val==2){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:2,
         content:this.form.value.againstDemands
       });
     }
     if(val==3){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:3,
         content:this.form.value.comments
       });
@@ -473,32 +470,5 @@ export class PassengerdetailPage {
     }
   }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 
 }

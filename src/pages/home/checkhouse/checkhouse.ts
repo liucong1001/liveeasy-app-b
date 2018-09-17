@@ -12,6 +12,7 @@ import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 import {DeclardetailPage} from "../declaration/declardetail/declardetail";
+import {NativeProvider} from "../../../providers/native/native";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -45,14 +46,14 @@ export class CheckhousePage {
               public nativePageTransitions: NativePageTransitions, public navParams: NavParams,
               private customerProvider: CustomerProvider,
               public propertyProvider: PropertyProvider, public toast: ToastComponent,
-              public localStorageProvider: LocalStorageProvider) {
+              public localStorageProvider: LocalStorageProvider,public  nativeProvider:NativeProvider,) {
     this.localCode = this.localStorageProvider.get('codeData');
     this.msgJson = new ArryCodeValuePipe().transform(this.localCode,'operate_code');
   }
 
   ionViewDidLoad() {
     this.search();
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 
   ionViewDidEnter() {
@@ -235,37 +236,9 @@ export class CheckhousePage {
       let profileModal = this.modalCtrl.create(HousinfoPage, {propertyId: item.objectId, modals: false});
       profileModal.present();
     }else {
-      this.openWin(DeclardetailPage,{
+      this.nativeProvider.openWin(this.navCtrl,DeclardetailPage,{
         id:item.objectId,
       });
     }
-  }
-
-//------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  };
-
-//------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
   }
 }

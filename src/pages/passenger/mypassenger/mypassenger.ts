@@ -14,6 +14,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import { Content,List } from 'ionic-angular';
+import {NativeProvider} from "../../../providers/native/native";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -60,7 +61,7 @@ export class MypassengerPage {
   @ViewChild('navbar') navBar: Navbar;
   date:any;
   constructor(public navCtrl: NavController,
-              public statusBar: StatusBar,
+              public statusBar: StatusBar,public  nativeProvider:NativeProvider,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,
@@ -89,9 +90,6 @@ export class MypassengerPage {
   @ViewChild('Content') content: Content;
   ionViewDidLoad() {
     this.search();
-    // this.navBar.backButtonClick = () => {
-    //   this.navCtrl.setRoot(PassengerPage);
-    // };
     this.navBar.backButtonClick = () => {
       this.navCtrl.setRoot(PassengerPage)
     };
@@ -480,57 +478,31 @@ export class MypassengerPage {
       // this.getHouseData(params.propertyId,false);
       this.events.unsubscribe('bevents');
     });
-    this.openWin(AddpassengerPage)
+    this.nativeProvider.openWin(this.navCtrl,AddpassengerPage)
   }
 
   gopassengerDetail(item){
-    this.openWin(PassengerdetailPage,{customerId:item.customerId});
+    this.nativeProvider.openWin(this.navCtrl,PassengerdetailPage,{customerId:item.customerId});
   }
   goFollow(item,slidingItem){
-    this.openWin(PassengerfollowPage,{
+    this.nativeProvider.openWin(this.navCtrl,PassengerfollowPage,{
       item:item,
     });
     slidingItem.close();
   }
   golook(item,slidingItem){
-    this.openWin(PassengerlookPage,{
+    this.nativeProvider.openWin(this.navCtrl,PassengerlookPage,{
       item:item,
     });
     slidingItem.close();
   }
   closePrivateGuest(item,slidingItem){
-    this.openWin(CloseprivateguestPage,{
+    this.nativeProvider.openWin(this.navCtrl,CloseprivateguestPage,{
       item:item,
     });
     slidingItem.close();
   };
-//------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-
-//------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 
 
   setRoot(goPage, param = {}) {

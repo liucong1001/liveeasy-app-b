@@ -8,6 +8,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {NativeProvider} from "../../../providers/native/native";
 
 /**
  * 报单列表
@@ -46,7 +47,8 @@ export class DeclarationPage {
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,public statusBar: StatusBar,
               private customerProvider:CustomerProvider,private homeProvider:HomeProvider,
-              public propertyProvider: PropertyProvider,public localStorageProvider: LocalStorageProvider) {
+              public propertyProvider: PropertyProvider,public localStorageProvider: LocalStorageProvider,
+              public  nativeProvider:NativeProvider,) {
     this.localCode = this.localStorageProvider.get('codeData');
     this.stateJSON = new ArryCodeValuePipe().transform(this.localCode,'order_status');
     console.log(this.stateJSON)
@@ -54,7 +56,7 @@ export class DeclarationPage {
 
   ionViewDidLoad() {
     this.search();
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -332,21 +334,6 @@ export class DeclarationPage {
     this.openWin(DeclardetailPage,{
       id:item.orderId,
     })
-  }
-
-//------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
   }
 
 

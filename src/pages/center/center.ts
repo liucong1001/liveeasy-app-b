@@ -61,16 +61,14 @@ export class CenterPage {
     if(this.localStorageProvider.get('loginInfo').user.photo){
       this.photo = this.localStorageProvider.get('loginInfo').user.photo;
     }
-
     console.log(this.photo);
     this.imgHeader = this.configProvider.set().img;
 
     this.localStorageProvider.del('searchMoreData');
     this.versionJsonUrl = "https://www.pgyer.com/apiv2/app/listMy";
     // console.log('检测新版本');
-    this.appVersion.getVersionNumber().then(res=>{
+    this.platform.is('cordova')&& this.appVersion.getVersionNumber().then(res=>{
       this.versionNumber =res; //当前版本
-      // console.log('getVersionNumber',res);
     });
     if (this.platform.is('ios')) {
          // console.log('ios','ios平台');
@@ -87,7 +85,8 @@ export class CenterPage {
       _api_key:this.ENY.apiKey,
       page:'1',
     };
-    this.http.post(this.versionJsonUrl,params,{
+
+    this.platform.is('cordova')&&this.http.post(this.versionJsonUrl,params,{
       "content-type":"application/json"
     }).then(data  => {
       var res;
@@ -98,8 +97,6 @@ export class CenterPage {
       if (data && data.status && data.status == 200 && data.data) {
         // let result = data.data || {};
          versionInfo.url ="https://www.pgyer.com/apiv2/app/install?appKey="+this.ENY.appKey+"&_api_key="+this.ENY.apiKey;
-
-
         this.aLinKDownload = versionInfo.url;
         this.aLinKDownloadVersion = versionInfo.buildVersion;   //从网上获取最新版本号
         if(this.aLinKDownloadVersion>this.versionNumber){
@@ -107,7 +104,6 @@ export class CenterPage {
            this.showNewVersion = true;
            // console.log('是否存在版本',this.showNewVersion);
         }
-
       }
     }).catch((e)=> {
       console.error(JSON.stringify(e));

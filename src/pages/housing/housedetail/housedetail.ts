@@ -21,6 +21,7 @@ import { LoadingController, Loading } from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousinfoPage} from "../housinfo/housinfo";
+import {NativeProvider} from "../../../providers/native/native";
 
 /**
  房源修改页面
@@ -81,10 +82,12 @@ export class HousedetailPage {
 
 
   localCode:any;
-  constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public propertyProvider: PropertyProvider,
+  constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
+              public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,
+              public propertyProvider: PropertyProvider,
               public events: Events,public addhouseProvider: AddhouseProvider,public toast:ToastComponent,
-              public statusBar: StatusBar,
+              public statusBar: StatusBar,public  nativeProvider:NativeProvider,
               public loadingCtrl: LoadingController) {
 
     this.localCode = this.localStorageProvider.get('codeData');
@@ -396,12 +399,10 @@ export class HousedetailPage {
     actionSheet.present();
   }
     record(){
-      this.openWin(RecordPage,{
+      this.nativeProvider.openWin(this.navCtrl,RecordPage,{
         propertyid:this.propertyid,
       });
     }
-
-
 
   //楼盘搜索页面
   goserach(){
@@ -412,7 +413,7 @@ export class HousedetailPage {
       // 取消订阅
       this.events.unsubscribe('bevents');
     });
-    this.openWin(SearchhousePage);
+    this.nativeProvider.openWin(this.navCtrl,SearchhousePage);
   };
 
   estateChange(Value){
@@ -429,7 +430,7 @@ export class HousedetailPage {
 
 
   letterOfAttorney(){
-    this.openWin(LetteratorneyPage,{
+    this.nativeProvider.openWin(this.navCtrl,LetteratorneyPage,{
       propertyid:this.propertyid,
       estateId:this.data.estateId,
     })
@@ -440,11 +441,11 @@ export class HousedetailPage {
    */
 
   lookHouse(){
-    this.openWin(LookhousePage,{propertyId:this.propertyid,item:this.data});
+    this.nativeProvider.openWin(this.navCtrl,LookhousePage,{propertyId:this.propertyid,item:this.data});
   }
 
   rolepeople(){
-    this.openWin(RolepeoplePage,{
+    this.nativeProvider.openWin(this.navCtrl,RolepeoplePage,{
       propertyid:this.propertyid,
     })
   }
@@ -527,7 +528,7 @@ export class HousedetailPage {
 
   //跟进
   goFollow(){
-    this.openWin(FollowPage,{
+    this.nativeProvider.openWin(this.navCtrl,FollowPage,{
       propertyid: this.data.propertyId,
       estatename: this.data.estateName,
       convid: this.data.convId,
@@ -537,7 +538,7 @@ export class HousedetailPage {
 
   //钥匙
   goKey(){
-    this.openWin(KeyPage,{
+    this.nativeProvider.openWin(this.navCtrl,KeyPage,{
       propertyid:this.propertyid,
       item:this.data,
     })
@@ -566,7 +567,7 @@ export class HousedetailPage {
       // 取消订阅
       this.events.unsubscribe('content');
     });
-    this.openWin(DescPage,{content:this.form.value.propertyDesc});
+    this.nativeProvider.openWin(this.navCtrl,DescPage,{content:this.form.value.propertyDesc});
   }
 
   //户型
@@ -582,31 +583,5 @@ export class HousedetailPage {
     }
   }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 }

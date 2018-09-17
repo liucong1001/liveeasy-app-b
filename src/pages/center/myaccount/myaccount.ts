@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Platform} from 'ionic-angular';
 import { UpdatepwdPage } from '../updatepwd/updatepwd';
 import { VerifyphonePage } from '../verifyphone/verifyphone';
 import {HttpClient} from '@angular/common/http';
@@ -23,7 +23,8 @@ export class MyaccountPage {
   photo:any;
 
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,
-              public navParams: NavParams,public localStorageProvider:LocalStorageProvider) {
+              public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
+              public platform: Platform) {
     this.phone = this.localStorageProvider.get('loginInfo').user.phone;
     // this.photo = this.localStorageProvider.get('loginInfo').photo;
     this.photo = 'https://gd2.alicdn.com/imgextra/i1/0/TB11jq4neuSBuNjSsziXXbq8pXa_!!0-item_pic.jpg';
@@ -49,7 +50,7 @@ export class MyaccountPage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});

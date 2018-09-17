@@ -8,6 +8,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {PubliclookPage} from "./publiclook/publiclook";
 import {PublicfollowPage} from "./publicfollow/publicfollow";
 import {PublicdescPage} from "./publicdesc/publicdesc";
+import {NativeProvider} from "../../../../providers/native/native";
 
 /**
  * Generated class for the PublicpdetailPage page.
@@ -34,7 +35,7 @@ export class PublicpdetailPage {
               public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar,
               public navParams: NavParams,public customerProvider:CustomerProvider,
-              public toast:ToastComponent) {
+              public toast:ToastComponent,public  nativeProvider:NativeProvider) {
     this.customerId=navParams.get('customerId');
     // console.log(navParams.data);
 
@@ -55,8 +56,7 @@ export class PublicpdetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublicpdetailPage1');
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -138,51 +138,23 @@ export class PublicpdetailPage {
 
   desc(val,data){
     if(val==1){
-      this.openWin(PublicdescPage,{
+      this.nativeProvider.openWin(this.navCtrl,PublicdescPage,{
         val:1,
         content:data.entity.requiredDemands,
       });
     }
     if(val==2){
-      this.openWin(PublicdescPage,{
+      this.nativeProvider.openWin(this.navCtrl,PublicdescPage,{
         val:2,
         content:data.entity.againstDemands,
       });
     }
     if(val==3){
-      this.openWin(PublicdescPage,{
+      this.nativeProvider.openWin(this.navCtrl,PublicdescPage,{
         val:3,
         content:data.entity.comments
       });
     }
-  }
-
-
-//------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-//------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 }

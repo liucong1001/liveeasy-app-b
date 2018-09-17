@@ -6,6 +6,7 @@ import { PublicpassengerPage } from './publicpassenger/publicpassenger';
 import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
+import {NativeProvider} from "../../providers/native/native";
 
 /**
  * Generated class for the PassengerPage page.
@@ -25,7 +26,7 @@ export class PassengerPage {
     public navCtrl: NavController,
     public nativePageTransitions: NativePageTransitions,
     public navParams: NavParams, public statusBar: StatusBar,
-    public localStorageProvider: LocalStorageProvider,
+    public localStorageProvider: LocalStorageProvider,public  nativeProvider:NativeProvider,
 
     ) {
     this.localStorageProvider.del('searchMoreData');
@@ -37,27 +38,15 @@ export class PassengerPage {
     console.log('ionViewDidLoad PassengerPage');
   }
   addpassenger(){
-    this.openWin(AddpassengerPage)
+    this.nativeProvider.openWin(this.navCtrl,AddpassengerPage)
   }
   passenger(){
-    this.openWin(MypassengerPage,null)
+    this.nativeProvider.openWin(this.navCtrl,MypassengerPage,null)
   }
 
   publicpassenger(){
-    this.openWin(PublicpassengerPage,null)
+    this.nativeProvider.openWin(this.navCtrl,PublicpassengerPage,null)
   }
 
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 
 }

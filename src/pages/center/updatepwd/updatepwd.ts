@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Platform} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import {UpdatepwdProvider} from '../../../providers/updatepwd/updatepwd'
 import {HttpClient} from '@angular/common/http';
@@ -23,7 +23,7 @@ export class UpdatepwdPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public http: HttpClient,public toast:ToastComponent,
               public  updprovider: UpdatepwdProvider,public nativePageTransitions: NativePageTransitions,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public platform: Platform) {
   }
   form:FormGroup =this.fb.group({
     plainPassword:['',Validators.required], //旧密码
@@ -84,7 +84,7 @@ export class UpdatepwdPage {
       iosdelay: 50
     };
 
-    this.nativePageTransitions.slide(options)
+    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
       .then()
       .catch();
     this.navCtrl.pop({animate:false});

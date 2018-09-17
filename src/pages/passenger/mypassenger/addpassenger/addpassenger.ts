@@ -13,6 +13,7 @@ import {DescsPage} from "../descs/descs";
 import {LocalStorageProvider} from "../../../../providers/local-storage/local-storage";
 import {ArryCodeValuePipe} from "../../../../pipes/arry-code-value/arry-code-value";
 import {PropertyProvider} from "../../../../providers/property/property";
+import {NativeProvider} from "../../../../providers/native/native";
 /**
  * Generated class for the AddpassengerPage page.
  *
@@ -57,6 +58,7 @@ export class AddpassengerPage {
               public navParams: NavParams,private fb:FormBuilder,public toast:ToastComponent,public localStorageProvider: LocalStorageProvider,
               private customerProvider:CustomerProvider,private addhouseProvider:AddhouseProvider,
               public events: Events,public statusBar: StatusBar,public propertyProvider: PropertyProvider,
+              public  nativeProvider:NativeProvider,
   ) {
 
     this.localCode = this.localStorageProvider.get('codeData');
@@ -122,7 +124,7 @@ export class AddpassengerPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddpassengerPage',this.form.value);
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 
 
@@ -324,19 +326,19 @@ export class AddpassengerPage {
 
 
     if(val==1){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:1,
         content:this.form.value.requiredDemands
       });
     }
     if(val==2){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:2,
         content:this.form.value.againstDemands
       });
     }
     if(val==3){
-      this.openWin(DescsPage,{
+      this.nativeProvider.openWin(this.navCtrl,DescsPage,{
         val:3,
         content:this.form.value.comments
       });
@@ -350,31 +352,5 @@ export class AddpassengerPage {
     this.tradingArea =  this.areaList;
   }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-
-//------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 }

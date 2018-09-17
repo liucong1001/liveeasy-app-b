@@ -13,6 +13,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
+import {NativeProvider} from "../../../providers/native/native";
 /**
   添加空看页面
  */
@@ -45,7 +46,8 @@ export class AddlookPage {
   hasPermisson:any;
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,private renderer:Renderer,
-              public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,public toast:ToastComponent,
+              public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,
+              public toast:ToastComponent,public  nativeProvider:NativeProvider,
               private transfer:FileTransfer,private fileProvider:FileProvider,private propertyProvider:PropertyProvider,
               public configProvider: ConfigProvider) {
     this.propertyid = navParams.get('item').propertyId;
@@ -76,7 +78,7 @@ export class AddlookPage {
   ionViewDidLoad() {
     // console.log('带看',this.convId);
     this.imgHeader = this.configProvider.set().img;
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
   imgData = [];
   maxImagesCount = true;
@@ -126,19 +128,5 @@ export class AddlookPage {
       })
     }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
 
 }

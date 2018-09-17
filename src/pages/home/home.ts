@@ -24,6 +24,7 @@ import {VersionProvider} from "../../providers/version/app.version";
 import { ENV } from '@app/env';
 import {ToastComponent} from "../../components/toast/toast";
 import {jpushUnit} from "../../providers/native/jpush-unit";
+import {NativeProvider} from "../../providers/native/native";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -60,7 +61,7 @@ export class HomePage {
               public localStorageProvider: LocalStorageProvider,public propertyProvider:PropertyProvider,
               public jpush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,
               private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit,
-              public viewCtrl: ViewController,public platform: Platform
+              public viewCtrl: ViewController,public platform: Platform,public  nativeProvider:NativeProvider,
              ) {
     this.AddhousePage = AddhousePage;
 
@@ -70,7 +71,6 @@ export class HomePage {
     this.propertyProvider.getCode().then(res=>{
         if(res.success){
            this.localStorageProvider.set('codeData', res.data.result);
-
           //添加，修改房源的标签 (不存在学区房)
           var tagsList = new ArryCodeValuePipe().transform(this.localStorageProvider.get('codeData'),'property_tag_desc');
           for(var item of tagsList){
@@ -83,12 +83,9 @@ export class HomePage {
     });
     /*消息推送配置**/
     this.jpushUnit.initPush();
-    console.log('设置别名--------',this.localStorageProvider.get('loginInfo')['user']['id']);
-    this.platform.is('cordova')&& this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
-     // this.jpushUnit.getAlias();
+    this.platform.is('cordova')&&
+    this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
   }
-
-
 
 
 
@@ -104,7 +101,6 @@ export class HomePage {
     this.homeProvider.msgs(1).then(res=>{
       if(res.data.result){
         this.msgResult=res.data.result;
-        // console.log(this.msgResult)
       }
     });
   }
@@ -115,34 +111,28 @@ export class HomePage {
     this.renderer.setElementAttribute(input, 'disabled', 'true');
   }
 
-/*  addhouse(){
-    this.openWin(AddhousePage)
-  }
-  addpassenger(){
-    this.openWin(AddpassengerPage)
-  }*/
   msgDetail(){
-    this.notificationNews&&this.openWin(MsgdetailPage);
+    this.notificationNews&&this.nativeProvider.openWin(this.navCtrl,MsgdetailPage);
   }
   goAddHouse(){
     // this.navCtrl.push('AddhousePage',{})
     // {animate:true,animation:'transition',duration:500,direction:'forward'}
-    this.openWin(AddhousePage);
+    this.nativeProvider.openWin(this.navCtrl,AddhousePage);
   }
 
   goAddPassenger(){
-    this.openWin(AddpassengerPage);
+    this.nativeProvider.openWin(this.navCtrl,AddpassengerPage);
   }
 
   gosta(){
-    this.openWin(StatisticsPage);
+    this.nativeProvider.openWin(this.navCtrl,StatisticsPage);
   }
   godeclara(){
-    this.openWin(DeclarationPage)
+    this.nativeProvider.openWin(this.navCtrl,DeclarationPage)
   }
   floorName = '';
   search(){
-    this.openWin(HomesearchPage,{floorName:this.floorName})
+    this.nativeProvider.openWin(this.navCtrl,HomesearchPage,{floorName:this.floorName})
   }
 
   gohomeSource(){
@@ -150,24 +140,10 @@ export class HomePage {
   }
 
   goNotice(){
-    this.openWin(CheckhousePage,);
+    this.nativeProvider.openWin(this.navCtrl,CheckhousePage,);
   }
   getRegistrationID(){
     this.jpushUnit.getRegistrationID();
-  }
-
-
-//------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
   }
 
 }

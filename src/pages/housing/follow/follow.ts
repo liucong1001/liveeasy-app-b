@@ -10,6 +10,7 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
 import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {HousedetailPage} from "../housedetail/housedetail";
 import {PropertyProvider} from "../../../providers/property/property";
+import {NativeProvider} from "../../../providers/native/native";
 /**
    房源空看页面
  */
@@ -33,7 +34,7 @@ export class FollowPage {
               public http: HttpClient,private renderer:Renderer,
               public toast:ToastComponent,public propertyProvider: PropertyProvider,
               public  followProvider: FollowProvider,public nativePageTransitions: NativePageTransitions,
-              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,) {
+              private fb:FormBuilder,public localStorageProvider:LocalStorageProvider,public  nativeProvider:NativeProvider,) {
 
     this.propertyid = navParams.get('item').propertyId;
     // this.estatename = navParams.get('item').estateName;
@@ -52,7 +53,7 @@ export class FollowPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 
   ionViewWillLeave(){
@@ -105,20 +106,5 @@ export class FollowPage {
 //       this.navCtrl.popToRoot();
 //     };
 //   }
-
-//------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
 
 }
