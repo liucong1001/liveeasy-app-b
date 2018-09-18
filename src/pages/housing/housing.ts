@@ -937,6 +937,11 @@ export class HousingPage {
     console.log('选择bed',item,'参数');
     this.search('propQuery');
   }
+  category = false;
+  showCategory(){
+     this.category = !this.category;
+  }
+
 
 }
 

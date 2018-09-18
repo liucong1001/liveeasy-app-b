@@ -78,6 +78,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import {jpushUnit} from "../providers/native/jpush-unit";
 import { SharePropertyProvider } from '../providers/property/share-property';
 import { Clipboard } from '@ionic-native/clipboard';
+import { Geolocation } from '@ionic-native/geolocation';
 @NgModule({
   declarations: [
     MyApp,
@@ -156,7 +157,7 @@ import { Clipboard } from '@ionic-native/clipboard';
       AndroidPermissions,
       JPush,Network,
       NativeProvider,CodePush,Diagnostic,jpushUnit,
-      SharePropertyProvider,Clipboard
+      SharePropertyProvider,Clipboard,Geolocation
     ]
 })
 export class AppModule {}

@@ -196,7 +196,7 @@
 
 
   <ion-fab right bottom>
-    <button ion-fab color="white"><ion-icon name="fenlei"></ion-icon></button>
+    <button ion-fab color="white" (click)="showCategory()"><ion-icon name="fenlei"></ion-icon></button>
     <!--<ion-fab-list></ion-fab-list>-->
 
   </ion-fab>
@@ -269,7 +269,7 @@
 </div>
 <div class="pop" *ngIf="pop" (click)="allClose()"></div>
 
-<div class="ion-fab-list">
+<div class="ion-fab-list" *ngIf="category">
   <h5>快捷功能</h5>
   <h4>我的房源</h4>
   <ion-row>
@@ -303,6 +303,6 @@
     </ion-col>
   </ion-row>
 </div>
-<div class="pops"></div>
+<div class="pops" *ngIf="category"></div>
 
 

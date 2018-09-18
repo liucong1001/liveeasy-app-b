@@ -94,7 +94,7 @@ export class MyApp {
        this.nativeProvider.sync();
        console.log('手机定位开始');
        //手机定位
-       this.nativeProvider.getLocation();
+       // this.nativeProvider.getLocation();
      });
    }
 

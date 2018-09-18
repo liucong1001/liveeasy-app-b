@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import {ToastComponent} from "../../components/toast/toast";
 import { ENV } from '@app/env'
 import { App } from "ionic-angular";
+import { Geolocation } from '@ionic-native/geolocation';
 // import { NavController } from "ionic-angular/index";
 declare var LocationPlugin;
 declare var AMapNavigation;
@@ -23,7 +24,7 @@ export class NativeProvider {
               public nativePageTransitions: NativePageTransitions,
               private network: Network, private codePush: CodePush,
               private diagnostic: Diagnostic,public toast:ToastComponent,
-              private alertCtrl: AlertController, private app:App,) {
+              private alertCtrl: AlertController, private app:App,private geolocation: Geolocation) {
               this.ENV = ENV;
               this.navCtrl = this.app.getActiveNav();
     // get navCtrl(): NavController {
@@ -74,7 +75,7 @@ export class NativeProvider {
    * 获得用户当前坐标信息
    * 5秒内只会返回同一结果
    */
-  getUserLocation = (() => {
+/*  getUserLocation = (() => {
     let lastTime = null; //  缓存上次获取定位时间
     let lastResult = null; //  缓存上次获取的结果
     return () => {
@@ -105,13 +106,15 @@ export class NativeProvider {
         }
       });
     };
-  })();
+  })();*/
   /**
    * 获取位置
    */
   getLocation() {
-    return Observable.create(observer => {
+    console.log('获取位置');
+/*    return Observable.create(observer => {
       if (this.isMobile()) {
+        console.log('检查app是否开始位置服务和定位权限.没有则会请求权限');
         //  检查app是否开始位置服务和定位权限.没有则会请求权限
         Observable.zip(this.assertLocationService(), this.assertLocationAuthorization()).subscribe(() => {
           LocationPlugin.getLocation(data => {
@@ -152,7 +155,15 @@ export class NativeProvider {
         console.log('非手机环境,即测试环境返回固定坐标');
         observer.next({'lng': 113.350912, 'lat': 23.119495});
       }
+    });*/
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('获取经纬度',resp.coords);
+      // resp.coords.latitude
+      // resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
+
   }
 
   // 检测app位置服务是否开启
