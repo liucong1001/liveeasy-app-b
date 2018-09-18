@@ -8,6 +8,7 @@ import {PersonPage} from "./person/person";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {ToastComponent} from "../../../components/toast/toast";
 import {NativeProvider} from "../../../providers/native/native";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 /**
  * Generated class for the StatisticsPage page.
@@ -20,6 +21,14 @@ import {NativeProvider} from "../../../providers/native/native";
 @Component({
   selector: 'page-statistics',
   templateUrl: 'statistics.html',
+  animations: [
+    trigger('animation', [
+      state('open', style({ opacity: 1,  height: '*'})),
+      state('close', style({ opacity: 0, height: '0'})),
+      transition('open => close', animate('.3s ease-in')),
+      transition('close => open', animate('.3s ease-out')),
+    ])
+  ]
 })
 export class StatisticsPage {
   pet: string = "house";
@@ -251,6 +260,10 @@ export class StatisticsPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad StatisticsPage');
+    //动画初始化
+    for(var i = 1 ;i<4;i++){
+      this.states[i]='close'
+    }
   }
   //状态栏文字颜色修改-白色
   ionViewWillEnter() {
@@ -320,7 +333,6 @@ export class StatisticsPage {
           this.tableJSON[7].result+=sorted[all][aa].stateValue;
         }
         if(sorted[all][aa].statItem == 4026){
-          console.log('4026',sorted[all][aa]);
           this.tableJSON[8].result+=sorted[all][aa].stateValue;
         }
         if(sorted[all][aa].statItem == 4022){
@@ -403,7 +415,7 @@ export class StatisticsPage {
           }
         });
         // console.log('表单',event);
-        this.clear();
+        this.allClose();
 
       }
       loading.dismiss();
@@ -477,7 +489,7 @@ export class StatisticsPage {
       }
     });
 
-    this.clear();
+    this.allClose();
     if(this.times ==1 || this.times ==3){
       if (this.times==3){
         this.form.setValue({
@@ -507,9 +519,8 @@ export class StatisticsPage {
     this.department=[];
     this.person=[];
     this.personName='';
-    this.tableJSON
     for(var i in this.tableJSON){
-      this
+      this.tableJSON[i].result=0;
     }
   }
 
@@ -557,7 +568,7 @@ export class StatisticsPage {
         this.errStatus = true;
       }
     });
-    this.clear();
+    this.allClose();
     if(this.fast ==1){
       this.fast=2;
     }
@@ -594,13 +605,15 @@ export class StatisticsPage {
       // this.personal.push(sorted[j]);
       //员工分组
       for (var i in sorted[j]){
+console.log(sorted[j])
+
         if (sorted[j][i].deptId==item.deptId || sorted[j][i].storeCode ==item.deptId){
-          // console.log(sorted[j][i])
+
           this.allPersonal.push(sorted[j][i])
         }
       }
     }
-    // console.log(this.allPersonal)
+    // console.log(this.allPersonal,sorted[j][i].storeCode)
     this.person=[];
     //所有员工分组，获取每组第一条数据
     let person = this.groupBy(this.allPersonal, function(item){
@@ -770,7 +783,7 @@ export class StatisticsPage {
 
     }
     // console.log(this.tableJSON);
-    this.clear();
+    this.allClose();
     if(this.staff ==1){
       this.staff=2;
     }
@@ -813,64 +826,91 @@ export class StatisticsPage {
 
 
   //menu
+  states=[];
+  toggleNum:any;
+  pop=false;
+  toggleSta(num){
+    // debugger;
+    this.toggleNum=num;
+    if(this.states[num]=='close'){
+      for(var i=1;i<4;i++){
+        if(i!=num){
+          this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
+        }
+      }
+      this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
+      this.pop=true;
+    }else  {
+      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
+      this.pop=false;
+    }
+  }
+  allClose(){
+    this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+    this.pop=false;
+  }
+
+
+
+
   show=false;
   time=false;
   fastSearch=false;
-  pop=false;
-  showMenu1() {
-    // if(this.falsees==true){
-    //   this.falsees=true;
-    // }else {
-    //   this.falsees=false;
-    // }
-    if (this.show == false || this.time == true || this.fastSearch == true ) {
-      this.show = true;
-      this.pop = true;
-      this.time = false;
-      this.fastSearch = false;
-    } else {
-      this.show = false;
-      this.pop = false;
-    }
-  }
-  showMenu2() {
-    if (this.time == false || this.show == true || this.fastSearch == true) {
-      this.time = true;
-      this.show = false;
-      this.pop = true;
-      this.fastSearch = false;
-    } else {
-      this.time = false;
-      this.pop = false;
-    }
-  }
-  showMenu3() {
-    if (this.fastSearch == false || this.show == true || this.time == true) {
-      this.fastSearch = true;
-      this.show = false;
-      this.pop = true;
-      this.time = false;
-    } else {
-      this.fastSearch = false;
-      this.pop = false;
-    }
-  }
-  pops() {
-    if (this.fastSearch == true || this.show == true || this.time == true) {
-      this.fastSearch = false;
-      this.show = false;
-      this.pop = false;
-      this.time = false;
-    }
-  }
-  clear(){
-    if (this.fastSearch == true || this.show == true || this.time == true) {
-      this.fastSearch = false;
-      this.show = false;
-      this.pop = false;
-      this.time = false;
-    }
-  }
+
+  // showMenu1() {
+  //   // if(this.falsees==true){
+  //   //   this.falsees=true;
+  //   // }else {
+  //   //   this.falsees=false;
+  //   // }
+  //   if (this.show == false || this.time == true || this.fastSearch == true ) {
+  //     this.show = true;
+  //     this.pop = true;
+  //     this.time = false;
+  //     this.fastSearch = false;
+  //   } else {
+  //     this.show = false;
+  //     this.pop = false;
+  //   }
+  // }
+  // showMenu2() {
+  //   if (this.time == false || this.show == true || this.fastSearch == true) {
+  //     this.time = true;
+  //     this.show = false;
+  //     this.pop = true;
+  //     this.fastSearch = false;
+  //   } else {
+  //     this.time = false;
+  //     this.pop = false;
+  //   }
+  // }
+  // showMenu3() {
+  //   if (this.fastSearch == false || this.show == true || this.time == true) {
+  //     this.fastSearch = true;
+  //     this.show = false;
+  //     this.pop = true;
+  //     this.time = false;
+  //   } else {
+  //     this.fastSearch = false;
+  //     this.pop = false;
+  //   }
+  // }
+  // pops() {
+  //   if (this.fastSearch == true || this.show == true || this.time == true) {
+  //     this.fastSearch = false;
+  //     this.show = false;
+  //     this.pop = false;
+  //     this.time = false;
+  //   }
+  // }
+  // clear(){
+  //   if (this.fastSearch == true || this.show == true || this.time == true) {
+  //     this.fastSearch = false;
+  //     this.show = false;
+  //     this.pop = false;
+  //     this.time = false;
+  //   }
+  // }
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {

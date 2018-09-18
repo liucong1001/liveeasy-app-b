@@ -4,18 +4,18 @@
     <ion-title>数据统计</ion-title>
   </ion-navbar>
   <ion-row class="houseMenu bgWhite">
-    <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{'color':show}">
+    <ion-col col-4 class="tc" tappable (click)="toggleSta(1)" [ngClass]="{'color':show}">
       <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>6}">{{personName}}</span>
       <span *ngIf="staff==1">部门员工</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
     </ion-col>
-    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{'color':time}">
+    <ion-col col-4 class="tc animated bounceIn" tappable (click)="toggleSta(2)" [ngClass]="{'color':time}">
       <span *ngIf="tm1 && tm2 && times == 3" class="menuWid ellipsis" [ngClass]="{'color':tm1 && tm2}">{{tm1}}-{{tm2}}</span>
       <span *ngIf="times == 2" [ngClass]="{'color':timeName}">{{timeName}}</span>
       <span *ngIf="times == 1">时间查询</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'menuDown':  times == 3,'color':times!=1}"></ion-icon>
     </ion-col>
-    <ion-col col-4 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{'color':fastSearch}">
+    <ion-col col-4 class="tc animated bounceIn" tappable (click)="toggleSta(3)" [ngClass]="{'color':fastSearch}">
       <span *ngIf="fast==2" [ngClass]="{'color':fastName}">{{fastName}}</span>
       <span *ngIf="fast==1">快速查询</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':fastName}"></ion-icon>
@@ -34,7 +34,7 @@
 </ion-content>
 <div class="popLocation">
   <!-- 员工 -->
-  <ion-grid class="lists p0" [hidden]="!show">
+  <ion-grid class="lists p0" [@animation]="states[1]">
 
     <div *ngIf="department==''" style="text-align: center;padding: 15px 0 0">暂无数据</div>
     <ion-row *ngIf="all">
@@ -76,7 +76,7 @@
   </ion-grid>
 
   <!-- 时间查询 -->
-  <div class="lists houseType" [hidden]="!time" >
+  <div class="lists houseType" [@animation]="states[2]" >
     <ion-list radio-group class="scrollC" [(ngModel)]="sausage[index]">
       <ion-item *ngFor="let item of titleJSON;let index =index" class="tc">
         <ion-label>{{item.name}}</ion-label>
@@ -108,7 +108,7 @@
   </div>
 
   <!-- 快速查询 -->
-  <div class="lists houseType" [hidden]="!fastSearch" >
+  <div class="lists houseType" [@animation]="states[3]" >
     <ion-list radio-group class="updateLine scrollFast">
       <ion-item *ngFor="let item of fastJSON"  class="tc" >
         <ion-label>{{item.name}}</ion-label>
@@ -118,5 +118,5 @@
   </div>
 
 </div>
-<div class="pop" *ngIf="pop" (click)="pops()"></div>
+<div class="pop" *ngIf="pop" (click)="allClose()"></div>
 

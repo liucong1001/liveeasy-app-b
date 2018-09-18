@@ -112,7 +112,6 @@ export class HousingPage {
   localCode:any;
   updateInput=false;
   cxJSON:Array<{name:string;val:string}>;
-  toggleNum:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -300,12 +299,6 @@ export class HousingPage {
          this.totalPages = res.data.totalPages;
          //关闭搜索框子
          this.allClose();
-         // this.show = false;
-         // this.houseType = false;
-         // this.more = false;
-         this.pop = false;
-         // this.housingEstate = false;
-
          //户型搜索条件字显示
          if(this.searchFloorNum ==1){
            this.searchFloorNum = 2;
@@ -344,7 +337,7 @@ export class HousingPage {
     }
 
     this.imgHeader = this.configProvider.set().img;
-
+//动画初始化
     for(var i = 1 ;i<4;i++){
       this.states[i]='close'
     }
@@ -387,132 +380,35 @@ export class HousingPage {
      }
   }
 
-  stateOne = 'close';
-  stateTwo = 'close';
-  stateThree = 'close';
   pop = false;
-  // statePop='close';
   states=[];
-
-  allClose(){
-    // this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
-  }
-  //
-  //
+  toggleNum:any;
   toggleSta(num){
+    // debugger;
     this.toggleNum=num;
-
-    if(this.states[num]=='open'){
-      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
-      this.pop=false;
-    }else {
+    if(this.states[num]=='close'){
+     for(var i=1;i<4;i++){
+       if(i!=num){
+         this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
+       }
+     }
       this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
       this.pop=true;
+    }else  {
+      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
+      this.pop=false;
     }
   }
-
-
-  // toggleState() {
-  //   if(this.stateTwo|| this.stateThree){
-  //     this.stateTwo = this.stateTwo === 'open' ? 'close' : 'close';
-  //     this.stateThree = this.stateThree === 'open' ? 'close' : 'close';
-  //   }
-  //   this.stateOne = this.stateOne === 'close' ? 'open' : 'close';
-  //   this.showen();
-  // }
-  //
-  // toggleState2(){
-  //   if(this.stateOne|| this.stateThree){
-  //     this.stateOne = this.stateOne === 'open' ? 'close' : 'close';
-  //     this.stateThree = this.stateThree === 'open' ? 'close' : 'close';
-  //   }
-  //   this.stateTwo = this.stateTwo === 'close' ? 'open' : 'close';
-  //   this.showen();
-  // }
-  // toggleState3(){
-  //   if(this.stateOne|| this.stateTwo){
-  //     this.stateOne = this.stateOne === 'open' ? 'close' : 'close';
-  //     this.stateTwo = this.stateTwo === 'open' ? 'close' : 'close';
-  //   }
-  //   this.stateThree = this.stateThree === 'close' ? 'open' : 'close';
-  //   this.showen();
-  // }
-
-  //menu
-  showMenu1() {
-    if (this.show == false || this.houseType == true || this.more == true || this.housingEstate == true) {
-      this.show = true;
-      this.pop = true;
-      this.houseType = false;
-      this.more = false;
-      this.housingEstate = false;
-      // console.log("111");
-    } else {
-      this.show = false;
-      this.pop = false;
-    }
+  allClose(){
+    this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+    this.pop=false;
   }
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
-  //户型搜索
-  showMenu2() {
-    if(this.searchFloorNum ==0 || this.searchFloorNum ==1){
-      this.searchFloorNum = 1;
-    }else {
-      this.searchFloorNum =2;
-    }
-    if (this.houseType == false || this.show == true || this.more == true || this.housingEstate == true) {
-      this.houseType = true;
-      this.show = false;
-      this.pop = true;
-      this.more = false;
-      this.housingEstate = false;
-      // console.log("111开");
-    } else {
-      this.houseType = false;
-      this.pop = false;
-      // console.log("222关");
-    }
-    // this.toggle();
-  }
-
-  showMenu3() {
-    if (this.housingEstate == false || this.show == true || this.more == true || this.houseType == true) {
-      this.housingEstate = true;
-      this.show = false;
-      this.pop = true;
-      this.more = false;
-      this.houseType = false;
-    } else {
-      this.housingEstate = false;
-      this.pop = false;
-    }
-    // this.toggle();
-  }
-
-  showMenu4() {
-    if (this.more == false || this.show == true || this.houseType == true || this.housingEstate == true) {
-      this.more = true;
-      this.show = false;
-      this.pop = true;
-      this.houseType = false;
-      this.housingEstate = false;
-    } else {
-      this.more = false;
-      this.pop = false;
-    }
-  }
-
 
 
   ionViewWillLeave(){
-    if (this.more == true || this.show == true || this.houseType == true || this.housingEstate == true) {
-      this.more = false;
-      this.show = false;
-      this.pop = false;
-      this.houseType = false;
-      this.housingEstate = false;
-    }
+    this.allClose();
   }
  //
   goFollow(item,slidingItem) {

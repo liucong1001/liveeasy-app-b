@@ -15,6 +15,7 @@ import {el} from "@angular/platform-browser/testing/src/browser_util";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import { Content,List } from 'ionic-angular';
 import {NativeProvider} from "../../../providers/native/native";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -26,6 +27,14 @@ import {NativeProvider} from "../../../providers/native/native";
 @Component({
   selector: 'page-mypassenger',
   templateUrl: 'mypassenger.html',
+  animations: [
+    trigger('animation', [
+      state('open', style({ opacity: 1,  height: '*'})),
+      state('close', style({ opacity: 0, height: '0'})),
+      transition('open => close', animate('.3s ease-in')),
+      transition('close => open', animate('.3s ease-out')),
+    ])
+  ]
 })
 export class MypassengerPage {
   show=false;
@@ -93,6 +102,11 @@ export class MypassengerPage {
     this.navBar.backButtonClick = () => {
       this.navCtrl.setRoot(PassengerPage)
     };
+    //动画初始化
+    for(var i = 1 ;i<4;i++){
+      this.states[i]='close'
+    }
+
   }
   ionViewDidEnter() {
     // this.navBar.backButtonClick = () => {
@@ -428,49 +442,72 @@ export class MypassengerPage {
     return count;
   }
 
+//menu
+  states=[];
+  toggleNum:any;
+  toggleSta(num){
+    // debugger;
+    this.toggleNum=num;
+    if(this.states[num]=='close'){
+      for(var i=1;i<4;i++){
+        if(i!=num){
+          this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
+        }
+      }
+      this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
+      this.pop=true;
+    }else  {
+      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
+      this.pop=false;
+    }
+  }
+  allClose(){
+    this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+    this.pop=false;
+  }
 
-  //menu
-  showMenu1(){
-    if(this.show==false || this.houseType == true || this.more == true ){
-      this.show=true;
-      this.pop=true;
-      this.houseType = false;
-      this.more=false;
-    }else{
-      this.show=false;
-      this.pop=false;
-    }
-  }
-  showMenu2(){
-    if(this.houseType==false || this.show == true || this.more == true ){
-      this.houseType=true;
-      this.show=false;
-      this.pop=true;
-      this.more = false;
-    }else{
-      this.houseType = false;
-      this.pop=false;
-    }
-  }
-  showMenu3(){
-    if(this.more==false || this.show == true || this.houseType == true){
-      this.more=true;
-      this.show=false;
-      this.pop=true;
-      this.houseType = false;
-    }else{
-      this.more = false;
-      this.pop=false;
-    }
-  }
-  pops(){
-    if(this.more==true || this.show == true || this.houseType == true){
-      this.more=false;
-      this.show=false;
-      this.pop=false;
-      this.houseType = false;
-    }
-  }
+
+  // showMenu1(){
+  //   if(this.show==false || this.houseType == true || this.more == true ){
+  //     this.show=true;
+  //     this.pop=true;
+  //     this.houseType = false;
+  //     this.more=false;
+  //   }else{
+  //     this.show=false;
+  //     this.pop=false;
+  //   }
+  // }
+  // showMenu2(){
+  //   if(this.houseType==false || this.show == true || this.more == true ){
+  //     this.houseType=true;
+  //     this.show=false;
+  //     this.pop=true;
+  //     this.more = false;
+  //   }else{
+  //     this.houseType = false;
+  //     this.pop=false;
+  //   }
+  // }
+  // showMenu3(){
+  //   if(this.more==false || this.show == true || this.houseType == true){
+  //     this.more=true;
+  //     this.show=false;
+  //     this.pop=true;
+  //     this.houseType = false;
+  //   }else{
+  //     this.more = false;
+  //     this.pop=false;
+  //   }
+  // }
+  // pops(){
+  //   if(this.more==true || this.show == true || this.houseType == true){
+  //     this.more=false;
+  //     this.show=false;
+  //     this.pop=false;
+  //     this.houseType = false;
+  //   }
+  // }
   addpassenger(){
     this.events.subscribe('bevents',(params)=>{
       console.log('接受数据',params); //propertyId

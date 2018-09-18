@@ -455,18 +455,17 @@ ion-infinite-scroll-content{
 
 .fab-ios-white{
   position: absolute;
-  bottom: 113px;
+  bottom: 20px;
   right: 18px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
   ion-icon{
     font-size: 2.6rem;
     color: #1ab394;
   }
-
 }
 .ion-fab-list{
   position: absolute;
-  top: 115px !important;
+  bottom: 80px;
   min-width: 86%;
   left: 7%;
   right: 7%;
@@ -500,6 +499,11 @@ ion-infinite-scroll-content{
     border-radius: 100%;
   }
 }
+@media screen and(max-width: 500px) and(min-width: 400px){
+  .fab-ios-white{
+    right: 21px;
+  }
+}
 
 @media screen and(max-width: 320px) {
   .hdRightInfo{
@@ -509,9 +513,5 @@ ion-infinite-scroll-content{
     input{
       width:70% !important;
     }
-  }
-  .fab-ios-white{
-    bottom: 13px;
-
   }
 }

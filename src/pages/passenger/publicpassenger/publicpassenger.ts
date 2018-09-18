@@ -10,6 +10,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {PassengerPage} from "../passenger";
 import {NativeProvider} from "../../../providers/native/native";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 /**
  公客列表
  */
@@ -18,6 +19,14 @@ import {NativeProvider} from "../../../providers/native/native";
 @Component({
   selector: 'page-publicpassenger',
   templateUrl: 'publicpassenger.html',
+  animations: [
+    trigger('animation', [
+      state('open', style({ opacity: 1,  height: '*'})),
+      state('close', style({ opacity: 0, height: '0'})),
+      transition('open => close', animate('.3s ease-in')),
+      transition('close => open', animate('.3s ease-out')),
+    ])
+  ]
 })
 export class PublicpassengerPage {
   show=false;
@@ -79,6 +88,10 @@ export class PublicpassengerPage {
     this.navBar.backButtonClick = () => {
       this.navCtrl.setRoot(PassengerPage)
     };
+    //动画初始化
+    for(var i = 1 ;i<4;i++){
+      this.states[i]='close'
+    }
 
   }
 
@@ -360,54 +373,29 @@ export class PublicpassengerPage {
   }
 
   //menu
-  showMenu1(){
-    if(this.show==false || this.houseType == true || this.more == true){
-      this.show=true;
+  states=[];
+  toggleNum:any;
+  toggleSta(num){
+    // debugger;
+    this.toggleNum=num;
+    if(this.states[num]=='close'){
+      for(var i=1;i<4;i++){
+        if(i!=num){
+          this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
+        }
+      }
+      this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
       this.pop=true;
-      this.houseType = false;
-      this.more=false;
-    }else{
-      this.show=false;
+    }else  {
+      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
       this.pop=false;
     }
+  }
+  allClose(){
+    this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+    this.pop=false;
+  }
 
-  }
-  showMenu2(){
-    if(this.houseType==false || this.show == true || this.more == true ){
-      this.houseType=true;
-      this.show=false;
-      this.pop=true;
-      this.more = false;
-    }else{
-      this.houseType = false;
-      this.pop=false;
-    }
-  }
-
-  showMenu3(){
-    if(this.sx == 2){
-      this.sx=2
-    }else {
-      this.sx =1;
-    }
-    if(this.more == false || this.show == true || this.houseType==true){
-      this.show=false;
-      this.pop=true;
-      this.more = true;
-      this.houseType = false;
-    }else{
-      this.more=false;
-      this.pop=false;
-    }
-  }
-  pops(){
-    if(this.more==true || this.show == true || this.houseType == true){
-      this.more=false;
-      this.show=false;
-      this.pop=false;
-      this.houseType = false;
-    }
-  }
   gopublicpasger(){
     this.nativeProvider.openWin(this.navCtrl,PublicpassengerPage)
   }

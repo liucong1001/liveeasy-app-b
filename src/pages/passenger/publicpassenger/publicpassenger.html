@@ -3,7 +3,7 @@
     <ion-title>公客列表</ion-title>
   </ion-navbar>
   <ion-row class="houseMenu">
-    <ion-col col-4 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
+    <ion-col col-4 class="tc" tappable (click)="toggleSta(1)" [ngClass]="{color:this.show}">
       <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" style="width: 40px;" *ngIf="searchArea&&searchArea!='不限'">
         {{ searchArea}}
       </span>
@@ -13,13 +13,13 @@
     </ion-col>
 
 
-    <ion-col col-4 class="tc" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
+    <ion-col col-4 class="tc" tappable (click)="toggleSta(2)" [ngClass]="{color:this.houseType}">
       <span *ngIf="housePipe(params.intentionRoom)&&housePipe(params.intentionRoom)!='不限'" [ngClass]="{color:params.intentionRoom}">{{housePipe(params.intentionRoom)}}</span>
       <span  *ngIf="!housePipe(params.intentionRoom) || housePipe(params.intentionRoom)=='不限'">户型</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{color:housePipe(params.intentionRoom) && housePipe(params.intentionRoom)!='' && housePipe(params.intentionRoom)!='不限' }"></ion-icon>
     </ion-col>
 
-    <ion-col col-4 class="tc" tappable (click)="showMenu3()" [ngClass]="{color:this.more}">
+    <ion-col col-4 class="tc" tappable (click)="toggleSta(3)" [ngClass]="{color:this.more}">
       <span  [ngClass]="{color:params.customerType}">{{filtrate(params.customerType)}}</span>
       <!--<span [hidden]="sx==2||params.customerType==0" > 筛选</span>-->
       <span *ngIf="!params.customerType">筛选</span>
@@ -102,7 +102,7 @@
 </ion-content>
 <div class="popLocation" style="top: 113px;">
   <!-- 区域 -->
-  <ion-grid class="lists p0" *ngIf="show">
+  <ion-grid class="lists p0" [@animation]="states[1]">
     <ion-row>
       <ion-col col-6 class="p0">
         <div class="leftChange">
@@ -124,7 +124,7 @@
   </ion-grid>
 
   <!-- 价格 -->
-  <div class="lists houseType" *ngIf="houseType">
+  <div class="lists houseType" [@animation]="states[2]">
     <ion-list radio-group [(ngModel)]="params.intentionRoom" class="scrollC">
       <ion-item *ngFor="let y of houseJSON" class="tc">
         <ion-label>{{y.name}}</ion-label>
@@ -134,7 +134,7 @@
   </div>
 
   <!-- 筛选 -->
-  <div class="lists houseType" [hidden]="!more">
+  <div class="lists houseType" [@animation]="states[3]">
     <ion-list radio-group class="scrollC">
       <ion-item *ngFor="let i of filtrateJson;let index =index">
         <ion-label>{{i.name}}</ion-label>
@@ -145,4 +145,4 @@
   </div>
 
 </div>
-<div class="pops" *ngIf="pop" (click)="pops()"></div>
+<div class="pop" *ngIf="pop" (click)="allClose()"></div>
