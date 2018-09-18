@@ -141,6 +141,7 @@
                     <span style="font-size: 1.2rem;color: #aaa" *ngIf="item.propertyPrice!=0">
                   <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
+                      <!--<span>{{item.updatedTime |  date:'yyyy/MM/dd HH:MM:ss'}}</span>-->
                 </span>
                   </ion-col>
                 </ion-row>
@@ -155,10 +156,10 @@
           >实勘</button>
           <button ion-button color="primary" style="background: #ffba4d;padding: 1em;" tappable  (click)="goFollow(item,slidingItem)"
                   >跟进</button>
-          <button ion-button color="danger"  style="background: #80adff;padding: 1em;" tappable (click)="goAddLook(item,slidingItem)"
+          <button *ngIf="params.status!='32'"  ion-button color="danger"  style="background: #80adff;padding: 1em;" tappable (click)="goAddLook(item,slidingItem)"
                   >空看</button>
 
-          <button ion-button color="default" style="background: #ff756f;padding: 1em;" tappable (click)="goCloseHouse(item,slidingItem)"
+          <button *ngIf="!params.status" ion-button color="default" style="background: #ff756f;padding: 1em;" tappable (click)="goCloseHouse(item,slidingItem)"
                   >关闭</button>
 
         </ion-item-options>
@@ -274,30 +275,30 @@
   <h4>我的房源</h4>
   <ion-row>
     <ion-col col-4>
-      <img src="" width="55" height="55">
+      <img src="" width="55" height="55" (click)="searchCategory('8')">
       <div>在售房源</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('64')">
       <img src="" width="55" height="55">
       <div>暂不出售</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('128')">
       <img src="" width="55" height="55">
       <div>无效房源</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('256')">
       <img src="" width="55" height="55">
       <div>他售房源</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('32')">
       <img src="" width="55" height="55">
       <div>成交房源</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('16')">
       <img src="" width="55" height="55">
       <div>我的房源</div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-4 (click)="searchCategory('480')">
       <img src="" width="55" height="55">
       <div>下架房源</div>
     </ion-col>

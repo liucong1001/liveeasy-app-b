@@ -277,6 +277,7 @@ export class HousingPage {
     this.pageData = [];
     this.hasData  = true;
      this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
+       this.category= false;
        if(res.success){
          this.badHttp = false;
 
@@ -291,6 +292,7 @@ export class HousingPage {
            }
            this.currentPage=1;
            this.pageResult =res.data&&res.data.result;
+           if(res.data.result.length<10){ this.all = true;}
          }else {
            // console.log('没有数据!');
            this.hasData = false;
@@ -942,6 +944,20 @@ export class HousingPage {
      this.category = !this.category;
   }
 
+  searchCategory(status){
+    if(status=='16'){ //我的房源
+      this.params.agent = this.localStorageProvider.get('loginInfo')['user']['id'];
+      delete  this.params.status;
+    }else if(status=='8'){  //在售房源
+      delete  this.params.agent;
+      delete  this.params.status;
+    }else {  //其他房源
+      this.params.status=status;
+      delete  this.params.agent;
+    }
+      this.search('propQuery');
+      console.log('暂不出',this.params.status);
+  }
 
 }
 
@@ -968,5 +984,7 @@ class  PropertyPageParams {
   buildType?:any;//建筑类型
   position?:any;//楼层位置
   estate?:any;//楼盘搜索
+  status?:any;//房源状态
+  agent?:string;//经纪人id
 }
 
