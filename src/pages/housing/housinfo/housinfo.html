@@ -228,7 +228,7 @@
     </ion-row>
   </div>-->
 
-  <ion-list class="m10" [ngClass]="{'addMargin':houseData&&!houseData?.sameCompany}" *ngIf="houseData&&houseData?.sameCompany">
+  <ion-list class="m10" style="margin-bottom: 25px !important;" [ngClass]="{'addMargin':houseData&&!houseData?.sameCompany}" *ngIf="houseData&&houseData?.sameCompany">
     <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
       角色人
       <font color="#aaa" class="changes"></font>

@@ -5,31 +5,31 @@
     <ion-searchbar  #searchBar placeholder="请输入小区或商圈名" [(ngModel)]="floorName" [ngClass]="{updateInput:updateInput}"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" *ngIf="addIcon" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>
-
+<!--(click)="showMenu1()"-->
   <ion-row class="houseMenu" >
-    <ion-col col-3 class="tc" tappable (click)="showMenu1()" [ngClass]="{color:this.show}">
+    <ion-col col-3 class="tc" tappable (click)="toggleSta(1)"  [ngClass]="{color:stateOne=='open'}">
       <span [ngClass]="{color:this.searchArea,esRow:this.searchArea}" *ngIf="searchArea&&searchArea!='不限'">
-        {{ searchArea}}
+        {{searchArea}}
       </span>
       <span *ngIf="!searchArea||searchArea=='不限'">区域</span>
       <ion-icon name="md-arrow-dropdown" *ngIf="searchArea&&searchArea!='不限'" [ngClass]="{color: this.searchArea && this.searchArea!=''  ,down:this.searchArea }"></ion-icon>
       <ion-icon name="md-arrow-dropdown" *ngIf="!searchArea||searchArea=='不限'"></ion-icon>
     </ion-col>
 
-    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu2()" [ngClass]="{color:this.houseType}">
-      <span *ngIf="searchFloorNum==2" [ngClass]="{color:params.bedrooms}">{{housePipe(params.bedrooms)}}</span>
-      <span  *ngIf="searchFloorNum==0 || searchFloorNum==1 || params.bedrooms==undefined">户型</span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:searchFloorNum==2&&params.bedrooms}"></ion-icon>
+    <ion-col col-3 class="tc animated bounceIn" tappable (click)="toggleSta(2)" [ngClass]="{color:stateTwo=='open'}">
+      <span *ngIf="params.bedrooms" [ngClass]="{color:params.bedrooms}">{{housePipe(params.bedrooms)}}</span>
+      <span  *ngIf="params.bedrooms==undefined">户型</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:params.bedrooms}"></ion-icon>
     </ion-col>
 
-    <ion-col col-3 class="tc animated bounceIn" tappable (click)="showMenu3()" [ngClass]="{color:this.housingEstate}">
-      <span [ngClass]="{color:starts || starts ==0&&ends,esRow:ends}" *ngIf="selctPri==2">
+    <ion-col col-3 class="tc animated bounceIn" tappable (click)="toggleSta(3)" [ngClass]="{color:stateThree=='open'}">
+      <span [ngClass]="{color:starts||starts==0&&ends,esRow:selctPri==2}" *ngIf="selctPri==2 ">
         <span *ngIf="starts ==0&&ends!=5000">{{ends}}万以下</span>
         <span *ngIf="ends !=0 && starts !=0">{{starts}}万-{{ends}}万</span>
         <span *ngIf="starts==5000&&ends==0">{{starts}}万以上</span>
       </span>
-      <span *ngIf="selctPri==1 || ends==5000">价格 </span>
-      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts || starts ==0&&ends!=5000,down:ends!=5000}"></ion-icon>
+      <span *ngIf="selctPri==1">价格</span>
+      <ion-icon name="md-arrow-dropdown" [ngClass]="{color:starts&&selctPri==2||starts==0&&ends&&selctPri==2,down:selctPri==2}"></ion-icon>
     </ion-col>
     <ion-col col-3 class="tc" tappable (click)="mores()" [ngClass]="{color:this.more}">
       <span [ngClass]="{color:searchMore()}">更多</span>
@@ -193,10 +193,18 @@
     </div>
   </ion-grid>
 
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="white"><ion-icon name="fenlei"></ion-icon></button>
+    <!--<ion-fab-list></ion-fab-list>-->
+
+  </ion-fab>
+
 </ion-content>
 <div class="popLocation">
   <!-- 区域 -->
-  <ion-grid class="lists p0" [hidden]="!show" [ngClass]="{transitions:show}">
+  <ion-grid class="lists p0" [@animation]="states[1]">
     <ion-row>
       <ion-col col-6 class="p0">
         <div class="leftChange">
@@ -215,10 +223,10 @@
         </div>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid >
 
   <!-- 户型 -->
-  <div class="lists houseType" [hidden]="!houseType" >
+  <div class="lists houseType" [@animation]="states[2]" >
     <ion-list radio-group [(ngModel)]="paramsBedrooms" class="scrollC">
       <ion-item *ngFor="let y of houseJSON" class="tc" style="    margin-left: 15px;">
         <ion-label>{{y.name}}</ion-label>
@@ -229,7 +237,7 @@
   </div>
 
   <!-- 价格 -->
-  <div class="lists houseType" [hidden]="!housingEstate" >
+  <div class="lists houseType" [@animation]="states[3]" >
     <ion-list radio-group class="scrollC updateLine"  [(ngModel)]="price" style="height: 207px">
       <ion-item *ngFor="let y of hasElevatorJson;let index =index"  class="tc" >
         <ion-label *ngIf="y.name=='不限'">{{y.name}}</ion-label>
@@ -238,7 +246,7 @@
           <span *ngIf="y.start!='' && y.val !=1 && y.val !=9">{{y.start}}{{-y.end}}万</span>
           <span *ngIf="y.val ==9">{{y.start}}万以上</span>
         </ion-label>
-        <ion-radio value={{y.val}} (ionSelect)="selectPrice(index)"></ion-radio>
+        <ion-radio value={{y.val}} (ionSelect)="selectPrice(index,y.val)"></ion-radio>
       </ion-item>
     </ion-list>
     <ion-list style="height: 166px;">
@@ -259,7 +267,42 @@
     </div>
   </div>
 </div>
-<div class="pop" *ngIf="pop" (click)="pops()"></div>
+<div class="pop" *ngIf="pop" (click)="allClose()"></div>
 
+<div class="ion-fab-list">
+  <h5>快捷功能</h5>
+  <h4>我的房源</h4>
+  <ion-row>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>在售房源</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>暂不出售</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>无效房源</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>他售房源</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>成交房源</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>我的房源</div>
+    </ion-col>
+    <ion-col col-4>
+      <img src="" width="55" height="55">
+      <div>下架房源</div>
+    </ion-col>
+  </ion-row>
+</div>
+<div class="pops"></div>
 
 

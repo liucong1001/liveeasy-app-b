@@ -21,7 +21,6 @@ import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
-import {NativeProvider} from "../../providers/native/native";
 
 /**
  * Generated class for the HousingPage page.
@@ -34,21 +33,30 @@ import {NativeProvider} from "../../providers/native/native";
 @Component({
   selector: 'page-housing',
   templateUrl: 'housing.html',
+  // animations: [
+  //   trigger('flyInOut', [
+  //     state('in',
+  //       style({opacity: 1, transform: 'translateY(0)'}),
+  //
+  //     ),
+  //     transition('void => *', [
+  //       style({
+  //         opacity: 0,
+  //         transform: 'translateY(100%)'
+  //       }),
+  //       animate('.35s ease-in')
+  //     ])
+  //   ])
+  // ]
   animations: [
-    trigger('flyInOut', [
-      state('in',
-        style({opacity: 1, transform: 'translateY(0)'}),
-
-        ),
-      transition('void => *', [
-        style({
-          opacity: 0,
-          transform: 'translateY(100%)'
-        }),
-        animate('.35s ease-in')
-      ])
+    trigger('animation', [
+      state('open', style({ opacity: 1,  height: '*'})),
+      state('close', style({ opacity: 0, height: '0'})),
+      transition('open => close', animate('.3s ease-in')),
+      transition('close => open', animate('.3s ease-out')),
     ])
   ]
+
 })
 export class HousingPage {
   visibility = 'hidden';
@@ -62,7 +70,7 @@ export class HousingPage {
   show = false;
   houseType = false;
   more = false;
-  pop = false;
+
   housingEstate = false;
   pageData = [];
   firstPageData = [];
@@ -104,6 +112,7 @@ export class HousingPage {
   localCode:any;
   updateInput=false;
   cxJSON:Array<{name:string;val:string}>;
+  toggleNum:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -114,7 +123,7 @@ export class HousingPage {
               public customerProvider:CustomerProvider,
               public nativePageTransitions: NativePageTransitions,
               public toast:ToastComponent,
-              private renderer:Renderer,public  nativeProvider:NativeProvider,
+              private renderer:Renderer
   ) {
     this.localCode = this.localStorageProvider.get('codeData');
     console.log('初始化上一个',this.navCtrl.last()&&this.navCtrl.last().name);
@@ -130,14 +139,12 @@ export class HousingPage {
       this.floorName = this.navParams.get('item').keyword;
       this.params.estate = this.navParams.get('item').id;
     }
-
       // if(!navParams.get('item')){
       //   this.floorName = '';
       // }else {
       //   this.floorName = navParams.get('item').keyword;
       //   this.params.estateId = navParams.get('item').id;
       // }
-
     this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
     this.localStorageProvider.set('tagsListPage',this.tagsListPage);
     // console.log('tagsListPage',this.tagsListPage);
@@ -284,18 +291,18 @@ export class HousingPage {
            }
            this.currentPage=1;
            this.pageResult =res.data&&res.data.result;
-           if(res.data.result.length<10){ this.all = true;}
          }else {
            // console.log('没有数据!');
            this.hasData = false;
          }
          this.totalPages = res.data.totalPages;
          //关闭搜索框子
-         this.show = false;
-         this.houseType = false;
-         this.more = false;
+         this.allClose();
+         // this.show = false;
+         // this.houseType = false;
+         // this.more = false;
          this.pop = false;
-         this.housingEstate = false;
+         // this.housingEstate = false;
 
          //户型搜索条件字显示
          if(this.searchFloorNum ==1){
@@ -335,6 +342,10 @@ export class HousingPage {
     }
 
     this.imgHeader = this.configProvider.set().img;
+
+    for(var i = 1 ;i<4;i++){
+      this.states[i]='close'
+    }
   }
     //禁用调出键盘
   ionViewDidEnter(){
@@ -374,6 +385,57 @@ export class HousingPage {
      }
   }
 
+  stateOne = 'close';
+  stateTwo = 'close';
+  stateThree = 'close';
+  pop = false;
+  // statePop='close';
+  states=[];
+
+  allClose(){
+    // this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+  }
+  //
+  //
+  toggleSta(num){
+    this.toggleNum=num;
+
+    if(this.states[num]=='open'){
+      this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
+      this.pop=false;
+    }else {
+      this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
+      this.pop=true;
+    }
+  }
+
+
+  // toggleState() {
+  //   if(this.stateTwo|| this.stateThree){
+  //     this.stateTwo = this.stateTwo === 'open' ? 'close' : 'close';
+  //     this.stateThree = this.stateThree === 'open' ? 'close' : 'close';
+  //   }
+  //   this.stateOne = this.stateOne === 'close' ? 'open' : 'close';
+  //   this.showen();
+  // }
+  //
+  // toggleState2(){
+  //   if(this.stateOne|| this.stateThree){
+  //     this.stateOne = this.stateOne === 'open' ? 'close' : 'close';
+  //     this.stateThree = this.stateThree === 'open' ? 'close' : 'close';
+  //   }
+  //   this.stateTwo = this.stateTwo === 'close' ? 'open' : 'close';
+  //   this.showen();
+  // }
+  // toggleState3(){
+  //   if(this.stateOne|| this.stateTwo){
+  //     this.stateOne = this.stateOne === 'open' ? 'close' : 'close';
+  //     this.stateTwo = this.stateTwo === 'open' ? 'close' : 'close';
+  //   }
+  //   this.stateThree = this.stateThree === 'close' ? 'open' : 'close';
+  //   this.showen();
+  // }
+
   //menu
   showMenu1() {
     if (this.show == false || this.houseType == true || this.more == true || this.housingEstate == true) {
@@ -386,9 +448,7 @@ export class HousingPage {
     } else {
       this.show = false;
       this.pop = false;
-      // console.log("222");
     }
-    // this.toggle();
   }
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
@@ -441,15 +501,7 @@ export class HousingPage {
     }
   }
 
-  pops() {
-    if (this.more == true || this.show == true || this.houseType == true || this.housingEstate == true) {
-      this.more = false;
-      this.show = false;
-      this.pop = false;
-      this.houseType = false;
-      this.housingEstate = false;
-    }
-  }
+
 
   ionViewWillLeave(){
     if (this.more == true || this.show == true || this.houseType == true || this.housingEstate == true) {
@@ -490,11 +542,11 @@ export class HousingPage {
 /*  if(!this.addIcon){
       return
     }*/
-    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId});
+    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
   }
 
   addHouse() {
-    this.nativeProvider.openWin(this.navCtrl,AddhousePage);
+    this.openWin(AddhousePage);
   }
   num :any;
   timer:any;
@@ -612,14 +664,13 @@ export class HousingPage {
         this.all = true;
       }else {
         this.all = false;
-        if(this.pageResult ==''){this.all = true; return};
+        if(this.pageResult ==''){return};
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult =res.data&&res.data.result;
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
             }
-            if(res.data.result.length<10){ this.all = true;}
           }else {
             this.all = true;
           }
@@ -720,20 +771,33 @@ export class HousingPage {
 
     this.starts=this.structure.lower;
     this.ends=this.structure.upper;
-    this.selctPri=2;
+    if(this.ends==5000){
+      this.selctPri=1
+    }else {
+      this.selctPri=2
+    }
+    // this.selctPri=2;
     console.log(this.starts,this.ends,this.structure.lower,this.structure.upper)
       this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
   selctPri=1;
   name:any;
-  selectPrice(){
-    this.selctPri=2;
+  // val:any;
+  selectPrice(val){
+    console.log(val)
     this.time=this.elevatorPipe(this.price);
     this.name=this.time.name;
     this.starts=this.time.start;
     this.ends=this.time.end;
     // console.log(this.ends);
+    if(val==0){
+      this.starts=0;
+      this.ends=5000;
+      this.selctPri=1;
+    }else {
+      this.selctPri=2;
+    }
 
     if(this.starts==undefined||this.ends==undefined){
       delete  this.params.price;
@@ -744,12 +808,6 @@ export class HousingPage {
     if(this.starts,this.ends){
       this.structure= {lower: this.starts, upper:this.ends};
       // console.log(this.structure)
-    }
-    if(this.name=='不限'){
-      this.starts=0;
-      this.ends=5000;
-      this.selctPri=1;
-      this.params.price = this.starts + ',' + this.ends;
     }
     this.search('propQuery');
   }
