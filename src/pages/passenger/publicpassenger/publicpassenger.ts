@@ -29,9 +29,9 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class PublicpassengerPage {
-  show=false;
-  houseType=false;
-  more=false;
+  // show=false;
+  // houseType=false;
+  // more=false;
   pop=false;
   pageData = [];
   totalPages:number;//总页数
@@ -196,10 +196,11 @@ export class PublicpassengerPage {
       }
 
       //关闭搜索框子
-      this.show = false;
-      this.houseType = false;
-      this.more = false;
-      this.pop = false;
+      // this.show = false;
+      // this.houseType = false;
+      // this.more = false;
+      // this.pop = false;
+      this.allClose();
       // this.housingEstate = false;
       //户型搜索条件字显示
 
