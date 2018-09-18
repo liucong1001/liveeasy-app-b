@@ -138,6 +138,7 @@ export class HousingPage {
        this.addIcon=false;
        this.updateInput=true;
     }
+    this.propertyCategory = this.propertyCategoryData;
 
     if(!this.navParams.get('item')){
        this.floorName = '';
@@ -843,8 +844,9 @@ export class HousingPage {
     this.search('propQuery');
   }
   category =false;
+  propertyCategory:any;
   // categoryPop=false;
-  propertyCategory = [
+  propertyCategoryData = [
     {name:'在售房源',status:'8',src:'./assets/imgs/pitch.png'},
     {name:'暂不出售',status:'64',src:'./assets/imgs/pitch.png'},
     {name:'无效房源',status:'128',src:'./assets/imgs/pitch.png'},
@@ -864,19 +866,27 @@ export class HousingPage {
     // }
   }
 
-  searchCategory(status){
-    if(status=='16'){ //我的房源
+  searchCategory(index,item){
+    item.active = true;
+    for(var i in this.propertyCategory ){
+         if(i== index.toString()){
+         }else{
+           this.propertyCategory[i]['active'] = false;
+          // item.active = false;
+         }
+    }
+    if(item.status=='16'){ //我的房源
       this.params.agent = this.localStorageProvider.get('loginInfo')['user']['id'];
       delete  this.params.status;
-    }else if(status=='8'){  //在售房源
+    }else if(item.status=='8'){  //在售房源
       delete  this.params.agent;
       delete  this.params.status;
     }else {  //其他房源
-      this.params.status=status;
+      this.params.status=item.status;
       delete  this.params.agent;
       this.params.close='1';
     }
-      this.search('propQuery');
+    this.search('propQuery');
   }
 
 }

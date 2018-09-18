@@ -271,8 +271,8 @@
 <div class="pop" *ngIf="pop" (click)="allClose()"></div>
 
 <div class="ion-fab-list" *ngIf="category">
-  <h5>快捷功能</h5>
-  <h4>我的房源</h4>
+  <h5>房源分类</h5>
+  <!--<h4>我的房源</h4>-->
   <ion-row>
 <!--    <ion-col col-4>
      <img src="" width="55" height="55" (click)="searchCategory('8')">
@@ -298,9 +298,10 @@
       <img src="" width="55" height="55">
       <div>我的房源</div>
     </ion-col>-->
-    <ion-col col-4   *ngFor=" let item of propertyCategory" (click)="searchCategory(item.status)">
+    <ion-col col-4 *ngFor=" let item of propertyCategory;let i =index"
+             [ngClass]="{'activeCate': item.active}" (click)="searchCategory(i,item)">
       <div class="backGround"></div>
-      <div>{{item.name}}</div>
+      <div >{{item.name}}</div>
     </ion-col>
   </ion-row>
 </div>
