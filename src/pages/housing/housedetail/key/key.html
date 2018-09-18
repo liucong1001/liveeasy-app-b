@@ -24,6 +24,11 @@
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       没有查看权限、请联系上传人或者上传人上级</font>
   </div>
+  <div class="bgWhite p10" *ngIf="data?.propertyStatus>=64&&data?.propertyStatus<512">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      关闭房源时不允许上传</font>
+  </div>
 
   <ion-list>
     <ion-item class="pl12 hdRightInfo1" *ngIf="data?.submitterName">

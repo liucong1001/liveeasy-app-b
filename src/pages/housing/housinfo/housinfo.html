@@ -233,12 +233,14 @@
       角色人
       <font color="#aaa" class="changes"></font>
     </button>
-    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="letterOfAttorney()">
+    <button class="clear" ion-item  style="padding: 0 16px" tappable [hidden]="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512"
+            (click)="letterOfAttorney()">
       业主委托书
       <font color="#aaa" class="changes"></font>
     </button>
-    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="goKey()">
-      钥匙
+    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="goKey()"
+            [hidden]="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512">
+        钥匙
       <font color="#aaa" class="changes"></font>
     </button>
   </ion-list>
@@ -256,7 +258,8 @@
     <ion-col col-5 *ngIf="houseData&&houseData.closePropertyShow">
       <button ion-button class="follows" tappable (click)="goFollow()">跟进</button>
     </ion-col>
-    <ion-col col-5  *ngIf="houseData&&houseData.closePropertyShow">
+    <ion-col col-5  *ngIf="houseData&&houseData.closePropertyShow"
+             [hidden]="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512">
       <button ion-button tappable class="compile" (click)="edit()">编辑</button>
     </ion-col>
   </ion-row>
