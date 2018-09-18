@@ -112,7 +112,13 @@ export class PropertyProvider {
     if(qId == 'propQuery'){
       qType ='dynamic';
       params.qCate=1;
-      params.update =1;
+      if(params.status == '32'||params.status == '64'||params.status == '128'||params.status == '256'){
+        params.close='1';
+        delete  params.update;
+      }else {
+        params.update =1;
+        delete  params.close;
+      }
     }else if (qId == 'properties') {
       qType= 'fixed';
     }

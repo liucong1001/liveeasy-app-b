@@ -274,8 +274,8 @@
   <h5>快捷功能</h5>
   <h4>我的房源</h4>
   <ion-row>
-    <ion-col col-4>
-      <img src="" width="55" height="55" (click)="searchCategory('8')">
+<!--    <ion-col col-4>
+     <img src="" width="55" height="55" (click)="searchCategory('8')">
       <div>在售房源</div>
     </ion-col>
     <ion-col col-4 (click)="searchCategory('64')">
@@ -297,11 +297,11 @@
     <ion-col col-4 (click)="searchCategory('16')">
       <img src="" width="55" height="55">
       <div>我的房源</div>
-    </ion-col>
-<!--    <ion-col col-4 (click)="searchCategory('480')">
-      <img src="" width="55" height="55">
-      <div>下架房源</div>
     </ion-col>-->
+    <ion-col col-4   *ngFor=" let item of propertyCategory" (click)="searchCategory(item.status)">
+      <img src="" width="55" height="55">
+      <div>{{item.name}}</div>
+    </ion-col>
   </ion-row>
 </div>
 <div class="pops" *ngIf="category"></div>

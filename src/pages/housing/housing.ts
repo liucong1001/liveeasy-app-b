@@ -836,6 +836,15 @@ export class HousingPage {
     this.search('propQuery');
   }
   category = false;
+  propertyCategory = [
+    {name:'在售房源',status:'8'},
+    {name:'暂不出售',status:'64'},
+    {name:'无效房源',status:'128'},
+    {name:'他售房源',status:'256'},
+    {name:'成交房源',status:'32'},
+    {name:'我的房源',status:'16'},
+  ];
+
   showCategory(){
      this.category = !this.category;
   }
@@ -850,9 +859,9 @@ export class HousingPage {
     }else {  //其他房源
       this.params.status=status;
       delete  this.params.agent;
+      this.params.close='1';
     }
       this.search('propQuery');
-      console.log('暂不出',this.params.status);
   }
 
 }
@@ -882,5 +891,6 @@ class  PropertyPageParams {
   estate?:any;//楼盘搜索
   status?:any;//房源状态
   agent?:string;//经纪人id
+  close?:any;//排序
 }
 
