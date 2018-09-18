@@ -494,10 +494,45 @@ ion-infinite-scroll-content{
   ion-col{
     text-align: center;
     margin-bottom: 10px;
+    .backGround{
+      width: 55px;
+      height: 55px;
+      border-radius: 100%;
+      background: url(../assets/imgs/pitch.png) no-repeat;
+      margin: 0 14px 6px;
+    }
+      &:first-child{
+        .backGround{
+          background-position:0px 0px;
+        }
+      }
+      &:nth-child(2){
+        .backGround{
+          background-position:-55px 0px;
+        }
+      }
+      &:nth-child(3){
+        .backGround{
+          background-position:-110px 0px;
+        }
+      }
+      &:nth-child(4){
+        .backGround{
+          background-position:-165px 0px;
+        }
+      }
+      &:nth-child(5){
+        .backGround{
+          background-position:-220px 0px;
+        }
+      }
+      &:nth-child(6){
+        .backGround{
+          background-position:-275px 0px;
+        }
+      }
   }
-  img{
-    border-radius: 100%;
-  }
+
 }
 @media screen and(max-width: 500px) and(min-width: 400px){
   .fab-ios-white{

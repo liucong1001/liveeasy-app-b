@@ -54,8 +54,15 @@ import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
       state('close', style({ opacity: 0, height: '0'})),
       transition('open => close', animate('.3s ease-in')),
       transition('close => open', animate('.3s ease-out')),
-    ])
-  ]
+    ]),
+    // trigger('bottom', [
+    //   state('open',style({ opacity: 1,transform: 'skew(0deg)'})),
+    //   state('close', style({ opacity: 0,transform: 'skew(45deg)'})),
+    //   transition('open => close', animate('600ms')),
+    //   transition('close => open', animate('600ms')),
+    // ])
+  ],
+
 
 })
 export class HousingPage {
@@ -835,18 +842,26 @@ export class HousingPage {
     console.log('选择bed',item,'参数');
     this.search('propQuery');
   }
-  category = false;
+  category =false;
+  // categoryPop=false;
   propertyCategory = [
-    {name:'在售房源',status:'8'},
-    {name:'暂不出售',status:'64'},
-    {name:'无效房源',status:'128'},
-    {name:'他售房源',status:'256'},
-    {name:'成交房源',status:'32'},
-    {name:'我的房源',status:'16'},
+    {name:'在售房源',status:'8',src:'./assets/imgs/pitch.png'},
+    {name:'暂不出售',status:'64',src:'./assets/imgs/pitch.png'},
+    {name:'无效房源',status:'128',src:'./assets/imgs/pitch.png'},
+    {name:'他售房源',status:'256',src:'./assets/imgs/pitch.png'},
+    {name:'成交房源',status:'32',src:'./assets/imgs/pitch.png'},
+    {name:'我的房源',status:'16',src:'./assets/imgs/pitch.png'},
   ];
 
   showCategory(){
      this.category = !this.category;
+    // if(this.category=='close'){
+    //   this.category = this.category === 'close' ? 'open' : 'close';
+    //   this.categoryPop=true;
+    // }else {
+    //   this.category = this.category === 'open' ? 'close' : 'close';
+    //   this.categoryPop=false;
+    // }
   }
 
   searchCategory(status){
