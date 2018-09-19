@@ -21,6 +21,7 @@ import {HousinfoPage} from "./housinfo/housinfo";
 import {HomesearchPage} from "../home/homesearch/homesearch";
 import {ArryCodeValuePipe} from "../../pipes/arry-code-value/arry-code-value";
 import {LookhousePage} from "./housedetail/lookhouse/lookhouse";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 /**
  * Generated class for the HousingPage page.
@@ -264,11 +265,6 @@ export class HousingPage {
    * 列表搜索
    */
   search(qId){
-    if(this.price){
-      this.price=false;
-    }else {
-      this.price=true;
-    }
     for(var i in this.district){
        if(this.params.area ==this.district[i].estateId){
        }
@@ -417,6 +413,7 @@ export class HousingPage {
 
   ionViewWillLeave(){
     this.allClose();
+    this.category=false;
   }
  //
   goFollow(item,slidingItem) {
@@ -648,7 +645,7 @@ export class HousingPage {
     {start:'2000',end:'2500',val:6},
     {start:'2500',end:'3000',val:7},
     {start:'3000',end:'3500',val:8},
-    {start:'5000',end:'0',val:9},
+    {start:'5000',end:'',val:9},
   ];
 //户型转换
   housePipe(data){
@@ -677,29 +674,22 @@ export class HousingPage {
 
     this.starts=this.structure.lower;
     this.ends=this.structure.upper;
-    if(this.ends==5000){
-      this.selctPri=1
-    }else {
-      this.selctPri=2
-    }
+    console.log(this.structure.lower,this.structure.upper);
     // this.selctPri=2;
-    console.log(this.starts,this.ends,this.structure.lower,this.structure.upper)
-      this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
+    this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
   selctPri=1;
   name:any;
   // val:any;
   selectPrice(val){
-    console.log(val)
     this.time=this.elevatorPipe(this.price);
     this.name=this.time.name;
     this.starts=this.time.start;
     this.ends=this.time.end;
-    // console.log(this.ends);
     if(val==0){
-      this.starts=0;
-      this.ends=5000;
+      delete  this.params.price;
+      this.structure= {lower:'0', upper:'600'};
       this.selctPri=1;
     }else {
       this.selctPri=2;
