@@ -503,6 +503,7 @@ ion-infinite-scroll-content{
       height: 55px;
       border-radius: 100%;
       background: url(../assets/imgs/pitch.png) no-repeat;
+      background-size: cover;
      margin: 0 auto 8px;
     }
       &:first-child{

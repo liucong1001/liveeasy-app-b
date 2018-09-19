@@ -5,7 +5,10 @@
   </ion-navbar>
   <ion-row class="houseMenu bgWhite">
     <ion-col col-4 class="tc" tappable (click)="toggleSta(1)" [ngClass]="{'color':show}">
-      <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>6}">{{personName}}</span>
+      <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>6}">
+        <span *ngIf="personName!='不限'">{{personName}}</span>
+         <span *ngIf="personName=='不限'">{{name}}</span>
+      </span>
       <span *ngIf="staff==1">部门员工</span>
       <ion-icon name="md-arrow-dropdown" [ngClass]="{'color':personName}"></ion-icon>
     </ion-col>

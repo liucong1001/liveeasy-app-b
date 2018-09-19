@@ -674,7 +674,7 @@ export class HousingPage {
 
     this.starts=this.structure.lower;
     this.ends=this.structure.upper;
-    console.log(this.structure.lower,this.structure.upper);
+    // console.log(this.structure.lower,this.structure.upper);
     // this.selctPri=2;
     this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 

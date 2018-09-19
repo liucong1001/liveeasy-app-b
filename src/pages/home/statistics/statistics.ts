@@ -517,6 +517,7 @@ export class StatisticsPage {
     }else {
       this.name=this.selected.deptName;
     }
+    console.log(this.name)
     // console.log(item.deptId);
     this.id=item.deptId;
     let sorted = this.groupBy(this.data, function(item){
