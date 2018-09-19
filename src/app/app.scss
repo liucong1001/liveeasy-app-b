@@ -295,13 +295,13 @@ textarea{
   .xiang{
     background-color: #f29b76;
     &.activated{
-      background-color: #f29b76;
+      background-color: #f29b76 !important;
     }
   }
   .suo{
     background-color: #a6937c;
     &.activated{
-      background-color: #a6937c;
+      background-color: #a6937c !important;
     }
   }
 }

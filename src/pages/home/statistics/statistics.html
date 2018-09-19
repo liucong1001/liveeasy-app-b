@@ -60,10 +60,6 @@
       <ion-col col-5 class="p0">
         <div class="leftChange updateBg" [ngClass]="{'bgWhite':person==''}">
           <ion-list radio-group>
-            <!--<ion-item class="tc">-->
-            <!--<ion-label>不限</ion-label>-->
-            <!--<ion-radio  (ionSelect)="tests()"></ion-radio>-->
-            <!--</ion-item>-->
             <ion-item *ngFor="let item of person" class="tc">
               <ion-label>{{item.personName}}</ion-label>
               <ion-radio value="{{item.personId}}" (ionSelect)="searchs(item)"></ion-radio>
