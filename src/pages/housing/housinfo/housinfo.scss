@@ -5,6 +5,10 @@ page-housinfo {
     top: 20px;
     .button-ios{
       background: none;
+      &:last-child{
+        font-size: 1.5rem;
+        margin-top: -1px;
+      }
     }
   }
 
