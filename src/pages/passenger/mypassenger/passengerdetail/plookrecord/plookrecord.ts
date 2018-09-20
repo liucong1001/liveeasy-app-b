@@ -34,7 +34,6 @@ export class PlookrecordPage {
   statusOne=[];
   statusTwo=[];
   statusThree=[];
-  ss=false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController, public events: Events) {
@@ -43,8 +42,11 @@ export class PlookrecordPage {
   }
 
   getRecords(customerid){
-    this.params = {customerId:customerid};
-    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
+    this.params = {
+      customerId:customerid,
+      customerType:'1'
+    };
+    this.customerProvider.mLook(1,{customer:this.params,followStatus: this.index+1,type: 1}).then(res => {
       if(res.data.hasOwnProperty('result')){
         this.lRecord=res.data.result;
       }else {
@@ -76,11 +78,13 @@ export class PlookrecordPage {
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     this.addActive(currentIndex);
+    this.getRecords(this.customerid);
   }
   // 改变tab 颜色
   addActive(index) {
     this.index = index;
-    // console.log(index)
+    // console.log(this.index);
+
   }
   // accomplish(){
   //   this.navCtrl.push(AccomplishPage)

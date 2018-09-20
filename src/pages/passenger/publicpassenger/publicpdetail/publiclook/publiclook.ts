@@ -31,14 +31,20 @@ export class PubliclookPage {
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
     this.customerid=navParams.get('customerId');
-    // console.log(this.customerid);
-    this.params = {customerId:this.customerid}
-    this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
+    this.getRecords(this.customerid)
+  }
+  getRecords(customerid){
+    this.params = {
+      customerId:customerid,
+      customerType:'1'
+    };
+    this.customerProvider.mLook(1,{customer:this.params,followStatus: this.index+1,type: 1}).then(res => {
       if(res.data.hasOwnProperty('result')){
         this.lRecord=res.data.result;
       }else {
         this.lRecord=[];
       }
+
     });
   }
 
@@ -66,6 +72,7 @@ export class PubliclookPage {
     let currentIndex = this.slides.getActiveIndex();
     // console.log(currentIndex);
     this.addActive(currentIndex);
+    this.getRecords(this.customerid)
   }
   // 改变tab 颜色
   addActive(index) {

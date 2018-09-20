@@ -262,36 +262,43 @@ export class MypassengerPage {
   }
   sx=1;
   sxClick(){
+    if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
+    if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
+    if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
+    if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
+    // debugger;
     if(!this.params.todayNoFollow &&!this.params.threeDayNoFollow&&!this.params.todayNoLook&&!this.params.threeDayNoLook ){
       this.sx=1;
+    }else {
+      this.sx=2;
     }
+
     this.search();
     //关闭搜索框子
     // this.show = false;
     // this.houseType = false;
     // this.more = false;
     // this.pop = false;
-    this.allClose()
+    // this.allClose()
+
   }
 
   // checks:boolean;
   sausage=[];
   info:any;
   updateCucumber(val,index) {
+    console.log(this.sausage)
     this.values=val;
-    for(var i in this.sausage){
-      if(this.sausage[i]==true){
-        this.sx=2;
-      }else{
-        this.sx=1;
-      }
-    };
+    this.sx=1;
+    // for(var i in this.sausage){
+    //   if(this.sausage[i]==false){
+    //     this.sx=1;
+    //   }else{
+    //     this.sx=2;
+    //   }
+    // };
+    // console.log(this.sausage)
 
-    console.log(this.sx)
-    if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
-    if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
-    if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
-    if(this.sausage[4]){this.params.threeDayNoLook='4'}else if(!this.sausage[4]) {delete this.params.threeDayNoLook }
   }
 
   //重置

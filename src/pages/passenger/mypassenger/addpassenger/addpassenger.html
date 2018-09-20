@@ -10,7 +10,7 @@
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>客户姓名<i class="text-danger">*</i></ion-label>
-        <ion-input type="text" placeholder="请输入" formControlName="customerName" >
+        <ion-input type="text" placeholder="请输入" maxlength="10" formControlName="customerName" >
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"  ></valid-error>
@@ -75,7 +75,6 @@
             <ion-option [value]="item.code" *ngFor="let item of tradingArea  ">{{item.name}}</ion-option>
           </ion-select>
         </ion-item>
-
         <ion-item (click)="goserach()">
           <button ion-item class="pl12">
             意向楼盘
@@ -84,11 +83,6 @@
             </font>
           </button>
         </ion-item>
-
-
-
-
-
             <!--<ion-item class="pl12">-->
               <!--<ion-label>面积要求</ion-label>-->
               <!--<ion-label class="centers">-->
@@ -109,8 +103,6 @@
                 <!--</ion-row>-->
               <!--</ion-label>-->
             <!--</ion-item>-->
-
-
       <div class="bgWhite  centers">
         <ion-row class="pl12">
           <ion-col col-2>
@@ -130,8 +122,6 @@
           </ion-col>
         </ion-row>
       </div>
-
-
       <valid-error [errors]="errors.minSpaceSize"  [control]="form.get('minSpaceSize')"></valid-error>
       <valid-error [errors]="errors.maxSpaceSize"  [control]="form.get('maxSpaceSize')"  ></valid-error>
             <!--<div *ngIf="areaCheck" class="p15">*结束面积不能小于开始面积</div>-->
@@ -178,7 +168,6 @@
               <!--</ion-row>-->
             <!--</ion-label>-->
           <!--</ion-item>-->
-
       <div class="bgWhite  centers">
         <ion-row class="pl12">
           <ion-col col-2>
@@ -198,8 +187,6 @@
           </ion-col>
         </ion-row>
       </div>
-
-
       <valid-error [errors]="errors.minFloor"  [control]="form.get('minFloor')"  ></valid-error>
       <valid-error [errors]="errors.maxFloor"  [control]="form.get('maxFloor')"  ></valid-error>
         <!--<div *ngIf="floorCheck" class="p15">*最高楼不能小于最低楼层</div>-->
@@ -223,7 +210,6 @@
               <!--</ion-row>-->
             <!--</ion-label>-->
           <!--</ion-item>-->
-
           <div class="bgWhite  centers">
             <ion-row class="pl12">
               <ion-col col-2>
@@ -243,8 +229,6 @@
               </ion-col>
             </ion-row>
           </div>
-
-
           <div class="p15" *ngIf="(form.value.minBedroom == 0 && form.value.minBedroom!='') || (form.value.maxBedroom == 0 && form.value.maxBedroom!='')">* 不能为0</div>
           <valid-error [errors]="errors.minBedroom"  [control]="form.get('minBedroom')"  ></valid-error>
           <valid-error [errors]="errors.maxBedroom"  [control]="form.get('maxBedroom')"  ></valid-error>

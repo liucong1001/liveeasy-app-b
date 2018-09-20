@@ -30,7 +30,7 @@ export class PublicfollowPage {
     console.log(this.customerid)
     this.params = {customerId:this.customerid}
     this.customerProvider.mfollow(1,{customer:this.params}).then(res => {
-      console.log(res.data.result);
+      // console.log(res.data.result);
       this.fRecord=res.data.result
     });
   }

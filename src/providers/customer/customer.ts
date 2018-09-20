@@ -119,8 +119,23 @@ export class CustomerProvider {
   public prclose(params?){
     return this.httpProvider.httpPost(this.prclosePath,params);
   }
-  //我的客户——记录(跟进，约看)
+  //我的客户——记录(跟进)
   public mfollow(currentPage,params){
+    var  data = {
+      currentPage: currentPage,
+      limit:50,
+      totalRecords:0,
+      totalPages:0,
+      offset:0,
+      order:'asc',
+      params:{
+        ...params,
+      },
+    };
+    return this.httpProvider.httpPost(this.mfollowPath,data);
+  }
+  //我的客户——记录(约看)
+  public mLook(currentPage,params){
     var  data = {
       currentPage: currentPage,
       limit:10,

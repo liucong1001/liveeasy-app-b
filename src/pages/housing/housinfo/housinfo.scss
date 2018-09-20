@@ -1,4 +1,11 @@
 page-housinfo {
+  .headEnd{
+    position: absolute;
+    right: 0;
+    .button-ios{
+      background: none;
+    }
+  }
 
   .sizees{
     font-size: 2.7rem !important;

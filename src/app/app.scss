@@ -304,6 +304,13 @@ textarea{
       background-color: #a6937c !important;
     }
   }
+  .xue{
+    background-color: #23c6c8;
+    color: #FFF;
+    &.activated{
+      background-color: #23c6c8 !important;
+    }
+  }
 }
 //筛选选中样式
 .color{
