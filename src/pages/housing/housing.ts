@@ -406,6 +406,7 @@ export class HousingPage {
   allClose(){
     this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
     this.pop=false;
+    this.category=false;
   }
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
