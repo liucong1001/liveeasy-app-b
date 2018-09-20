@@ -4,7 +4,7 @@
     <div class='upload_div' *ngFor="let item of imgData;let i = index; ">
       <span [hidden]="item.position=='add1'&&item.uploader!=localStorageProvider.get('loginInfo').user.id">
          <img src={{imgHeader+item.imagePath+smSign}}  [imgGallery]="{data:imgData,index:i}" class='img_upload'>
-         <span class='close_upload deleteSty' name='cha' (tap)='delete(i,item)' *ngIf="isBtn">x</span>
+         <span class='close_upload deleteSty' name='cha' (tap)='delete(i,item)' *ngIf="isBtn&&isDel">x</span>
       </span>
 
       <span *ngIf="item.position=='add1'&&item.uploader!=localStorageProvider.get('loginInfo').user.id">

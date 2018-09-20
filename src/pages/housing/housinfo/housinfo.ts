@@ -24,6 +24,7 @@ import {SharePropertyProvider} from "../../../providers/property/share-property"
 import {KeyPage} from "../housedetail/key/key";
 import {LetteratorneyPage} from "../housedetail/letteratorney/letteratorney";
 import {NativeProvider} from "../../../providers/native/native";
+import {LookhousePage} from "../housedetail/lookhouse/lookhouse";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -66,6 +67,13 @@ export class HousinfoPage {
   testHeader=false;
   ModalCmp = false;
   isFavoStatus:boolean = false;
+  positionInBuildingType= [
+    {name:'地下',val:0},
+    {name:'低层',val:1},
+    {name:'中层',val:2},
+    {name:'高层',val:3},
+  ];
+  status:any;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public viewCtrl: ViewController,
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
@@ -131,6 +139,8 @@ export class HousinfoPage {
       this.slider1&&this.slider1.slideNext(300,true);
     },2000);
     this.propertyId = this.navParams.get('propertyId');
+    this.status=this.navParams.get('status');
+    this.params = this.navParams.get('params');
     this.getHouseData(this.propertyId,true);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'){
       this.ModalCmp = true;
@@ -247,6 +257,11 @@ export class HousinfoPage {
     });
     this.nativeProvider.openWin(this.navCtrl,HousedetailPage,{propertyId:this.propertyId,item:this.houseData});
   }
+  params:any;
+  goLookHouse(){
+    this.nativeProvider.openWin(this.navCtrl,LookhousePage,{propertyId:this.propertyId,item:this.houseData,
+      params:this.params,});
+  }
 
   rolepeople(){
     this.nativeProvider.openWin(this.navCtrl,RolepeoplePage,{propertyid:this.propertyId});
@@ -256,6 +271,7 @@ export class HousinfoPage {
     this.nativeProvider.openWin(this.navCtrl,KeyPage,{
       propertyid:this.propertyId,
       item:this.houseData,
+      status:this.status,
     })
   }
   //业主委托书
@@ -263,6 +279,8 @@ export class HousinfoPage {
     this.nativeProvider.openWin(this.navCtrl,LetteratorneyPage,{
       propertyid:this.propertyId,
       estateId:this.houseData.estateId,
+      item:this.houseData,
+      status:this.status,
     })
   }
 
@@ -372,6 +390,7 @@ export class HousinfoPage {
           arry.push(item)
         }
      }
+     arry.sort(this.by('position'));
      return arry
   }
   // 异常单价
@@ -423,10 +442,44 @@ export class HousinfoPage {
   shareBolean = false
 
   share(convId){
+    this.toast.defaultMsg('middle','开发中。。');
    // this.shareProvider.linkShare();// 分享链接
    //  let modal = this.modalCtrl.create(SharePage);
    //  modal.present();
   }
 
+  positionInBuildingTypeFilter(val){
+    for(let item of this.positionInBuildingType ){
+       if(item.val==val){
+         return item.name
+       }
+    }
+  }
+
+  /**
+   *  数组排序
+   * @param name
+   * @returns {(o, p) => (number | number)}
+   */
+
+  by = function(name){
+    return function(o, p){
+      var a, b;
+      if (typeof o === "object" && typeof p === "object" && o && p) {
+        a = o[name];
+        b = p[name];
+        if (a === b) {
+          return 0;
+        }
+        if (typeof a === typeof b) {
+          return a < b ? -1 : 1;
+        }
+        return typeof a < typeof b ? -1 : 1;
+      }
+      else {
+        throw ("error");
+      }
+    }
+  };
 
 }

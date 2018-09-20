@@ -428,7 +428,7 @@ export class HousingPage {
     slidingItem.close();
   }
   goLookHouse(item,slidingItem) {
-    this.openWin(LookhousePage, {item: item, propertyId: item.propertyId});
+    this.openWin(LookhousePage, {item: item, propertyId: item.propertyId,params:this.params});
     slidingItem.close();
   }
   goCloseHouse(item,slidingItem) {
@@ -440,12 +440,8 @@ export class HousingPage {
 
   }
 
-  //从首页楼盘搜索 - 禁止进入房源详情页
   goHouseDetail(item) {
-/*  if(!this.addIcon){
-      return
-    }*/
-    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
+    this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId,status:this.params.status,params:this.params})
   }
 
   addHouse() {
@@ -566,17 +562,20 @@ export class HousingPage {
         //toast提示
         this.all = true;
       }else {
-        this.all = false;
-        if(this.pageResult ==''){return};
+         this.all = false;
+        if(this.pageResult ==''){this.all=true;return};
         this.propertyProvider.pageSearch(this.currentPage,this.params,'propQuery').then(res => {
           this.pageResult =res.data&&res.data.result;
           if (res.data&&res.data.result) {
             for (let i = 0; i < res.data.result.length; i ++) {
               this.pageData.push(res.data.result[i]);
             }
+            if(res.data.result=''){this.all=true}
+
           }else {
             this.all = true;
           }
+          console.log('全部',this.all);
         });
       }
       infiniteScroll.complete(function () {
@@ -876,6 +875,8 @@ export class HousingPage {
       delete  this.params.agent;
       this.params.close='1';
     }
+    this.category=false;
+    this.all= false;
     this.search('propQuery');
   }
 

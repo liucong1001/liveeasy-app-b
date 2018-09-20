@@ -25,6 +25,7 @@ export class UploadComponent {
   @Input() max:number;
   @Input() src:Array<any>;
   @Input() isBtn:any;
+  @Input() isDel:any;
   @Output() successEvent = new EventEmitter<any>();
   showTip = true;//是否展示引导上产框框
 
@@ -49,6 +50,7 @@ export class UploadComponent {
     this.imgSign = this.configProvider.set().imgSign;
     this.smSign = this.configProvider.set().smSign;
     this.isBtn = true;
+    this.isDel = true;
   }
 
   ngOnInit(){

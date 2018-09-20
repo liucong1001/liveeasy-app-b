@@ -49,7 +49,9 @@
         <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
       <ion-col col-12>
-        <span class="defaults">楼层：</span>{{data?.floorNo}}
+        <span class="defaults">楼层：</span>
+        <span *ngIf="data.shareShow">{{data?.floorNo}} ({{positionInBuildingTypeFilter(data?.positionInBuilding) }})</span>
+        <span *ngIf="!data.shareShow" class="info">敏感信息已隐藏</span>
       </ion-col>
       <ion-col col-12 >
         <span class="defaults">房间号：</span>

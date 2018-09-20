@@ -35,24 +35,37 @@ export class KeyPage {
   maxImagesCount = true;
   keyData:any;
   res:any;
+  houseData:any;
+  inputDisabled:boolean = false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public propertyProvider: PropertyProvider,private camera: Camera, public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
+    this.houseData= navParams.get('item');
+    console.log('参数',navParams,this.houseData);
+    if(navParams.get('status')=='32'|| this.houseData.propertyStatus>=64&&this.houseData.propertyStatus<=512){
+       this.inputDisabled = true;
+       console.log("禁用",this.inputDisabled);
+    }
     //钥匙信息
     this.propertyProvider.keydetail(this.propertyid).then(res=>{
       this.res=res;
       if(res.success&&res.data){
             this.data = res.data;
-            this.keyData = JSON.parse(res.data.content.toString());
-            this.form.patchValue({
-              keySn: this.keyData.keysn,
-              keyAddress: this.keyData.keyAddress,
-              keyDlgtFilePics: this.keyData.keyDlgtFilePics,
-            });
-            this.imgJson=this.keyData.keyDlgtFilePics;
+            if(this.data.auditStatus!=2){
+              this.keyData = JSON.parse(res.data.content.toString());
+              this.form.patchValue({
+                keySn: this.keyData.keysn,
+                keyAddress: this.keyData.keyAddress,
+                keyDlgtFilePics: this.keyData.keyDlgtFilePics,
+              });
+              this.imgJson=this.keyData.keyDlgtFilePics;
+            }else {
+              this.imgJson= [];
+            }
+
      }else {
         this.imgJson= [];
       }
@@ -64,7 +77,7 @@ export class KeyPage {
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
   }
-//进入页面后执行
+
   ionViewDidEnter(){
   }
 
@@ -90,7 +103,6 @@ export class KeyPage {
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
     };
-    // console.log('参数',data);
     this.isDisabled = true;
     this.propertyProvider.key({
       propertyId:this.propertyid,
@@ -99,7 +111,6 @@ export class KeyPage {
       keyAddress:this.form.value.keyAddress,
       keyDlgtFilePics:JSON.stringify(this.imgData),
     }).then(res => {
-      // console.log(res);
       if(res.success){
         this.toast.msg('上传成功!');
         setTimeout(()=>{
@@ -110,9 +121,9 @@ export class KeyPage {
         this.isDisabled = false;
       }
     });
-    // console.log(this.form.value);
+
   }
-  // JSON.stringify(this.imgData)
+
   imgData = [];
 
   yaoChi(event){
@@ -122,7 +133,6 @@ export class KeyPage {
     }else {
       this.maxImagesCount = true;
     }
-    // console.log('图片回调事件',this.imgData,this.imgData.length,event);
   }
 
   //修改钥匙信息

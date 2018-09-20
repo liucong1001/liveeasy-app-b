@@ -21,10 +21,33 @@
           图片各上传至少一张。
         </font>
       </div>
-      <div class="bgWhite p10" *ngIf="lockhoseDetail?.auditStatus==3">
+      <div class="bgWhite p10" *ngIf="lockhoseDetail?.auditStatus==3&&
+      lockhoseDetail.submitter==localStorageProvider.get('loginInfo').user.id">
         <font color="red">
           <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
           你提交的实勘图正在审核，审核期间不允许上传或修改</font>
+      </div>
+      <div class="bgWhite p10" *ngIf="lockhoseDetail?.auditStatus==3&&
+      lockhoseDetail.submitter!=localStorageProvider.get('loginInfo').user.id">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          提示:当前实勘图正在审核，审核期间不允许上传或修改</font>
+      </div>
+      <div class="bgWhite p10" *ngIf="lockhoseDetail?.lock">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          房源锁定时不允许上传图片</font>
+      </div>
+      <div class="bgWhite p10" *ngIf="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          关闭房源时不允许上传图片</font>
+      </div>
+
+      <div class="bgWhite p10" *ngIf="!houseData?.sameCompany">
+        <font color="red">
+          <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+          不同加盟店不允许上传图片</font>
       </div>
 
       <!--<ion-list class="m10" >-->
@@ -45,35 +68,34 @@
           </div>
           <div class="attorneyPic bgWhite"  >
             <span class="lookHeadLine">户型图：</span>
-            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
+            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
           <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.halls>=1" >
             <span class="lookHeadLine"><i class="text-danger">*</i>客厅图：</span>
-            <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
+            <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
           <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.bedrooms>=1" >
             <span class="lookHeadLine"><i class="text-danger">*</i>卧室图：</span>
-            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
+            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
           <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.kitchens>=1">
             <span class="lookHeadLine" ><i class="text-danger">*</i>厨房图：</span>
-            <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
+            <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
           <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.bathrooms>=1">
             <span class="lookHeadLine"><i class="text-danger">*</i>卫生间图：</span>
             <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"
-                    *ngIf="imgJson" [isBtn]="showBtn"></upload>
+                    *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
           <div class="attorneyPic bgWhite" >
             <span class="lookHeadLine">其他图：</span>
             <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="'add7'" (successEvent)="other($event)"
-                      *ngIf="imgJson" [isBtn]="showBtn"></upload>
+                      *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
           </div>
         </ion-list>
 
-
       <div>
-        <div class="p15"    *ngIf="showBtn "  >
+        <div class="p15"    *ngIf="showBtn " [hidden]="lockhoseDetail?.auditStatus==3" >
           <!--<button ion-button full color="danger"  class="radius" (click)="update()" *ngIf="!edit">确认修改</button>-->
           <button ion-button full color="danger"     [disabled]="isDisabled"   class="radius" (click)="update()"  >上传图片</button>
         </div>

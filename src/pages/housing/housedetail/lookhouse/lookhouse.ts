@@ -22,7 +22,6 @@ import {LocalStorageProvider} from "../../../../providers/local-storage/local-st
 })
 export class LookhousePage {
   path: string;
-  data:PropertyModel;
   useDir :string;
   formData = {
      arrPic:'',
@@ -44,17 +43,32 @@ export class LookhousePage {
   picSuccessAll:any;
   isContent:any;
   showBtn:any;
+  showDel:any;
+  houseData:any;
+  params:any;
+  hashouseData:any;
+  hasKeyData:any;
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams
               ,public actionSheetCtrl: ActionSheetController,
               public propertyProvider:PropertyProvider, public configProvider: ConfigProvider,
               private photoViewer: PhotoViewer,public localStorageProvider:LocalStorageProvider) {
     this.picSuccessAll = false;
-    this.data = navParams.get('item');
+
+    this.houseData = navParams.get('item');
     this.propertyId = navParams.get('propertyId');
+    this.params= navParams.get('params');
+    console.log('参数',navParams);
+    this.formData.propertyId = this.propertyId;
+    this.useDir = this.houseData.estateId+'/'+this.houseData.propertyId+'/';
+    this.propertyProvider.getRecord(this.propertyId).then(res=>{
+      this.houseData=res.data;
+      this.hashouseData = true;
+    });
 
     this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
+      this.hasKeyData = true;
       if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id&&this.lockhoseDetail.auditStatus==3){
         this.imgJson = JSON.parse(this.lockhoseDetail.content).propertyPics;
         this.isContent = true;
@@ -65,6 +79,7 @@ export class LookhousePage {
         this.isContent = false;
         this.imgJson =[];
       }
+
       /**
        * 判断是不是自己录入的房源  （24小时之内可以上传实勘图）
        */
@@ -73,15 +88,17 @@ export class LookhousePage {
       }else {
          this.isCreater = false;
       }
-      this.showBtn =true;
-      if(this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock &&
-        this.lockhoseDetail.auditStatus!=3)  {
-        this.showBtn =true;
-      }else {
-        this.showBtn =false;
-      }
       /**
-       * 实勘图 审核拒绝
+       *实勘图审核通过以后  只有自己和加盟商可以删除图片
+       */
+      this.showDel = true;
+      if(this.lockhoseDetail.submitter!=localStorageProvider.get('loginInfo').user.id){
+        this.showDel = false;
+      }
+
+
+      /**
+       * 实勘图 审核拒绝1
        */
       if(!this.lockhoseDetail.content){
         this.imgJson =[];
@@ -90,16 +107,14 @@ export class LookhousePage {
         this.imgJson =[];
       }
 
-      /**
-      * */
-      this.positionList =[];
+     this.positionList =[];
      if(this.lockhoseDetail.halls>=1){this.positionList.push('add3')}
      if(this.lockhoseDetail.bedrooms>=1){this.positionList.push('add4')}
      if(this.lockhoseDetail.kitchens>=1){this.positionList.push('add5')}
      if(this.lockhoseDetail.bathrooms>=1){this.positionList.push('add6')}
     });
 
-
+/*
     //获取时间
     function getOffsetDays(time1, time2) {
       var offsetTime = Math.abs(time1 - time2);
@@ -111,17 +126,29 @@ export class LookhousePage {
       this.showTip = true;
      } else {
         this.showTip = false;
-    }
-    this.formData.propertyId = this.data.propertyId;
-    this.useDir = this.data.estateId+'/'+this.data.propertyId+'/';
+    }*/
+
   }
 
 
  imgData = [];
   ionViewDidLoad() {
-
     this.imgHeader = this.configProvider.set().img;
 
+
+   setInterval(()=>{
+     if(this.hashouseData&&this.hasKeyData){
+       if(this.houseData&&this.houseData.propertyStatus<64&&this.houseData.sameCompany&&this.lockhoseDetail&&this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock&&this.lockhoseDetail.auditStatus!=3 ){
+         this.showBtn =true;
+       }else {
+         this.showBtn =false;
+       }
+     }
+     if(this.params.status){
+       this.showBtn =false;
+     }
+
+   })
   }
 
 

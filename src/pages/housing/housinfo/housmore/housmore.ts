@@ -21,6 +21,12 @@ export class HousmorePage {
   data:PropertyModel;
   sensitiveData:any;
   localCode:any;
+  positionInBuildingType= [
+    {name:'地下',val:0},
+    {name:'低层',val:1},
+    {name:'中层',val:2},
+    {name:'高层',val:3},
+  ];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -50,5 +56,11 @@ export class HousmorePage {
   contactPipe(data){
     return    data&&JSON.parse(data);
   }
-
+  positionInBuildingTypeFilter(val){
+    for(let item of this.positionInBuildingType ){
+      if(item.val==val){
+        return item.name
+      }
+    }
+  }
 }

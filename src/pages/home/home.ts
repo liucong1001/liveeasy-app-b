@@ -82,7 +82,7 @@ export class HomePage {
         }
     });
     /*消息推送配置**/
-    this.jpushUnit.initPush();
+    this.jpushUnit.initPush(this.navCtrl);
     this.platform.is('cordova')&&
     this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
   }

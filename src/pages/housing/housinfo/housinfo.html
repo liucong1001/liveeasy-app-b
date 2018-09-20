@@ -113,9 +113,14 @@
           <ion-col col-7>
             <span class="defaults">房源编号:</span> <span>{{houseData?.convIdReq}}</span>
           </ion-col>
-          <ion-col col-5>
-            <span class="defaults"> 楼层：</span>{{houseData?.floorNo}}
+      <ion-col col-5>
+<!--      <span class="defaults"> 楼层：</span>
+            <span *ngIf="houseData?.shareShow"> {{houseData?.floorNo}}
+              ({{positionInBuildingTypeFilter(houseData?.positionInBuilding) }})</span>
+            <span *ngIf="!houseData?.shareShow" class="info">敏感信息已隐藏</span>-->
+           <span class="defaults">区县：</span>{{houseData?.adminDivisionName}}
           </ion-col>
+
         </ion-row>
         <ion-row>
           <ion-col col-7>
@@ -229,17 +234,20 @@
   </div>-->
 
   <ion-list class="m10" style="margin-bottom: 25px !important;" [ngClass]="{'addMargin':houseData&&!houseData?.sameCompany}" *ngIf="houseData&&houseData?.sameCompany">
+    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="goLookHouse()">
+      实勘图
+      <font color="#aaa" class="changes"></font>
+    </button>
     <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="rolepeople()">
       角色人
       <font color="#aaa" class="changes"></font>
     </button>
-    <button class="clear" ion-item  style="padding: 0 16px" tappable [hidden]="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512"
+    <button class="clear" ion-item  style="padding: 0 16px" tappable
             (click)="letterOfAttorney()">
       业主委托书
       <font color="#aaa" class="changes"></font>
     </button>
-    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="goKey()"
-            [hidden]="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512">
+    <button class="clear" ion-item  style="padding: 0 16px" tappable (click)="goKey()">
         钥匙
       <font color="#aaa" class="changes"></font>
     </button>

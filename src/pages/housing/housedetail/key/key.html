@@ -24,13 +24,18 @@
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       没有查看权限、请联系上传人或者上传人上级</font>
   </div>
-  <div class="bgWhite p10" *ngIf="data?.propertyStatus>=64&&data?.propertyStatus<512">
+  <div class="bgWhite p10" *ngIf="houseData?.propertyStatus>=64&&houseData?.propertyStatus<512">
     <font color="red">
       <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
       关闭房源时不允许上传</font>
   </div>
+<!--  <div class="bgWhite p10" *ngIf="inputDisabled">
+    <font color="red">
+      <ion-icon ios="ios-alert-outline" md="md-alert"></ion-icon>
+      成交房源不允许修改信息</font>
+  </div>-->
 
-  <ion-list>
+  <ion-list [hidden]="data?.auditStatus==2">
     <ion-item class="pl12 hdRightInfo1" *ngIf="data?.submitterName">
       <ion-label>
         钥匙人:{{data?.submitterName }}
@@ -47,13 +52,14 @@
     <ion-list>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>钥匙编号</ion-label>
-        <ion-input type="text"  class="p0" formControlName="keySn">
+        <ion-input type="text"  class="p0" formControlName="keySn"
+                   [disabled]="inputDisabled"  >
         </ion-input>
       </ion-item>
       <valid-error [errors]="errors.keySn"  [control]="form.get('keySn')"  ></valid-error>
       <ion-item class="pl12 hdRightInfo1">
         <ion-label>钥匙存储地址</ion-label>
-        <ion-input type="text"  class="p0" formControlName="keyAddress">
+        <ion-input type="text"  class="p0" formControlName="keyAddress"  [disabled]="inputDisabled">
         </ion-input>
       </ion-item>
       <div class="attorneyPic bgWhite" >
@@ -70,10 +76,10 @@
       </div>
     </ion-list>
     <img-list [imgJson]="form.value.keyDlgtFilePics"></img-list>
-    <ion-grid [hidden]="data?.auditStatus==3">
+    <ion-grid [hidden]="data?.auditStatus==3 || inputDisabled ">
       <ion-row class="p15">
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount||isDisabled" (click)="goYc()"  *ngIf="!res?.success|| data?.auditStatus==2 ">上传钥匙信息</button>
-        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||imgData.length!=1 || isDisabled" (click)="updateYc()"  [hidden]="data?.auditStatus==2||!res?.success ">修改钥匙</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||maxImagesCount||isDisabled || inputDisabled" (click)="goYc()"  *ngIf="!res?.success|| data?.auditStatus==2 ">上传钥匙信息</button>
+        <button ion-button full color="danger" class="radius" [disabled]="form.invalid||imgData.length!=1 || isDisabled ||inputDisabled" (click)="updateYc()"  [hidden]="data?.auditStatus==2||!res?.success ">修改钥匙</button>
       </ion-row>
     </ion-grid>
   </form>

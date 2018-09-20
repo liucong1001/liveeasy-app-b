@@ -22,6 +22,7 @@ import {ToastComponent} from "../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {StatusBar} from "@ionic-native/status-bar";
 import { Keyboard } from '@ionic-native/keyboard';
+import {NativeProvider} from "../../../providers/native/native";
 
 /**
  * Generated class for the AddhousePage page.
@@ -73,9 +74,9 @@ export class AddhousePage {
               private fb:FormBuilder,public nativePageTransitions: NativePageTransitions,
               private addhouseProvider:AddhouseProvider,
               public localStorageProvider:LocalStorageProvider,public events: Events ,public toast:ToastComponent,
-              public app: App,public statusBar: StatusBar, public platform: Platform
+              public app: App,public statusBar: StatusBar, public platform: Platform,
+              public  nativeProvider:NativeProvider
   ) {
-
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
     this.localCode = this.localStorageProvider.get('codeData');
@@ -246,20 +247,9 @@ export class AddhousePage {
   }
 
   ionViewDidLoad() {
-    // console.log('朝向',this.localStorageProvider.get('codeData').orientation);
-    this.navBar.backButtonClick = this.backButtonClick;
-    // var arry =[];
-    // var data = this.localStorageProvider.get('codeData').orientation;
-    // for(var i in data){
-    //    arry.push({name:data[i],val:i})
-    // }
-
-    // orientation
+  this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
   ionViewDidEnter(){
-    // this.navBar.backButtonClick = () => {
-    //   this.navCtrl.setRoot(HousingPage);
-    // };
   }
 
   /**
@@ -456,32 +446,5 @@ export class AddhousePage {
     }
   }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.platform.is('cordova')&&this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  };
-
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 
 }

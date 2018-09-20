@@ -39,6 +39,8 @@ export class LetteratorneyPage {
   maxImagesCount = true;
   @ViewChild(Navbar) navBar: Navbar;
   content:any;
+  houseData:any;
+  inputDisabled:boolean = false;
   constructor(public navCtrl: NavController,public propertyProvider: PropertyProvider,
               public localStorageProvider:LocalStorageProvider, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent,
@@ -46,24 +48,33 @@ export class LetteratorneyPage {
               private fb:FormBuilder,public actionSheetCtrl: ActionSheetController) {
     this.propertyid = navParams.get('propertyid');
     this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
+    this.houseData= navParams.get('item');
+    if(navParams.get('status')=='32'|| this.houseData.propertyStatus>=64&&this.houseData.propertyStatus<=512){
+      this.inputDisabled = true;
+    }
     //委托书详情
     this.propertyProvider.adetail(this.propertyid).then(res => {
       if(res.success){
         this.data= res.data;
-        this.content = JSON.parse(res.data.content) ;
-        console.log('解释时间',  typeof (this.content.delegateEndTm));
-        this.delegateDocId= res.data.delegateDocId;
-        this.form.patchValue({
-          delegateDocSn:this.content.delegateDocSn,
-          delegateBeginTm:this.content.delegateBeginTm &&new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
-          delegateEndTm: this.content.delegateEndTm&&this.content.delegateEndTm!='null'&&this.content.delegateEndTm!='-1'&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
-          delegateDocPics:this.content.delegateDocPics,
-          delegateStyle:this.content.delegateStyle
-        });
-        this.sub=false;
-        this.upd=true;
-        this.imgJson = this.content.delegateDocPics; //默认展示有图片
-        console.log('委托书详情',this.content.delegateDocPics);
+        if(this.data.auditStatus!=2){
+          this.content = JSON.parse(res.data.content) ;
+          console.log('解释时间',  typeof (this.content.delegateEndTm));
+          this.delegateDocId= res.data.delegateDocId;
+          this.form.patchValue({
+            delegateDocSn:this.content.delegateDocSn,
+            delegateBeginTm:this.content.delegateBeginTm &&new Date(parseFloat(this.content.delegateBeginTm)).toISOString(),
+            delegateEndTm: this.content.delegateEndTm&&this.content.delegateEndTm!='null'&&this.content.delegateEndTm!='-1'&&new Date(parseFloat(this.content.delegateEndTm)).toISOString(),
+            delegateDocPics:this.content.delegateDocPics,
+            delegateStyle:this.content.delegateStyle
+          });
+          this.sub=false;
+          this.upd=true;
+          this.imgJson = this.content.delegateDocPics; //默认展示有图片
+        }else {
+          this.imgJson = [];
+        }
+
+
       }else {
         this.imgJson = [];
       }

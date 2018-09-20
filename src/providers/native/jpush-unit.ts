@@ -18,7 +18,7 @@ export class  jpushUnit{
   public registrationId: string;
   devicePlatform: string;
   sequence: number = 0;
-
+  num:0;
   tagResultHandler = function(result) {
     var sequence: number = result.sequence;
     var tags: Array<string> = result.tags == null ? [] : result.tags;
@@ -45,7 +45,7 @@ export class  jpushUnit{
   /**
    * 初始化
    */
-  initPush(){
+  initPush(navCtr){
     document.addEventListener('jpush.receiveNotification', (event: any) => {
       var content;
       if (this.devicePlatform == 'Android') {
@@ -69,7 +69,21 @@ export class  jpushUnit{
         }
       }
        // alert('打开通知: ' + JSON.stringify(event));
-      this.app.getActiveNav().push(CheckhousePage);
+/*      this.num++;
+      if(this.num==1){
+        this.app.getActiveNav().push(CheckhousePage);
+      }else {
+       this.app.getActiveNav().push(CheckhousePage);
+       this.app.getActiveNav().pop();
+      }*/
+      if(navCtr.isActive(CheckhousePage)){
+        navCtr.getPrevious(CheckhousePage)
+      }else {
+        this.app.getRootNav().push(CheckhousePage);
+      }
+
+
+      console.log('num',this.num);
       console.log('打开通知: ' , JSON.stringify(event));
     }, false);
 
