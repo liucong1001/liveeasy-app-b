@@ -12,7 +12,7 @@ export const ENV: Environment = {
   apiKey:'14eca046de7309cd5125d4e3bdb1afd1',
   cordova:{
     "id":"tech.liveeasy.apps.agent",
-    "version":"0.0.4",
+    "version":"0.0.7",
     "name": "房贝",
     "ios":{
       "CodePushDeploymentKey": "CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260"
