@@ -4,9 +4,12 @@ page-aboutus{
     bottom: 60px;
     left: 0;
     margin: 0 30px;
-    padding: 20px 0px 8px;
+    padding: 20px 0px 18px;
     border-top: 1px solid #f4f4f4;
     border-bottom: 1px solid #f4f4f4;
+    line-height: 24px;
+    font-weight: 600;
+    font-size: 15px;
   }
 }
 .heInfo{
@@ -17,14 +20,14 @@ page-aboutus{
 }
 .lines{
   position: absolute;
-  width: 50px;
-  border-bottom: 2px solid #db2624;
-  bottom: -10px;
-  margin-left: -25px;
+  width: 55px;
+  border-bottom: 3px solid #db2624;
+  bottom: 30px;
+  margin-left: -66px;
 }
 .version{
   position: absolute;
-  bottom: 16px;
+  bottom: 18px;
   width: 100%;
   left: 0;
 }

@@ -27,7 +27,7 @@
          </ion-col>
 
          <ion-col col-4 class="tc" tappable (click)="toggleSta(3)" [ngClass]="{color:more}">
-           <span [ngClass]="{color:sx==2}"*ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(params.todayNoFollow) || filtrate(params.threeDayNoFollow) ||filtrate(params.todayNoLook) || filtrate(params.threeDayNoLook)}}</span>
+           <span [ngClass]="{color:sx==2}" *ngIf="sx==2" class="ellipsis" style="display: inline-block;">{{filtrate(params.todayNoFollow) || filtrate(params.threeDayNoFollow) ||filtrate(params.todayNoLook) || filtrate(params.threeDayNoLook)}}</span>
            <span *ngIf="sx==1"> 筛选</span>
            <ion-icon name="md-arrow-dropdown" [ngClass]="{color:sx==2,esRow:sx==2}"></ion-icon>
          </ion-col>

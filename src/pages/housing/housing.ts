@@ -876,6 +876,7 @@ export class HousingPage {
       delete  this.params.agent;
       this.params.close='1';
     }
+    this.category=false;
     this.search('propQuery');
   }
 

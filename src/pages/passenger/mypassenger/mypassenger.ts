@@ -279,7 +279,15 @@ export class MypassengerPage {
   info:any;
   updateCucumber(val,index) {
     this.values=val;
-    this.sx=2;
+    for(var i in this.sausage){
+      if(this.sausage[i]==true){
+        this.sx=2;
+      }else{
+        this.sx=1;
+      }
+    };
+
+    console.log(this.sx)
     if(this.sausage[1]){this.params.todayNoFollow='1'}else if(!this.sausage[1]) {delete this.params.todayNoFollow }
     if(this.sausage[2]){this.params.threeDayNoFollow='2'}else if(!this.sausage[2]) {delete this.params.threeDayNoFollow }
     if(this.sausage[3]){this.params.todayNoLook='3'}else if(!this.sausage[3]) {delete this.params.todayNoLook }
@@ -288,8 +296,7 @@ export class MypassengerPage {
 
   //重置
   reset(){
-    // this.sx=1;
-    console.log('清除',this.sausage);
+    // console.log('清除',this.sausage);
     for(var i in this.sausage){
       this.sausage[i]=false;
     };
