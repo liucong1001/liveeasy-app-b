@@ -1,22 +1,9 @@
 page-housinfo {
-  .headEnd{
-    position: absolute;
-    right: 0;
-    top: 20px;
-    .button-ios{
-      background: none;
-      &:last-child{
-        font-size: 1.5rem;
-        margin-top: -1px;
-      }
-    }
-  }
-
   .sizees{
     font-size: 2.7rem !important;
   }
   .clearMore.activated{
-    background: #f8f8f8 !important;
+    background: #f8f8f8 ;
   }
   ion-header{
     background: none !important;
@@ -110,7 +97,7 @@ page-housinfo {
     img{
       width: inherit !important;
       height: 305px !important;
-      -webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.9));
+      -webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1));
     }
   }
   .swiper-pagination-fraction{

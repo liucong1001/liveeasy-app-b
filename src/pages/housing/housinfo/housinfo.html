@@ -6,23 +6,23 @@
     <button  ion-button="bar-button" *ngIf="modals" (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-
+    <ion-buttons end class="headEnd">
+      <button ion-button icon-only tappable  (click)="addFavo()" *ngIf="!isFavoStatus">
+        <ion-icon name="md-heart-outline" class="sizees" ></ion-icon>
+      </button>
+      <button ion-button icon-only tappable  (click)="delFavo()" *ngIf="isFavoStatus">
+        <ion-icon name="md-heart" style="color: #e22222"></ion-icon>
+      </button>
+      <button ion-button icon-only tappable (click)="share()">
+        <ion-icon name="fenxiang"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content   id="contents" (ionScroll)="scrollHandler($event)" [ngClass]="{'updateScroll':houseData&&!houseData.closePropertyShow}">
-  <ion-buttons end class="headEnd">
-    <button ion-button icon-only tappable  (click)="addFavo()" *ngIf="!isFavoStatus">
-      <ion-icon name="md-heart-outline" class="sizees" ></ion-icon>
-    </button>
-    <button ion-button icon-only tappable  (click)="delFavo()" *ngIf="isFavoStatus">
-      <ion-icon name="md-heart" style="color: #e22222"></ion-icon>
-    </button>
-    <button ion-button icon-only tappable (click)="share()">
-      <ion-icon name="fenxiang"></ion-icon>
-    </button>
-  </ion-buttons>
+
   <ion-slides #mySlider1  autoplay="3000" pager="true" loop="true" paginationType="fraction"  [hidden]="houseData&&imgJson&&houseData?.picsAuditStatus==1" >
     <ion-slide *ngIf="!imgJson">
       <img src="assets/imgs/banner.png" width="100%" height="400">
