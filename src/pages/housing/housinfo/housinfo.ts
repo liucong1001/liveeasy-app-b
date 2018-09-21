@@ -96,11 +96,10 @@ export class HousinfoPage {
     if (this.modals == false) {
       this.modals = true;
     }
-    // this.updateHead.nativeElement.style.background = `rgba(0,0,0,0)`;
   }
 
   scrollHandler(e) {
-    let opacity = +(e.scrollTop / 150).toFixed(2);
+    let opacity = +(e.scrollTop / 140).toFixed(2);
     opacity = opacity > 1 ? 1 : opacity;
     this.updateHead.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
     this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;

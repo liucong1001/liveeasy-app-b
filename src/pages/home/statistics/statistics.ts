@@ -75,14 +75,15 @@ export class StatisticsPage {
     var day = date.getDay();
     var oneDayTime = 24*60*60*1000 ;
     //显示周一
-    var firstMonth=(new Date(nowTime - (day-1)*oneDayTime)).getMonth()+1;
-    var firstDd=(new Date(nowTime - (day-1)*oneDayTime)).getDate();
+    var firstMonth=(new Date(nowTime - (day)*oneDayTime)).getMonth()+1;
+    var firstDd=(new Date(nowTime - (day)*oneDayTime)).getDate();
     //显示周日
     var lastMonth=(new Date(nowTime + (7-day)*oneDayTime)).getMonth()+1;
     var lastDd=(new Date(nowTime + (7-day)*oneDayTime)).getDate();
     this.firstWeek=year + ""+this.Appendzero(firstMonth) + this.Appendzero(firstDd);
-    this.lastWeek=year + ""+this.Appendzero(lastMonth) + this.Appendzero(lastDd);
-
+    // this.lastWeek=year + ""+this.Appendzero(lastMonth) + this.Appendzero(lastDd);
+    this.lastWeek=this.yesterday;
+    console.log(this.firstWeek,this.lastWeek);
     //上周
     var nowDayOfWeek = date.getDay(); //今天本周的第几天
     var nowDay = date.getDate(); //当前日
@@ -108,7 +109,7 @@ export class StatisticsPage {
     var lastWd=(getLastWeekEndDate()).getDate();
     this.lastMonday=year + ""+this.Appendzero(lastMon) + this.Appendzero(lastMDd);
     this.lastweekend=year + ""+this.Appendzero(lastWm) + this.Appendzero(lastWd);
-    console.log(this.lastMonday,this.lastweekend,lastMDd,lastWd);
+
     //本月
     //显示月初
     //显示月初
@@ -264,25 +265,29 @@ export class StatisticsPage {
           // console.log('3007',sorted[j][h]);
           this.tableJSON[10].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 5018){
+        if(sorted[all][aa].statItem == 5017){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[11].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 5019){
+        if(sorted[all][aa].statItem == 5018){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[12].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 5020){
+        if(sorted[all][aa].statItem == 5019){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[13].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 5021){
+        if(sorted[all][aa].statItem == 5020){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[14].result+=sorted[all][aa].stateValue;
         }
-        if(sorted[all][aa].statItem == 5022){
+        if(sorted[all][aa].statItem == 5021){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[15].result+=sorted[all][aa].stateValue;
+        }
+        if(sorted[all][aa].statItem == 5022){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[16].result+=sorted[all][aa].stateValue;
         }
       }
     }
@@ -533,10 +538,11 @@ export class StatisticsPage {
       // this.personal.push(sorted[j]);
       //员工分组
       for (var i in sorted[j]){
-// console.log(sorted[j])
-
+        if(item.deptId.length>14){
+          item.deptId=item.deptId.substring(0,14);
+        }
         if (sorted[j][i].deptId==item.deptId || sorted[j][i].storeCode ==item.deptId){
-
+          // console.log(sorted[j],item.deptId,item.deptId.length)
           this.allPersonal.push(sorted[j][i])
         }
       }
@@ -610,25 +616,29 @@ export class StatisticsPage {
           // console.log('3007',sorted[j][h]);
           this.tableJSON[10].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 5018){
+        if(this.allPersonal[i].statItem == 5017){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[11].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 5019){
+        if(this.allPersonal[i].statItem == 5018){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[12].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 5020){
+        if(this.allPersonal[i].statItem == 5019){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[13].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 5021){
+        if(this.allPersonal[i].statItem == 5020){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[14].result+=this.allPersonal[i].stateValue;
         }
-        if(this.allPersonal[i].statItem == 5022){
+        if(this.allPersonal[i].statItem == 5021){
           // console.log('3007',sorted[j][h]);
           this.tableJSON[15].result+=this.allPersonal[i].stateValue;
+        }
+        if(this.allPersonal[i].statItem == 5022){
+          // console.log('3007',sorted[j][h]);
+          this.tableJSON[16].result+=this.allPersonal[i].stateValue;
         }
       }
 
@@ -685,25 +695,29 @@ export class StatisticsPage {
               // console.log('3007',sorted[j][h]);
               this.tableJSON[10].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 5018){
+            if(perInfo[j][h].statItem == 5017){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[11].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 5019){
+            if(perInfo[j][h].statItem == 5018){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[12].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 5020){
+            if(perInfo[j][h].statItem == 5019){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[13].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 5021){
+            if(perInfo[j][h].statItem == 5020){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[14].result+=perInfo[j][h].stateValue;
             }
-            if(perInfo[j][h].statItem == 5022){
+            if(perInfo[j][h].statItem == 5021){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[15].result+=perInfo[j][h].stateValue;
+            }
+            if(perInfo[j][h].statItem == 5022){
+              // console.log('3007',sorted[j][h]);
+              this.tableJSON[16].result+=perInfo[j][h].stateValue;
             }
           }
         }
@@ -732,11 +746,12 @@ export class StatisticsPage {
     {name:'带看次数',val:8,result:0},
     {name:'领取公客数',val:9,result:0},
     {name:'查看公客电话数',val:10,result:0},
-    {name:'报单成交业绩（万）',val:11,result:0},
-    {name:'报单房源归属业绩',val:12,result:0},
-    {name:'报单实勘业绩',val:13,result:0},
-    {name:'报单钥匙业绩',val:14,result:0},
-    {name:'其他角色业绩',val:15,result:0},
+    {name:'报单作废',val:11,result:0},
+    {name:'报单成交业绩（万）',val:12,result:0},
+    {name:'报单房源归属业绩',val:13,result:0},
+    {name:'报单实勘业绩',val:14,result:0},
+    {name:'报单钥匙业绩',val:15,result:0},
+    {name:'其他角色业绩',val:16,result:0},
   ]
 
   //快速查询
