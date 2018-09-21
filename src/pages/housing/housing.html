@@ -1,7 +1,5 @@
 <ion-header id="propertyHeader">
-
   <ion-navbar #navbar>
-    <!--<p>{{all}}&#45;&#45;{{hasData}}</p>-->
     <ion-searchbar  #searchBar placeholder="请输入小区或商圈名" [(ngModel)]="floorName" [ngClass]="{updateInput:updateInput}"  class="serInput" (tap)="allSearch()" [disabled]="true"></ion-searchbar>
     <ion-icon ios="ios-add" md="md-add" *ngIf="addIcon" class="adds" tappable (click)="addHouse()"></ion-icon>
   </ion-navbar>
@@ -100,9 +98,7 @@
 
     </div>
     <ion-list class="housList">
-
       <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
-
         <ion-item style="padding: 8px 15px 0;">
             <ion-row tappable (click)="goHouseDetail(item)">
               <ion-col col-4 style="margin-top: 2px">
@@ -165,7 +161,6 @@
         </ion-item-options>
 
       </ion-item-sliding>
-
     </ion-list>
 
     <!--网络错误处理-->
@@ -187,18 +182,15 @@
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="正在加载中...">
-
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
     <div *ngIf="all&&hasData" class="sTips">已加载全部
     </div>
   </ion-grid>
 
-
-
   <ion-fab right bottom>
     <button ion-fab color="white" (click)="showCategory()">
-      <ion-icon name="fenlei" *ngIf="!category"></ion-icon>
+      <ion-icon [name]="'fenlei'"  *ngIf="!category"></ion-icon>
       <ion-icon name="close" *ngIf="category"></ion-icon>
     </button>
   </ion-fab>
@@ -275,32 +267,7 @@
 
 <div class="ion-fab-list" *ngIf="category">
   <h5>房源分类</h5>
-  <!--<h4>我的房源</h4>-->
   <ion-row>
-<!--    <ion-col col-4>
-     <img src="" width="55" height="55" (click)="searchCategory('8')">
-      <div>在售房源</div>
-    </ion-col>
-    <ion-col col-4 (click)="searchCategory('64')">
-      <img src="" width="55" height="55">
-      <div>暂不出售</div>
-    </ion-col>
-    <ion-col col-4 (click)="searchCategory('128')">
-      <img src="" width="55" height="55">
-      <div>无效房源</div>
-    </ion-col>
-    <ion-col col-4 (click)="searchCategory('256')">
-      <img src="" width="55" height="55">
-      <div>他售房源</div>
-    </ion-col>
-    <ion-col col-4 (click)="searchCategory('32')">
-      <img src="" width="55" height="55">
-      <div>成交房源</div>
-    </ion-col>
-    <ion-col col-4 (click)="searchCategory('16')">
-      <img src="" width="55" height="55">
-      <div>我的房源</div>
-    </ion-col>-->
     <ion-col col-4 *ngFor=" let item of propertyCategory;let i =index"
              [ngClass]="{'activeCate': item.active}" (click)="searchCategory(i,item)">
       <div class="backGround"></div>

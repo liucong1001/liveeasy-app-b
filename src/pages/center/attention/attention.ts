@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
@@ -30,7 +30,8 @@ export class AttentionPage {
   tagsListPage =[];
   imgHeader: string; //线上图片默认头地址
   constructor(public navCtrl: NavController, public navParams: NavParams, public localStorageProvider: LocalStorageProvider,
-              public propertyProvider: PropertyProvider,public toast:ToastComponent, public configProvider: ConfigProvider,) {
+              public propertyProvider: PropertyProvider,public toast:ToastComponent, public configProvider: ConfigProvider,
+              public events: Events) {
     this.agentId = this.localStorageProvider.get('loginInfo')['user']['id'];
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
@@ -134,6 +135,14 @@ export class AttentionPage {
     /*  if(!this.addIcon){
           return
         }*/
+    this.events.subscribe('attention', (params) => {
+      // 接收B页面发布的数据
+      if(params){
+        this.search();
+      }
+      // 取消订阅
+      this.events.unsubscribe('attention');
+    });
     this.navCtrl.push(HousinfoPage,{propertyId:item.propertyId})
   }
 

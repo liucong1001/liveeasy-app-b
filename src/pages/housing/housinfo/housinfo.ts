@@ -207,31 +207,11 @@ export class HousinfoPage {
        this.navCtrl.popToRoot()
       }else if(this.app.getActiveNavs()[0]['index']==0){    //从首页搜索楼盘进入
         this.navCtrl.pop()
-/*        if(this.navParams.get('notReloadPage')){
-          this.navCtrl.pop();
-          // this.navCtrl.parent.select(1);
-        }else {
-          this.navCtrl.parent.select(1);
-          this.navCtrl.setRoot(HousingPage);
-        }
       }else {
-        this.navCtrl.parent.select(1);
-        this.navCtrl.setRoot(HousingPage);*/
-      }else {
-        this.navCtrl.pop()
+        this.navCtrl.pop().then(()=>{  //我的关注
+          this.events.publish('attention','attention')
+        })
       }
-      // if(this.app.getActiveNavs()[0]['index']==0){
-      //   if(this.navParams.get('notReloadPage')){
-      //     this.navCtrl.pop();
-      //     // this.navCtrl.parent.select(1);
-      //   }else {
-      //     // this.navCtrl.push(HousingPage);
-      //     // this.navCtrl.popToRoot();
-      //     this.navCtrl.parent.select(1);
-      //     this.navCtrl.setRoot(HousingPage);
-      //   }
-      // }
-
     };
   }
 

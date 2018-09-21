@@ -791,7 +791,7 @@ export class HousingPage {
         if(params.buildType!=0){this.params.buildType = params.buildType}else {delete this.params.buildType}
         if(params.position!=0){this.params.position = params.position}else {delete this.params.position}
 
-        // console.log('接收到11',this.moreSearchData,this.params);
+        console.log('接收到11',this.moreSearchData,this.params);
       }
        this.search('propQuery');
       // 取消订阅

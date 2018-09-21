@@ -23,7 +23,7 @@ import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value"
 export class MorePage {
   tagsList:any;
   tagsStr = [];
-  orientation:any; //朝向
+  orientation:any; //朝向1
   //搜索数据
   searchMoreData = {
     tags:0,
@@ -145,7 +145,7 @@ export class MorePage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+    // this.navBar.backButtonClick = this.backButtonClick;
     //标签
     this.tagsList=this.localStorageProvider.get('tagsListPage');
 
@@ -157,7 +157,7 @@ export class MorePage {
 
   ionViewDidEnter(){
     //清空条件后返回 房源列表也刷新
-    this.navBar.backButtonClick = () => {
+/*    this.navBar.backButtonClick = () => {
      if(!this.localStorageProvider.get('searchMoreData')){
        console.log('条件被清空');
       this.confirm();
@@ -166,7 +166,7 @@ export class MorePage {
        this.navCtrl.pop();
      }
       console.log('条件',this.localStorageProvider.get('searchMoreData'));
-    }
+    }*/
   }
 
   initTags(item,attr,arryAttr){
@@ -267,7 +267,7 @@ export class MorePage {
     for(var i in this.searchMoreData[attrNameArry]){
       this.searchMoreData[attrName]+= parseInt(this.searchMoreData[attrNameArry][i]) ;
     }
-    this.localStorageProvider.set('searchMoreData',this.searchMoreData)
+    // this.localStorageProvider.set('searchMoreData',this.searchMoreData)
      // console.log('查询',item,this.searchMoreData[attrNameArry],this.searchMoreData[attrNameList]);
   }
 
@@ -312,12 +312,11 @@ export class MorePage {
     this.multiplyReset('position','positionArry','positionList');
     // console.log('清除',this.searchMoreData);
     this.initData();
-    this.localStorageProvider.del('searchMoreData');
-    // this.localStorageProvider.set('searchMoreData',this.searchMoreData);
+    // this.localStorageProvider.del('searchMoreData');
   }
 
   confirm(){
-    // this.localStorageProvider.set('searchMoreData',this.searchMoreData);
+    this.localStorageProvider.set('searchMoreData',this.searchMoreData);
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
       this.events.publish('moreSearchBevents', this.searchMoreData);

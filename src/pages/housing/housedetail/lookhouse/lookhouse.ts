@@ -61,12 +61,12 @@ export class LookhousePage {
     console.log('参数',navParams);
     this.formData.propertyId = this.propertyId;
     this.useDir = this.houseData.estateId+'/'+this.houseData.propertyId+'/';
-    this.propertyProvider.getRecord(this.propertyId).then(res=>{
+   var p1= this.propertyProvider.getRecord(this.propertyId).then(res=>{
       this.houseData=res.data;
       this.hashouseData = true;
     });
 
-    this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
+   var p2= this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
       this.hasKeyData = true;
       if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id&&this.lockhoseDetail.auditStatus==3){
@@ -114,19 +114,18 @@ export class LookhousePage {
      if(this.lockhoseDetail.bathrooms>=1){this.positionList.push('add6')}
     });
 
-/*
-    //获取时间
-    function getOffsetDays(time1, time2) {
-      var offsetTime = Math.abs(time1 - time2);
-      return Math.floor(offsetTime / (3600 * 24 * 1e3));
-    }
+    Promise.all([p1,p2]).then(res=>{
+      console.log('Promiseall:',this.hashouseData,this.hasKeyData);
+      if(this.houseData&&this.houseData.propertyStatus<64&&this.houseData.sameCompany&&this.lockhoseDetail&&this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock&&this.lockhoseDetail.auditStatus!=3 ){
+        this.showBtn =true;
+      }else {
+        this.showBtn =false;
+      }
 
-     this.wrap = getOffsetDays(Date.now(), (new Date(navParams.get('item').createdTime)).getTime());
-      if(this.wrap==0){
-      this.showTip = true;
-     } else {
-        this.showTip = false;
-    }*/
+    });
+    if(this.params.status){
+      this.showBtn =false;
+    }
 
   }
 
@@ -135,6 +134,8 @@ export class LookhousePage {
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;
 
+
+/*
 
    setInterval(()=>{
      if(this.hashouseData&&this.hasKeyData){
@@ -147,8 +148,11 @@ export class LookhousePage {
      if(this.params.status){
        this.showBtn =false;
      }
-
    })
+*/
+
+
+
   }
 
 
