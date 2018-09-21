@@ -6,14 +6,37 @@
     <!--<ion-icon ios="ios-add" md="md-add" class="adds" (click)="addpassenger()"></ion-icon>-->
   </ion-navbar>
 </ion-header>
-<ion-content>
-    <ion-list>
-        <button ion-item class="pl12" tappable (click)="passenger()">
-          我的客户
-        </button>
-        <button ion-item class="pl12" tappable (click)="publicpassenger()">
-            公客池
-          </button>
-      </ion-list>
+<ion-content padding>
+  <ion-row>
+    <ion-col col-4 tappable (click)="passenger()">
+      <ion-icon name="wodekehu"></ion-icon>
+      <div>我的客户</div>
+    </ion-col>
+    <ion-col col-4 tappable (click)="publicpassenger()">
+      <ion-icon name="gongkechi"></ion-icon>
+      <div>公客池</div>
+    </ion-col>
+    <ion-col col-4 tappable (click)="invalid()">
+      <ion-icon name="wuxiaokehu"></ion-icon>
+      <div>无效客户</div>
+    </ion-col>
+    <ion-col col-4 tappable (click)="sold()">
+      <ion-icon name="tashoukehu"></ion-icon>
+      <div>他售客户</div>
+    </ion-col>
+    <ion-col col-4 tappable (click)="deal()">
+      <ion-icon name="chengjiaokehu"></ion-icon>
+      <div>成交客户</div>
+    </ion-col>
+  </ion-row>
+
+  <!--<ion-list>-->
+      <!--<button ion-item class="pl12" tappable (click)="passenger()">-->
+        <!--我的客户-->
+      <!--</button>-->
+      <!--<button ion-item class="pl12" tappable (click)="publicpassenger()">-->
+          <!--公客池-->
+        <!--</button>-->
+    <!--</ion-list>-->
 </ion-content>
 

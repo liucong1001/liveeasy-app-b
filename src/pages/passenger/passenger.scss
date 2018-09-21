@@ -1,3 +1,45 @@
 page-passenger{
+  ion-col[col-4]{
+    text-align: center;
+    padding: 5px 5px 20px;
+    ion-icon{
+      width: 75px;
+      height: 75px;
+      border-radius: 100%;
+      font-size:3rem;
+      color: #fff;
+      background: #37cbd8;
+     line-height: 75px;
+      padding-left: 2px;
+      margin-bottom:8px;
+    }
+    &:nth-child(2){
+      ion-icon{
+        background: #16ba98;
+        font-size:3.7rem;
+      }
+    }
+    &:nth-child(3){
+      ion-icon{
+        background: #ff5d5e;
+        font-size:3.7rem;
+      }
+    }
+    &:nth-child(4){
+      ion-icon{
+        background: #fdaf4a;
+        font-size:3.7rem;
+      }
+    }
+    &:nth-child(5){
+      ion-icon{
+        background: #3c71f3;
+        font-size:3.7rem;
+      }
+    }
+    div{
+      font-weight: 600;
+    }
+  }
 
 }
