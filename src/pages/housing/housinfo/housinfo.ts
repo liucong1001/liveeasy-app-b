@@ -74,6 +74,8 @@ export class HousinfoPage {
     {name:'高层',val:3},
   ];
   status:any;
+  @ViewChild("header") header;
+  @ViewChild("updateHead") updateHead;
   constructor(public navCtrl: NavController, public toast:ToastComponent,public viewCtrl: ViewController,
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
@@ -84,28 +86,25 @@ export class HousinfoPage {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
     this.localCode = this.localStorageProvider.get('codeData');
-    this.modals=navParams.get('modals');
-    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
-    this.buzzTypeJson = new ArryCodeValuePipe().transform(this.localCode,'buzz_type');
-    this.decorationJson = new ArryCodeValuePipe().transform(this.localCode,'decoration');
-    this.buildingTypeJson = new ArryCodeValuePipe().transform(this.localCode,'building_type');
-    this.floorJSON=new ArryCodeValuePipe().transform(this.localCode,'building_height_type');
+    this.modals = navParams.get('modals');
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode, 'orientation');
+    this.buzzTypeJson = new ArryCodeValuePipe().transform(this.localCode, 'buzz_type');
+    this.decorationJson = new ArryCodeValuePipe().transform(this.localCode, 'decoration');
+    this.buildingTypeJson = new ArryCodeValuePipe().transform(this.localCode, 'building_type');
+    this.floorJSON = new ArryCodeValuePipe().transform(this.localCode, 'building_height_type');
 
-    if(this.modals == false){
-      this.modals=true;
+    if (this.modals == false) {
+      this.modals = true;
     }
+    // this.updateHead.nativeElement.style.background = `rgba(0,0,0,0)`;
   }
 
-  @ViewChild("header") header;
   scrollHandler(e) {
     let opacity = +(e.scrollTop / 150).toFixed(2);
-    if(opacity>0){
-      this.testHeader=true;
-      opacity = opacity > 1 ? 1 : opacity;
-      // this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
-    }else {
-      this.testHeader=false;
-    }
+    opacity = opacity > 1 ? 1 : opacity;
+    this.updateHead.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
+    this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
+console.log(this.updateHead,this.header._elementRef);
   }
 
   flag=false;
