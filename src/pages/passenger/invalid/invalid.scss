@@ -1,3 +1,14 @@
 page-invalid {
-
+  .houseMenu{
+    background: #fff;
+    padding: 1px 0;
+  }
+  .housList{
+    .item-ios.item-block .item-inner{
+      padding-bottom: 0;
+    }
+    .item-block:last-child, .item-wrapper:last-child .item-block{
+      border: 0;
+    }
+  }
 }

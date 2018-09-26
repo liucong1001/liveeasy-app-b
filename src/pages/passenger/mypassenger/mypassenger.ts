@@ -480,6 +480,9 @@ export class MypassengerPage {
   allClose(){
     this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
     this.pop=false;
+    for (var i in this.sausage){
+      this.sausage[i]=false;
+    }
   }
 
 

@@ -1,20 +1,116 @@
-<!--
-  Generated template for the InvalidPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar #navbar color="first" >
     <ion-title>无效客户
     </ion-title>
-
+    <ion-buttons end tappable (click)="addpassenger()">
+      <button ion-button icon-only>
+        <ion-icon name='md-add' class="adds"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-row class="houseMenu">
+    <ion-col col-6 class="tc" tappable (click)="toggleSta(1)" >
+      <span >客户来源</span>
+      <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </ion-col>
+    <ion-col col-6 class="tc" tappable (click)="toggleSta(2)" >
+      <span >排序</span>
+      <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </ion-col>
+  </ion-row>
 </ion-header>
+<ion-content  class="housList" style="margin-top: 2px" >
 
 
-<ion-content padding>
+  <ion-refresher
+    [pullMax]="480"
+    [pullMin]="180"
+    (ionRefresh)="doRefresh($event)" class="refresh">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉推荐"
+      refreshingSpinner="circles"
+      refreshingText="加载数据中">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="tc refreshTip" *ngIf="not">暂无更新</div>
+  <div class="tc refreshTip" *ngIf="haveData">已更新{{newCount}}信息</div>
+  <ion-list class="housList" style="margin-top: 2px">
+    <ion-item-sliding   #slidingItem >
+      <ion-item style="padding: 10px 15px;" >
+        <ion-row >
+          <ion-col col-12 tappable>
+            <div class="ellipsis tips">
+              <font size="3">客户名称</font>
+            </div>
+            <p class="m5">
+              <font size="2" color="#aaa">
+                ID:<span>0025265</span>
+              </font>
+            </p>
+            <p class="m5">
+              <font size="2" color="#aaa">
+                <span>2018年12月12日 12：00 录入</span>
+                <span>客户来源：400电话</span>
+              </font>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <!--<ion-item-options>-->
+        <!--<button ion-button color="primary" style="background: #ffba4d" tappable (click)="goFollow(item,slidingItem)" [hidden]="item['isLock']==1">跟进</button>-->
+        <!--<button ion-button color="danger"  style="background: #80adff" tappable (click)="golook(item,slidingItem)"  [hidden]="item['isLock']==1">约看</button>-->
+        <!--<button ion-button color="default" style="background: #ff756f" tappable (click)="closePrivateGuest(item,slidingItem)" [hidden]="item['isLock']==1">关闭</button>-->
+
+      <!--</ion-item-options>-->
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="content_page" >
+    <div *ngIf="hasData&&!all" class="tc">
+      <ion-spinner item-start name="ios"></ion-spinner>
+      <div>加载数据中...</div>
+    </div>
+    <div *ngIf="!hasData"  class="tc p10">
+      抱歉！没有找到数据
+    </div>
+  </div>
+
+  <ion-infinite-scroll   (ionInfinite)="doInfinite($event)" >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="加载中">
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div *ngIf="all&&hasData" class="sTips">已加载全部
+  </div>
+  <!--</ion-grid>-->
 
 </ion-content>
+
+<div class="popLocation">
+  <!-- 客户来源 -->
+  <div class="lists houseType" [@animation]="states[1]">
+    <ion-list radio-group class="scrollC">
+      <ion-item >
+        <ion-label>400电话</ion-label>
+        <ion-radio></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- 排序-->
+  <div class="lists houseType" [@animation]="states[2]">
+    <ion-list radio-group class="scrollC">
+      <ion-item >
+        <ion-label>关闭时间由晚到早</ion-label>
+        <ion-radio></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+<div class="pop" *ngIf="pop" (click)="allClose()"></div>
+
+
