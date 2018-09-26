@@ -99,7 +99,7 @@ export class HousinfoPage {
   }
 
   scrollHandler(e) {
-    let opacity = +(e.scrollTop / 140).toFixed(2);
+    let opacity = +(e.scrollTop).toFixed(2);
     opacity = opacity > 1 ? 1 : opacity;
     this.updateHead.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
     this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
