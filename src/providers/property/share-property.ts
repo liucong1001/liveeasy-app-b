@@ -28,12 +28,12 @@ export class SharePropertyProvider {
   setLinkPath(id){
     if (this.platform.is('ios')) {
       // this.link = "https://itunes.apple.com/cn/app/女装尖货-单件月销1-8万/id1194942857?mt=8";
-      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
+      this.link = this.configProvider.set().http.slice(0,-7)+'/html/share/property/'+id;
     }
     else if (this.platform.is('android')) {
-      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
+      this.link = this.configProvider.set().http.slice(0,-7)+'/html/share/property/'+id;
     } else {
-      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
+      this.link = this.configProvider.set().http.slice(0,-7)+'/html/share/property/'+id;
     }
   }
 
