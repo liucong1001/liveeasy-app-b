@@ -12,10 +12,10 @@ declare var QQSDK;
 @Injectable()
 export class SharePropertyProvider {
 
-  title:string;//标题
+  title:string='这是标题';//标题
   description:string='这是描述';//描述
   link:string;//分享链接
-  image:string;//图片
+  image:string='http://img1.imgtn.bdimg.com/it/u=2545480505,1987716996&fm=26&gp=0.jpg';//图片
   //房源分享 不存在‘api/v1’
   sharePropertyPath =  this.configProvider.set().http.slice(0,-8)+'/biz-erp/html/shareProperty';
 
