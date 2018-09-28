@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController, Platform } from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
 import {ToastComponent} from "../../components/toast/toast";
+import {ConfigProvider} from "../config/config";
 declare var Wechat;
 declare var QQSDK;
 /*
@@ -15,23 +16,32 @@ export class SharePropertyProvider {
   description:string='这是描述';//描述
   link:string;//分享链接
   image:string;//图片
+  //房源分享 不存在‘api/v1’
+  sharePropertyPath =  this.configProvider.set().http.slice(0,-8)+'/biz-erp/html/shareProperty';
 
-  constructor(public http: HttpClient,platform: Platform,public loadingCtrl: LoadingController,
-              private clipboard: Clipboard,public toast:ToastComponent) {
+  constructor(public http: HttpClient,public platform: Platform,public loadingCtrl: LoadingController,
+              private clipboard: Clipboard,public toast:ToastComponent,private configProvider:ConfigProvider) {
 
-    if (platform.is('ios')) {
-      this.link = "https://itunes.apple.com/cn/app/女装尖货-单件月销1-8万/id1194942857?mt=8";
+
+  }
+
+  setLinkPath(id){
+    if (this.platform.is('ios')) {
+      // this.link = "https://itunes.apple.com/cn/app/女装尖货-单件月销1-8万/id1194942857?mt=8";
+      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
     }
-    else if (platform.is('android')) {
-      this.link = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.tongedev.dress";
+    else if (this.platform.is('android')) {
+      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
     } else {
-      this.link = "http://dress.tongedev.cn";
+      this.link = this.configProvider.set().http.slice(0,-7)+'/biz-erp/html/shareProperty'+"?convId="+id;
     }
   }
 
-  wxShare(scene) {
+  wxShare(scene,convId) {
     var loading = this.loadingCtrl.create({ showBackdrop: false });
     loading.present();
+    this.setLinkPath(convId);
+    console.log('路径',this.link);
     try {
       Wechat.share({
         message: {
@@ -48,9 +58,9 @@ export class SharePropertyProvider {
         },
         scene: scene == 0 ? Wechat.Scene.SESSION : Wechat.Scene.Timeline  // share to Timeline
       }, function () {
-        // alert("分享成功！");
+         alert("分享成功！");
       }, function (reason) {
-        // alert("Failed: " + reason);
+        alert("Failed: " + reason);
       });
     } catch (error) {
       console.log(error);

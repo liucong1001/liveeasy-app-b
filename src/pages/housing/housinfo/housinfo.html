@@ -13,7 +13,7 @@
       <button ion-button icon-only tappable  (click)="delFavo()" *ngIf="isFavoStatus">
         <ion-icon name="md-heart" style="color: #e22222"></ion-icon>
       </button>
-      <button ion-button icon-only tappable (click)="share()">
+      <button ion-button icon-only tappable (click)="share(houseData?.convId)">
         <ion-icon name="fenxiang"></ion-icon>
       </button>
     </ion-buttons>

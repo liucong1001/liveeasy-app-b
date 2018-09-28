@@ -1,5 +1,5 @@
 import { Component,ViewChild,NgZone} from '@angular/core';
-import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController, Events,ModalController } from 'ionic-angular';
+import {IonicPage, Navbar, NavController, NavParams, Slides, Content, App, ViewController, Events,ModalController,ActionSheetController  } from 'ionic-angular';
 import {HousedetailPage} from "../housedetail/housedetail";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {HousmorePage} from "./housmore/housmore";
@@ -80,8 +80,10 @@ export class HousinfoPage {
               public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
               public propertyProvider: PropertyProvider, public loadingCtrl: LoadingController,
               public configProvider:ConfigProvider,
-              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,                 public app: App,public events: Events,public modalCtrl: ModalController,
-              public shareProvider:SharePropertyProvider,public  nativeProvider:NativeProvider
+              public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,
+              public app: App,public events: Events,public modalCtrl: ModalController,
+              public shareProvider:SharePropertyProvider,public  nativeProvider:NativeProvider,
+              public actionSheetCtrl: ActionSheetController,public appShare:SharePropertyProvider
               ) {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
@@ -415,10 +417,44 @@ export class HousinfoPage {
   shareBolean = false
 
   share(convId){
-    this.toast.defaultMsg('middle','开发中。。');
-   // this.shareProvider.linkShare();// 分享链接
-   //  let modal = this.modalCtrl.create(SharePage);
-   //  modal.present();
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '分享',
+      buttons: [
+        {
+          text: 'QQ好友',
+          handler: () => {
+            this.appShare.qqShare(0)
+          }
+        },
+        {
+          text: 'QQ空间',
+          handler: () => {
+            this.appShare.qqShare(1)
+          }
+        },
+        {
+          text: '微信好友',
+          handler: () => {
+            this.appShare.wxShare(0,convId)
+          }
+        },
+        {
+          text: '朋友圈',
+          handler: () => {
+            this.appShare.wxShare(1,convId)
+          }
+        },
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+
   }
 
   positionInBuildingTypeFilter(val){
