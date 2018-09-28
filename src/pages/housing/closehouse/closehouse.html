@@ -70,14 +70,13 @@
         </ion-col>
         <ion-col col-12 class="followMain bgWhite">
           <div>关闭说明：<i class="text-danger">*</i></div>
-          <div>
+          <ion-item>
             <ion-textarea rows="10" placeholder="请填写关闭原因" formControlName="closeDesc"></ion-textarea>
-          </div>
+          </ion-item>
         </ion-col>
         <ion-col col-12 class="bgWhite p10">
           <button ion-button full color="danger" class="radius"  [disabled]="form.invalid || (form.value.propertyStatus==128&&form.value.invalidReason=='')" *ngIf="subs" (click)="subClose()">确定</button>
           <button ion-button full color="danger" class="radius" [disabled]="form.invalid" (click)="subApplic()" *ngIf="applic">提交申请</button>
-          <!--<button ion-button tappable (click)="pendings()" *ngIf="pending">您有一条待处理申请</button>-->
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -33,10 +33,17 @@ export class CustomerProvider {
   private  publicDetailPath = this.configProvider.set().http+'/publiccustomer/publicCustomerInfo/toDetailApp';
   //约看
   private  finishPath=this.configProvider.set().http+'/customer/customerInfo/updateFollowStatus';
+  //无效客户列表
+  private  invalidPageListPath=this.configProvider.set().http+'/publiccustomer/publicCustomerInfo/invalidPageList.do';
+  //他售客户列表
+  private heSoldPageListPath = this.configProvider.set().http+'/publiccustomer/publicCustomerInfo/heSoldPageList.do';
+  //成交客户列表
+  private  dealPageListPath = this.configProvider.set().http+'/publiccustomer/publicCustomerInfo/dealPageList.do';
 
+  constructor(public http: HttpClient,public httpProvider:HttpProvider,
+              private configProvider:ConfigProvider,
+              public localStorageProvider: LocalStorageProvider) {
 
-  constructor(public http: HttpClient,public httpProvider:HttpProvider,private configProvider:ConfigProvider,public localStorageProvider: LocalStorageProvider) {
-    console.log('Hello CustomerProvider Provider');
   }
 
   //分页列表
@@ -156,6 +163,29 @@ export class CustomerProvider {
 
   public mfinish(id,status,content,customerId){
     return this.httpProvider.httpPostForm(this.finishPath,"id=" +id + "&status="+status + '&content=' + content + '&customerId='+customerId);
+  }
+
+  public otherCustomersPage(type,currentPage,params){
+    let path ='';
+    switch (type){
+      case 0: path= this.invalidPageListPath;break;
+      case 1:path = this.heSoldPageListPath;break;
+      case 2:path = this.dealPageListPath;break;
+    }
+    var  data = {
+      currentPage: currentPage,
+      limit:10,
+      totalRecords:0,
+      totalPages:0,
+      offset:0,
+      order:'asc',
+      orderBy:'DESC',
+      hasCount:true,
+      customerSrc:0,
+      priceUnit:1,
+      ...params
+    };
+    return this.httpProvider.httpGet(path,data)
   }
 
 

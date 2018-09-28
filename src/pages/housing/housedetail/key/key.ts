@@ -9,6 +9,7 @@ import {ConfigProvider} from "../../../../providers/config/config";
 import {ToastComponent} from "../../../../components/toast/toast";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {ErrorMessage} from "../../../../components/valid-error/valid-error";
+import {NativeProvider} from "../../../../providers/native/native";
 
 /**
   钥匙页面
@@ -39,13 +40,13 @@ export class KeyPage {
   inputDisabled:boolean = false;
   @ViewChild(Navbar) navBar: Navbar;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public propertyProvider: PropertyProvider,private camera: Camera, public nativePageTransitions: NativePageTransitions,
+              public propertyProvider: PropertyProvider,private camera: Camera,
+              public nativePageTransitions: NativePageTransitions,public  nativeProvider:NativeProvider,
               private fb:FormBuilder,public configProvider: ConfigProvider,public toast:ToastComponent,
               public localStorageProvider:LocalStorageProvider,public actionSheetCtrl: ActionSheetController,) {
     this.propertyid= navParams.get('propertyid');
     this.houseData= navParams.get('item');
-    console.log('参数',navParams,this.houseData);
-    if(navParams.get('status')=='32'|| this.houseData.propertyStatus>=64&&this.houseData.propertyStatus<=512){
+    if( this.houseData.propertyStatus>=32&&this.houseData.propertyStatus<=512){
        this.inputDisabled = true;
        console.log("禁用",this.inputDisabled);
     }
@@ -73,7 +74,7 @@ export class KeyPage {
     });
   }
   ionViewDidLoad() {
-    this.navBar.backButtonClick = this.backButtonClick;
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
     this.attorneys=new Date().getTime();
     this.imgHeader = this.configProvider.set().img;
   }
@@ -165,30 +166,4 @@ export class KeyPage {
     });
   }
 
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
-  //------跳转页面过渡--------//
-  openWin(goPage, param = {}) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-      iosdelay: 50
-    };
-
-    this.nativePageTransitions.slide(options);
-    this.navCtrl.push(goPage, param, {animate:false});
-  }
 }

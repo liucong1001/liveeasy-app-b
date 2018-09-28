@@ -26,6 +26,8 @@ export class UploadComponent {
   @Input() src:Array<any>;
   @Input() isBtn:any;
   @Input() isDel:any;
+  @Input() superior:any;
+  @Input() object:any;//总数据
   @Output() successEvent = new EventEmitter<any>();
   showTip = true;//是否展示引导上产框框
 
@@ -51,6 +53,7 @@ export class UploadComponent {
     this.smSign = this.configProvider.set().smSign;
     this.isBtn = true;
     this.isDel = true;
+    this.object={};
   }
 
   ngOnInit(){
@@ -249,10 +252,21 @@ export class UploadComponent {
   }
 
 
-
   trackByFn(index, item) {
     return item.imageId;
   }
 
+  // 实勘图审核通过以后  只有自己和加盟商可以删除图片
+  hasDel(item,object){
+    if(item.position.substring(0,3)=='add'){
+      if((item.uploader==this.localStorageProvider.get('loginInfo').user.id || object.superior==1)&&object.auditStatus!=3) {
+        return true
+      }else {
+        return false
+      }
+    }else {
+      return true
+    }
+  }
 
 }

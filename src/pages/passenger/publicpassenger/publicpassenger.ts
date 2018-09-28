@@ -152,34 +152,16 @@ export class PublicpassengerPage {
   }
 
   /**
-   * 监听商圈id——code（转换）
-   */
-  // intentionTrade(event){
-  //   console.log('商圈',event);
-  //   for(var i in this.tradingArea){
-  //     if(this.tradingArea[i].id == event){
-  //       // this.params.intentionTradeCode = this.tradingArea[i].code;
-  //     }
-  //   }
-  //    if(this.params.intentionDiviCode=='99'){
-  //       this.params.intentionDiviCode='0';
-  //     }
-  // }
-  /**
    * 列表搜索
    */
   search(){
     this.pageData = null;
     this.hasData  = true;
-    if(this.params.intentionDiviCode=='99'){
-      this.params.intentionDiviCode='0';
-    }
+
     if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
     if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
     if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
 
-
-    // this.params.intentionDiviCode='0';
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
@@ -194,15 +176,7 @@ export class PublicpassengerPage {
       }else{
         this.hasData = false;
       }
-
-      //关闭搜索框子
-      // this.show = false;
-      // this.houseType = false;
-      // this.more = false;
-      // this.pop = false;
       this.allClose();
-      // this.housingEstate = false;
-      //户型搜索条件字显示
 
     });
   }
@@ -269,8 +243,11 @@ export class PublicpassengerPage {
   haveData=false;
   newCount:any;
   doRefresh(refresher) {
-    console.log(this.params)
+    console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
+    if(this.params.intentionDiviCode=='0'){delete  this.params.intentionDiviCode}
+    if(this.params.intentionTradeCode=='0'){delete  this.params.intentionTradeCode}
+    if(this.params.intentionRoom=='0'){delete  this.params.intentionRoom}
 
     this.publicCustomerProvider.pageSearch(1,this.params).then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
@@ -338,6 +315,7 @@ export class PublicpassengerPage {
     this.nativeProvider.openWin(this.navCtrl,PublicpdetailPage, {
       item:item,
       customerId:item.customerId,
+      type:99,
     });
   }
 

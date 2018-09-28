@@ -266,18 +266,21 @@ export class AddpassengerPage {
 
   }
 
+
   getcontactFreeTm1(event){
-    // this.form.value.contactFreeTmArray
+    if( event.hour<10 ){event.hour='0'+event.hour}
+    if( event.minute<10 ){event.minute='0'+event.minute}
     var startTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[0] = startTime;
-     console.log('时间',event,startTime);
   }
 
   getcontactFreeTm2(event){
+    if( event.hour<10 ){event.hour='0'+event.hour}
+    if( event.minute<10 ){event.minute='0'+event.minute}
     var endTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTmArray[1] = endTime;
-    console.log('表单',this.form.value);
   }
+
 
   errBtnHttp:boolean;
   save(){

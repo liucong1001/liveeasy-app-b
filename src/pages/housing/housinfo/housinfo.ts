@@ -103,7 +103,7 @@ export class HousinfoPage {
     opacity = opacity > 1 ? 1 : opacity;
     this.updateHead.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
     this.header._elementRef.nativeElement.style.background = `rgba(26,179,148,${opacity})`;
-console.log(this.updateHead,this.header._elementRef);
+// console.log(this.updateHead,this.header._elementRef);
   }
 
   flag=false;
@@ -137,8 +137,6 @@ console.log(this.updateHead,this.header._elementRef);
       this.slider1&&this.slider1.slideNext(300,true);
     },2000);
     this.propertyId = this.navParams.get('propertyId');
-    this.status=this.navParams.get('status');
-    this.params = this.navParams.get('params');
     this.getHouseData(this.propertyId,true);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'){
       this.ModalCmp = true;
@@ -237,8 +235,7 @@ console.log(this.updateHead,this.header._elementRef);
   }
   params:any;
   goLookHouse(){
-    this.nativeProvider.openWin(this.navCtrl,LookhousePage,{propertyId:this.propertyId,item:this.houseData,
-      params:this.params,});
+    this.nativeProvider.openWin(this.navCtrl,LookhousePage,{propertyId:this.propertyId,item:this.houseData});
   }
 
   rolepeople(){
@@ -249,7 +246,6 @@ console.log(this.updateHead,this.header._elementRef);
     this.nativeProvider.openWin(this.navCtrl,KeyPage,{
       propertyid:this.propertyId,
       item:this.houseData,
-      status:this.status,
     })
   }
   //业主委托书
@@ -258,7 +254,6 @@ console.log(this.updateHead,this.header._elementRef);
       propertyid:this.propertyId,
       estateId:this.houseData.estateId,
       item:this.houseData,
-      status:this.status,
     })
   }
 

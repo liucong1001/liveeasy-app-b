@@ -80,15 +80,10 @@ export class AddhousePage {
     //房源标签
     this.houLabel = this.localStorageProvider.get('tagsList');
     this.localCode = this.localStorageProvider.get('codeData');
-    // this.scrollTo();
   }
 
   @ViewChild(Content) content: Content;
-/*  scrollTo() {
-    window.addEventListener('native.keyboardshow', (e: any) => {
-      this.content.scrollTo(0, e.keyboardHeight);
-    });
-  }*/
+
   selectTitle(data){
      var title = {title:data};
      return title;
@@ -241,15 +236,13 @@ export class AddhousePage {
       ],
     };
 
-  //状态栏文字颜色修改-白色
+
   ionViewWillEnter() {
-    this.statusBar.styleLightContent();
   }
 
   ionViewDidLoad() {
-  this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
-  }
-  ionViewDidEnter(){
+    this.statusBar.styleLightContent();//状态栏文字颜色修改-白色
+    this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 
   /**
@@ -262,16 +255,6 @@ export class AddhousePage {
       return false
     }
   }
-  // sizeCheck=false;
-  // // reg=false;
-  // // innerReg=false;
-  // sizes(){
-  //     if(this.form.value.spaceSize&&this.form.value.innerSpaceSize){
-  //     if(parseFloat(this.form.value.spaceSize) < parseFloat(this.form.value.innerSpaceSize)) {
-  //       alert(2);
-  //     }
-  //   }
-  // }
 
 
   presentActionSheet() {
@@ -313,12 +296,10 @@ export class AddhousePage {
   }
 
   estateChange(Value){
-    //哥
     this.form.controls['adminDivisionCode'].setValue(Value.site);
     this.form.controls['estateName'].setValue(Value.keyword);
     this.form.controls['estateId'].setValue(Value.id);
     this.form.controls['tradingAreaId'].setValue(Value['meta']['trading_id']);
-
   }
 
   //房源标签处理
@@ -430,9 +411,7 @@ export class AddhousePage {
     this.navCtrl.push(DescPage,{content:this.form.value.propertyDesc});
   }
 
-  menPai(event){
-    // console.log('门牌号',event);
-  }
+
   //户型
   clickHx(){
     if(this.showHx==false ){

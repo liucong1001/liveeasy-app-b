@@ -47,9 +47,9 @@ export class PassengerPage {
   publicpassenger(){
     this.nativeProvider.openWin(this.navCtrl,PublicpassengerPage,null)
   }
-  //无效客户/他售客户/成交客户
-  otherPass(){
-    this.nativeProvider.openWin(this.navCtrl,OtherpaPage,null)
+  // 0: 无效客户 , 1:他售客户  2:成交客户
+  otherPass(type){
+    this.nativeProvider.openWin(this.navCtrl,OtherpaPage,{type:type})
   }
 
 

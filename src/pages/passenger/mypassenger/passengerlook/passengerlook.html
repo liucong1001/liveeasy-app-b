@@ -51,7 +51,7 @@
             </ion-list>
           </ion-col>
           <ion-col col-12 class="bgWhite p10 later">
-            <button ion-button full color="danger" class="radius update" (click)="looks()" [disabled]="form.invalid">添加约看</button>
+            <button ion-button full color="danger" class="radius update" (click)="looks()" [disabled]="form.invalid || isDisabled">添加约看</button>
           </ion-col>
         </ion-row>
       </ion-grid>

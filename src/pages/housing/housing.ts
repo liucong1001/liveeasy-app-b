@@ -505,7 +505,7 @@ export class HousingPage {
 
     }).catch(err=>{
       if(err){
-        this.badHttp = true;
+        this.badHttp = true;this.pageData =[];this.hasData=false; this.all=true;
         refresher.complete();
       }
     });

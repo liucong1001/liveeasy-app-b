@@ -45,9 +45,9 @@ export class LookhousePage {
   showBtn:any;
   showDel:any;
   houseData:any;
-  params:any;
   hashouseData:any;
   hasKeyData:any;
+  superior:any;//上级
   constructor(public navCtrl: NavController, public nativePageTransitions: NativePageTransitions,
               private camera: Camera,public toast:ToastComponent, public navParams: NavParams
               ,public actionSheetCtrl: ActionSheetController,
@@ -57,8 +57,6 @@ export class LookhousePage {
 
     this.houseData = navParams.get('item');
     this.propertyId = navParams.get('propertyId');
-    this.params= navParams.get('params');
-    console.log('参数',navParams);
     this.formData.propertyId = this.propertyId;
     this.useDir = this.houseData.estateId+'/'+this.houseData.propertyId+'/';
    var p1= this.propertyProvider.getRecord(this.propertyId).then(res=>{
@@ -69,7 +67,7 @@ export class LookhousePage {
    var p2= this.propertyProvider.shikanDetail(this.propertyId).then(res=>{
       this.lockhoseDetail = res.data;
       this.hasKeyData = true;
-      if(this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id&&this.lockhoseDetail.auditStatus==3){
+      if((this.lockhoseDetail.submitter==this.localStorageProvider.get('loginInfo').user.id || this.lockhoseDetail.superior==1)&&this.lockhoseDetail.auditStatus==3){
         this.imgJson = JSON.parse(this.lockhoseDetail.content).propertyPics;
         this.isContent = true;
       }else if(this.lockhoseDetail.pics) {
@@ -89,13 +87,8 @@ export class LookhousePage {
          this.isCreater = false;
       }
       /**
-       *实勘图审核通过以后  只有自己和加盟商可以删除图片
+       *实勘图审核通过以后  只有自己和加盟商可以删除图片 在uploader组件
        */
-      this.showDel = true;
-      if(this.lockhoseDetail.submitter!=localStorageProvider.get('loginInfo').user.id){
-        this.showDel = false;
-      }
-
 
       /**
        * 实勘图 审核拒绝1
@@ -116,16 +109,14 @@ export class LookhousePage {
 
     Promise.all([p1,p2]).then(res=>{
       console.log('Promiseall:',this.hashouseData,this.hasKeyData);
-      if(this.houseData&&this.houseData.propertyStatus<64&&this.houseData.sameCompany&&this.lockhoseDetail&&this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock&&this.lockhoseDetail.auditStatus!=3 ){
+      if(this.houseData.propertyStatus<64&&this.houseData.sameCompany&&this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock&&this.lockhoseDetail.auditStatus!=3 ){
         this.showBtn =true;
+        this.houseData.propertyStatus==32?this.showBtn =false:'' //成交房源不能实勘
       }else {
         this.showBtn =false;
       }
 
     });
-    if(this.params.status){
-      this.showBtn =false;
-    }
 
   }
 
@@ -133,26 +124,6 @@ export class LookhousePage {
  imgData = [];
   ionViewDidLoad() {
     this.imgHeader = this.configProvider.set().img;
-
-
-/*
-
-   setInterval(()=>{
-     if(this.hashouseData&&this.hasKeyData){
-       if(this.houseData&&this.houseData.propertyStatus<64&&this.houseData.sameCompany&&this.lockhoseDetail&&this.lockhoseDetail.open || (!this.lockhoseDetail.open&&this.isCreater)&&!this.lockhoseDetail.lock&&this.lockhoseDetail.auditStatus!=3 ){
-         this.showBtn =true;
-       }else {
-         this.showBtn =false;
-       }
-     }
-     if(this.params.status){
-       this.showBtn =false;
-     }
-   })
-*/
-
-
-
   }
 
 
@@ -296,7 +267,6 @@ export class LookhousePage {
    this.isDisabled = true;
     this.propertyProvider.shiKanSave(this.formData.arrPic,this.formData.propertyId).then(res=>{
       if(res.success){
-        this.isDisabled = false;
         console.log('成功返回的数据',res);
         this.toast.msg('上传成功!');
         setTimeout(()=>{

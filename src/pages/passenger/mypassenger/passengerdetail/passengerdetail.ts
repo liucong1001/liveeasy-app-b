@@ -103,6 +103,11 @@ export class PassengerdetailPage {
           contactFreeTm1:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0],
           contactFreeTm2:this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1],
         });
+        console.log('start：',this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0],
+    "end:",this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1]);
+/*        this.getcontactFreeTm1(this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[0]);
+        this.getcontactFreeTm2(this.data.contactFreeTm&&this.data.contactFreeTm.split("-")[1]);*/
+
         for(var item of this.area){
            if(item.code==this.data.intentionDiviCode){
               this.areaChange(item);
@@ -163,8 +168,8 @@ export class PassengerdetailPage {
     customerId:['',Validators.required,],
     customerName:['',[Validators.required,Validators.pattern(/^[\u4e00-\u9fa5a-zA-Z]+$/)]],//客户名称
     customerGender :['',Validators.required],//客户性别
-    customerPhone:['',[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],//客户电话
-    customerSrc:['',Validators.required], //客户来源
+    customerPhone:[{value:'',disabled:true},[Validators.required, Validators.pattern(/^0?(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/)]],//客户电话
+    customerSrc:[{value:'',disabled:true},Validators.required], //客户来源
     agentId:['',Validators.required],//归属人id
     customerGrade:['',],//客户等级
     intentionDiviCode :[''],//意向区域
@@ -442,7 +447,7 @@ export class PassengerdetailPage {
     if( event.minute<10 ){event.minute='0'+event.minute}
     var startTime = event.hour +':'+event.minute ;
     this.form.value.contactFreeTm1 = startTime;
-    console.log('表单',this.form.value.contactFreeTm1);
+    console.log('表单',event,this.form.value.contactFreeTm1);
   }
 
   getcontactFreeTm2(event){

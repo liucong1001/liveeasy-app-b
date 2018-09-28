@@ -124,7 +124,7 @@ export class AddlookPage {
         }
       }).catch(err=>{
          this.isDisabled = false;
-         alert('添加失败'+err);
+         this.toast.error('添加失败!');
       })
     }
 

@@ -50,6 +50,7 @@ import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { Network } from '@ionic-native/network';
 import { ENV } from '@app/env';
+import {BaseProvider} from "../providers/common/base";
 //启动加速
 
 import { StartupPageModule } from './../pages/startup/startup.module';
@@ -157,7 +158,7 @@ import { Geolocation } from '@ionic-native/geolocation';
       AndroidPermissions,
       JPush,Network,
       NativeProvider,CodePush,Diagnostic,jpushUnit,
-      SharePropertyProvider,Clipboard,Geolocation
+      SharePropertyProvider,Clipboard,Geolocation,BaseProvider
     ]
 })
 export class AppModule {}

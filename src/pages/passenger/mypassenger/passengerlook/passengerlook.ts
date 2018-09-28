@@ -57,9 +57,10 @@ export class PassengerlookPage {
     });
     this.openWin(SearchPage);
   }
-
+  isDisabled = false;
   looks(){
     if(this.estateName){
+      this.isDisabled = true;
       this.customerProvider.prlook({
         property:{convId:this.coveId},
         appointmentTm:new Date(this.form.value.appointmentTm).getTime(),
@@ -73,12 +74,15 @@ export class PassengerlookPage {
           },500)
         }else if (res.msg.indexOf('您已约看') !=-1){
           this.toast.showLongToast('您已约看该客户，请先关闭约看');
+          this.isDisabled = false;
         }else {
           this.toast.error(res.msg);
+          this.isDisabled = false;
         }
       });
     }else {
       this.toast.error('请选择房源');
+      this.isDisabled = false;
     }
   }
 

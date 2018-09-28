@@ -49,7 +49,7 @@ export class LetteratorneyPage {
     this.propertyid = navParams.get('propertyid');
     this.useDir = navParams.get('estateId')+'/'+this.propertyid+'/';
     this.houseData= navParams.get('item');
-    if(navParams.get('status')=='32'|| this.houseData.propertyStatus>=64&&this.houseData.propertyStatus<=512){
+    if( this.houseData.propertyStatus>=32&&this.houseData.propertyStatus<=512){
       this.inputDisabled = true;
     }
     //委托书详情
@@ -140,18 +140,13 @@ export class LetteratorneyPage {
         this.toast.msg('上传成功!');
         setTimeout(()=>{
           this.navCtrl.pop();
-        },500);
-        this.isDisabled = false;
+        },500)
       }else{
         this.toast.error('上传失败！');
         this.isDisabled = false;
       }
-      // alert('上传成功！')
-      // this.navCtrl.pop()
     });
 
-    // console.log(new Date(this.form.value.delegateBeginTm).getTime());
-    // console.log(new Date(this.form.value.delegateEndTm).getTime())
   }
 
   /**
@@ -231,7 +226,6 @@ export class LetteratorneyPage {
         setTimeout(()=>{
           this.navCtrl.pop();
         });
-        this.isDisabled = false;
       }else{
         this.toast.error('修改失败！');
         this.isDisabled = false;

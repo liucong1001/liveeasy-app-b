@@ -35,7 +35,13 @@ export class BaseProvider {
   //   this.nav.push(goPage,params);
   // }
 
-
+  public codeFilter(data,json){
+    for(var i in json){
+      if(data == json[i].val){
+        return json[i].name;
+      }
+    }
+  }
 
 
 

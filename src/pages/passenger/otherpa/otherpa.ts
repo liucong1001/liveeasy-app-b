@@ -11,6 +11,9 @@ import {LocalStorageProvider} from "../../../providers/local-storage/local-stora
 import { Content,List } from 'ionic-angular';
 import {NativeProvider} from "../../../providers/native/native";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {PublicpdetailPage} from "../publicpassenger/publicpdetail/publicpdetail";
+import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
+import {BaseProvider} from "../../../providers/common/base";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -56,22 +59,26 @@ export class OtherpaPage {
    * @type {{}}
    */
   values:any;
-  params:CustomerPageParams = {
-    customerSrc:'0',
-    intentionDiviCode:'0',//区县
-    intentionRoom:'0', //居室
-    intentionTradeCode:'0',//商圈
-    priceUnit:'1',
-    sort:'1',
-  };
+  params:CustomerPageParams={} ;
   @ViewChild('navbar') navBar: Navbar;
   date:any;
+  title:string;localCode:any;customerSrcList:Array<any>;
+  sortJson=[
+    // {name:'不限',val:'DESC'},
+    {name:'关闭时间由晚到早',val:'DESC'},
+    {name:'关闭时间由早到晚',val:'ASC'},
+  ];
   constructor(public navCtrl: NavController,
               public statusBar: StatusBar,public  nativeProvider:NativeProvider,
               public nativePageTransitions: NativePageTransitions,
               public navParams: NavParams,private customerProvider:CustomerProvider,
               public propertyProvider: PropertyProvider,public toast:ToastComponent,
-              public localStorageProvider: LocalStorageProvider,public events: Events) {
+              public localStorageProvider: LocalStorageProvider,public events: Events,
+              public base:BaseProvider) {
+    this.localCode = this.localStorageProvider.get('codeData');
+    //客户来源
+    this.customerSrcList = new ArryCodeValuePipe().transform(this.localCode,'cms_src');
+    this.customerSrcList.unshift({name:'不限',val:0});
   }
   @ViewChild('myTabs') tabRef: Tabs;
   @ViewChild('Content') content: Content;
@@ -80,7 +87,13 @@ export class OtherpaPage {
     for(var i = 1 ;i<4;i++){
       this.states[i]='close'
     }
-
+    console.log('type',this.navParams.get('type'));
+    switch (this.navParams.get('type')) {
+      case 0 :this.title = '无效客户';break;
+      case 1 :this.title = '他售客户';break;
+      case 2 :this.title = '成交客户';break;
+    }
+    this.search();
   }
   ionViewDidEnter() {
   }
@@ -92,12 +105,32 @@ export class OtherpaPage {
   }
   navbar=true;
   ionViewWillUnload(){
-    // window.history.back();
     this.navbar =false;
-    // ;alert('4545')
   }
   ionViewWillLeave(){
 
+  }
+
+
+  search(){
+    this.pageData = null;
+    this.hasData  = true;
+     this.customerProvider.otherCustomersPage(this.navParams.get('type'),1,this.params)
+       .then(res=>{
+           this.totalPages = res.data.totalPages;
+           if(res.data.hasOwnProperty('result')){
+             this.hasData  = true;
+             this.pageData = res.data.result;
+             this.firstPageData = res.data.result;
+             this.currentPage=1;
+             this.pageResult =res.data&&res.data.result;
+             if(res.data.result.length<10){ this.all = true;}
+             console.log(this.hasData)
+           }else{
+             this.hasData = false;
+           }
+           this.allClose();
+     })
   }
 
   //条数
@@ -117,7 +150,8 @@ export class OtherpaPage {
     }else {
       this.all = false;
       if(this.currentPage>this.totalPages){this.all = true; return}
-      this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
+      this.customerProvider.otherCustomersPage(this.navParams.get('type'),this.currentPage,this.params).
+      then(res=>{
         this.pageResult =res.data&&res.data.result;
         for(let i=0;i<res.data.result.length;i++){
           this.pageData.push(res.data.result[i]);
@@ -142,9 +176,9 @@ export class OtherpaPage {
   doRefresh(refresher) {
     console.log(this.params);
     console.log('上拉刷新Begin async operation', refresher);
-    this.customerProvider.pageSearch(1,this.params).then(res=>{
+    this.customerProvider.otherCustomersPage(this.navParams.get('type'),1,this.params).
+    then(res=>{
       console.log('结束时间内容',res.data.totalRecords);
-
       this.totalRecords = res.data.totalRecords;
       this.pageData = res.data.result;
       this.totalPages = res.data.totalPages;
@@ -212,6 +246,22 @@ export class OtherpaPage {
     return count;
   }
 
+  //进入详情页
+  gopassengerDetail(item){
+    this.nativeProvider.openWin(this.navCtrl,PublicpdetailPage, {
+      customerId:item.customerId,
+      type:this.navParams.get('type')
+    });
+  }
+  selectCustomerSrc(item){
+   this.params.customerSrc = item.val;
+    this.search();
+  }
+  selectSort(item){
+    this.params.orderBy=item.val;
+    this.search();
+  }
+
 //menu
   states=[];
   toggleNum:any;
@@ -242,14 +292,12 @@ export class OtherpaPage {
  * 定义搜索参数类
  */
 class CustomerPageParams {
-  customerSrc:string;
-  intentionDiviCode:string;
+  customerSrc?:string;
+  orderBy?:string;
+/*  intentionDiviCode:string;
   intentionRoom:string;
   intentionTradeCode:string;
   priceUnit:string;
-  sort:string;
-  threeDayNoFollow?:string;
-  threeDayNoLook?:string;
-  todayNoFollow?:string;
-  todayNoLook?:string;
+  sort:string;*/
+
 }

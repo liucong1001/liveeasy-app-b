@@ -64,41 +64,44 @@
       <ion-list class="m10" >
           <div class="attorneyPic bgWhite" >
             <span class="lookHeadLine">门牌图:</span>
-            <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson" [isBtn]="showBtn"></upload>
+            <upload  [useDir]="useDir"   [src]="imgJson" [desc]="'门牌图'" [position]="'add1'" (successEvent)="menPai($event)" *ngIf="imgJson" [isBtn]="showBtn" [superior]="lockhoseDetail.superior" [object]="lockhoseDetail" ></upload>
           </div>
           <div class="attorneyPic bgWhite"  >
             <span class="lookHeadLine">户型图：</span>
-            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'户型图'" [position]="'add2'" (successEvent)="huXin($event)" *ngIf="imgJson" [isBtn]="showBtn"  [object]="lockhoseDetail"></upload>
           </div>
           <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.halls>=1" >
             <span class="lookHeadLine"><i class="text-danger">*</i>客厅图：</span>
-            <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+            <upload   [useDir]="useDir"  [src]="imgJson" [desc]="'客厅图'" [position]="'add3'" (successEvent)="keTin($event)" *ngIf="imgJson" [isBtn]="showBtn" [object]="lockhoseDetail"></upload>
           </div>
           <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.bedrooms>=1" >
             <span class="lookHeadLine"><i class="text-danger">*</i>卧室图：</span>
-            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+            <upload   [useDir]="useDir" [src]="imgJson" [desc]="'卧室图'" [position]="'add4'" (successEvent)="woShi($event)" *ngIf="imgJson" [isBtn]="showBtn"  [object]="lockhoseDetail"></upload>
           </div>
           <div class="attorneyPic bgWhite" *ngIf="lockhoseDetail?.kitchens>=1">
             <span class="lookHeadLine" ><i class="text-danger">*</i>厨房图：</span>
-            <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+            <upload  [useDir]="useDir" [src]="imgJson" [desc]="'厨房图'" [position]="'add5'" (successEvent)="chuFang($event)" *ngIf="imgJson" [isBtn]="showBtn"  [object]="lockhoseDetail"></upload>
           </div>
           <div class="attorneyPic bgWhite"  *ngIf="lockhoseDetail?.bathrooms>=1">
             <span class="lookHeadLine"><i class="text-danger">*</i>卫生间图：</span>
             <upload [useDir]="useDir" [src]="imgJson" [desc]="'卫生间图'" [position]="'add6'" (successEvent)="woShenJian($event)"
-                    *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+                    *ngIf="imgJson" [isBtn]="showBtn"  [object]="lockhoseDetail"></upload>
           </div>
           <div class="attorneyPic bgWhite" >
             <span class="lookHeadLine">其他图：</span>
             <upload   [useDir]="useDir" [src]="imgJson" [desc]="'其他图'" [position]="'add7'" (successEvent)="other($event)"
-                      *ngIf="imgJson" [isBtn]="showBtn" [isDel]="showDel"></upload>
+                      *ngIf="imgJson" [isBtn]="showBtn"  [object]="lockhoseDetail"></upload>
           </div>
         </ion-list>
-
       <div>
-        <div class="p15"    *ngIf="showBtn " [hidden]="lockhoseDetail?.auditStatus==3" >
-          <!--<button ion-button full color="danger"  class="radius" (click)="update()" *ngIf="!edit">确认修改</button>-->
+        <div class="p15"    *ngIf="showBtn " [hidden]="lockhoseDetail?.auditStatus==3 || !showBtn" >
           <button ion-button full color="danger"     [disabled]="isDisabled"   class="radius" (click)="update()"  >上传图片</button>
         </div>
       </div>
     </form>
   </ion-content>
+<!--
+/**
+1 正常 2 不可见 4 删除 8 待审核 16	审核中 32 已成交 64	暂不交易 128 无效房源 256 他售房源 512 锁定
+*/
+private Integer propertyStatus;-->

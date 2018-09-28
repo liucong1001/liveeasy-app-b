@@ -1,5 +1,5 @@
-import {Component, Renderer, ViewChild} from '@angular/core';
-import {Navbar, NavController, Platform, Searchbar, ViewController} from 'ionic-angular';
+import {Component, Renderer, ViewChild,ElementRef } from '@angular/core';
+import {Navbar, NavController, Platform, Searchbar, ViewController,ToastController } from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../housing/addhouse/addhouse";
@@ -25,6 +25,11 @@ import { ENV } from '@app/env';
 import {ToastComponent} from "../../components/toast/toast";
 import {jpushUnit} from "../../providers/native/jpush-unit";
 import {NativeProvider} from "../../providers/native/native";
+import { Geolocation } from '@ionic-native/geolocation';
+
+declare var BMap;
+declare var BMAP_STATUS_SUCCESS;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -52,8 +57,13 @@ export class HomePage {
   aLinKDownload:string;
   aLinKDownloadVersion:string;
   model:any;
-
   AddhousePage:any;
+
+  @ViewChild('map') map_container: ElementRef;
+  map: any;//地图对象
+  marker: any;//标记
+  geolocation1: any;
+  myIcon: any;
 
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
@@ -62,6 +72,7 @@ export class HomePage {
               public jpush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,
               private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit,
               public viewCtrl: ViewController,public platform: Platform,public  nativeProvider:NativeProvider,
+              private geolocation: Geolocation
              ) {
     this.AddhousePage = AddhousePage;
 
@@ -85,6 +96,7 @@ export class HomePage {
     this.jpushUnit.initPush(this.navCtrl);
     this.platform.is('cordova')&&
     this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
+    this.myIcon = new BMap.Icon("assets/icon/favicon.ico", new BMap.Size(30, 30));
   }
 
 
@@ -103,6 +115,65 @@ export class HomePage {
         this.msgResult=res.data.result;
       }
     });
+    console.log('定位！！！！！！！！');
+  }
+/*  getLocation(){
+    let options = {timeout: 10000, enableHighAccuracy: true, maximumAge: 3600};
+
+    this.geolocation.getCurrentPosition(options).then((res) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      //let location= 'lat'+ res.coords.latitude +'lang'+ res.coords.longitude;
+      let location='lat '+res.coords.latitude+' lang '+res.coords.longitude;
+      let toast = this.toastCtrl.create({
+        message: location,
+        duration: 3000
+      });
+      toast.present();
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }*/
+
+  getLocationByBrowser() {
+    let geolocation1 = this.geolocation1 = new BMap.Geolocation();
+    geolocation1.getCurrentPosition((r) => {
+      let mk = this.marker = new BMap.Marker(r.point, { icon: this.myIcon });
+      if (geolocation1.getStatus() == BMAP_STATUS_SUCCESS) {
+        this.map.addOverlay(mk);
+        this.map.panTo(r.point, 16);
+        console.log('浏览器定位：您的位置是 ' + r.point.lng + ',' + r.point.lat);
+      }
+      else {
+        alert('failed' + this.geolocation1.getStatus());
+      }
+    }, { enableHighAccuracy: false })
+  }
+  getLocationByIp() {
+    let myCity = new BMap.LocalCity();
+    myCity.get(result => {
+      let cityName = result.name;
+      this.map.setCenter(cityName);
+      console.log("当前定位城市:" + cityName);
+    });
+  }
+  getLocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let locationPoint = new BMap.Point(resp.coords.longitude, resp.coords.latitude);
+      let convertor = new BMap.Convertor();
+      let pointArr = [];
+      pointArr.push(locationPoint);
+      convertor.translate(pointArr, 1, 5, (data) => {
+        if (data.status === 0) {
+          let marker = this.marker = new BMap.Marker(data.points[0], { icon: this.myIcon });
+          this.map.panTo(data.points[0]);
+          marker.setPosition(data.points[0]);
+          this.map.addOverlay(marker);
+        }
+      })
+      console.log('GPS定位：您的位置是 ' + resp.coords.longitude + ',' + resp.coords.latitude);
+    })
   }
 
   //禁用调出键盘
@@ -116,7 +187,6 @@ export class HomePage {
   }
   goAddHouse(){
     // this.navCtrl.push('AddhousePage',{})
-    // {animate:true,animation:'transition',duration:500,direction:'forward'}
     this.nativeProvider.openWin(this.navCtrl,AddhousePage);
   }
 

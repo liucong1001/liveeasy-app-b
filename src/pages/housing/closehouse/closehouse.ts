@@ -4,12 +4,10 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 import {ClosehouseProvider} from '../../../providers/closehouse/closehouse'
 import {LocalStorageProvider} from "../../../providers/local-storage/local-storage";
 import {HttpClient} from '@angular/common/http';
-import {HousingPage} from "../../housing/housing";
 import {PropertyProvider} from "../../../providers/property/property";
 import {ToastComponent} from "../../../components/toast/toast";
 import {BelongerPage} from "./belonger/belonger";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
-import {ErrorMessage} from "../../../components/valid-error/valid-error";
 import {NativeProvider} from "../../../providers/native/native";
 /**
  * Generated class for the ClosehousePage page.
@@ -85,7 +83,7 @@ export class ClosehousePage {
 
   }
   ionViewWillLeave(){
-    this.select.close();
+    this.select&&this.select.close();
   }
 
   subClose(){
@@ -107,7 +105,6 @@ export class ClosehousePage {
           this.toast.error('关闭失败！');
         }
       });
-
   }
 
   subApplic(){

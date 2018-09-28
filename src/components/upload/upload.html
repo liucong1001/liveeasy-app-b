@@ -2,16 +2,17 @@
   <!--上传图片div-->
   <div id="uploadDiv" >
     <div class='upload_div' *ngFor="let item of imgData;let i = index; ">
-      <span [hidden]="item.position=='add1'&&item.uploader!=localStorageProvider.get('loginInfo').user.id">
+      <span [hidden]="!(item.uploader==localStorageProvider.get('loginInfo').user.id || superior ==1) && item.position=='add1'">
+        <span class="uploadName"  *ngIf="item.uploadName">{{item.uploadName}}</span>
          <img src={{imgHeader+item.imagePath+smSign}}  [imgGallery]="{data:imgData,index:i}" class='img_upload'>
-         <span class='close_upload deleteSty' name='cha' (tap)='delete(i,item)' *ngIf="isBtn&&isDel">x</span>
+         <!--*ngIf="isBtn&&(item.uploader==localStorageProvider.get('loginInfo').user.id || object.superior==1)&&object.auditStatus!=3"-->
+         <span class='close_upload deleteSty' name='cha' (tap)='delete(i,item)' *ngIf="isBtn&&hasDel(item,object)">x</span>
       </span>
 
-      <span *ngIf="item.position=='add1'&&item.uploader!=localStorageProvider.get('loginInfo').user.id">
+      <span *ngIf="!(item.uploader==localStorageProvider.get('loginInfo').user.id || superior ==1) && item.position=='add1'">
         已上传. <span *ngIf="item.uploadName">上传人：{{item.uploadName}}</span>
       </span>
     </div>
-
   </div>
   <div class="bgWrapper m10" id="tip_camer" (tap)="presentActionSheet()" *ngIf="isBtn">
   </div>

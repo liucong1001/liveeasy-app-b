@@ -29,3 +29,14 @@ upload {
   border-radius: 100%;
   text-align: center;
 }
+
+.uploadName{
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  z-index: 99;
+  background: #000;
+  color: #fff;
+  padding: 2px 5px;
+  text-align: center;
+}
