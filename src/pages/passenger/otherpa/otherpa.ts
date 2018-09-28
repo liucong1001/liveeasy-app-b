@@ -20,8 +20,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @IonicPage()
 @Component({
-  selector: 'page-invalid',
-  templateUrl: 'invalid.html',
+  selector: 'page-otherpa',
+  templateUrl: 'otherpa.html',
   animations: [
     trigger('animation', [
       state('open', style({ opacity: 1,  height: '*'})),
@@ -31,7 +31,9 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class InvalidPage  {
+
+
+export class OtherpaPage {
   // show=false;
   // houseType=false;
   // more=false;
@@ -97,9 +99,6 @@ export class InvalidPage  {
   ionViewWillLeave(){
 
   }
-
-
-
 
   //条数
   currentPage:number =1;

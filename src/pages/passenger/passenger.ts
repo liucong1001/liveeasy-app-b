@@ -7,9 +7,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 import {LocalStorageProvider} from "../../providers/local-storage/local-storage";
 import {NativeProvider} from "../../providers/native/native";
-import {DealPage} from "./deal/deal";
-import {InvalidPage} from "./invalid/invalid";
-import {SoldPage} from "./sold/sold";
+import {OtherpaPage} from "./otherpa/otherpa";
 
 /**
  * Generated class for the PassengerPage page.
@@ -49,17 +47,9 @@ export class PassengerPage {
   publicpassenger(){
     this.nativeProvider.openWin(this.navCtrl,PublicpassengerPage,null)
   }
-  //无效客户
-  invalid(){
-    this.nativeProvider.openWin(this.navCtrl,InvalidPage,null)
-  }
-  //他售客户
-  sold(){
-    this.nativeProvider.openWin(this.navCtrl,SoldPage,null)
-  }
-  //成交客户
-  deal(){
-    this.nativeProvider.openWin(this.navCtrl,DealPage,null)
+  //无效客户/他售客户/成交客户
+  otherPass(){
+    this.nativeProvider.openWin(this.navCtrl,OtherpaPage,null)
   }
 
 
