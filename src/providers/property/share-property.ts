@@ -35,6 +35,7 @@ export class SharePropertyProvider {
     } else {
       this.link = this.configProvider.set().http.slice(0,-7)+'/html/share/property/'+id;
     }
+    return this.link;
   }
 
   wxShare(scene,convId) {

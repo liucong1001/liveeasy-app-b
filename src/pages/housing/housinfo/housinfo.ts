@@ -27,7 +27,7 @@ import {NativeProvider} from "../../../providers/native/native";
 import {LookhousePage} from "../housedetail/lookhouse/lookhouse";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 // import {BaiduMapModule } from "angular2-baidu-map";
-
+import { Clipboard } from '@ionic-native/clipboard';
 /**
 房源详情页面
  */
@@ -92,7 +92,8 @@ export class HousinfoPage {
               public localStorageProvider: LocalStorageProvider,public statusBar: StatusBar,public ngzone:NgZone,
               public app: App,public events: Events,public modalCtrl: ModalController,
               public shareProvider:SharePropertyProvider,public  nativeProvider:NativeProvider,
-              public actionSheetCtrl: ActionSheetController,public appShare:SharePropertyProvider
+              public actionSheetCtrl: ActionSheetController,public appShare:SharePropertyProvider,
+              private clipboard: Clipboard
               ) {
 
     this.tagsListPage = this.localStorageProvider.get('tagsListPage');
@@ -472,6 +473,10 @@ export class HousinfoPage {
     // });
     // actionSheet.present();
 
+  }
+  copyUrl(){
+      this.clipboard.copy(this.appShare.setLinkPath(this.houseData.convId));
+      this.toast.msg('已复制到剪贴板');
   }
 
   positionInBuildingTypeFilter(val){
