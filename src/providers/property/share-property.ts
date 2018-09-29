@@ -70,7 +70,7 @@ export class SharePropertyProvider {
       loading.dismiss();
     }
   }
-  qqShare(scene) {
+  qqShare(scene,data) {
     var loading = this.loadingCtrl.create({ showBackdrop: false });
     loading.present();
     try {
@@ -81,9 +81,10 @@ export class SharePropertyProvider {
       else {
         args.scene = QQSDK.Scene.QQZone;
       }
-      args.url = this.link;
-      args.title = this.title;
-      args.description = this.description;
+      this.image = data.propAvatar?this.imgHeader+this.pic(data.propAvatar):'assets/imgs/default.jpg';
+      args.url =this.setLinkPath(data['convId']);
+      args.title = data['propertyTitle'];
+      args.description = data['propertyDescApp'];
       args.image = this.image;
       QQSDK.shareNews(function () {
         loading.dismiss();
