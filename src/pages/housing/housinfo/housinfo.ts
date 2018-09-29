@@ -452,7 +452,7 @@ export class HousinfoPage {
     //     {
     //       text: '微信好友',
     //       handler: () => {
-    //         this.appShare.wxShare(0,convId)
+    //           this.appShare.wxShare(0,convId)
     //       }
     //     },
     //     {

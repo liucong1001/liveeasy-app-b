@@ -116,64 +116,38 @@ export class HomePage {
       }
     });
     console.log('定位！！！！！！！！');
+    this.getLocal()
+
   }
-/*  getLocation(){
-    let options = {timeout: 10000, enableHighAccuracy: true, maximumAge: 3600};
+  getLocal(){
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(116.331398,39.897445);
+    map.centerAndZoom(point,12);
 
-    this.geolocation.getCurrentPosition(options).then((res) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
-      //let location= 'lat'+ res.coords.latitude +'lang'+ res.coords.longitude;
-      let location='lat '+res.coords.latitude+' lang '+res.coords.longitude;
-      let toast = this.toastCtrl.create({
-        message: location,
-        duration: 3000
-      });
-      toast.present();
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }*/
-
-  getLocationByBrowser() {
-    let geolocation1 = this.geolocation1 = new BMap.Geolocation();
-    geolocation1.getCurrentPosition((r) => {
-      let mk = this.marker = new BMap.Marker(r.point, { icon: this.myIcon });
-      if (geolocation1.getStatus() == BMAP_STATUS_SUCCESS) {
-        this.map.addOverlay(mk);
-        this.map.panTo(r.point, 16);
-        console.log('浏览器定位：您的位置是 ' + r.point.lng + ',' + r.point.lat);
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+      if(this.getStatus() == BMAP_STATUS_SUCCESS){
+        var mk = new BMap.Marker(r.point);
+        map.addOverlay(mk);
+        map.panTo(r.point);
+        // alert('您的位置是：'+r.point.lng+','+r.point.lat);
+        console.log('您的位置是：'+r.point.lng+','+r.point.lat);
       }
       else {
-        alert('failed' + this.geolocation1.getStatus());
+        alert('failed'+this.getStatus());
       }
-    }, { enableHighAccuracy: false })
-  }
-  getLocationByIp() {
-    let myCity = new BMap.LocalCity();
-    myCity.get(result => {
-      let cityName = result.name;
-      this.map.setCenter(cityName);
-      console.log("当前定位城市:" + cityName);
-    });
-  }
-  getLocation() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      let locationPoint = new BMap.Point(resp.coords.longitude, resp.coords.latitude);
-      let convertor = new BMap.Convertor();
-      let pointArr = [];
-      pointArr.push(locationPoint);
-      convertor.translate(pointArr, 1, 5, (data) => {
-        if (data.status === 0) {
-          let marker = this.marker = new BMap.Marker(data.points[0], { icon: this.myIcon });
-          this.map.panTo(data.points[0]);
-          marker.setPosition(data.points[0]);
-          this.map.addOverlay(marker);
-        }
-      })
-      console.log('GPS定位：您的位置是 ' + resp.coords.longitude + ',' + resp.coords.latitude);
-    })
+    },{enableHighAccuracy: true})
+    //关于状态码
+    //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+    //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+    //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+    //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+    //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+    //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+    //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+    //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+    //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
   }
 
   //禁用调出键盘
