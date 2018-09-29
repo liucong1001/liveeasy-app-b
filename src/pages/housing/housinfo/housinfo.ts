@@ -25,6 +25,7 @@ import {KeyPage} from "../housedetail/key/key";
 import {LetteratorneyPage} from "../housedetail/letteratorney/letteratorney";
 import {NativeProvider} from "../../../providers/native/native";
 import {LookhousePage} from "../housedetail/lookhouse/lookhouse";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 // import {BaiduMapModule } from "angular2-baidu-map";
 
 /**
@@ -41,7 +42,15 @@ import {LookhousePage} from "../housedetail/lookhouse/lookhouse";
             height: 300px;
             display: block;
         }
-    `]
+    `],
+  animations: [
+    trigger('animation', [
+      state('open', style({ opacity: 1,  height: '*'})),
+      state('close', style({ opacity: 0, height: '0'})),
+      transition('open => close', animate('.3s ease-in')),
+      transition('close => open', animate('.3s ease-out')),
+    ]),
+  ]
 })
 export class HousinfoPage {
   data:any;
@@ -414,46 +423,54 @@ export class HousinfoPage {
       }
     })
   }
-  shareBolean = false
 
+  shares='close';
+  sharePop=false;
+  shareBolean = false
+  allClose(){
+    this.sharePop=false;
+    this.shares = this.shares === 'open' ? 'close' : 'close';
+  }
   share(convId){
-    let actionSheet = this.actionSheetCtrl.create({
-      title: '分享',
-      buttons: [
-        {
-          text: 'QQ好友',
-          handler: () => {
-            this.appShare.qqShare(0)
-          }
-        },
-        {
-          text: 'QQ空间',
-          handler: () => {
-            this.appShare.qqShare(1)
-          }
-        },
-        {
-          text: '微信好友',
-          handler: () => {
-            this.appShare.wxShare(0,convId)
-          }
-        },
-        {
-          text: '朋友圈',
-          handler: () => {
-            this.appShare.wxShare(1,convId)
-          }
-        },
-        {
-          text: '取消',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+    this.sharePop=true;
+    this.shares = this.shares === 'close' ? 'open' : 'close';
+    // let actionSheet = this.actionSheetCtrl.create({
+    //   title: '分享',
+    //   buttons: [
+    //     {
+    //       text: 'QQ好友',
+    //       handler: () => {
+    //         this.appShare.qqShare(0)
+    //       }
+    //     },
+    //     {
+    //       text: 'QQ空间',
+    //       handler: () => {
+    //         this.appShare.qqShare(1)
+    //       }
+    //     },
+    //     {
+    //       text: '微信好友',
+    //       handler: () => {
+    //         this.appShare.wxShare(0,convId)
+    //       }
+    //     },
+    //     {
+    //       text: '朋友圈',
+    //       handler: () => {
+    //         this.appShare.wxShare(1,convId)
+    //       }
+    //     },
+    //     {
+    //       text: '取消',
+    //       role: 'cancel',
+    //       handler: () => {
+    //         console.log('Cancel clicked');
+    //       }
+    //     }
+    //   ]
+    // });
+    // actionSheet.present();
 
   }
 

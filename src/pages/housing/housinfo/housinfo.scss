@@ -222,4 +222,32 @@ page-housinfo {
     height: 299px;
     z-index: 1;
   }
+  .houseShare{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 999;
+    padding: 10px 15px 15px;
+    .shareTitle{
+      font-size: 1.4rem;
+      text-align: center;
+      margin: 0 0 15px;
+    }
+    .scroll{
+      overflow: scroll;
+      white-space:nowrap;
+      width: 100%;
+      .share{
+        width:23%;
+        display: inline-block;
+
+        text-align: center;
+        p{
+          text-align: center;
+          font-size: 1.2rem;
+        }
+    }
+    }
+  }
 }
