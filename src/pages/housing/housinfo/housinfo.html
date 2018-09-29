@@ -274,28 +274,29 @@
 </ion-footer>
 
 <div class="houseShare" [@animation]="shares">
-  <div class="shareTitle">分享到</div>
-  <div class="scroll">
-    <div class="share">
+  <div>分享</div>
+  <ion-row>
+    <ion-col col-3>
       <img src="assets/imgs/wx.png" width="38" height="38">
       <p>微信</p>
-    </div>
-    <div class="share">
+    </ion-col>
+    <ion-col col-3>
       <img src="assets/imgs/pjq.png" width="38" height="38">
       <p>朋友圈</p>
-    </div>
-    <div class="share">
+    </ion-col>
+    <ion-col col-3>
       <img src="assets/imgs/qq.png" width="38" height="38">
       <p>QQ好友</p>
-    </div>
-    <div class="share">
+    </ion-col>
+    <ion-col col-3>
       <img src="assets/imgs/qqkj.png" width="38" height="38">
       <p>QQ空间</p>
-    </div>
-    <div class="share">
+    </ion-col>
+    <ion-col col-3>
       <img src="assets/imgs/lj.png" width="38" height="38">
       <p>复制链接</p>
-    </div>
-  </div>
+    </ion-col>
+
+  </ion-row>
 </div>
 <div class="pops" *ngIf="sharePop" tappable (click)="allClose()"></div>

@@ -228,26 +228,22 @@ page-housinfo {
     width: 100%;
     background: #fff;
     z-index: 999;
-    padding: 10px 15px 15px;
-    .shareTitle{
-      font-size: 1.4rem;
+    padding: 0 15px;
+    div{
+      margin: 12px 10px;
+      //font-size: 1.4rem;
       text-align: center;
-      margin: 0 0 15px;
     }
-    .scroll{
-      overflow: scroll;
-      white-space:nowrap;
-      width: 100%;
-      .share{
-        width:23%;
-        display: inline-block;
-
+    ion-row{
+      margin: 10px 0;
+      ion-col{
         text-align: center;
-        p{
-          text-align: center;
-          font-size: 1.2rem;
-        }
-    }
+        margin-bottom: 10px;
+      }
+      p{
+        text-align: center;
+        font-size: 1rem;
+      }
     }
   }
 }
