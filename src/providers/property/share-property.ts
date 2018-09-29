@@ -18,10 +18,10 @@ export class SharePropertyProvider {
   image:string='http://img1.imgtn.bdimg.com/it/u=2545480505,1987716996&fm=26&gp=0.jpg';//图片
   //房源分享 不存在‘api/v1’
   sharePropertyPath =  this.configProvider.set().http.slice(0,-8)+'/biz-erp/html/shareProperty';
-
+  imgHeader:string;
   constructor(public http: HttpClient,public platform: Platform,public loadingCtrl: LoadingController,
               private clipboard: Clipboard,public toast:ToastComponent,private configProvider:ConfigProvider) {
-
+   this.imgHeader= this.configProvider.set().img;
 
   }
 
@@ -38,16 +38,17 @@ export class SharePropertyProvider {
     return this.link;
   }
 
-  wxShare(scene,convId) {
+  wxShare(scene,data) {
     var loading = this.loadingCtrl.create({ showBackdrop: false });
     loading.present();
-    this.setLinkPath(convId);
-    console.log('路径',this.link);
+    this.setLinkPath(data['convId']);
+    this.image = data.propAvatar?this.imgHeader+this.pic(data.propAvatar):'assets/imgs/default.jpg';
+    console.log('路径',this.link,this.image);
     try {
       Wechat.share({
         message: {
-          title: this.title,
-          description: this.description,
+          title: data['propertyTitle'],
+          description: data['propertyDescApp'],
           thumb: this.image,
           mediaTagName: "TEST-TAG-001",
           messageExt: "",  // 这是第三方带的测试字段
@@ -69,7 +70,7 @@ export class SharePropertyProvider {
       loading.dismiss();
     }
   }
-  qqShare(scene) {
+  qqShare(scene,data) {
     var loading = this.loadingCtrl.create({ showBackdrop: false });
     loading.present();
     try {
@@ -80,9 +81,10 @@ export class SharePropertyProvider {
       else {
         args.scene = QQSDK.Scene.QQZone;
       }
-      args.url = this.link;
-      args.title = this.title;
-      args.description = this.description;
+      this.image = data.propAvatar?this.imgHeader+this.pic(data.propAvatar):'assets/imgs/default.jpg';
+      args.url =this.setLinkPath(data['convId']);
+      args.title = data['propertyTitle'];
+      args.description = data['propertyDescApp'];
       args.image = this.image;
       QQSDK.shareNews(function () {
         loading.dismiss();
@@ -113,6 +115,10 @@ export class SharePropertyProvider {
     //https://beta-erp.zdfc.com/html/shareProperty?convId=420105100748
     // this.toastService.show('已复制到剪贴板');
   }
-
+  pic(data) {
+    if (data) {
+      return JSON.parse(data).imagePath+this.configProvider.set().smSign
+    }
+  }
 
 }
