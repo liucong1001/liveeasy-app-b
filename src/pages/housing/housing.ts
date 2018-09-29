@@ -1,6 +1,6 @@
 
 import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
-import {Alert, Events, IonicPage, Navbar, NavController, NavParams, Searchbar} from 'ionic-angular';
+import {Alert, Events, IonicPage, Navbar, NavController, NavParams, Searchbar,ItemSliding} from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -113,6 +113,9 @@ export class HousingPage {
   tags:any;
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild('navbar') navBar: Navbar;
+  @ViewChild('slidingItem') slidingItem: ItemSliding;
+  // slidingItem
+
 
   badHttp = false;
   comFromHomeSearch = false;
@@ -411,33 +414,45 @@ export class HousingPage {
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
 
-
+  // slidingItem:any;
   ionViewWillLeave(){
     this.allClose();
     this.category=false;
+    this.slidingItem.close();
   }
+
  //
   goFollow(item,slidingItem) {
+    // this.slidingItem=slidingItem;
     this.openWin(FollowPage, {
       item:item
     });
-    slidingItem.close();
+    if(slidingItem){
+      slidingItem.close();
+    }
+
   }
 
   goAddLook(item,slidingItem) {
     this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
-    slidingItem.close();
+    if(slidingItem){
+      slidingItem.close();
+    }
   }
   goLookHouse(item,slidingItem) {
     this.openWin(LookhousePage, {item: item, propertyId: item.propertyId,params:this.params});
-    slidingItem.close();
+    if(slidingItem){
+      slidingItem.close();
+    }
   }
   goCloseHouse(item,slidingItem) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
       item:item,
     });
-    slidingItem.close();
+    if(slidingItem){
+      slidingItem.close();
+    }
 
   }
 
