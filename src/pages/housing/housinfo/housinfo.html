@@ -276,11 +276,11 @@
 <div class="houseShare" [@animation]="shares">
   <div>分享</div>
   <ion-row>
-    <ion-col col-3 (click)="appShare.wxShare(0,houseData?.convId)">
+    <ion-col col-3 (click)="appShare.wxShare(0,houseData)">
       <img src="assets/imgs/wx.png" width="38" height="38">
       <p>微信好友</p>
     </ion-col>
-    <ion-col col-3 (click)="appShare.wxShare(1,houseData?.convId)">
+    <ion-col col-3 (click)="appShare.wxShare(1,houseData)">
       <img src="assets/imgs/pjq.png" width="38" height="38">
       <p>朋友圈</p>
     </ion-col>
