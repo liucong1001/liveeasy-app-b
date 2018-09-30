@@ -1,17 +1,8 @@
 page-home{
   .homeMenu{
-    padding: 10px 0;
-    div{
-      //border: 1px solid;
-      display: inline-block;
-      width: 24%;
-      text-align: center;
-      a{
-        display: block;
-        margin: 5px 0 0;
-      }
+    ion-col{
       ion-icon{
-        text-align: center;
+        border: 1px solid;
         width: 55px;
         height: 55px;
         line-height: 55px;
@@ -34,34 +25,12 @@ page-home{
 
     }
   }
-
-
-  //.homeMenu{
-  //  ion-col{
-  //    ion-icon{
-  //      border: 1px solid;
-  //      width: 55px;
-  //      height: 55px;
-  //      line-height: 55px;
-  //      color: #fff;
-  //      font-size: 2.6rem;
-  //      border-radius: 100%;
-  //    }
-  //    &:first-child ion-icon{
-  //      background: #15B997;
-  //    }
-  //    &:nth-child(2) ion-icon{
-  //      background: #FDAF4A;
-  //    }
-  //    &:nth-child(3) ion-icon{
-  //      background: #FD5E5C;
-  //    }
-  //    &:last-child ion-icon{
-  //      background: #3971F0;
-  //    }
-  //
-  //  }
-  //}
+  ion-list{
+    margin-top: 10px !important;
+    h2{
+      font-size: 1.5rem !important;
+    }
+  }
 }
 page-home ,page-housing{
  .toolbar .searchbar-ios .searchbar-input {
@@ -85,12 +54,7 @@ page-housing .searchbar-ios{
 .newsList:last-child{
   margin: 3px 0 8px;
 }
-page-home ion-list{
-    margin-top: 10px !important;
-}
-page-home ion-list h2{
-    font-size: 1.5rem !important;
-}
+
 .leftImg{
     width: 45px;
     height: 45px;

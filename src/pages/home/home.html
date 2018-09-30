@@ -4,45 +4,27 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
-  <div class="homeMenu bgWhite">
-    <div tappable  (click)="goAddHouse()">
-      <ion-icon name="fangyuanluru" ></ion-icon>
-      <a>房源录入</a>
-    </div>
-    <div tappable  (click)="goAddPassenger()">
-      <ion-icon name="kehuqunzu" ></ion-icon>
-      <a>客源录入</a>
-    </div>
-    <div tappable  (click)="godeclara()">
-      <ion-icon name="chengjiaobaodan" ></ion-icon>
-      <a>成功报单</a>
-    </div>
-    <div tappable  (click)="gosta()">
-      <ion-icon name="shujutongji" ></ion-icon>
-      <a>数据统计</a>
-    </div>
-  </div>
 
-  <!--<ion-grid class="bgWhite">-->
-    <!--<ion-row class="homeMenu">-->
-      <!--<ion-col col-3 tappable  (click)="goAddHouse()">-->
-          <!--<ion-icon name="fangyuanluru" ></ion-icon>-->
-          <!--<a>房源录入</a>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-3 tappable (click)="goAddPassenger()">-->
-        <!--<ion-icon name="kehuqunzu" ></ion-icon>-->
-        <!--<a>客源录入</a>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-3 tappable (click)="godeclara()" >-->
-        <!--<ion-icon name="chengjiaobaodan"></ion-icon>-->
-        <!--<a>成功报单</a>-->
-      <!--</ion-col>-->
-      <!--<ion-col col-3 tappable (click)="gosta()">-->
-        <!--<ion-icon name="shujutongji"></ion-icon>-->
-        <!--<a>数据统计</a>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-  <!--</ion-grid>-->
+  <ion-grid class="bgWhite">
+    <ion-row class="homeMenu">
+      <ion-col col-3 tappable  (click)="goAddHouse()">
+          <ion-icon name="fangyuanluru" ></ion-icon>
+          <a>房源录入</a>
+      </ion-col>
+      <ion-col col-3 tappable (click)="goAddPassenger()">
+        <ion-icon name="kehuqunzu" ></ion-icon>
+        <a>客源录入</a>
+      </ion-col>
+      <ion-col col-3 tappable (click)="godeclara()" >
+        <ion-icon name="chengjiaobaodan"></ion-icon>
+        <a>成功报单</a>
+      </ion-col>
+      <ion-col col-3 tappable (click)="gosta()">
+        <ion-icon name="shujutongji"></ion-icon>
+        <a>数据统计</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list class="bgWhite p5">
     <ion-item class="pl12">
       待办消息
