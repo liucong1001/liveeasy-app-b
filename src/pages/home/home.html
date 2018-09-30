@@ -7,14 +7,12 @@
 
   <ion-grid class="bgWhite">
     <ion-row class="homeMenu">
-      <ion-col col-3 tappable>
-        <!--[openWin]="{url:'AddhousePage'}"-->
-          <ion-icon name="fangyuanluru"  (click)="goAddHouse()" ></ion-icon>
+      <ion-col col-3 tappable  (click)="goAddHouse()">
+          <ion-icon name="fangyuanluru" ></ion-icon>
           <a>房源录入</a>
       </ion-col>
-      <ion-col col-3 tappable>
-        <!--[openWin]="{url:'AddpassengerPage'}"-->
-        <ion-icon name="kehuqunzu" (click)="goAddPassenger()"></ion-icon>
+      <ion-col col-3 tappable (click)="goAddPassenger()">
+        <ion-icon name="kehuqunzu" ></ion-icon>
         <a>客源录入</a>
       </ion-col>
       <ion-col col-3 tappable (click)="godeclara()" >

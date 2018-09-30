@@ -18,7 +18,7 @@ export const ENV: Environment = {
       "CodePushDeploymentKey": "CtefGSLBzBhhbftRvjE8ddqYIR9j89505932-72e4-46de-81fa-175372b59260"
     },
     "android":{
-      "CodePushDeploymentKey":"_67l4A_Y9DN11GmLkc3Wk0rrPBxl89505932-72e4-46de-81fa-175372b59260"
+      "CodePushDeploymentKey":"U_5b-roJeJblAgAhox14M1I61Qcw1d3c396e-55f7-4543-bbac-85cd7a1e8cc5"
     },
     "jpushKey":"5c9844642cc40dde038a0d3d"
   }

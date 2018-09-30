@@ -362,10 +362,11 @@ export class NativeProvider {
 
   openWin(nav,goPage, param = {}) {
     let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
+      // direction: 'left',
+      duration: 300,
       slowdownfactor: -1,
-      iosdelay: 50
+      iosdelay: 50,
+      androiddelay : 100,
     };
     this.nativePageTransitions.slide(options);
     nav.push(goPage, param, {animate:false});
