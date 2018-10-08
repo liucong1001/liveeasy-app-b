@@ -83,7 +83,7 @@ export class StatisticsPage {
     this.firstWeek=year + ""+this.Appendzero(firstMonth) + this.Appendzero(firstDd);
     // this.lastWeek=year + ""+this.Appendzero(lastMonth) + this.Appendzero(lastDd);
     this.lastWeek=this.yesterday;
-    console.log(this.firstWeek,this.lastWeek);
+    // console.log(this.firstWeek,this.lastWeek);
     //上周
     var nowDayOfWeek = date.getDay(); //今天本周的第几天
     var nowDay = date.getDate(); //当前日
@@ -92,7 +92,7 @@ export class StatisticsPage {
     nowYear += (nowYear < 2000) ? 1900 : 0; //
     //获得上周的开始日期
     function getLastWeekStartDate() {
-      var weekStartDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek - 6);
+      var weekStartDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek - 7);
       return weekStartDate;
     }
     //获得上周的结束日期
@@ -102,14 +102,14 @@ export class StatisticsPage {
     }
     //显示周一
     var lastMon=(getLastWeekStartDate()).getMonth()+1;
-    var lastMDd=(getLastWeekStartDate()).getDate()-1;
+    var lastMDd=(getLastWeekStartDate()).getDate();
     //显示周日
 
     var lastWm=(getLastWeekEndDate()).getMonth()+1;
     var lastWd=(getLastWeekEndDate()).getDate();
     this.lastMonday=year + ""+this.Appendzero(lastMon) + this.Appendzero(lastMDd);
     this.lastweekend=year + ""+this.Appendzero(lastWm) + this.Appendzero(lastWd);
-
+// console.log(this.lastMonday,lastMDd,this.lastweekend)
     //本月
     //显示月初
     //显示月初
@@ -121,10 +121,6 @@ export class StatisticsPage {
     this.firstDay=year + ""+this.Appendzero(firstMon) + this.Appendzero(firstMDd);
     var distance=lastDdEnd-nowDay+1;
     this.lastDay=year + ""+this.Appendzero(lastMonEnd) + this.Appendzero(lastDdEnd-distance);
-
-
-
-    // console.log(this.firstDay,this.lastDay,lastMonEnd,lastDdEnd-distance);
 
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
@@ -387,50 +383,69 @@ export class StatisticsPage {
     });
     loading.present();
     this.getClear();
-    this.department=[];
-    this.timeName=item.name;
-    this.startTime=item.start;
-    this.endTime=item.end;
-    if(item.start.length<9 || item.start.length <9){
-      item.start=item.start.replace('/','0');
-      item.end=item.end.replace('/','');
-    }else if(item.start.length==9 || item.end.length == 9){
-      item.start=item.start.replace('/','');
-      item.end=item.end.replace('/','');
-    }
-    this.homeProvider.statis({
-      startTime:parseInt(item.start),
-      endTime:parseInt(item.end),
-      statItem:this.statItem,
-    }).then(res=>{
-      if(res.success){
-        if(res.hasOwnProperty('data')) {
-          this.data=res.data;
-          this.metheod();
-          this.showen();
-          // this.falsees=true;
-        }else {
-          this.department=[];
-          this.showen();
-        }
-        loading.dismiss();
-      }else {
-        this.toast.error('暂无数据');
-        this.errStatus = true;
-      }
-    });
+    var date=new Date().toLocaleDateString();
 
-    this.allClose();
-    if(this.times ==1 || this.times ==3){
-      if (this.times==3){
-        this.form.setValue({
-          startTime:'',
-          endTime:''
-        })
-        this.form.value.endTime='';
-      }
-      this.times=2;
+    // debugger;
+    if(date.length<9){
+      date=date.replace('/','0');
+    }else if(date.length==9){
+      date=date.replace('/','0');
+      date=date.replace('/','');
     }
+    // console.log(date,this.firstWeek)
+    if(date==this.firstWeek&&item.val==2){
+      this.toast.error('每周第一天无统计数据!');
+      this.showen();
+      this.allClose();
+      this.reset();
+    }else {
+      this.department=[];
+      this.timeName=item.name;
+      this.startTime=item.start;
+      this.endTime=item.end;
+      if(item.start.length<9 || item.end.length <9){
+        item.start=item.start.replace('/','0');
+        item.end=item.end.replace('/','');
+      }else if(item.start.length==9 || item.end.length == 9){
+        item.start=item.start.replace('/','');
+        item.end=item.end.replace('/','');
+      }
+      this.homeProvider.statis({
+        startTime:parseInt(item.start),
+        endTime:parseInt(item.end),
+        statItem:this.statItem,
+      }).then(res=>{
+        if(res.success){
+          if(res.hasOwnProperty('data')) {
+            this.data=res.data;
+            this.metheod();
+            this.showen();
+            // this.falsees=true;
+          }else {
+            this.department=[];
+            this.showen();
+          }
+
+        }else {
+          this.toast.error('暂无数据');
+          this.errStatus = true;
+        }
+      });
+
+      this.allClose();
+      if(this.times ==1 || this.times ==3){
+        if (this.times==3){
+          this.form.setValue({
+            startTime:'',
+            endTime:''
+          })
+          this.form.value.endTime='';
+        }
+        this.times=2;
+      }
+    }
+    loading.dismiss();
+
   }
   //重置
   sausage=[];
@@ -522,7 +537,7 @@ export class StatisticsPage {
     }else {
       this.name=this.selected.deptName;
     }
-    console.log(this.name)
+    // console.log(this.name)
     // console.log(item.deptId);
     this.id=item.deptId;
     let sorted = this.groupBy(this.data, function(item){
