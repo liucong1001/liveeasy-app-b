@@ -44,6 +44,10 @@ page-mypassenger {
     background-color: #1c84c6;
     color: #FFFFFF;
   }
+  .item-ios p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 
