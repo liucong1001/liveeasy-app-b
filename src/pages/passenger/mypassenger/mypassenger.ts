@@ -462,7 +462,6 @@ export class MypassengerPage {
   states=[];
   toggleNum:any;
   toggleSta(num){
-    // debugger;
     this.toggleNum=num;
     if(this.states[num]=='close'){
       for(var i=1;i<4;i++){
@@ -480,9 +479,6 @@ export class MypassengerPage {
   allClose(){
     this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
     this.pop=false;
-    for (var i in this.sausage){
-      this.sausage[i]=false;
-    }
   }
 
 
