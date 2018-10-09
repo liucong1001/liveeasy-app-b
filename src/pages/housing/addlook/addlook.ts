@@ -44,6 +44,7 @@ export class AddlookPage {
   estateName:any;
   useDir :string;
   hasPermisson:any;
+  startDate: String = new Date(new Date().getTime()+8*60*60*1000+60*1000).toISOString();
   constructor(public navCtrl: NavController, private fb:FormBuilder, public navParams: NavParams,public localStorageProvider:LocalStorageProvider,
               private camera: Camera,private renderer:Renderer,
               public nativePageTransitions: NativePageTransitions,public actionSheetCtrl: ActionSheetController,
