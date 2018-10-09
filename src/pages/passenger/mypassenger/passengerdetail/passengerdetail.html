@@ -10,7 +10,7 @@
       <ion-list>
         <ion-item class="pl12 hdRightInfo1">
           <ion-label>客户姓名<i class="text-danger">*</i></ion-label>
-          <ion-input type="text" placeholder="请输入" formControlName="customerName">
+          <ion-input type="text" placeholder="请输入" maxlength="10" formControlName="customerName">
           </ion-input>
         </ion-item>
         <valid-error [errors]="errors.customerName"  [control]="form.get('customerName')"></valid-error>
