@@ -64,8 +64,8 @@
         <div class="leftChange updateBg" [ngClass]="{'bgWhite':person==''}">
           <ion-list radio-group>
             <ion-item *ngFor="let item of person" class="tc">
-              <ion-label>{{item.personName}}</ion-label>
-              <ion-radio value="{{item.personId}}" (ionSelect)="searchs(item)"></ion-radio>
+              <ion-label *ngIf="item.personName!=undefined">{{item.personName}}</ion-label>
+              <ion-radio (ionSelect)="searchs(item)"></ion-radio>
             </ion-item>
           </ion-list>
           <div *ngIf="!person">暂无</div>

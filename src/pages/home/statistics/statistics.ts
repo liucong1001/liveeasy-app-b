@@ -213,7 +213,7 @@ export class StatisticsPage {
         return [item.deptId];
       }
     });
-    // console.log('部门',sorted);
+// console.log(this.department)
     for (var i in sorted) {
       this.department.push(sorted[i][0]);
     }
@@ -568,8 +568,11 @@ export class StatisticsPage {
     let person = this.groupBy(this.allPersonal, function(item){
       return [item.personId];
     });
+
     for(var p in person){
-      this.person.push(person[p][0]);
+      if(person[p][0].personName!=undefined){
+        this.person.push(person[p][0]);
+      }
     }
     // console.log('所有员工', this.allPersonal,'单个员工',person)
     this.person.unshift({personName:'不限',personId:''});
@@ -713,6 +716,7 @@ export class StatisticsPage {
             if(perInfo[j][h].statItem == 5017){
               // console.log('3007',sorted[j][h]);
               this.tableJSON[11].result+=perInfo[j][h].stateValue;
+
             }
             if(perInfo[j][h].statItem == 5018){
               // console.log('3007',sorted[j][h]);
