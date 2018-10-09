@@ -99,7 +99,7 @@
     </div>
     <ion-list class="housList">
       <ion-item-sliding  *ngFor=" let item of pageData; index as i;" #slidingItem>
-        <ion-item style="padding: 8px 15px 0;">
+        <ion-item style="padding: 8px 15px 0;" >
             <ion-row tappable (click)="goHouseDetail(item)">
               <ion-col col-4 style="margin-top: 2px">
                 <!--懒加载图片-->
@@ -259,7 +259,7 @@
       </ion-item>
     </ion-list>
     <div class="btns">
-      <button ion-button full color="danger" tappable (click)="search('propQuery')">确定</button>
+      <button ion-button full color="danger" tappable (click)="priceSea()">确定</button>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 
 import {Component, OnInit, ViewChild, Renderer, ElementRef} from '@angular/core';
-import {Alert, Events, IonicPage, Navbar, NavController, NavParams, Searchbar,ItemSliding} from 'ionic-angular';
+import {Alert, Events, IonicPage, Navbar, NavController, NavParams, Searchbar,ItemSliding } from 'ionic-angular';
 import {AlertController, ModalController} from 'ionic-angular';
 import {FollowPage} from './follow/follow';
 import {ClosehousePage} from './closehouse/closehouse';
@@ -69,11 +69,13 @@ import {el} from "@angular/platform-browser/testing/src/browser_util";
 export class HousingPage {
   visibility = 'hidden';
   showFilter = false;
+
   // 列表搜索表单隐藏显示切换
   toggle() {
     this.showFilter = !this.showFilter;
     this.visibility = this.showFilter ? 'shown' : 'hidden';
   }
+
   classFlag = true;
   show = false;
   houseType = false;
@@ -88,41 +90,39 @@ export class HousingPage {
 
   area: any;
   tagsList = [];
-  tagsListPage =[];
+  tagsListPage = [];
   estateList = []; //楼盘列表
-  district:any;
-  aeraShow=true;
-  tradArea=false;
-  hTips=false;
-  associate=false;
-  searchPop=false;
-  address:any;
+  district: any;
+  aeraShow = true;
+  tradArea = false;
+  hTips = false;
+  associate = false;
+  searchPop = false;
+  address: any;
   /**
    * 列表搜索条件
    * @type {{}}
    */
-  params:PropertyPageParams = {
-     area:'',
-    division:'',
+  params: PropertyPageParams = {
+    area: '',
+    division: '',
   };
   //楼盘搜索
-  searchFloorName:any;
-  selected :any;
+  searchFloorName: any;
+  selected: any;
   offset = 100;
-  orientation:any;
-  tags:any;
-  @ViewChild('searchBar') searchBar:Searchbar;
+  orientation: any;
+  tags: any;
+  @ViewChild('searchBar') searchBar: Searchbar;
   @ViewChild('navbar') navBar: Navbar;
-  @ViewChild('slidingItem') slidingItem: ItemSliding;
-  // slidingItem
-
-
+  // @ViewChild('slidingItem') slidingItem: ItemSliding;
   badHttp = false;
   comFromHomeSearch = false;
-  addIcon=true;
-  localCode:any;
-  updateInput=false;
-  cxJSON:Array<{name:string;val:string}>;
+  addIcon = true;
+  localCode: any;
+  updateInput = false;
+  cxJSON: Array<{ name: string; val: string }>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public events: Events,
               public modalCtrl: ModalController, public propertyProvider: PropertyProvider,
@@ -130,55 +130,54 @@ export class HousingPage {
               public configProvider: ConfigProvider,
               public statusBar: StatusBar,
               public addhouseProvider: AddhouseProvider,
-              public customerProvider:CustomerProvider,
+              public customerProvider: CustomerProvider,
               public nativePageTransitions: NativePageTransitions,
-              public toast:ToastComponent,
-              private renderer:Renderer
-  ) {
+              public toast: ToastComponent,
+              private renderer: Renderer) {
     this.localCode = this.localStorageProvider.get('codeData');
-    console.log('初始化上一个',this.navCtrl.last()&&this.navCtrl.last().name);
-    if(this.navCtrl.last()&&this.navCtrl.last().name=='HomesearchPage'){
-       this.comFromHomeSearch = true;
-       this.addIcon=false;
-       this.updateInput=true;
+    console.log('初始化上一个', this.navCtrl.last() && this.navCtrl.last().name);
+    if (this.navCtrl.last() && this.navCtrl.last().name == 'HomesearchPage') {
+      this.comFromHomeSearch = true;
+      this.addIcon = false;
+      this.updateInput = true;
     }
     this.propertyCategory = this.propertyCategoryData;
 
-    if(!this.navParams.get('item')){
-       this.floorName = '';
-    }else {
+    if (!this.navParams.get('item')) {
+      this.floorName = '';
+    } else {
       this.floorName = this.navParams.get('item').keyword;
       this.params.estate = this.navParams.get('item').id;
     }
-      // if(!navParams.get('item')){
-      //   this.floorName = '';
-      // }else {
-      //   this.floorName = navParams.get('item').keyword;
-      //   this.params.estateId = navParams.get('item').id;
-      // }
-    this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode,'property_tag_desc');
-    this.localStorageProvider.set('tagsListPage',this.tagsListPage);
+    // if(!navParams.get('item')){
+    //   this.floorName = '';
+    // }else {
+    //   this.floorName = navParams.get('item').keyword;
+    //   this.params.estateId = navParams.get('item').id;
+    // }
+    this.tagsListPage = new ArryCodeValuePipe().transform(this.localCode, 'property_tag_desc');
+    this.localStorageProvider.set('tagsListPage', this.tagsListPage);
     // console.log('tagsListPage',this.tagsListPage);
     //朝向
     this.localCode = this.localStorageProvider.get('codeData');
-    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode,'orientation');
-    this.cxJSON.unshift({name:'全部',val:''});
+    this.cxJSON = new ArryCodeValuePipe().transform(this.localCode, 'orientation');
+    this.cxJSON.unshift({name: '全部', val: ''});
     //查询列表，行政区参数
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
     // console.log('查询参数登录',this.localStorageProvider.get('loginInfo')['user']);
     this.params.division = loginUserDistrict;
 
-    if(this.localStorageProvider.get('area')==null){
+    if (this.localStorageProvider.get('area') == null) {
       //行政区划
-      this.propertyProvider.getDivision().then(res=>{
+      this.propertyProvider.getDivision().then(res => {
         this.area = res.data.result[0];
-        this.localStorageProvider.set('area',this.area);
-        this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+        this.localStorageProvider.set('area', this.area);
+        this.area && this.area.unshift({name: '不限', id: '99', code: '99'});
       });
 
-    }else {
+    } else {
       this.area = this.localStorageProvider.get('area');
-      this.area&&this.area.unshift({name:'不限',id:'99',code:'99'});
+      this.area && this.area.unshift({name: '不限', id: '99', code: '99'});
     }
 
   }
@@ -186,32 +185,38 @@ export class HousingPage {
   isActive(item) {
     return this.selected === item;
   };
+
   allCity = false;
-  unlimited(){
+
+  unlimited() {
     this.allCity = true;
     this.params.division = '2333';
-    this.params.area = '' ;
+    this.params.area = '';
     this.search('propQuery');
   }
 
   searchDict = '';
   searchArea = '';
   //搜索房源——区域——商圈
-  cityId:any;
-  bx(){
-     this.params.area = '' ;
+  cityId: any;
+
+  bx() {
+    this.params.area = '';
     this.searchArea = '不限';
     this.search('propQuery');
   }
+
   //电梯
-  dt(){
-     this.params.area  = '';
+  dt() {
+    this.params.area = '';
     this.search('propQuery');
   }
-  choseDivision=false;
+
+  choseDivision = false;
+
   go(item) {
     this.choseDivision = false;
-    if(item.id=='99'){
+    if (item.id == '99') {
       this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
       // delete this.params.division;
       delete this.params.division1;
@@ -223,27 +228,27 @@ export class HousingPage {
     }
     this.searchArea = item.name;
     this.selected = item;
-    this.aeraShow=false;
-    this.tradArea=true;
+    this.aeraShow = false;
+    this.tradArea = true;
     this.params.division = item.code;
     this.params.division1 = this.params.division;
-    this.district =[];
-    for(var i of this.area){
-       if(item.code==i['code']){
-         this.district = i['area'];
-         if(this.district!=undefined){
-           this.district.unshift({name:'不限',code:'0'});
-           this.district = this.uniqueArray(this.district,'name');
-         }else {
-           this.district = [];
-         }
-       }
+    this.district = [];
+    for (var i of this.area) {
+      if (item.code == i['code']) {
+        this.district = i['area'];
+        if (this.district != undefined) {
+          this.district.unshift({name: '不限', code: '0'});
+          this.district = this.uniqueArray(this.district, 'name');
+        } else {
+          this.district = [];
+        }
+      }
     }
   }
 
-   uniqueArray(array, key){
+  uniqueArray(array, key) {
     var result = [array[0]];
-    for(var i = 1; i < array.length; i++){
+    for (var i = 1; i < array.length; i++) {
       var item = array[i];
       var repeat = false;
       for (var j = 0; j < result.length; j++) {
@@ -260,97 +265,102 @@ export class HousingPage {
   }
 
 
-
   hasData = true;
-  totalRecords :any;//查询到的总条数；
+  totalRecords: any;//查询到的总条数；
   bedroomUnlimt = false;
+
   /**
    * 列表搜索
    */
-  search(qId){
-    for(var i in this.district){
-       if(this.params.area ==this.district[i].estateId){
-       }
+  search(qId) {
+    for (var i in this.district) {
+      if (this.params.area == this.district[i].estateId) {
+      }
     }
-    if(this.params.division=='99'){
-      this.params.division =this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
+    if (this.params.division == '99') {
+      this.params.division = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
       delete this.params.division1
     }
-    if(!this.params.area){
+    if (!this.params.area) {
       delete this.params.area1;
     }
 
     this.pageData = [];
-    this.hasData  = true;
-     this.propertyProvider.pageSearch(1,this.params,qId).then(res=>{
-       this.category= false;
-       if(res.success){
-         this.badHttp = false;
+    this.hasData = true;
+    this.propertyProvider.pageSearch(1, this.params, qId).then(res => {
+      this.category = false;
+      if (res.success) {
+        this.badHttp = false;
 
-         this.totalRecords = res.data.totalRecords;
-         this.firstPageData = res.data.result;
-         // res.data.hasOwnProperty('result')
-         if(res.data.result){
-           this.hasData  = true;
-           this.pageData = [];
-           for (let i = 0; i < res.data.result.length; i ++) {
-             this.pageData.push(res.data.result[i]);
-           }
-           this.currentPage=1;
-           this.pageResult =res.data&&res.data.result;
-           if(res.data.result.length<10){ this.all = true;}
-         }else {
-           // console.log('没有数据!');
-           this.hasData = false;
-         }
-         this.totalPages = res.data.totalPages;
-         //关闭搜索框子
-         this.allClose();
-         //户型搜索条件字显示
-         if(this.searchFloorNum ==1){
-           this.searchFloorNum = 2;
-         }
-         if(this.searchFloorNum ==2 && this.params.bedrooms=='0'){
-           this.searchFloorNum=1;
-         }
-        //将下拉currentPage重置
-         this.currentPage = 1;
-       }else {
-         this.badHttp = true;
-       }
-
-     }).catch(err=>{
-       // if(err.name=="TimeoutError"){
-       //      this.badHttp = true;
-       //  }
-        if(err){
-          this.badHttp = true;
+        this.totalRecords = res.data.totalRecords;
+        this.firstPageData = res.data.result;
+        // res.data.hasOwnProperty('result')
+        if (res.data.result) {
+          this.hasData = true;
+          this.pageData = [];
+          for (let i = 0; i < res.data.result.length; i++) {
+            this.pageData.push(res.data.result[i]);
+          }
+          this.currentPage = 1;
+          this.pageResult = res.data && res.data.result;
+          if (res.data.result.length < 10) {
+            this.all = true;
+          }
+        } else {
+          // console.log('没有数据!');
+          this.hasData = false;
         }
-       // console.log('错误返回',err);
-     });
-  }
+        this.totalPages = res.data.totalPages;
+        //关闭搜索框子
+        this.allClose();
+        //户型搜索条件字显示
+        if (this.searchFloorNum == 1) {
+          this.searchFloorNum = 2;
+        }
+        if (this.searchFloorNum == 2 && this.params.bedrooms == '0') {
+          this.searchFloorNum = 1;
+        }
+        //将下拉currentPage重置
+        this.currentPage = 1;
+      } else {
+        this.badHttp = true;
+      }
 
+    }).catch(err => {
+      // if(err.name=="TimeoutError"){
+      //      this.badHttp = true;
+      //  }
+      if (err) {
+        this.badHttp = true;
+      }
+      // console.log('错误返回',err);
+    });
+  }
 
 
   ionViewWillEnter() {
     this.statusBar.styleDefault();
   }
+
   ionViewDidLoad() {
 
-    if(this.navParams.data.pageName=='HomesearchPage'){
-        this.search('propQuery');
-    }else {
-        this.search('properties');
+    if (this.navParams.data.pageName == 'HomesearchPage') {
+      this.search('propQuery');
+    } else {
+      this.search('properties');
     }
 
     this.imgHeader = this.configProvider.set().img;
 //动画初始化
-    for(var i = 1 ;i<4;i++){
-      this.states[i]='close'
+    for (var i = 1; i < 4; i++) {
+      this.states[i] = 'close'
     }
+
+
   }
-    //禁用调出键盘
-  ionViewDidEnter(){
+
+  //禁用调出键盘
+  ionViewDidEnter() {
     let input = this.searchBar.getElementRef().nativeElement.querySelector('input');
     this.renderer.setElementAttribute(input, 'disabled', 'true');
 
@@ -358,94 +368,100 @@ export class HousingPage {
       // this.navCtrl.push(HomesearchPage);
       this.navCtrl.popToRoot();
     };
+
   }
 
-  datas:any;
-  searchMore(){
-    var data=  this.localStorageProvider.get('searchMoreData');
-    this.datas=data;
+  datas: any;
+
+  searchMore() {
+    var data = this.localStorageProvider.get('searchMoreData');
+    this.datas = data;
     // (data.orientation ==''||data.orientation ==null) &&
     // console.log(data.hasElevator,data.orientation)
-     if(data){
-           if(data.tags!=0){
-             // console.log(2);
-               return true;
-           }else if(data.hasElevator !=''){
-             // console.log(3)
-             return true;
-           }
-           else if(data.orientation !=''){
-             // console.log(4)
-             return true;
-           }
-           else {
-               return false;
-           }
+    if (data) {
+      if (data.tags != 0) {
+        // console.log(2);
+        return true;
+      } else if (data.hasElevator != '') {
+        // console.log(3)
+        return true;
+      }
+      else if (data.orientation != '') {
+        // console.log(4)
+        return true;
+      }
+      else {
+        return false;
+      }
 
-     }else {
-       return false;
-     }
+    } else {
+      return false;
+    }
   }
 
   pop = false;
-  states=[];
-  toggleNum:any;
-  toggleSta(num){
+  states = [];
+  toggleNum: any;
+
+  toggleSta(num) {
     // debugger;
-    this.toggleNum=num;
-    if(this.states[num]=='close'){
-     for(var i=1;i<4;i++){
-       if(i!=num){
-         this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
-       }
-     }
+    this.toggleNum = num;
+    if (this.states[num] == 'close') {
+      for (var i = 1; i < 4; i++) {
+        if (i != num) {
+          this.states[i] = this.states[i] === 'open' ? 'close' : 'close';
+        }
+      }
       this.states[num] = this.states[num] === 'close' ? 'open' : 'close';
-      this.pop=true;
-    }else  {
+      this.pop = true;
+    } else {
       this.states[num] = this.states[num] === 'open' ? 'close' : 'close';
-      this.pop=false;
+      this.pop = false;
     }
   }
-  allClose(){
+
+  allClose() {
     this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
-    this.pop=false;
-    this.category=false;
+    this.pop = false;
+    this.category = false;
   }
+
   // searchEaste = false;
   searchFloorNum = 0; //初始化搜索次数
 
-  // slidingItem:any;
-  ionViewWillLeave(){
+  ionViewWillLeave(slidingItem: ItemSliding){
     this.allClose();
     this.category=false;
-    this.slidingItem.close();
+    console.log(slidingItem)
+    if(slidingItem){
+      slidingItem.close();
+    }
   }
 
- //
-  goFollow(item,slidingItem) {
-    // this.slidingItem=slidingItem;
+
+  goFollow(item,slidingItem: ItemSliding) {
     this.openWin(FollowPage, {
       item:item
     });
     if(slidingItem){
       slidingItem.close();
     }
-
+    console.log(slidingItem)
   }
 
-  goAddLook(item,slidingItem) {
+  goAddLook(item,slidingItem: ItemSliding) {
     this.openWin(AddlookPage, {item: item,standardAddress:item.standardAddress});
     if(slidingItem){
       slidingItem.close();
     }
   }
-  goLookHouse(item,slidingItem) {
+  goLookHouse(item,slidingItem: ItemSliding) {
     this.openWin(LookhousePage, {item: item, propertyId: item.propertyId,params:this.params});
     if(slidingItem){
       slidingItem.close();
     }
   }
-  goCloseHouse(item,slidingItem) {
+  goCloseHouse(item,slidingItem: ItemSliding) {
     this.openWin(ClosehousePage, {
       propertyid: item.propertyId,
       item:item,
@@ -691,6 +707,7 @@ export class HousingPage {
     this.ends=this.structure.upper;
     // console.log(this.structure.lower,this.structure.upper);
     // this.selctPri=2;
+
     this.params.price = this.structure.lower.toString()+','+this.structure.upper.toString();
 
   }
@@ -723,7 +740,19 @@ export class HousingPage {
     this.search('propQuery');
   }
 
-  allSearch(){
+  priceSea() {
+    if (this.starts != undefined && this.ends != undefined) {
+      this.selctPri = 2;
+      this.price=false;
+    } else {
+      this.selctPri = 1;
+    }
+    this.search('propQuery');
+  }
+
+
+
+    allSearch(){
     this.events.subscribe('bevents', (params) => {
       // 接收B页面发布的数据
       // console.log('接收数据为: ', params);
