@@ -394,7 +394,7 @@
   </div>
   <div *ngIf="!ownerinfo" class="tc p10">暂无数据</div>
   <!--合同信息-->
-  <div *ngIf="asslist && nums == 3">
+  <div *ngIf="uers && nums == 3">
     <ion-grid class="p0 m10">
       <ion-row>
         <ion-col col-12 class="p0">
@@ -424,7 +424,7 @@
             <ion-item>
               <div class="pl12">
                 <span>签约日期：</span>
-                <span>{{orders.contractSignTm | date:'yyyy/MM/dd' }}</span>
+                <span>{{orders.contractSignTm | date:'yyyy年MM月dd日' }}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -575,7 +575,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="!asslist && nums == 3" class="tc p10">暂无数据</div>
+  <div *ngIf="!uers && nums == 3" class="tc p10">暂无数据</div>
   <!--收款信息-->
   <div *ngIf="feelist && nums == 4">
     <ion-grid class="p0 m10" *ngFor="let i of feelist">
