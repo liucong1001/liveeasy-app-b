@@ -144,8 +144,8 @@ export class AddpassengerPage {
      maxPrice:['',Validators.pattern(/^(\d+|\d+\.\d{1,4})$/)],//最高价格
      minFloor:['',Validators.pattern(/^[0-9]*$/)],//最低楼层
      maxFloor:['',Validators.pattern(/^[0-9]*$/)],//最高楼层
-     minBedroom:['',Validators.pattern(/^[0-9]*$/)],//最少居室
-     maxBedroom:['',Validators.pattern(/^[0-9]*$/)],//最多居室
+     minBedroom:['',Validators.pattern(/^[1-9]\d*$/)],//最少居室
+     maxBedroom:['',Validators.pattern(/^[1-9]\d*$/)],//最多居室
     minHall:['',Validators.pattern(/^[0-9]*$/)],//最少厅
     maxHall:['',Validators.pattern(/^[0-9]*$/)],//最多厅
     decorationArray:[],//装修要求
@@ -192,10 +192,10 @@ export class AddpassengerPage {
       new ErrorMessage('pattern','请填写数字'),
     ],
     minBedroom:[
-      new ErrorMessage('pattern','请填写数字'),
+      new ErrorMessage('pattern','请填写大于0整数'),
     ],
     maxBedroom:[
-      new ErrorMessage('pattern','请填写数字'),
+      new ErrorMessage('pattern','请填写大于0整数'),
     ],
     minHall:[
       new ErrorMessage('pattern','请填写数字'),
@@ -214,6 +214,7 @@ export class AddpassengerPage {
        return false
      }
   }
+
 
 
   clickIntention(){

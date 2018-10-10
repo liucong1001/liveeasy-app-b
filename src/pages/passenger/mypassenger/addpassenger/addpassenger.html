@@ -216,20 +216,19 @@
                 居室要求
               </ion-col>
               <ion-col col-4>
-                <ion-input type="text" class="separateIon"  formControlName="minBedroom" placeholder="请填写数字" ></ion-input>
+                <ion-input type="text" class="separateIon"  formControlName="minBedroom" placeholder="请填写数字"></ion-input>
               </ion-col>
               <ion-col col-1>
                 <span>至</span>
               </ion-col>
               <ion-col col-4>
-                <ion-input type="text" class="separateIon"  formControlName="maxBedroom" placeholder="请填写数字" ></ion-input>
+                <ion-input type="text" class="separateIon"  formControlName="maxBedroom" placeholder="请填写数字"></ion-input>
               </ion-col>
               <ion-col col-1>
                 <span>室</span>
               </ion-col>
             </ion-row>
           </div>
-          <div class="p15" *ngIf="(form.value.minBedroom == 0 && form.value.minBedroom!='') || (form.value.maxBedroom == 0 && form.value.maxBedroom!='')">* 不能为0</div>
           <valid-error [errors]="errors.minBedroom"  [control]="form.get('minBedroom')"  ></valid-error>
           <valid-error [errors]="errors.maxBedroom"  [control]="form.get('maxBedroom')"  ></valid-error>
           <div *ngIf="compare(form.value.minBedroom,form.value.maxBedroom)" class="valid-error">*最多居室不能小于最少居室</div>
