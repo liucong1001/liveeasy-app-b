@@ -144,10 +144,7 @@ export class HousinfoPage {
     this.imgHeader = this.configProvider.set().img;
     this.imgSign = this.configProvider.set().imgSign;
     this.smImgSign = this.configProvider.set().smSign;
-    setInterval(()=>{
-      this.slider&&this.slider.slideNext(300,true);
-      this.slider1&&this.slider1.slideNext(300,true);
-    },2000);
+
     this.propertyId = this.navParams.get('propertyId');
     this.getHouseData(this.propertyId,true);
     if(this.navCtrl.last()&&this.navCtrl.last().name=='ModalCmp'){
@@ -201,17 +198,15 @@ export class HousinfoPage {
 
   //进入页面后执行
   ionViewDidEnter(){
+
+    // setInterval(()=>{
+      this.slider&&this.slider.slideNext(300,true);
+      this.slider1&&this.slider1.slideNext(300,true);
+    // },2000);
+
+
     this.navBar.backButtonClick = () => {
-      // console.log('刷新reloadpage',this.navParams.get('notReloadPage'),this.app.getActiveNavs()[0]['index']);
       if(this.app.getActiveNavs()[0]['index']==1){
-/*      if(!this.navParams.get('notReloadPage')){
-           this.navCtrl.popToRoot()
-          // this.navCtrl.parent.select(1);
-        }else {
-          this.navCtrl.parent.select(1);
-          this.navCtrl.setRoot(HousingPage);
-          // this.navCtrl.popToRoot()
-        }*/
        this.navCtrl.popToRoot()
       }else if(this.app.getActiveNavs()[0]['index']==0){    //从首页搜索楼盘进入
         this.navCtrl.pop()

@@ -104,8 +104,6 @@ export class PropertyProvider {
    */
   pageSearch(currentPage,params,qId){
     var loginUserDistrict = this.localStorageProvider.get('loginInfo')['user']['office']['area']['code'];
-    console.log('code',this.localStorageProvider.get('loginInfo')['user']['office']['area']['code']);
-     // var loginUserDistrict='213';
     var loginUserProvince = loginUserDistrict.substring(0,4);
     var qType;
     if(qId == 'propQuery'){

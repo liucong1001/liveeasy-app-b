@@ -239,7 +239,6 @@ export class LookhousePage {
 
   isDisabled = false;
   update(){
-      // this.edit = true;
     this.imgData = [];
     this.addArry(this.menPaiImg,this.imgData);
     this.addArry(this.huxinImg,this.imgData);
@@ -286,8 +285,6 @@ export class LookhousePage {
 
   textArrt =[];
   isShow(name){
-    // var title = name;
-
     if(this.textArrt.indexOf(name) == -1){
       this.textArrt.push(name);
       console.log('名字',this.textArrt);
@@ -295,10 +292,6 @@ export class LookhousePage {
     }else {
       return false;
     }
-    // else if(this.isInArray(this.textArrt,name)){
-    //   return false;
-    // }
-
   }
 
    isInArray(arr,value){
@@ -309,19 +302,6 @@ export class LookhousePage {
     }
     return false;
   }
-  //------返回处理--------//
-  backButtonClick = (e: UIEvent) => {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: 3,
-      iosdelay: 50
-    };
 
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-    this.navCtrl.pop({animate:false});
-  }
 
 }

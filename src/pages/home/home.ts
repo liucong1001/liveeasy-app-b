@@ -1,5 +1,5 @@
 import {Component, Renderer, ViewChild,ElementRef } from '@angular/core';
-import {Navbar, NavController, Platform, Searchbar, ViewController,ToastController } from 'ionic-angular';
+import {Navbar, NavController, Platform, Searchbar, ViewController, ToastController, Events} from 'ionic-angular';
 import { MsgdetailPage } from './msgdetail/msgdetail';
 import {HomeProvider} from "../../providers/home/home";
 import {AddhousePage} from "../housing/addhouse/addhouse";
@@ -72,7 +72,7 @@ export class HomePage {
               public jpush: JPush, device: Device,private appVersion: AppVersion,private http: HTTP,
               private appUpdate: VersionProvider,public toast:ToastComponent,private jpushUnit:jpushUnit,
               public viewCtrl: ViewController,public platform: Platform,public  nativeProvider:NativeProvider,
-              private geolocation: Geolocation
+              private geolocation: Geolocation,private events: Events
              ) {
     this.AddhousePage = AddhousePage;
 
@@ -115,10 +115,23 @@ export class HomePage {
         this.msgResult=res.data.result;
       }
     });
-    console.log('定位！！！！！！！！');
-    this.getLocal()
+    this.receiveNotification();
+    this.getLocal();
 
   }
+
+
+  //首页home页面消息通知更新
+  receiveNotification(){
+    this.events.subscribe('jpush.receiveNotification', content => {
+      this.homeProvider.msgs(1).then(res=>{
+        if(res.data.result){
+          this.msgResult= res.data.result;
+        }
+      });
+    });
+  }
+
   getLocal(){
     // 百度地图API功能
     var map = new BMap.Map("allmap");
@@ -160,19 +173,22 @@ export class HomePage {
     this.notificationNews&&this.nativeProvider.openWin(this.navCtrl,MsgdetailPage);
   }
   goAddHouse(){
-    // this.navCtrl.push('AddhousePage',{})
-    this.nativeProvider.openWin(this.navCtrl,AddhousePage);
+    // this.nativeProvider.openWin(this.navCtrl,AddhousePage);
+    this.navCtrl.push(AddhousePage);
   }
 
   goAddPassenger(){
-    this.nativeProvider.openWin(this.navCtrl,AddpassengerPage);
+    // this.nativeProvider.openWin(this.navCtrl,AddpassengerPage);
+    this.navCtrl.push(AddpassengerPage);
   }
 
   gosta(){
-    this.nativeProvider.openWin(this.navCtrl,StatisticsPage);
+    this.navCtrl.push(StatisticsPage);
+    // this.nativeProvider.openWin(this.navCtrl,StatisticsPage);
   }
   godeclara(){
-    this.nativeProvider.openWin(this.navCtrl,DeclarationPage)
+    this.navCtrl.push(DeclarationPage);
+    // this.nativeProvider.openWin(this.navCtrl,DeclarationPage)
   }
   floorName = '';
   search(){

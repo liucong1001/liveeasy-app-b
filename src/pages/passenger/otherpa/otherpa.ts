@@ -149,13 +149,15 @@ export class OtherpaPage {
       return
     }else {
       this.all = false;
-      if(this.currentPage>this.totalPages){this.all = true; return}
+      if(this.currentPage>this.totalPages){infiniteScroll.complete(); return}
       this.customerProvider.otherCustomersPage(this.navParams.get('type'),this.currentPage,this.params).
       then(res=>{
         this.pageResult =res.data&&res.data.result;
         for(let i=0;i<res.data.result.length;i++){
           this.pageData.push(res.data.result[i]);
         }
+        this.currentPage = res.data.currentPage;
+        if(this.currentPage>=this.totalPages){this.all = true;infiniteScroll.complete(); return}
       });
     }
     // console.log('Async operation has ended');

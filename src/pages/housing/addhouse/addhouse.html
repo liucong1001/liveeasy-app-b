@@ -30,21 +30,6 @@
         </ion-row>
       </div>
 
-      <!--<div class="bgWhite">-->
-        <!--<div class="hdRightInfo">-->
-          <!--<label>栋号<i class="text-danger">*</i></label>-->
-          <!--<input type="text" formControlName="buildingNo"   placeholder="请填写英文或数字" class="upinput"/>-->
-          <!--<button ion-button outline item-end>栋</button>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="hdRightInfo">-->
-        <!--<ion-item class="pl12">-->
-          <!--<ion-label>栋号<i class="text-danger">*</i></ion-label>-->
-          <!--<ion-input type="text" formControlName="buildingNo"   placeholder="请填写英文或数字">-->
-          <!--</ion-input>-->
-        <!--</ion-item>-->
-        <!--<span class="">栋</span>-->
-      <!--</div>-->
       <div *ngIf="form.value.buildingNo&&form.value.buildingNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.buildingNo"  [control]="form.get('buildingNo')"></valid-error>
       <ion-item class="pl12 hdRightInfo1">
@@ -68,22 +53,6 @@
          </ion-col>
        </ion-row>
      </div>
-      <!--<div class="bgWhite updateEnd">-->
-        <!--<div class="hdRightInfo">-->
-          <!--<label>楼层<i class="text-danger">*</i></label>-->
-          <!--<input type="text"  formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}" class="upinput"/>-->
-          <!--<button ion-button  item-end>层</button>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="relative updateEnd">-->
-        <!--<ion-item class="pl12">-->
-          <!--<ion-label >楼层<i class="text-danger">*</i></ion-label>-->
-          <!--<ion-input type="text"  formControlName="floorNo" placeholder="请填写数字" [ngClass]="{'form-control-danger':form.get('floorNo')&&form.get('floorNo').touched}">-->
-          <!--</ion-input>-->
-        <!--</ion-item>-->
-        <!--<span class="updatRight">层</span>-->
-      <!--</div>-->
 
       <div *ngIf="form.value.floorNo&&form.value.floorNo==0" class="valid-error">*不能为0</div>
       <valid-error [errors]="errors.floorNo"  [control]="form.get('floorNo')"  ></valid-error>
@@ -105,14 +74,6 @@
       <valid-error [errors]="errors.houseNo"  [control]="form.get('houseNo')"  ></valid-error>
     </ion-list>
     <ion-list class="m10">
-      <!--<div class="bgWhite">-->
-        <!--<div class="hdRightInfo">-->
-          <!--<label>建筑面积<i class="text-danger">*</i></label>-->
-          <!--<input type="text"  formControlName="spaceSize"  placeholder="请填写数字"/>-->
-          <!--<button ion-button outline item-end>平</button>-->
-        <!--</div>-->
-      <!--</div>-->
-
       <div class="bgWhite">
         <ion-row class="updateEnd">
           <ion-col col-3>建筑面积<i class="text-danger">*</i></ion-col>

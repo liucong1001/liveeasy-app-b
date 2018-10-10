@@ -1,5 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB, } from 'ionic-angular';
+import {App, Platform, Nav, ToastController, IonicApp, Keyboard as KB,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {VersionProvider} from "../providers/version/app.version";
@@ -19,6 +19,8 @@ import {HTTP} from "@ionic-native/http";
 import {NativeProvider} from "../providers/native/native";
 import {Network} from "@ionic-native/network";
 import {jpushUnit} from "../providers/native/jpush-unit";
+import {CheckhousePage} from "../pages/home/checkhouse/checkhouse";
+import {HomeProvider} from "../providers/home/home";
 
 @Component({
   templateUrl: 'app.html'
@@ -47,7 +49,7 @@ export class MyApp {
               private headerColor: HeaderColor,
               public app: App,
               public keybord: Keyboard,
-              public kb: KB,
+              public kb: KB, private events: Events,public homeProvider:HomeProvider,
               private nativePageTransitions: NativePageTransitions,public ionicApp: IonicApp,public toastCtrl: ToastController,
               private androidPermissions: AndroidPermissions,public jpush: JPush,private appVersion: AppVersion,private http: HTTP,
               private  nativeProvider:NativeProvider,private network: Network,private jpushUnit:jpushUnit,
@@ -92,6 +94,8 @@ export class MyApp {
        jpush.setDebugMode(true);
        //检查热更新
        this.nativeProvider.sync();
+       // 处理打开推送消息事件
+       this.jPushOpenNotification();
      });
    }
 
@@ -199,4 +203,38 @@ export class MyApp {
         this.toastCheckNetwork.present();
       });
   }
+
+  jPushOpenNotification(){
+    // 当点击极光推送消息跳转到指定页面
+    this.events.subscribe('jpush.openNotification', content => {
+      const childNav = this.nav.getActiveChildNav();
+      if (childNav) {
+        const tab = childNav.getSelected();
+        const activeVC = tab.getActive();
+        // if (activeVC.component == AboutPage) {//如果当前所在页面就是将要跳转到的页面则不处理
+        //   return;
+        // }
+        const activeNav = activeVC.getNav();
+        activeNav.popToRoot({}).then(() => { // 导航跳到最顶层
+          childNav.select(0); // 选中第一个tab
+          const t = childNav.getSelected(); // 获取选中的tab
+          const v = t.getActive(); // 通过当前选中的tab获取ViewController
+          const n = v.getNav(); // 通过当前视图的ViewController获取的NavController
+          n.push(CheckhousePage); // 跳转到指定页面
+        });
+      }
+    });
+  }
+  //首页home页面消息通知更新
+  receiveNotification(){
+    this.events.subscribe('jpush.receiveNotification', content => {
+      this.homeProvider.msgs(1).then(res=>{
+        if(res.data.result){
+          return res.data.result;
+        }
+      });
+   });
+  }
+
+
 }

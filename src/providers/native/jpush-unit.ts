@@ -1,12 +1,12 @@
 
-import { Injectable } from '@angular/core';
+import {Injectable, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {ConfigProvider} from "../config/config";
 import {ToastComponent} from "../../components/toast/toast";
 import {Device} from "@ionic-native/device";
 import { JPush } from '@jiguang-ionic/jpush';
 import {CheckhousePage} from "../../pages/home/checkhouse/checkhouse";
-import {NavController} from "ionic-angular";
+import {Events, Nav, NavController} from "ionic-angular";
 import {App} from 'ionic-angular';
 /*
  jpush消息推送服务
@@ -19,6 +19,7 @@ export class  jpushUnit{
   devicePlatform: string;
   sequence: number = 0;
   num:0;
+  @ViewChild(Nav) nav: Nav;
   tagResultHandler = function(result) {
     var sequence: number = result.sequence;
     var tags: Array<string> = result.tags == null ? [] : result.tags;
@@ -38,7 +39,7 @@ export class  jpushUnit{
   };
 
   constructor(device: Device,public toast:ToastComponent, public jpush: JPush,
-              public app: App) {
+              public app: App, public events: Events,) {
     this.devicePlatform = device.platform;
   }
 
@@ -54,7 +55,7 @@ export class  jpushUnit{
         content = event.aps.alert;
       }
       // alert('接受到通知: ' + JSON.stringify(event));
-      console.log('接受到通知: ' , JSON.stringify(event));
+      this.events.publish('jpush.receiveNotification',content);
     }, false);
 
     document.addEventListener('jpush.openNotification', (event: any) => {
@@ -68,23 +69,14 @@ export class  jpushUnit{
           content = event.aps.alert;
         }
       }
-       // alert('打开通知: ' + JSON.stringify(event));
-/*      this.num++;
-      if(this.num==1){
-        this.app.getActiveNav().push(CheckhousePage);
-      }else {
-       this.app.getActiveNav().push(CheckhousePage);
-       this.app.getActiveNav().pop();
-      }*/
-      if(navCtr.isActive(CheckhousePage)){
+
+/*      if(navCtr.isActive(CheckhousePage)){
         navCtr.getPrevious(CheckhousePage)
       }else {
         this.app.getRootNav().push(CheckhousePage);
-      }
+      }*/
 
-
-      console.log('num',this.num);
-      console.log('打开通知: ' , JSON.stringify(event));
+      this.events.publish('jpush.openNotification',content);
     }, false);
 
     document.addEventListener('jpush.receiveLocalNotification', (event: any) => {

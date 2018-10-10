@@ -112,7 +112,6 @@ export class AddhousePage {
 
   }
 
-  // tradingAreaId
 
   form:FormGroup =this.fb.group({
       adminDivisionCode:[''],//楼盘相对应区域
@@ -238,10 +237,10 @@ export class AddhousePage {
 
 
   ionViewWillEnter() {
+    this.statusBar.styleLightContent();//状态栏文字颜色修改-白色
   }
 
   ionViewDidLoad() {
-    this.statusBar.styleLightContent();//状态栏文字颜色修改-白色
     this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
   }
 

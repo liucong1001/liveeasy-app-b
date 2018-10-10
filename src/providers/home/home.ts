@@ -28,7 +28,6 @@ export class HomeProvider {
 
   constructor(public http: HttpClient,public localStorageProvider:LocalStorageProvider,
               public httpProvider:HttpProvider,private configProvider:ConfigProvider) {
-    console.log('Hello HomeProvider Provider',this.headers);
   }
 
     public pageList():Promise<any>{

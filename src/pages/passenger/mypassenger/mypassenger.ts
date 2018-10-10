@@ -352,25 +352,23 @@ export class MypassengerPage {
   pageResult:any;
   //上拉加载
   doInfinite(infiniteScroll) {
-   console.log('currentPage:',this.currentPage,'totalPages',this.totalPages);
     infiniteScroll.complete();
     this.currentPage<=this.totalPages&&this.currentPage++;
-    // console.log('当前页数',this.currentPage);
     if(this.pageResult&&this.pageResult.length<10){
-      //toast提示
       this.all = true;
       return
     }else {
       this.all = false;
-      if(this.currentPage>this.totalPages){this.all = true; return}
+      if(this.currentPage>this.totalPages){infiniteScroll.complete(); return}
       this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
         this.pageResult =res.data&&res.data.result;
         for(let i=0;i<res.data.result.length;i++){
           this.pageData.push(res.data.result[i]);
         }
+        this.currentPage = res.data.currentPage;
+        if(this.currentPage>=this.totalPages){this.all = true;infiniteScroll.complete(); return}
       });
     }
-    // console.log('Async operation has ended');
     infiniteScroll.complete(function () {
       // console.log('数据请求完成');
     });
