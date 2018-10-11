@@ -31,13 +31,44 @@ export class PubliclookPage {
   constructor(public navCtrl: NavController,public nativePageTransitions: NativePageTransitions,public statusBar: StatusBar, public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,private alertCtrl: AlertController) {
     this.customerid=navParams.get('customerId');
-    this.getRecords(this.customerid)
+    this.getRecords(this.customerid);
+    // console.log(navParams.get('type'))
   }
+
+
+
   getRecords(customerid){
-    this.params = {
-      customerId:customerid,
-      customerType:'1'
-    };
+    if(this.navParams.get('type')=='99'){
+      this.params={
+        customerId:customerid,
+        customerStatus: '3',
+        customerType: '2',
+      };
+      this.method();
+
+    }else if(this.navParams.get('type')=='0'){
+      this.params={
+        customerId: customerid,
+        customerStatus:'0',
+      };
+      this.method();
+
+    }else if(this.navParams.get('type')=='1'){
+      this.params={
+        customerId: customerid,
+        customerStatus: '2'
+      };
+      this.method();
+    }else if(this.navParams.get('type')=='2'){
+      this.params={
+        customerId: customerid,
+        customerStatus:'4'
+      };
+      this.method();
+    }
+
+  }
+  method(){
     this.customerProvider.mLook(1,{customer:this.params,followStatus: this.index+1,type: 1}).then(res => {
       if(res.data.hasOwnProperty('result')){
         this.lRecord=res.data.result;
@@ -47,7 +78,6 @@ export class PubliclookPage {
 
     });
   }
-
 //状态栏文字颜色修改-白色
   ionViewWillEnter() {
     this.statusBar.styleLightContent();
@@ -65,23 +95,19 @@ export class PubliclookPage {
   goToSlide(index) {
     this.slides.slideTo(index, 500);
     this.addActive(index);
-
+    this.getRecords(this.customerid)
   }
   // 滑动切换
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-    // console.log(currentIndex);
+
     this.addActive(currentIndex);
-    this.getRecords(this.customerid)
+
   }
   // 改变tab 颜色
   addActive(index) {
     this.index = index;
-    // console.log(index)
   }
-  // accomplish(){
-  //   this.navCtrl.push(AccomplishPage)
-  // }
   data:any;
   confirm(item) {
     let alert = this.alertCtrl.create({

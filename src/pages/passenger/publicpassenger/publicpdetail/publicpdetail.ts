@@ -87,7 +87,8 @@ export class PublicpdetailPage {
   passengerLook(){
     this.navCtrl.push(PubliclookPage,{
       id:this.datas,
-      customerId:this.customerId
+      customerId:this.customerId,
+      type:this.navParams.get('type'),
     })
   }
   passengerFollow(){
