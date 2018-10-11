@@ -31,7 +31,9 @@
   <table width="100%" class="bgWhite m10" [hidden]="errStatus">
     <tr class="tc" *ngFor="let i of tableJSON">
       <td>{{i.name}}</td>
-      <td>{{i.result}}</td>
+      <!--<td>{{i.result}}</td>-->
+      <td *ngIf="i.val==11||i.val==12||i.val==13||i.val==14||i.val==15||i.val==16">{{i.result.toFixed(1)}}</td>
+      <td *ngIf="i.val!=11&&i.val!=12&&i.val!=13&&i.val!=14&&i.val!=15&&i.val!=16">{{i.result}}</td>
     </tr>
   </table>
 </ion-content>
