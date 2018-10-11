@@ -27,7 +27,7 @@
   <div>
     <ion-slides (ionSlideDidChange)="slideChanged()">
       <ion-slide>
-        <div *ngIf="followUp == undefined" class="tc" style="margin-top: 15px;font-size: 16px">暂无跟进记录</div>
+        <div *ngIf="followUp == undefined" class="tc not">暂无跟进记录</div>
         <div class="location">
           <ion-list>
             <ion-item class="updateHegiht p10" *ngFor="let item of followUp">
@@ -40,10 +40,8 @@
         </div>
       </ion-slide>
       <ion-slide  style="height: 100%">
+        <div *ngIf="lookEmpty == undefined" class="tc not">暂无空看记录</div>
           <div class="location">
-              <ion-list>
-                <ion-item *ngIf="lookEmpty == undefined" class="tc">暂无空看记录</ion-item>
-              </ion-list>
               <ion-list>
                 <ion-item class="updateHegiht p10" *ngFor="let items of lookEmpty">
                       <div>{{items.agentName}}</div>
