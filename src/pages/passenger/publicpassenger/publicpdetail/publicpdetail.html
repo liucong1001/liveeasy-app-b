@@ -16,7 +16,7 @@
 
         <!--<ion-label>{{data.entity.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</ion-label>-->
       </ion-item>
-      <ion-item class="pl12 hdRightInfo1">
+      <ion-item class="pl12 hdRightInfo1" *ngIf="title=='公客详情'">
         <ion-label>公客位置：{{data.entity.customerTypeName}}</ion-label>
         <!--<ion-label>{{ data.entity.customerTypeName}}</ion-label>-->
       </ion-item>
