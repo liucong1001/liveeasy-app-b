@@ -247,7 +247,9 @@ export class MypassengerPage {
       // this.houseType = false;
       // this.more = false;
       // this.pop = false;
-      this.allClose();
+      // this.allClose();
+      this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
+      this.pop=false;
       // this.housingEstate = false;
       //户型搜索条件字显示
     });
@@ -477,6 +479,7 @@ export class MypassengerPage {
   allClose(){
     this.states[this.toggleNum] = this.states[this.toggleNum] === 'open' ? 'close' : 'close';
     this.pop=false;
+    this.reset();
   }
 
 
