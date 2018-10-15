@@ -182,7 +182,7 @@ export class PublicpassengerPage {
   }
   searchArea='';
   selectArea(items){
-    console.log('商圈',items);
+    this.params.intentionTradeCode= items.code;
     if(items.code!='0'){ this.searchArea= items.name;}
     this.search();
   }
@@ -193,7 +193,6 @@ export class PublicpassengerPage {
     this.params.customerType=val;
     val== ''&& delete  this.params.customerType;
     this.search();
-    console.log('搜索',this.params);
   }
   searchFloorNum = 0; //初始化搜索次数
   sx=0;

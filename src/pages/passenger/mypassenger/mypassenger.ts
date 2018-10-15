@@ -257,9 +257,8 @@ export class MypassengerPage {
 
   searchArea='';
   selectArea(items){
-
+    this.params.intentionTradeCode = items.code;
     if(items.code!='0'){ this.searchArea= items.name;}
-    console.log('商圈',items);
     this.search();
   }
   sx=1;
@@ -356,25 +355,27 @@ export class MypassengerPage {
   doInfinite(infiniteScroll) {
     infiniteScroll.complete();
     this.currentPage<=this.totalPages&&this.currentPage++;
+    console.log('currentPage',this.currentPage,'totalPages',this.totalPages);
     if(this.pageResult&&this.pageResult.length<10){
-      this.all = true;
+      this.all = true;infiniteScroll.complete();
       return
     }else {
       this.all = false;
-      if(this.currentPage>this.totalPages){infiniteScroll.complete(); return}
+      if(this.currentPage>this.totalPages){infiniteScroll.complete();this.all=true; return}
+
       this.customerProvider.pageSearch(this.currentPage,this.params).then(res=>{
         this.pageResult =res.data&&res.data.result;
         for(let i=0;i<res.data.result.length;i++){
           this.pageData.push(res.data.result[i]);
         }
         this.currentPage = res.data.currentPage;
-        if(this.currentPage>=this.totalPages){this.all = true;infiniteScroll.complete(); return}
+        if(this.currentPage>=this.totalPages ){ this.all = true; infiniteScroll.complete(); return}
       });
     }
-    infiniteScroll.complete(function () {
-      // console.log('数据请求完成');
-    });
-
+/*    infiniteScroll.complete(function () {
+      this.all = true
+      console.log('数据请求完成');
+    });*/
   }
   searchFloorNum = 0; //初始化搜索次数
   totalRecords :any;//查询到的总条数；

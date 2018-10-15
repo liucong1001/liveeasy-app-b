@@ -59,9 +59,11 @@
           <h2>消息通知</h2>
         </ion-col>
       </ion-row>
-      <div class="ellipsis newsList" *ngFor="let item of msgResult; index as i;">
-        <span class="newsTip"  *ngIf="i==0">{{item.messageContent}}  </span>
-      </div>
+      <ng-container *ngIf="msgResult">
+        <div class="ellipsis newsList" *ngFor="let item of msgResult; index as i;" >
+          <span class="newsTip"  *ngIf="i==0">{{item.messageContent}}  </span>
+        </div>
+      </ng-container>
       <div class="ellipsis newsList" *ngIf="!msgResult">
         <span class="defaults">暂无数据</span>
       </div>

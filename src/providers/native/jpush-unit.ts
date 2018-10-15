@@ -47,15 +47,16 @@ export class  jpushUnit{
    * 初始化
    */
   initPush(navCtr){
+    //接受到通知
     document.addEventListener('jpush.receiveNotification', (event: any) => {
       var content;
       if (this.devicePlatform == 'Android') {
         content = event.alert['messageContent'];
       } else {
-        content = event.aps.alert;
+        // content = event.aps.alert;  某些手机此处存在bug
       }
-      // alert('接受到通知: ' + JSON.stringify(event));
-      this.events.publish('jpush.receiveNotification',content);
+      console.log('来新消息');
+      this.events.publish('jpushReceiveNotification',content);
     }, false);
 
     document.addEventListener('jpush.openNotification', (event: any) => {
@@ -69,13 +70,6 @@ export class  jpushUnit{
           content = event.aps.alert;
         }
       }
-
-/*      if(navCtr.isActive(CheckhousePage)){
-        navCtr.getPrevious(CheckhousePage)
-      }else {
-        this.app.getRootNav().push(CheckhousePage);
-      }*/
-
       this.events.publish('jpush.openNotification',content);
     }, false);
 
@@ -199,9 +193,11 @@ export class  jpushUnit{
     }
   }
 
-
-
-
-
+  /**
+   * 清除通知栏上的所有通知
+   */
+  clearAllNotification(){
+    this.jpush.clearAllNotification();
+  }
 
 }

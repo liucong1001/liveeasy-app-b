@@ -133,7 +133,7 @@
                   <ion-col col-12 class="p0">
                     <span class="unitPrice" *ngIf="item.propertyPrice!=0">{{item.propertyPrice}} </span>
                     <span class="unitPrice" *ngIf="item.propertyPrice!=0"> {{item.propertyPriceUnit==1?'万':'元'}}</span>
-                    <span class="errorPrice"   *ngIf="item.propertyPrice==0">价格异常</span>
+                    <span class="errorPrice"   *ngIf="item.propertyPrice==0&&params.status!='32'">价格异常</span>
                     <span style="font-size: 1.2rem;color: #aaa" *ngIf="item.propertyPrice!=0">
                   <span *ngIf="item.propertyPriceUnit==1">{{item.propertyPrice*1/item.spaceSize*10000 | toParseInt}}元/㎡</span>
                   <span *ngIf="item.propertyPriceUnit=='2'">{{item.propertyPrice*1/item.spaceSize}}</span>
@@ -206,18 +206,18 @@
         </div>
       </ion-col>
       <ion-col col-6 class="p0" >
-        <div class="leftChange updateBg" *ngIf="district" >
+        <div class="leftChange updateBg"   *ngIf="district" >
           <ion-list radio-group [(ngModel)]="params.area" style="background: #fff">
             <ion-item *ngFor=" let items of district;let i = index" style="font-size: 14px; ">
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.id}}"  (ionSelect)="selectArea(items)"></ion-radio>
+              <ion-radio [value]="items.id"  [checked]="false" (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
           <div  *ngIf="district.length==0&&!choseDivision"  >暂无该地区！</div>
         </div>
       </ion-col>
     </ion-row>
-  </ion-grid >
+  </ion-grid>
 
   <!-- 户型 -->
   <div class="lists houseType" [@animation]="states[2]" >

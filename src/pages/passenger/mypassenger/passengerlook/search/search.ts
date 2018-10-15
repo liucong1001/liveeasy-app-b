@@ -7,7 +7,7 @@ import {CustomerProvider} from "../../../../../providers/customer/customer";
 import {LocalStorageProvider} from "../../../../../providers/local-storage/local-storage";
 import {StatusBar} from "@ionic-native/status-bar";
 /**
- 首页楼盘搜索
+ 我的客源-约看-楼盘搜索
  */
 
 @IonicPage()
@@ -38,7 +38,6 @@ export class SearchPage {
   floor = [];
   edit = false;
   getFloorKey(event){
-    console.log('值',this.search);
     this.getData(this.search).then(res=>{
       if(res.data){
         this.floor = res.data;
@@ -51,18 +50,13 @@ export class SearchPage {
         this.floor=[];
       }
 
-
     })
-
-
   }
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AllsearchPage');
-    this.floorList = this.localStorageProvider.get('floorList');
-    if(this.floorList ==null){this.floorList = []}
-    console.log('历史',this.floorList);
+    this.propertyList = this.localStorageProvider.get('propertyList');
+    if(this.propertyList ==null){this.propertyList = []}
   }
   //进入页面后执行
   ionViewDidEnter(){
@@ -74,13 +68,13 @@ export class SearchPage {
   ionViewCanLeave(){
     window.clearInterval(this.timer);
   }
-  floorList :Array<any>;
+  propertyList :Array<any>;
 
+  // propertyList
   select(item){
-    if(item&&this.floorList.indexOf(item.estateName)==-1){
-      this.floorList.push(item.estateName);
-      console.log(this.floorList)
-      this.localStorageProvider.set('floorList',this.floorList);
+    if(item&&this.propertyList.indexOf(item.estateName)==-1){
+      this.propertyList.push(item.estateName);
+      this.localStorageProvider.set('propertyList',this.propertyList);
     }
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件

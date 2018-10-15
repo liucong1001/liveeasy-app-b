@@ -22,7 +22,8 @@ export class PassengerlookPage {
   @ViewChild('searchBar') searchBar:Searchbar;
   @ViewChild(Navbar) navBar: Navbar;
   startDate: String = new Date(new Date().getTime()+8*60*60*1000+60*1000).toISOString();
-  constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,public nativePageTransitions: NativePageTransitions,
+  constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams,
+              public nativePageTransitions: NativePageTransitions,
               private fb:FormBuilder,public customerProvider:CustomerProvider,private renderer:Renderer,
               public toast:ToastComponent,  public events: Events) {
     this.clientID=navParams.get('item').customerSn;

@@ -124,6 +124,7 @@ export class MyApp {
       }
       //点击返回按钮隐藏toast或loading或Overlay
       this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+
       if (this.ionicApp._modalPortal) {
         let activePortal = this.ionicApp._modalPortal.getActive();
         if (activePortal) {
@@ -132,7 +133,11 @@ export class MyApp {
           return;
         }
       }
-
+      // 点击返回按钮隐藏actionSheetCtrl或Overlay
+      const overlayView = this.app._appRoot._overlayPortal._views[0];
+      if (overlayView && overlayView.dismiss) {
+        overlayView.dismiss();
+      }
 
       let activeVC = this.nav.getActive();
       let tabs = activeVC.instance.tabs;
@@ -225,16 +230,5 @@ export class MyApp {
       }
     });
   }
-  //首页home页面消息通知更新
-  receiveNotification(){
-    this.events.subscribe('jpush.receiveNotification', content => {
-      this.homeProvider.msgs(1).then(res=>{
-        if(res.data.result){
-          return res.data.result;
-        }
-      });
-   });
-  }
-
 
 }

@@ -264,6 +264,8 @@ export class UploadComponent {
       }else {
         return false
       }
+    }else if(object.auditStatus==1) {
+      return false
     }else {
       return true
     }

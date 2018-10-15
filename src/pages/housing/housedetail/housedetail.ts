@@ -166,6 +166,7 @@ export class HousedetailPage {
         var jsonData = JSON.parse(this.data.contacts);
         this.form.patchValue({
           adminDivisionCode:this.data.adminDivisionCode,
+          avgPrice:this.data.avgPrice,
           buzzType:this.data.buzzType,
           buildingNo: this.data.buildingNo,
           estateName:this.data.estateName,
@@ -202,6 +203,7 @@ export class HousedetailPage {
           buzzOwnerType:this.data.buzzOwnerType,
           propertyMortgage:this.data.propertyMortgage,
           businessTime:this.data.businessTime&&new Date(parseFloat(this.data.businessTime)).toISOString(),
+          unitPriceAudit:this.data.unitPriceAudit,
         });
         //判断存在tagsStr
         if(this.data.tagsStr){
@@ -241,6 +243,7 @@ export class HousedetailPage {
   // tradingAreaId
   form:FormGroup =this.fb.group({
     adminDivisionCode:[''],//楼盘相对应区域
+    avgPrice:[''],
     estate:[''],//楼盘
     estateName:[''],
     estateId:[''],
@@ -291,6 +294,7 @@ export class HousedetailPage {
     apartments:['',[Validators.pattern(/^[0-9]+$/)]],//户
     // tradingAreaId:[''],//商圈id
     businessTime:[],//挂牌时间
+    unitPriceAudit:[false],
   });
   //表单验证消息
   errors={

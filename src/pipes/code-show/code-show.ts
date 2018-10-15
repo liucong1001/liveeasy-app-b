@@ -20,23 +20,12 @@ export class CodeShowPipe implements PipeTransform {
     const  attr_name = attrName.replace(/([A-Z])/g,"_$1").toLowerCase();
     const  localCode = this.localStorageProvider.get('codeData');
     const  json= new ArryCodeValuePipe().transform(localCode,attr_name);
-    console.log('codeShow',value,args,attr_name);
     for(var item of  json){
       if(value==item.val){
         return item.name
       }
+  }
+  }
 
-    // return value.toLowerCase();
-  }
-  }
-/*
-  houseAttrPipe(data,attr){
-    var json = new ArryCodeValuePipe().transform(this.localCode,attr);
-    for(var item of  json){
-      if(data==item.val){
-        return item.name
-      }
-    }
-  }*/
 
 }

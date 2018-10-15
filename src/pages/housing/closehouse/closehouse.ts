@@ -99,7 +99,11 @@ export class ClosehousePage {
 
     this.closehouseProvider.getClose(data).then(res => {
         if(res.success){
-          this.toast.msg('关闭成功!');
+          if(this.realtorSourceId==this.localStorageProvider.get('loginInfo').user.id){
+            this.toast.msg('关闭成功!');
+          }else {
+            this.toast.msg('已提交关闭申请!');
+          }
           this.navCtrl.pop();
         }else{
           this.toast.error('关闭失败！');

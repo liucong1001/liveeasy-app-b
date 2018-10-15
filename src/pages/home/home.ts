@@ -97,6 +97,7 @@ export class HomePage {
     this.platform.is('cordova')&&
     this.jpushUnit.setAlias(this.localStorageProvider.get('loginInfo')['user']['id']);    //设置别名
     this.myIcon = new BMap.Icon("assets/icon/favicon.ico", new BMap.Size(30, 30));
+    this.receiveNotification();
   }
 
 
@@ -115,15 +116,13 @@ export class HomePage {
         this.msgResult=res.data.result;
       }
     });
-    this.receiveNotification();
     this.getLocal();
-
   }
 
 
   //首页home页面消息通知更新
   receiveNotification(){
-    this.events.subscribe('jpush.receiveNotification', content => {
+    this.events.subscribe('jpushReceiveNotification', content => {
       this.homeProvider.msgs(1).then(res=>{
         if(res.data.result){
           this.msgResult= res.data.result;

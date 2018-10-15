@@ -7,6 +7,7 @@
            <button ion-button icon-only>
              <ion-icon name='md-add' class="adds"></ion-icon>
            </button>
+
          </ion-buttons>
        </ion-navbar>
        <ion-row class="houseMenu">
@@ -132,10 +133,10 @@
       </ion-col>
       <ion-col col-6 class="p0">
         <div class="leftChange updateBg" *ngIf="district">
-          <ion-list radio-group [(ngModel)]="params.intentionTradeCode" >
+          <ion-list radio-group  >
             <ion-item *ngFor=" let items of district;let i = index" >
               <ion-label>{{items.name}}</ion-label>
-              <ion-radio value="{{items.code}}"  (ionSelect)="selectArea(items)"></ion-radio>
+              <ion-radio [value]="items.code"   (ionSelect)="selectArea(items)"></ion-radio>
             </ion-item>
           </ion-list>
           <div *ngIf="district.length==0&&!choseDivision&&searchArea">暂无该地区！</div>

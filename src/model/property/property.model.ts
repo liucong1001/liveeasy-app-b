@@ -5,6 +5,11 @@ import {PriceAbnormalModel} from "./priceAbnormal.model";
  */
 export  class PropertyModel {
   /**
+   * 均价
+   */
+  avgPrice?:string;
+
+  /**
    * 楼盘id
    */
   estateId:string;
@@ -187,4 +192,7 @@ export  class PropertyModel {
    * 是否收藏  true：是  false:否
    */
   favoriteProperties?:boolean;
+
+  /*是否处于价格审核*/
+  unitPriceAudit?:any;
 }

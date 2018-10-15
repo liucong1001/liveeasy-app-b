@@ -13,6 +13,7 @@ import {LocalStorageProvider} from "../../../providers/local-storage/local-stora
 import {ArryCodeValuePipe} from "../../../pipes/arry-code-value/arry-code-value";
 import {DeclardetailPage} from "../declaration/declardetail/declardetail";
 import {NativeProvider} from "../../../providers/native/native";
+import {jpushUnit} from "../../../providers/native/jpush-unit";
 /**
  * Generated class for the MypassengerPage page.
  *
@@ -46,7 +47,8 @@ export class CheckhousePage {
               public nativePageTransitions: NativePageTransitions, public navParams: NavParams,
               private customerProvider: CustomerProvider,
               public propertyProvider: PropertyProvider, public toast: ToastComponent,
-              public localStorageProvider: LocalStorageProvider,public  nativeProvider:NativeProvider,) {
+              public localStorageProvider: LocalStorageProvider,public  nativeProvider:NativeProvider,
+              private jpushUnit:jpushUnit,) {
     this.localCode = this.localStorageProvider.get('codeData');
     this.msgJson = new ArryCodeValuePipe().transform(this.localCode,'operate_code');
   }
@@ -54,10 +56,10 @@ export class CheckhousePage {
   ionViewDidLoad() {
     this.search();
     this.navBar.backButtonClick = this.nativeProvider.back(this.navCtrl);
+    this.jpushUnit.clearAllNotification();
   }
 
   ionViewDidEnter() {
-    // alert('刷新！！');
   }
 
   //状态栏文字颜色修改-白色

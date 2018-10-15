@@ -99,7 +99,7 @@ export class AllsearchPage {
 
     this.navCtrl.pop().then(() => {
       // 发布 bevents事件
-      this.events.publish('bevents', item);
+      this.events.publish('beventsSearchProperty', item);
     });
   }
 

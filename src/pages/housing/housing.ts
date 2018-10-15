@@ -753,22 +753,17 @@ export class HousingPage {
 
 
     allSearch(){
-    this.events.subscribe('bevents', (params) => {
-      // 接收B页面发布的数据
-      // console.log('接收数据为: ', params);
+    this.events.subscribe('beventsSearchProperty', (params) => {
         if(!params){
           this.floorName = '';
-          // this.params.estate = '';
           delete   this.params.estate
-          // console.log('不存在数据',this.params);
         }else {
           this.floorName = params.keyword;
           this.params.estate = params.id;
-          // console.log('搜索',this.floorName,this.params.estate);
         }
         this.search('propQuery');
       // 取消订阅
-      this.events.unsubscribe('bevents');
+      this.events.unsubscribe('beventsSearchProperty');
     });
     this.navCtrl.push(AllsearchPage,{floorName:this.floorName});
   }
