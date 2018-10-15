@@ -41,28 +41,28 @@ export class PubliclookPage {
     if(this.navParams.get('type')=='99'){
       this.params={
         customerId:customerid,
-        customerStatus: '3',
-        customerType: '2',
+        customerStatus: 3,
+        customerType: 2,
       };
       this.method();
 
     }else if(this.navParams.get('type')=='0'){
       this.params={
         customerId: customerid,
-        customerStatus:'0',
+        customerStatus:0,
       };
       this.method();
 
     }else if(this.navParams.get('type')=='1'){
       this.params={
         customerId: customerid,
-        customerStatus: '2'
+        customerStatus: 2
       };
       this.method();
     }else if(this.navParams.get('type')=='2'){
       this.params={
         customerId: customerid,
-        customerStatus:'4'
+        customerStatus:4
       };
       this.method();
     }
@@ -95,18 +95,18 @@ export class PubliclookPage {
   goToSlide(index) {
     this.slides.slideTo(index, 500);
     this.addActive(index);
-    this.getRecords(this.customerid)
+    // this.getRecords(this.customerid);
   }
   // 滑动切换
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
-
     this.addActive(currentIndex);
-
+    // this.getRecords(this.customerid);
   }
   // 改变tab 颜色
   addActive(index) {
     this.index = index;
+    this.getRecords(this.customerid);
   }
   data:any;
   confirm(item) {
