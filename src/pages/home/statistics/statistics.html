@@ -5,7 +5,7 @@
   </ion-navbar>
   <ion-row class="houseMenu bgWhite">
     <ion-col col-4 class="tc" tappable (click)="toggleSta(1)" [ngClass]="{'color':show}">
-      <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>6}">
+      <span *ngIf="staff==2" [ngClass]="{'color':personName,'upWid':personName.length>15}">
         <span *ngIf="personName!='不限'">{{personName}}</span>
          <span *ngIf="personName=='不限'">{{name}}</span>
       </span>
@@ -45,9 +45,10 @@
     <ion-row *ngIf="all">
       <ion-col col-12>
         <div class="leftChange">
-          <a *ngFor=" let item of department" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">
-            <span *ngIf="item.storeName">{{item.storeName}}</span>
-            <span *ngIf="!item.storeName">{{item.deptName}}</span>
+          <a *ngFor=" let item of department" (click)="go(item)"   [ngClass]="{'active': isActive(item)}">
+            <span *ngIf="item.deptId.length==11">{{item.personName}}</span>
+            <span *ngIf="item.deptId.length!=11&&item.storeName">{{item.storeName}}</span>
+            <span *ngIf="item.deptId.length!=11&&!item.storeName">{{item.deptName}}</span>
           </a>
         </div>
       </ion-col>
@@ -56,9 +57,10 @@
     <ion-row *ngIf="full">
       <ion-col col-7 class="p0" [ngClass]="{'col-12': person}">
         <div class="leftChange">
-          <a *ngFor=" let item of department" (click)="go(item)"  [ngClass]="{'active': isActive(item)}">
-            <span *ngIf="item.storeName">{{item.storeName}}</span>
-            <span *ngIf="!item.storeName">{{item.deptName}}</span>
+          <a *ngFor=" let item of department" (click)="go(item)"   [ngClass]="{'active': isActive(item)}">
+            <span *ngIf="item.deptId.length==11">{{item.personName}}</span>
+            <span *ngIf="item.deptId.length!=11&&item.storeName">{{item.storeName}}</span>
+            <span *ngIf="item.deptId.length!=11&&!item.storeName">{{item.deptName}}</span>
           </a>
         </div>
       </ion-col>

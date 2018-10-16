@@ -204,6 +204,7 @@ export class StatisticsPage {
     }
   }
 
+  jms=[];
   //public Menthod
   metheod(){
     let sorted = this.groupBy(this.data, function(item){
@@ -213,12 +214,12 @@ export class StatisticsPage {
         return [item.deptId];
       }
     });
-// console.log(this.department)
-    for (var i in sorted) {
-      this.department.push(sorted[i][0]);
-    }
     for (var all in sorted){
+      this.department.push(sorted[all][0]);
       for (var aa=0;aa<sorted[all].length;aa++){
+        if(sorted[all][aa].deptId.length==11){
+          this.jms.push(sorted[all][aa]);
+        }
         if(sorted[all][aa].statItem == 3001){
           this.tableJSON[0].result+=sorted[all][aa].stateValue;
         }
@@ -525,61 +526,149 @@ export class StatisticsPage {
   allPersonal=[];
   person=[];
   go(item){
-
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });
     this.all=false;
     this.full=true;
     this.selected = item;
-    if(this.selected.storeName){
-      this.name=this.selected.storeName;
+    if(item.deptId.length==11){
+      this.name=this.selected.personName;
+    }else if(this.selected.storeName){
+        this.name=this.selected.storeName;
     }else {
       this.name=this.selected.deptName;
     }
-    // console.log(this.name)
-    // console.log(item.deptId);
-    this.id=item.deptId;
-    let sorted = this.groupBy(this.data, function(item){
-      if(item.storeCode){
-        return [item.storeCode];
-      }else {
-        return [item.deptId==item.deptId];
-      }
-    });
-    this.allPersonal=[];
-    //通过部门ID分组
-    for (var j in sorted){
-      // this.personal.push(sorted[j]);
-      //员工分组
-      for (var i in sorted[j]){
-        if(item.deptId.length>14){
-          item.deptId=item.deptId.substring(0,14);
+    if(item.deptId.length!=11){
+      let sorted = this.groupBy(this.data, function(item){
+        if(item.storeCode){
+          return [item.storeCode];
+        }else {
+          return [item.deptId==item.deptId];
         }
-        if (sorted[j][i].deptId==item.deptId || sorted[j][i].storeCode ==item.deptId){
-          // console.log(sorted[j],item.deptId,item.deptId.length)
-          this.allPersonal.push(sorted[j][i])
+      });
+      this.allPersonal=[];
+      //通过部门ID分组
+      for (var j in sorted){
+        // this.personal.push(sorted[j]);
+        //员工分组
+        for (var i in sorted[j]){
+          if(item.deptId.length>14){
+            item.deptId=item.deptId.substring(0,14);
+          }
+          if (sorted[j][i].deptId==item.deptId || sorted[j][i].storeCode ==item.deptId){
+            // console.log(sorted[j],item.deptId,item.deptId.length)
+            this.allPersonal.push(sorted[j][i])
+          }
         }
       }
-    }
-    // console.log(this.allPersonal,sorted[j][i].storeCode)
-    this.person=[];
-    //所有员工分组，获取每组第一条数据
-    let person = this.groupBy(this.allPersonal, function(item){
-      return [item.personId];
-    });
+      // console.log(this.allPersonal,sorted[j][i].storeCode)
+      this.person=[];
+      //所有员工分组，获取每组第一条数据
+      let person = this.groupBy(this.allPersonal, function(item){
+        return [item.personId];
+      });
 
-    for(var p in person){
-      if(person[p][0].personName!=undefined){
-        this.person.push(person[p][0]);
+      for(var p in person){
+        if(person[p][0].personName!=undefined){
+          this.person.push(person[p][0]);
+        }
       }
+      // console.log('所有员工', this.allPersonal,'单个员工',person)
+      this.person.unshift({personName:'不限',personId:''});
+    }else {
+      this.all=true;
+      this.full=false;
+      this.searchs(item);
     }
-    // console.log('所有员工', this.allPersonal,'单个员工',person)
-    this.person.unshift({personName:'不限',personId:''});
+
     loading.dismiss();
   }
+
+  //定义变量分别获取及蒙上
+  getPerson(item){
+
+    let perInfo = this.groupBy(this.allPersonal, function(item){
+      return [item.personId == item.personId];
+    });
+    for (var j in perInfo){
+      for(var h=0;h<perInfo[j].length;h++){
+        if (perInfo[j][h].personId==item.personId){
+          // console.log(perInfo[j][h]);
+          if(perInfo[j][h].statItem == 3001){
+            // console.log(perInfo[j][h])
+            this.tableJSON[0].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 3025){
+            // console.log('3025',sorted[j][h]);
+            this.tableJSON[1].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 3011){
+            // console.log('3011',sorted[j][h]);
+            this.tableJSON[2].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 3012){
+            // console.log('3012',sorted[j][h]);
+            this.tableJSON[3].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 3007){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[4].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4018){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[5].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4019){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[6].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4020){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[7].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4026){
+            this.tableJSON[8].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4022){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[9].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 4023){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[10].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 5017){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[11].result+=perInfo[j][h].stateValue;
+
+          }
+          if(perInfo[j][h].statItem == 5018){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[12].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 5019){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[13].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 5020){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[14].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 5021){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[15].result+=perInfo[j][h].stateValue;
+          }
+          if(perInfo[j][h].statItem == 5022){
+            // console.log('3007',sorted[j][h]);
+            this.tableJSON[16].result+=perInfo[j][h].stateValue;
+          }
+        }
+      }
+    }
+  }
+
   id:any;
-  rigthPerson=[];
   personName:any;
   staff=1;
   searchs(item){
@@ -589,6 +678,7 @@ export class StatisticsPage {
     loading.present();
     this.getClear();
     this.personName=item.personName;
+
     if(item.personName == '不限'){
       for (var i in this.allPersonal){
         if(this.allPersonal[i].statItem == 3001){
@@ -659,97 +749,25 @@ export class StatisticsPage {
           this.tableJSON[16].result+=this.allPersonal[i].stateValue;
         }
       }
-
-    }else {
-      let perInfo = this.groupBy(this.allPersonal, function(item){
-        return [item.personId == item.personId];
-      });
-      // console.log(item.personId)
-      //通过员工ID分组，循环数据
-      for (var j in perInfo){
-        for(var h=0;h<perInfo[j].length;h++){
-          if (perInfo[j][h].personId==item.personId){
-            // console.log(perInfo[j][h]);
-            if(perInfo[j][h].statItem == 3001){
-              // console.log(perInfo[j][h])
-              this.tableJSON[0].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 3025){
-              // console.log('3025',sorted[j][h]);
-              this.tableJSON[1].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 3011){
-              // console.log('3011',sorted[j][h]);
-              this.tableJSON[2].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 3012){
-              // console.log('3012',sorted[j][h]);
-              this.tableJSON[3].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 3007){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[4].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4018){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[5].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4019){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[6].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4020){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[7].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4026){
-              this.tableJSON[8].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4022){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[9].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 4023){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[10].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 5017){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[11].result+=perInfo[j][h].stateValue;
-
-            }
-            if(perInfo[j][h].statItem == 5018){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[12].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 5019){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[13].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 5020){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[14].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 5021){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[15].result+=perInfo[j][h].stateValue;
-            }
-            if(perInfo[j][h].statItem == 5022){
-              // console.log('3007',sorted[j][h]);
-              this.tableJSON[16].result+=perInfo[j][h].stateValue;
-            }
-          }
-        }
+    }else if(item.deptId.length==11) {
+      this.allPersonal=[];
+      for(var i in this.jms){
+        this.allPersonal.push(this.jms[i]);
       }
-
+      this.getPerson(item);
+    }else {
+      this.getPerson(item);
     }
-    // console.log(this.tableJSON);
+    // console.log(this.allPersonal);
     this.allClose();
     if(this.staff ==1){
       this.staff=2;
     }
     loading.dismiss();
   }
+
+
+
 
 
   //table title
@@ -771,7 +789,7 @@ export class StatisticsPage {
     {name:'报单实勘业绩',val:14,result:0},
     {name:'报单钥匙业绩',val:15,result:0},
     {name:'其他角色业绩',val:16,result:0},
-  ]
+  ];
 
   //快速查询
   fastJSON=[
@@ -812,67 +830,6 @@ export class StatisticsPage {
     this.pop=false;
   }
 
-
-
-
-  show=false;
-  time=false;
-  fastSearch=false;
-
-  // showMenu1() {
-  //   // if(this.falsees==true){
-  //   //   this.falsees=true;
-  //   // }else {
-  //   //   this.falsees=false;
-  //   // }
-  //   if (this.show == false || this.time == true || this.fastSearch == true ) {
-  //     this.show = true;
-  //     this.pop = true;
-  //     this.time = false;
-  //     this.fastSearch = false;
-  //   } else {
-  //     this.show = false;
-  //     this.pop = false;
-  //   }
-  // }
-  // showMenu2() {
-  //   if (this.time == false || this.show == true || this.fastSearch == true) {
-  //     this.time = true;
-  //     this.show = false;
-  //     this.pop = true;
-  //     this.fastSearch = false;
-  //   } else {
-  //     this.time = false;
-  //     this.pop = false;
-  //   }
-  // }
-  // showMenu3() {
-  //   if (this.fastSearch == false || this.show == true || this.time == true) {
-  //     this.fastSearch = true;
-  //     this.show = false;
-  //     this.pop = true;
-  //     this.time = false;
-  //   } else {
-  //     this.fastSearch = false;
-  //     this.pop = false;
-  //   }
-  // }
-  // pops() {
-  //   if (this.fastSearch == true || this.show == true || this.time == true) {
-  //     this.fastSearch = false;
-  //     this.show = false;
-  //     this.pop = false;
-  //     this.time = false;
-  //   }
-  // }
-  // clear(){
-  //   if (this.fastSearch == true || this.show == true || this.time == true) {
-  //     this.fastSearch = false;
-  //     this.show = false;
-  //     this.pop = false;
-  //     this.time = false;
-  //   }
-  // }
 
   //------跳转页面过渡--------//
   openWin(goPage, param = {}) {
