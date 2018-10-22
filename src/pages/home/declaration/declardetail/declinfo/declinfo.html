@@ -434,7 +434,7 @@
             <ion-item>
               <div class="pl12">
                 <span>成交总价：</span>
-                <span>{{orders.dealCompletePrice}}万元</span>
+                <span>{{orders.dealCompletePrice.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -446,7 +446,7 @@
             <ion-item>
               <div class="pl12">
                 <span>网签总价：</span>
-                <span>{{orders.onlineSignPrice}}万元</span>
+                <span>{{orders.onlineSignPrice.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -456,7 +456,7 @@
             <ion-item>
               <div class="pl12">
                 <span>定金：</span>
-                <span>{{orders.deposit}}万元</span>
+                <span>{{orders.deposit.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -466,7 +466,7 @@
             <ion-item>
               <div class="pl12">
                 <span>首付款：</span>
-                <span>{{orders.downPayment}}万元</span>
+                <span>{{orders.downPayment.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -476,7 +476,7 @@
             <ion-item>
               <div class="pl12">
                 <span>尾款：</span>
-                <span>{{orders.retainagePayment}}万元</span>
+                <span>{{orders.retainagePayment.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -496,7 +496,7 @@
             <ion-item>
               <div class="pl12">
                 <span>贷款：</span>
-                <span>{{orders.loanPrice}}万元</span>
+                <span>{{orders.loanPrice.toFixed(2)}}万元</span>
               </div>
             </ion-item>
           </ion-list>
@@ -595,7 +595,7 @@
             <ion-item>
               <div class="pl12">
                 <span>应收金额：</span>
-                <span>{{i.receivableAmount}}</span>
+                <span>{{i.receivableAmount.toFixed(2)}}</span>
               </div>
             </ion-item>
           </ion-list>
@@ -671,7 +671,7 @@
             <ion-item>
               <div class="pl12">
                 <span>计提业绩金额	：</span>
-                <span>{{item.assignedPrice}}</span>
+                <span>{{item.assignedPrice.toFixed(2)}}</span>
               </div>
             </ion-item>
           </ion-list>
