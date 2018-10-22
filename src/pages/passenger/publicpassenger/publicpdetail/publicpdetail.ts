@@ -32,19 +32,19 @@ export class PublicpdetailPage {
   customeroGrageInfoList = [];//客户等级
   @ViewChild(Navbar) navBar: Navbar;
   title:string;
+  type:string;
   constructor(public navCtrl: NavController,
               public nativePageTransitions: NativePageTransitions,
               public statusBar: StatusBar,
               public navParams: NavParams,public customerProvider:CustomerProvider,
               public toast:ToastComponent,public  nativeProvider:NativeProvider) {
     this.customerId=navParams.get('customerId');
-     console.log('参数详情',navParams.data);
+    this.type = navParams.get('type');
    switch (navParams.get('type')){
      case 99:this.title= '公客详情';break;
      case 0:this.title= '无效客户详情';break;
      case 1:this.title= '他售客户详情';break;
      case 2:this.title= '成交客户详情';break;
-
    }
 
     this.customerProvider.getPublicDetail(this.customerId).then(res=>{

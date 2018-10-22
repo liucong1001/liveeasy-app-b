@@ -93,7 +93,7 @@ export class MyApp {
        jpush.init();
        jpush.setDebugMode(true);
        //检查热更新
-       this.nativeProvider.sync();
+        this.nativeProvider.sync();
        // 处理打开推送消息事件
        this.jPushOpenNotification();
      });
